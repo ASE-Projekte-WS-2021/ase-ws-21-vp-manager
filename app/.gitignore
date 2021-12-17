@@ -1,2 +1,4 @@
-/build
-!/build/*.apk
+/build/generated
+/build/outputs/logs
+/build/intermediates
+/build/tmp
