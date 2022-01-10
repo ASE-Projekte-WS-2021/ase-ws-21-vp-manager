@@ -1,5 +1,6 @@
 plugins {
     id 'com.android.application'
+    id 'checkstyle'
 }
 
 android {
@@ -12,6 +13,7 @@ android {
         versionCode 1
         versionName "1.0"
 
+        //ESPRESSO
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
@@ -29,12 +31,15 @@ android {
 
 dependencies {
 
-    implementation 'androidx.appcompat:appcompat:1.2.0'
-    implementation 'com.google.android.material:material:1.3.0'
-    implementation 'androidx.constraintlayout:constraintlayout:2.0.4'
-    testImplementation 'junit:junit:4.+'
-    androidTestImplementation 'androidx.test.ext:junit:1.1.2'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
+    implementation 'androidx.appcompat:appcompat:1.4.0'
+    implementation 'com.google.android.material:material:1.4.0'
+    implementation 'androidx.constraintlayout:constraintlayout:2.1.2'
+
+    //Test dependencies (some might not be needed)
+    testImplementation 'junit:junit:4.13.2'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.3'
+    androidTestImplementation 'com.android.support:support-annotations:28.0.0'
+    androidTestImplementation 'com.android.support.test:runner:1.0.2'
     //ESPRESSO
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
     androidTestImplementation 'androidx.test:runner:1.4.0'

@@ -1,43 +1,122 @@
-name: Android CI
+name: Android CI Workflow
 
 on:
   push:
-    branches: [ main ]
+    branches: [master]
+    tags: ['v*']
   pull_request:
-    branches: [ main ]
+    branches: [master]
+    tags: ['v*']
 
 jobs:
+
   checkstyle_job:
-
+    name: Check code with checkstyle
     runs-on: ubuntu-latest
-
-    name: Checkstyle job
+    continue-on-error: true
     steps:
-    - name: Checkout
-      uses: actions/checkout@v2
-    - name: Run check style
-      uses: nikitasavinov/checkstyle-action@master
-      with:
-        github_token: ${{ secrets.GITHUB_TOKEN }}
-        reporter: 'github-pr-check'
-        tool_name: 'testtool'
+      - name: Checkout
+        uses: actions/checkout@v2
 
-  build:
+      - name: set up JDK 11
+        uses: actions/setup-java@v2
+        with:
+          java-version: '11'
+          distribution: 'adopt'
+          cache: gradle
 
+      - name: Run gradle checkstyle tasks
+        run: ./gradlew checkstyleMain checkstyleTest
+        # "./gradlew check" would run all test tasks ("./gradlew test") and additional tasks from other plugins
+        # e.g. checkstyle (https://stackoverflow.com/questions/50104666/difference-between-test-and-check-tasks-in-gradle).
+        # Two tasks provided by the checkstyle plugin are used above to check all "production" and "test" Java source files.
+
+  test_job:
+    name: Run UI and Unit tests
     runs-on: ubuntu-latest
-
     steps:
-    - uses: actions/checkout@v2
-    - name: set up JDK 11
-      uses: actions/setup-java@v2
-      with:
-        java-version: '11'
-        distribution: 'adopt'
-        cache: gradle
-        
-    - name: Run java checkstyle
-      uses: nikitasavinov/checkstyle-action@0.4.0
-    - name: Grant execute permission for gradlew
-      run: chmod +x gradlew
-    - name: Build with Gradle
-      run: ./gradlew build
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: set up JDK 11
+        uses: actions/setup-java@v2
+        with:
+          java-version: '11'
+          distribution: 'adopt'
+          cache: gradle
+
+      - name: Run test task
+        run: ./gradlew test
+        # "./gradlew build" would run more tasks. "./gradlew test" runs the tests located
+        # in the app/src/androidTest and app/src/test directories (https://developer.android.com/studio/test).
+        # TO DO: Use the Espresso Framework for automated UI-Testing.
+        # (https://developer.android.com/training/testing/espresso/setup)
+
+  apk_job:
+    name: Generate and upload the APK
+    runs-on: ubuntu-latest
+    needs:
+      - checkstyle_job
+      - test_job
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: set up JDK 11
+        uses: actions/setup-java@v2
+        with:
+          java-version: '11'
+          distribution: 'adopt'
+          cache: gradle
+
+      - name: Build APK
+        run: ./gradlew assembleDebug
+
+      - name: Upload APK
+        uses: actions/upload-artifact@v2
+        with:
+          name: apk
+          path: app/build/outputs/apk/debug/app-debug.apk
+        # The debugAPK is also included in the vcs at the moment. We might create and upload the releaseAPK (signed) here instead.
+
+  release_job:
+    name: Release the APK
+    needs: apk_job
+    if: startsWith(github.ref, 'refs/tags/v') # The "release_job" is only executed if this is true
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download APK
+        uses: actions/download-artifact@v2
+        with:
+          name: apk
+
+      - name: Create a Release on Github
+        id: create_release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: ${{ github.ref }}
+          release_name: Release ${{ github.ref }}
+
+      - name: Upload the (Release) APK
+        id: upload_release_asset
+        uses: actions/upload-release-asset@v1.0.1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: apk/app-debug.apk
+          asset_name: VP-Manager-pre-release.apk
+          asset_content_type: application/zip
+        # The "release_job" is guided by the last parts of this example workflow:
+        # https://gist.github.com/alexanderbazo/227476190ef5ab655795e34ec0d314d6
+        # Instead of the debugAPK, the releaseAPK (signed) might be used here.
+
+
+
+
+
+
+
+
