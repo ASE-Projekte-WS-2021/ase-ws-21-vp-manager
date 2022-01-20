@@ -4,6 +4,10 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Users/nikla/AndroidStudioProjects/VPManagaer/app/src/main/res/layout/activity_main.xml" value="0.20520833333333333" />
+        <entry key="..\:/Users/stron/AndroidStudioProjects/ase-ws-21-vp-manager/app/src/main/res/layout/activity_create_study.xml" value="0.5541666666666667" />
+        <entry key="..\:/Users/stron/AndroidStudioProjects/ase-ws-21-vp-manager/app/src/main/res/layout/activity_find_study.xml" value="0.5541666666666667" />
+        <entry key="..\:/Users/stron/AndroidStudioProjects/ase-ws-21-vp-manager/app/src/main/res/layout/activity_home.xml" value="0.5541666666666667" />
+        <entry key="..\:/Users/stron/AndroidStudioProjects/ase-ws-21-vp-manager/app/src/main/res/layout/activity_personal_account.xml" value="0.5541666666666667" />
       </map>
     </option>
   </component>

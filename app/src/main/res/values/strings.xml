@@ -1,3 +1,11 @@
 <resources>
-    <string name="app_name">VP Managaer</string>
+    <!---Homepage-->
+    <string name="app_name">VP Manager</string>
+    <string name="dummyDate">22.01.2022 um 18 Uhr</string>
+    <string name="dummyStudy">Studie A</string>
+    <string name="homeFindStudy">Find</string>
+    <string name="homeCreateStudy">Create</string>
+    <string name="homeTopicAppointments">Anstehende Termine</string>
+
+
 </resources>
