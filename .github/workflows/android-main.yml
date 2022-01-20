@@ -1,12 +1,10 @@
-name: Android CI Workflow
+name: Android CI (main branch)
 
 on:
   push:
-    branches: [master]
-    tags: ['v*']
+    branches: [main]
   pull_request:
-    branches: [master]
-    tags: ['v*']
+    branches: [main]
 
 jobs:
 
@@ -77,12 +75,14 @@ jobs:
         with:
           name: apk
           path: app/build/outputs/apk/debug/app-debug.apk
-        # The debugAPK is also included in the vcs at the moment. We might create and upload the releaseAPK (signed) here instead.
+        # The debugAPK is also included in the vcs at the moment. We might create and upload the
+        # releaseAPK here instead.
 
   release_job:
     name: Release the APK
     needs: apk_job
-    if: startsWith(github.ref, 'refs/tags/v') # The "release_job" is only executed if this is true
+    if: startsWith(github.ref, 'refs/tags/v')
+    # The "release_job" is only executed if the push or pull_request event includes a version number as a tag.
     runs-on: ubuntu-latest
     steps:
       - name: Download APK
@@ -99,7 +99,7 @@ jobs:
           tag_name: ${{ github.ref }}
           release_name: Release ${{ github.ref }}
 
-      - name: Upload the (Release) APK
+      - name: Upload the (debug) APK
         id: upload_release_asset
         uses: actions/upload-release-asset@v1.0.1
         env:
@@ -107,16 +107,8 @@ jobs:
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
           asset_path: apk/app-debug.apk
-          asset_name: VP-Manager-pre-release.apk
+          asset_name: VP-Manager-debug.apk
           asset_content_type: application/zip
         # The "release_job" is guided by the last parts of this example workflow:
         # https://gist.github.com/alexanderbazo/227476190ef5ab655795e34ec0d314d6
-        # Instead of the debugAPK, the releaseAPK (signed) might be used here.
-
-
-
-
-
-
-
-
+        # Instead of the debugAPK, the releaseAPK might be used here in the future.

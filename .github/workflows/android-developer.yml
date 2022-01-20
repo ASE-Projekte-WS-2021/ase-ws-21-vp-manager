@@ -1,0 +1,50 @@
+name: Android CI (developer branch)
+
+on:
+  push:
+    branches: [developer]
+  pull_request:
+    branches: [developer]
+
+jobs:
+  checkstyle_job:
+    name: Check code with checkstyle
+    runs-on: ubuntu-latest
+    continue-on-error: true
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: set up JDK 11
+        uses: actions/setup-java@v2
+        with:
+          java-version: '11'
+          distribution: 'adopt'
+          cache: gradle
+
+      - name: Run gradle checkstyle tasks
+        run: ./gradlew checkstyleMain checkstyleTest
+        # "./gradlew check" would run all test tasks ("./gradlew test") and additional tasks from other plugins
+        # e.g. checkstyle (https://stackoverflow.com/questions/50104666/difference-between-test-and-check-tasks-in-gradle).
+        # Two tasks provided by the checkstyle plugin are used above to check all "production" and "test" Java source files.
+
+  test_job:
+    name: Run UI and Unit tests
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: set up JDK 11
+        uses: actions/setup-java@v2
+        with:
+          java-version: '11'
+          distribution: 'adopt'
+          cache: gradle
+
+      - name: Run test task
+        run: ./gradlew test
+        # "./gradlew build" would run more tasks. "./gradlew test" runs the tests located
+        # in the app/src/androidTest and app/src/test directories (https://developer.android.com/studio/test).
+        # TO DO: Use the Espresso Framework for automated UI-Testing.
+        # (https://developer.android.com/training/testing/espresso/setup)
