@@ -23,10 +23,8 @@ jobs:
           cache: gradle
 
       - name: Run gradle checkstyle tasks
-        run: ./gradlew checkstyleMain checkstyleTest
-        # "./gradlew check" would run all test tasks ("./gradlew test") and additional tasks from other plugins
-        # e.g. checkstyle (https://stackoverflow.com/questions/50104666/difference-between-test-and-check-tasks-in-gradle).
-        # Two tasks provided by the checkstyle plugin are used above to check all "production" and "test" Java source files.
+        run: ./gradlew checkstyle
+        # The task "checkstyle" is specified in the app/build.gradle file.
 
   test_job:
     name: Run UI and Unit tests

@@ -3,6 +3,17 @@ plugins {
     id 'checkstyle'
 }
 
+task checkstyle(type: Checkstyle) {
+    configFile = rootProject.file('config/checkstyle/checkstyle.xml')
+
+    description 'Check code with checkstyle'
+    source 'src'
+    include '**/*.java'
+    exclude '**/gen/**'
+
+    classpath = files()
+}
+
 android {
     compileSdk 32
 
