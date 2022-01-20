@@ -24,7 +24,7 @@ jobs:
           cache: gradle
 
       - name: Run gradle checkstyle tasks
-        run: ./gradlew checkstyle
+        run: ./gradlew checkstyle --stacktrace
         # The task "checkstyle" is specified in the app/build.gradle file.
 
   test_job:
@@ -42,7 +42,7 @@ jobs:
           cache: gradle
 
       - name: Run test task
-        run: ./gradlew test
+        run: ./gradlew test --stacktrace
         # "./gradlew build" would run more tasks. "./gradlew test" runs the tests located
         # in the app/src/androidTest and app/src/test directories (https://developer.android.com/studio/test).
         # TO DO: Use the Espresso Framework for automated UI-Testing.
@@ -66,7 +66,7 @@ jobs:
           cache: gradle
 
       - name: Build APK
-        run: ./gradlew assembleDebug
+        run: ./gradlew assembleDebug --stacktrace
 
       - name: Upload APK
         uses: actions/upload-artifact@v2
