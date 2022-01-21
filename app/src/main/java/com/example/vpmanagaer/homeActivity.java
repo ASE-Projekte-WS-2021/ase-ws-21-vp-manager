@@ -33,7 +33,7 @@ public class homeActivity extends AppCompatActivity {
     //Sets clicklistner on navigation items
     private void setupClickables() {
         findStudyButton = findViewById(R.id.findStudyHome);
-        createStudyButton = findViewById(R.id.findStudyHome);
+        createStudyButton = findViewById(R.id.createStudyHome);
         pieChart = findViewById(R.id.piechart);
 
         findStudyButton.setOnClickListener(new View.OnClickListener() {
