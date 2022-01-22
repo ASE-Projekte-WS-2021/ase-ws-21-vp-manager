@@ -42,7 +42,7 @@ jobs:
 
       - name: Run test task
         run: ./gradlew test --stacktrace
-        # "./gradlew build" would run more tasks. "./gradlew test" runs the tests located
+        # "./gradlew build" and "check" would run more tasks. "./gradlew test" runs the tests located
         # in the app/src/androidTest and app/src/test directories (https://developer.android.com/studio/test).
         # TO DO: Use the Espresso Framework for automated UI-Testing.
         # (https://developer.android.com/training/testing/espresso/setup)

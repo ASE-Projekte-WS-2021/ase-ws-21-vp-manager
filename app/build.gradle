@@ -1,20 +1,24 @@
 plugins {
     id 'com.android.application'
-    id 'checkstyle'
+    //id 'checkstyle'
 }
 
-task checkstyle(type: Checkstyle) {
+apply plugin: 'checkstyle'
 
+task checkstyle(type: Checkstyle) {
     description 'Check code with checkstyle'
+    group 'verification'
+    //configFile = file("${rootDir}/config/checkstyle/checkstyle.xml")
     configFile file('../config/checkstyle/checkstyle.xml')
     source 'src'
     include '**/*.java'
     exclude '**/gen/**'
     classpath = files()
+    ignoreFailures = false
 }
 
 android {
-    compileSdk 32
+    compileSdk 31
 
     defaultConfig {
         applicationId "com.example.vpmanagaer"
@@ -23,7 +27,6 @@ android {
         versionCode 1
         versionName "1.0"
 
-        //ESPRESSO
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
