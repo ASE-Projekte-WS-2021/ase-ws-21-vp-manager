@@ -21,6 +21,7 @@
         <activity android:name=".findStudyActivity" />
         <activity android:name=".createStudyActivity" />
         <activity android:name=".personalAccountActivity" />
+        <activity android:name=".studyActivity" />
     </application>
 
 </manifest>
