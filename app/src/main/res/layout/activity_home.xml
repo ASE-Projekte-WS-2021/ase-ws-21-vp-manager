@@ -80,13 +80,6 @@
                     android:layout_alignParentEnd="true"/>
             </RelativeLayout>
 
-            <Button
-                android:id="@+id/dbTestButton"
-                android:layout_width="150dp"
-                android:layout_height="50dp"
-                android:text="TestDB"
-                android:layout_gravity="center"/>
-
         </LinearLayout>
 
     <LinearLayout

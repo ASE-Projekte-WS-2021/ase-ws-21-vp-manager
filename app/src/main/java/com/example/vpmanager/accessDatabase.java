@@ -16,6 +16,7 @@ import java.util.Map;
 
 public class accessDatabase {
 
+    //can be called to make changes to the db
     public static void makeChangeToDB() {
 
         FirebaseFirestore db = FirebaseFirestore.getInstance();

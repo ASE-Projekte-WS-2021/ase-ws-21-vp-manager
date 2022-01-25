@@ -17,7 +17,6 @@ public class homeActivity extends AppCompatActivity {
     Button findStudyButton;
     Button createStudyButton;
     PieChart pieChart;
-    Button testDBButton; //zum Test der Datenbank
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,7 +35,6 @@ public class homeActivity extends AppCompatActivity {
         findStudyButton = findViewById(R.id.findStudyHome);
         createStudyButton = findViewById(R.id.createStudyHome);
         pieChart = findViewById(R.id.piechart);
-        testDBButton = findViewById(R.id.dbTestButton); //zum Test der Datenbank
 
         findStudyButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View V) {
@@ -56,12 +54,6 @@ public class homeActivity extends AppCompatActivity {
             public void onClick(View V) {
                 Intent intent = new Intent(homeActivity.this, personalAccountActivity.class);
                 startActivity(intent);
-            }
-        });
-
-        testDBButton.setOnClickListener(new View.OnClickListener() { //zum Test der Datenbank
-            public void onClick(View V) {
-                accessDatabase.makeChangeToDB();
             }
         });
 
