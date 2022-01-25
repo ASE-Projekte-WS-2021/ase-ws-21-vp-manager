@@ -2,3 +2,4 @@
 /build/outputs/logs
 /build/intermediates
 /build/tmp
+/google-services.json
