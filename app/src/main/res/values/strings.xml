@@ -7,5 +7,6 @@
     <string name="homeCreateStudy">Create</string>
     <string name="homeTopicAppointments">Anstehende Termine</string>
 
+    <string name="personalAccountTitle">Angemeldete Studien</string>
 
 </resources>
