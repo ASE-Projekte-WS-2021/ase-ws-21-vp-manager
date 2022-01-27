@@ -1,4 +1,4 @@
-package com.example.vpmanagaer;
+package com.example.vpmanager;
 
 import android.os.Bundle;
 import android.widget.ArrayAdapter;
