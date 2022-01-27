@@ -27,4 +27,7 @@
         <item>Präsenz</item>
     </string-array>
 
+    <!---Personal Account-->
+    <string name="personalAccountTitle">Angemeldete Studien</string>
+
 </resources>
