@@ -16,7 +16,7 @@ import java.util.Map;
 
 public class accessDatabase {
 
-    //can be called to make changes to the db
+    //example
     public static void makeChangeToDB() {
 
         FirebaseFirestore db = FirebaseFirestore.getInstance();
@@ -44,4 +44,28 @@ public class accessDatabase {
                 });
 
     }
+
+    //add a new user to the db - in the mvp the deviceID is required
+    public static void addNewUser(String deviceID) {
+
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        Map<String, Object> user = new HashMap<>();
+        user.put("deviceId", deviceID);
+
+        db.collection("users").document(deviceID)
+                .set(user)
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                        Log.d(TAG, "DocumentSnapshot successfully written!");
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Log.w(TAG, "Error writing document", e);
+                    }
+                });
+    }
+
 }
