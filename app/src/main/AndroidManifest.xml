@@ -21,6 +21,7 @@
         <activity android:name="com.example.vpmanager.findStudyActivity" />
         <activity android:name="com.example.vpmanager.createStudyActivity" />
         <activity android:name="com.example.vpmanager.personalAccountActivity" />
+        <activity android:name="com.example.vpmanager.studyActivity" />
     </application>
 
 </manifest>

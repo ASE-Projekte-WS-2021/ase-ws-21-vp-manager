@@ -30,4 +30,13 @@
     <!---Personal Account-->
     <string name="personalAccountTitle">Angemeldete Studien</string>
 
+    <!---findStudyActivity-->
+    <string name="entryListHeader">aktuelle Studien</string>
+
+    <!---studyActivity-->
+    <string name="studyViewHeader">Detailansicht - Studie</string>
+    <string name="dateListHeader">verfügbare Studiem</string>
+
+
+
 </resources>

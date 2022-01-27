@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context = ".studyActivity">
+    <!---android:weightSum="100"-->
+
+    <ImageView
+        android:id="@+id/imageView3"
+        android:layout_width="229dp"
+        android:layout_height="213dp"
+        android:layout_gravity="center_horizontal"
+        app:srcCompat="@android:drawable/btn_star_big_on" />
+
+
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/studyViewHeader"
+        android:textSize="23sp"
+        android:textStyle="bold"
+        android:layout_marginStart="25dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginBottom="10dp"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="3dp"
+        android:background="@color/color_two"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginBottom="15dp"/>
+
+
+    <TextView
+        android:id="@+id/text1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:fontFamily="sans-serif-light"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:weightSum="100" />
+
+    <TextView
+        android:id="@+id/text2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:fontFamily="sans-serif-light"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:weightSum="100" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="3dp"
+        android:background="@color/color_two"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="65dp"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/dateListHeader"
+        android:textColor="@color/teal_700"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:layout_marginStart="25dp"
+        android:layout_marginTop="5dp"
+        android:layout_gravity="center_horizontal"/>
+
+    <ListView
+        android:id="@+id/listViewDates"
+        android:layout_width="348dp"
+        android:layout_height="178dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="3dp" />
+
+
+</LinearLayout>
