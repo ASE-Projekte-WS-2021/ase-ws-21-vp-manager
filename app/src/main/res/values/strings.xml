@@ -7,5 +7,13 @@
     <string name="homeCreateStudy">Create</string>
     <string name="homeTopicAppointments">Anstehende Termine</string>
 
+    <!---findStudyActivity-->
+    <string name="entryListHeader">aktuelle Studien</string>
+
+    <!---studyActivity-->
+    <string name="studyViewHeader">Detailansicht - Studie</string>
+    <string name="dateListHeader">verfügbare Studiem</string>
+
+
 
 </resources>
