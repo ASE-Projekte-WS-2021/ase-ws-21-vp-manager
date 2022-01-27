@@ -7,5 +7,24 @@
     <string name="homeCreateStudy">Create</string>
     <string name="homeTopicAppointments">Anstehende Termine</string>
 
+    <!---Create Study-->
+    <string name="createOfferedVP">Angebotene VP</string>
+    <string name="createStudyTitle">Titel der Studie</string>
+    <string name="createStudyDesc">Studienbeschreibung</string>
+    <string name="createAddDateButton">Add Date</string>
+    <string name="createCreateButton">Studie erstellen</string>
+
+    <string-array name="createCategoryList">
+        <item>Studienkategorie</item>
+        <item>VR</item>
+        <item>AR</item>
+        <item>Diary Study</item>
+    </string-array>
+
+    <string-array name="createExecutionTypeList">
+        <item>Durchführungsart</item>
+        <item>Remote</item>
+        <item>Präsenz</item>
+    </string-array>
 
 </resources>

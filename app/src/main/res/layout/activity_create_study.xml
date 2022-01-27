@@ -1,6 +1,78 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="@string/createStudyTitle"
+        android:inputType="text"
+        android:id="@+id/createStudyTitleInput">
+    </EditText>
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="@string/createOfferedVP"
+        android:inputType="numberDecimal"
+        android:id="@+id/createVPInput">
+    </EditText>
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="@string/createStudyDesc"
+        android:inputType="textCapSentences|textMultiLine"
+        android:maxLength="2000"
+        android:maxLines="12"
+        android:id="@+id/createStudyDescInput"/>
+
+    <Spinner
+        android:id="@+id/createCategories"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <Spinner
+        android:id="@+id/createExecutionType"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:id="@+id/locationLayout">
+
+    </LinearLayout>
+
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/createAddDateButton"
+        android:id="@+id/createAddDateButton"/>
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:id="@+id/createCreateButton"
+        android:text="@string/createCreateButton"
+        />
+
+
+    <ListView
+        android:id="@+id/createDatelist"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_marginBottom="5dp"
+        android:drawSelectorOnTop="false"
+        />
+
+
+
+</LinearLayout>
