@@ -348,7 +348,7 @@ public class createStudyActivity extends AppCompatActivity {
                 alertMessage += "Daten \n";
             }
         }
-        if(alertMessage.isEmpty()){
+        if(alertMessage.equals("Sind Sie sicher das Sie ohne folgende Angaben fortfahren wollen: \n")){
             createDBEntry();
         } else{
             alertPopup(alertMessage, mandatoryCheck);
