@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "477709133134",
+    "project_id": "vp-manager-8e407",
+    "storage_bucket": "vp-manager-8e407.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:477709133134:android:4d6a9a5315221ab1336a1f",
+        "android_client_info": {
+          "package_name": "com.example.vpmanager"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "477709133134-gpt4itus0rnfsa6eovsljjmft8bqrpv6.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCjJ5IMVkwQ-Xt2rWPYX3WfmOegtrXaK34"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "477709133134-gpt4itus0rnfsa6eovsljjmft8bqrpv6.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
