@@ -2,7 +2,9 @@ package com.example.vpmanager;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
@@ -18,6 +20,9 @@ public class homeActivity extends AppCompatActivity {
     Button findStudyButton;
     Button createStudyButton;
     PieChart pieChart;
+    //Unique ID Strings
+    private static String uniqueID = null;
+    private static final String PREF_UNIQUE_ID = "PREF_UNIQUE_ID";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -97,14 +102,30 @@ public class homeActivity extends AppCompatActivity {
         pieChart.startAnimation();
     }
 
-    //Problem: getDeviceID() does not access DeviceID but creates a new random ID!
     public void registerNewUser(){
-        String deviceID = getDeviceID();
+        String deviceID = id(this);
         accessDatabase.createNewUser(deviceID);
     }
 
-    private String getDeviceID() {
+    //UUID creates a new random id
+    private String getNewId() {
         return UUID.randomUUID().toString();
+    }
+
+    //From: https://ssaurel.medium.com/how-to-retrieve-an-unique-id-to-identify-android-devices-6f99fd5369eb
+    public synchronized static String id(Context context) {
+        if (uniqueID == null) {
+            SharedPreferences sharedPrefs = context.getSharedPreferences(
+                    PREF_UNIQUE_ID, Context.MODE_PRIVATE);
+            uniqueID = sharedPrefs.getString(PREF_UNIQUE_ID, null);
+            if (uniqueID == null) {
+                uniqueID = UUID.randomUUID().toString();
+                SharedPreferences.Editor editor = sharedPrefs.edit();
+                editor.putString(PREF_UNIQUE_ID, uniqueID);
+                editor.apply();
+            }
+        }
+        return uniqueID;
     }
 }
 

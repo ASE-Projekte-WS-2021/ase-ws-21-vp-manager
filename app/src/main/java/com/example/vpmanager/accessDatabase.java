@@ -21,7 +21,7 @@ import java.util.Map;
 
 public class accessDatabase {
 
-    //Adds a new device (user) to the database, if it doesn't already exist
+    //Adds a new user (installation of the app) to the database, if it doesn't already exist
     public static void createNewUser(String deviceId){
 
         FirebaseFirestore db = FirebaseFirestore.getInstance();
@@ -42,5 +42,27 @@ public class accessDatabase {
             }
         }).addOnSuccessListener(aVoid -> Log.d(TAG, "Transaction success!"
         )).addOnFailureListener(e -> Log.w(TAG, "Transaction failure.", e));
+    }
+
+    public static void addNewStudy(Map<String, Object> newStudy, String studyID) {
+
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+
+        db.collection("studies").document(studyID)
+                .set(newStudy)
+                .addOnSuccessListener(aVoid -> Log.d(TAG, "DocumentSnapshot successfully written!"))
+                .addOnFailureListener(e -> Log.w(TAG, "Error writing document", e));
+
+    }
+
+    public static void addNewDate(Map<String, Object> newDate, String dateID) {
+
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+
+        db.collection("dates").document(dateID)
+                .set(newDate)
+                .addOnSuccessListener(aVoid -> Log.d(TAG, "DocumentSnapshot successfully written!"))
+                .addOnFailureListener(e -> Log.w(TAG, "Error writing document", e));
+
     }
 }
