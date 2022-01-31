@@ -11,6 +11,7 @@ import android.widget.Button;
 import org.eazegraph.lib.charts.PieChart;
 import org.eazegraph.lib.models.PieModel;
 
+import java.util.UUID;
 
 public class homeActivity extends AppCompatActivity {
 
@@ -21,6 +22,8 @@ public class homeActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        //Checks if a new user needs to be registered
+        registerNewUser();
         setContentView(R.layout.activity_home);
         setupClickables();
         //Testdaten
@@ -92,6 +95,16 @@ public class homeActivity extends AppCompatActivity {
                         Color.parseColor("#808080")));
 
         pieChart.startAnimation();
+    }
+
+    //Problem: getDeviceID() does not access DeviceID but creates a new random ID!
+    public void registerNewUser(){
+        String deviceID = getDeviceID();
+        accessDatabase.createNewUser(deviceID);
+    }
+
+    private String getDeviceID() {
+        return UUID.randomUUID().toString();
     }
 }
 

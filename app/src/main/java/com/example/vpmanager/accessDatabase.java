@@ -6,66 +6,41 @@ import android.util.Log;
 
 import androidx.annotation.NonNull;
 
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreException;
+import com.google.firebase.firestore.Transaction;
 
 import java.util.HashMap;
 import java.util.Map;
 
 public class accessDatabase {
 
-    //example
-    public static void makeChangeToDB() {
+    //Adds a new device (user) to the database, if it doesn't already exist
+    public static void createNewUser(String deviceId){
 
         FirebaseFirestore db = FirebaseFirestore.getInstance();
+        //A DocumentReference refers to a document location
+        final DocumentReference userDocRef = db.collection("users").document(deviceId);
 
-        // Create a new user with a first and last name
-        Map<String, Object> user = new HashMap<>();
-        user.put("first", "Ada");
-        user.put("last", "Lovelace");
-        user.put("born", 1815);
-
-        // Add a new document with a generated ID
-        db.collection("users")
-                .add(user)
-                .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
-                    @Override
-                    public void onSuccess(DocumentReference documentReference) {
-                        Log.d(TAG, "DocumentSnapshot added with ID: " + documentReference.getId());
-                    }
-                })
-                .addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        Log.w(TAG, "Error adding document", e);
-                    }
-                });
-
+        db.runTransaction(new Transaction.Function<Void>() {
+            @Override
+            public Void apply(Transaction transaction) throws FirebaseFirestoreException {
+                //A DocumentSnapshot contains data read from a document
+                DocumentSnapshot snapshot = transaction.get(userDocRef);
+                if (!snapshot.exists()) {
+                    Map<String, Object> user = new HashMap<>();
+                    user.put("deviceId", deviceId);
+                    transaction.set(userDocRef, user);
+                }
+                return null;
+            }
+        }).addOnSuccessListener(aVoid -> Log.d(TAG, "Transaction success!"
+        )).addOnFailureListener(e -> Log.w(TAG, "Transaction failure.", e));
     }
-
-    //add a new user to the db - in the mvp the deviceID is required
-    public static void addNewUser(String deviceID) {
-
-        FirebaseFirestore db = FirebaseFirestore.getInstance();
-        Map<String, Object> user = new HashMap<>();
-        user.put("deviceId", deviceID);
-
-        db.collection("users").document(deviceID)
-                .set(user)
-                .addOnSuccessListener(new OnSuccessListener<Void>() {
-                    @Override
-                    public void onSuccess(Void aVoid) {
-                        Log.d(TAG, "DocumentSnapshot successfully written!");
-                    }
-                })
-                .addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        Log.w(TAG, "Error writing document", e);
-                    }
-                });
-    }
-
 }
