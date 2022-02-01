@@ -7,20 +7,25 @@ import android.util.Log;
 import androidx.annotation.NonNull;
 
 import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
+import com.google.firebase.firestore.Query;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 import com.google.firebase.firestore.Transaction;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
+import java.util.concurrent.TimeUnit;
 
 public class accessDatabase {
 
+    //HomeActivity --------------------------------------------------------------------------------!
     //Adds a new user (installation of the app) to the database, if it doesn't already exist
     public static void createNewUser(String deviceId){
 
@@ -30,7 +35,7 @@ public class accessDatabase {
 
         db.runTransaction(new Transaction.Function<Void>() {
             @Override
-            public Void apply(Transaction transaction) throws FirebaseFirestoreException {
+            public Void apply(@NonNull Transaction transaction) throws FirebaseFirestoreException {
                 //A DocumentSnapshot contains data read from a document
                 DocumentSnapshot snapshot = transaction.get(userDocRef);
                 if (!snapshot.exists()) {
@@ -44,6 +49,7 @@ public class accessDatabase {
         )).addOnFailureListener(e -> Log.w(TAG, "Transaction failure.", e));
     }
 
+    //CreateStudyActivity -------------------------------------------------------------------------!
     public static void addNewStudy(Map<String, Object> newStudy, String studyID) {
 
         FirebaseFirestore db = FirebaseFirestore.getInstance();
@@ -64,5 +70,90 @@ public class accessDatabase {
                 .addOnSuccessListener(aVoid -> Log.d(TAG, "DocumentSnapshot successfully written!"))
                 .addOnFailureListener(e -> Log.w(TAG, "Error writing document", e));
 
+    }
+
+    //FindStudyActivity ---------------------------------------------------------------------------!
+    public static ArrayList<Object> getStudyBasicInfo(){
+
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        ArrayList<Object> studyInfo = new ArrayList<>();
+
+        db.collection("studies").orderBy("name", Query.Direction.DESCENDING)
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            for (QueryDocumentSnapshot document : task.getResult()) {
+                                //adds the names of all studies in the db atm
+                                //allStudyNames.add(document.getString("name"));
+                                ArrayList<String> idNameVph = new ArrayList<>();
+                                idNameVph.add(0, document.getString("id"));
+                                idNameVph.add(1, document.getString("name"));
+                                idNameVph.add(2, document.getString("vps"));
+                                studyInfo.add(idNameVph);
+                                Log.d("inForLoop", "=>" + document.getData());
+                            }
+                            Log.d("outOfForLoop", studyInfo.toString());
+                        } else {
+                            Log.d(TAG, "Error getting documents: ", task.getException());
+                        }
+                    }
+                });
+        Log.d("endOfMethod", studyInfo.toString());
+        return studyInfo;
+    }
+
+    /*
+    public static Map<String, Object> getAllStudiesAsMap(){
+
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        Map<String, Object> allStudies = new HashMap<>();
+
+        db.collection("studies").orderBy("name", Query.Direction.DESCENDING)
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            for (QueryDocumentSnapshot document : task.getResult()) {
+                                allStudies.put(document.getId(), document.getData());
+                                Log.d("forLoop", document.getId() + " => " + document.getData());
+                            }
+                            Log.d("outOfForLoop", allStudies.toString());
+                        } else {
+                            Log.d(TAG, "Error getting documents: ", task.getException());
+                        }
+                    }
+                });
+        Log.d("EndOfMethod", allStudies.toString());
+        return allStudies;
+    }
+     */
+
+    //studyActivity -------------------------------------------------------------------------------!
+    public static Map<String, Object> getAllInfoOfOneStudy(String studyId) {
+
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        Map<String, Object> allStudyInfo = new HashMap<>();
+
+        DocumentReference docRef = db.collection("studies").document(studyId);
+        docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                if (task.isSuccessful()) {
+                    DocumentSnapshot document = task.getResult();
+                    if (document.exists()) {
+                        allStudyInfo.putAll(document.getData()); //getData is ne map
+                        Log.d(TAG, "DocumentSnapshot data: " + document.getData());
+                    } else {
+                        Log.d(TAG, "No such document");
+                    }
+                } else {
+                    Log.d(TAG, "get failed with ", task.getException());
+                }
+            }
+        });
+        return allStudyInfo;
     }
 }

@@ -102,17 +102,13 @@ public class homeActivity extends AppCompatActivity {
         pieChart.startAnimation();
     }
 
-    public void registerNewUser(){
+    private void registerNewUser(){
         String deviceID = id(this);
         accessDatabase.createNewUser(deviceID);
     }
 
-    //UUID creates a new random id
-    private String getNewId() {
-        return UUID.randomUUID().toString();
-    }
-
-    //From: https://ssaurel.medium.com/how-to-retrieve-an-unique-id-to-identify-android-devices-6f99fd5369eb
+    //Generates an unique id for every installation of the app.
+    //Source: https://ssaurel.medium.com/how-to-retrieve-an-unique-id-to-identify-android-devices-6f99fd5369eb
     public synchronized static String id(Context context) {
         if (uniqueID == null) {
             SharedPreferences sharedPrefs = context.getSharedPreferences(
