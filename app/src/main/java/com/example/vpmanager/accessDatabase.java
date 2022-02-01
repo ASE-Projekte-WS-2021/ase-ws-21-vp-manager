@@ -8,6 +8,7 @@ import androidx.annotation.NonNull;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -19,15 +20,20 @@ import com.google.firebase.firestore.Transaction;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 import java.util.concurrent.TimeUnit;
 
 public class accessDatabase {
 
+    FirebaseFirestore db;
+    CollectionReference studiesRef;
+    ArrayList<ArrayList<String>> studyInfo;
+
     //HomeActivity --------------------------------------------------------------------------------!
     //Adds a new user (installation of the app) to the database, if it doesn't already exist
-    public static void createNewUser(String deviceId){
+    public void createNewUser(String deviceId){
 
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         //A DocumentReference refers to a document location
@@ -50,7 +56,7 @@ public class accessDatabase {
     }
 
     //CreateStudyActivity -------------------------------------------------------------------------!
-    public static void addNewStudy(Map<String, Object> newStudy, String studyID) {
+    public void addNewStudy(Map<String, Object> newStudy, String studyID) {
 
         FirebaseFirestore db = FirebaseFirestore.getInstance();
 
@@ -61,7 +67,7 @@ public class accessDatabase {
 
     }
 
-    public static void addNewDate(Map<String, Object> newDate, String dateID) {
+    public void addNewDate(Map<String, Object> newDate, String dateID) {
 
         FirebaseFirestore db = FirebaseFirestore.getInstance();
 
@@ -73,66 +79,10 @@ public class accessDatabase {
     }
 
     //FindStudyActivity ---------------------------------------------------------------------------!
-    public static ArrayList<Object> getStudyBasicInfo(){
-
-        FirebaseFirestore db = FirebaseFirestore.getInstance();
-        ArrayList<Object> studyInfo = new ArrayList<>();
-
-        db.collection("studies").orderBy("name", Query.Direction.DESCENDING)
-                .get()
-                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                    @Override
-                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                        if (task.isSuccessful()) {
-                            for (QueryDocumentSnapshot document : task.getResult()) {
-                                //adds the names of all studies in the db atm
-                                //allStudyNames.add(document.getString("name"));
-                                ArrayList<String> idNameVph = new ArrayList<>();
-                                idNameVph.add(0, document.getString("id"));
-                                idNameVph.add(1, document.getString("name"));
-                                idNameVph.add(2, document.getString("vps"));
-                                studyInfo.add(idNameVph);
-                                Log.d("inForLoop", "=>" + document.getData());
-                            }
-                            Log.d("outOfForLoop", studyInfo.toString());
-                        } else {
-                            Log.d(TAG, "Error getting documents: ", task.getException());
-                        }
-                    }
-                });
-        Log.d("endOfMethod", studyInfo.toString());
-        return studyInfo;
-    }
-
-    /*
-    public static Map<String, Object> getAllStudiesAsMap(){
-
-        FirebaseFirestore db = FirebaseFirestore.getInstance();
-        Map<String, Object> allStudies = new HashMap<>();
-
-        db.collection("studies").orderBy("name", Query.Direction.DESCENDING)
-                .get()
-                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                    @Override
-                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                        if (task.isSuccessful()) {
-                            for (QueryDocumentSnapshot document : task.getResult()) {
-                                allStudies.put(document.getId(), document.getData());
-                                Log.d("forLoop", document.getId() + " => " + document.getData());
-                            }
-                            Log.d("outOfForLoop", allStudies.toString());
-                        } else {
-                            Log.d(TAG, "Error getting documents: ", task.getException());
-                        }
-                    }
-                });
-        Log.d("EndOfMethod", allStudies.toString());
-        return allStudies;
-    }
-     */
+    //in findStudyActivity
 
     //studyActivity -------------------------------------------------------------------------------!
-    public static Map<String, Object> getAllInfoOfOneStudy(String studyId) {
+    public Map<String, Object> getAllInfoOfOneStudy(String studyId) {
 
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         Map<String, Object> allStudyInfo = new HashMap<>();

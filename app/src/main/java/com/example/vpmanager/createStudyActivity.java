@@ -44,6 +44,7 @@ public class createStudyActivity extends AppCompatActivity {
     Button createButton;
 
     ArrayAdapter<String> datePickerAdapter;
+    accessDatabase accessDatabase = new accessDatabase();
 
     String date_time = "";
     int mYear;
