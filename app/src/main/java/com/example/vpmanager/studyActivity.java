@@ -3,6 +3,9 @@ package com.example.vpmanager;
 import static android.content.ContentValues.TAG;
 
 import android.annotation.SuppressLint;
+import android.app.AlertDialog;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -25,6 +28,8 @@ import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 public class studyActivity extends AppCompatActivity{
 
@@ -184,8 +189,40 @@ public class studyActivity extends AppCompatActivity{
 
                 String dateId = dateIds.get(position);
 
-                //start pop up here and add userId to a date
+                selectDateAlert(dateId);
             }
         });
+    }
+
+    private void selectDateAlert(String dateId){
+
+        DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                switch (which){
+                    case DialogInterface.BUTTON_POSITIVE:
+                        selectDate(dateId);
+                        break;
+                    case DialogInterface.BUTTON_NEGATIVE:
+                        break;
+                }
+            }
+        };
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setMessage("Möchten Sie sich für diesen Termin eintragen?")
+                .setPositiveButton("Ja", dialogClickListener)
+                .setNegativeButton("Nein", dialogClickListener).show();
+    }
+
+    private void selectDate(String dateId){
+
+        accessDatabase accessDatabase = new accessDatabase();
+        String userId = homeActivity.id(this);
+
+        Map<String, Object> updateDataMap = new HashMap<>();
+        updateDataMap.put("selected", true);
+        updateDataMap.put("userId", userId);
+
+        accessDatabase.selectDate(updateDataMap, dateId);
     }
 }
