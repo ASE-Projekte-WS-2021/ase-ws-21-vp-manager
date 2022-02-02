@@ -31,7 +31,7 @@
     <string name="personalAccountTitle">Angemeldete Studien</string>
 
     <!---findStudyActivity-->
-    <string name="entryListHeader">aktuelles Studienangebot</string>
+    <string name="entryListHeader">Aktuelles Studienangebot</string>
 
     <!---studyActivity-->
     <string name="studyViewHeader">Detailansicht - Studie</string>

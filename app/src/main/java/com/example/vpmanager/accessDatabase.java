@@ -87,5 +87,14 @@ public class accessDatabase {
                 .addOnFailureListener(e -> Log.w(TAG, "Error updating document", e));
     }
 
+    public void unselectDate(String dateId){
+
+        db = FirebaseFirestore.getInstance();
+
+        db.collection("dates").document(dateId)
+                .update("selected", false, "userId", null)
+                .addOnSuccessListener(aVoid -> Log.d(TAG, "DocumentSnapshot successfully updated!"))
+                .addOnFailureListener(e -> Log.w(TAG, "Error updating document", e));
+    }
 
 }

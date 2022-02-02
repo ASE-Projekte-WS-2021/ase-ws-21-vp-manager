@@ -2,11 +2,8 @@ package com.example.vpmanager;
 
 import static android.content.ContentValues.TAG;
 
-import android.annotation.SuppressLint;
 import android.app.AlertDialog;
-import android.content.Context;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -38,13 +35,19 @@ public class studyActivity extends AppCompatActivity{
 
     ArrayList<String> studyDetails;
 
-    ArrayList<ArrayList<String>> dateAndId;
+    ArrayList<ArrayList<String>> dateInfo;
     ArrayList<String> allDates;
     ArrayList<String> dateIds;
+    ArrayList<String> userIdsOfDates;
+
+    ArrayList<String> savedDateItem;
+    ArrayAdapter availableDatesAdapter;
+    ArrayAdapter savedDateAdapter;
 
     FirebaseFirestore db;
     DocumentReference studyRef;
     CollectionReference datesRef;
+    accessDatabase accessDatabase = new accessDatabase();
 
     @Override
     protected void onCreate (Bundle savedInstanceState) {
@@ -52,8 +55,9 @@ public class studyActivity extends AppCompatActivity{
         setContentView(R.layout.activity_study);
         //Get the studyId early
         currentStudyId = getIntent().getStringExtra("studyId");
+        savedDateItem = new ArrayList<>();
+        savedDateItem.add("Sie haben sich bereits für einen Termin eingetragen.");
 
-        //verschachtelt
         setupStudyDetails(new FirestoreCallbackStudy() {
             @Override
             public void onCallback(ArrayList<String> arrayList) {
@@ -99,7 +103,7 @@ public class studyActivity extends AppCompatActivity{
         if (studyDetails.get(4).equals("Remote")) {
             remoteData.setText(studyDetails.get(5));
         } else{
-            localData.setText(studyDetails.get(6) + "\t\t" + studyDetails.get(6) + "\t\t" + studyDetails.get(6));
+            localData.setText(studyDetails.get(6) + "\t\t" + studyDetails.get(7) + "\t\t" + studyDetails.get(8));
         }
     }
 
@@ -107,18 +111,27 @@ public class studyActivity extends AppCompatActivity{
         dateList = findViewById(R.id.listViewDates);
         allDates = new ArrayList<>();
         dateIds = new ArrayList<>();
+        userIdsOfDates = new ArrayList<>();
 
         //store ids and dates in different ArrayLists
-        for (int i = 0; i < dateAndId.size(); i++) {
-            allDates.add(dateAndId.get(i).get(1));
-            dateIds.add(dateAndId.get(i).get(0));
+        for (int i = 0; i < dateInfo.size(); i++) {
+            dateIds.add(dateInfo.get(i).get(0));
+            allDates.add(dateInfo.get(i).get(1));
+            userIdsOfDates.add(dateInfo.get(i).get(2));
         }
 
-        //Set adapter to display all available dates for the study
-        ArrayAdapter arrayAdapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, allDates);
-        dateList.setAdapter(arrayAdapter);
-
-        setupClickListener();
+        Log.d("userIdsOfAllDates", userIdsOfDates.toString());
+        //makes date selection unavailable if user already picked a date from this study
+        if (userIdsOfDates.contains(homeActivity.id(this))){
+            setSavedDateAdapter();
+            setupSelectedDateClickListener();
+        }else{
+            //Set adapter to display all available dates for the study
+            //availableDatesAdapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, allDates);
+            //dateList.setAdapter(availableDatesAdapter);
+            setAllDatesAdapter();
+            setupClickListener();
+        }
     }
 
     private void setupStudyDetails(FirestoreCallbackStudy firestoreCallbackStudy) {
@@ -159,7 +172,7 @@ public class studyActivity extends AppCompatActivity{
 
         db = FirebaseFirestore.getInstance();
         datesRef = db.collection("dates");
-        dateAndId = new ArrayList<>();
+        dateInfo = new ArrayList<>();
 
         datesRef.whereEqualTo("studyId", currentStudyId).get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
@@ -167,12 +180,14 @@ public class studyActivity extends AppCompatActivity{
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
                         if (task.isSuccessful()) {
                             for (QueryDocumentSnapshot document : task.getResult()) {
-                                ArrayList<String> dateAndID = new ArrayList<>();
-                                dateAndID.add(0, document.getString("id"));
-                                dateAndID.add(1, document.getString("date"));
-                                dateAndId.add(dateAndID);
+                                ArrayList<String> idDateUser = new ArrayList<>();
+                                idDateUser.add(0, document.getString("id"));
+                                idDateUser.add(1, document.getString("date"));
+                                idDateUser.add(2, document.getString("userId"));
+
+                                dateInfo.add(idDateUser);
                             }
-                            firestoreCallbackDates.onCallback(dateAndId);
+                            firestoreCallbackDates.onCallback(dateInfo);
                         } else {
                             Log.d(TAG, "Error getting documents: ", task.getException());
                         }
@@ -194,6 +209,38 @@ public class studyActivity extends AppCompatActivity{
         });
     }
 
+    private void setupSelectedDateClickListener() {
+
+        dateList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                unSelectDateAlert();
+            }
+        });
+    }
+
+    private void unSelectDateAlert() {
+
+        DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                switch (which){
+                    case DialogInterface.BUTTON_POSITIVE:
+                        unSelectDate(); //get dateId out of array and then datenbankanfrage
+                        setAllDatesAdapter();
+                        setupClickListener();
+                        break;
+                    case DialogInterface.BUTTON_NEGATIVE:
+                        break;
+                }
+            }
+        };
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setMessage("Möchten Sie sich für diesen Termin wieder austragen?")
+                .setPositiveButton("Ja", dialogClickListener)
+                .setNegativeButton("Nein", dialogClickListener).show();
+    }
+
     private void selectDateAlert(String dateId){
 
         DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener() {
@@ -202,6 +249,8 @@ public class studyActivity extends AppCompatActivity{
                 switch (which){
                     case DialogInterface.BUTTON_POSITIVE:
                         selectDate(dateId);
+                        setSavedDateAdapter();
+                        setupSelectedDateClickListener();
                         break;
                     case DialogInterface.BUTTON_NEGATIVE:
                         break;
@@ -214,9 +263,18 @@ public class studyActivity extends AppCompatActivity{
                 .setNegativeButton("Nein", dialogClickListener).show();
     }
 
+    private void setSavedDateAdapter(){
+        savedDateAdapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, savedDateItem);
+        dateList.setAdapter(savedDateAdapter);
+    }
+
+    private void setAllDatesAdapter(){
+        availableDatesAdapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, allDates);
+        dateList.setAdapter(availableDatesAdapter);
+    }
+
     private void selectDate(String dateId){
 
-        accessDatabase accessDatabase = new accessDatabase();
         String userId = homeActivity.id(this);
 
         Map<String, Object> updateDataMap = new HashMap<>();
@@ -224,5 +282,12 @@ public class studyActivity extends AppCompatActivity{
         updateDataMap.put("userId", userId);
 
         accessDatabase.selectDate(updateDataMap, dateId);
+    }
+
+    private void unSelectDate(){
+        int datePosition = userIdsOfDates.indexOf(homeActivity.id(this));
+        String dateId = dateIds.get(datePosition);
+
+        accessDatabase.unselectDate(dateId);
     }
 }

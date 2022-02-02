@@ -31,23 +31,37 @@
         android:layout_marginBottom="15dp"/>
 
 
+    <ImageView
+        android:id="@+id/imageView3"
+        android:layout_width="91dp"
+        android:layout_height="29dp"
+        android:layout_marginTop="10dp"
+        app:srcCompat="@drawable/ic_baseline_info_24" />
+
+
+
     <TextView
         android:id="@+id/description"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
+        android:layout_marginLeft="35dp"
         android:fontFamily="sans-serif-light"
-        android:textSize="18sp"
+        android:text="xmlTest"
+        android:textSize="17sp"
         android:textStyle="bold"
-        android:weightSum="100" />
+        android:weightSum="100"
+        android:layout_marginTop="10dp"/>
+
 
     <TextView
         android:id="@+id/vpValue"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
+        android:layout_marginLeft="35dp"
         android:fontFamily="sans-serif-light"
-        android:textSize="18sp"
+        android:textSize="17sp"
         android:textStyle="bold"
         android:weightSum="100" />
 
@@ -56,20 +70,31 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
+        android:layout_marginLeft="35dp"
         android:fontFamily="sans-serif-light"
-        android:textSize="18sp"
+        android:textSize="17sp"
         android:textStyle="bold"
         android:weightSum="100" />
+
+
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="91dp"
+        android:layout_height="31dp"
+        android:layout_marginTop="30dp"
+        app:srcCompat="@drawable/ic_round_location_on_24" />
 
     <TextView
         android:id="@+id/type"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
+        android:layout_marginLeft="35dp"
         android:fontFamily="sans-serif-light"
-        android:textSize="18sp"
+        android:textSize="17sp"
         android:textStyle="bold"
-        android:weightSum="100" />
+        android:weightSum="100"
+        android:layout_marginTop="10dp"/>
 
 
     <!--  adapt design to studyType Textview-->
@@ -78,10 +103,12 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
+        android:layout_marginLeft="35dp"
         android:fontFamily="sans-serif-light"
-        android:textSize="15sp"
+        android:textSize="17sp"
         android:textStyle="bold"
-        android:weightSum="100" />
+        android:weightSum="100"
+        android:layout_marginTop="10dp"/>
 
     <!-- position mit remoteStudy TextView Ã¼berlagern!-->
     <TextView
@@ -89,11 +116,12 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
+        android:layout_marginLeft="35dp"
         android:fontFamily="sans-serif-light"
-        android:textSize="15sp"
+        android:textSize="17sp"
         android:textStyle="bold"
         android:weightSum="100"
-        android:layout_marginTop="-21dp"/>
+        android:layout_marginTop="-25dp"/>
 
     <View
         android:layout_width="match_parent"
@@ -101,7 +129,7 @@
         android:background="@color/color_two"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
-        android:layout_marginTop="65dp"/>
+        android:layout_marginTop="35dp"/>
 
     <TextView
         android:layout_width="match_parent"
@@ -111,7 +139,7 @@
         android:textSize="18sp"
         android:textStyle="bold"
         android:layout_marginStart="25dp"
-        android:layout_marginTop="5dp"
+        android:layout_marginTop="12dp"
         android:layout_gravity="center_horizontal"/>
 
     <ListView

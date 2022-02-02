@@ -69,7 +69,8 @@ public class findStudyActivity extends AppCompatActivity {
         //Store the names and the vps in an ArrayList
         //Store the ids in the same order in another ArrayList
         for (int i = 0; i < studyIdNameVp.size(); i++) {
-            studyNamesAndVps.add(studyIdNameVp.get(i).get(1) + "\t" + "\t" + studyIdNameVp.get(i).get(2) + "VP-Stunden");
+            studyNamesAndVps.add(studyIdNameVp.get(i).get(1) + "\t" + "\t" +
+                    "(" + studyIdNameVp.get(i).get(2) + "\t" + "VP-Stunden)");
             studyIds.add(studyIdNameVp.get(i).get(0));
         }
         //Log.d("loadData (studyName+Vp)", studyNamesAndVps.toString());
