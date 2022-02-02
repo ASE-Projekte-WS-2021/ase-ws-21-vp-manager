@@ -6,15 +6,8 @@ import android.widget.ListView;
 import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 import java.util.ArrayList;
-import android.provider.Settings;
-
-
 
 public class studyActivity extends AppCompatActivity{
-
-    // upgrading Design with next Commit
-
-
 
     @Override
     protected void onCreate (Bundle savedInstanceState) {
@@ -24,7 +17,7 @@ public class studyActivity extends AppCompatActivity{
         //Dummy data for TextView
         TextView textView1 = findViewById(R.id.text1);
         TextView textView2 = findViewById(R.id.text2);
-        TextView textView3;
+        TextView textView3 = findViewById(R.id.text3);
         TextView textView4;
         TextView textView5;
 
@@ -42,16 +35,15 @@ public class studyActivity extends AppCompatActivity{
         dateList.setAdapter(arrayAdapter);
 
 
+        String studyId = getIntent().getStringExtra("studyId");
         String dbData1 = getIntent().getStringExtra("newData");
         String dbData2 = getIntent().getStringExtra("newData2");
 
         //store DB Data in textViews
             textView1.setText(dbData1);
             textView2.setText(dbData2);
-
+            textView3.setText(studyId);
         }
-
-
     }
 
 

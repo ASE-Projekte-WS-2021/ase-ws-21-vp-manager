@@ -28,64 +28,72 @@ import com.google.firebase.firestore.QuerySnapshot;
 public class findStudyActivity extends AppCompatActivity {
 
     ListView studyList;
-    ArrayList<ArrayList<String>> allStudyInfo;
-    ArrayList<String> allStudyNames;
-    ArrayList<String> allStudyIds;
 
-    accessDatabase accessDatabase = new accessDatabase();
+    ArrayList<ArrayList<String>> studyIdNameVp;
+    ArrayList<String> studyNamesAndVps;
+    ArrayList<String> studyIds;
 
     FirebaseFirestore db;
     CollectionReference studiesRef;
-    ArrayList<ArrayList<String>> studyInfo;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_find_study);
+
         setupListView(new FirestoreCallback() {
             @Override
             public void onCallback(ArrayList<ArrayList<String>> arrayList) {
-                Log.d("inTheArrayListMethod", arrayList.toString());
+                Log.d("onCallback (onCreate)", arrayList.toString());
                 loadData();
             }
         });
-        setupClickListener();
+        //Log.d("before setupListener", studyList.toString());
+        //setupClickListener();
     }
 
     private void loadData() {
-        studyList = findViewById(R.id.listView); //ListView in the activity_find_study.xml
 
-        allStudyNames = new ArrayList<>();
-        Log.d("findStudyActivity", allStudyInfo.toString());
+        studyList = findViewById(R.id.listView);
+        studyNamesAndVps = new ArrayList<>();
+        studyIds = new ArrayList<>();
+        Log.d("loadData (allStudyInfo)", studyIdNameVp.toString());
 
-        for (int i = 0; i < allStudyInfo.size(); i++) {
-            for (int j = 0; j < allStudyInfo.get(i).size(); j++) {
-                System.out.println("hallo");
-                System.out.print(allStudyInfo.get(i).get(j) + " ");
+        //For loop for testing
+        for (int i = 0; i < studyIdNameVp.size(); i++) { //Amount of studies
+            for (int j = 0; j < studyIdNameVp.get(i).size(); j++) { //Amount of info of one study
+                System.out.print(studyIdNameVp.get(i).get(j));
             }
             System.out.println("next entry");
         }
-        //get just the name out of the info
-        for (int i = 0; i < allStudyInfo.size(); i++) {
-            allStudyNames.add(allStudyInfo.get(i).get(1) + "\t\t" + allStudyInfo.get(i).get(2) + "Vp");
-        }
-        Log.d("afterGettingAllNames", allStudyNames.toString());
 
-        ArrayAdapter arrayAdapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, allStudyNames);
+        //Store the names and the vps in an ArrayList
+        //Store the ids in the same order in another ArrayList
+        for (int i = 0; i < studyIdNameVp.size(); i++) {
+            studyNamesAndVps.add(studyIdNameVp.get(i).get(1) + "\t" + "\t" + studyIdNameVp.get(i).get(2) + "VP-Stunden");
+            studyIds.add(studyIdNameVp.get(i).get(0));
+        }
+        Log.d("loadData (studyName+Vp)", studyNamesAndVps.toString());
+        Log.d("loadData (studyIds", studyIds.toString());
+
+        ArrayAdapter arrayAdapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, studyNamesAndVps);
         studyList.setAdapter(arrayAdapter);
+
+        setupClickListener();
     }
 
+    //For getting all the Information of all studies
     public interface FirestoreCallback {
         void onCallback(ArrayList<ArrayList<String>> arrayList);
     }
 
-
+    //set up ListView after the data is loaded
     private void setupListView(FirestoreCallback firestoreCallback) {
 
         db = FirebaseFirestore.getInstance();
         studiesRef = db.collection("studies");
-        allStudyInfo = new ArrayList<>();
+        studyIdNameVp = new ArrayList<>();
 
         studiesRef.orderBy("name", Query.Direction.DESCENDING)
                 .get()
@@ -94,21 +102,20 @@ public class findStudyActivity extends AppCompatActivity {
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
                         if (task.isSuccessful()) {
                             for (QueryDocumentSnapshot document : task.getResult()) {
+                                //local ArrayList
                                 ArrayList<String> idNameVph = new ArrayList<>();
                                 idNameVph.add(0, document.getString("id"));
                                 idNameVph.add(1, document.getString("name"));
                                 idNameVph.add(2, document.getString("vps"));
-                                allStudyInfo.add(idNameVph);
-
+                                studyIdNameVp.add(idNameVph);
                             }
-                            firestoreCallback.onCallback(allStudyInfo);
+                            firestoreCallback.onCallback(studyIdNameVp);
 
                         } else {
                             Log.d(TAG, "Error getting documents: ", task.getException());
                         }
                     }
                 });
-
     }
 
     private void setupClickListener() {
@@ -120,13 +127,14 @@ public class findStudyActivity extends AppCompatActivity {
                 //get values from DB, give them to studyactivity
                 Intent intent = new Intent(findStudyActivity.this, studyActivity.class);
 
+                //get the Id of the study that is clicked on
+                String studyId = studyIds.get(position);
+                intent.putExtra("studyId", studyId);
+
                 String testData = " - Studienbeschreibung";
                 intent.putExtra("newData", testData);
                 String testData2 = " - Kategorie ...";
                 intent.putExtra("newData2", testData2);
-                //need the studyId here
-                String deviceID = Settings.Secure.getString(getContentResolver(), Settings.Secure.ANDROID_ID);
-                intent.putExtra("deviceID", deviceID);
 
                 startActivity(intent);
             }

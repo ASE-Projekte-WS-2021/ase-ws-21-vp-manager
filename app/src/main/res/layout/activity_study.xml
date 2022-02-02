@@ -58,6 +58,16 @@
         android:textStyle="bold"
         android:weightSum="100" />
 
+    <TextView
+        android:id="@+id/text3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:fontFamily="sans-serif-light"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:weightSum="100" />
+
     <View
         android:layout_width="match_parent"
         android:layout_height="3dp"

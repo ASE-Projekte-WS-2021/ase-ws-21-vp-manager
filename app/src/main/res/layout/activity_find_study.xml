@@ -19,16 +19,12 @@
         android:background="@color/color_two"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
-        android:layout_marginTop="55dp"
-        />
+        android:layout_marginTop="55dp"/>
 
     <ListView
         android:id="@+id/listView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginTop="70dp" />
-
-
-
 
 </RelativeLayout>
