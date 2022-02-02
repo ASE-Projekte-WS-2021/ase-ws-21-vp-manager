@@ -9,16 +9,9 @@
     tools:context = ".studyActivity">
     <!---android:weightSum="100"-->
 
-    <ImageView
-        android:id="@+id/imageView3"
-        android:layout_width="229dp"
-        android:layout_height="213dp"
-        android:layout_gravity="center_horizontal"
-        app:srcCompat="@android:drawable/btn_star_big_on" />
-
-
 
     <TextView
+        android:id = "@+id/activityHeader"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/studyViewHeader"
@@ -39,7 +32,7 @@
 
 
     <TextView
-        android:id="@+id/text1"
+        android:id="@+id/description"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
@@ -49,7 +42,7 @@
         android:weightSum="100" />
 
     <TextView
-        android:id="@+id/text2"
+        android:id="@+id/vpValue"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
@@ -59,7 +52,7 @@
         android:weightSum="100" />
 
     <TextView
-        android:id="@+id/text3"
+        android:id="@+id/category"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
@@ -67,6 +60,40 @@
         android:textSize="18sp"
         android:textStyle="bold"
         android:weightSum="100" />
+
+    <TextView
+        android:id="@+id/type"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:fontFamily="sans-serif-light"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:weightSum="100" />
+
+
+    <!--  adapt design to studyType Textview-->
+    <TextView
+        android:id="@+id/remotyStudy"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:fontFamily="sans-serif-light"
+        android:textSize="15sp"
+        android:textStyle="bold"
+        android:weightSum="100" />
+
+    <!-- position mit remoteStudy TextView Ã¼berlagern!-->
+    <TextView
+        android:id="@+id/localStudy"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:fontFamily="sans-serif-light"
+        android:textSize="15sp"
+        android:textStyle="bold"
+        android:weightSum="100"
+        android:layout_marginTop="-21dp"/>
 
     <View
         android:layout_width="match_parent"
@@ -93,6 +120,5 @@
         android:layout_height="178dp"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="3dp" />
-
 
 </LinearLayout>

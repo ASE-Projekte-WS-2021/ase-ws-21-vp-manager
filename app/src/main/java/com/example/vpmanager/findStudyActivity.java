@@ -15,8 +15,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.ArrayList;
 
-import android.provider.Settings;
-
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.CollectionReference;
@@ -49,8 +47,6 @@ public class findStudyActivity extends AppCompatActivity {
                 loadData();
             }
         });
-        //Log.d("before setupListener", studyList.toString());
-        //setupClickListener();
     }
 
     private void loadData() {
@@ -61,12 +57,14 @@ public class findStudyActivity extends AppCompatActivity {
         Log.d("loadData (allStudyInfo)", studyIdNameVp.toString());
 
         //For loop for testing
+        /*
         for (int i = 0; i < studyIdNameVp.size(); i++) { //Amount of studies
             for (int j = 0; j < studyIdNameVp.get(i).size(); j++) { //Amount of info of one study
                 System.out.print(studyIdNameVp.get(i).get(j));
             }
             System.out.println("next entry");
         }
+         */
 
         //Store the names and the vps in an ArrayList
         //Store the ids in the same order in another ArrayList
@@ -74,8 +72,8 @@ public class findStudyActivity extends AppCompatActivity {
             studyNamesAndVps.add(studyIdNameVp.get(i).get(1) + "\t" + "\t" + studyIdNameVp.get(i).get(2) + "VP-Stunden");
             studyIds.add(studyIdNameVp.get(i).get(0));
         }
-        Log.d("loadData (studyName+Vp)", studyNamesAndVps.toString());
-        Log.d("loadData (studyIds", studyIds.toString());
+        //Log.d("loadData (studyName+Vp)", studyNamesAndVps.toString());
+        //Log.d("loadData (studyIds", studyIds.toString());
 
         ArrayAdapter arrayAdapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, studyNamesAndVps);
         studyList.setAdapter(arrayAdapter);
@@ -124,17 +122,12 @@ public class findStudyActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
-                //get values from DB, give them to studyactivity
+                //get values from DB, give them to studyActivity
                 Intent intent = new Intent(findStudyActivity.this, studyActivity.class);
 
                 //get the Id of the study that is clicked on
                 String studyId = studyIds.get(position);
                 intent.putExtra("studyId", studyId);
-
-                String testData = " - Studienbeschreibung";
-                intent.putExtra("newData", testData);
-                String testData2 = " - Kategorie ...";
-                intent.putExtra("newData2", testData2);
 
                 startActivity(intent);
             }
