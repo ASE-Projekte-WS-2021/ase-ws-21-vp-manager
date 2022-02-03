@@ -90,22 +90,23 @@ public class homeActivity extends AppCompatActivity {
                 new PieModel(
                         getString(R.string.pieSliceLabelSafe),
                         scaledCompletedVP,
-                        Color.parseColor(String.valueOf(ContextCompat.getColor(this, R.color.pieChartSafe)))));
+                        getResources().getColor(R.color.pieChartSafe)));
+                        //Color.parseColor(String.valueOf(ContextCompat.getColor(this, R.color.pieChartSafe)))));
         pieChart.addPieSlice(
                 new PieModel(
                         getString(R.string.pieSliceLabelParticipation),
                         scaledParticipationVP,
-                        Color.parseColor(String.valueOf(ContextCompat.getColor(this, R.color.pieChartParticipation)))));
+                        getResources().getColor(R.color.pieChartParticipation)));
         pieChart.addPieSlice(
                 new PieModel(
                         getString(R.string.pieSliceLabelPlanned),
                         scaledPlannedVP,
-                        Color.parseColor(String.valueOf(ContextCompat.getColor(this, R.color.pieChartPlanned)))));
+                        getResources().getColor(R.color.pieChartPlanned)));
         pieChart.addPieSlice(
                 new PieModel(
                         getString(R.string.pieSliceLabelRemaining),
                         remaining,
-                        Color.parseColor(String.valueOf(ContextCompat.getColor(this, R.color.pieChartRemaining)))));
+                        getResources().getColor(R.color.pieChartRemaining)));
 
         pieChart.startAnimation();
     }

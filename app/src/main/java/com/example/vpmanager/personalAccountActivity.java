@@ -92,22 +92,23 @@ public class personalAccountActivity extends AppCompatActivity {
                 new PieModel(
                         getString(R.string.pieSliceLabelSafe),
                         scaledCompletedVP,
-                        Color.parseColor(String.valueOf(ContextCompat.getColor(this, R.color.pieChartSafe)))));
+                        getResources().getColor(R.color.pieChartSafe)));
+        //Color.parseColor(String.valueOf(ContextCompat.getColor(this, R.color.pieChartSafe)))));
         chart.addPieSlice(
                 new PieModel(
                         getString(R.string.pieSliceLabelParticipation),
                         scaledParticipationVP,
-                        Color.parseColor(String.valueOf(ContextCompat.getColor(this, R.color.pieChartParticipation)))));
+                        getResources().getColor(R.color.pieChartParticipation)));
         chart.addPieSlice(
                 new PieModel(
                         getString(R.string.pieSliceLabelPlanned),
                         scaledPlannedVP,
-                        Color.parseColor(String.valueOf(ContextCompat.getColor(this, R.color.pieChartPlanned)))));
+                        getResources().getColor(R.color.pieChartPlanned)));
         chart.addPieSlice(
                 new PieModel(
                         getString(R.string.pieSliceLabelRemaining),
                         remaining,
-                        Color.parseColor(String.valueOf(ContextCompat.getColor(this, R.color.pieChartRemaining)))));
+                        getResources().getColor(R.color.pieChartRemaining)));
 
         chart.startAnimation();
     }
