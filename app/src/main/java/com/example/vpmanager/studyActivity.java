@@ -94,12 +94,14 @@ public class studyActivity extends AppCompatActivity{
         //Textview for further studyType data (depending on type)
         TextView remoteData  = findViewById(R.id.remotyStudy);
         TextView localData   = findViewById(R.id.localStudy);
+        TextView contactInfo = findViewById(R.id.contactInformation);
 
         //store DB Data Strings in textViews
         headerText.setText(studyDetails.get(0));
         description.setText(studyDetails.get(1));
         String vpHours = "VP-Stunden: " + "\t" + studyDetails.get(2);
         vpValue.setText(vpHours);
+        contactInfo.setText(studyDetails.get(9));
         category.setText(studyDetails.get(3));
         studyType.setText(studyDetails.get(4));
 
@@ -161,6 +163,7 @@ public class studyActivity extends AppCompatActivity{
                         studyDetails.add(6, document.getString("location"));
                         studyDetails.add(7, document.getString("street"));
                         studyDetails.add(8, document.getString("room"));
+                        studyDetails.add(9, document.getString("contact"));
 
                         Log.d(TAG, "DocumentSnapshot data: " + document.getData());
                         firestoreCallbackStudy.onCallback(studyDetails);
