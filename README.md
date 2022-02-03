@@ -18,6 +18,17 @@ Die OpenAPI Spezifikation ist der öffentliche (Beschreibungs-)Standard zur Doku
 
 ### Open Source Tools
 
+Die Swagger Tools zur API Entwicklung umfassen:
+- Design 
+- Build-Prozess
+- <strong>Dokumentation</strong>
+
+
+
 
 ### SwaggerHUB
+
+Swagger Hub Rest API Dokumentation Anleitung:
+
+
 
