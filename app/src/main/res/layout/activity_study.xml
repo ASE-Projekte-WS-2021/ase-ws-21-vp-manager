@@ -47,7 +47,6 @@
         android:layout_gravity="bottom"
         android:layout_marginLeft="35dp"
         android:fontFamily="sans-serif-light"
-        android:text="xmlTest"
         android:textSize="17sp"
         android:textStyle="bold"
         android:weightSum="100"

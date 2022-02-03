@@ -3,16 +3,40 @@
     <string name="app_name">VP Manager</string>
     <string name="dummyDate">22.01.2022 um 18 Uhr</string>
     <string name="dummyStudy">Studie A</string>
-    <string name="homeFindStudy">Find</string>
-    <string name="homeCreateStudy">Create</string>
+    <string name="homeFindStudy">STUDIEN FINDEN</string>
+    <string name="homeCreateStudy">STUDIEN ERSTELLEN</string>
     <string name="homeTopicAppointments">Anstehende Termine</string>
+    <string name="pieSliceLabelSafe">Safe</string>
+    <string name="pieSliceLabelParticipation">Participation</string>
+    <string name="pieSliceLabelPlanned">Planned</string>
+    <string name="pieSliceLabelRemaining">Remaining</string>
+    <string name="personalAccount">Persönliche Übersicht</string>
 
     <!---Create Study-->
     <string name="createOfferedVP">Angebotene VP</string>
     <string name="createStudyTitle">Titel der Studie</string>
     <string name="createStudyDesc">Studienbeschreibung</string>
-    <string name="createAddDateButton">Add Date</string>
+    <string name="createAddDateButton">Termine hinzufügen</string>
     <string name="createCreateButton">Studie erstellen</string>
+    <string name="createPlatformHint">Welche Plattform?</string>
+    <string name="createLocationHint">Ort</string>
+    <string name="createRoomHint">Raum</string>
+    <string name="createStreetHint">Straße</string>
+    <string name="createAlertBase">Bitten tragen Sie die fehlenden Angaben ein: \n</string>
+    <string name="createAlertTitle">Studientitel \n</string>
+    <string name="createAlertContact">Kontaktmöglichkeit \n</string>
+    <string name="createAlertStudyDesc">Studienbeschreibung \n</string>
+    <string name="createAlertExecutionType">Durchführungsart \n</string>
+    <string name="createAlertCategory">Kategorie \n</string>
+    <string name="createAlertLocation">Durchführungsort \n</string>
+    <string name="createAlertOptionalBase">Sind Sie sicher das Sie ohne folgende Angaben fortfahren wollen: \n</string>
+    <string name="createAlertVP">VP-Stunden \n</string>
+    <string name="createAlertRoom">Raum \n</string>
+    <string name="createAlertStreet">Straße \n</string>
+    <string name="createAlertPlatform">Plattform \n</string>
+    <string name="createAlertDates">Termine \n</string>
+    <string name="remoteString">Remote</string>
+    <string name="presenceString">Präsenz</string>
 
     <string-array name="createCategoryList">
         <item>Studienkategorie</item>
@@ -32,11 +56,23 @@
 
     <!---findStudyActivity-->
     <string name="entryListHeader">Aktuelles Studienangebot</string>
+    <string name="vpHours"> VPs)</string>
 
     <!---studyActivity-->
     <string name="studyViewHeader">Detailansicht - Studie</string>
     <string name="dateListHeader">Verfügbare Termine</string>
     <string name="createContactInfo">Kontaktmöglichkeit</string>
+    <string name="dropDateView">Sie haben sich bereits für einen Termin eingetragen. (für Abmeldung hier kilcken)</string>
+    <string name="dropDateQuestion">Möchten Sie sich für diesen Termin wieder austragen?</string>
+    <string name="selectDateQuestion">Möchten Sie sich für diesen Termin eintragen?</string>
 
+    <!--General-->
+    <string name="yes">Ja</string>
+    <string name="no">Nein</string>
+    <string name="ok">Ok</string>
+    <string name="collectionPathUsers">users</string>
+    <string name="collectionPathStudies">studies</string>
+    <string name="collectionPathDates">dates</string>
 
 </resources>
+
