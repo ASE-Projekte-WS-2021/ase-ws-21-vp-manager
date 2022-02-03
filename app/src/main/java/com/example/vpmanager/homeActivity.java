@@ -1,7 +1,6 @@
 package com.example.vpmanager;
 
 import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -9,10 +8,8 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-
 import org.eazegraph.lib.charts.PieChart;
 import org.eazegraph.lib.models.PieModel;
-
 import java.util.UUID;
 
 public class homeActivity extends AppCompatActivity {
@@ -31,19 +28,26 @@ public class homeActivity extends AppCompatActivity {
         //Checks if a new user needs to be registered
         registerNewUser();
         setContentView(R.layout.activity_home);
-        createUserId(this);
-        setupClickables();
+        uniqueID = createUserId(this);
+        setupView();
+        setClickListener();
         //Testdaten
         setPieChartData(5, 3, 2);
     }
 
     //Parameter:
     //Return values:
-    //Sets clicklistner on navigation items
-    private void setupClickables() {
+    //Connects the code with the view
+    private void setupView(){
         findStudyButton = findViewById(R.id.findStudyHome);
         createStudyButton = findViewById(R.id.createStudyHome);
         pieChart = findViewById(R.id.piechart);
+    }
+
+    //Parameter:
+    //Return values:
+    //Sets Clicklistener on navigation items
+    private void setClickListener() {
 
         findStudyButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View V) {

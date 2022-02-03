@@ -4,19 +4,13 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.ExpandableListView;
-import android.widget.Toast;
-
 import androidx.appcompat.app.AppCompatActivity;
-
 import org.eazegraph.lib.charts.PieChart;
 import org.eazegraph.lib.models.PieModel;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.UUID;
 
 
 public class personalAccountActivity extends AppCompatActivity {

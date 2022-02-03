@@ -1,20 +1,14 @@
 package com.example.vpmanager;
 
-import static android.content.ContentValues.TAG;
-
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
-
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-
 import java.util.ArrayList;
-
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.CollectionReference;
@@ -26,11 +20,9 @@ import com.google.firebase.firestore.QuerySnapshot;
 public class findStudyActivity extends AppCompatActivity {
 
     ListView studyList;
-
     ArrayList<ArrayList<String>> studyIdNameVp;
     ArrayList<String> studyNamesAndVps;
     ArrayList<String> studyIds;
-
     FirebaseFirestore db;
     CollectionReference studiesRef;
 
@@ -43,29 +35,15 @@ public class findStudyActivity extends AppCompatActivity {
         setupListView(new FirestoreCallback() {
             @Override
             public void onCallback(ArrayList<ArrayList<String>> arrayList) {
-                Log.d("onCallback (onCreate)", arrayList.toString());
                 loadData();
             }
         });
     }
 
     private void loadData() {
-
         studyList = findViewById(R.id.listView);
         studyNamesAndVps = new ArrayList<>();
         studyIds = new ArrayList<>();
-        Log.d("loadData (allStudyInfo)", studyIdNameVp.toString());
-
-        //For loop for testing
-        /*
-        for (int i = 0; i < studyIdNameVp.size(); i++) { //Amount of studies
-            for (int j = 0; j < studyIdNameVp.get(i).size(); j++) { //Amount of info of one study
-                System.out.print(studyIdNameVp.get(i).get(j));
-            }
-            System.out.println("next entry");
-        }
-         */
-
         //Store the names and the vps in an ArrayList
         //Store the ids in the same order in another ArrayList
         for (int i = 0; i < studyIdNameVp.size(); i++) {
@@ -73,9 +51,6 @@ public class findStudyActivity extends AppCompatActivity {
                     "(" + studyIdNameVp.get(i).get(2) + "\t" + "VP-Stunden)");
             studyIds.add(studyIdNameVp.get(i).get(0));
         }
-        //Log.d("loadData (studyName+Vp)", studyNamesAndVps.toString());
-        //Log.d("loadData (studyIds", studyIds.toString());
-
         ArrayAdapter arrayAdapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, studyNamesAndVps);
         studyList.setAdapter(arrayAdapter);
 
@@ -86,6 +61,7 @@ public class findStudyActivity extends AppCompatActivity {
     public interface FirestoreCallback {
         void onCallback(ArrayList<ArrayList<String>> arrayList);
     }
+
 
     //set up ListView after the data is loaded
     private void setupListView(FirestoreCallback firestoreCallback) {
@@ -111,14 +87,13 @@ public class findStudyActivity extends AppCompatActivity {
                             firestoreCallback.onCallback(studyIdNameVp);
 
                         } else {
-                            Log.d(TAG, "Error getting documents: ", task.getException());
                         }
                     }
                 });
     }
 
-    private void setupClickListener() {
 
+    private void setupClickListener() {
         studyList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {

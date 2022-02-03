@@ -69,6 +69,10 @@ public class createStudyActivity extends AppCompatActivity {
     boolean remoteActive = false;
     boolean presenceActive = false;
 
+    String firstSpinnerItemExecution = "Durchführungsart";
+    String firstSpinnerItemCategory = "Studienkategorie";
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -129,9 +133,9 @@ public class createStudyActivity extends AppCompatActivity {
     //Return values:
     //Depending on the executionType another set of Edittexts are dynamically loaded
     private void loadLocation(String executionType) {
-        if (executionType.equals("Remote")) {
+        if (executionType.equals(getString(R.string.remoteString))) {
             programEditText = new EditText(this);
-            programEditText.setHint("Welche Plattform");
+            programEditText.setHint(getString(R.string.createPlatformHint));
             programEditText.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
 
             if (locationLinearLayout != null) {
@@ -139,17 +143,17 @@ public class createStudyActivity extends AppCompatActivity {
             }
         }
 
-        if (executionType.equals("Präsenz")) {
+        if (executionType.equals(getString(R.string.presenceString))) {
             locationEditText = new EditText(this);
-            locationEditText.setHint("Ort");
+            locationEditText.setHint(getString(R.string.createLocationHint));
             locationEditText.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
 
             streetEditText = new EditText(this);
-            streetEditText.setHint("Straße");
+            streetEditText.setHint(getString(R.string.createStreetHint));
             streetEditText.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
 
             roomEditText = new EditText(this);
-            roomEditText.setHint("Raum");
+            roomEditText.setHint(getString(R.string.createRoomHint));
             roomEditText.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
 
             if (locationLinearLayout != null) {
@@ -174,13 +178,13 @@ public class createStudyActivity extends AppCompatActivity {
                 }
                 if (id == 1) {
                     locationLinearLayout.removeAllViews();
-                    loadLocation("Remote");
+                    loadLocation(getString(R.string.remoteString));
                     remoteActive = true;
                     presenceActive = false;
                 }
                 if (id == 2) {
                     locationLinearLayout.removeAllViews();
-                    loadLocation("Präsenz");
+                    loadLocation(getString(R.string.presenceString));
                     remoteActive = false;
                     presenceActive = true;
                 }
@@ -282,9 +286,9 @@ public class createStudyActivity extends AppCompatActivity {
         newStudy.put("description", studyDesc.getText().toString());
         newStudy.put("category", categories.getSelectedItem().toString());
         newStudy.put("executionType", executionType.getSelectedItem().toString());
-        if (executionType.getSelectedItem().toString().equals("Remote")) {
+        if (executionType.getSelectedItem().toString().equals(getString(R.string.remoteString))) {
             newStudy.put("platform", programEditText.getText().toString());
-        }else if (executionType.getSelectedItem().toString().equals("Präsenz")){
+        }else if (executionType.getSelectedItem().toString().equals(getString(R.string.presenceString))){
             newStudy.put("location", locationEditText.getText().toString());
             newStudy.put("street", streetEditText.getText().toString());
             newStudy.put("room", roomEditText.getText().toString());
@@ -352,58 +356,58 @@ public class createStudyActivity extends AppCompatActivity {
         }
 
         if (!mandatoryCheck) {
-            alertMessage += "Bitten tragen Sie die fehlenden Angaben ein: \n";
+            alertMessage += getString(R.string.createAlertBase);
 
             if(!checkListTitle){
-                alertMessage += "Studientitel \n";
+                alertMessage += getString(R.string.createAlertTitle);
             }
 
             if(!checkListStudyDesc){
-                alertMessage += "Studienbeschreibung \n";
+                alertMessage += getString(R.string.createAlertStudyDesc);
 
             }
 
             if(!checkListContact){
-                alertMessage += "Kontaktmöglichkeit \n";
+                alertMessage += getString(R.string.createAlertContact);
             }
 
             if(!checkListExecutionType){
-                alertMessage += "Durchführungsart \n";
+                alertMessage += getString(R.string.createAlertExecutionType);
             }
 
             if(!checkListCategory){
-                alertMessage += "Kategorie der Studie \n";
+                alertMessage += getString(R.string.createAlertCategory);
 
             }
 
             if (!checkListLocation && presenceActive) {
-                alertMessage += "Durchführungsort \n";
+                alertMessage += getString(R.string.createAlertLocation);
             }
 
         } else {
             //Optional
-            alertMessage += "Sind Sie sicher das Sie ohne folgende Angaben fortfahren wollen: \n";
+            alertMessage += getString(R.string.createAlertOptionalBase);
             if (!checkListVP) {
-                alertMessage += "VP-Stunden \n";
+                alertMessage += getString(R.string.createAlertVP);
             }
 
             if (!checkListRoom && presenceActive) {
-                alertMessage += "Raum \n";
+                alertMessage += getString(R.string.createAlertRoom);
             }
 
             if (!checkListStreet && presenceActive) {
-                alertMessage += "Straße \n";
+                alertMessage += getString(R.string.createAlertStreet);
             }
 
             if (!checkListProgram && remoteActive) {
-                alertMessage += "Programm \n";
+                alertMessage += getString(R.string.createAlertPlatform);
             }
 
             if (!checkListDate) {
-                alertMessage += "Daten \n";
+                alertMessage += getString(R.string.createAlertDates);
             }
         }
-        if(alertMessage.equals("Sind Sie sicher das Sie ohne folgende Angaben fortfahren wollen: \n")){
+        if(alertMessage.equals(getString(R.string.createAlertOptionalBase))){
             createDBEntry();
         } else{
             alertPopup(alertMessage, mandatoryCheck);
@@ -419,7 +423,7 @@ public class createStudyActivity extends AppCompatActivity {
             AlertDialog.Builder builder = new AlertDialog.Builder(this);
             builder.setMessage(alertMessage)
                     .setCancelable(false)
-                    .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                    .setPositiveButton(getString(R.string.ok), new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int id) {
                         }
                     });
@@ -440,8 +444,8 @@ public class createStudyActivity extends AppCompatActivity {
                 }
             };
             AlertDialog.Builder builder = new AlertDialog.Builder(this);
-            builder.setMessage(alertMessage).setPositiveButton("Ja", dialogClickListener)
-                    .setNegativeButton("Nein", dialogClickListener).show();
+            builder.setMessage(alertMessage).setPositiveButton(getString(R.string.yes), dialogClickListener)
+                    .setNegativeButton(getString(R.string.no), dialogClickListener).show();
         }
     }
 
@@ -484,14 +488,14 @@ public class createStudyActivity extends AppCompatActivity {
     //Return values:
     //Checks if a executiontype was picked at the spinner
     private void checkExecutionType() {
-        checkListExecutionType = !executionType.getSelectedItem().toString().equals("Durchführungsart");
+        checkListExecutionType = !executionType.getSelectedItem().toString().equals(firstSpinnerItemExecution);
     }
 
     //Parameter:
     //Return values:
     //Checks if a category was picked at the spinner
     private void checkCategory() {
-        checkListCategory = !categories.getSelectedItem().toString().equals("Studienkategorie");
+        checkListCategory = !categories.getSelectedItem().toString().equals(firstSpinnerItemCategory);
     }
 
     //Parameter:

@@ -1,39 +1,24 @@
 package com.example.vpmanager;
 
 import static android.content.ContentValues.TAG;
-
 import android.util.Log;
-
 import androidx.annotation.NonNull;
-
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
-import com.google.firebase.firestore.SetOptions;
 import com.google.firebase.firestore.Transaction;
-
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
 public class accessDatabase {
-
     FirebaseFirestore db;
-
     //HomeActivity --------------------------------------------------------------------------------!
     //Adds a new user (installation of the app) to the database, if it doesn't already exist
     public void createNewUser(String deviceId){
-
         db = FirebaseFirestore.getInstance();
         //A DocumentReference refers to a document location
         final DocumentReference userDocRef = db.collection("users").document(deviceId);
-
         db.runTransaction(new Transaction.Function<Void>() {
             @Override
             public Void apply(@NonNull Transaction transaction) throws FirebaseFirestoreException {
