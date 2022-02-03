@@ -21,6 +21,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.UUID;
 
 public class createStudyActivity extends AppCompatActivity {
@@ -30,6 +32,7 @@ public class createStudyActivity extends AppCompatActivity {
     Spinner categories;
     Spinner executionType;
     ArrayList<String> dates = new ArrayList<>();
+
     EditText studyTitle;
     EditText VP;
     EditText studyDesc;
@@ -41,6 +44,7 @@ public class createStudyActivity extends AppCompatActivity {
     Button createButton;
 
     ArrayAdapter<String> datePickerAdapter;
+    accessDatabase accessDatabase = new accessDatabase();
 
     String date_time = "";
     int mYear;
@@ -263,15 +267,57 @@ public class createStudyActivity extends AppCompatActivity {
     //Return values:
     //Will be the last method called to transfer the data to the database
     private void createDBEntry() {
-        //DBCODE
-        System.out.println("DB");
+
+        String studyID = getNewId();
+        Map<String, Object> newStudy = new HashMap<>();
+
+        newStudy.put("id", studyID); //New id for the study
+        newStudy.put("creator", homeActivity.uniqueID);
+        newStudy.put("name", studyTitle.getText().toString());
+        newStudy.put("vps", VP.getText().toString());
+        newStudy.put("description", studyDesc.getText().toString());
+        newStudy.put("category", categories.getSelectedItem().toString());
+        newStudy.put("executionType", executionType.getSelectedItem().toString());
+        if (executionType.getSelectedItem().toString().equals("Remote")) {
+            newStudy.put("platform", programEditText.getText().toString());
+        }else if (executionType.getSelectedItem().toString().equals("Präsenz")){
+            newStudy.put("location", locationEditText.getText().toString());
+            newStudy.put("street", streetEditText.getText().toString());
+            newStudy.put("room", roomEditText.getText().toString());
+        }
+        if (!dates.isEmpty()) {
+            ArrayList<String> dateIds = new ArrayList<>();
+
+            for (int i=0; i < dates.size(); i++){
+                Map<String, Object> newDate = new HashMap<>();
+                String dateID = getNewId();
+
+                newDate.put("id", dateID); //New id for every date
+                newDate.put("studyId", studyID);
+                newDate.put("userId", null);
+                newDate.put("date", dates.get(i));
+                newDate.put("selected", false);
+                dateIds.add(dateID);
+                accessDatabase.addNewDate(newDate, dateID);
+            }
+            newStudy.put("dates", dateIds);
+        }
+        accessDatabase.addNewStudy(newStudy, studyID);
+
+        //reload Activity
+        reloadActivity();
+    }
+
+    private void reloadActivity(){
+        finish();
+        startActivity(getIntent());
     }
 
     //Parameter:
     //Return values:
     //Checks the input of the EditTexts, Spinners and ListViews and gives an Error if something mandatory is missing or a notification if its something optional
     private void checkInput() {
-        getDeviceID();
+        //getDeviceID();
         checkTitle();
         checkVP();
         checkStudyDesc();
@@ -460,10 +506,8 @@ public class createStudyActivity extends AppCompatActivity {
         checkListTitle = !studyTitle.getText().toString().equals("");
     }
 
-    //Parameter:
-    //Return values: UUID
-    //Returns the users Device ID to enable an assignment of the study to the specific user
-    private String getDeviceID() {
+    //UUID creates a new random id
+    private String getNewId() {
         return UUID.randomUUID().toString();
     }
 }

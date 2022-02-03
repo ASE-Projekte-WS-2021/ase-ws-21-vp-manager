@@ -2,7 +2,9 @@ package com.example.vpmanager;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
@@ -11,17 +13,25 @@ import android.widget.Button;
 import org.eazegraph.lib.charts.PieChart;
 import org.eazegraph.lib.models.PieModel;
 
+import java.util.UUID;
 
 public class homeActivity extends AppCompatActivity {
 
     Button findStudyButton;
     Button createStudyButton;
     PieChart pieChart;
+    //Unique ID Strings
+    public static String uniqueID = null;
+    private static final String PREF_UNIQUE_ID = "PREF_UNIQUE_ID";
+    accessDatabase accessDatabase = new accessDatabase();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        //Checks if a new user needs to be registered
+        registerNewUser();
         setContentView(R.layout.activity_home);
+        createUserId(this);
         setupClickables();
         //Testdaten
         setPieChartData(5, 3, 2);
@@ -92,6 +102,28 @@ public class homeActivity extends AppCompatActivity {
                         Color.parseColor("#808080")));
 
         pieChart.startAnimation();
+    }
+
+    private void registerNewUser(){
+        String deviceID = createUserId(this);
+        accessDatabase.createNewUser(deviceID);
+    }
+
+    //Generates an unique id for every installation of the app.
+    //Source: https://ssaurel.medium.com/how-to-retrieve-an-unique-id-to-identify-android-devices-6f99fd5369eb
+    public synchronized static String createUserId(Context context) {
+        if (uniqueID == null) {
+            SharedPreferences sharedPrefs = context.getSharedPreferences(
+                    PREF_UNIQUE_ID, Context.MODE_PRIVATE);
+            uniqueID = sharedPrefs.getString(PREF_UNIQUE_ID, null);
+            if (uniqueID == null) {
+                uniqueID = UUID.randomUUID().toString();
+                SharedPreferences.Editor editor = sharedPrefs.edit();
+                editor.putString(PREF_UNIQUE_ID, uniqueID);
+                editor.apply();
+            }
+        }
+        return uniqueID;
     }
 }
 
