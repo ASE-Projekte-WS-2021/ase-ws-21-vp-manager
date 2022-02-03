@@ -1,6 +1,6 @@
 # Dokumentation von REST-APIs
 
-<strong>"REST-API" = "Representational State Transfer - Application Programming Interface</strong>
+<strong>"REST-API" = "Representational State Transfer - Application Programming Interface"</strong>
 
 REST-APIs  ermöglichen im Zeitalter verschiedenster Nutzungsszenarien einen strukturierten Informationsaustausch. Unterschiedliche Systeme und Endgeräte (Desktop-PCs, Smartphones, Tablets etc.) soll durch die REST-API eine gemeinsame Kommunikationsbasis bereitgestellt werden. So kann beispielsweise über eine Client-Anforderung eine Repräsentation des aktuellen Ressourcenstatus (HTTP FOrmat: JSON, HTML, etc.) eines Projektes an den Anforderer übertragen werden. Ein solcher HTTP Request besteht aus dem Endpoint und den jeweiligen Parametern.
 
