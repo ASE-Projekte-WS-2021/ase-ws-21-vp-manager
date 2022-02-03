@@ -1,6 +1,7 @@
 package com.example.vpmanager;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -17,28 +18,30 @@ public class homeActivity extends AppCompatActivity {
     Button findStudyButton;
     Button createStudyButton;
     PieChart pieChart;
+    accessDatabase accessDatabase;
     //Unique ID Strings
     public static String uniqueID = null;
     private static final String PREF_UNIQUE_ID = "PREF_UNIQUE_ID";
-    accessDatabase accessDatabase = new accessDatabase();
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //Checks if a new user needs to be registered
-        registerNewUser();
         setContentView(R.layout.activity_home);
         uniqueID = createUserId(this);
+        accessDatabase = new accessDatabase();
+        //Checks if a new user needs to be registered
+        registerNewUser();
         setupView();
         setClickListener();
-        //Testdaten
+        //testData
         setPieChartData(5, 3, 2);
     }
 
     //Parameter:
     //Return values:
     //Connects the code with the view
-    private void setupView(){
+    private void setupView() {
         findStudyButton = findViewById(R.id.findStudyHome);
         createStudyButton = findViewById(R.id.createStudyHome);
         pieChart = findViewById(R.id.piechart);
@@ -46,7 +49,7 @@ public class homeActivity extends AppCompatActivity {
 
     //Parameter:
     //Return values:
-    //Sets Clicklistener on navigation items
+    //Sets clickListener on navigation items
     private void setClickListener() {
 
         findStudyButton.setOnClickListener(new View.OnClickListener() {
@@ -69,7 +72,6 @@ public class homeActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-
     }
 
     //Parameter: completedVP, participationVP, plannedVP
@@ -86,33 +88,38 @@ public class homeActivity extends AppCompatActivity {
         }
         pieChart.addPieSlice(
                 new PieModel(
-                        "Safe",
+                        getString(R.string.pieSliceLabelSafe),
                         scaledCompletedVP,
-                        Color.parseColor("#7CFC00")));
+                        Color.parseColor(String.valueOf(ContextCompat.getColor(this, R.color.pieChartSafe)))));
         pieChart.addPieSlice(
                 new PieModel(
-                        "Participation",
+                        getString(R.string.pieSliceLabelParticipation),
                         scaledParticipationVP,
-                        Color.parseColor("#ffa500")));
+                        Color.parseColor(String.valueOf(ContextCompat.getColor(this, R.color.pieChartParticipation)))));
         pieChart.addPieSlice(
                 new PieModel(
-                        "Planned",
+                        getString(R.string.pieSliceLabelPlanned),
                         scaledPlannedVP,
-                        Color.parseColor("#ff0000")));
+                        Color.parseColor(String.valueOf(ContextCompat.getColor(this, R.color.pieChartPlanned)))));
         pieChart.addPieSlice(
                 new PieModel(
-                        "Remaining",
+                        getString(R.string.pieSliceLabelRemaining),
                         remaining,
-                        Color.parseColor("#808080")));
+                        Color.parseColor(String.valueOf(ContextCompat.getColor(this, R.color.pieChartRemaining)))));
 
         pieChart.startAnimation();
     }
 
-    private void registerNewUser(){
+    //Parameter:
+    //Return values:
+    //Registers a new user (installation of the app)  in the DB, if the user doesn't already exist
+    private void registerNewUser() {
         String deviceID = createUserId(this);
         accessDatabase.createNewUser(deviceID);
     }
 
+    //Parameter: context
+    //Return values: uniqueID
     //Generates an unique id for every installation of the app.
     //Source: https://ssaurel.medium.com/how-to-retrieve-an-unique-id-to-identify-android-devices-6f99fd5369eb
     public synchronized static String createUserId(Context context) {

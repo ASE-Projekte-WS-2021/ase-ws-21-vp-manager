@@ -14,6 +14,15 @@
             android:layout_weight="30"
             android:orientation="vertical">
 
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/personalAccount"
+                android:textSize="23sp"
+                android:textStyle="bold"
+                android:layout_marginStart="25dp"
+                android:layout_marginTop="20dp"/>
+
             <!--Pie chart to display VPs-->
             <org.eazegraph.lib.charts.PieChart
                 android:id="@+id/piechart"
@@ -26,7 +35,6 @@
                 tools:ignore="NestedWeights" />
         </LinearLayout>
 
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
@@ -36,7 +44,6 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/homeTopicAppointments"
                 android:textSize="23sp"
                 android:textStyle="bold"
                 android:layout_marginStart="25dp"
@@ -49,36 +56,6 @@
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="20dp"
                 android:layout_marginTop="5dp"/>
-
-
-            <!---ListView, currently only a dummy-->
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginRight="25dp"
-                android:layout_marginLeft="25dp"
-                android:layout_marginTop="10dp"
-                android:layout_marginBottom="10dp">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="sans-serif-light"
-                    android:text="@string/dummyStudy"
-                    android:textSize="18sp"/>
-
-                <TextView
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/dummyDate"
-                    android:id="@+id/tvR"
-                    android:textAlignment="textEnd"
-                    android:textSize="18sp"
-                    android:textColor="@color/color_one"
-                    android:textStyle="bold"
-                    android:fontFamily="sans-serif-light"
-                    android:layout_alignParentEnd="true"/>
-            </RelativeLayout>
 
         </LinearLayout>
 

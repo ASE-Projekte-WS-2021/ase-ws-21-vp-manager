@@ -67,6 +67,9 @@ public class studyActivity extends AppCompatActivity {
         savedDateItem = new ArrayList<>();
         savedDateItem.add(getString(R.string.dropDateView));
 
+        // Parameter:
+        // Return values:
+        // load necessary data for clicked study
         setupStudyDetails(new FirestoreCallbackStudy() {
             @Override
             public void onCallback(ArrayList<String> arrayList) {
@@ -74,6 +77,9 @@ public class studyActivity extends AppCompatActivity {
             }
         });
 
+        // Parameter:
+        // Return values:
+        // load available dates for date selection ListView forclicked study
         setupDateListView(new FirestoreCallbackDates() {
             @Override
             public void onCallback(ArrayList<ArrayList<String>> arrayList) {
@@ -82,14 +88,23 @@ public class studyActivity extends AppCompatActivity {
         });
     }
 
+    // Parameter:
+    // Return values:
+    // set up view one after data is loaded
     public interface FirestoreCallbackStudy {
         void onCallback(ArrayList<String> arrayList);
     }
 
+    // Parameter:
+    // Return values:
+    // set up view 2 after data is loaded
     public interface FirestoreCallbackDates {
         void onCallback(ArrayList<ArrayList<String>> arrayList);
     }
 
+    // Parameter:
+    // Return values:
+    // Get DB values from arraylist and load study data in associated textViews
     private void loadStudyData() {
 
         headerText = findViewById(R.id.activityHeader);
@@ -112,7 +127,7 @@ public class studyActivity extends AppCompatActivity {
         studyType.setText(studyDetails.get(4));
 
         // set further studyType data
-        if (studyDetails.get(4).equals("Remote")) {
+        if (studyDetails.get(4).equals(getString(R.string.remoteString))) {
             remoteData.setText(studyDetails.get(5));
         } else {
             String locationString = studyDetails.get(6) + "\t\t" + studyDetails.get(7) + "\t\t" + studyDetails.get(8);
@@ -120,6 +135,9 @@ public class studyActivity extends AppCompatActivity {
         }
     }
 
+    // Parameter:
+    // Return values:
+    // Get DB values from arraylist and load date data in associated textViews
     private void loadDatesData() {
         dateList = findViewById(R.id.listViewDates);
         allDates = new ArrayList<>();
@@ -138,18 +156,18 @@ public class studyActivity extends AppCompatActivity {
             setSavedDateAdapter();
             setupSelectedDateClickListener();
         } else {
-            //Set adapter to display all available dates for the study
-            //availableDatesAdapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, allDates);
-            //dateList.setAdapter(availableDatesAdapter);
             setAllDatesAdapter();
             setupClickListener();
         }
     }
 
+    // Parameters: firestoreCallbackStudy
+    // Return values:
+    // load DB Data for study details in arraylist
     private void setupStudyDetails(FirestoreCallbackStudy firestoreCallbackStudy) {
 
         db = FirebaseFirestore.getInstance();
-        studyRef = db.collection("studies").document(currentStudyId);
+        studyRef = db.collection(getString(R.string.collectionPathStudies)).document(currentStudyId);
         studyDetails = new ArrayList<>();
 
         studyRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
@@ -176,10 +194,13 @@ public class studyActivity extends AppCompatActivity {
         });
     }
 
+    // Parameter: firestoreCallbackDates
+    // Return values:
+    // load DB data for available dates in arraylist
     private void setupDateListView(FirestoreCallbackDates firestoreCallbackDates) {
 
         db = FirebaseFirestore.getInstance();
-        datesRef = db.collection("dates");
+        datesRef = db.collection(getString(R.string.collectionPathDates));
         freeAndOwnDatesInfo = new ArrayList<>();
 
         //only the unselected dates should be retrieved here!
@@ -206,6 +227,9 @@ public class studyActivity extends AppCompatActivity {
                 });
     }
 
+    // Parameter:
+    // Return values:
+    // set up CLickListener for date list items to open register Pop-up
     private void setupClickListener() {
 
         dateList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -213,12 +237,14 @@ public class studyActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
                 String dateId = dateIds.get(position);
-
                 selectDateAlert(dateId);
             }
         });
     }
 
+    // Parameter:
+    // Return values:
+    // set up CLickListener for register Pop-up options
     private void setupSelectedDateClickListener() {
 
         dateList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -229,6 +255,9 @@ public class studyActivity extends AppCompatActivity {
         });
     }
 
+    // Parameter:
+    // Return values:
+    // cancel registered appointment
     private void unSelectDateAlert() {
 
         DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener() {
@@ -236,7 +265,7 @@ public class studyActivity extends AppCompatActivity {
             public void onClick(DialogInterface dialog, int which) {
                 switch (which) {
                     case DialogInterface.BUTTON_POSITIVE:
-                        unSelectDate(); //get dateId out of array and then datenbankanfrage
+                        unSelectDate();
                         setAllDatesAdapter();
                         setupClickListener();
                         break;
@@ -251,6 +280,9 @@ public class studyActivity extends AppCompatActivity {
                 .setNegativeButton(getString(R.string.no), dialogClickListener).show();
     }
 
+    // Parameter: dateId
+    // Return values:
+    // approve selected appointment
     private void selectDateAlert(String dateId) {
 
         DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener() {
@@ -269,20 +301,29 @@ public class studyActivity extends AppCompatActivity {
         };
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setMessage(getString(R.string.selectDateQuestion))
-                .setPositiveButton("Ja", dialogClickListener)
-                .setNegativeButton("Nein", dialogClickListener).show();
+                .setPositiveButton(getString(R.string.yes), dialogClickListener)
+                .setNegativeButton(getString(R.string.no), dialogClickListener).show();
     }
 
+    // Parameter:
+    // Return values:
+    // set ArrayAdapter for saved dates
     private void setSavedDateAdapter() {
         savedDateAdapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, savedDateItem);
         dateList.setAdapter(savedDateAdapter);
     }
 
+    // Parameter:
+    // Return values:
+    // set ArrayAdapter for all available dates
     private void setAllDatesAdapter() {
         availableDatesAdapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, allDates);
         dateList.setAdapter(availableDatesAdapter);
     }
 
+    // Parameter: dateId
+    // Return values:
+    // update DB for registered appointment
     private void selectDate(String dateId) {
 
         String userId = homeActivity.createUserId(this);
@@ -295,7 +336,9 @@ public class studyActivity extends AppCompatActivity {
         reloadActivity();
     }
 
-    //der Array userIdsOfDates wird beim selecten und unselecten in der activity nicht geupdated
+    // Parameter:
+    // Return values:
+    // update DB for canceled appointment
     private void unSelectDate() {
         int datePosition = userIdsOfDates.indexOf(homeActivity.createUserId(this));
         String dateId = dateIds.get(datePosition);
@@ -303,6 +346,9 @@ public class studyActivity extends AppCompatActivity {
         reloadActivity();
     }
 
+    // Parameter:
+    // Return values:
+    // reload activity
     private void reloadActivity() {
         finish();
         startActivity(getIntent());

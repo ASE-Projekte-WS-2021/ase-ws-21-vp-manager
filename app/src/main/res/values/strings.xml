@@ -3,15 +3,20 @@
     <string name="app_name">VP Manager</string>
     <string name="dummyDate">22.01.2022 um 18 Uhr</string>
     <string name="dummyStudy">Studie A</string>
-    <string name="homeFindStudy">Find</string>
-    <string name="homeCreateStudy">Create</string>
+    <string name="homeFindStudy">STUDIEN FINDEN</string>
+    <string name="homeCreateStudy">STUDIEN ERSTELLEN</string>
     <string name="homeTopicAppointments">Anstehende Termine</string>
+    <string name="pieSliceLabelSafe">Safe</string>
+    <string name="pieSliceLabelParticipation">Participation</string>
+    <string name="pieSliceLabelPlanned">Planned</string>
+    <string name="pieSliceLabelRemaining">Remaining</string>
+    <string name="personalAccount">Persönliche Übersicht</string>
 
     <!---Create Study-->
     <string name="createOfferedVP">Angebotene VP</string>
     <string name="createStudyTitle">Titel der Studie</string>
     <string name="createStudyDesc">Studienbeschreibung</string>
-    <string name="createAddDateButton">Add Date</string>
+    <string name="createAddDateButton">Termine hinzufügen</string>
     <string name="createCreateButton">Studie erstellen</string>
     <string name="createPlatformHint">Welche Plattform?</string>
     <string name="createLocationHint">Ort</string>
@@ -33,8 +38,6 @@
     <string name="remoteString">Remote</string>
     <string name="presenceString">Präsenz</string>
 
-
-
     <string-array name="createCategoryList">
         <item>Studienkategorie</item>
         <item>VR</item>
@@ -53,6 +56,7 @@
 
     <!---findStudyActivity-->
     <string name="entryListHeader">Aktuelles Studienangebot</string>
+    <string name="vpHours"> VP-Stunden</string>
 
     <!---studyActivity-->
     <string name="studyViewHeader">Detailansicht - Studie</string>
@@ -66,6 +70,9 @@
     <string name="yes">Ja</string>
     <string name="no">Nein</string>
     <string name="ok">Ok</string>
+    <string name="collectionPathUsers">users</string>
+    <string name="collectionPathStudies">studies</string>
+    <string name="collectionPathDates">dates</string>
 
 </resources>
 

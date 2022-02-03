@@ -6,9 +6,12 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+
 import java.util.ArrayList;
+
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.CollectionReference;
@@ -26,12 +29,10 @@ public class findStudyActivity extends AppCompatActivity {
     FirebaseFirestore db;
     CollectionReference studiesRef;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_find_study);
-
         setupListView(new FirestoreCallback() {
             @Override
             public void onCallback(ArrayList<ArrayList<String>> arrayList) {
@@ -40,6 +41,9 @@ public class findStudyActivity extends AppCompatActivity {
         });
     }
 
+    // Parameter:
+    // Return values:
+    // Get DB values from arraylist and load study names and VP data in ListView
     private void loadData() {
         studyList = findViewById(R.id.listView);
         studyNamesAndVps = new ArrayList<>();
@@ -47,27 +51,28 @@ public class findStudyActivity extends AppCompatActivity {
         //Store the names and the vps in an ArrayList
         //Store the ids in the same order in another ArrayList
         for (int i = 0; i < studyIdNameVp.size(); i++) {
-            studyNamesAndVps.add(studyIdNameVp.get(i).get(1) + "\t" + "\t" +
-                    "(" + studyIdNameVp.get(i).get(2) + "\t" + "VP-Stunden)");
+            studyNamesAndVps.add(studyIdNameVp.get(i).get(1) + "\t\t(" + studyIdNameVp.get(i).get(2) + R.string.vpHours);
             studyIds.add(studyIdNameVp.get(i).get(0));
         }
         ArrayAdapter arrayAdapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, studyNamesAndVps);
         studyList.setAdapter(arrayAdapter);
-
         setupClickListener();
     }
 
-    //For getting all the Information of all studies
+    // Parameter:
+    // Return values:
+    // For getting all the Information of all studies
     public interface FirestoreCallback {
         void onCallback(ArrayList<ArrayList<String>> arrayList);
     }
 
-
-    //set up ListView after the data is loaded
+    // Parameter: firestoreCallback
+    // Return values:
+    // set up ListView after the data is loaded
     private void setupListView(FirestoreCallback firestoreCallback) {
 
         db = FirebaseFirestore.getInstance();
-        studiesRef = db.collection("studies");
+        studiesRef = db.collection(getString(R.string.collectionPathStudies));
         studyIdNameVp = new ArrayList<>();
 
         studiesRef.orderBy("name", Query.Direction.DESCENDING)
@@ -85,23 +90,22 @@ public class findStudyActivity extends AppCompatActivity {
                                 studyIdNameVp.add(idNameVph);
                             }
                             firestoreCallback.onCallback(studyIdNameVp);
-
-                        } else {
                         }
                     }
                 });
     }
 
-
+    // Parameter:
+    // Return values:
+    // set up CLickListener for list elements to open associated study view
     private void setupClickListener() {
         studyList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
-                //get values from DB, give them to studyActivity
                 Intent intent = new Intent(findStudyActivity.this, studyActivity.class);
 
-                //get the Id of the study that is clicked on
+                //get the id of the study that is clicked on
                 String studyId = studyIds.get(position);
                 intent.putExtra("studyId", studyId);
 

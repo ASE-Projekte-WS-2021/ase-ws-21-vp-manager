@@ -9,4 +9,9 @@
     <color name="white">#FFFFFFFF</color>
     <color name="color_one">#fb7268</color>
     <color name="color_two">#E3E0E0</color>
+    <!--pieChart-->
+    <color name="pieChartSafe">#7CFC00</color>
+    <color name="pieChartParticipation">#ffa500</color>
+    <color name="pieChartPlanned">#ff0000</color>
+    <color name="pieChartRemaining">#808080</color>
 </resources>

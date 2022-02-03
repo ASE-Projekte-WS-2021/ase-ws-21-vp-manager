@@ -5,13 +5,16 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ExpandableListView;
+
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
+
 import org.eazegraph.lib.charts.PieChart;
 import org.eazegraph.lib.models.PieModel;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-
 
 public class personalAccountActivity extends AppCompatActivity {
 
@@ -27,7 +30,7 @@ public class personalAccountActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_personal_account);
 
-       setupView();
+        setupView();
     }
 
     //Parameters:
@@ -62,8 +65,8 @@ public class personalAccountActivity extends AppCompatActivity {
         double completedVP = 0;
         double participatedVP = 0;
 
-        List<String> vpList =  expandableListDetail.get("Geplante Studien");
-        if(vpList != null) {
+        List<String> vpList = expandableListDetail.get("Geplante Studien");
+        if (vpList != null) {
             for (int i = 0; i < vpList.size(); i++) {
                 String vps = vpList.get(i).split(",")[1];
                 double studyVPS = Double.parseDouble(vps);
@@ -87,24 +90,24 @@ public class personalAccountActivity extends AppCompatActivity {
         }
         chart.addPieSlice(
                 new PieModel(
-                        "Safe",
+                        getString(R.string.pieSliceLabelSafe),
                         scaledCompletedVP,
-                        Color.parseColor("#7CFC00")));
+                        Color.parseColor(String.valueOf(ContextCompat.getColor(this, R.color.pieChartSafe)))));
         chart.addPieSlice(
                 new PieModel(
-                        "Participation",
+                        getString(R.string.pieSliceLabelParticipation),
                         scaledParticipationVP,
-                        Color.parseColor("#ffa500")));
+                        Color.parseColor(String.valueOf(ContextCompat.getColor(this, R.color.pieChartParticipation)))));
         chart.addPieSlice(
                 new PieModel(
-                        "Planned",
+                        getString(R.string.pieSliceLabelPlanned),
                         scaledPlannedVP,
-                        Color.parseColor("#ff0000")));
+                        Color.parseColor(String.valueOf(ContextCompat.getColor(this, R.color.pieChartPlanned)))));
         chart.addPieSlice(
                 new PieModel(
-                        "Remaining",
+                        getString(R.string.pieSliceLabelRemaining),
                         remaining,
-                        Color.parseColor("#808080")));
+                        Color.parseColor(String.valueOf(ContextCompat.getColor(this, R.color.pieChartRemaining)))));
 
         chart.startAnimation();
     }
