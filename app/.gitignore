@@ -1,4 +1,5 @@
 /build/generated
-/build/outputs/logs
+/build/outputs
 /build/intermediates
 /build/tmp
+/google-services.json
