@@ -6,11 +6,14 @@ REST-APIs  ermöglichen im Zeitalter verschiedenster Nutzungsszenarien einen str
 
 Der zentrale Nutzen von REST-APIs für Entwickler zeigt sich vor allem dann, wenn die Methoden auf seiten des Anbieters gründlich dokumentiert werden. Das Toolpaket <strong>"Swagger" (https://swagger.io/)</strong> dient genau diesem Zweck. Mit diversen Werkzeugen können hier API-Referenze sondern und passendes Client-SDKs für verschiedene Programmiersprachen generiert werden.
 
-[img] (Bild von Präsi)
 
 ## Swagger 
 
+[img] (Bild von Präsi)
+
 ### OpenAPI Spezifikation
+
+Die OpenAPI Spezifikation ist der öffentliche (Beschreibungs-)Standard zur Dokumentation von REST-APIs. Swagger bietet leistungsstarke und möglichst einfach verwendbare Tools aneinfachste, um die Vorteile der OpenAPI-Spezifikation bestmöglichst auszuschöpfen. Ein zentraler Vorteil ist beispielsweise, dass Implementierung, Dokumentation und Design des Build-Prozesses automoatisch synchronisiert und geupdated werden können.
 
 
 ### Open Source Tools
