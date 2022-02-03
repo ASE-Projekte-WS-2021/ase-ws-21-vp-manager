@@ -76,6 +76,17 @@
         android:textStyle="bold"
         android:weightSum="100" />
 
+    <TextView
+        android:id="@+id/contactInformation"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:layout_marginLeft="35dp"
+        android:fontFamily="sans-serif-light"
+        android:textSize="17sp"
+        android:textStyle="bold"
+        android:weightSum="100" />
+
 
     <ImageView
         android:id="@+id/imageView2"

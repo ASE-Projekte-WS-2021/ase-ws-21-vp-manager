@@ -36,7 +36,7 @@
     <!---studyActivity-->
     <string name="studyViewHeader">Detailansicht - Studie</string>
     <string name="dateListHeader">Verfügbare Termine</string>
-
+    <string name="createContactInfo">Kontaktmöglichkeit</string>
 
 
 </resources>

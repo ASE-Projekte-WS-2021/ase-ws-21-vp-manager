@@ -42,6 +42,7 @@ public class createStudyActivity extends AppCompatActivity {
     EditText streetEditText;
     EditText roomEditText;
     Button createButton;
+    EditText contactEditText;
 
     ArrayAdapter<String> datePickerAdapter;
     accessDatabase accessDatabase = new accessDatabase();
@@ -64,6 +65,7 @@ public class createStudyActivity extends AppCompatActivity {
     boolean checkListProgram = false;
     boolean checkListTitle = false;
     boolean checkListVP = false;
+    boolean checkListContact = false;
     boolean remoteActive = false;
     boolean presenceActive = false;
 
@@ -91,6 +93,7 @@ public class createStudyActivity extends AppCompatActivity {
         studyDesc = findViewById(R.id.createStudyDescInput);
         locationLinearLayout = findViewById(R.id.locationLayout);
         createButton = findViewById(R.id.createCreateButton);
+        contactEditText = findViewById(R.id.createContactInput);
     }
 
     //Parameter:
@@ -275,6 +278,7 @@ public class createStudyActivity extends AppCompatActivity {
         newStudy.put("creator", homeActivity.uniqueID);
         newStudy.put("name", studyTitle.getText().toString());
         newStudy.put("vps", VP.getText().toString());
+        newStudy.put("contact", contactEditText.getText().toString());
         newStudy.put("description", studyDesc.getText().toString());
         newStudy.put("category", categories.getSelectedItem().toString());
         newStudy.put("executionType", executionType.getSelectedItem().toString());
@@ -324,6 +328,7 @@ public class createStudyActivity extends AppCompatActivity {
         checkCategory();
         checkExecutionType();
         checkDate();
+        checkContact();
         if (remoteActive) {
             checkProgram();
         }
@@ -336,7 +341,7 @@ public class createStudyActivity extends AppCompatActivity {
         boolean mandatoryCheck = false;
         String alertMessage = "";
         //Mandatory Checks
-        if (checkListTitle && checkListStudyDesc && checkListExecutionType && checkListCategory) {
+        if (checkListTitle && checkListStudyDesc && checkListExecutionType && checkListCategory && checkListContact) {
             if(presenceActive){
                 if(checkListLocation){
                     mandatoryCheck = true;
@@ -356,6 +361,10 @@ public class createStudyActivity extends AppCompatActivity {
             if(!checkListStudyDesc){
                 alertMessage += "Studienbeschreibung \n";
 
+            }
+
+            if(!checkListContact){
+                alertMessage += "Kontaktmöglichkeit \n";
             }
 
             if(!checkListExecutionType){
@@ -504,6 +513,10 @@ public class createStudyActivity extends AppCompatActivity {
     //Checks if the study title EditText is empty
     private void checkTitle() {
         checkListTitle = !studyTitle.getText().toString().equals("");
+    }
+
+    private void checkContact(){
+        checkListContact = !contactEditText.getText().toString().equals("");
     }
 
     //UUID creates a new random id
