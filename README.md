@@ -8,7 +8,7 @@ Der zentrale Nutzen von REST-APIs für Entwickler zeigt sich vor allem dann, wen
 
 [img] (Bild von Präsi)
 
-## Swagger Tools
+## Swagger 
 
 ### OpenAPI Spezifikation
 
