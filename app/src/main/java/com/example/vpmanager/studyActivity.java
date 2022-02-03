@@ -191,7 +191,6 @@ public class studyActivity extends AppCompatActivity{
                         } else {
                             Log.d(TAG, "Error getting documents: ", task.getException());
                         }
-
                     }
                 });
     }
