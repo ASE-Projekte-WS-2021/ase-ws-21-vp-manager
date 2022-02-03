@@ -56,7 +56,7 @@
 
     <!---findStudyActivity-->
     <string name="entryListHeader">Aktuelles Studienangebot</string>
-    <string name="vpHours"> VP-Stunden</string>
+    <string name="vpHours"> VPs)</string>
 
     <!---studyActivity-->
     <string name="studyViewHeader">Detailansicht - Studie</string>

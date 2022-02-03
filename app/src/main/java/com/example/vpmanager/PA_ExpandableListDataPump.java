@@ -53,7 +53,6 @@ public class PA_ExpandableListDataPump extends Activity {
         createListEntries();
         return EXPANDABLE_LIST_DETAIL;
     }
-
     private static void createListEntries() {
         List<String> ownStudies = new ArrayList<>();
         String[] ownStudyKeys = OWN_STUDY_ID_NAME.keySet().toArray(new String[0]);

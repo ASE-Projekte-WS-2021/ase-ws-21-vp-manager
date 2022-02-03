@@ -1,13 +1,11 @@
 package com.example.vpmanager;
 
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ExpandableListView;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.content.ContextCompat;
 
 import org.eazegraph.lib.charts.PieChart;
 import org.eazegraph.lib.models.PieModel;

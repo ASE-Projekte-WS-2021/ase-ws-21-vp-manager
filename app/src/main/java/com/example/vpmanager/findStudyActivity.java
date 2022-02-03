@@ -51,7 +51,7 @@ public class findStudyActivity extends AppCompatActivity {
         //Store the names and the vps in an ArrayList
         //Store the ids in the same order in another ArrayList
         for (int i = 0; i < studyIdNameVp.size(); i++) {
-            studyNamesAndVps.add(studyIdNameVp.get(i).get(1) + "\t\t(" + studyIdNameVp.get(i).get(2) + R.string.vpHours);
+            studyNamesAndVps.add(studyIdNameVp.get(i).get(1) + "\t\t(" + studyIdNameVp.get(i).get(2) + getString(R.string.vpHours));
             studyIds.add(studyIdNameVp.get(i).get(0));
         }
         ArrayAdapter arrayAdapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, studyNamesAndVps);
