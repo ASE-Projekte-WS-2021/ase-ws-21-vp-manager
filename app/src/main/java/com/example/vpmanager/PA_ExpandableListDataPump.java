@@ -13,7 +13,6 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -51,47 +50,43 @@ public class PA_ExpandableListDataPump {
     //Parameters
     //Return Values:
     //this function restructures the hashmaps into strings for the expandable List
-    private static void createListEntries()
-    {
+    private static void forOwnStudieGetDates() {
         getOwnStudies(new FirestoreCallbackOwnStudy() {
             @Override
             public void onCallback() {
-                for(int i = 0; i < ownStudyID_name.keySet().size(); i++)
-                {
+                for (int i = 0; i < ownStudyID_name.keySet().size(); i++) {
                     String key = ownStudyID_name.keySet().toArray(new String[0])[i];
                     getAllBookedDatesForOwnStudies(key, new FirestoreCallbackBookedDatesOfOwnStudy() {
                         @Override
                         public void onCallback() {
-
+                            createListEntries();
                         }
                     });
                 }
             }
         });
-
+    }
+    private static void createListEntries() {
         List<String> ownStudies = new ArrayList<>();
         String[] ownStudyKeys = ownStudyID_name.keySet().toArray(new String[0]);
-        for(int i = 0; i < ownStudyID_name.size(); i++)
-        {
+        for (int i = 0; i < ownStudyID_name.size(); i++) {
             String StudyName = ownStudyID_name.get(ownStudyKeys[i]);
             String StudyVPS = ownStudyID_vps.get(ownStudyKeys[i]);
             ArrayList<String> dates = ownStudyID_dates.get(ownStudyKeys[i]);
-            for(int k = 0; k < dates.size(); k++)
-            {
+            for (int k = 0; k < dates.size(); k++) {
                 String StudyDate = dates.get(k);
-                ownStudies.add(StudyName +"," + StudyVPS + "," + StudyDate + "," + ownStudyKeys[i]);
+                ownStudies.add(StudyName + "," + StudyVPS + "," + StudyDate + "," + ownStudyKeys[i]);
             }
         }
 
         List<String> plannedStudies = new ArrayList<String>();
         String[] keys = StudyID_date.keySet().toArray(new String[0]);
-        for(int i = 0; i < StudyID_date.size(); i++)
-        {
+        for (int i = 0; i < StudyID_date.size(); i++) {
             String StudyName = StudyID_name.get(keys[i]);
             String StudyDate = StudyID_date.get(keys[i]);
             String StudyVPS = StudyID_vps.get(keys[i]);
 
-            plannedStudies.add(StudyName +"," + StudyVPS + "," + StudyDate + "," + keys[i]);
+            plannedStudies.add(StudyName + "," + StudyVPS + "," + StudyDate + "," + keys[i]);
         }
 
         expandableListDetail.put("Geplante Studien", plannedStudies);
@@ -111,7 +106,7 @@ public class PA_ExpandableListDataPump {
             getStudies(StudyID, new FirestoreCallbackStudy() {
                 @Override
                 public void onCallback() {
-                    createListEntries();
+                    forOwnStudieGetDates();
                 }
             });
         }
@@ -211,7 +206,7 @@ public class PA_ExpandableListDataPump {
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
                         if (task.isSuccessful()) {
                             for (QueryDocumentSnapshot document : task.getResult()) {
-                                if(document.getString("userID") != null && document.getString("userID") != "" && document.getString("userID") != "null")
+                                if(document.getString("userId") != null && document.getString("userId") != "" && document.getString("userId") != "null")
                                 {
                                     dates.add(document.getString("date"));
                                 }
