@@ -29,6 +29,7 @@ Die Swagger Tools zur API Entwicklung umfassen:
 ### SwaggerHUB
 
 https://swagger.io/tools/swaggerhub/
+
 Von Swagger.IO angeboten Plattform für API Workflows. Beinhaltett Online-Editor für die Dokumentation einer REST-APIs.
 
 
