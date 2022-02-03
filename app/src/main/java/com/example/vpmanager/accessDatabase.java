@@ -77,6 +77,7 @@ public class accessDatabase {
     //studyActivity -------------------------------------------------------------------------------!
     //in studyActivity
 
+    //updateData should contain ("selected": true) and ("userId: the User Id)
     public void selectDate(Map<String, Object> updateData, String dateId){
 
         db = FirebaseFirestore.getInstance();

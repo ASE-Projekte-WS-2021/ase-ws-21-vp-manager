@@ -27,15 +27,17 @@ import com.google.firebase.firestore.QuerySnapshot;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 public class studyActivity extends AppCompatActivity{
 
     ListView dateList;
     String currentStudyId;
+    String currentUserId;
 
     ArrayList<String> studyDetails;
 
-    ArrayList<ArrayList<String>> dateInfo;
+    ArrayList<ArrayList<String>> freeAndOwnDatesInfo;
     ArrayList<String> allDates;
     ArrayList<String> dateIds;
     ArrayList<String> userIdsOfDates;
@@ -55,6 +57,7 @@ public class studyActivity extends AppCompatActivity{
         setContentView(R.layout.activity_study);
         //Get the studyId early
         currentStudyId = getIntent().getStringExtra("studyId");
+        currentUserId = homeActivity.id(this);
         savedDateItem = new ArrayList<>();
         savedDateItem.add("Sie haben sich bereits für einen Termin eingetragen.");
 
@@ -95,7 +98,8 @@ public class studyActivity extends AppCompatActivity{
         //store DB Data Strings in textViews
         headerText.setText(studyDetails.get(0));
         description.setText(studyDetails.get(1));
-        vpValue.setText(studyDetails.get(2));
+        String vpHours = "VP-Stunden: " + "\t" + studyDetails.get(2);
+        vpValue.setText(vpHours);
         category.setText(studyDetails.get(3));
         studyType.setText(studyDetails.get(4));
 
@@ -103,7 +107,8 @@ public class studyActivity extends AppCompatActivity{
         if (studyDetails.get(4).equals("Remote")) {
             remoteData.setText(studyDetails.get(5));
         } else{
-            localData.setText(studyDetails.get(6) + "\t\t" + studyDetails.get(7) + "\t\t" + studyDetails.get(8));
+            String locationString = studyDetails.get(6) + "\t\t" + studyDetails.get(7) + "\t\t" + studyDetails.get(8);
+            localData.setText(locationString);
         }
     }
 
@@ -114,10 +119,10 @@ public class studyActivity extends AppCompatActivity{
         userIdsOfDates = new ArrayList<>();
 
         //store ids and dates in different ArrayLists
-        for (int i = 0; i < dateInfo.size(); i++) {
-            dateIds.add(dateInfo.get(i).get(0));
-            allDates.add(dateInfo.get(i).get(1));
-            userIdsOfDates.add(dateInfo.get(i).get(2));
+        for (int i = 0; i < freeAndOwnDatesInfo.size(); i++) {
+            dateIds.add(freeAndOwnDatesInfo.get(i).get(0));
+            allDates.add(freeAndOwnDatesInfo.get(i).get(1));
+            userIdsOfDates.add(freeAndOwnDatesInfo.get(i).get(2));
         }
 
         Log.d("userIdsOfAllDates", userIdsOfDates.toString());
@@ -132,6 +137,7 @@ public class studyActivity extends AppCompatActivity{
             setAllDatesAdapter();
             setupClickListener();
         }
+        Log.d("allDates", allDates.toString());
     }
 
     private void setupStudyDetails(FirestoreCallbackStudy firestoreCallbackStudy) {
@@ -172,8 +178,9 @@ public class studyActivity extends AppCompatActivity{
 
         db = FirebaseFirestore.getInstance();
         datesRef = db.collection("dates");
-        dateInfo = new ArrayList<>();
+        freeAndOwnDatesInfo = new ArrayList<>();
 
+        //only the unselected dates should be retrieved here!
         datesRef.whereEqualTo("studyId", currentStudyId).get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
@@ -181,13 +188,17 @@ public class studyActivity extends AppCompatActivity{
                         if (task.isSuccessful()) {
                             for (QueryDocumentSnapshot document : task.getResult()) {
                                 ArrayList<String> idDateUser = new ArrayList<>();
+                                if (Objects.equals(document.getBoolean("selected"), true) &&
+                                        !Objects.equals(document.getString("userId"), currentUserId)){
+                                    continue;
+                                }
                                 idDateUser.add(0, document.getString("id"));
                                 idDateUser.add(1, document.getString("date"));
                                 idDateUser.add(2, document.getString("userId"));
 
-                                dateInfo.add(idDateUser);
+                                freeAndOwnDatesInfo.add(idDateUser);
                             }
-                            firestoreCallbackDates.onCallback(dateInfo);
+                            firestoreCallbackDates.onCallback(freeAndOwnDatesInfo);
                         } else {
                             Log.d(TAG, "Error getting documents: ", task.getException());
                         }
@@ -282,12 +293,19 @@ public class studyActivity extends AppCompatActivity{
         updateDataMap.put("userId", userId);
 
         accessDatabase.selectDate(updateDataMap, dateId);
+        reloadActivity();
     }
 
+    //der Array userIdsOfDates wird beim selecten und unselecten in der activity nicht geupdated
     private void unSelectDate(){
         int datePosition = userIdsOfDates.indexOf(homeActivity.id(this));
         String dateId = dateIds.get(datePosition);
-
         accessDatabase.unselectDate(dateId);
+        reloadActivity();
+    }
+
+    private void reloadActivity(){
+        finish();
+        startActivity(getIntent());
     }
 }
