@@ -57,9 +57,9 @@ public class studyActivity extends AppCompatActivity{
         setContentView(R.layout.activity_study);
         //Get the studyId early
         currentStudyId = getIntent().getStringExtra("studyId");
-        currentUserId = homeActivity.id(this);
+        currentUserId = homeActivity.createUserId(this);
         savedDateItem = new ArrayList<>();
-        savedDateItem.add("Sie haben sich bereits für einen Termin eingetragen.");
+        savedDateItem.add("Sie haben sich bereits für einen Termin eingetragen. (für Abmeldung hier kilcken)");
 
         setupStudyDetails(new FirestoreCallbackStudy() {
             @Override
@@ -127,7 +127,7 @@ public class studyActivity extends AppCompatActivity{
 
         Log.d("userIdsOfAllDates", userIdsOfDates.toString());
         //makes date selection unavailable if user already picked a date from this study
-        if (userIdsOfDates.contains(homeActivity.id(this))){
+        if (userIdsOfDates.contains(homeActivity.createUserId(this))){
             setSavedDateAdapter();
             setupSelectedDateClickListener();
         }else{
@@ -285,7 +285,7 @@ public class studyActivity extends AppCompatActivity{
 
     private void selectDate(String dateId){
 
-        String userId = homeActivity.id(this);
+        String userId = homeActivity.createUserId(this);
 
         Map<String, Object> updateDataMap = new HashMap<>();
         updateDataMap.put("selected", true);
@@ -297,7 +297,7 @@ public class studyActivity extends AppCompatActivity{
 
     //der Array userIdsOfDates wird beim selecten und unselecten in der activity nicht geupdated
     private void unSelectDate(){
-        int datePosition = userIdsOfDates.indexOf(homeActivity.id(this));
+        int datePosition = userIdsOfDates.indexOf(homeActivity.createUserId(this));
         String dateId = dateIds.get(datePosition);
         accessDatabase.unselectDate(dateId);
         reloadActivity();

@@ -31,6 +31,7 @@ public class homeActivity extends AppCompatActivity {
         //Checks if a new user needs to be registered
         registerNewUser();
         setContentView(R.layout.activity_home);
+        createUserId(this);
         setupClickables();
         //Testdaten
         setPieChartData(5, 3, 2);
@@ -104,13 +105,13 @@ public class homeActivity extends AppCompatActivity {
     }
 
     private void registerNewUser(){
-        String deviceID = id(this);
+        String deviceID = createUserId(this);
         accessDatabase.createNewUser(deviceID);
     }
 
     //Generates an unique id for every installation of the app.
     //Source: https://ssaurel.medium.com/how-to-retrieve-an-unique-id-to-identify-android-devices-6f99fd5369eb
-    public synchronized static String id(Context context) {
+    public synchronized static String createUserId(Context context) {
         if (uniqueID == null) {
             SharedPreferences sharedPrefs = context.getSharedPreferences(
                     PREF_UNIQUE_ID, Context.MODE_PRIVATE);

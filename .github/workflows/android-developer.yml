@@ -7,6 +7,7 @@ on:
     branches: [developer]
 
 jobs:
+
   checkstyle_job:
     name: Check code with checkstyle
     runs-on: ubuntu-latest

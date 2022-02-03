@@ -73,6 +73,9 @@ public class PA_ExpandableListDataPump {
             String StudyName = ownStudyID_name.get(ownStudyKeys[i]);
             String StudyVPS = ownStudyID_vps.get(ownStudyKeys[i]);
             ArrayList<String> dates = ownStudyID_dates.get(ownStudyKeys[i]);
+            if (dates == null){
+                continue;
+            }
             for (int k = 0; k < dates.size(); k++) {
                 String StudyDate = dates.get(k);
                 ownStudies.add(StudyName + "," + StudyVPS + "," + StudyDate + "," + ownStudyKeys[i]);

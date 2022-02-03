@@ -272,7 +272,7 @@ public class createStudyActivity extends AppCompatActivity {
         Map<String, Object> newStudy = new HashMap<>();
 
         newStudy.put("id", studyID); //New id for the study
-        newStudy.put("creator", homeActivity.id(this));
+        newStudy.put("creator", homeActivity.uniqueID);
         newStudy.put("name", studyTitle.getText().toString());
         newStudy.put("vps", VP.getText().toString());
         newStudy.put("description", studyDesc.getText().toString());
@@ -303,6 +303,14 @@ public class createStudyActivity extends AppCompatActivity {
             newStudy.put("dates", dateIds);
         }
         accessDatabase.addNewStudy(newStudy, studyID);
+
+        //reload Activity
+        reloadActivity();
+    }
+
+    private void reloadActivity(){
+        finish();
+        startActivity(getIntent());
     }
 
     //Parameter:
