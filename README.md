@@ -28,6 +28,8 @@ Die Swagger Tools zur API Entwicklung umfassen:
 
 ### SwaggerHUB
 
+https://swagger.io/tools/swaggerhub/
+
 Swagger Hub Rest API Dokumentation Anleitung:
 
 
