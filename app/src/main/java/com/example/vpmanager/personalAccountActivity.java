@@ -34,12 +34,11 @@ public class personalAccountActivity extends AppCompatActivity {
         setContentView(R.layout.activity_personal_account);
 
        setupView();
-       setPieChartData(2,4,1);
     }
 
     //Parameters:
     //Return Values:
-    //this method sets all the listeners for the expandable list and initialises the piechart
+    //this method sets all the listeners for the expandable list and initialises the piechart and extracts the VPS from the expandable List for the pieChart
     private void setupView() {
 
         listView = findViewById(R.id.pa_expandableList);
@@ -55,16 +54,29 @@ public class personalAccountActivity extends AppCompatActivity {
             @Override
             public boolean onChildClick(ExpandableListView parent, View v,
                                         int groupPosition, int childPosition, long id) {
-                String groupTitle = expandableListTitle.get(groupPosition);
-                String studyTitle = expandableListDetail.get(expandableListTitle.get(groupPosition)).get(childPosition).split(",")[0];
+                String studyTitle = expandableListDetail.get(expandableListTitle.get(groupPosition)).get(childPosition).split(",")[3];
 
-                Intent intent = new Intent();
-                intent.putExtra("Studienname", studyTitle);
-                intent.putExtra("UserID", UUID.randomUUID().toString());
-
+                Intent intent = new Intent(personalAccountActivity.this, studyActivity.class);
+                intent.putExtra("studyId", studyTitle);
+                startActivity(intent);
                 return false;
             }
         });
+
+
+        double plannedVP = 0;
+        double completedVP = 0;
+        double participatedVP = 0;
+
+        List<String> vpList =  expandableListDetail.get("Geplante Studien");
+        if(vpList != null) {
+            for (int i = 0; i < vpList.size(); i++) {
+                String vps = vpList.get(i).split(",")[1];
+                double studyVPS = Double.parseDouble(vps);
+                plannedVP += studyVPS;
+            }
+        }
+        setPieChartData(completedVP, participatedVP, plannedVP);
     }
 
     //Parameter: completedVP, participationVP, plannedVP

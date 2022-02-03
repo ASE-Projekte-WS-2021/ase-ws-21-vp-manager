@@ -21,7 +21,7 @@ public class homeActivity extends AppCompatActivity {
     Button createStudyButton;
     PieChart pieChart;
     //Unique ID Strings
-    private static String uniqueID = null;
+    public static String uniqueID = null;
     private static final String PREF_UNIQUE_ID = "PREF_UNIQUE_ID";
     accessDatabase accessDatabase = new accessDatabase();
 
