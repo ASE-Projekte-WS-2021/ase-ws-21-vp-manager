@@ -1,162 +1,200 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.drawerlayout.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/drawerLayoutStudy"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context = ".studyActivity">
-    <!---android:weightSum="100"-->
+    tools:context=".studyActivity">
 
-    <TextView
-        android:id = "@+id/activityHeader"
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/studyViewHeader"
-        android:textSize="23sp"
-        android:textStyle="bold"
-        android:layout_marginStart="25dp"
-        android:layout_marginTop="15dp"
-        android:layout_marginBottom="10dp"/>
+        android:layout_height="match_parent"
+        android:fitsSystemWindows="true">
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="3dp"
-        android:background="@color/color_two"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
-        android:layout_marginTop="15dp"
-        android:layout_marginBottom="15dp"/>
+        <com.google.android.material.appbar.AppBarLayout
+            style="@style/Widget.MaterialComponents.AppBarLayout.PrimarySurface"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fitsSystemWindows="true">
 
+            <com.google.android.material.appbar.MaterialToolbar
+                android:id="@+id/topAppBarStudy"
+                style="@style/Widget.MaterialComponents.Toolbar.PrimarySurface"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                android:background="@android:color/transparent"
+                android:elevation="0dp"
+                app:navigationIcon="@drawable/ic_baseline_menu_24"
+                app:title="Studiendetails" />
 
-    <ImageView
-        android:id="@+id/imageView3"
-        android:layout_width="91dp"
-        android:layout_height="29dp"
-        android:layout_marginTop="10dp"
-        app:srcCompat="@drawable/ic_baseline_info_24" />
+        </com.google.android.material.appbar.AppBarLayout>
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior"
+            tools:context=".studyActivity">
 
+            <TextView
+                android:id="@+id/activityHeader"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="25dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginBottom="10dp"
+                android:text="@string/studyViewHeader"
+                android:textSize="23sp"
+                android:textStyle="bold" />
 
-    <TextView
-        android:id="@+id/description"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom"
-        android:layout_marginLeft="35dp"
-        android:fontFamily="sans-serif-light"
-        android:textSize="17sp"
-        android:textStyle="bold"
-        android:weightSum="100"
-        android:layout_marginTop="10dp"/>
-
-
-    <TextView
-        android:id="@+id/vpValue"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom"
-        android:layout_marginLeft="35dp"
-        android:fontFamily="sans-serif-light"
-        android:textSize="17sp"
-        android:textStyle="bold"
-        android:weightSum="100" />
-
-    <TextView
-        android:id="@+id/category"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom"
-        android:layout_marginLeft="35dp"
-        android:fontFamily="sans-serif-light"
-        android:textSize="17sp"
-        android:textStyle="bold"
-        android:weightSum="100" />
-
-    <TextView
-        android:id="@+id/contactInformation"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom"
-        android:layout_marginLeft="35dp"
-        android:fontFamily="sans-serif-light"
-        android:textSize="17sp"
-        android:textStyle="bold"
-        android:weightSum="100" />
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="3dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginBottom="15dp"
+                android:background="@color/color_two" />
 
 
-    <ImageView
-        android:id="@+id/imageView2"
-        android:layout_width="91dp"
-        android:layout_height="31dp"
-        android:layout_marginTop="30dp"
-        app:srcCompat="@drawable/ic_round_location_on_24" />
-
-    <TextView
-        android:id="@+id/type"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom"
-        android:layout_marginLeft="35dp"
-        android:fontFamily="sans-serif-light"
-        android:textSize="17sp"
-        android:textStyle="bold"
-        android:weightSum="100"
-        android:layout_marginTop="10dp"/>
+            <ImageView
+                android:id="@+id/imageView3"
+                android:layout_width="91dp"
+                android:layout_height="29dp"
+                android:layout_marginTop="10dp"
+                app:srcCompat="@drawable/ic_baseline_info_24" />
 
 
-    <!--  adapt design to studyType Textview-->
-    <TextView
-        android:id="@+id/remotyStudy"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom"
-        android:layout_marginLeft="35dp"
-        android:fontFamily="sans-serif-light"
-        android:textSize="17sp"
-        android:textStyle="bold"
-        android:weightSum="100"
-        android:layout_marginTop="10dp"/>
+            <TextView
+                android:id="@+id/description"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom"
+                android:layout_marginLeft="35dp"
+                android:layout_marginTop="10dp"
+                android:fontFamily="sans-serif-light"
+                android:textSize="17sp"
+                android:textStyle="bold"
+                android:weightSum="100" />
 
-    <!-- position mit remoteStudy TextView Ã¼berlagern!-->
-    <TextView
-        android:id="@+id/localStudy"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom"
-        android:layout_marginLeft="35dp"
-        android:fontFamily="sans-serif-light"
-        android:textSize="17sp"
-        android:textStyle="bold"
-        android:weightSum="100"
-        android:layout_marginTop="-25dp"/>
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="3dp"
-        android:background="@color/color_two"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
-        android:layout_marginTop="35dp"/>
+            <TextView
+                android:id="@+id/vpValue"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom"
+                android:layout_marginLeft="35dp"
+                android:fontFamily="sans-serif-light"
+                android:textSize="17sp"
+                android:textStyle="bold"
+                android:weightSum="100" />
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/dateListHeader"
-        android:textColor="@color/teal_700"
-        android:textSize="18sp"
-        android:textStyle="bold"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="12dp"
-        android:layout_gravity="center_horizontal"/>
+            <TextView
+                android:id="@+id/category"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom"
+                android:layout_marginLeft="35dp"
+                android:fontFamily="sans-serif-light"
+                android:textSize="17sp"
+                android:textStyle="bold"
+                android:weightSum="100" />
 
-    <ListView
-        android:id="@+id/listViewDates"
-        android:layout_width="348dp"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="3dp"/>
+            <TextView
+                android:id="@+id/contactInformation"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom"
+                android:layout_marginLeft="35dp"
+                android:fontFamily="sans-serif-light"
+                android:textSize="17sp"
+                android:textStyle="bold"
+                android:weightSum="100" />
 
-</LinearLayout>
+
+            <ImageView
+                android:id="@+id/imageView2"
+                android:layout_width="91dp"
+                android:layout_height="31dp"
+                android:layout_marginTop="30dp"
+                app:srcCompat="@drawable/ic_round_location_on_24" />
+
+            <TextView
+                android:id="@+id/type"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom"
+                android:layout_marginLeft="35dp"
+                android:layout_marginTop="10dp"
+                android:fontFamily="sans-serif-light"
+                android:textSize="17sp"
+                android:textStyle="bold"
+                android:weightSum="100" />
+
+
+            <!--  adapt design to studyType Textview-->
+            <TextView
+                android:id="@+id/remotyStudy"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom"
+                android:layout_marginLeft="35dp"
+                android:layout_marginTop="10dp"
+                android:fontFamily="sans-serif-light"
+                android:textSize="17sp"
+                android:textStyle="bold"
+                android:weightSum="100" />
+
+            <!-- position mit remoteStudy TextView Ã¼berlagern!-->
+            <TextView
+                android:id="@+id/localStudy"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom"
+                android:layout_marginLeft="35dp"
+                android:layout_marginTop="-25dp"
+                android:fontFamily="sans-serif-light"
+                android:textSize="17sp"
+                android:textStyle="bold"
+                android:weightSum="100" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="3dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="35dp"
+                android:layout_marginRight="20dp"
+                android:background="@color/color_two" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="12dp"
+                android:text="@string/dateListHeader"
+                android:textColor="@color/teal_700"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <ListView
+                android:id="@+id/listViewDates"
+                android:layout_width="348dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="3dp" />
+
+        </LinearLayout>
+
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+    <com.google.android.material.navigation.NavigationView
+        android:id="@+id/navigationViewStudy"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        app:headerLayout="@layout/header_navigation_drawer"
+        app:menu="@menu/navigation_drawer" />
+
+</androidx.drawerlayout.widget.DrawerLayout>

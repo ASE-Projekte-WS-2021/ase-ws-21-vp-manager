@@ -4,7 +4,9 @@ import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -17,7 +19,12 @@ import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TimePicker;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.drawerlayout.widget.DrawerLayout;
+
+import com.google.android.material.appbar.MaterialToolbar;
+import com.google.android.material.navigation.NavigationView;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -26,6 +33,10 @@ import java.util.Map;
 import java.util.UUID;
 
 public class createStudyActivity extends AppCompatActivity {
+
+    MaterialToolbar topAppBarCreate;
+    DrawerLayout drawerLayoutCreate;
+    NavigationView navigationViewCreate;
 
     Button addButton;
     ListView dateList;
@@ -72,8 +83,6 @@ public class createStudyActivity extends AppCompatActivity {
     String firstSpinnerItemExecution = "Durchführungsart";
     String firstSpinnerItemCategory = "Studienkategorie";
 
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -88,6 +97,13 @@ public class createStudyActivity extends AppCompatActivity {
     //Return values:
     //Connects the View elements with the code
     private void setupView() {
+
+        topAppBarCreate = findViewById(R.id.topAppBarCreate);
+        setSupportActionBar(topAppBarCreate);
+        drawerLayoutCreate = findViewById(R.id.drawerLayoutCreate);
+        navigationViewCreate = findViewById(R.id.navigationViewCreate);
+        navigationViewCreate.getMenu().getItem(2).setChecked(true);
+
         addButton = findViewById(R.id.createAddDateButton);
         dateList = findViewById(R.id.createDatelist);
         categories = findViewById(R.id.createCategories);
@@ -104,6 +120,44 @@ public class createStudyActivity extends AppCompatActivity {
     //Return values:
     //Sets click listener on buttons
     private void setupClickListener() {
+
+        //For NavigationDrawer to open
+        topAppBarCreate.setNavigationOnClickListener(new View.OnClickListener() {
+            public void onClick(View V) {
+                drawerLayoutCreate.open();
+            }
+        });
+
+        //Handle click on single item in drawer here
+        navigationViewCreate.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+
+                switch (item.getItemId()) {
+                    case R.id.nav_home:
+                        Intent homeIntent = new Intent(createStudyActivity.this, homeActivity.class);
+                        startActivity(homeIntent);
+                        break;
+                    case R.id.nav_search:
+                        Intent searchIntent = new Intent(createStudyActivity.this, findStudyActivity.class);
+                        startActivity(searchIntent);
+                        break;
+                    case R.id.nav_create:
+                        break;
+                    case R.id.nav_overview:
+                        Intent overviewIntent = new Intent(createStudyActivity.this, personalAccountActivity.class);
+                        startActivity(overviewIntent);
+                        break;
+                    case R.id.nav_own:
+                        //Added later
+                        break;
+
+                }
+                drawerLayoutCreate.close();
+                return true;
+            }
+        });
+
         addButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -111,9 +165,9 @@ public class createStudyActivity extends AppCompatActivity {
             }
         });
 
-        createButton.setOnClickListener(new View.OnClickListener(){
+        createButton.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v){
+            public void onClick(View v) {
                 checkInput();
             }
         });
@@ -288,7 +342,7 @@ public class createStudyActivity extends AppCompatActivity {
         newStudy.put("executionType", executionType.getSelectedItem().toString());
         if (executionType.getSelectedItem().toString().equals(getString(R.string.remoteString))) {
             newStudy.put("platform", programEditText.getText().toString());
-        }else if (executionType.getSelectedItem().toString().equals(getString(R.string.presenceString))){
+        } else if (executionType.getSelectedItem().toString().equals(getString(R.string.presenceString))) {
             newStudy.put("location", locationEditText.getText().toString());
             newStudy.put("street", streetEditText.getText().toString());
             newStudy.put("room", roomEditText.getText().toString());
@@ -296,7 +350,7 @@ public class createStudyActivity extends AppCompatActivity {
         if (!dates.isEmpty()) {
             ArrayList<String> dateIds = new ArrayList<>();
 
-            for (int i=0; i < dates.size(); i++){
+            for (int i = 0; i < dates.size(); i++) {
                 Map<String, Object> newDate = new HashMap<>();
                 String dateID = getNewId();
 
@@ -316,7 +370,7 @@ public class createStudyActivity extends AppCompatActivity {
         reloadActivity();
     }
 
-    private void reloadActivity(){
+    private void reloadActivity() {
         finish();
         startActivity(getIntent());
     }
@@ -346,8 +400,8 @@ public class createStudyActivity extends AppCompatActivity {
         String alertMessage = "";
         //Mandatory Checks
         if (checkListTitle && checkListStudyDesc && checkListExecutionType && checkListCategory && checkListContact) {
-            if(presenceActive){
-                if(checkListLocation){
+            if (presenceActive) {
+                if (checkListLocation) {
                     mandatoryCheck = true;
                 }
             } else {
@@ -358,24 +412,24 @@ public class createStudyActivity extends AppCompatActivity {
         if (!mandatoryCheck) {
             alertMessage += getString(R.string.createAlertBase);
 
-            if(!checkListTitle){
+            if (!checkListTitle) {
                 alertMessage += getString(R.string.createAlertTitle);
             }
 
-            if(!checkListStudyDesc){
+            if (!checkListStudyDesc) {
                 alertMessage += getString(R.string.createAlertStudyDesc);
 
             }
 
-            if(!checkListContact){
+            if (!checkListContact) {
                 alertMessage += getString(R.string.createAlertContact);
             }
 
-            if(!checkListExecutionType){
+            if (!checkListExecutionType) {
                 alertMessage += getString(R.string.createAlertExecutionType);
             }
 
-            if(!checkListCategory){
+            if (!checkListCategory) {
                 alertMessage += getString(R.string.createAlertCategory);
 
             }
@@ -407,9 +461,9 @@ public class createStudyActivity extends AppCompatActivity {
                 alertMessage += getString(R.string.createAlertDates);
             }
         }
-        if(alertMessage.equals(getString(R.string.createAlertOptionalBase))){
+        if (alertMessage.equals(getString(R.string.createAlertOptionalBase))) {
             createDBEntry();
-        } else{
+        } else {
             alertPopup(alertMessage, mandatoryCheck);
         }
 
@@ -418,8 +472,8 @@ public class createStudyActivity extends AppCompatActivity {
     //Parameter: alertMessage, mandatoryCheck
     //Return values:
     //Creates the AlertDialog based of the result of the mandatoryCheck and displays the alertMessage previously build
-    private void alertPopup(String alertMessage, boolean mandatoryCheck){
-        if(!mandatoryCheck) {
+    private void alertPopup(String alertMessage, boolean mandatoryCheck) {
+        if (!mandatoryCheck) {
             AlertDialog.Builder builder = new AlertDialog.Builder(this);
             builder.setMessage(alertMessage)
                     .setCancelable(false)
@@ -429,11 +483,11 @@ public class createStudyActivity extends AppCompatActivity {
                     });
             AlertDialog alert = builder.create();
             alert.show();
-        } else{
+        } else {
             DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
-                    switch (which){
+                    switch (which) {
                         case DialogInterface.BUTTON_POSITIVE:
                             createDBEntry();
                             break;
@@ -519,7 +573,7 @@ public class createStudyActivity extends AppCompatActivity {
         checkListTitle = !studyTitle.getText().toString().equals("");
     }
 
-    private void checkContact(){
+    private void checkContact() {
         checkListContact = !contactEditText.getText().toString().equals("");
     }
 

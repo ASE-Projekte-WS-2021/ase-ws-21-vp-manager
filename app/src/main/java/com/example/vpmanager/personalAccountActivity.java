@@ -2,10 +2,16 @@ package com.example.vpmanager;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ExpandableListView;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.drawerlayout.widget.DrawerLayout;
+
+import com.google.android.material.appbar.MaterialToolbar;
+import com.google.android.material.navigation.NavigationView;
 
 import org.eazegraph.lib.charts.PieChart;
 import org.eazegraph.lib.models.PieModel;
@@ -15,6 +21,10 @@ import java.util.HashMap;
 import java.util.List;
 
 public class personalAccountActivity extends AppCompatActivity {
+
+    MaterialToolbar topAppBarPersonalAcc;
+    DrawerLayout drawerLayoutPersonalAcc;
+    NavigationView navigationViewPersonalAcc;
 
     ExpandableListView listView;
     PA_ExpandableListAdapter adapter;
@@ -27,7 +37,6 @@ public class personalAccountActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_personal_account);
-
         setupView();
     }
 
@@ -35,6 +44,12 @@ public class personalAccountActivity extends AppCompatActivity {
     //Return Values:
     //this method sets all the listeners for the expandable list and initialises the piechart and extracts the VPS from the expandable List for the pieChart
     private void setupView() {
+
+        topAppBarPersonalAcc = findViewById(R.id.topAppBarPersonalAccount);
+        setSupportActionBar(topAppBarPersonalAcc);
+        drawerLayoutPersonalAcc = findViewById(R.id.drawerLayoutPersonalAccount);
+        navigationViewPersonalAcc = findViewById(R.id.navigationViewPersonalAccount);
+        navigationViewPersonalAcc.getMenu().getItem(3).setChecked(true);
 
         listView = findViewById(R.id.pa_expandableList);
         chart = findViewById(R.id.pa_piechart);
@@ -44,6 +59,42 @@ public class personalAccountActivity extends AppCompatActivity {
         adapter = new PA_ExpandableListAdapter(this, expandableListTitle, expandableListDetail);
 
         listView.setAdapter(adapter);
+
+        //For NavigationDrawer to open
+        topAppBarPersonalAcc.setNavigationOnClickListener(new View.OnClickListener() {
+            public void onClick(View V) {
+                drawerLayoutPersonalAcc.open();
+            }
+        });
+
+        //Handle click on single item in drawer here
+        navigationViewPersonalAcc.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+
+                switch (item.getItemId()) {
+                    case R.id.nav_home:
+                        Intent homeIntent = new Intent(personalAccountActivity.this, homeActivity.class);
+                        startActivity(homeIntent);
+                        break;
+                    case R.id.nav_search:
+                        Intent searchIntent = new Intent(personalAccountActivity.this, findStudyActivity.class);
+                        startActivity(searchIntent);
+                        break;
+                    case R.id.nav_create:
+                        Intent createIntent = new Intent(personalAccountActivity.this, createStudyActivity.class);
+                        startActivity(createIntent);
+                        break;
+                    case R.id.nav_overview:
+                        break;
+                    case R.id.nav_own:
+                        //Added later
+                        break;
+                }
+                drawerLayoutPersonalAcc.close();
+                return true;
+            }
+        });
 
         listView.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
             @Override
@@ -57,7 +108,6 @@ public class personalAccountActivity extends AppCompatActivity {
                 return false;
             }
         });
-
 
         double plannedVP = 0;
         double completedVP = 0;

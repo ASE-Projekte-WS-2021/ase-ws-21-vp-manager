@@ -10,7 +10,6 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
 
 import com.google.android.material.appbar.MaterialToolbar;
 import com.google.android.material.navigation.NavigationView;
@@ -22,12 +21,10 @@ import java.util.UUID;
 
 public class homeActivity extends AppCompatActivity {
 
-    MaterialToolbar topAppBar;
-    DrawerLayout drawerLayout;
-    NavigationView navigationView;
+    MaterialToolbar topAppBarHome;
+    DrawerLayout drawerLayoutHome;
+    NavigationView navigationViewHome;
 
-    Button findStudyButton;
-    Button createStudyButton;
     PieChart pieChart;
     accessDatabase accessDatabase;
     //Unique ID Strings
@@ -54,13 +51,12 @@ public class homeActivity extends AppCompatActivity {
     //Connects the code with the view
     private void setupView() {
 
-        topAppBar = findViewById(R.id.topAppBar);
-        setSupportActionBar(topAppBar); //needed?
-        drawerLayout = findViewById(R.id.drawerLayout);
-        navigationView = findViewById(R.id.navigationView);
+        topAppBarHome = findViewById(R.id.topAppBarHome);
+        setSupportActionBar(topAppBarHome);
+        drawerLayoutHome = findViewById(R.id.drawerLayoutHome);
+        navigationViewHome = findViewById(R.id.navigationViewHome);
+        navigationViewHome.getMenu().getItem(0).setChecked(true);
 
-        findStudyButton = findViewById(R.id.findStudyHome);
-        createStudyButton = findViewById(R.id.createStudyHome);
         pieChart = findViewById(R.id.piechart);
     }
 
@@ -70,14 +66,14 @@ public class homeActivity extends AppCompatActivity {
     private void setClickListener() {
 
         //For NavigationDrawer to open
-        topAppBar.setNavigationOnClickListener(new View.OnClickListener() {
+        topAppBarHome.setNavigationOnClickListener(new View.OnClickListener() {
             public void onClick(View V) {
-                drawerLayout.open();
+                drawerLayoutHome.open();
             }
         });
 
         //Handle click on single item in drawer here
-        navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+        navigationViewHome.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
 
@@ -100,22 +96,8 @@ public class homeActivity extends AppCompatActivity {
                         //Added later
                         break;
                 }
-                drawerLayout.close();
+                drawerLayoutHome.close();
                 return true;
-            }
-        });
-
-        findStudyButton.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View V) {
-                Intent intent = new Intent(homeActivity.this, findStudyActivity.class);
-                startActivity(intent);
-            }
-        });
-
-        createStudyButton.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View V) {
-                Intent intent = new Intent(homeActivity.this, createStudyActivity.class);
-                startActivity(intent);
             }
         });
 

@@ -1,55 +1,95 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.drawerlayout.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/drawerLayoutPersonalAccount"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical"
     tools:context=".personalAccountActivity">
 
-    <LinearLayout
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="50"
-        android:orientation="vertical">
+        android:layout_height="match_parent"
+        android:fitsSystemWindows="true">
 
-        <!--Pie chart to display VPs-->
-        <org.eazegraph.lib.charts.PieChart
-            android:id="@+id/pa_piechart"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="30"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="15dp"
-            android:padding="6dp"
-            tools:ignore="NestedWeights"
-            app:egLegendTextSize="18sp"/>
-
-    </LinearLayout>
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/homeTopicAppointments"
-        android:textSize="23sp"
-        android:textStyle="bold"
-        android:layout_marginStart="25dp"
-        android:layout_marginTop="20dp"/>
-
-    <ScrollView
-        android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:fillViewport="true"
-    android:layout_weight="100">
-        <ExpandableListView
+        <com.google.android.material.appbar.AppBarLayout
+            style="@style/Widget.MaterialComponents.AppBarLayout.PrimarySurface"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/pa_expandableList">
+            android:fitsSystemWindows="true">
 
-        </ExpandableListView>
+            <com.google.android.material.appbar.MaterialToolbar
+                android:id="@+id/topAppBarPersonalAccount"
+                style="@style/Widget.MaterialComponents.Toolbar.PrimarySurface"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                android:background="@android:color/transparent"
+                android:elevation="0dp"
+                app:navigationIcon="@drawable/ic_baseline_menu_24"
+                app:title="Meine Übersicht" />
 
-    </ScrollView>
+        </com.google.android.material.appbar.AppBarLayout>
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="50"
+                android:orientation="vertical">
 
-</LinearLayout>
+                <!--Pie chart to display VPs-->
+                <org.eazegraph.lib.charts.PieChart
+                    android:id="@+id/pa_piechart"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="15dp"
+                    android:layout_weight="30"
+                    android:padding="6dp"
+                    app:egLegendTextSize="18sp"
+                    tools:ignore="NestedWeights" />
+
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="25dp"
+                android:layout_marginTop="20dp"
+                android:text="@string/homeTopicAppointments"
+                android:textSize="23sp"
+                android:textStyle="bold" />
+
+            <ScrollView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="100"
+                android:fillViewport="true">
+
+                <ExpandableListView
+                    android:id="@+id/pa_expandableList"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                </ExpandableListView>
+
+            </ScrollView>
+
+        </LinearLayout>
+
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+    <com.google.android.material.navigation.NavigationView
+        android:id="@+id/navigationViewPersonalAccount"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        app:headerLayout="@layout/header_navigation_drawer"
+        app:menu="@menu/navigation_drawer" />
+
+</androidx.drawerlayout.widget.DrawerLayout>
