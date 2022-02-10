@@ -27,7 +27,7 @@
                 android:background="@android:color/transparent"
                 android:elevation="0dp"
                 app:navigationIcon="@drawable/ic_baseline_menu_24"
-                app:title="VP Manager" />
+                app:title="Home" />
 
         </com.google.android.material.appbar.AppBarLayout>
 

@@ -2,6 +2,7 @@ package com.example.vpmanager;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -9,11 +10,14 @@ import android.widget.ListView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.drawerlayout.widget.DrawerLayout;
 
 import java.util.ArrayList;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.appbar.MaterialToolbar;
+import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
@@ -21,6 +25,10 @@ import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
 public class findStudyActivity extends AppCompatActivity {
+
+    MaterialToolbar topAppBarFind;
+    DrawerLayout drawerLayoutFind;
+    NavigationView navigationViewFind;
 
     ListView studyList;
     ArrayList<ArrayList<String>> studyIdNameVp;
@@ -33,12 +41,20 @@ public class findStudyActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_find_study);
+        setupView();
         setupListView(new FirestoreCallback() {
             @Override
             public void onCallback(ArrayList<ArrayList<String>> arrayList) {
                 loadData();
             }
         });
+    }
+
+    private void setupView() {
+        topAppBarFind = findViewById(R.id.topAppBarFind);
+        setSupportActionBar(topAppBarFind);
+        drawerLayoutFind = findViewById(R.id.drawerLayoutFind);
+        navigationViewFind = findViewById(R.id.navigationViewFind);
     }
 
     // Parameter:
@@ -99,6 +115,43 @@ public class findStudyActivity extends AppCompatActivity {
     // Return values:
     // set up CLickListener for list elements to open associated study view
     private void setupClickListener() {
+
+        //For NavigationDrawer to open
+        topAppBarFind.setNavigationOnClickListener(new View.OnClickListener() {
+            public void onClick(View V) {
+                drawerLayoutFind.open();
+            }
+        });
+
+        //Handle click on single item in drawer here
+        navigationViewFind.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+
+                switch (item.getItemId()) {
+                    case R.id.nav_home:
+                        Intent homeIntent = new Intent(findStudyActivity.this, homeActivity.class);
+                        startActivity(homeIntent);
+                        break;
+                    case R.id.nav_search:
+                        break;
+                    case R.id.nav_create:
+                        Intent createIntent = new Intent(findStudyActivity.this, createStudyActivity.class);
+                        startActivity(createIntent);
+                        break;
+                    case R.id.nav_overview:
+                        Intent overviewIntent = new Intent(findStudyActivity.this, personalAccountActivity.class);
+                        startActivity(overviewIntent);
+                        break;
+                    case R.id.nav_own:
+                        //Added later
+                        break;
+                }
+                drawerLayoutFind.close();
+                return true;
+            }
+        });
+
         studyList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
