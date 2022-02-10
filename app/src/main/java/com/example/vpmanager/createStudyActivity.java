@@ -102,6 +102,7 @@ public class createStudyActivity extends AppCompatActivity {
         setSupportActionBar(topAppBarCreate);
         drawerLayoutCreate = findViewById(R.id.drawerLayoutCreate);
         navigationViewCreate = findViewById(R.id.navigationViewCreate);
+        navigationViewCreate.getMenu().getItem(2).setChecked(true);
 
         addButton = findViewById(R.id.createAddDateButton);
         dateList = findViewById(R.id.createDatelist);

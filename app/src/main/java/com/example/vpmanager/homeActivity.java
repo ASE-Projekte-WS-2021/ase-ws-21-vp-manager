@@ -26,8 +26,6 @@ public class homeActivity extends AppCompatActivity {
     DrawerLayout drawerLayoutHome;
     NavigationView navigationViewHome;
 
-    Button findStudyButton;
-    Button createStudyButton;
     PieChart pieChart;
     accessDatabase accessDatabase;
     //Unique ID Strings
@@ -58,9 +56,8 @@ public class homeActivity extends AppCompatActivity {
         setSupportActionBar(topAppBarHome);
         drawerLayoutHome = findViewById(R.id.drawerLayoutHome);
         navigationViewHome = findViewById(R.id.navigationViewHome);
+        navigationViewHome.getMenu().getItem(0).setChecked(true);
 
-        findStudyButton = findViewById(R.id.findStudyHome);
-        createStudyButton = findViewById(R.id.createStudyHome);
         pieChart = findViewById(R.id.piechart);
     }
 
@@ -102,20 +99,6 @@ public class homeActivity extends AppCompatActivity {
                 }
                 drawerLayoutHome.close();
                 return true;
-            }
-        });
-
-        findStudyButton.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View V) {
-                Intent intent = new Intent(homeActivity.this, findStudyActivity.class);
-                startActivity(intent);
-            }
-        });
-
-        createStudyButton.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View V) {
-                Intent intent = new Intent(homeActivity.this, createStudyActivity.class);
-                startActivity(intent);
             }
         });
 

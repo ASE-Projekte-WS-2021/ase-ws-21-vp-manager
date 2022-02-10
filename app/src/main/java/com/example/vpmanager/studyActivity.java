@@ -103,6 +103,7 @@ public class studyActivity extends AppCompatActivity {
         setSupportActionBar(topAppBarStudy);
         drawerLayoutStudy = findViewById(R.id.drawerLayoutStudy);
         navigationViewStudy = findViewById(R.id.navigationViewStudy);
+        navigationViewStudy.getMenu().getItem(1).setChecked(true);
     }
 
     // Parameter:

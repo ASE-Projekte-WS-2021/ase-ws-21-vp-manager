@@ -27,7 +27,7 @@
                 android:background="@android:color/transparent"
                 android:elevation="0dp"
                 app:navigationIcon="@drawable/ic_baseline_menu_24"
-                app:title="Home" />
+                app:title="Startseite" />
 
         </com.google.android.material.appbar.AppBarLayout>
 
@@ -88,32 +88,6 @@
                     android:layout_marginRight="20dp"
                     android:background="@color/color_two" />
 
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="bottom"
-                android:orientation="horizontal"
-                android:weightSum="100">
-
-                <Button
-                    android:id="@+id/findStudyHome"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="bottom"
-                    android:layout_margin="2dp"
-                    android:layout_weight="50"
-                    android:text="@string/homeFindStudy" />
-
-                <Button
-                    android:id="@+id/createStudyHome"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="bottom"
-                    android:layout_margin="2dp"
-                    android:layout_weight="50"
-                    android:text="@string/homeCreateStudy" />
             </LinearLayout>
 
         </LinearLayout>

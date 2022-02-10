@@ -55,6 +55,7 @@ public class findStudyActivity extends AppCompatActivity {
         setSupportActionBar(topAppBarFind);
         drawerLayoutFind = findViewById(R.id.drawerLayoutFind);
         navigationViewFind = findViewById(R.id.navigationViewFind);
+        navigationViewFind.getMenu().getItem(1).setChecked(true);
     }
 
     // Parameter:

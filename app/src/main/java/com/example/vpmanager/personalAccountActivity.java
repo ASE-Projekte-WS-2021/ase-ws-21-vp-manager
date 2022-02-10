@@ -49,6 +49,7 @@ public class personalAccountActivity extends AppCompatActivity {
         setSupportActionBar(topAppBarPersonalAcc);
         drawerLayoutPersonalAcc = findViewById(R.id.drawerLayoutPersonalAccount);
         navigationViewPersonalAcc = findViewById(R.id.navigationViewPersonalAccount);
+        navigationViewPersonalAcc.getMenu().getItem(3).setChecked(true);
 
         listView = findViewById(R.id.pa_expandableList);
         chart = findViewById(R.id.pa_piechart);
