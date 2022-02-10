@@ -8,6 +8,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -80,7 +81,26 @@ public class homeActivity extends AppCompatActivity {
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                item.setChecked(true);
+
+                switch(item.getItemId()){
+                    case R.id.nav_home:
+                        break;
+                    case R.id.nav_search:
+                        Intent searchIntent = new Intent(homeActivity.this, findStudyActivity.class);
+                        startActivity(searchIntent);
+                        break;
+                    case R.id.nav_create:
+                        Intent createIntent = new Intent(homeActivity.this, createStudyActivity.class);
+                        startActivity(createIntent);
+                        break;
+                    case R.id.nav_overview:
+                        Intent overviewIntent = new Intent(homeActivity.this, personalAccountActivity.class);
+                        startActivity(overviewIntent);
+                        break;
+                    case R.id.nav_own:
+                        //Added later
+                        break;
+                }
                 drawerLayout.close();
                 return true;
             }

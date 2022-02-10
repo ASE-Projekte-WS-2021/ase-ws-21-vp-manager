@@ -5,24 +5,23 @@
         android:id="@+id/group1"
         android:checkableBehavior="single">
         <item
-            android:id="@+id/item1"
-            android:checked="true"
+            android:id="@+id/nav_home"
             android:icon="@drawable/ic_baseline_home_24"
             android:title="Home" />
         <item
-            android:id="@+id/item2"
+            android:id="@+id/nav_search"
             android:icon="@drawable/ic_baseline_search_24"
             android:title="Studien finden" />
         <item
-            android:id="@+id/item3"
+            android:id="@+id/nav_create"
             android:icon="@drawable/ic_baseline_create_24"
             android:title="Studien erstellen" />
         <item
-            android:id="@+id/item4"
+            android:id="@+id/nav_overview"
             android:icon="@drawable/ic_baseline_account_circle_24"
             android:title="Meine Übersicht" />
         <item
-            android:id="@+id/item5"
+            android:id="@+id/nav_own"
             android:icon="@drawable/ic_baseline_folder_24"
             android:title="Eigene Studien" />
     </group>
