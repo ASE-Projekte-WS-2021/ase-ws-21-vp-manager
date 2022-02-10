@@ -1,16 +1,13 @@
 plugins {
     id 'com.android.application'
-    //id 'checkstyle'
 }
 
 apply plugin: 'com.google.gms.google-services'  // Google Services plugin
-
 apply plugin: 'checkstyle'
 
 task checkstyle(type: Checkstyle) {
     description 'Check code with checkstyle'
     group 'verification'
-    //configFile = file("${rootDir}/config/checkstyle/checkstyle.xml")
     configFile file('../config/checkstyle/checkstyle.xml')
     source 'src'
     include '**/*.java'
@@ -65,4 +62,6 @@ dependencies {
     implementation platform('com.google.firebase:firebase-bom:29.0.4') //specify version number only here
     implementation 'com.google.firebase:firebase-analytics'
     implementation 'com.google.firebase:firebase-firestore'
+    //Drawer Layout
+    implementation "androidx.drawerlayout:drawerlayout:1.1.1"
 }

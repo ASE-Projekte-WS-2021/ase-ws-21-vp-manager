@@ -18,9 +18,19 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="com.example.vpmanager.findStudyActivity" />
-        <activity android:name="com.example.vpmanager.createStudyActivity" />
-        <activity android:name="com.example.vpmanager.personalAccountActivity" />
+        <activity
+            android:name="com.example.vpmanager.findStudyActivity"
+            android:exported="true">
+        </activity>
+        <activity
+            android:name="com.example.vpmanager.createStudyActivity"
+            android:exported="true">
+
+        </activity>
+        <activity
+            android:name="com.example.vpmanager.personalAccountActivity"
+            android:exported="true">
+        </activity>
         <activity android:name="com.example.vpmanager.studyActivity" />
     </application>
 

@@ -1,17 +1,30 @@
 package com.example.vpmanager;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.drawerlayout.widget.DrawerLayout;
+
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+
+import com.google.android.material.appbar.MaterialToolbar;
+import com.google.android.material.navigation.NavigationView;
+
 import org.eazegraph.lib.charts.PieChart;
 import org.eazegraph.lib.models.PieModel;
+
 import java.util.UUID;
 
 public class homeActivity extends AppCompatActivity {
+
+    MaterialToolbar topAppBar;
+    DrawerLayout drawerLayout;
+    NavigationView navigationView;
 
     Button findStudyButton;
     Button createStudyButton;
@@ -40,6 +53,12 @@ public class homeActivity extends AppCompatActivity {
     //Return values:
     //Connects the code with the view
     private void setupView() {
+
+        topAppBar = findViewById(R.id.topAppBar);
+        setSupportActionBar(topAppBar); //needed?
+        drawerLayout = findViewById(R.id.drawerLayout);
+        navigationView = findViewById(R.id.navigationView);
+
         findStudyButton = findViewById(R.id.findStudyHome);
         createStudyButton = findViewById(R.id.createStudyHome);
         pieChart = findViewById(R.id.piechart);
@@ -49,6 +68,42 @@ public class homeActivity extends AppCompatActivity {
     //Return values:
     //Sets clickListener on navigation items
     private void setClickListener() {
+
+        //For NavigationDrawer to open
+        topAppBar.setNavigationOnClickListener(new View.OnClickListener() {
+            public void onClick(View V) {
+                drawerLayout.open();
+            }
+        });
+
+        //Handle click on single item in drawer here
+        navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+
+                switch (item.getItemId()) {
+                    case R.id.nav_home:
+                        break;
+                    case R.id.nav_search:
+                        Intent searchIntent = new Intent(homeActivity.this, findStudyActivity.class);
+                        startActivity(searchIntent);
+                        break;
+                    case R.id.nav_create:
+                        Intent createIntent = new Intent(homeActivity.this, createStudyActivity.class);
+                        startActivity(createIntent);
+                        break;
+                    case R.id.nav_overview:
+                        Intent overviewIntent = new Intent(homeActivity.this, personalAccountActivity.class);
+                        startActivity(overviewIntent);
+                        break;
+                    case R.id.nav_own:
+                        //Added later
+                        break;
+                }
+                drawerLayout.close();
+                return true;
+            }
+        });
 
         findStudyButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View V) {
@@ -89,7 +144,7 @@ public class homeActivity extends AppCompatActivity {
                         getString(R.string.pieSliceLabelSafe),
                         scaledCompletedVP,
                         getResources().getColor(R.color.pieChartSafe)));
-                        //Color.parseColor(String.valueOf(ContextCompat.getColor(this, R.color.pieChartSafe)))));
+        //Color.parseColor(String.valueOf(ContextCompat.getColor(this, R.color.pieChartSafe)))));
         pieChart.addPieSlice(
                 new PieModel(
                         getString(R.string.pieSliceLabelParticipation),
