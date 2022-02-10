@@ -2,7 +2,9 @@ package com.example.vpmanager;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -11,9 +13,12 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.drawerlayout.widget.DrawerLayout;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.appbar.MaterialToolbar;
+import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
@@ -27,6 +32,10 @@ import java.util.Map;
 import java.util.Objects;
 
 public class studyActivity extends AppCompatActivity {
+
+    MaterialToolbar topAppBarStudy;
+    DrawerLayout drawerLayoutStudy;
+    NavigationView navigationViewStudy;
 
     ListView dateList;
     String currentStudyId;
@@ -66,6 +75,7 @@ public class studyActivity extends AppCompatActivity {
         currentUserId = homeActivity.createUserId(this);
         savedDateItem = new ArrayList<>();
         savedDateItem.add(getString(R.string.dropDateView));
+        setupView();
 
         // Parameter:
         // Return values:
@@ -79,13 +89,20 @@ public class studyActivity extends AppCompatActivity {
 
         // Parameter:
         // Return values:
-        // load available dates for date selection ListView forclicked study
+        // load available dates for date selection ListView for clicked study
         setupDateListView(new FirestoreCallbackDates() {
             @Override
             public void onCallback(ArrayList<ArrayList<String>> arrayList) {
                 loadDatesData();
             }
         });
+    }
+
+    private void setupView() {
+        topAppBarStudy = findViewById(R.id.topAppBarStudy);
+        setSupportActionBar(topAppBarStudy);
+        drawerLayoutStudy = findViewById(R.id.drawerLayoutStudy);
+        navigationViewStudy = findViewById(R.id.navigationViewStudy);
     }
 
     // Parameter:
@@ -230,7 +247,46 @@ public class studyActivity extends AppCompatActivity {
     // Parameter:
     // Return values:
     // set up CLickListener for date list items to open register Pop-up
+    // set up ClickListener for the app bar and the navigation drawer
     private void setupClickListener() {
+
+        //For NavigationDrawer to open
+        topAppBarStudy.setNavigationOnClickListener(new View.OnClickListener() {
+            public void onClick(View V) {
+                drawerLayoutStudy.open();
+            }
+        });
+
+        //Handle click on single item in drawer here
+        navigationViewStudy.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+
+                switch (item.getItemId()) {
+                    case R.id.nav_home:
+                        Intent homeIntent = new Intent(studyActivity.this, homeActivity.class);
+                        startActivity(homeIntent);
+                        break;
+                    case R.id.nav_search:
+                        Intent searchIntent = new Intent(studyActivity.this, findStudyActivity.class);
+                        startActivity(searchIntent);
+                        break;
+                    case R.id.nav_create:
+                        Intent createIntent = new Intent(studyActivity.this, createStudyActivity.class);
+                        startActivity(createIntent);
+                        break;
+                    case R.id.nav_overview:
+                        Intent overviewIntent = new Intent(studyActivity.this, personalAccountActivity.class);
+                        startActivity(overviewIntent);
+                        break;
+                    case R.id.nav_own:
+                        //Added later
+                        break;
+                }
+                drawerLayoutStudy.close();
+                return true;
+            }
+        });
 
         dateList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
