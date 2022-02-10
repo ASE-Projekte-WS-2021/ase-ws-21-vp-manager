@@ -22,9 +22,9 @@ import java.util.UUID;
 
 public class homeActivity extends AppCompatActivity {
 
-    MaterialToolbar topAppBar;
-    DrawerLayout drawerLayout;
-    NavigationView navigationView;
+    MaterialToolbar topAppBarHome;
+    DrawerLayout drawerLayoutHome;
+    NavigationView navigationViewHome;
 
     Button findStudyButton;
     Button createStudyButton;
@@ -54,10 +54,10 @@ public class homeActivity extends AppCompatActivity {
     //Connects the code with the view
     private void setupView() {
 
-        topAppBar = findViewById(R.id.topAppBar);
-        setSupportActionBar(topAppBar); //needed?
-        drawerLayout = findViewById(R.id.drawerLayout);
-        navigationView = findViewById(R.id.navigationView);
+        topAppBarHome = findViewById(R.id.topAppBarHome);
+        setSupportActionBar(topAppBarHome);
+        drawerLayoutHome = findViewById(R.id.drawerLayoutHome);
+        navigationViewHome = findViewById(R.id.navigationViewHome);
 
         findStudyButton = findViewById(R.id.findStudyHome);
         createStudyButton = findViewById(R.id.createStudyHome);
@@ -70,14 +70,14 @@ public class homeActivity extends AppCompatActivity {
     private void setClickListener() {
 
         //For NavigationDrawer to open
-        topAppBar.setNavigationOnClickListener(new View.OnClickListener() {
+        topAppBarHome.setNavigationOnClickListener(new View.OnClickListener() {
             public void onClick(View V) {
-                drawerLayout.open();
+                drawerLayoutHome.open();
             }
         });
 
         //Handle click on single item in drawer here
-        navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+        navigationViewHome.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
 
@@ -100,7 +100,7 @@ public class homeActivity extends AppCompatActivity {
                         //Added later
                         break;
                 }
-                drawerLayout.close();
+                drawerLayoutHome.close();
                 return true;
             }
         });
