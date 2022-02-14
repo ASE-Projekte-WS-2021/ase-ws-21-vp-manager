@@ -169,6 +169,8 @@ public class studyActivity extends AppCompatActivity {
             userIdsOfDates.add(freeAndOwnDatesInfo.get(i).get(2));
         }
 
+        setupNavigationListener();
+
         //makes date selection unavailable if user already picked a date from this study
         if (userIdsOfDates.contains(homeActivity.createUserId(this))) {
             setSavedDateAdapter();
@@ -178,6 +180,51 @@ public class studyActivity extends AppCompatActivity {
             setupClickListener();
         }
     }
+
+
+    // set up ClickListener for the app bar and the navigation drawer
+    private void setupNavigationListener() {
+
+        //For NavigationDrawer to open
+        topAppBarStudy.setNavigationOnClickListener(new View.OnClickListener() {
+            public void onClick(View V) {
+                drawerLayoutStudy.open();
+            }
+        });
+
+        //Handle click on single item in drawer here
+        navigationViewStudy.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+
+                switch (item.getItemId()) {
+                    case R.id.nav_home:
+                        Intent homeIntent = new Intent(studyActivity.this, homeActivity.class);
+                        startActivity(homeIntent);
+                        break;
+                    case R.id.nav_search:
+                        Intent searchIntent = new Intent(studyActivity.this, findStudyActivity.class);
+                        startActivity(searchIntent);
+                        break;
+                    case R.id.nav_create:
+                        Intent createIntent = new Intent(studyActivity.this, createStudyActivity.class);
+                        startActivity(createIntent);
+                        break;
+                    case R.id.nav_overview:
+                        Intent overviewIntent = new Intent(studyActivity.this, personalAccountActivity.class);
+                        startActivity(overviewIntent);
+                        break;
+                    case R.id.nav_own:
+                        //Added later
+                        break;
+                }
+                drawerLayoutStudy.close();
+                return true;
+            }
+        });
+
+    }
+
 
     // Parameters: firestoreCallbackStudy
     // Return values:
@@ -248,46 +295,7 @@ public class studyActivity extends AppCompatActivity {
     // Parameter:
     // Return values:
     // set up CLickListener for date list items to open register Pop-up
-    // set up ClickListener for the app bar and the navigation drawer
     private void setupClickListener() {
-
-        //For NavigationDrawer to open
-        topAppBarStudy.setNavigationOnClickListener(new View.OnClickListener() {
-            public void onClick(View V) {
-                drawerLayoutStudy.open();
-            }
-        });
-
-        //Handle click on single item in drawer here
-        navigationViewStudy.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
-            @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-
-                switch (item.getItemId()) {
-                    case R.id.nav_home:
-                        Intent homeIntent = new Intent(studyActivity.this, homeActivity.class);
-                        startActivity(homeIntent);
-                        break;
-                    case R.id.nav_search:
-                        Intent searchIntent = new Intent(studyActivity.this, findStudyActivity.class);
-                        startActivity(searchIntent);
-                        break;
-                    case R.id.nav_create:
-                        Intent createIntent = new Intent(studyActivity.this, createStudyActivity.class);
-                        startActivity(createIntent);
-                        break;
-                    case R.id.nav_overview:
-                        Intent overviewIntent = new Intent(studyActivity.this, personalAccountActivity.class);
-                        startActivity(overviewIntent);
-                        break;
-                    case R.id.nav_own:
-                        //Added later
-                        break;
-                }
-                drawerLayoutStudy.close();
-                return true;
-            }
-        });
 
         dateList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override

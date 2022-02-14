@@ -38,24 +38,24 @@
             tools:context=".studyActivity">
 
             <TextView
-                android:id="@+id/activityHeader"
+                android:id = "@+id/activityHeader"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="25dp"
-                android:layout_marginTop="15dp"
-                android:layout_marginBottom="10dp"
                 android:text="@string/studyViewHeader"
                 android:textSize="23sp"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                android:layout_marginStart="25dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginBottom="10dp"/>
 
             <View
                 android:layout_width="match_parent"
                 android:layout_height="3dp"
+                android:background="@color/color_two"
                 android:layout_marginLeft="20dp"
-                android:layout_marginTop="15dp"
                 android:layout_marginRight="20dp"
-                android:layout_marginBottom="15dp"
-                android:background="@color/color_two" />
+                android:layout_marginTop="15dp"
+                android:layout_marginBottom="15dp"/>
 
 
             <ImageView
@@ -66,17 +66,18 @@
                 app:srcCompat="@drawable/ic_baseline_info_24" />
 
 
+
             <TextView
                 android:id="@+id/description"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="bottom"
                 android:layout_marginLeft="35dp"
-                android:layout_marginTop="10dp"
                 android:fontFamily="sans-serif-light"
                 android:textSize="17sp"
                 android:textStyle="bold"
-                android:weightSum="100" />
+                android:weightSum="100"
+                android:layout_marginTop="10dp"/>
 
 
             <TextView
@@ -126,11 +127,11 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="bottom"
                 android:layout_marginLeft="35dp"
-                android:layout_marginTop="10dp"
                 android:fontFamily="sans-serif-light"
                 android:textSize="17sp"
                 android:textStyle="bold"
-                android:weightSum="100" />
+                android:weightSum="100"
+                android:layout_marginTop="10dp"/>
 
 
             <!--  adapt design to studyType Textview-->
@@ -140,11 +141,11 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="bottom"
                 android:layout_marginLeft="35dp"
-                android:layout_marginTop="10dp"
                 android:fontFamily="sans-serif-light"
                 android:textSize="17sp"
                 android:textStyle="bold"
-                android:weightSum="100" />
+                android:weightSum="100"
+                android:layout_marginTop="10dp"/>
 
             <!-- position mit remoteStudy TextView Ã¼berlagern!-->
             <TextView
@@ -153,37 +154,37 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="bottom"
                 android:layout_marginLeft="35dp"
-                android:layout_marginTop="-25dp"
                 android:fontFamily="sans-serif-light"
                 android:textSize="17sp"
                 android:textStyle="bold"
-                android:weightSum="100" />
+                android:weightSum="100"
+                android:layout_marginTop="-25dp"/>
 
             <View
                 android:layout_width="match_parent"
                 android:layout_height="3dp"
+                android:background="@color/color_two"
                 android:layout_marginLeft="20dp"
-                android:layout_marginTop="35dp"
                 android:layout_marginRight="20dp"
-                android:background="@color/color_two" />
+                android:layout_marginTop="35dp"/>
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
+                android:text="@string/dateListHeader"
+                android:textColor="@color/orange_highlight"
+                android:textSize="18sp"
+                android:textStyle="bold"
                 android:layout_marginStart="20dp"
                 android:layout_marginTop="12dp"
-                android:text="@string/dateListHeader"
-                android:textColor="@color/teal_700"
-                android:textSize="18sp"
-                android:textStyle="bold" />
+                android:layout_gravity="center_horizontal"/>
 
             <ListView
                 android:id="@+id/listViewDates"
                 android:layout_width="348dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
-                android:layout_marginTop="3dp" />
+                android:layout_marginTop="3dp"/>
 
         </LinearLayout>
 
@@ -195,6 +196,10 @@
         android:layout_height="match_parent"
         android:layout_gravity="start"
         app:headerLayout="@layout/header_navigation_drawer"
-        app:menu="@menu/navigation_drawer" />
+        app:itemIconTint="@color/drawer_item"
+        app:itemTextColor="@color/drawer_item"
+        app:itemBackground="@android:color/transparent"
+        app:menu="@menu/navigation_drawer"
+        />
 
 </androidx.drawerlayout.widget.DrawerLayout>
