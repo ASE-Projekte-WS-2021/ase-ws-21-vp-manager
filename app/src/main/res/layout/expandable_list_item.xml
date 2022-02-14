@@ -12,7 +12,6 @@
         android:paddingHorizontal="?android:attr/expandableListPreferredChildPaddingLeft"
         android:paddingTop="10dp"
         android:paddingBottom="10dp"
-        android:textColor="@android:color/black"
         android:background="@drawable/textline"/>
 
     <LinearLayout
@@ -23,7 +22,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/pa_VP_view"
-            android:textColor="@android:color/black"
             android:paddingBottom="10dp"
             android:paddingLeft="?android:attr/expandableListPreferredChildPaddingLeft"
             android:layout_gravity="start" />
@@ -32,11 +30,10 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/pa_date_view"
-            android:textColor="@android:color/black"
             android:paddingBottom="10dp"
             android:paddingRight="?android:attr/expandableListPreferredChildPaddingLeft"
             android:layout_gravity="right"
             android:gravity="right"/>
 
-</LinearLayout>
+    </LinearLayout>
 </LinearLayout>

@@ -14,4 +14,39 @@
     <color name="pieChartParticipation">#ffa500</color>
     <color name="pieChartPlanned">#ff0000</color>
     <color name="pieChartRemaining">#808080</color>
+
+
+
+
+    <!--individual color palette for application; based on Material Design color tool-->
+
+    <!--primary colors-->
+    <color name="lightblue_Main">#E3F2FD</color>
+    <color name="blue_highlight">#40A6F6</color>
+    <color name="blue_highlightDark">#1277D3</color>
+
+    <!--complementary colors-->
+    <color name="lightorange_Main">#FDEEE3</color>
+    <color name="orange_highlight">#F68F40</color>
+    <color name="orange_highlightDark">#D36F12</color>
+
+    <!--analogous colors (based on highlight color of main and secondary)-->
+    <color name="turquoise_highlight">#40F6EA</color>
+    <color name="darkblue_highlight">#404CF6</color>
+
+    <!--triadic colors-->
+    <color name="purple_highlight">#8F40F6</color>
+    <color name="pink_highlight">#F640A7</color>
+
+
+    <!--independent UI Elements-->
+    <color name="red_error">#D50000</color>
+    <color name="lightorange_hint">#FFC39E</color>
+
+
+
+
+
+
+
 </resources>

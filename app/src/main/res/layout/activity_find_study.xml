@@ -35,28 +35,39 @@
             android:layout_height="match_parent"
             app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
+            <!--    android:background="@color/lightblue_Main"-->
+
+
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="25dp"
-                android:layout_marginTop="15dp"
                 android:text="@string/entryListHeader"
                 android:textSize="23sp"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                android:layout_marginStart="25dp"
+                android:layout_marginTop="15dp"
+                />
+            <!--    android:textColor="@color/orange_highlight"-->
 
             <View
                 android:layout_width="match_parent"
                 android:layout_height="3dp"
                 android:layout_marginLeft="20dp"
-                android:layout_marginTop="55dp"
                 android:layout_marginRight="20dp"
-                android:background="@color/color_two" />
+                android:layout_marginTop="55dp"
+                android:background="@color/color_two"
+                />
+            <!--    android:background="@color/lightorange_Main"-->
+
 
             <ListView
                 android:id="@+id/listView"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginTop="70dp" />
+                android:layout_marginTop="70dp"
+                android:layout_weight="1"
+                android:dividerHeight="2dp" />
+            <!--        android:divider="@color/lightorange_Main"-->
 
         </RelativeLayout>
 
@@ -68,6 +79,9 @@
         android:layout_height="match_parent"
         android:layout_gravity="start"
         app:headerLayout="@layout/header_navigation_drawer"
+        app:itemIconTint="@color/drawer_item"
+        app:itemTextColor="@color/drawer_item"
+        app:itemBackground="@android:color/transparent"
         app:menu="@menu/navigation_drawer" />
 
 </androidx.drawerlayout.widget.DrawerLayout>
