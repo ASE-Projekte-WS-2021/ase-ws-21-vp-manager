@@ -181,7 +181,6 @@ public class studyActivity extends AppCompatActivity {
         }
     }
 
-
     // set up ClickListener for the app bar and the navigation drawer
     private void setupNavigationListener() {
 
@@ -224,7 +223,6 @@ public class studyActivity extends AppCompatActivity {
         });
 
     }
-
 
     // Parameters: firestoreCallbackStudy
     // Return values:
