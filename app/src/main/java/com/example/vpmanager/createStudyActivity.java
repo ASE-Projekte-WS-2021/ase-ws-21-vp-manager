@@ -22,7 +22,11 @@ import android.widget.TimePicker;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
+import com.google.android.gms.common.SupportErrorDialogFragment;
 import com.google.android.material.appbar.MaterialToolbar;
 import com.google.android.material.navigation.NavigationView;
 
@@ -54,6 +58,7 @@ public class createStudyActivity extends AppCompatActivity {
     EditText roomEditText;
     Button createButton;
     EditText contactEditText;
+    Button fragmentButton;
 
     ArrayAdapter<String> datePickerAdapter;
     accessDatabase accessDatabase = new accessDatabase();
@@ -114,6 +119,7 @@ public class createStudyActivity extends AppCompatActivity {
         locationLinearLayout = findViewById(R.id.locationLayout);
         createButton = findViewById(R.id.createCreateButton);
         contactEditText = findViewById(R.id.createContactInput);
+        fragmentButton = findViewById(R.id.fragmentButton);
     }
 
     //Parameter:
@@ -169,6 +175,14 @@ public class createStudyActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 checkInput();
+            }
+        });
+
+        fragmentButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent overviewIntent = new Intent(createStudyActivity.this, createStudyBase.class);
+                startActivity(overviewIntent);
             }
         });
     }

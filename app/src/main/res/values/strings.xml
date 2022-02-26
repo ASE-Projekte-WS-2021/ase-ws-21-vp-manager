@@ -73,6 +73,8 @@
     <string name="collectionPathUsers">users</string>
     <string name="collectionPathStudies">studies</string>
     <string name="collectionPathDates">dates</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 </resources>
 

@@ -32,6 +32,7 @@
             android:exported="true">
         </activity>
         <activity android:name="com.example.vpmanager.studyActivity" />
+        <activity android:name=".createStudyBase" />
     </application>
 
 </manifest>
