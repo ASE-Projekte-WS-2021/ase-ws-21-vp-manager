@@ -8,10 +8,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-public class createStudyFragment_StepOne extends Fragment {
+public class createStudyFragment_StepThree extends Fragment {
 
 
-    public createStudyFragment_StepOne() {
+    public createStudyFragment_StepThree() {
     }
 
     @Override
@@ -23,7 +23,7 @@ public class createStudyFragment_StepOne extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_create_study_step_one, container, false);
+        return inflater.inflate(R.layout.fragment_create_study_step_three, container, false);
     }
 
     @Override
