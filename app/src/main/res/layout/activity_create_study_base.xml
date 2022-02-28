@@ -1,21 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:weightSum="4">
+    android:weightSum="10">
+
+
+    <com.google.android.material.card.MaterialCardView
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:background="?android:windowBackground"
+        tools:context=".createStudyFragment_StepOne"
+        android:layout_weight="8"
+        app:cardCornerRadius="20dp">
 
     <fragment
         android:id="@+id/fragment_container"
-        android:name="com.example.vpmanager.createStudyFragment_StepOne"
+        android:name="com.example.vpmanager.createStudyFragment_Base"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_weight="1"/>
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"/>
+
+    </com.google.android.material.card.MaterialCardView>
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="0dp"
         android:orientation="horizontal"
         android:layout_weight="1"
         android:weightSum="2">
@@ -39,5 +56,25 @@
             android:text="Weiter"/>
 
     </LinearLayout>
+
+    <com.kofigyan.stateprogressbar.StateProgressBar
+        android:id="@+id/your_state_progress_bar_id"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        app:spb_stateDescriptionSize="15sp"
+        app:spb_stateLineThickness="10dp"
+        app:spb_stateSize="35dp"
+        app:spb_stateTextSize="15sp"
+        app:spb_maxStateNumber="five"
+        app:spb_stateBackgroundColor="#BDBDBD"
+        app:spb_stateForegroundColor="#009688"
+        app:spb_stateNumberBackgroundColor="#808080"
+        app:spb_stateNumberForegroundColor="#eeeeee"
+        app:spb_currentStateDescriptionColor="#009688"
+        app:spb_stateDescriptionColor="#808080"
+        app:spb_animateToCurrentProgressState="true"
+        app:spb_animationDuration="100000"
+        app:spb_checkStateCompleted="true"/>
 
 </LinearLayout>

@@ -20,7 +20,15 @@
             android:layout_height="wrap_content"
             android:text="@string/createStudyDesc"
             android:textAlignment="center"
-            android:textSize="40sp" />
+            android:textSize="35sp" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="3dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginRight="20dp"
+            android:background="@color/black" />
 
         <TextView
             android:id="@+id/pageDesc"

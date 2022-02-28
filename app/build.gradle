@@ -65,4 +65,6 @@ dependencies {
     implementation 'com.google.firebase:firebase-firestore'
     //Drawer Layout
     implementation "androidx.drawerlayout:drawerlayout:1.1.1"
+    //Progress Bar
+    implementation 'com.kofigyan.stateprogressbar:stateprogressbar:1.0.0'
 }

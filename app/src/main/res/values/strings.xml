@@ -77,6 +77,8 @@
     <string name="fragment_create_study_pageOneTitle">Grundinformationen</string>
     <string name="fragment_create_study_desc_page_one">Bitte tragen Sie hier grundlegende Informationen zu Ihrer Studie ein. \n\n Titel der Studie: Anzeige Namen der Studie die Sie erstellen wollen \n \n Angebotene VP: Die Anzahl der Versuchspersonstunden welche an die Teilnehmer bei erfolgreicher Teilnahme vergeben werden.</string>
     <string name="fragment_create_study_desc_page_two">Bitte fügen Sie hier eine Studiebeschreibung ein, welche den Teilnehmern deine Studie genauer erklärt</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 </resources>
 
