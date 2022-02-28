@@ -83,5 +83,6 @@
         app:itemTextColor="@color/drawer_item"
         app:itemBackground="@android:color/transparent"
         app:menu="@menu/navigation_drawer" />
+    <!--set background color-->
 
 </androidx.drawerlayout.widget.DrawerLayout>
