@@ -2,7 +2,10 @@ package com.example.vpmanager;
 
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -18,6 +21,8 @@ public class createStudyBase extends AppCompatActivity {
     String studyTitle = "";
     String VP = "";
     String studyDesc = "";
+    String category = "";
+    String execution = "";
     String platform = "";
     String location = "";
     String street = "";
@@ -35,9 +40,11 @@ public class createStudyBase extends AppCompatActivity {
     TextInputEditText textInputEditTextTitle;
     TextInputEditText textInputEditTextVP;
     TextInputEditText textInputEditTextDesc;
+    Spinner categories;
+    Spinner executionType;
+
 
     Fragment fragment_container;
-    createStudyFragment_StepOne fragment;
     FragmentManager fragmentManager;
 
     @Override
@@ -92,7 +99,7 @@ public class createStudyBase extends AppCompatActivity {
                 break;
             case 1:
                 getInput(currentFragment);
-                stateProgressBar.setCurrentStateNumber(StateProgressBar.StateNumber.ONE);
+                stateProgressBar.setCurrentStateNumber(StateProgressBar.StateNumber.TWO);
                 fragmentManager
                         .beginTransaction()
                         .setCustomAnimations(R.anim.enter_from_right, R.anim.exit_to_left,
@@ -106,7 +113,7 @@ public class createStudyBase extends AppCompatActivity {
                 break;
             case 2:
                 getInput(currentFragment);
-                stateProgressBar.setCurrentStateNumber(StateProgressBar.StateNumber.TWO);
+                stateProgressBar.setCurrentStateNumber(StateProgressBar.StateNumber.THREE);
                 fragmentManager
                         .beginTransaction()
                         .setCustomAnimations(R.anim.enter_from_right, R.anim.exit_to_left,
@@ -125,11 +132,45 @@ public class createStudyBase extends AppCompatActivity {
                         .beginTransaction()
                         .setCustomAnimations(R.anim.enter_from_right, R.anim.exit_to_left,
                                 R.anim.enter_from_left, R.anim.exit_to_right)
-                        .replace(R.id.fragment_container, new createStudyFragment_StepThree(), null)
+                        .replace(R.id.fragment_container, new createStudyFragment_StepFour(), null)
                         .addToBackStack(null)
                         .commit();
                 System.out.println("Before Currentfragment = " + currentFragment);
                 currentFragment++;
+                System.out.println("Currentfragment = " + currentFragment);
+                break;
+            case 4:
+                getInput(currentFragment);
+                stateProgressBar.setCurrentStateNumber(StateProgressBar.StateNumber.FOUR);
+                fragmentManager
+                        .beginTransaction()
+                        .setCustomAnimations(R.anim.enter_from_right, R.anim.exit_to_left,
+                                R.anim.enter_from_left, R.anim.exit_to_right)
+                        .replace(R.id.fragment_container, new createStudyFragment_StepFive(), null)
+                        .addToBackStack(null)
+                        .commit();
+                System.out.println("Before Currentfragment = " + currentFragment);
+                currentFragment++;
+                System.out.println("Currentfragment = " + currentFragment);
+                break;
+            case 5:
+                getInput(currentFragment);
+                stateProgressBar.setCurrentStateNumber(StateProgressBar.StateNumber.FIVE);
+                fragmentManager
+                        .beginTransaction()
+                        .setCustomAnimations(R.anim.enter_from_right, R.anim.exit_to_left,
+                                R.anim.enter_from_left, R.anim.exit_to_right)
+                        .replace(R.id.fragment_container, new createStudyFragment_finalStep(), null)
+                        .addToBackStack(null)
+                        .commit();
+                System.out.println("Before Currentfragment = " + currentFragment);
+                currentFragment++;
+                System.out.println("Currentfragment = " + currentFragment);
+                break;
+            case 6:
+                getInput(currentFragment);
+                stateProgressBar.setCurrentStateNumber(StateProgressBar.StateNumber.FIVE);
+                System.out.println("Before Currentfragment = " + currentFragment);
                 System.out.println("Currentfragment = " + currentFragment);
                 break;
             default:
@@ -141,6 +182,7 @@ public class createStudyBase extends AppCompatActivity {
         switch (currentFragment) {
             case 1:
                 getInput(currentFragment);
+                //MAKE PROGRESSBAR INVIS
                 stateProgressBar.setCurrentStateNumber(StateProgressBar.StateNumber.ONE);
                 fragmentManager
                         .beginTransaction()
@@ -181,6 +223,49 @@ public class createStudyBase extends AppCompatActivity {
                 currentFragment--;
                 System.out.println("Currentfragment = " + currentFragment);
                 break;
+
+            case 4:
+                getInput(currentFragment);
+                stateProgressBar.setCurrentStateNumber(StateProgressBar.StateNumber.THREE);
+                fragmentManager
+                        .beginTransaction()
+                        .setCustomAnimations(R.anim.enter_from_left, R.anim.exit_to_right,
+                                R.anim.enter_from_right, R.anim.exit_to_left)
+                        .replace(R.id.fragment_container, new createStudyFragment_StepThree(), null)
+                        .addToBackStack(null)
+                        .commit();
+                System.out.println("Before Currentfragment = " + currentFragment);
+                currentFragment--;
+                System.out.println("Currentfragment = " + currentFragment);
+                break;
+            case 5:
+                getInput(currentFragment);
+                stateProgressBar.setCurrentStateNumber(StateProgressBar.StateNumber.THREE);
+                fragmentManager
+                        .beginTransaction()
+                        .setCustomAnimations(R.anim.enter_from_left, R.anim.exit_to_right,
+                                R.anim.enter_from_right, R.anim.exit_to_left)
+                        .replace(R.id.fragment_container, new createStudyFragment_StepFour(), null)
+                        .addToBackStack(null)
+                        .commit();
+                System.out.println("Before Currentfragment = " + currentFragment);
+                currentFragment--;
+                System.out.println("Currentfragment = " + currentFragment);
+                break;
+            case 6:
+                getInput(currentFragment);
+                stateProgressBar.setCurrentStateNumber(StateProgressBar.StateNumber.FOUR);
+                fragmentManager
+                        .beginTransaction()
+                        .setCustomAnimations(R.anim.enter_from_left, R.anim.exit_to_right,
+                                R.anim.enter_from_right, R.anim.exit_to_left)
+                        .replace(R.id.fragment_container, new createStudyFragment_StepFive(), null)
+                        .addToBackStack(null)
+                        .commit();
+                System.out.println("Before Currentfragment = " + currentFragment);
+                currentFragment--;
+                System.out.println("Currentfragment = " + currentFragment);
+                break;
             default:
                 break;
         }
@@ -188,23 +273,33 @@ public class createStudyBase extends AppCompatActivity {
 
 
     private void getInput(int page) {
-        if (page == 1) {
-            textInputEditTextTitle = fragmentManager.getFragments().get(0).getView().findViewById(R.id.inputFieldTitle);
-            textInputEditTextVP = fragmentManager.getFragments().get(0).getView().findViewById(R.id.inputFieldVP);
-            studyTitle = Objects.requireNonNull(textInputEditTextTitle.getText()).toString();
-            VP = Objects.requireNonNull(textInputEditTextVP.getText()).toString();
-            System.out.println(VP + " " + studyTitle);
-        }
-        if (page == 2) {
-            textInputEditTextDesc = fragmentManager.getFragments().get(0).getView().findViewById(R.id.inputFieldStudyDesc);
-            studyDesc = Objects.requireNonNull(textInputEditTextDesc.getText()).toString();
-            System.out.println(studyDesc);
-        }
+        switch (page) {
+            case 1:
+                textInputEditTextTitle = fragmentManager.getFragments().get(0).getView().findViewById(R.id.inputFieldTitle);
+                textInputEditTextVP = fragmentManager.getFragments().get(0).getView().findViewById(R.id.inputFieldVP);
+                studyTitle = Objects.requireNonNull(textInputEditTextTitle.getText()).toString();
+                VP = Objects.requireNonNull(textInputEditTextVP.getText()).toString();
+                System.out.println(VP + " " + studyTitle);
+                break;
 
-        if (page == 3) {
-            System.out.println("Poggers");
+            case 2:
+                textInputEditTextDesc = fragmentManager.getFragments().get(0).getView().findViewById(R.id.inputFieldStudyDesc);
+                studyDesc = Objects.requireNonNull(textInputEditTextDesc.getText()).toString();
+                System.out.println(studyDesc);
+                break;
+
+
+            case 3:
+                categories = fragmentManager.getFragments().get(0).getView().findViewById(R.id.createCategories);
+                executionType = fragmentManager.getFragments().get(0).getView().findViewById(R.id.createExecutionType);
+                category = categories.getSelectedItem().toString();
+                execution = executionType.getSelectedItem().toString();
+                System.out.println("Kategorie: " + category);
+                System.out.println("Durchführung: " + execution);
+            break;
+
+            case 4:
+                break;
+            }
         }
     }
-
-
-}

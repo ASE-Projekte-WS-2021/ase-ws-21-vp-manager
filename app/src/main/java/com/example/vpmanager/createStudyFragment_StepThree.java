@@ -7,9 +7,12 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.Spinner;
 
 public class createStudyFragment_StepThree extends Fragment {
-
+    Spinner categories;
+    Spinner executionType;
 
     public createStudyFragment_StepThree() {
     }
@@ -33,6 +36,19 @@ public class createStudyFragment_StepThree extends Fragment {
         // EditText etFoo = (EditText) view.findViewById(R.id.etFoo);
     }
 
+
+
     private void setupView(View view){
+        categories = view.findViewById(R.id.createCategories);
+        ArrayAdapter<CharSequence> categoryAdapter = ArrayAdapter.createFromResource(getActivity(),
+                R.array.createCategoryList, android.R.layout.simple_spinner_item);
+        categoryAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        categories.setAdapter(categoryAdapter);
+
+        executionType = view.findViewById(R.id.createExecutionType);
+        ArrayAdapter<CharSequence> executionTypeAdapter = ArrayAdapter.createFromResource(getActivity(),
+                R.array.createExecutionTypeList, android.R.layout.simple_spinner_item);
+        executionTypeAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        executionType.setAdapter(executionTypeAdapter);
     }
 }
