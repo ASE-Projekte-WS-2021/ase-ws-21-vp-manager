@@ -1,21 +1,26 @@
 package com.example.vpmanager;
 
 import static android.content.ContentValues.TAG;
+
 import android.util.Log;
+
 import androidx.annotation.NonNull;
+
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.Transaction;
+
 import java.util.HashMap;
 import java.util.Map;
 
 public class accessDatabase {
     FirebaseFirestore db;
+
     //HomeActivity --------------------------------------------------------------------------------!
     //Adds a new user (installation of the app) to the database, if it doesn't already exist
-    public void createNewUser(String deviceId){
+    public void createNewUser(String deviceId) {
         db = FirebaseFirestore.getInstance();
         //A DocumentReference refers to a document location
         final DocumentReference userDocRef = db.collection("users").document(deviceId);
@@ -63,7 +68,7 @@ public class accessDatabase {
     //in studyActivity
 
     //updateData should contain ("selected": true) and ("userId: the User Id)
-    public void selectDate(Map<String, Object> updateData, String dateId){
+    public void selectDate(Map<String, Object> updateData, String dateId) {
 
         db = FirebaseFirestore.getInstance();
 
@@ -73,7 +78,7 @@ public class accessDatabase {
                 .addOnFailureListener(e -> Log.w(TAG, "Error updating document", e));
     }
 
-    public void unselectDate(String dateId){
+    public void unselectDate(String dateId) {
 
         db = FirebaseFirestore.getInstance();
 

@@ -4,9 +4,8 @@ import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.os.Bundle;
-import android.view.MenuItem;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -19,7 +18,6 @@ import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TimePicker;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.drawerlayout.widget.DrawerLayout;
 
@@ -120,43 +118,6 @@ public class createStudyActivity extends AppCompatActivity {
     //Return values:
     //Sets click listener on buttons
     private void setupClickListener() {
-
-        //For NavigationDrawer to open
-        topAppBarCreate.setNavigationOnClickListener(new View.OnClickListener() {
-            public void onClick(View V) {
-                drawerLayoutCreate.open();
-            }
-        });
-
-        //Handle click on single item in drawer here
-        navigationViewCreate.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
-            @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-
-                switch (item.getItemId()) {
-                    case R.id.nav_home:
-                        Intent homeIntent = new Intent(createStudyActivity.this, homeActivity.class);
-                        startActivity(homeIntent);
-                        break;
-                    case R.id.nav_search:
-                        Intent searchIntent = new Intent(createStudyActivity.this, findStudyActivity.class);
-                        startActivity(searchIntent);
-                        break;
-                    case R.id.nav_create:
-                        break;
-                    case R.id.nav_overview:
-                        Intent overviewIntent = new Intent(createStudyActivity.this, personalAccountActivity.class);
-                        startActivity(overviewIntent);
-                        break;
-                    case R.id.nav_own:
-                        //Added later
-                        break;
-
-                }
-                drawerLayoutCreate.close();
-                return true;
-            }
-        });
 
         addButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -333,7 +294,8 @@ public class createStudyActivity extends AppCompatActivity {
         Map<String, Object> newStudy = new HashMap<>();
 
         newStudy.put("id", studyID); //New id for the study
-        newStudy.put("creator", homeActivity.uniqueID);
+        newStudy.put("creator", mainActivity.uniqueID); //before: homeActivity.uniqueID
+        Log.d("used userId", mainActivity.uniqueID);  //before: homeActivity.uniqueID
         newStudy.put("name", studyTitle.getText().toString());
         newStudy.put("vps", VP.getText().toString());
         newStudy.put("contact", contactEditText.getText().toString());
