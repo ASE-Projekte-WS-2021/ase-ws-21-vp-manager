@@ -2,9 +2,9 @@ package com.example.vpmanager;
 
 import android.os.Bundle;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
 
@@ -15,6 +15,7 @@ import androidx.fragment.app.FragmentManager;
 import com.google.android.material.textfield.TextInputEditText;
 import com.kofigyan.stateprogressbar.StateProgressBar;
 
+import java.util.ArrayList;
 import java.util.Objects;
 
 public class createStudyBase extends AppCompatActivity {
@@ -24,10 +25,12 @@ public class createStudyBase extends AppCompatActivity {
     String category = "";
     String execution = "";
     String platform = "";
+    String optionalPlatform = "";
     String location = "";
     String street = "";
     String room = "";
     String contact = "";
+    ArrayList<String> dates = new ArrayList<>();
 
     StateProgressBar stateProgressBar;
     String[] descriptionData = {"Basis", "Beschreibung", "Art", "Termine", "Bestätigen"};
@@ -40,6 +43,12 @@ public class createStudyBase extends AppCompatActivity {
     TextInputEditText textInputEditTextTitle;
     TextInputEditText textInputEditTextVP;
     TextInputEditText textInputEditTextDesc;
+    TextInputEditText textInputEditTextPlatform;
+    TextInputEditText textInputEditTextOptionalPlatform;
+    TextInputEditText textInputEditTextLocation;
+    TextInputEditText textInputEditTextStreet;
+    TextInputEditText textInputEditTextRoom;
+    ListView listViewDates;
     Spinner categories;
     Spinner executionType;
 
@@ -128,13 +137,23 @@ public class createStudyBase extends AppCompatActivity {
             case 3:
                 getInput(currentFragment);
                 stateProgressBar.setCurrentStateNumber(StateProgressBar.StateNumber.THREE);
-                fragmentManager
-                        .beginTransaction()
-                        .setCustomAnimations(R.anim.enter_from_right, R.anim.exit_to_left,
-                                R.anim.enter_from_left, R.anim.exit_to_right)
-                        .replace(R.id.fragment_container, new createStudyFragment_StepFour(), null)
-                        .addToBackStack(null)
-                        .commit();
+                if (execution.equals(getString(R.string.remoteString))) {
+                    fragmentManager
+                            .beginTransaction()
+                            .setCustomAnimations(R.anim.enter_from_right, R.anim.exit_to_left,
+                                    R.anim.enter_from_left, R.anim.exit_to_right)
+                            .replace(R.id.fragment_container, new createStudyFragment_StepFour_Remote(), null)
+                            .addToBackStack(null)
+                            .commit();
+                } else {
+                    fragmentManager
+                            .beginTransaction()
+                            .setCustomAnimations(R.anim.enter_from_right, R.anim.exit_to_left,
+                                    R.anim.enter_from_left, R.anim.exit_to_right)
+                            .replace(R.id.fragment_container, new createStudyFragment_StepFour_Presence(), null)
+                            .addToBackStack(null)
+                            .commit();
+                }
                 System.out.println("Before Currentfragment = " + currentFragment);
                 currentFragment++;
                 System.out.println("Currentfragment = " + currentFragment);
@@ -245,7 +264,7 @@ public class createStudyBase extends AppCompatActivity {
                         .beginTransaction()
                         .setCustomAnimations(R.anim.enter_from_left, R.anim.exit_to_right,
                                 R.anim.enter_from_right, R.anim.exit_to_left)
-                        .replace(R.id.fragment_container, new createStudyFragment_StepFour(), null)
+                        .replace(R.id.fragment_container, new createStudyFragment_StepFour_Remote(), null)
                         .addToBackStack(null)
                         .commit();
                 System.out.println("Before Currentfragment = " + currentFragment);
@@ -296,10 +315,37 @@ public class createStudyBase extends AppCompatActivity {
                 execution = executionType.getSelectedItem().toString();
                 System.out.println("Kategorie: " + category);
                 System.out.println("Durchführung: " + execution);
-            break;
+                break;
 
             case 4:
+                if (execution.equals(getString(R.string.remoteString))) {
+                    // GET REMOTE STUFF HERE
+                    textInputEditTextPlatform = fragmentManager.getFragments().get(0).getView().findViewById(R.id.inputFieldPlatform);
+                    textInputEditTextOptionalPlatform = fragmentManager.getFragments().get(0).getView().findViewById(R.id.inputFieldPlatformOptional);
+                    platform = Objects.requireNonNull(textInputEditTextPlatform.getText()).toString();
+                    optionalPlatform = Objects.requireNonNull(textInputEditTextOptionalPlatform.getText()).toString();
+                } else {
+                    // GET PRESENCE STUFF HERE
+                    textInputEditTextLocation = fragmentManager.getFragments().get(0).getView().findViewById(R.id.inputFieldLocation);
+                    textInputEditTextStreet = fragmentManager.getFragments().get(0).getView().findViewById(R.id.inputFieldStreet);
+                    textInputEditTextRoom = fragmentManager.getFragments().get(0).getView().findViewById(R.id.inputFieldRoom);
+
+                    location = Objects.requireNonNull(textInputEditTextLocation.getText()).toString();
+                    street = Objects.requireNonNull(textInputEditTextStreet.getText()).toString();
+                    room = Objects.requireNonNull(textInputEditTextRoom.getText()).toString();
+                }
                 break;
-            }
+            case 5:
+                ArrayAdapter adapter = new ArrayAdapter(this,
+                        android.R.layout.simple_list_item_1);
+                listViewDates = fragmentManager.getFragments().get(0).getView().findViewById(R.id.createDatelist);
+                listViewDates.setAdapter(adapter);
+                for (int i = 0; i < adapter.getCount(); i++) {
+                    dates.add((String) adapter.getItem(i));
+                    System.out.println(adapter.getItem(i));
+                    System.out.println((String) adapter.getItem(i));
+                }
+                break;
         }
     }
+}

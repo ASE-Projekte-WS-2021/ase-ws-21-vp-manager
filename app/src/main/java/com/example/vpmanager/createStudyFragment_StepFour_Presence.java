@@ -1,17 +1,16 @@
 package com.example.vpmanager;
 
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-public class createStudyFragment_StepFour extends Fragment {
+import androidx.fragment.app.Fragment;
+
+public class createStudyFragment_StepFour_Presence extends Fragment {
 
 
-    public createStudyFragment_StepFour() {
+    public createStudyFragment_StepFour_Presence() {
     }
 
     @Override
@@ -23,7 +22,7 @@ public class createStudyFragment_StepFour extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_create_study_step_four, container, false);
+        return inflater.inflate(R.layout.fragment_create_study_step_four_presence, container, false);
     }
 
     @Override

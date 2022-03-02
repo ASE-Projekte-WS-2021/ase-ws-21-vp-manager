@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".createStudyFragment_StepFour"
+    tools:context=".createStudyFragment_StepFour_Remote"
     android:background="?android:windowBackground">
 
 
@@ -18,7 +18,7 @@
             android:id="@+id/pageTitle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Duchrführungsart"
+            android:text="Durchführungsort"
             android:textAlignment="center"
             android:textSize="35sp" />
 
@@ -52,11 +52,11 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 style="@style/You.EditText.Style"
-                android:id="@+id/inputFieldTitle"
+                android:id="@+id/inputFieldLocation"
                 android:layout_marginRight="20dp"
                 android:layout_marginLeft="20dp"
                 android:layout_marginBottom="30dp"
-                android:hint="@string/createStudyTitle">
+                android:hint="@string/createLocationHint">
             </com.google.android.material.textfield.TextInputEditText>
 
         </com.google.android.material.textfield.TextInputLayout>
@@ -69,15 +69,34 @@
 
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/inputFieldVP"
+                android:id="@+id/inputFieldStreet"
                 style="@style/You.EditText.Style"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="20dp"
                 android:layout_marginBottom="30dp"
-                android:hint="@string/createOfferedVP"
+                android:hint="@string/createStreetHint"
                 android:inputType="numberDecimal" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1">
+
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/inputFieldRoom"
+                style="@style/You.EditText.Style"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginBottom="30dp"
+                android:hint="@string/createRoomHint"
+                android:inputType="numberDecimal"/>
 
         </com.google.android.material.textfield.TextInputLayout>
 

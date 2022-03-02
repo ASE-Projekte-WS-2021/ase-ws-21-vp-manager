@@ -18,7 +18,7 @@
             android:id="@+id/pageTitle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Kategorie"
+            android:text="Kategorie und Art"
             android:textAlignment="center"
             android:textSize="35sp" />
 
@@ -34,53 +34,24 @@
             android:id="@+id/pageDesc"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="7"
-            android:textSize="20dp"
+            android:layout_weight="4"
+            android:textSize="20sp"
             android:textAlignment="center"
             android:layout_marginTop="30dp"
             android:text="@string/fragment_create_study_desc_page_one"
             />
 
-
-        <com.google.android.material.textfield.TextInputLayout
+        <Spinner
+            android:id="@+id/createCategories"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1">
+            android:layout_height="0dp"
+            android:layout_weight="1" />
 
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                style="@style/You.EditText.Style"
-                android:id="@+id/inputFieldTitle"
-                android:layout_marginRight="20dp"
-                android:layout_marginLeft="20dp"
-                android:layout_marginBottom="30dp"
-                android:hint="@string/createStudyTitle">
-            </com.google.android.material.textfield.TextInputEditText>
-
-        </com.google.android.material.textfield.TextInputLayout>
-
-
-        <com.google.android.material.textfield.TextInputLayout
+        <Spinner
+            android:id="@+id/createExecutionType"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1">
-
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/inputFieldVP"
-                style="@style/You.EditText.Style"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="20dp"
-                android:layout_marginRight="20dp"
-                android:layout_marginBottom="30dp"
-                android:hint="@string/createOfferedVP"
-                android:inputType="numberDecimal" />
-
-        </com.google.android.material.textfield.TextInputLayout>
-
+            android:layout_height="0dp"
+            android:layout_weight="1"/>
     </LinearLayout>
 
 
