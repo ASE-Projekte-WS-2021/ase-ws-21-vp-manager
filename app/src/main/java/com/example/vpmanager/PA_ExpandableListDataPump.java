@@ -1,13 +1,16 @@
 package com.example.vpmanager;
 
 import android.app.Activity;
+
 import androidx.annotation.NonNull;
+
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -15,7 +18,7 @@ import java.util.List;
 public class PA_ExpandableListDataPump extends Activity {
 
     private static FirebaseFirestore db;
-    private static CollectionReference datesRef;
+    private static CollectionReference datesRef, studiesRef;
     private static final HashMap<String, String> STUDY_ID_NAME = new HashMap<>();
     private static final HashMap<String, String> STUDY_ID_VPS = new HashMap<>();
     private static final HashMap<String, String> STUDY_ID_DATE = new HashMap<>();
@@ -53,6 +56,7 @@ public class PA_ExpandableListDataPump extends Activity {
         createListEntries();
         return EXPANDABLE_LIST_DETAIL;
     }
+
     private static void createListEntries() {
         List<String> ownStudies = new ArrayList<>();
         String[] ownStudyKeys = OWN_STUDY_ID_NAME.keySet().toArray(new String[0]);
@@ -103,7 +107,7 @@ public class PA_ExpandableListDataPump extends Activity {
     //Return Values: Returns a HashMap with test data for the personal account view
     //this function searches through all existing dates in the DB for the users ID and adds the matches in a Hashmap. Key is the study and value the date.
     private static void getBookedDates(FirestoreCallbackDates firestoreCallbackDates) {
-        String uniqueID = homeActivity.uniqueID;
+        String uniqueID = mainActivity.uniqueID; //before: homeActivity.uniqueID
         db = FirebaseFirestore.getInstance();
         datesRef = db.collection("dates");
 
@@ -125,11 +129,11 @@ public class PA_ExpandableListDataPump extends Activity {
     //Return Values:
     //this function adds all names and vps to hashmaps if the user has a booked date in it.
     private static void getStudies(String studyID, FirestoreCallbackStudy firestoreCallbackStudies) {
-        String uniqueID = homeActivity.uniqueID;
+        String uniqueID = mainActivity.uniqueID; //before: homeActivity.uniqueID
         db = FirebaseFirestore.getInstance();
-        datesRef = db.collection("studies");
+        studiesRef = db.collection("studies");
 
-        datesRef.whereEqualTo("id", studyID).get()
+        studiesRef.whereEqualTo("id", studyID).get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
@@ -148,11 +152,11 @@ public class PA_ExpandableListDataPump extends Activity {
     //Return Values:
     //this function searches for all studies the user created and adds them to a list.
     private static void getOwnStudies(FirestoreCallbackOwnStudy firestoreCallbackOwnStudy) {
-        String uniqueID = homeActivity.uniqueID;
+        String uniqueID = mainActivity.uniqueID; //before: homeActivity.uniqueID
         db = FirebaseFirestore.getInstance();
-        datesRef = db.collection("studies");
+        studiesRef = db.collection("studies");
 
-        datesRef.whereEqualTo("creator", uniqueID).get()
+        studiesRef.whereEqualTo("creator", uniqueID).get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
@@ -171,7 +175,7 @@ public class PA_ExpandableListDataPump extends Activity {
     //Return Values:
     //this function uses the studyID to find all dates which belong to the study. Then all Dates where the userID is not null are added to a list.
     private static void getAllBookedDatesForOwnStudies(String StudyID, FirestoreCallbackBookedDatesOfOwnStudy firestoreCallbackBookedDatesOfOwnStudy) {
-        String uniqueID = homeActivity.uniqueID;
+        String uniqueID = mainActivity.uniqueID; //before: homeActivity.uniqueID
         db = FirebaseFirestore.getInstance();
         datesRef = db.collection("dates");
 
