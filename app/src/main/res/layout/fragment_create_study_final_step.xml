@@ -13,7 +13,6 @@
         android:orientation="vertical"
         android:weightSum="7">
 
-
         <TextView
             android:id="@+id/pageTitle"
             android:layout_width="match_parent"
@@ -30,58 +29,150 @@
             android:layout_marginRight="20dp"
             android:background="@color/black" />
 
-        <TextView
-            android:id="@+id/pageDesc"
+
+        <com.google.android.material.card.MaterialCardView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="7"
-            android:textSize="20sp"
-            android:textAlignment="center"
-            android:layout_marginTop="30dp"
-            android:text="@string/fragment_create_study_desc_page_one"
-            />
+            android:layout_height="0dp"
+            android:layout_weight=".5"
 
+            android:layout_marginRight="30dp"
+            android:layout_marginLeft="30dp"
+            android:layout_marginTop="20dp">
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1">
-
-
-            <com.google.android.material.textfield.TextInputEditText
+            <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                style="@style/You.EditText.Style"
-                android:id="@+id/inputFieldTitle"
-                android:layout_marginRight="20dp"
-                android:layout_marginLeft="20dp"
-                android:layout_marginBottom="30dp"
-                android:hint="@string/createStudyTitle">
-            </com.google.android.material.textfield.TextInputEditText>
+                android:text="Titel: AQ"
+                android:id="@+id/confirmTitle"
+                android:textSize="20sp"
+                android:layout_gravity="center"
+                android:layout_marginLeft="10dp">
+            </TextView>
+        </com.google.android.material.card.MaterialCardView>
 
-        </com.google.android.material.textfield.TextInputLayout>
-
-
-        <com.google.android.material.textfield.TextInputLayout
+        <com.google.android.material.card.MaterialCardView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1">
+            android:layout_height="0dp"
+            android:layout_weight=".5"
 
+            android:layout_marginRight="30dp"
+            android:layout_marginLeft="30dp"
+            android:layout_marginTop="20dp">
 
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/inputFieldVP"
-                style="@style/You.EditText.Style"
+            <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="20dp"
-                android:layout_marginRight="20dp"
-                android:layout_marginBottom="30dp"
-                android:hint="@string/createOfferedVP"
-                android:inputType="numberDecimal" />
+                android:text="VP"
+                android:id="@+id/confirmVP"
+                android:textSize="20sp"
+                android:layout_gravity="center"
+                android:layout_marginLeft="10dp">
+            </TextView>
+        </com.google.android.material.card.MaterialCardView>
 
-        </com.google.android.material.textfield.TextInputLayout>
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight=".5"
+
+            android:layout_marginRight="30dp"
+            android:layout_marginLeft="30dp"
+            android:layout_marginTop="20dp">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Contact"
+                android:id="@+id/confirmContact"
+                android:textSize="20sp"
+                android:layout_gravity="center"
+                android:layout_marginLeft="10dp">
+            </TextView>
+        </com.google.android.material.card.MaterialCardView>
+
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="3"
+
+            android:layout_marginRight="30dp"
+            android:layout_marginLeft="30dp"
+            android:layout_marginTop="20dp">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Desc"
+                android:id="@+id/confirmDesc"
+                android:textSize="20sp"
+                android:gravity="top"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="5dp">
+            </TextView>
+        </com.google.android.material.card.MaterialCardView>
+
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight=".5"
+
+            android:layout_marginRight="30dp"
+            android:layout_marginLeft="30dp"
+            android:layout_marginTop="20dp">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Category"
+                android:id="@+id/confirmCategory"
+                android:textSize="20sp"
+                android:layout_gravity="center"
+                android:layout_marginLeft="10dp">
+            </TextView>
+        </com.google.android.material.card.MaterialCardView>
+
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight=".5"
+
+            android:layout_marginRight="30dp"
+            android:layout_marginLeft="30dp"
+            android:layout_marginTop="20dp">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Durchführung"
+                android:id="@+id/confirmExecution"
+                android:textSize="20sp"
+                android:layout_gravity="center"
+                android:layout_marginLeft="10dp">
+            </TextView>
+        </com.google.android.material.card.MaterialCardView>
+
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1.2"
+
+            android:layout_marginRight="30dp"
+            android:layout_marginLeft="30dp"
+            android:layout_marginTop="20dp">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Where"
+                android:id="@+id/confirmLocation"
+                android:textSize="20sp"
+                android:layout_marginTop="5dp"
+                android:gravity="top"
+                android:layout_marginLeft="10dp"
+                >
+            </TextView>
+        </com.google.android.material.card.MaterialCardView>
 
     </LinearLayout>
-
 
 </FrameLayout>

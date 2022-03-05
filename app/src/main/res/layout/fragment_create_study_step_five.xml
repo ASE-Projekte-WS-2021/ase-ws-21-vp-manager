@@ -42,15 +42,13 @@
             android:text="@string/fragment_create_study_desc_page_one" />
 
 
-
         <ListView
             android:id="@+id/createDatelist"
-            android:layout_weight="3"
             android:layout_width="fill_parent"
             android:layout_height="0dp"
             android:layout_marginBottom="5dp"
+            android:layout_weight="3"
             android:drawSelectorOnTop="false" />
-
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/fab"

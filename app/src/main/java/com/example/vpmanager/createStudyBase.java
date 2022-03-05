@@ -36,10 +36,10 @@ public class createStudyBase extends AppCompatActivity {
     String[] descriptionData = {"Basis", "Beschreibung", "Art", "Termine", "Bestätigen"};
 
     int currentFragment = 0;
+    Bundle bundle;
 
     Button back;
     Button next;
-    TextView tv;
     TextInputEditText textInputEditTextTitle;
     TextInputEditText textInputEditTextVP;
     TextInputEditText textInputEditTextDesc;
@@ -173,13 +173,16 @@ public class createStudyBase extends AppCompatActivity {
                 System.out.println("Currentfragment = " + currentFragment);
                 break;
             case 5:
+                bundle = createBundle(1);
+                createStudyFragment_finalStep createStudyFragment_finalStep = new createStudyFragment_finalStep();
+                createStudyFragment_finalStep.setArguments(bundle);
                 getInput(currentFragment);
                 stateProgressBar.setCurrentStateNumber(StateProgressBar.StateNumber.FIVE);
                 fragmentManager
                         .beginTransaction()
                         .setCustomAnimations(R.anim.enter_from_right, R.anim.exit_to_left,
                                 R.anim.enter_from_left, R.anim.exit_to_right)
-                        .replace(R.id.fragment_container, new createStudyFragment_finalStep(), null)
+                        .replace(R.id.fragment_container, createStudyFragment_finalStep, null)
                         .addToBackStack(null)
                         .commit();
                 System.out.println("Before Currentfragment = " + currentFragment);
@@ -187,7 +190,24 @@ public class createStudyBase extends AppCompatActivity {
                 System.out.println("Currentfragment = " + currentFragment);
                 break;
             case 6:
-                getInput(currentFragment);
+                bundle = createBundle(2);
+                createStudyFragment_finalStep_two createStudyFragment_finalStep_two = new createStudyFragment_finalStep_two();
+                createStudyFragment_finalStep_two.setArguments(bundle);
+                stateProgressBar.setCurrentStateNumber(StateProgressBar.StateNumber.FIVE);
+                next.setText("Erstellen");
+                fragmentManager
+                        .beginTransaction()
+                        .setCustomAnimations(R.anim.enter_from_right, R.anim.exit_to_left,
+                                R.anim.enter_from_left, R.anim.exit_to_right)
+                        .replace(R.id.fragment_container, createStudyFragment_finalStep_two, null)
+                        .addToBackStack(null)
+                        .commit();
+                System.out.println("Before Currentfragment = " + currentFragment);
+                currentFragment++;
+                System.out.println("Currentfragment = " + currentFragment);
+                break;
+
+            case 7:
                 stateProgressBar.setCurrentStateNumber(StateProgressBar.StateNumber.FIVE);
                 System.out.println("Before Currentfragment = " + currentFragment);
                 System.out.println("Currentfragment = " + currentFragment);
@@ -285,11 +305,27 @@ public class createStudyBase extends AppCompatActivity {
                 currentFragment--;
                 System.out.println("Currentfragment = " + currentFragment);
                 break;
+            case 7:
+                Bundle bundle = createBundle(1);
+                createStudyFragment_finalStep createStudyFragment_finalStep = new createStudyFragment_finalStep();
+                createStudyFragment_finalStep.setArguments(bundle);
+                next.setText("Weiter");
+                stateProgressBar.setCurrentStateNumber(StateProgressBar.StateNumber.FOUR);
+                fragmentManager
+                        .beginTransaction()
+                        .setCustomAnimations(R.anim.enter_from_left, R.anim.exit_to_right,
+                                R.anim.enter_from_right, R.anim.exit_to_left)
+                        .replace(R.id.fragment_container, createStudyFragment_finalStep, null)
+                        .addToBackStack(null)
+                        .commit();
+                System.out.println("Before Currentfragment = " + currentFragment);
+                currentFragment--;
+                System.out.println("Currentfragment = " + currentFragment);
+                break;
             default:
                 break;
         }
     }
-
 
     private void getInput(int page) {
         switch (page) {
@@ -324,7 +360,8 @@ public class createStudyBase extends AppCompatActivity {
                     textInputEditTextOptionalPlatform = fragmentManager.getFragments().get(0).getView().findViewById(R.id.inputFieldPlatformOptional);
                     platform = Objects.requireNonNull(textInputEditTextPlatform.getText()).toString();
                     optionalPlatform = Objects.requireNonNull(textInputEditTextOptionalPlatform.getText()).toString();
-                } else {
+                }
+                if(execution.equals((getString(R.string.presenceString)))){
                     // GET PRESENCE STUFF HERE
                     textInputEditTextLocation = fragmentManager.getFragments().get(0).getView().findViewById(R.id.inputFieldLocation);
                     textInputEditTextStreet = fragmentManager.getFragments().get(0).getView().findViewById(R.id.inputFieldStreet);
@@ -336,16 +373,34 @@ public class createStudyBase extends AppCompatActivity {
                 }
                 break;
             case 5:
-                ArrayAdapter adapter = new ArrayAdapter(this,
-                        android.R.layout.simple_list_item_1);
+
                 listViewDates = fragmentManager.getFragments().get(0).getView().findViewById(R.id.createDatelist);
-                listViewDates.setAdapter(adapter);
-                for (int i = 0; i < adapter.getCount(); i++) {
-                    dates.add((String) adapter.getItem(i));
-                    System.out.println(adapter.getItem(i));
-                    System.out.println((String) adapter.getItem(i));
+                for (int i = 0; i < listViewDates.getAdapter().getCount(); i++) {
+                    System.out.println(listViewDates.getAdapter().getItem(i));
+                    dates.add(listViewDates.getAdapter().getItem(i).toString());
                 }
                 break;
         }
+    }
+
+    private Bundle createBundle(int finalPage){
+        Bundle bundle = new Bundle();
+        if(finalPage == 1) {
+            bundle.putString("title", studyTitle);
+            bundle.putString("vp", VP);
+            bundle.putString("desc", studyDesc);
+            bundle.putString("category", category);
+            bundle.putString("exe", execution);
+            bundle.putString("platform", platform);
+            bundle.putString("platform2", optionalPlatform);
+            bundle.putString("location", location);
+            bundle.putString("street", street);
+            bundle.putString("room", room);
+            bundle.putString("contact", contact);
+        }
+        else{
+            bundle.putStringArrayList("dates", dates);
+        }
+        return bundle;
     }
 }
