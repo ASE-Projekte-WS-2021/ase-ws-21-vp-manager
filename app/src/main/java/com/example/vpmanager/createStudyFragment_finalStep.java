@@ -58,14 +58,8 @@ public class createStudyFragment_finalStep extends Fragment {
             category.setText(bundle.getString("category"));
             desc.setText(bundle.getString("desc"));
             execution.setText(bundle.getString("exe"));
+            location.setText(bundle.getString("location"));
             contact.setText(bundle.getString("contact"));
-            String locationString;
-            if(!bundle.getString("location").isEmpty()) {
-                locationString = bundle.getString("location") + " \n " + bundle.getString("street") + "\n" + bundle.getString("room") ;
-            } else{
-                locationString = bundle.getString("platform") + " & " + bundle.getString("platform2");
-            }
-            location.setText(locationString);
         }
     }
 }

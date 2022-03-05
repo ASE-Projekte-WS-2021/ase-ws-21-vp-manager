@@ -30,6 +30,11 @@ public class createStudyBase extends AppCompatActivity {
     String street = "";
     String room = "";
     String contact = "";
+    String contact2 = "";
+    String contact3 = "";
+
+    String contactViewString = "";
+    String locationViewString = "";
     ArrayList<String> dates = new ArrayList<>();
 
     StateProgressBar stateProgressBar;
@@ -48,6 +53,9 @@ public class createStudyBase extends AppCompatActivity {
     TextInputEditText textInputEditTextLocation;
     TextInputEditText textInputEditTextStreet;
     TextInputEditText textInputEditTextRoom;
+    TextInputEditText textInputEditTextContact;
+    TextInputEditText textInputEditTextContact2;
+    TextInputEditText textInputEditTextContact3;
     ListView listViewDates;
     Spinner categories;
     Spinner executionType;
@@ -106,7 +114,22 @@ public class createStudyBase extends AppCompatActivity {
                 currentFragment++;
                 System.out.println("Currentfragment = " + currentFragment);
                 break;
+
             case 1:
+                getInput(currentFragment);
+                stateProgressBar.setCurrentStateNumber(StateProgressBar.StateNumber.TWO);
+                fragmentManager
+                        .beginTransaction()
+                        .setCustomAnimations(R.anim.enter_from_right, R.anim.exit_to_left,
+                                R.anim.enter_from_left, R.anim.exit_to_right)
+                        .replace(R.id.fragment_container, new createStudyFragment_StepOne_Contact(), null)
+                        .addToBackStack(null)
+                        .commit();
+                System.out.println("Before Currentfragment = " + currentFragment);
+                currentFragment++;
+                System.out.println("Currentfragment = " + currentFragment);
+                break;
+            case 2:
                 getInput(currentFragment);
                 stateProgressBar.setCurrentStateNumber(StateProgressBar.StateNumber.TWO);
                 fragmentManager
@@ -120,7 +143,7 @@ public class createStudyBase extends AppCompatActivity {
                 currentFragment++;
                 System.out.println("Currentfragment = " + currentFragment);
                 break;
-            case 2:
+            case 3:
                 getInput(currentFragment);
                 stateProgressBar.setCurrentStateNumber(StateProgressBar.StateNumber.THREE);
                 fragmentManager
@@ -134,7 +157,7 @@ public class createStudyBase extends AppCompatActivity {
                 currentFragment++;
                 System.out.println("Currentfragment = " + currentFragment);
                 break;
-            case 3:
+            case 4:
                 getInput(currentFragment);
                 stateProgressBar.setCurrentStateNumber(StateProgressBar.StateNumber.THREE);
                 if (execution.equals(getString(R.string.remoteString))) {
@@ -158,7 +181,7 @@ public class createStudyBase extends AppCompatActivity {
                 currentFragment++;
                 System.out.println("Currentfragment = " + currentFragment);
                 break;
-            case 4:
+            case 5:
                 getInput(currentFragment);
                 stateProgressBar.setCurrentStateNumber(StateProgressBar.StateNumber.FOUR);
                 fragmentManager
@@ -172,7 +195,7 @@ public class createStudyBase extends AppCompatActivity {
                 currentFragment++;
                 System.out.println("Currentfragment = " + currentFragment);
                 break;
-            case 5:
+            case 6:
                 bundle = createBundle(1);
                 createStudyFragment_finalStep createStudyFragment_finalStep = new createStudyFragment_finalStep();
                 createStudyFragment_finalStep.setArguments(bundle);
@@ -189,7 +212,7 @@ public class createStudyBase extends AppCompatActivity {
                 currentFragment++;
                 System.out.println("Currentfragment = " + currentFragment);
                 break;
-            case 6:
+            case 7:
                 bundle = createBundle(2);
                 createStudyFragment_finalStep_two createStudyFragment_finalStep_two = new createStudyFragment_finalStep_two();
                 createStudyFragment_finalStep_two.setArguments(bundle);
@@ -207,9 +230,10 @@ public class createStudyBase extends AppCompatActivity {
                 System.out.println("Currentfragment = " + currentFragment);
                 break;
 
-            case 7:
+            case 8:
                 stateProgressBar.setCurrentStateNumber(StateProgressBar.StateNumber.FIVE);
                 System.out.println("Before Currentfragment = " + currentFragment);
+                //DATABASE
                 System.out.println("Currentfragment = " + currentFragment);
                 break;
             default:
@@ -241,7 +265,7 @@ public class createStudyBase extends AppCompatActivity {
                         .beginTransaction()
                         .setCustomAnimations(R.anim.enter_from_left, R.anim.exit_to_right,
                                 R.anim.enter_from_right, R.anim.exit_to_left)
-                        .replace(R.id.fragment_container, new createStudyFragment_StepOne(), null)
+                        .replace(R.id.fragment_container, new createStudyFragment_StepOne_Contact(), null)
                         .addToBackStack(null)
                         .commit();
                 System.out.println("Before Currentfragment = " + currentFragment);
@@ -249,6 +273,20 @@ public class createStudyBase extends AppCompatActivity {
                 System.out.println("Currentfragment = " + currentFragment);
                 break;
             case 3:
+                getInput(currentFragment);
+                stateProgressBar.setCurrentStateNumber(StateProgressBar.StateNumber.ONE);
+                fragmentManager
+                        .beginTransaction()
+                        .setCustomAnimations(R.anim.enter_from_left, R.anim.exit_to_right,
+                                R.anim.enter_from_right, R.anim.exit_to_left)
+                        .replace(R.id.fragment_container, new createStudyFragment_StepOne(), null)
+                        .addToBackStack(null)
+                        .commit();
+                System.out.println("Before Currentfragment = " + currentFragment);
+                currentFragment--;
+                System.out.println("Currentfragment = " + currentFragment);
+                break;
+            case 4:
                 getInput(currentFragment);
                 stateProgressBar.setCurrentStateNumber(StateProgressBar.StateNumber.TWO);
                 fragmentManager
@@ -263,7 +301,7 @@ public class createStudyBase extends AppCompatActivity {
                 System.out.println("Currentfragment = " + currentFragment);
                 break;
 
-            case 4:
+            case 5:
                 getInput(currentFragment);
                 stateProgressBar.setCurrentStateNumber(StateProgressBar.StateNumber.THREE);
                 fragmentManager
@@ -277,7 +315,7 @@ public class createStudyBase extends AppCompatActivity {
                 currentFragment--;
                 System.out.println("Currentfragment = " + currentFragment);
                 break;
-            case 5:
+            case 6:
                 getInput(currentFragment);
                 stateProgressBar.setCurrentStateNumber(StateProgressBar.StateNumber.THREE);
                 fragmentManager
@@ -291,7 +329,7 @@ public class createStudyBase extends AppCompatActivity {
                 currentFragment--;
                 System.out.println("Currentfragment = " + currentFragment);
                 break;
-            case 6:
+            case 7:
                 getInput(currentFragment);
                 stateProgressBar.setCurrentStateNumber(StateProgressBar.StateNumber.FOUR);
                 fragmentManager
@@ -305,7 +343,7 @@ public class createStudyBase extends AppCompatActivity {
                 currentFragment--;
                 System.out.println("Currentfragment = " + currentFragment);
                 break;
-            case 7:
+            case 8:
                 Bundle bundle = createBundle(1);
                 createStudyFragment_finalStep createStudyFragment_finalStep = new createStudyFragment_finalStep();
                 createStudyFragment_finalStep.setArguments(bundle);
@@ -338,13 +376,23 @@ public class createStudyBase extends AppCompatActivity {
                 break;
 
             case 2:
+                textInputEditTextContact = fragmentManager.getFragments().get(0).getView().findViewById(R.id.inputContact1);
+                textInputEditTextContact2 = fragmentManager.getFragments().get(0).getView().findViewById(R.id.inputContact2);
+                textInputEditTextContact3 = fragmentManager.getFragments().get(0).getView().findViewById(R.id.inputContact3);
+
+                contact = Objects.requireNonNull(textInputEditTextContact.getText()).toString();
+                contact2 = Objects.requireNonNull(textInputEditTextContact2.getText()).toString();
+                contact3 = Objects.requireNonNull(textInputEditTextContact3.getText()).toString();
+                break;
+
+            case 3:
                 textInputEditTextDesc = fragmentManager.getFragments().get(0).getView().findViewById(R.id.inputFieldStudyDesc);
                 studyDesc = Objects.requireNonNull(textInputEditTextDesc.getText()).toString();
                 System.out.println(studyDesc);
                 break;
 
 
-            case 3:
+            case 4:
                 categories = fragmentManager.getFragments().get(0).getView().findViewById(R.id.createCategories);
                 executionType = fragmentManager.getFragments().get(0).getView().findViewById(R.id.createExecutionType);
                 category = categories.getSelectedItem().toString();
@@ -353,9 +401,12 @@ public class createStudyBase extends AppCompatActivity {
                 System.out.println("Durchführung: " + execution);
                 break;
 
-            case 4:
+            case 5:
                 if (execution.equals(getString(R.string.remoteString))) {
                     // GET REMOTE STUFF HERE
+                    location = "";
+                    street = "";
+                    room = "";
                     textInputEditTextPlatform = fragmentManager.getFragments().get(0).getView().findViewById(R.id.inputFieldPlatform);
                     textInputEditTextOptionalPlatform = fragmentManager.getFragments().get(0).getView().findViewById(R.id.inputFieldPlatformOptional);
                     platform = Objects.requireNonNull(textInputEditTextPlatform.getText()).toString();
@@ -363,6 +414,9 @@ public class createStudyBase extends AppCompatActivity {
                 }
                 if(execution.equals((getString(R.string.presenceString)))){
                     // GET PRESENCE STUFF HERE
+                    platform = "";
+                    optionalPlatform = "";
+
                     textInputEditTextLocation = fragmentManager.getFragments().get(0).getView().findViewById(R.id.inputFieldLocation);
                     textInputEditTextStreet = fragmentManager.getFragments().get(0).getView().findViewById(R.id.inputFieldStreet);
                     textInputEditTextRoom = fragmentManager.getFragments().get(0).getView().findViewById(R.id.inputFieldRoom);
@@ -372,7 +426,7 @@ public class createStudyBase extends AppCompatActivity {
                     room = Objects.requireNonNull(textInputEditTextRoom.getText()).toString();
                 }
                 break;
-            case 5:
+            case 6:
 
                 listViewDates = fragmentManager.getFragments().get(0).getView().findViewById(R.id.createDatelist);
                 for (int i = 0; i < listViewDates.getAdapter().getCount(); i++) {
@@ -386,21 +440,37 @@ public class createStudyBase extends AppCompatActivity {
     private Bundle createBundle(int finalPage){
         Bundle bundle = new Bundle();
         if(finalPage == 1) {
+            prepareData();
             bundle.putString("title", studyTitle);
             bundle.putString("vp", VP);
             bundle.putString("desc", studyDesc);
             bundle.putString("category", category);
             bundle.putString("exe", execution);
-            bundle.putString("platform", platform);
-            bundle.putString("platform2", optionalPlatform);
-            bundle.putString("location", location);
-            bundle.putString("street", street);
-            bundle.putString("room", room);
-            bundle.putString("contact", contact);
+            bundle.putString("location", locationViewString);
+            bundle.putString("contact", contactViewString);
         }
         else{
             bundle.putStringArrayList("dates", dates);
         }
         return bundle;
+    }
+
+    private void prepareData(){
+            contactViewString += contact;
+            if(!contact2.isEmpty()){
+                contactViewString += " , " + bundle.getString("contact2");
+            }
+            if(contact3.isEmpty()){
+                contactViewString += " , " + bundle.getString("contact3");
+            }
+
+            if(location.isEmpty()) {
+                locationViewString =  location + " \n " + street + "\n" + room ;
+            } else{
+                locationViewString += platform;
+                if(optionalPlatform.isEmpty()){
+                    locationViewString += " & " + optionalPlatform;
+            }
+        }
     }
 }
