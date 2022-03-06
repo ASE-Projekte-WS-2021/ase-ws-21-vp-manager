@@ -12,6 +12,7 @@ public class createStudyFragment_Base extends Fragment {
 
 
     public createStudyFragment_Base() {
+        createStudyBase.currentFragment = 0;
     }
 
     @Override

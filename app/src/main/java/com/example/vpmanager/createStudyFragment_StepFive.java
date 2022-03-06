@@ -36,6 +36,7 @@ public class createStudyFragment_StepFive extends Fragment {
 
 
     public createStudyFragment_StepFive() {
+        createStudyBase.currentFragment = 6;
     }
 
     @Override

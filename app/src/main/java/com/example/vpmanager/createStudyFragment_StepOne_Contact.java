@@ -12,6 +12,7 @@ public class createStudyFragment_StepOne_Contact extends Fragment {
 
 
     public createStudyFragment_StepOne_Contact() {
+        createStudyBase.currentFragment = 2;
     }
 
     @Override

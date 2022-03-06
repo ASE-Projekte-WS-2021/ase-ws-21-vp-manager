@@ -20,6 +20,7 @@ public class createStudyFragment_finalStep_two extends Fragment {
 
 
     public createStudyFragment_finalStep_two() {
+        createStudyBase.currentFragment = 8;
     }
 
     @Override

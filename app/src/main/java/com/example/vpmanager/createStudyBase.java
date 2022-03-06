@@ -116,7 +116,6 @@ public class createStudyBase extends AppCompatActivity {
                         .addToBackStack(null)
                         .commit();
                 System.out.println("Before Currentfragment = " + currentFragment);
-                currentFragment++;
                 System.out.println("Currentfragment = " + currentFragment);
                 break;
             case 1:
@@ -131,7 +130,6 @@ public class createStudyBase extends AppCompatActivity {
                             .addToBackStack(null)
                             .commit();
                     System.out.println("Before Currentfragment = " + currentFragment);
-                    currentFragment++;
                     System.out.println("Currentfragment = " + currentFragment);
                 }
                 break;
@@ -147,7 +145,6 @@ public class createStudyBase extends AppCompatActivity {
                             .addToBackStack(null)
                             .commit();
                     System.out.println("Before Currentfragment = " + currentFragment);
-                    currentFragment++;
                     System.out.println("Currentfragment = " + currentFragment);
                 }
                 break;
@@ -163,7 +160,6 @@ public class createStudyBase extends AppCompatActivity {
                             .addToBackStack(null)
                             .commit();
                     System.out.println("Before Currentfragment = " + currentFragment);
-                    currentFragment++;
                     System.out.println("Currentfragment = " + currentFragment);
                 }
                 break;
@@ -189,7 +185,6 @@ public class createStudyBase extends AppCompatActivity {
                                 .commit();
                     }
                     System.out.println("Before Currentfragment = " + currentFragment);
-                    currentFragment++;
                     System.out.println("Currentfragment = " + currentFragment);
                     break;
                 }
@@ -205,7 +200,6 @@ public class createStudyBase extends AppCompatActivity {
                             .addToBackStack(null)
                             .commit();
                     System.out.println("Before Currentfragment = " + currentFragment);
-                    currentFragment++;
                     System.out.println("Currentfragment = " + currentFragment);
                 }
                 break;
@@ -223,7 +217,6 @@ public class createStudyBase extends AppCompatActivity {
                         .addToBackStack(null)
                         .commit();
                 System.out.println("Before Currentfragment = " + currentFragment);
-                currentFragment++;
                 System.out.println("Currentfragment = " + currentFragment);
                 break;
             case 7:
@@ -240,7 +233,6 @@ public class createStudyBase extends AppCompatActivity {
                         .addToBackStack(null)
                         .commit();
                 System.out.println("Before Currentfragment = " + currentFragment);
-                currentFragment++;
                 System.out.println("Currentfragment = " + currentFragment);
                 break;
 
@@ -269,7 +261,6 @@ public class createStudyBase extends AppCompatActivity {
                         .addToBackStack(null)
                         .commit();
                 System.out.println("Before Currentfragment = " + currentFragment);
-                currentFragment--;
                 System.out.println("Currentfragment = " + currentFragment);
                 break;
             case 2:
@@ -283,7 +274,6 @@ public class createStudyBase extends AppCompatActivity {
                         .addToBackStack(null)
                         .commit();
                 System.out.println("Before Currentfragment = " + currentFragment);
-                currentFragment--;
                 System.out.println("Currentfragment = " + currentFragment);
                 break;
             case 3:
@@ -297,7 +287,6 @@ public class createStudyBase extends AppCompatActivity {
                         .addToBackStack(null)
                         .commit();
                 System.out.println("Before Currentfragment = " + currentFragment);
-                currentFragment--;
                 System.out.println("Currentfragment = " + currentFragment);
                 break;
             case 4:
@@ -311,7 +300,6 @@ public class createStudyBase extends AppCompatActivity {
                         .addToBackStack(null)
                         .commit();
                 System.out.println("Before Currentfragment = " + currentFragment);
-                currentFragment--;
                 System.out.println("Currentfragment = " + currentFragment);
                 break;
 
@@ -326,7 +314,6 @@ public class createStudyBase extends AppCompatActivity {
                         .addToBackStack(null)
                         .commit();
                 System.out.println("Before Currentfragment = " + currentFragment);
-                currentFragment--;
                 System.out.println("Currentfragment = " + currentFragment);
                 break;
             case 6:
@@ -340,7 +327,6 @@ public class createStudyBase extends AppCompatActivity {
                         .addToBackStack(null)
                         .commit();
                 System.out.println("Before Currentfragment = " + currentFragment);
-                currentFragment--;
                 System.out.println("Currentfragment = " + currentFragment);
                 break;
             case 7:
@@ -354,7 +340,6 @@ public class createStudyBase extends AppCompatActivity {
                         .addToBackStack(null)
                         .commit();
                 System.out.println("Before Currentfragment = " + currentFragment);
-                currentFragment--;
                 System.out.println("Currentfragment = " + currentFragment);
                 break;
             case 8:
@@ -371,7 +356,6 @@ public class createStudyBase extends AppCompatActivity {
                         .addToBackStack(null)
                         .commit();
                 System.out.println("Before Currentfragment = " + currentFragment);
-                currentFragment--;
                 System.out.println("Currentfragment = " + currentFragment);
                 break;
             default:

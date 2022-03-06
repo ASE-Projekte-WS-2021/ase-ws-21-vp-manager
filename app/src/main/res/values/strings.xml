@@ -92,6 +92,7 @@
     <string name="fragment_create_study_pageFiveTitle">Termine</string>
     <string name="fragment_create_study_desc_page_five">In der Kalenderansicht können sie Termine auswählen und bestätigen, an denen sich Teilnehmer für ihre Studie eintragen können. \n \n Bitte vermeiden sie hier Fehlplanungen um möglichst problemfreie Teilnahmen zu gewährleisten.</string>
     <string name="fragment_create_study_pageFive_fab">Neuer Termin</string>
+    <string name="fragment_create_study_pageFinalTitle">Bestätigung</string>
 
 
 </resources>

@@ -15,6 +15,7 @@ public class createStudyFragment_StepThree extends Fragment {
     Spinner executionType;
 
     public createStudyFragment_StepThree() {
+        createStudyBase.currentFragment = 4;
     }
 
     @Override

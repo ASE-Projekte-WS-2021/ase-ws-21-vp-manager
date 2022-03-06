@@ -20,6 +20,7 @@ public class createStudyFragment_finalStep extends Fragment {
     TextView contact;
 
     public createStudyFragment_finalStep() {
+        createStudyBase.currentFragment = 7;
     }
 
     @Override
