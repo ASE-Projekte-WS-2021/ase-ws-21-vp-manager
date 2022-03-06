@@ -42,9 +42,10 @@ public class createStudyBase extends AppCompatActivity {
     ArrayList<String> dates = new ArrayList<>();
 
     StateProgressBar stateProgressBar;
-    String[] descriptionData = {"Basis", "Beschreibung", "Art", "Termine", "Bestätigen"};
+    String[] descriptionData = {"Basis", "Info", "Kategorie", "Termine", "Bestätigen"};
 
-    int currentFragment = 0;
+    public static int currentFragment = 0;
+
     Bundle bundle;
 
     Button back;

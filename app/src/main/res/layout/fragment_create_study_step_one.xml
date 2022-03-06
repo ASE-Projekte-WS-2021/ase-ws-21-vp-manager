@@ -1,89 +1,89 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="?android:windowBackground"
+    tools:context=".createStudyFragment_StepOne">
 
-    <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:tools="http://schemas.android.com/tools"
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="?android:windowBackground"
-        tools:context=".createStudyFragment_StepOne">
+        android:orientation="vertical"
+        android:weightSum="7">
 
 
-        <LinearLayout
+        <TextView
+            android:id="@+id/pageTitle"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical"
-            android:weightSum="7">
+            android:layout_height="wrap_content"
+            android:text="@string/fragment_create_study_pageOneTitle"
+            android:textAlignment="center"
+            android:textSize="35sp" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="3dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginRight="20dp"
+            android:background="@color/black" />
+
+        <TextView
+            android:id="@+id/pageDesc"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginTop="30dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:layout_weight="4"
+            android:text="@string/fragment_create_study_desc_page_one"
+            android:textAlignment="center"
+            android:textSize="20sp" />
 
 
-            <TextView
-                android:id="@+id/pageTitle"
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1.5">
+
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/inputFieldTitle"
+                style="@style/You.EditText.Style"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/fragment_create_study_pageOneTitle"
-                android:textAlignment="center"
-                android:textSize="35sp" />
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="3dp"
                 android:layout_marginLeft="20dp"
-                android:layout_marginTop="5dp"
                 android:layout_marginRight="20dp"
-                android:background="@color/black" />
+                android:layout_marginBottom="30dp"
+                android:hint="@string/createStudyTitle" />
 
-            <TextView
-                android:id="@+id/pageDesc"
+        </com.google.android.material.textfield.TextInputLayout>
+
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1.5">
+
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/inputFieldVP"
+                style="@style/You.EditText.Style"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="30dp"
-                android:layout_weight="7"
-                android:text="@string/fragment_create_study_desc_page_one"
-                android:textAlignment="center"
-                android:textSize="20dp" />
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginBottom="30dp"
+                android:hint="@string/createOfferedVP"
+                android:inputType="numberDecimal" />
 
+        </com.google.android.material.textfield.TextInputLayout>
 
-            <com.google.android.material.textfield.TextInputLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1">
+    </LinearLayout>
 
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/inputFieldTitle"
-                    style="@style/You.EditText.Style"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="20dp"
-                    android:layout_marginRight="20dp"
-                    android:layout_marginBottom="30dp"
-                    android:hint="@string/createStudyTitle" />
-
-            </com.google.android.material.textfield.TextInputLayout>
-
-
-            <com.google.android.material.textfield.TextInputLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1">
-
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/inputFieldVP"
-                    style="@style/You.EditText.Style"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="20dp"
-                    android:layout_marginRight="20dp"
-                    android:layout_marginBottom="30dp"
-                    android:hint="@string/createOfferedVP"
-                    android:inputType="numberDecimal" />
-
-            </com.google.android.material.textfield.TextInputLayout>
-
-        </LinearLayout>
-
-
-    </FrameLayout>
+</FrameLayout>
 

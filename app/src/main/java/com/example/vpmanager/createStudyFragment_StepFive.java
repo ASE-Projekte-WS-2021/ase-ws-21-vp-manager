@@ -14,6 +14,7 @@ import android.widget.DatePicker;
 import android.widget.ListView;
 import android.widget.TimePicker;
 
+import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
@@ -56,7 +57,7 @@ public class createStudyFragment_StepFive extends Fragment {
     private void setupView(View view) {
         dateList = view.findViewById(R.id.createDatelist);
         setupDatePicker();
-        FloatingActionButton fab = view.findViewById(R.id.fab);
+        ExtendedFloatingActionButton fab = view.findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
