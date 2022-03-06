@@ -1,4 +1,4 @@
-package com.example.vpmanager;
+package com.example.vpmanager.views;
 
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
@@ -21,6 +21,9 @@ import android.widget.TimePicker;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.drawerlayout.widget.DrawerLayout;
 
+import com.example.vpmanager.R;
+import com.example.vpmanager.accessDatabase;
+import com.example.vpmanager.views.mainActivity;
 import com.google.android.material.appbar.MaterialToolbar;
 import com.google.android.material.navigation.NavigationView;
 
@@ -54,7 +57,7 @@ public class createStudyActivity extends AppCompatActivity {
     EditText contactEditText;
 
     ArrayAdapter<String> datePickerAdapter;
-    accessDatabase accessDatabase = new accessDatabase();
+    com.example.vpmanager.accessDatabase accessDatabase = new accessDatabase();
 
     String date_time = "";
     int mYear;

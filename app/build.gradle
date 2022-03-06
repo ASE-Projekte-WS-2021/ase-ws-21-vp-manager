@@ -65,6 +65,8 @@ dependencies {
     implementation 'com.google.firebase:firebase-firestore'
     //Drawer Layout
     implementation "androidx.drawerlayout:drawerlayout:1.1.1"
+    //RecyclerView
+    implementation "androidx.recyclerview:recyclerview:1.2.1"
     //Navigation
     implementation "androidx.navigation:navigation-fragment:2.4.1"
     implementation "androidx.navigation:navigation-ui:2.4.1"

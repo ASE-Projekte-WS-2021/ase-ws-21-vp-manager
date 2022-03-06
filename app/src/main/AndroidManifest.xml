@@ -10,7 +10,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.VPManager">
         <activity
-            android:name="com.example.vpmanager.mainActivity"
+            android:name="com.example.vpmanager.views.mainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -19,7 +19,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.example.vpmanager.createStudyActivity"
+            android:name="com.example.vpmanager.views.createStudyActivity"
             android:exported="true">
 
         </activity>

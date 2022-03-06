@@ -1,4 +1,4 @@
-package com.example.vpmanager;
+package com.example.vpmanager.views;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -11,6 +11,10 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
+
+import com.example.vpmanager.PA_ExpandableListAdapter;
+import com.example.vpmanager.PA_ExpandableListDataPump;
+import com.example.vpmanager.R;
 
 import org.eazegraph.lib.charts.PieChart;
 import org.eazegraph.lib.models.PieModel;
@@ -48,7 +52,8 @@ public class personalAccountFragment extends Fragment {
     }
 
     private void setupView(View view) {
-        navController = Navigation.findNavController(view);
+        //navController = Navigation.findNavController(view);
+        navController = Navigation.findNavController(requireActivity(), R.id.nav_host_fragment_main);
 
         listView = view.findViewById(R.id.pa_fragment_expandableList);
         chart = view.findViewById(R.id.pa_fragment_pie_chart);
@@ -84,11 +89,7 @@ public class personalAccountFragment extends Fragment {
                 Bundle args = new Bundle();
                 args.putString("studyId", studyTitle);
                 navController.navigate(R.id.action_personalAccountFragment_to_studyFragment, args);
-                /*
-                Intent intent = new Intent(getActivity(), studyActivity.class);
-                intent.putExtra("studyId", studyTitle);
-                startActivity(intent);
-                 */
+
                 return false;
             }
         });

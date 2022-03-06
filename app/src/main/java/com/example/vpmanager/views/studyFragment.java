@@ -1,4 +1,4 @@
-package com.example.vpmanager;
+package com.example.vpmanager.views;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
@@ -17,6 +17,8 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import com.example.vpmanager.R;
+import com.example.vpmanager.accessDatabase;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.CollectionReference;
@@ -51,7 +53,7 @@ public class studyFragment extends Fragment {
     FirebaseFirestore db;
     DocumentReference studyRef;
     CollectionReference datesRef;
-    accessDatabase accessDatabase = new accessDatabase();
+    com.example.vpmanager.accessDatabase accessDatabase = new accessDatabase();
 
     TextView headerText;
     TextView description;

@@ -25,8 +25,8 @@
         android:background="@color/color_two" />
     <!--android:background="@color/lightorange_Main"-->
 
-    <ListView
-        android:id="@+id/listViewFindStudyFragment"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerViewFindStudyFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginTop="70dp"
