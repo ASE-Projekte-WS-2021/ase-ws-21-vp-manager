@@ -17,7 +17,7 @@
             android:id="@+id/pageTitle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Terminbestätigung"
+            android:text="@string/fragment_create_study_finalPage_title_three"
             android:textAlignment="center"
             android:textSize="35sp" />
 
@@ -42,7 +42,6 @@
             <ListView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Dates"
                 android:id="@+id/confirmDates"
                 android:textSize="20sp"
                 android:layout_gravity="top"

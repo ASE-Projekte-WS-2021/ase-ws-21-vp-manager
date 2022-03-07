@@ -34,6 +34,9 @@ public class createStudyFragment_StepFive extends Fragment {
 
 
 
+    //Parameter:
+    //Return values:
+    //Sets the current fragment for the activity
     public createStudyFragment_StepFive() {
         createStudyActivity.currentFragment = 6;
     }
@@ -54,6 +57,9 @@ public class createStudyFragment_StepFive extends Fragment {
         setupView(view);
     }
 
+    //Parameter:
+    //Return values:
+    //Connects the code with the view
     private void setupView(View view) {
         dateList = view.findViewById(R.id.createDatelist);
         setupDatePicker();
@@ -66,7 +72,9 @@ public class createStudyFragment_StepFive extends Fragment {
         });
     }
 
-    //Extra Activity
+    //Parameter:
+    //Return values:
+    //Creates a datepicker, which will be displayed as a popup in the fragment
     private void datePicker() {
         final Calendar c = Calendar.getInstance();
         mYear = c.get(Calendar.YEAR);
@@ -85,6 +93,9 @@ public class createStudyFragment_StepFive extends Fragment {
         datePickerDialog.show();
     }
 
+    //Parameter:
+    //Return values:
+    //Creates a timepicker, which will be displayed as a popup in the fragment after the datepicker
     private void timePicker() {
         final Calendar c = Calendar.getInstance();
         mHour = c.get(Calendar.HOUR_OF_DAY);
@@ -103,6 +114,9 @@ public class createStudyFragment_StepFive extends Fragment {
         timePickerDialog.show();
     }
 
+    //Parameter: hoursOfDay, minute
+    //Return values:
+    //Adds the created date and time to the list and transforms them into a uniform pattern
     private void addDateToList(int hourOfDay, int minute) {
         String minutes = Integer.toString(minute);
         String hours = Integer.toString(hourOfDay);
@@ -116,6 +130,9 @@ public class createStudyFragment_StepFive extends Fragment {
         datePickerAdapter.notifyDataSetChanged();
     }
 
+    //Parameter:
+    //Return values:
+    //Sets an adapter for the Listview
     public void setupDatePicker() {
         datePickerAdapter = new ArrayAdapter<String>(getActivity(),
                 android.R.layout.simple_list_item_1,

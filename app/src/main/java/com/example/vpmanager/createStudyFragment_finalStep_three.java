@@ -19,6 +19,9 @@ public class createStudyFragment_finalStep_three extends Fragment {
     ArrayAdapter<String> datePickerAdapter;
 
 
+    //Parameter:
+    //Return values:
+    //Sets the current fragment for the activity
     public createStudyFragment_finalStep_three() {
         createStudyActivity.currentFragment = 9;
     }
@@ -41,12 +44,18 @@ public class createStudyFragment_finalStep_three extends Fragment {
 
     }
 
+    //Parameter:
+    //Return values:
+    //Connects the code with the view
     private void setupView(View view){
         dateList = view.findViewById(R.id.confirmDates);
         setupDatePicker();
 
     }
 
+    //Parameter:
+    //Return values:
+    //Loads data recieved from the activity into the listview
     private void setupDatePicker() {
         Bundle bundle = getArguments();
         System.out.println(bundle);

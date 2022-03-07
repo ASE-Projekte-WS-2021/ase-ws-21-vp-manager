@@ -15,6 +15,9 @@ public class createStudyFragment_finalStep_two extends Fragment {
     TextView contact;
 
 
+    //Parameter:
+    //Return values:
+    //Sets the current fragment for the activity
     public createStudyFragment_finalStep_two() {
         createStudyActivity.currentFragment = 8;
     }
@@ -37,6 +40,9 @@ public class createStudyFragment_finalStep_two extends Fragment {
         loadData();
     }
 
+    //Parameter:
+    //Return values:
+    //Connects the code with the view
     private void setupView(View view) {
         desc = view.findViewById(R.id.confirmDesc);
         contact = view.findViewById(R.id.confirmContact);
@@ -44,6 +50,9 @@ public class createStudyFragment_finalStep_two extends Fragment {
 
     }
 
+    //Parameter:
+    //Return values:
+    //Loads data recieved from the activity into the textfields
     private void loadData() {
         Bundle bundle = getArguments();
         System.out.println(bundle);

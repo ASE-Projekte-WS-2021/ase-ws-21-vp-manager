@@ -11,6 +11,9 @@ import android.view.ViewGroup;
 public class createStudyFragment_StepTwo extends Fragment {
 
 
+    //Parameter:
+    //Return values:
+    //Sets the current fragment for the activity
     public createStudyFragment_StepTwo() {
         createStudyActivity.currentFragment = 3;
     }
@@ -29,11 +32,7 @@ public class createStudyFragment_StepTwo extends Fragment {
 
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
-        setupView(view);
-        // Setup any handles to view objects here
-        // EditText etFoo = (EditText) view.findViewById(R.id.etFoo);
+
     }
 
-    private void setupView(View view){
-    }
 }

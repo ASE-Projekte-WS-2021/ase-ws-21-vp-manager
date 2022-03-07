@@ -92,6 +92,9 @@ public class createStudyActivity extends AppCompatActivity {
 
     }
 
+    //Parameter:
+    //Return values:
+    //Connects the code with the view
     private void setupView() {
         topAppBarCreate = findViewById(R.id.topAppBarCreate);
         setSupportActionBar(topAppBarCreate);
@@ -107,6 +110,9 @@ public class createStudyActivity extends AppCompatActivity {
         stateProgressBar.setStateDescriptionData(descriptionData);
     }
 
+    //Parameter:
+    //Return values:
+    //Sets clickListener on navigation items
     private void setupListeners() {
         //For NavigationDrawer to open
         topAppBarCreate.setNavigationOnClickListener(new View.OnClickListener() {
@@ -209,11 +215,15 @@ public class createStudyActivity extends AppCompatActivity {
         reloadActivity();
     }
 
+
     private void reloadActivity() {
         finish();
         startActivity(getIntent());
     }
 
+    //Parameter:
+    //Return values:
+    //Handles the logic and the loading of fragments while moving forwards through the creation process
     private void nextButton() {
         switch (currentFragment) {
             case 0:
@@ -356,6 +366,9 @@ public class createStudyActivity extends AppCompatActivity {
         }
     }
 
+    //Parameter:
+    //Return values:
+    //Handles the logic and the loading of fragments while moving backwards through the creation process
     private void backButton() {
         switch (currentFragment) {
             case 0:
@@ -475,6 +488,9 @@ public class createStudyActivity extends AppCompatActivity {
         }
     }
 
+    //Parameter:
+    //Return values:
+    //Saves the input made in the fragments and in variables in this activity
     private void getInput(int page) {
         switch (page) {
             case 1:
@@ -547,6 +563,9 @@ public class createStudyActivity extends AppCompatActivity {
         }
     }
 
+    //Parameter:
+    //Return values:
+    //Creates a bundle which will be send to the fragments to display the data for the confirmation process
     private Bundle createBundle(int finalPage) {
         Bundle bundle = new Bundle();
         if (finalPage == 1) {
@@ -557,17 +576,19 @@ public class createStudyActivity extends AppCompatActivity {
             bundle.putString("exe", execution);
             bundle.putString("location", locationViewString);
         }
-        if(finalPage == 2){
+        if (finalPage == 2) {
             bundle.putString("desc", studyDesc);
             bundle.putString("contact", contactViewString);
         }
-        if(finalPage == 3)
-        {
+        if (finalPage == 3) {
             bundle.putStringArrayList("dates", dates);
         }
         return bundle;
     }
 
+    //Parameter:
+    //Return values:
+    //Prepares the data send in the bundle so the strings are ready to be displayed in the confirmation fragments
     private void prepareData() {
         contactViewString = "";
         locationViewString = "";
@@ -589,6 +610,9 @@ public class createStudyActivity extends AppCompatActivity {
         }
     }
 
+    //Parameter:
+    //Return values:
+    //Checks for mandatory information in the current fragment is missing and returns a boolean
     private boolean mandatoryCheck(int page) {
         switch (page) {
             case 1:
@@ -627,10 +651,16 @@ public class createStudyActivity extends AppCompatActivity {
         return false;
     }
 
+    //Parameter:
+    //Return values:
+    //Creates a unique id for the study in the database entry
     private String getNewId() {
         return UUID.randomUUID().toString();
     }
 
+    //Parameter:
+    //Return values:
+    //Overrides the return button from the android device to act like the backbutton
     @Override
     public void onBackPressed() {
         moveTaskToBack(false);

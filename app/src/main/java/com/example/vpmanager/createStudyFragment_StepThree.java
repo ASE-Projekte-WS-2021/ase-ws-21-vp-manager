@@ -14,6 +14,9 @@ public class createStudyFragment_StepThree extends Fragment {
     Spinner categories;
     Spinner executionType;
 
+    //Parameter:
+    //Return values:
+    //Sets the current fragment for the activity
     public createStudyFragment_StepThree() {
         createStudyActivity.currentFragment = 4;
     }
@@ -26,19 +29,19 @@ public class createStudyFragment_StepThree extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_create_study_step_three, container, false);
     }
 
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         setupView(view);
-        // Setup any handles to view objects here
-        // EditText etFoo = (EditText) view.findViewById(R.id.etFoo);
+
     }
 
 
-
+    //Parameter:
+    //Return values:
+    //Connects the code with the view
     private void setupView(View view){
         categories = view.findViewById(R.id.createCategories);
         ArrayAdapter<CharSequence> categoryAdapter = ArrayAdapter.createFromResource(getActivity(),
