@@ -590,21 +590,21 @@ public class createStudyActivity extends AppCompatActivity {
     //Return values:
     //Prepares the data send in the bundle so the strings are ready to be displayed in the confirmation fragments
     private void prepareData() {
-        contactViewString = "";
-        locationViewString = "";
+        contactViewString = "\n";
+        locationViewString = "\n";
         contactViewString += contact;
         if (!contact2.isEmpty()) {
             contactViewString += "\n" + contact2;
         }
-        if (contact3.isEmpty()) {
+        if (!contact3.isEmpty()) {
             contactViewString += "\n" + contact3;
         }
 
-        if (location.isEmpty()) {
-            locationViewString = location + " \n " + street + "\n" + room;
+        if (!location.isEmpty()) {
+            locationViewString = location + " \n" + street + "\n" + room;
         } else {
             locationViewString += platform;
-            if (optionalPlatform.isEmpty()) {
+            if (!optionalPlatform.isEmpty()) {
                 locationViewString += " & " + optionalPlatform;
             }
         }

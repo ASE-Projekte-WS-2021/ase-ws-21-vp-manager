@@ -57,12 +57,12 @@ public class createStudyFragment_finalStep_two extends Fragment {
         Bundle bundle = getArguments();
         System.out.println(bundle);
         if (bundle != null) {
-            desc.setText(bundle.getString("desc"));
-            contact.setText(bundle.getString("contact"));
+            String descTxt = getString(R.string.createStudyDesc) + ": " + bundle.getString("desc");
+            String contactTxt = getString(R.string.createStudyContact) + ": " + bundle.getString("contact");
+            desc.setText(descTxt);
+            contact.setText(contactTxt);
         }
     }
-
-
 
 }
 

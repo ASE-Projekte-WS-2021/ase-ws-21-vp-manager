@@ -63,7 +63,6 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/confirmContact"
                 android:textSize="20sp"
-                android:layout_marginTop="20dp"
                 android:layout_marginStart="10dp">
             </TextView>
         </com.google.android.material.card.MaterialCardView>

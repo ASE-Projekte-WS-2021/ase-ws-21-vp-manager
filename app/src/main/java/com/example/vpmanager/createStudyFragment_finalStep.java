@@ -59,11 +59,16 @@ public class createStudyFragment_finalStep extends Fragment {
         Bundle bundle = getArguments();
         System.out.println(bundle);
         if(bundle != null){
-            title.setText(bundle.getString("title"));
-            vp.setText(bundle.getString("vp"));
-            category.setText(bundle.getString("category"));
-            execution.setText(bundle.getString("exe"));
-            location.setText(bundle.getString("location"));
+            String titleTxt = getString(R.string.createStudyTitle) + ": " + bundle.getString("title");
+            String vpTxT = getString(R.string.createOfferedVP) + ": " + bundle.getString("vp");
+            String categoryTxT = getString(R.string.fragment_create_study_pageThreeTitle) + ": " + bundle.getString("category");
+            String executionTxT = getString(R.string.createStudyExe) + ": " + bundle.getString("exe");
+            String locationTxT = getString(R.string.fragment_create_study_pageFourTitle) + ": " + bundle.getString("location");
+            title.setText(titleTxt);
+            vp.setText(vpTxT);
+            category.setText(categoryTxT);
+            execution.setText(executionTxT);
+            location.setText(locationTxT);
         }
     }
 }

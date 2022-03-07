@@ -13,8 +13,6 @@
     <string name="personalAccount">Persönliche Übersicht</string>
 
     <!---Create Study-->
-    <string name="createOfferedVP">Angebotene VP</string>
-    <string name="createStudyTitle">Titel der Studie</string>
     <string name="createStudyDesc">Studienbeschreibung</string>
     <string name="createAddDateButton">Termine hinzufügen</string>
     <string name="createCreateButton">Studie erstellen</string>
@@ -23,8 +21,6 @@
     <string name="createRoomHint">Raum</string>
     <string name="createStreetHint">Straße</string>
     <string name="createAlertBase">Bitten tragen Sie die fehlenden Angaben ein:</string>
-    <string name="createAlertTitle">Studientitel</string>
-    <string name="createAlertContact">Kontaktmöglichkeit</string>
     <string name="createAlertStudyDesc">Studienbeschreibung</string>
     <string name="createAlertExecutionType">Durchführungsart</string>
     <string name="createAlertCategory">Kategorie \n</string>
@@ -38,6 +34,10 @@
     <string name="remoteString">Remote</string>
     <string name="presenceString">Präsenz</string>
 
+    <string name="createOfferedVP">Angebotene VP</string>
+    <string name="createStudyTitle">Titel</string>
+    <string name="createStudyExe">Durchführungsart</string>
+    <string name="createStudyContact">Kontaktmöglichkeit</string>
     <string name="fragment_create_study_pageOneTitle">Grundinformationen</string>
     <string name="fragment_create_study_pageBaseDesc">Um eine Studie zu erstellen, geben Sie in den folgenden Schritten bitte nähere Informationen zum Ablauf, der Studiendauer, der Zahl an VP Stunden und möglichen Terminen an. Optionale Angaben werden als solche gekennzeichnet (*). \n\n\n Potenzielle Teilnehmer können ihren Eintrag anschließend im Reiter \"Studie finden\" einsehen und sich für freistehende Termine eintragen.</string>
     <string name="fragment_create_study_desc_page_one">Titel der Studie: Name/Bezeichnung, unter der Ihr Eintrag in der Studienliste sichtbar sein wird.\n \n Angebotene VP: Anzahl der zu erhaltenden Versuchspersonenstunden für die erfolgreiche Teilnahme an Ihrer Studie.</string>
@@ -62,6 +62,8 @@
     <string name="fragment_create_study_base_create">Erstellen</string>
     <string name="fragment_create_study_base_main">Hauptmenü</string>
     <string name="fragment_create_study_finalPage_title_three">Terminbestätigung</string>
+
+
 
 
     <string-array name="createCategoryList">
