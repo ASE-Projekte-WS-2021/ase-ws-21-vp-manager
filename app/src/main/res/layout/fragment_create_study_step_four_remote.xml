@@ -76,7 +76,7 @@
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="20dp"
                 android:layout_marginBottom="30dp"
-                android:hint="@string/createPlatformHint" />
+                android:hint="@string/createPlatformHint2" />
 
         </com.google.android.material.textfield.TextInputLayout>
 

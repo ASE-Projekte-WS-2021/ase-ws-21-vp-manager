@@ -16,8 +16,9 @@
     <string name="createStudyDesc">Studienbeschreibung</string>
     <string name="createAddDateButton">Termine hinzufügen</string>
     <string name="createCreateButton">Studie erstellen</string>
-    <string name="createPlatformHint">Welche Plattform?</string>
-    <string name="createLocationHint">Ort</string>
+    <string name="createPlatformHint">Primär Plattform*</string>
+    <string name="createPlatformHint2">Sekundär Plattform</string>
+    <string name="createLocationHint">Ort*</string>
     <string name="createRoomHint">Raum</string>
     <string name="createStreetHint">Straße</string>
     <string name="createAlertBase">Bitten tragen Sie die fehlenden Angaben ein:</string>
@@ -35,6 +36,7 @@
     <string name="presenceString">Präsenz</string>
 
     <string name="createOfferedVP">Angebotene VP</string>
+    <string name="createStudyTitleHint">Titel*</string>
     <string name="createStudyTitle">Titel</string>
     <string name="createStudyExe">Durchführungsart</string>
     <string name="createStudyContact">Kontaktmöglichkeit</string>
@@ -67,14 +69,14 @@
 
 
     <string-array name="createCategoryList">
-        <item>Studienkategorie</item>
+        <item>Studienkategorie*</item>
         <item>VR</item>
         <item>AR</item>
         <item>Diary Study</item>
     </string-array>
 
     <string-array name="createExecutionTypeList">
-        <item>Durchführungsart</item>
+        <item>Durchführungsart*</item>
         <item>Remote</item>
         <item>Präsenz</item>
     </string-array>
