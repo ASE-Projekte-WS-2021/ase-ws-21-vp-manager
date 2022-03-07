@@ -13,14 +13,12 @@ public class createStudyFragment_finalStep extends Fragment {
 
     TextView title;
     TextView vp;
-    TextView desc;
     TextView category;
     TextView execution;
     TextView location;
-    TextView contact;
 
     public createStudyFragment_finalStep() {
-        createStudyBase.currentFragment = 7;
+        createStudyActivity.currentFragment = 7;
     }
 
     @Override
@@ -44,9 +42,7 @@ public class createStudyFragment_finalStep extends Fragment {
         title = view.findViewById(R.id.confirmTitle);
         vp = view.findViewById(R.id.confirmVP);
         category = view.findViewById(R.id.confirmCategory);
-        desc = view.findViewById(R.id.confirmDesc);
         execution = view.findViewById(R.id.confirmExecution);
-        contact = view.findViewById(R.id.confirmContact);
         location = view.findViewById(R.id.confirmLocation);
     }
 
@@ -57,10 +53,8 @@ public class createStudyFragment_finalStep extends Fragment {
             title.setText(bundle.getString("title"));
             vp.setText(bundle.getString("vp"));
             category.setText(bundle.getString("category"));
-            desc.setText(bundle.getString("desc"));
             execution.setText(bundle.getString("exe"));
             location.setText(bundle.getString("location"));
-            contact.setText(bundle.getString("contact"));
         }
     }
 }

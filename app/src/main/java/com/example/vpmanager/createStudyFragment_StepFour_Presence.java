@@ -11,7 +11,7 @@ public class createStudyFragment_StepFour_Presence extends Fragment {
 
 
     public createStudyFragment_StepFour_Presence() {
-        createStudyBase.currentFragment = 5;
+        createStudyActivity.currentFragment = 5;
     }
 
     @Override

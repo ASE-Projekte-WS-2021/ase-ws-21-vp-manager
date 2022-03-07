@@ -77,8 +77,7 @@
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="20dp"
                 android:layout_marginBottom="30dp"
-                android:hint="@string/createStreetHint"
-                android:inputType="numberDecimal" />
+                android:hint="@string/createStreetHint" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -96,8 +95,7 @@
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="20dp"
                 android:layout_marginBottom="30dp"
-                android:hint="@string/createRoomHint"
-                android:inputType="numberDecimal"/>
+                android:hint="@string/createRoomHint" />
 
         </com.google.android.material.textfield.TextInputLayout>
 

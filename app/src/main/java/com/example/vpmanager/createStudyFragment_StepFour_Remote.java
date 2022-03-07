@@ -12,7 +12,7 @@ public class createStudyFragment_StepFour_Remote extends Fragment {
 
 
     public createStudyFragment_StepFour_Remote() {
-        createStudyBase.currentFragment = 5;
+        createStudyActivity.currentFragment = 5;
     }
 
     @Override

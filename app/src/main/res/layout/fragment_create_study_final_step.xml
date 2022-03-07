@@ -11,7 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:weightSum="7">
+        android:weightSum="10">
 
         <TextView
             android:id="@+id/pageTitle"
@@ -33,7 +33,7 @@
         <com.google.android.material.card.MaterialCardView
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight=".5"
+            android:layout_weight="1.5"
 
             android:layout_marginRight="30dp"
             android:layout_marginLeft="30dp"
@@ -52,8 +52,7 @@
         <com.google.android.material.card.MaterialCardView
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight=".5"
-
+            android:layout_weight="1.5"
             android:layout_marginRight="30dp"
             android:layout_marginLeft="30dp"
             android:layout_marginTop="20dp">
@@ -71,46 +70,7 @@
         <com.google.android.material.card.MaterialCardView
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight=".5"
-
-            android:layout_marginRight="30dp"
-            android:layout_marginLeft="30dp"
-            android:layout_marginTop="20dp">
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/confirmContact"
-                android:textSize="20sp"
-                android:layout_gravity="center"
-                android:layout_marginStart="10dp">
-            </TextView>
-        </com.google.android.material.card.MaterialCardView>
-
-        <com.google.android.material.card.MaterialCardView
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="3"
-
-            android:layout_marginRight="30dp"
-            android:layout_marginLeft="30dp"
-            android:layout_marginTop="20dp">
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/confirmDesc"
-                android:textSize="20sp"
-                android:gravity="top"
-                android:layout_marginStart="10dp"
-                android:layout_marginTop="5dp">
-            </TextView>
-        </com.google.android.material.card.MaterialCardView>
-
-        <com.google.android.material.card.MaterialCardView
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight=".5"
+            android:layout_weight="1.5"
 
             android:layout_marginRight="30dp"
             android:layout_marginLeft="30dp"
@@ -129,7 +89,7 @@
         <com.google.android.material.card.MaterialCardView
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight=".5"
+            android:layout_weight="1.5"
 
             android:layout_marginRight="30dp"
             android:layout_marginLeft="30dp"
@@ -148,7 +108,7 @@
         <com.google.android.material.card.MaterialCardView
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="1.2"
+            android:layout_weight="3"
 
             android:layout_marginRight="30dp"
             android:layout_marginLeft="30dp"
@@ -159,7 +119,7 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/confirmLocation"
                 android:textSize="20sp"
-                android:layout_marginTop="5dp"
+                android:layout_marginTop="20dp"
                 android:gravity="top"
                 android:layout_marginStart="10dp"
                 >

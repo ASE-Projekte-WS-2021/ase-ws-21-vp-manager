@@ -12,7 +12,7 @@ public class createStudyFragment_StepTwo extends Fragment {
 
 
     public createStudyFragment_StepTwo() {
-        createStudyBase.currentFragment = 3;
+        createStudyActivity.currentFragment = 3;
     }
 
     @Override

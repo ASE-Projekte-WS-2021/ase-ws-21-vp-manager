@@ -7,20 +7,16 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
-import android.widget.ListView;
-
-import java.util.ArrayList;
+import android.widget.TextView;
 
 public class createStudyFragment_finalStep_two extends Fragment {
 
-    ListView dateList;
-    ArrayList<String> dates = new ArrayList<>();
-    ArrayAdapter<String> datePickerAdapter;
+    TextView desc;
+    TextView contact;
 
 
     public createStudyFragment_finalStep_two() {
-        createStudyBase.currentFragment = 8;
+        createStudyActivity.currentFragment = 8;
     }
 
     @Override
@@ -38,24 +34,26 @@ public class createStudyFragment_finalStep_two extends Fragment {
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         setupView(view);
+        loadData();
+    }
+
+    private void setupView(View view) {
+        desc = view.findViewById(R.id.confirmDesc);
+        contact = view.findViewById(R.id.confirmContact);
+
 
     }
 
-    private void setupView(View view){
-        dateList = view.findViewById(R.id.confirmDates);
-        setupDatePicker();
-
-    }
-
-    private void setupDatePicker() {
+    private void loadData() {
         Bundle bundle = getArguments();
         System.out.println(bundle);
         if (bundle != null) {
-            datePickerAdapter = new ArrayAdapter<String>(getActivity(),
-                    android.R.layout.simple_list_item_1,
-                    bundle.getStringArrayList("dates"));
-            dateList.setAdapter(datePickerAdapter);
+            desc.setText(bundle.getString("desc"));
+            contact.setText(bundle.getString("contact"));
         }
-        datePickerAdapter.notifyDataSetChanged();
     }
+
+
+
 }
+

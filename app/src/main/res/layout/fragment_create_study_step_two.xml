@@ -34,7 +34,7 @@
             android:id="@+id/pageDesc"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="3.5"
+            android:layout_weight="3"
             android:textSize="20sp"
             android:layout_marginLeft="5dp"
             android:layout_marginRight="5dp"
@@ -43,10 +43,11 @@
             android:text="@string/fragment_create_study_desc_page_two" />
 
 
+
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="5.5">
+            android:layout_weight="6">
 
 
             <com.google.android.material.textfield.TextInputEditText

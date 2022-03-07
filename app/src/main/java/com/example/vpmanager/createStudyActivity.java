@@ -1,127 +1,113 @@
 package com.example.vpmanager;
 
-import android.app.AlertDialog;
-import android.app.DatePickerDialog;
-import android.app.TimePickerDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.DatePicker;
-import android.widget.EditText;
-import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.Spinner;
-import android.widget.TimePicker;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+
 import com.google.android.material.appbar.MaterialToolbar;
 import com.google.android.material.navigation.NavigationView;
+import com.google.android.material.textfield.TextInputEditText;
+import com.kofigyan.stateprogressbar.StateProgressBar;
 
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 import java.util.UUID;
 
 public class createStudyActivity extends AppCompatActivity {
-
     MaterialToolbar topAppBarCreate;
     DrawerLayout drawerLayoutCreate;
     NavigationView navigationViewCreate;
 
-    Button addButton;
-    ListView dateList;
-    Spinner categories;
-    Spinner executionType;
-    ArrayList<String> dates = new ArrayList<>();
+    String studyTitle = "";
+    String VP = "0";
+    String studyDesc = "";
+    String category = "";
+    String execution = "";
+    String platform = "";
+    String optionalPlatform = "";
+    String location = "";
+    String street = "";
+    String room = "";
+    String contact = "";
+    String contact2 = "";
+    String contact3 = "";
 
-    EditText studyTitle;
-    EditText VP;
-    EditText studyDesc;
-    LinearLayout locationLinearLayout;
-    EditText programEditText;
-    EditText locationEditText;
-    EditText streetEditText;
-    EditText roomEditText;
-    Button createButton;
-    EditText contactEditText;
-    Button fragmentButton;
-
-    ArrayAdapter<String> datePickerAdapter;
-    accessDatabase accessDatabase = new accessDatabase();
-
-    String date_time = "";
-    int mYear;
-    int mMonth;
-    int mDay;
-    int mHour;
-    int mMinute;
-
-    //Checker for Inputs
-    boolean checkListDate = false;
-    boolean checkListExecutionType = false;
-    boolean checkListLocation = false;
-    boolean checkListCategory = false;
-    boolean checkListStudyDesc = false;
-    boolean checkListStreet = false;
-    boolean checkListRoom = false;
-    boolean checkListProgram = false;
-    boolean checkListTitle = false;
-    boolean checkListVP = false;
-    boolean checkListContact = false;
-    boolean remoteActive = false;
-    boolean presenceActive = false;
 
     String firstSpinnerItemExecution = "Durchführungsart";
     String firstSpinnerItemCategory = "Studienkategorie";
+
+    String contactViewString = "";
+    String locationViewString = "";
+    ArrayList<String> dates = new ArrayList<>();
+
+    accessDatabase accessDatabase = new accessDatabase();
+
+    StateProgressBar stateProgressBar;
+    String[] descriptionData = {"Basis", "Info", "Kategorie", "Termine", "Bestätigen"};
+
+    public static int currentFragment = 0;
+
+    Bundle bundle;
+
+    Button back;
+    Button next;
+    TextInputEditText textInputEditTextTitle;
+    TextInputEditText textInputEditTextVP;
+    TextInputEditText textInputEditTextDesc;
+    TextInputEditText textInputEditTextPlatform;
+    TextInputEditText textInputEditTextOptionalPlatform;
+    TextInputEditText textInputEditTextLocation;
+    TextInputEditText textInputEditTextStreet;
+    TextInputEditText textInputEditTextRoom;
+    TextInputEditText textInputEditTextContact;
+    TextInputEditText textInputEditTextContact2;
+    TextInputEditText textInputEditTextContact3;
+    ListView listViewDates;
+    Spinner categories;
+    Spinner executionType;
+
+
+    Fragment fragment_container;
+    FragmentManager fragmentManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_study);
         setupView();
-        setupSpinner();
-        setupDatePicker();
-        setupClickListener();
+        setupListeners();
+        //Checks if a new user needs to be registered
+
     }
 
-    //Parameter:
-    //Return values:
-    //Connects the View elements with the code
     private void setupView() {
-
         topAppBarCreate = findViewById(R.id.topAppBarCreate);
         setSupportActionBar(topAppBarCreate);
         drawerLayoutCreate = findViewById(R.id.drawerLayoutCreate);
         navigationViewCreate = findViewById(R.id.navigationViewCreate);
         navigationViewCreate.getMenu().getItem(2).setChecked(true);
 
-        addButton = findViewById(R.id.createAddDateButton);
-        dateList = findViewById(R.id.createDatelist);
-        categories = findViewById(R.id.createCategories);
-        executionType = findViewById(R.id.createExecutionType);
-        studyTitle = findViewById(R.id.createStudyTitleInput);
-        VP = findViewById(R.id.createVPInput);
-        studyDesc = findViewById(R.id.createStudyDescInput);
-        locationLinearLayout = findViewById(R.id.locationLayout);
-        createButton = findViewById(R.id.createCreateButton);
-        contactEditText = findViewById(R.id.createContactInput);
-        fragmentButton = findViewById(R.id.fragmentButton);
+        fragmentManager = getSupportFragmentManager();
+        fragment_container = fragmentManager.findFragmentById(R.id.fragment_container);
+        back = findViewById(R.id.backButton);
+        next = findViewById(R.id.nextButton);
+        stateProgressBar = (StateProgressBar) findViewById(R.id.your_state_progress_bar_id);
+        stateProgressBar.setStateDescriptionData(descriptionData);
     }
 
-    //Parameter:
-    //Return values:
-    //Sets click listener on buttons
-    private void setupClickListener() {
-
+    private void setupListeners() {
         //For NavigationDrawer to open
         topAppBarCreate.setNavigationOnClickListener(new View.OnClickListener() {
             public void onClick(View V) {
@@ -159,178 +145,18 @@ public class createStudyActivity extends AppCompatActivity {
             }
         });
 
-        addButton.setOnClickListener(new View.OnClickListener() {
+        next.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                datePicker();
+                nextButton();
             }
         });
-
-        createButton.setOnClickListener(new View.OnClickListener() {
+        back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                checkInput();
+                backButton();
             }
         });
-
-        fragmentButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent overviewIntent = new Intent(createStudyActivity.this, createStudyBase.class);
-                startActivity(overviewIntent);
-            }
-        });
-    }
-
-    //Parameter:
-    //Return values:
-    //Setting up an adapter for the dates
-    private void setupDatePicker() {
-        datePickerAdapter = new ArrayAdapter<String>(this,
-                android.R.layout.simple_list_item_1,
-                dates);
-        dateList.setAdapter(datePickerAdapter);
-    }
-
-    //Parameter: executionType
-    //Return values:
-    //Depending on the executionType another set of Edittexts are dynamically loaded
-    private void loadLocation(String executionType) {
-        if (executionType.equals(getString(R.string.remoteString))) {
-            programEditText = new EditText(this);
-            programEditText.setHint(getString(R.string.createPlatformHint));
-            programEditText.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
-
-            if (locationLinearLayout != null) {
-                locationLinearLayout.addView(programEditText);
-            }
-        }
-
-        if (executionType.equals(getString(R.string.presenceString))) {
-            locationEditText = new EditText(this);
-            locationEditText.setHint(getString(R.string.createLocationHint));
-            locationEditText.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
-
-            streetEditText = new EditText(this);
-            streetEditText.setHint(getString(R.string.createStreetHint));
-            streetEditText.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
-
-            roomEditText = new EditText(this);
-            roomEditText.setHint(getString(R.string.createRoomHint));
-            roomEditText.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
-
-            if (locationLinearLayout != null) {
-                locationLinearLayout.addView(locationEditText);
-                locationLinearLayout.addView(streetEditText);
-                locationLinearLayout.addView(roomEditText);
-            }
-        }
-    }
-
-    //Parameter:
-    //Return values:
-    //OnChange Listener on the Spinner Items so the App knows when it has to load the dynamically created Edittexts
-    private void spinnerOnChange() {
-        executionType.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
-                if (id == 0) {
-                    locationLinearLayout.removeAllViews();
-                    remoteActive = false;
-                    presenceActive = false;
-                }
-                if (id == 1) {
-                    locationLinearLayout.removeAllViews();
-                    loadLocation(getString(R.string.remoteString));
-                    remoteActive = true;
-                    presenceActive = false;
-                }
-                if (id == 2) {
-                    locationLinearLayout.removeAllViews();
-                    loadLocation(getString(R.string.presenceString));
-                    remoteActive = false;
-                    presenceActive = true;
-                }
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parentView) {
-            }
-        });
-    }
-
-    //Parameter:
-    //Return values:
-    //Setting up Spinners for executiontype and category
-    private void setupSpinner() {
-        ArrayAdapter<CharSequence> categoryAdapter = ArrayAdapter.createFromResource(this,
-                R.array.createCategoryList, android.R.layout.simple_spinner_item);
-        categoryAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        categories.setAdapter(categoryAdapter);
-
-        ArrayAdapter<CharSequence> executionTypeAdapter = ArrayAdapter.createFromResource(this,
-                R.array.createExecutionTypeList, android.R.layout.simple_spinner_item);
-        executionTypeAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        executionType.setAdapter(executionTypeAdapter);
-        spinnerOnChange();
-    }
-
-    //Parameter: hourOfDay, minute
-    //Return values:
-    //Adds the selected date to the ListView
-    private void addDateToList(int hourOfDay, int minute) {
-        String minutes = Integer.toString(minute);
-        String hours = Integer.toString(hourOfDay);
-        if (minute < 10) {
-            minutes = "0" + minute;
-        }
-        if (hourOfDay < 10) {
-            hours = "0" + hourOfDay;
-        }
-        dates.add(date_time + " " + hours + ":" + minutes);
-        datePickerAdapter.notifyDataSetChanged();
-    }
-
-    //Parameter:
-    //Return values:
-    //Creates the Datepicker for the dates
-    private void datePicker() {
-        final Calendar c = Calendar.getInstance();
-        mYear = c.get(Calendar.YEAR);
-        mMonth = c.get(Calendar.MONTH);
-        mDay = c.get(Calendar.DAY_OF_MONTH);
-
-        DatePickerDialog datePickerDialog = new DatePickerDialog(this,
-                new DatePickerDialog.OnDateSetListener() {
-                    @Override
-                    public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
-
-                        date_time = dayOfMonth + "-" + (monthOfYear + 1) + "-" + year;
-                        timePicker();
-                    }
-                }, mYear, mMonth, mDay);
-        datePickerDialog.show();
-    }
-
-    //Parameter:
-    //Return values:
-    //Creates the TimePicker for the dates
-    private void timePicker() {
-        final Calendar c = Calendar.getInstance();
-        mHour = c.get(Calendar.HOUR_OF_DAY);
-        mMinute = c.get(Calendar.MINUTE);
-
-        TimePickerDialog timePickerDialog = new TimePickerDialog(this,
-                new TimePickerDialog.OnTimeSetListener() {
-                    @Override
-                    public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
-
-                        mHour = hourOfDay;
-                        mMinute = minute;
-                        addDateToList(hourOfDay, minute);
-                    }
-                }, mHour, mMinute, false);
-        timePickerDialog.show();
     }
 
     //Parameter:
@@ -343,18 +169,21 @@ public class createStudyActivity extends AppCompatActivity {
 
         newStudy.put("id", studyID); //New id for the study
         newStudy.put("creator", homeActivity.uniqueID);
-        newStudy.put("name", studyTitle.getText().toString());
-        newStudy.put("vps", VP.getText().toString());
-        newStudy.put("contact", contactEditText.getText().toString());
-        newStudy.put("description", studyDesc.getText().toString());
-        newStudy.put("category", categories.getSelectedItem().toString());
-        newStudy.put("executionType", executionType.getSelectedItem().toString());
+        newStudy.put("name", studyTitle);
+        newStudy.put("vps", VP);
+        newStudy.put("contact", contact);
+        newStudy.put("contact2", contact2);
+        newStudy.put("contact3", contact3);
+        newStudy.put("description", studyDesc);
+        newStudy.put("category", category);
+        newStudy.put("executionType", execution);
         if (executionType.getSelectedItem().toString().equals(getString(R.string.remoteString))) {
-            newStudy.put("platform", programEditText.getText().toString());
+            newStudy.put("platform", platform);
+            newStudy.put("platform2", optionalPlatform);
         } else if (executionType.getSelectedItem().toString().equals(getString(R.string.presenceString))) {
-            newStudy.put("location", locationEditText.getText().toString());
-            newStudy.put("street", streetEditText.getText().toString());
-            newStudy.put("room", roomEditText.getText().toString());
+            newStudy.put("location", location);
+            newStudy.put("street", street);
+            newStudy.put("room", room);
         }
         if (!dates.isEmpty()) {
             ArrayList<String> dateIds = new ArrayList<>();
@@ -373,6 +202,7 @@ public class createStudyActivity extends AppCompatActivity {
             }
             newStudy.put("dates", dateIds);
         }
+        System.out.println("Here");
         accessDatabase.addNewStudy(newStudy, studyID);
 
         //reload Activity
@@ -384,210 +214,426 @@ public class createStudyActivity extends AppCompatActivity {
         startActivity(getIntent());
     }
 
-    //Parameter:
-    //Return values:
-    //Checks the input of the EditTexts, Spinners and ListViews and gives an Error if something mandatory is missing or a notification if its something optional
-    private void checkInput() {
-        //getDeviceID();
-        checkTitle();
-        checkVP();
-        checkStudyDesc();
-        checkCategory();
-        checkExecutionType();
-        checkDate();
-        checkContact();
-        if (remoteActive) {
-            checkProgram();
-        }
-        if (presenceActive) {
-            checkLocation();
-            checkRoom();
-            checkStreet();
-        }
-
-        boolean mandatoryCheck = false;
-        String alertMessage = "";
-        //Mandatory Checks
-        if (checkListTitle && checkListStudyDesc && checkListExecutionType && checkListCategory && checkListContact) {
-            if (presenceActive) {
-                if (checkListLocation) {
-                    mandatoryCheck = true;
+    private void nextButton() {
+        switch (currentFragment) {
+            case 0:
+                back.setText(getString(R.string.fragment_create_study_base_back));
+                stateProgressBar.setCurrentStateNumber(StateProgressBar.StateNumber.ONE);
+                fragmentManager
+                        .beginTransaction()
+                        .setCustomAnimations(R.anim.enter_from_right, R.anim.exit_to_left,
+                                R.anim.enter_from_left, R.anim.exit_to_right)
+                        .replace(R.id.fragment_container, new createStudyFragment_StepOne(), null)
+                        .addToBackStack(null)
+                        .commit();
+                break;
+            case 1:
+                getInput(currentFragment);
+                if (mandatoryCheck(currentFragment)) {
+                    stateProgressBar.setCurrentStateNumber(StateProgressBar.StateNumber.TWO);
+                    fragmentManager
+                            .beginTransaction()
+                            .setCustomAnimations(R.anim.enter_from_right, R.anim.exit_to_left,
+                                    R.anim.enter_from_left, R.anim.exit_to_right)
+                            .replace(R.id.fragment_container, new createStudyFragment_StepOne_Contact(), null)
+                            .addToBackStack(null)
+                            .commit();
                 }
-            } else {
-                mandatoryCheck = true;
-            }
-        }
-
-        if (!mandatoryCheck) {
-            alertMessage += getString(R.string.createAlertBase);
-
-            if (!checkListTitle) {
-                alertMessage += getString(R.string.createAlertTitle);
-            }
-
-            if (!checkListStudyDesc) {
-                alertMessage += getString(R.string.createAlertStudyDesc);
-
-            }
-
-            if (!checkListContact) {
-                alertMessage += getString(R.string.createAlertContact);
-            }
-
-            if (!checkListExecutionType) {
-                alertMessage += getString(R.string.createAlertExecutionType);
-            }
-
-            if (!checkListCategory) {
-                alertMessage += getString(R.string.createAlertCategory);
-
-            }
-
-            if (!checkListLocation && presenceActive) {
-                alertMessage += getString(R.string.createAlertLocation);
-            }
-
-        } else {
-            //Optional
-            alertMessage += getString(R.string.createAlertOptionalBase);
-            if (!checkListVP) {
-                alertMessage += getString(R.string.createAlertVP);
-            }
-
-            if (!checkListRoom && presenceActive) {
-                alertMessage += getString(R.string.createAlertRoom);
-            }
-
-            if (!checkListStreet && presenceActive) {
-                alertMessage += getString(R.string.createAlertStreet);
-            }
-
-            if (!checkListProgram && remoteActive) {
-                alertMessage += getString(R.string.createAlertPlatform);
-            }
-
-            if (!checkListDate) {
-                alertMessage += getString(R.string.createAlertDates);
-            }
-        }
-        if (alertMessage.equals(getString(R.string.createAlertOptionalBase))) {
-            createDBEntry();
-        } else {
-            alertPopup(alertMessage, mandatoryCheck);
-        }
-
-    }
-
-    //Parameter: alertMessage, mandatoryCheck
-    //Return values:
-    //Creates the AlertDialog based of the result of the mandatoryCheck and displays the alertMessage previously build
-    private void alertPopup(String alertMessage, boolean mandatoryCheck) {
-        if (!mandatoryCheck) {
-            AlertDialog.Builder builder = new AlertDialog.Builder(this);
-            builder.setMessage(alertMessage)
-                    .setCancelable(false)
-                    .setPositiveButton(getString(R.string.ok), new DialogInterface.OnClickListener() {
-                        public void onClick(DialogInterface dialog, int id) {
-                        }
-                    });
-            AlertDialog alert = builder.create();
-            alert.show();
-        } else {
-            DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-                    switch (which) {
-                        case DialogInterface.BUTTON_POSITIVE:
-                            createDBEntry();
-                            break;
-
-                        case DialogInterface.BUTTON_NEGATIVE:
-                            break;
+                break;
+            case 2:
+                getInput(currentFragment);
+                if (mandatoryCheck(currentFragment)) {
+                    stateProgressBar.setCurrentStateNumber(StateProgressBar.StateNumber.TWO);
+                    fragmentManager
+                            .beginTransaction()
+                            .setCustomAnimations(R.anim.enter_from_right, R.anim.exit_to_left,
+                                    R.anim.enter_from_left, R.anim.exit_to_right)
+                            .replace(R.id.fragment_container, new createStudyFragment_StepTwo(), null)
+                            .addToBackStack(null)
+                            .commit();
+                }
+                break;
+            case 3:
+                getInput(currentFragment);
+                if (mandatoryCheck(currentFragment)) {
+                    stateProgressBar.setCurrentStateNumber(StateProgressBar.StateNumber.THREE);
+                    fragmentManager
+                            .beginTransaction()
+                            .setCustomAnimations(R.anim.enter_from_right, R.anim.exit_to_left,
+                                    R.anim.enter_from_left, R.anim.exit_to_right)
+                            .replace(R.id.fragment_container, new createStudyFragment_StepThree(), null)
+                            .addToBackStack(null)
+                            .commit();
+                }
+                break;
+            case 4:
+                getInput(currentFragment);
+                if (mandatoryCheck(currentFragment)) {
+                    stateProgressBar.setCurrentStateNumber(StateProgressBar.StateNumber.THREE);
+                    if (execution.equals(getString(R.string.remoteString))) {
+                        fragmentManager
+                                .beginTransaction()
+                                .setCustomAnimations(R.anim.enter_from_right, R.anim.exit_to_left,
+                                        R.anim.enter_from_left, R.anim.exit_to_right)
+                                .replace(R.id.fragment_container, new createStudyFragment_StepFour_Remote(), null)
+                                .addToBackStack(null)
+                                .commit();
+                    } else {
+                        fragmentManager
+                                .beginTransaction()
+                                .setCustomAnimations(R.anim.enter_from_right, R.anim.exit_to_left,
+                                        R.anim.enter_from_left, R.anim.exit_to_right)
+                                .replace(R.id.fragment_container, new createStudyFragment_StepFour_Presence(), null)
+                                .addToBackStack(null)
+                                .commit();
                     }
+                    break;
                 }
-            };
-            AlertDialog.Builder builder = new AlertDialog.Builder(this);
-            builder.setMessage(alertMessage).setPositiveButton(getString(R.string.yes), dialogClickListener)
-                    .setNegativeButton(getString(R.string.no), dialogClickListener).show();
+            case 5:
+                getInput(currentFragment);
+                if (mandatoryCheck(currentFragment)) {
+                    stateProgressBar.setCurrentStateNumber(StateProgressBar.StateNumber.FOUR);
+                    fragmentManager
+                            .beginTransaction()
+                            .setCustomAnimations(R.anim.enter_from_right, R.anim.exit_to_left,
+                                    R.anim.enter_from_left, R.anim.exit_to_right)
+                            .replace(R.id.fragment_container, new createStudyFragment_StepFive(), null)
+                            .addToBackStack(null)
+                            .commit();
+                }
+                break;
+            case 6:
+                getInput(currentFragment);
+                bundle = createBundle(1);
+                createStudyFragment_finalStep createStudyFragment_finalStep = new createStudyFragment_finalStep();
+                createStudyFragment_finalStep.setArguments(bundle);
+                stateProgressBar.setCurrentStateNumber(StateProgressBar.StateNumber.FIVE);
+                fragmentManager
+                        .beginTransaction()
+                        .setCustomAnimations(R.anim.enter_from_right, R.anim.exit_to_left,
+                                R.anim.enter_from_left, R.anim.exit_to_right)
+                        .replace(R.id.fragment_container, createStudyFragment_finalStep, null)
+                        .addToBackStack(null)
+                        .commit();
+                break;
+            case 7:
+                bundle = createBundle(2);
+                createStudyFragment_finalStep_two createStudyFragment_finalStep_two = new createStudyFragment_finalStep_two();
+                createStudyFragment_finalStep_two.setArguments(bundle);
+                stateProgressBar.setCurrentStateNumber(StateProgressBar.StateNumber.FIVE);
+                next.setText(getString(R.string.fragment_create_study_base_create));
+                fragmentManager
+                        .beginTransaction()
+                        .setCustomAnimations(R.anim.enter_from_right, R.anim.exit_to_left,
+                                R.anim.enter_from_left, R.anim.exit_to_right)
+                        .replace(R.id.fragment_container, createStudyFragment_finalStep_two, null)
+                        .addToBackStack(null)
+                        .commit();
+                break;
+
+            case 8:
+                bundle = createBundle(3);
+                createStudyFragment_finalStep_three createStudyFragment_finalStep_three = new createStudyFragment_finalStep_three();
+                createStudyFragment_finalStep_three.setArguments(bundle);
+                stateProgressBar.setCurrentStateNumber(StateProgressBar.StateNumber.FIVE);
+                next.setText(getString(R.string.fragment_create_study_base_create));
+                fragmentManager
+                        .beginTransaction()
+                        .setCustomAnimations(R.anim.enter_from_right, R.anim.exit_to_left,
+                                R.anim.enter_from_left, R.anim.exit_to_right)
+                        .replace(R.id.fragment_container, createStudyFragment_finalStep_three, null)
+                        .addToBackStack(null)
+                        .commit();
+                break;
+            case 9:
+                stateProgressBar.setCurrentStateNumber(StateProgressBar.StateNumber.FIVE);
+                createDBEntry();
+                Intent homeIntent = new Intent(createStudyActivity.this, homeActivity.class);
+                startActivity(homeIntent);
+                break;
+            default:
+                break;
         }
     }
 
-    //Parameter:
-    //Return values:
-    //Checks if the Program EditText is empty
-    private void checkProgram() {
-        checkListProgram = !programEditText.getText().toString().equals("");
+    private void backButton() {
+        switch (currentFragment) {
+            case 0:
+                Intent homeIntent = new Intent(createStudyActivity.this, homeActivity.class);
+                startActivity(homeIntent);
+                break;
+            case 1:
+                getInput(currentFragment);
+                back.setText(getString(R.string.fragment_create_study_base_main));
+                //MAKE PROGRESSBAR INVIS
+                stateProgressBar.setCurrentStateNumber(StateProgressBar.StateNumber.ONE);
+                fragmentManager
+                        .beginTransaction()
+                        .setCustomAnimations(R.anim.enter_from_left, R.anim.exit_to_right,
+                                R.anim.enter_from_right, R.anim.exit_to_left)
+                        .replace(R.id.fragment_container, new createStudyFragment_Base(), null)
+                        .addToBackStack(null)
+                        .commit();
+                break;
+            case 2:
+                getInput(currentFragment);
+                stateProgressBar.setCurrentStateNumber(StateProgressBar.StateNumber.ONE);
+                fragmentManager
+                        .beginTransaction()
+                        .setCustomAnimations(R.anim.enter_from_left, R.anim.exit_to_right,
+                                R.anim.enter_from_right, R.anim.exit_to_left)
+                        .replace(R.id.fragment_container, new createStudyFragment_StepOne(), null)
+                        .addToBackStack(null)
+                        .commit();
+                break;
+            case 3:
+                getInput(currentFragment);
+                stateProgressBar.setCurrentStateNumber(StateProgressBar.StateNumber.ONE);
+                fragmentManager
+                        .beginTransaction()
+                        .setCustomAnimations(R.anim.enter_from_left, R.anim.exit_to_right,
+                                R.anim.enter_from_right, R.anim.exit_to_left)
+                        .replace(R.id.fragment_container, new createStudyFragment_StepOne_Contact(), null)
+                        .addToBackStack(null)
+                        .commit();
+                break;
+            case 4:
+                getInput(currentFragment);
+                stateProgressBar.setCurrentStateNumber(StateProgressBar.StateNumber.TWO);
+                fragmentManager
+                        .beginTransaction()
+                        .setCustomAnimations(R.anim.enter_from_left, R.anim.exit_to_right,
+                                R.anim.enter_from_right, R.anim.exit_to_left)
+                        .replace(R.id.fragment_container, new createStudyFragment_StepTwo(), null)
+                        .addToBackStack(null)
+                        .commit();
+                break;
+
+            case 5:
+                getInput(currentFragment);
+                stateProgressBar.setCurrentStateNumber(StateProgressBar.StateNumber.THREE);
+                fragmentManager
+                        .beginTransaction()
+                        .setCustomAnimations(R.anim.enter_from_left, R.anim.exit_to_right,
+                                R.anim.enter_from_right, R.anim.exit_to_left)
+                        .replace(R.id.fragment_container, new createStudyFragment_StepThree(), null)
+                        .addToBackStack(null)
+                        .commit();
+                break;
+            case 6:
+                getInput(currentFragment);
+                stateProgressBar.setCurrentStateNumber(StateProgressBar.StateNumber.THREE);
+                fragmentManager
+                        .beginTransaction()
+                        .setCustomAnimations(R.anim.enter_from_left, R.anim.exit_to_right,
+                                R.anim.enter_from_right, R.anim.exit_to_left)
+                        .replace(R.id.fragment_container, new createStudyFragment_StepFour_Remote(), null)
+                        .addToBackStack(null)
+                        .commit();
+                break;
+            case 7:
+                getInput(currentFragment);
+                stateProgressBar.setCurrentStateNumber(StateProgressBar.StateNumber.FOUR);
+                fragmentManager
+                        .beginTransaction()
+                        .setCustomAnimations(R.anim.enter_from_left, R.anim.exit_to_right,
+                                R.anim.enter_from_right, R.anim.exit_to_left)
+                        .replace(R.id.fragment_container, new createStudyFragment_StepFive(), null)
+                        .addToBackStack(null)
+                        .commit();
+                break;
+
+            case 8:
+                bundle = createBundle(1);
+                createStudyFragment_finalStep createStudyFragment_finalStep = new createStudyFragment_finalStep();
+                createStudyFragment_finalStep.setArguments(bundle);
+                stateProgressBar.setCurrentStateNumber(StateProgressBar.StateNumber.FOUR);
+                fragmentManager
+                        .beginTransaction()
+                        .setCustomAnimations(R.anim.enter_from_left, R.anim.exit_to_right,
+                                R.anim.enter_from_right, R.anim.exit_to_left)
+                        .replace(R.id.fragment_container, createStudyFragment_finalStep, null)
+                        .addToBackStack(null)
+                        .commit();
+                break;
+            case 9:
+                bundle = createBundle(2);
+                createStudyFragment_finalStep_two createStudyFragment_finalStep_two = new createStudyFragment_finalStep_two();
+                createStudyFragment_finalStep_two.setArguments(bundle);
+                next.setText(getString(R.string.fragment_create_study_base_next));
+                stateProgressBar.setCurrentStateNumber(StateProgressBar.StateNumber.FIVE);
+                fragmentManager
+                        .beginTransaction()
+                        .setCustomAnimations(R.anim.enter_from_left, R.anim.exit_to_right,
+                                R.anim.enter_from_right, R.anim.exit_to_left)
+                        .replace(R.id.fragment_container, createStudyFragment_finalStep_two, null)
+                        .addToBackStack(null)
+                        .commit();
+                break;
+            default:
+                break;
+        }
     }
 
-    //Parameter:
-    //Return values:
-    //Checks if the Street EditText is empty
-    private void checkStreet() {
-        checkListStreet = !streetEditText.getText().toString().equals("");
+    private void getInput(int page) {
+        switch (page) {
+            case 1:
+                textInputEditTextTitle = fragmentManager.getFragments().get(0).getView().findViewById(R.id.inputFieldTitle);
+                textInputEditTextVP = fragmentManager.getFragments().get(0).getView().findViewById(R.id.inputFieldVP);
+                studyTitle = Objects.requireNonNull(textInputEditTextTitle.getText()).toString();
+                VP = Objects.requireNonNull(textInputEditTextVP.getText()).toString();
+                System.out.println(VP + " " + studyTitle);
+                break;
+
+            case 2:
+                textInputEditTextContact = fragmentManager.getFragments().get(0).getView().findViewById(R.id.inputContact1);
+                textInputEditTextContact2 = fragmentManager.getFragments().get(0).getView().findViewById(R.id.inputContact2);
+                textInputEditTextContact3 = fragmentManager.getFragments().get(0).getView().findViewById(R.id.inputContact3);
+
+                contact = Objects.requireNonNull(textInputEditTextContact.getText()).toString();
+                contact2 = Objects.requireNonNull(textInputEditTextContact2.getText()).toString();
+                contact3 = Objects.requireNonNull(textInputEditTextContact3.getText()).toString();
+                break;
+
+            case 3:
+                textInputEditTextDesc = fragmentManager.getFragments().get(0).getView().findViewById(R.id.inputFieldStudyDesc);
+                studyDesc = Objects.requireNonNull(textInputEditTextDesc.getText()).toString();
+                System.out.println(studyDesc);
+                break;
+
+
+            case 4:
+                categories = fragmentManager.getFragments().get(0).getView().findViewById(R.id.createCategories);
+                executionType = fragmentManager.getFragments().get(0).getView().findViewById(R.id.createExecutionType);
+                category = categories.getSelectedItem().toString();
+                execution = executionType.getSelectedItem().toString();
+                System.out.println("Kategorie: " + category);
+                System.out.println("Durchführung: " + execution);
+                break;
+
+            case 5:
+                if (execution.equals(getString(R.string.remoteString))) {
+                    // GET REMOTE STUFF HERE
+                    location = "";
+                    street = "";
+                    room = "";
+                    textInputEditTextPlatform = fragmentManager.getFragments().get(0).getView().findViewById(R.id.inputFieldPlatform);
+                    textInputEditTextOptionalPlatform = fragmentManager.getFragments().get(0).getView().findViewById(R.id.inputFieldPlatformOptional);
+                    platform = Objects.requireNonNull(textInputEditTextPlatform.getText()).toString();
+                    optionalPlatform = Objects.requireNonNull(textInputEditTextOptionalPlatform.getText()).toString();
+                }
+                if (execution.equals((getString(R.string.presenceString)))) {
+                    // GET PRESENCE STUFF HERE
+                    platform = "";
+                    optionalPlatform = "";
+
+                    textInputEditTextLocation = fragmentManager.getFragments().get(0).getView().findViewById(R.id.inputFieldLocation);
+                    textInputEditTextStreet = fragmentManager.getFragments().get(0).getView().findViewById(R.id.inputFieldStreet);
+                    textInputEditTextRoom = fragmentManager.getFragments().get(0).getView().findViewById(R.id.inputFieldRoom);
+
+                    location = Objects.requireNonNull(textInputEditTextLocation.getText()).toString();
+                    street = Objects.requireNonNull(textInputEditTextStreet.getText()).toString();
+                    room = Objects.requireNonNull(textInputEditTextRoom.getText()).toString();
+                }
+                break;
+            case 6:
+
+                listViewDates = fragmentManager.getFragments().get(0).getView().findViewById(R.id.createDatelist);
+                for (int i = 0; i < listViewDates.getAdapter().getCount(); i++) {
+                    System.out.println(listViewDates.getAdapter().getItem(i));
+                    dates.add(listViewDates.getAdapter().getItem(i).toString());
+                }
+                break;
+        }
     }
 
-    //Parameter:
-    //Return values:
-    //Checks if the Room EditText is empty
-    private void checkRoom() {
-        checkListRoom = !roomEditText.getText().toString().equals("");
+    private Bundle createBundle(int finalPage) {
+        Bundle bundle = new Bundle();
+        if (finalPage == 1) {
+            prepareData();
+            bundle.putString("title", studyTitle);
+            bundle.putString("vp", VP);
+            bundle.putString("category", category);
+            bundle.putString("exe", execution);
+            bundle.putString("location", locationViewString);
+        }
+        if(finalPage == 2){
+            bundle.putString("desc", studyDesc);
+            bundle.putString("contact", contactViewString);
+        }
+        if(finalPage == 3)
+        {
+            bundle.putStringArrayList("dates", dates);
+        }
+        return bundle;
     }
 
-    //Parameter:
-    //Return values:
-    //Checks if there are any dates added to the ListView
-    private void checkDate() {
-        checkListDate = dates.size() != 0;
+    private void prepareData() {
+        contactViewString = "";
+        locationViewString = "";
+        contactViewString += contact;
+        if (!contact2.isEmpty()) {
+            contactViewString += "\n" + contact2;
+        }
+        if (contact3.isEmpty()) {
+            contactViewString += "\n" + contact3;
+        }
+
+        if (location.isEmpty()) {
+            locationViewString = location + " \n " + street + "\n" + room;
+        } else {
+            locationViewString += platform;
+            if (optionalPlatform.isEmpty()) {
+                locationViewString += " & " + optionalPlatform;
+            }
+        }
     }
 
-    //Parameter:
-    //Return values:
-    //Checks if the Location EditText is empty
-    private void checkLocation() {
-        checkListLocation = !locationEditText.getText().toString().equals("");
+    private boolean mandatoryCheck(int page) {
+        switch (page) {
+            case 1:
+                if (!studyTitle.isEmpty()) {
+                    System.out.println(studyTitle);
+                    return true;
+                }
+                break;
+            case 2:
+                if (!contact.isEmpty()) {
+                    return true;
+                }
+                break;
+            case 3:
+                if (!studyDesc.isEmpty()) {
+                    return true;
+                }
+                break;
+            case 4:
+                if (!category.equals(firstSpinnerItemCategory) && !execution.equals(firstSpinnerItemExecution)) {
+                    return true;
+                }
+                break;
+            case 5:
+                if (!location.isEmpty()) {
+                    return true;
+                }
+                if (!platform.isEmpty()) {
+                    return true;
+                }
+                break;
+            default:
+                return false;
+
+        }
+        return false;
     }
 
-    //Parameter:
-    //Return values:
-    //Checks if a executiontype was picked at the spinner
-    private void checkExecutionType() {
-        checkListExecutionType = !executionType.getSelectedItem().toString().equals(firstSpinnerItemExecution);
-    }
-
-    //Parameter:
-    //Return values:
-    //Checks if a category was picked at the spinner
-    private void checkCategory() {
-        checkListCategory = !categories.getSelectedItem().toString().equals(firstSpinnerItemCategory);
-    }
-
-    //Parameter:
-    //Return values:
-    //Checks if the study description EditText is empty
-    private void checkStudyDesc() {
-        checkListStudyDesc = !studyDesc.getText().toString().equals("");
-    }
-
-    //Parameter:
-    //Return values:
-    //Checks if the VP-hours EditText is empty
-    private void checkVP() {
-        checkListVP = !VP.getText().toString().equals("");
-    }
-
-    //Parameter:
-    //Return values:
-    //Checks if the study title EditText is empty
-    private void checkTitle() {
-        checkListTitle = !studyTitle.getText().toString().equals("");
-    }
-
-    private void checkContact() {
-        checkListContact = !contactEditText.getText().toString().equals("");
-    }
-
-    //UUID creates a new random id
     private String getNewId() {
         return UUID.randomUUID().toString();
+    }
+
+    @Override
+    public void onBackPressed() {
+        moveTaskToBack(false);
+        backButton();
     }
 }

@@ -15,7 +15,6 @@ import android.widget.ListView;
 import android.widget.TimePicker;
 
 import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -36,7 +35,7 @@ public class createStudyFragment_StepFive extends Fragment {
 
 
     public createStudyFragment_StepFive() {
-        createStudyBase.currentFragment = 6;
+        createStudyActivity.currentFragment = 6;
     }
 
     @Override

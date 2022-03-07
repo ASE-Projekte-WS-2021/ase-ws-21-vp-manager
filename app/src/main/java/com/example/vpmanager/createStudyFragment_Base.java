@@ -12,7 +12,7 @@ public class createStudyFragment_Base extends Fragment {
 
 
     public createStudyFragment_Base() {
-        createStudyBase.currentFragment = 0;
+        createStudyActivity.currentFragment = 0;
     }
 
     @Override
@@ -36,4 +36,5 @@ public class createStudyFragment_Base extends Fragment {
 
     private void setupView(View view){
     }
+
 }

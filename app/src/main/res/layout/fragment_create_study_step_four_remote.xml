@@ -6,7 +6,6 @@
     tools:context=".createStudyFragment_StepFour_Remote"
     android:background="?android:windowBackground">
 
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -77,8 +76,7 @@
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="20dp"
                 android:layout_marginBottom="30dp"
-                android:hint="@string/createPlatformHint"
-                android:inputType="numberDecimal" />
+                android:hint="@string/createPlatformHint" />
 
         </com.google.android.material.textfield.TextInputLayout>
 

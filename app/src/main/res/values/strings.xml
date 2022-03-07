@@ -69,30 +69,36 @@
     <!--General-->
     <string name="yes">Ja</string>
     <string name="no">Nein</string>
-    <string name="ok">Ok</string>
+    <string name="ok">OK</string>
     <string name="collectionPathUsers">users</string>
     <string name="collectionPathStudies">studies</string>
     <string name="collectionPathDates">dates</string>
 
     <string name="fragment_create_study_pageOneTitle">Grundinformationen</string>
-    <string name="fragment_create_study_pageBaseDesc">Um eine Studie zu erstellen, geben sie in den folgenden Schritten bitte nähere Informationen zum Ablauf, VP Stunden und verfügbaren Terminen an. Optionale Angaben werden als solche gekennzeichnet (*). \n\n\n Potenzielle Teilnehmer können ihren Eintrag anschließend im Reiter "Studie finden" einsehen und sich für freistehende Termine eintragen</string>
-    <string name="fragment_create_study_desc_page_one">Bitte tragen Sie hier grundlegende Informationen zu Ihrer Studie ein. \n\n <font color="#00CC00">Titel der Studie</font>: Name/Bezeichnung, unter der ihr Eintrag in der Studienliste sichtbar ist.\n \n Angebotene VP: Anzahl der zu erhaltenden Versuchspersonenstunden für die erfolgreiche Teilnahme an ihrer Studie.</string>
-    <string name="fragment_create_study_desc_page_two">Im Idealfall finden sich überwiegend Teilnehmer für ihre Studie, die fachliches Interesse mitbringen. \n\n Bitte gehen sie dafür genauer auf den thematischen Inhalt und Ablauf ihrer Studie ein.</string>
+    <string name="fragment_create_study_pageBaseDesc">Um eine Studie zu erstellen, geben Sie in den folgenden Schritten bitte nähere Informationen zum Ablauf, der Studiendauer, der Zahl an VP Stunden und möglichen Terminen an. Optionale Angaben werden als solche gekennzeichnet (*). \n\n\n Potenzielle Teilnehmer können ihren Eintrag anschließend im Reiter \"Studie finden\" einsehen und sich für freistehende Termine eintragen.</string>
+    <string name="fragment_create_study_desc_page_one">Titel der Studie: Name/Bezeichnung, unter der Ihr Eintrag in der Studienliste sichtbar sein wird.\n \n Angebotene VP: Anzahl der zu erhaltenden Versuchspersonenstunden für die erfolgreiche Teilnahme an Ihrer Studie.</string>
+    <string name="fragment_create_study_desc_page_two">Um die Teilnehmer Ihrer Studie über den Inhalt und den Ablauf zu informieren, geben Sie bitte eine möglichst genaue Beschreibung an.</string>
     <string name="fragment_create_study_pageBaseTitle">Willkommen</string>
     <string name="fragment_create_study_pageOneContactTitle">Kommunikation</string>
     <string name="fragment_create_study_pageOneContact_Hint_Contact">Kontaktmöglichkeit*</string>
     <string name="fragment_create_study_pageOneContact_Hint_Contact2">Kontaktmöglichkeit 2</string>
     <string name="fragment_create_study_pageOneContact_Hint_Contact3">Kontaktmöglichkeit 3</string>
-    <string name="fragment_create_study_desc_page_one_contact">Bei Fragen zu Terminen oder konkreten Inhalten der Studie soll Informationsaustausch auch außerhalb des VP-Managers möglich sein. \n\n Geben sie hier an, wie potenzielle Teilnehmer sie erreichen können.</string>
+    <string name="fragment_create_study_desc_page_one_contact">Bei Fragen zu Terminen oder konkreten Inhalten der Studie soll Informationsaustausch auch außerhalb des VP-Managers möglich sein. \n\n Geben Sie hier an, wie potenzielle Teilnehmer Sie erreichen können.</string>
     <string name="fragment_create_study_pageThreeTitle">Kategorie</string>
-    <string name="fragment_create_study_desc_page_four_remote">Geben sie hier nähere Informationen zum Durchführungskontext an. \n\n Präferierte Messaging-Dienste für die Remote Ausführung, wie Zoom Skype oder Discord können hier hinterlegt werden.</string>
-    <string name="fragment_create_study_desc_page_four_presence">Geben sie hier nähere Informationen zum Durchführungsort an. \n\n Bitte achten sie auf eine ausreichend detaillierte Beschreibung der Adresse, um Missverständnisse zu vermeiden.</string>
-    <string name="fragment_create_study_desc_page_three">Ordnen sie hier ihre Studie einer der thematische Kategorien zu. \n\n Die Durchführungsart bezieht sich auf den lokalen Kontext (Remote / Präsenz).</string>
+    <string name="fragment_create_study_desc_page_four_remote">Geben Sie hier nähere Informationen zum Durchführungskontext an. \n\n Präferierte Streaming-Dienste für die Remote Ausführung, wie Zoom, Skype oder Discord können hier hinterlegt werden.</string>
+    <string name="fragment_create_study_desc_page_four_presence">Geben Sie hier nähere Informationen zum Durchführungsort an. \n\n Bitte achten Sie auf eine ausreichend detaillierte Beschreibung der Adresse.</string>
+    <string name="fragment_create_study_desc_page_three">Ordnen Sie hier Ihre Studie einer der thematischen Kategorien zu. \n\n Die Durchführungsart bezieht sich auf den lokalen Kontext (Remote / Präsenz).</string>
     <string name="fragment_create_study_pageFourTitle">Durchführungsort</string>
     <string name="fragment_create_study_pageFiveTitle">Termine</string>
-    <string name="fragment_create_study_desc_page_five">In der Kalenderansicht können sie Termine auswählen und bestätigen, an denen sich Teilnehmer für ihre Studie eintragen können. \n \n Bitte vermeiden sie hier Fehlplanungen um möglichst problemfreie Teilnahmen zu gewährleisten.</string>
+    <string name="fragment_create_study_desc_page_five">Wählen Sie mithilfe des Buttons Termine aus, an denen Interessierte an Ihrer Studie teilnehmen können. \n \n Bitte vermeiden Sie hier Fehlplanungen um möglichst problemfreie Teilnahmen zu gewährleisten.</string>
     <string name="fragment_create_study_pageFive_fab">Neuer Termin</string>
     <string name="fragment_create_study_pageFinalTitle">Bestätigung</string>
+    <string name="fragment_create_study_base_next">Weiter</string>
+    <string name="fragment_create_study_base_back">Zurück</string>
+    <string name="fragment_create_study_base_create">Erstellen</string>
+    <string name="fragment_create_study_base_main">Hauptmenü</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 
 </resources>

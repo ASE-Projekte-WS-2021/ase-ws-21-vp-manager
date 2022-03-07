@@ -12,7 +12,7 @@ public class createStudyFragment_StepOne extends Fragment {
 
 
     public createStudyFragment_StepOne() {
-        createStudyBase.currentFragment = 1;
+        createStudyActivity.currentFragment = 1;
     }
 
     @Override
@@ -36,4 +36,5 @@ public class createStudyFragment_StepOne extends Fragment {
 
     private void setupView(View view){
     }
+
 }
