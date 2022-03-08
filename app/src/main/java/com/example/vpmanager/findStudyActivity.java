@@ -86,7 +86,7 @@ public class findStudyActivity extends AppCompatActivity {
         }
 
         studyListAdapter arrayAdapter = new studyListAdapter(this, studyNamesAndVps);
-        animation = AnimationUtils.loadAnimation(this,R.anim.animation1);
+        animation = AnimationUtils.loadAnimation(this,R.anim.animation);
         studyList.setAdapter(arrayAdapter);
         setupClickListener();
     }

@@ -78,7 +78,7 @@ public class studyListAdapter extends BaseAdapter {
 
         convertView = LayoutInflater.from(findStudyActivity).inflate(R.layout.studylist_cart, parent, false);
 
-        animation = AnimationUtils.loadAnimation(findStudyActivity, R.anim.animation1);
+        animation = AnimationUtils.loadAnimation(findStudyActivity, R.anim.animation);
 
         TextView nameText;
         TextView vpText;
