@@ -35,9 +35,9 @@ public class findStudyFragment extends Fragment implements StudyListAdapter.OnSt
         View view = inflater.inflate(R.layout.fragment_find_study, container, false);
         initFindStudyFragmentComponents(view);
 
-        //Daten werden zuerst im viewmodel verändert...
+        //data is first changed in the viewModel...
         findStudyViewModel.init();
-        //...und dann dem Adapter übergeben. Die muss evtl in onViewCreated aufgerufen werden wenn abgewartet werden soll
+        //...and passed to the adapter later.
         connectStudyListAdapter();
         return view;
     }
@@ -59,17 +59,10 @@ public class findStudyFragment extends Fragment implements StudyListAdapter.OnSt
         Log.d("findStudyFragment",
                 "connectStudyListAdapter start. Size of Array:" + findStudyViewModel.getStudyMetaInfo().size());
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
-        //Bei ersten mal wird ein neuer Adapter instanziert. Die anderen Male
-        if(studyListAdapter == null){
-            studyListAdapter = new StudyListAdapter(requireActivity(), findStudyViewModel.getStudyMetaInfo(), this);
-            studyList.setAdapter(studyListAdapter);
-            studyList.setLayoutManager(linearLayoutManager);
-        }else{
-            //Adapter could also be set new?!
-            studyListAdapter.mStudyMetaInfos = findStudyViewModel.getStudyMetaInfo();
-            studyListAdapter.notifyDataSetChanged();
-            studyList.setLayoutManager(linearLayoutManager);
-        }
+
+        studyListAdapter = new StudyListAdapter(requireActivity(), findStudyViewModel.getStudyMetaInfo(), this);
+        studyList.setAdapter(studyListAdapter);
+        studyList.setLayoutManager(linearLayoutManager);
         Log.d("findStudyFragment", "connectStudyListAdapter end");
     }
 

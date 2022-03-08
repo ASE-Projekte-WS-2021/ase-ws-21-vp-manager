@@ -34,13 +34,14 @@ public class FindStudyViewModel extends ViewModel {
 
         mRepo = StudyListRepository.getInstance();
         //instance is the same but different data can be retrieved!
+        //mStudyMetaInfo = mRepo.getStudyMetaInfo();
         mStudyMetaInfo = mRepo.getStudyMetaInfo();
         Log.d("FindStudyViewModel", "mStudyMetaInfo after init:" + mStudyMetaInfo.size());
         Log.d("FindStudyViewModel", "init end");
     }
 
     public ArrayList<StudyMetaInfoModel> getStudyMetaInfo(){
-        Log.d("FindStudyViewModel", "getStudyMetaInfo start + end (returns a MutableLiveDataList of StudyInfoModels)");
+        Log.d("FindStudyViewModel", "getStudyMetaInfo start + end (returns an ArrayList of StudyInfoModels)");
         return mStudyMetaInfo;
     }
 

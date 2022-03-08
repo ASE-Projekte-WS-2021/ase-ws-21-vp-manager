@@ -19,7 +19,7 @@ import java.util.ArrayList;
 //this adapter adapts the individual recyclerView layouts to the big recyclerView container
 public class StudyListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
-    public ArrayList<StudyMetaInfoModel> mStudyMetaInfos; //= new ArrayList<>() //List
+    private ArrayList<StudyMetaInfoModel> mStudyMetaInfos; //= new ArrayList<>()
     private Context mContext;
     private OnStudyItemClickListener mOnStudyItemClickListener;
 

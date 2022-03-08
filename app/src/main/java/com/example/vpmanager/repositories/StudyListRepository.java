@@ -3,7 +3,6 @@ package com.example.vpmanager.repositories;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
-import androidx.lifecycle.MutableLiveData;
 
 import com.example.vpmanager.models.StudyMetaInfoModel;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -15,7 +14,6 @@ import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
-import java.util.List;
 
 //Singleton pattern
 public class StudyListRepository {
@@ -48,19 +46,16 @@ public class StudyListRepository {
         Log.d("StudyListRepository","getStudyMetaInfo start");
 
         //This method is called first, but needs to long to finish!
-        getStudyInfosFromDB(new StudyListRepository.FirestoreCallback() {
+        getStudyInfosFromDB(new FirestoreCallback() { //StudyListRepository.
             @Override
-            public void onCallback(ArrayList<ArrayList<String>> arrayList) {
+            public void onCallback() { //ArrayList<ArrayList<String>> arrayList
                 Log.d("StudyListRepository", "The ArrayList of StudyInfoModels will be set now");
                 setStudyMetaInfo();
+                //send signal, that the db call is finished, here!
             }
         });
 
-        //TODO: make thread wait for db call!
-
-        //switch methods to use hardcoded or db-data! DB call is made anyway in the method above (getStudyInfosFromDB)!
         //fillTestArrayList(); //hardcoded data is used, for getting example studies (but ids must match to go in detail!)
-        //setStudyMetaInfo(); //real db data is used, for getting all studies (on the second try!)
 
         Log.d("StudyListRepository","getStudyMetaInfo end");
         return studyMetaInfosArrayList;
@@ -108,12 +103,12 @@ public class StudyListRepository {
         Log.d("StudyListRepository","setStudyMetaInfo end");
     }
 
-    public interface FirestoreCallback {
-        void onCallback(ArrayList<ArrayList<String>> arrayList);
+    private interface FirestoreCallback {
+        void onCallback(); //ArrayList<ArrayList<String>> arrayList
     }
 
     //method with the actual db call
-    private void getStudyInfosFromDB(StudyListRepository.FirestoreCallback firestoreCallback) {
+    private void getStudyInfosFromDB(FirestoreCallback firestoreCallback) {
         Log.d("StudyListRepository","getStudyInfosFromDB start");
         db = FirebaseFirestore.getInstance();
         studiesRef = db.collection("studies");
@@ -134,10 +129,13 @@ public class StudyListRepository {
                                 idNameVph.add(2, document.getString("vps"));
                                 studyIdNameVp.add(idNameVph);
                             }
-                            firestoreCallback.onCallback(studyIdNameVp);
+                            firestoreCallback.onCallback(); //studyIdNameVp
+                        }else {
+                            Log.d("getStudyInfosFromDB", "Error:" + task.getException());
                         }
                     }
                 });
         Log.d("StudyListRepository","getStudyInfosFromDB end");
     }
+
 }
