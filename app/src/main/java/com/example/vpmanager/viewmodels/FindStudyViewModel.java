@@ -9,17 +9,20 @@ import androidx.lifecycle.ViewModel;
 import com.example.vpmanager.models.StudyMetaInfoModel;
 import com.example.vpmanager.repositories.StudyListRepository;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class FindStudyViewModel extends ViewModel {
 
-    private MutableLiveData<List<StudyMetaInfoModel>> mStudyMetaInfo;
+    private ArrayList<StudyMetaInfoModel> mStudyMetaInfo;
     private StudyListRepository mRepo;
 
-    //init gets called before getStudyMetaInfo in the Fragment!
+    //get (always the same while app open) instance of the repo and fill ArrayList with StudyMetaInfoModel Objects
     public void init(){
         Log.d("FindStudyViewModel", "init start");
 
+        //This part isn't needed because we always want to fetch new data from the db
+        /*
         if (mStudyMetaInfo != null){
             Log.d("FindStudyViewModel",
                     "method init wasn't called because the MutableLiveDataList of " +
@@ -27,17 +30,19 @@ public class FindStudyViewModel extends ViewModel {
             Log.d("FindStudyViewModel", "init end");
             return;
         }
+         */
 
         mRepo = StudyListRepository.getInstance();
-        Log.d("FindStudyViewModel",
-                "mRepo.getStudyMetaInfo() will be called. This returns a MutableLiveDataList of StudyMetaInfoModel");
+        //instance is the same but different data can be retrieved!
         mStudyMetaInfo = mRepo.getStudyMetaInfo();
-
+        Log.d("FindStudyViewModel", "mStudyMetaInfo after init:" + mStudyMetaInfo.size());
         Log.d("FindStudyViewModel", "init end");
     }
 
-    public LiveData<List<StudyMetaInfoModel>> getStudyMetaInfo(){
+    public ArrayList<StudyMetaInfoModel> getStudyMetaInfo(){
         Log.d("FindStudyViewModel", "getStudyMetaInfo start + end (returns a MutableLiveDataList of StudyInfoModels)");
         return mStudyMetaInfo;
     }
+
+    //Methods could be put together (Always get instance of repo, fill array with data from repo and return it after)!
 }

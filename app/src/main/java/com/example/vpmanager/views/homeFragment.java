@@ -24,33 +24,35 @@ public class homeFragment extends Fragment {
     private Button ownStudyNavBtn;
 
     public homeFragment() {
-        //Empty public constructor required?
     }
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        //return super.onCreateView(inflater, container, savedInstanceState);
-        Log.d("homeFragment", "onCreateView start + end");
-        return inflater.inflate(R.layout.fragment_home, container, false);
+        View view = inflater.inflate(R.layout.fragment_home, container, false);
+
+        initHomeFragmentComponents(view);
+        return view;
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        Log.d("homeFragment", "onViewCreated start");
         super.onViewCreated(view, savedInstanceState);
-
         navController = Navigation.findNavController(view);
-        Log.d("homeFragment", "navController:" + navController);
+        setNavCardClickListeners();
+    }
 
-        setClickListeners(view);
-        Log.d("homeFragment", "onViewCreated end");
+    private void initHomeFragmentComponents(View view){
+
+        findStudyNavBtn = view.findViewById(R.id.findStudyCard);
+        createStudyNavBtn = view.findViewById(R.id.createStudyCard);
+        overviewNavBtn = view.findViewById(R.id.overviewCard);
+        ownStudyNavBtn = view.findViewById(R.id.ownStudyCard);
     }
 
     //sets click listeners on the four buttons to open their corresponding fragments
-    private void setClickListeners(View view) {
+    private void setNavCardClickListeners() {
         Log.d("homeFragment", "setClickListeners start");
-        findStudyNavBtn = view.findViewById(R.id.findStudyCard);
         findStudyNavBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -58,7 +60,6 @@ public class homeFragment extends Fragment {
                 navController.navigate(R.id.action_homeFragment_to_findStudyFragment);
             }
         });
-        createStudyNavBtn = view.findViewById(R.id.createStudyCard);
         createStudyNavBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -66,7 +67,6 @@ public class homeFragment extends Fragment {
                 navController.navigate(R.id.action_homeFragment_to_createStudyActivity);
             }
         });
-        overviewNavBtn = view.findViewById(R.id.overviewCard);
         overviewNavBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -74,7 +74,6 @@ public class homeFragment extends Fragment {
                 navController.navigate(R.id.action_homeFragment_to_personalAccountFragment);
             }
         });
-        ownStudyNavBtn = view.findViewById(R.id.ownStudyCard);
         ownStudyNavBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

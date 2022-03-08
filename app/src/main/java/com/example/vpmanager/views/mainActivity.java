@@ -91,7 +91,7 @@ public class mainActivity extends AppCompatActivity {
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
         //NavigationUI.setupWithNavController(topAppBarMain, navController, appBarConfiguration);
 
-        //Workaround weil dieser verdammte NavigationDrawer keinen Bock auf mich hat...
+        //Workaround because the drawer isn't working properly
         setWorkAround();
         Log.d("mainActivity", "setupNavigationView end");
     }
@@ -139,7 +139,6 @@ public class mainActivity extends AppCompatActivity {
         Log.d("mainActivity", "setWorkaround end");
     }
 
-
     @Override
     public boolean onSupportNavigateUp() {
         Log.d("mainActivity", "onSupportNavigateUp start + end");
@@ -147,7 +146,6 @@ public class mainActivity extends AppCompatActivity {
         // drawer menu, depending on the situation.
         return NavigationUI.navigateUp(navController, appBarConfiguration) || super.onSupportNavigateUp();
     }
-
 
     //Parameter:
     //Return values:

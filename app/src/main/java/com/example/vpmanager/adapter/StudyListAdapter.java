@@ -15,16 +15,15 @@ import com.example.vpmanager.R;
 import com.example.vpmanager.models.StudyMetaInfoModel;
 
 import java.util.ArrayList;
-import java.util.List;
 
 //this adapter adapts the individual recyclerView layouts to the big recyclerView container
 public class StudyListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
+    public ArrayList<StudyMetaInfoModel> mStudyMetaInfos; //= new ArrayList<>() //List
     private Context mContext;
-    private List<StudyMetaInfoModel> mStudyMetaInfos = new ArrayList<>();
     private OnStudyItemClickListener mOnStudyItemClickListener;
 
-    public StudyListAdapter(Context context, List<StudyMetaInfoModel> studyMetaInfos,
+    public StudyListAdapter(Context context, ArrayList<StudyMetaInfoModel> studyMetaInfos,
                             OnStudyItemClickListener onStudyItemClickListener) {
         mContext = context;
         mStudyMetaInfos = studyMetaInfos;
@@ -42,30 +41,10 @@ public class StudyListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
-
         ((CustomViewHolder)holder).studyTitle.setText(mStudyMetaInfos.get(position).getName());
-        //holder.studyTitle.setText(mStudyTitle.get(position));
-
         ((CustomViewHolder)holder).studyVps.setText(mStudyMetaInfos.get(position).getVps());
-        //holder.studyVps.setText(mStudyVps.get(position));
-
-        /*
-        ((ViewHolder)holder).studyListParentLayout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                //handle click on a study item
-                //gets the position of the clicked item
-                int currentPosition = holder.getAdapterPosition();
-                Log.d("Adapter CurrentPosition", String.valueOf(currentPosition));
-                String studyId = mStudyMetaInfos.get(currentPosition).getId();
-                Log.d("Adapter StudyId", studyId);
-                //findStudyFragment.navigateToStudyDetail(studyId);
-            }
-        });
-         */
     }
 
-    //Tells the adapter how many items are in the list
     @Override
     public int getItemCount() {
         return mStudyMetaInfos.size();
@@ -83,13 +62,14 @@ public class StudyListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
 
             studyTitle = itemView.findViewById(R.id.studyListStudyTitle);
             studyVps = itemView.findViewById(R.id.studyListStudyVps);
-
             studyListParentLayout = itemView.findViewById(R.id.studyListParentLayout);
+
             studyListParentLayout.setOnClickListener(this);
         }
 
         @Override
         public void onClick(View view) {
+            //Get the id of the item that was clicked
             String studyId = mStudyMetaInfos.get(getAdapterPosition()).getId();
             Log.d("StudyListAdapter", "studyId that was clicked:" + studyId);
             onStudyItemClickListener.onStudyClick(studyId);
@@ -97,6 +77,6 @@ public class StudyListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
     }
 
     public interface OnStudyItemClickListener {
-        void onStudyClick(String studyId); //int position ganz normal wenn id erst in findStudyFragment geholt wird!
+        void onStudyClick(String studyId);
     }
 }

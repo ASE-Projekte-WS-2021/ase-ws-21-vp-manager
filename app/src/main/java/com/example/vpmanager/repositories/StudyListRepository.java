@@ -28,11 +28,9 @@ public class StudyListRepository {
     private ArrayList<StudyMetaInfoModel> studyMetaInfosArrayList = new ArrayList<>();
     //this is a test list with hard coded studies that are added below
     private ArrayList<StudyMetaInfoModel> studyMetaInfosArrayListTest = new ArrayList<>();
-
     //this array gets filled first after the db call. Contains the three infos about a study
     private ArrayList<ArrayList<String>> studyIdNameVp;
 
-    //muss evtl verändert werden!
     public static StudyListRepository getInstance(){
         Log.d("StudyListRepository","getInstance start");
 
@@ -41,14 +39,12 @@ public class StudyListRepository {
             Log.d("StudyListRepository","instance was null and a new one was created");
         }
 
-        Log.d("StudyListRepository","instance:" + instance);
         Log.d("StudyListRepository","getInstance end");
         return instance;
     }
 
-    //This method gets called when the ViewModel is initiated in the fragment!
-    //The method returns the data from the DB/hardcoded, that is requested from the ViewModel.
-    public MutableLiveData<List<StudyMetaInfoModel>> getStudyMetaInfo(){
+    //This method gets called when the ViewModel is initiated in the fragment (every time the fragment is opened)!
+    public ArrayList<StudyMetaInfoModel> getStudyMetaInfo(){
         Log.d("StudyListRepository","getStudyMetaInfo start");
 
         //This method is called first, but needs to long to finish!
@@ -56,26 +52,18 @@ public class StudyListRepository {
             @Override
             public void onCallback(ArrayList<ArrayList<String>> arrayList) {
                 Log.d("StudyListRepository", "The ArrayList of StudyInfoModels will be set now");
-                setStudyMetaInfo(); //activate to use db data and deactivate to use hardcoded data!
+                setStudyMetaInfo();
             }
         });
+
         //TODO: make thread wait for db call!
 
-        //The following code is called after the fist method, but it is executed first
-        //because it doesn't wait for the method above!
-        MutableLiveData<List<StudyMetaInfoModel>> data = new MutableLiveData<>();
-
-        //WENN DER DB CALL MIT THREADING FUNKTIONIERT KANN DIE METHODE(N) AN DER STELLE VERMUTLICH RAUS!!!!
         //switch methods to use hardcoded or db-data! DB call is made anyway in the method above (getStudyInfosFromDB)!
         //fillTestArrayList(); //hardcoded data is used, for getting example studies (but ids must match to go in detail!)
         //setStudyMetaInfo(); //real db data is used, for getting all studies (on the second try!)
 
-        Log.d("StudyListRepository", "local data list before:" + data.getValue());
-        //Local MutableLiveDataList is filled with the data that was retrieved from the DB/hardcoded, and is then returned!
-        data.setValue(studyMetaInfosArrayList); //studyMetaInfosArrayListTest
-        Log.d("StudyListRepository", "local data list after:" + data.getValue());
         Log.d("StudyListRepository","getStudyMetaInfo end");
-        return data;
+        return studyMetaInfosArrayList;
     }
 
     //Stores the hardcoded study infos in another arrayList, which is further used in this app
@@ -103,9 +91,12 @@ public class StudyListRepository {
     }
 
     //Method has access to the already filled nested ArrayList.
-    //Stores the study meta infos in the model object and adds this to another ArrayList
+    //Stores the study meta infos in studyMetaInfoModel Objects and adds them to another ArrayList
     private void setStudyMetaInfo() {
         Log.d("StudyListRepository","setStudyMetaInfo start");
+        //THE LIST NEEDS TO BE CLEARED BEFORE, BECAUSE THE REPO-INSTANCE IS THE SAME AND IT ISN'T CREATED NEW!
+        studyMetaInfosArrayList.clear();
+        //New data is stored in the list
         for (int i = 0; i < studyIdNameVp.size(); i++) {
             studyMetaInfosArrayList.add(
                     new StudyMetaInfoModel(
