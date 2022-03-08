@@ -86,7 +86,9 @@
                     android:layout_marginLeft="20dp"
                     android:layout_marginTop="5dp"
                     android:layout_marginRight="20dp"
-                    android:background="@color/color_two" />
+                    android:background="@color/heatherred_light" />
+
+                <!--colortwo = grey-->
 
             </LinearLayout>
 

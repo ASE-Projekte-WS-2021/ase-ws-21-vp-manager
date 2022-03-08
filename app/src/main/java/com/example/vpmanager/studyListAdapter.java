@@ -16,6 +16,9 @@ import android.content.Intent;
 
 import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FirebaseFirestore;
+
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 
@@ -23,30 +26,31 @@ public class studyListAdapter extends BaseAdapter {
 
     findStudyActivity findStudyActivity;
     ArrayList<String> studyNamesAndVps;
+    ArrayList<String> nameList;
+    ArrayList<String> vpList;
+    ArrayList<String> categoryList;
+    String studyName;
+    String studyVP;
+    String category;
+
     Animation animation;
 
+    /*DocumentReference studyRef;
+    FirebaseFirestore db;*/
 
-
-
+    /*Class class = new Class();
+    class.publicMethod();*/
 
 
 
     public studyListAdapter(findStudyActivity findStudyActivity, ArrayList<String> studyNamesAndVps) {
 
-//        LocalBroadcastManager.getInstance().registerReceiver(mReceiver, new IntentFilter("testintent"));
 
         this.findStudyActivity = findStudyActivity;
         this.studyNamesAndVps = studyNamesAndVps;
 
+
     }
-
-  /*  private BroadcastReceiver mReceiver = new BroadcastReceiver() {
-
-        @Override
-        public void onReceive(Context context, Intent intent) {
-            String receivedHexColor = intent.getStringArrayExtra(studylist);
-        }
-    };*/
 
 
     @Override
@@ -67,34 +71,63 @@ public class studyListAdapter extends BaseAdapter {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
 
-        String test = studyNamesAndVps.get(position);
+        nameList = findStudyActivity.getStudyNames();
+        studyName = nameList.get(position);
+
+        vpList = findStudyActivity.getStudyVPs();
+        studyVP = vpList.get(position);
+
+
+        categoryList = findStudyActivity.getStudyCats();
+        category = categoryList.get(position);
+
+
+        /*if (category.equals("AR")) {
+            convertView = LayoutInflater.from(findStudyActivity).inflate(R.layout.studylist_cart_ar, parent, false);
+        } else {
+            convertView = LayoutInflater.from(findStudyActivity).inflate(R.layout.studylist_cart, parent, false);
+        }*/
 
         convertView = LayoutInflater.from(findStudyActivity).inflate(R.layout.studylist_cart, parent, false);
+
         animation = AnimationUtils.loadAnimation(findStudyActivity, R.anim.animation1);
 
-        TextView textView;
+        TextView nameText;
+        TextView vpText;
+        TextView categoryText;
+        View seperater;
+
 
         /*LinearLayout ll_item;
         ll_item = convertView.findViewById(R.id.ll_item);*/
-        textView = convertView.findViewById(R.id.textview);
+        nameText = convertView.findViewById(R.id.textviewName);
+        vpText = convertView.findViewById(R.id.textviewVP);
+        categoryText = convertView.findViewById(R.id.textviewCat);
+
+        seperater = convertView.findViewById(R.id.seperater);
 
 
+        nameText.setAnimation(animation);
+        nameText.setText(studyName);
 
+        vpText.setAnimation(animation);
+        vpText.setText(studyVP);
 
-        //hover effect for cards!
-        //add nav drawer background (in xml unten)
+        categoryText.setAnimation(animation);
+        categoryText.setText(category);
 
-
-
-
-        textView.setAnimation(animation);
-        textView.setText(test);
-
-
-
-
+        seperater.setAnimation(animation);
 
 
         return convertView;
     }
+
+
+    private void setupCategoryList() {
+
+    }
+
 }
+
+
+//hover effect for cards?

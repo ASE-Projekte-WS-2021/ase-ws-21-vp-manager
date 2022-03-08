@@ -418,4 +418,8 @@ public class studyActivity extends AppCompatActivity {
         finish();
         startActivity(getIntent());
     }
+
+    public ArrayList<String> getStudyDetails() {
+        return studyDetails;
+    }
 }

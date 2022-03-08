@@ -36,6 +36,8 @@
             app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
             <!--    android:background="@color/lightblue_Main"-->
+            <!--    hover effects for button-->
+            <!--    conflict for cards when studyname too long?-->
 
 
             <TextView
@@ -43,11 +45,16 @@
                 android:layout_height="wrap_content"
                 android:text="@string/entryListHeader"
                 android:textSize="23sp"
-                android:textStyle="bold"
-                android:layout_marginStart="25dp"
+                android:layout_marginStart="5dp"
                 android:layout_marginTop="15dp"
+                android:textAlignment="center"
+                android:fontFamily="@font/google_sans_bold"
                 />
-            <!--    android:textColor="@color/orange_highlight"-->
+            <!--    android:layout_marginStart="5dp"
+                    android:textStyle="bold"-->
+            <!--Trennstrich zwischen Vps und Name??-->
+
+            <!--farbiges Icon neben Überschrift?-->
 
             <View
                 android:layout_width="match_parent"
@@ -55,7 +62,7 @@
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="20dp"
                 android:layout_marginTop="55dp"
-                android:background="@color/color_two"
+                android:background="@color/heatherred_light"
                 />
             <!--    android:background="@color/lightorange_Main"-->
 

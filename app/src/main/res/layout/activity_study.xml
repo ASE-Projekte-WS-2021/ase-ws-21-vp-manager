@@ -51,7 +51,7 @@
             <View
                 android:layout_width="match_parent"
                 android:layout_height="3dp"
-                android:background="@color/color_two"
+                android:background="@color/heatherred_light"
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="20dp"
                 android:layout_marginTop="15dp"
@@ -64,6 +64,8 @@
                 android:layout_height="29dp"
                 android:layout_marginTop="10dp"
                 app:srcCompat="@drawable/ic_baseline_info_24" />
+
+            
 
 
 
@@ -163,7 +165,7 @@
             <View
                 android:layout_width="match_parent"
                 android:layout_height="3dp"
-                android:background="@color/color_two"
+                android:background="@color/heatherred_light"
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="20dp"
                 android:layout_marginTop="35dp"/>
@@ -172,7 +174,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/dateListHeader"
-                android:textColor="@color/orange_highlight"
+                android:textColor="@color/green_dark"
                 android:textSize="18sp"
                 android:textStyle="bold"
                 android:layout_marginStart="20dp"

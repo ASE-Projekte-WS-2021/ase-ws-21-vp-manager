@@ -21,14 +21,14 @@
     <!--individual color palette for application; based on Material Design color tool-->
 
     <!--primary colors-->
-    <color name="lightblue_Main">#E3F2FD</color>
-    <color name="blue_highlight">#40A6F6</color>
-    <color name="blue_highlightDark">#1277D3</color>
+    <color name="heatherred_Main">#9c004b</color>
+    <color name="heatherred_light">#d24676</color>
+    <color name="heatherred_dark">#680024</color>
 
     <!--complementary colors-->
-    <color name="lightorange_Main">#FDEEE3</color>
-    <color name="orange_highlight">#F68F40</color>
-    <color name="orange_highlightDark">#D36F12</color>
+    <color name="green_Main">#009c51</color>
+    <color name="green_light">#51ce7e</color>
+    <color name="green_dark">#006c26</color>
 
     <!--analogous colors (based on highlight color of main and secondary)-->
     <color name="turquoise_highlight">#40F6EA</color>
@@ -42,6 +42,9 @@
     <!--independent UI Elements-->
     <color name="red_error">#D50000</color>
     <color name="lightorange_hint">#FFC39E</color>
+    <color name="lightorange_gradient">#FE9455</color>
+    <color name="heatherred_hint">#F2B7CB</color>
+
 
 
 

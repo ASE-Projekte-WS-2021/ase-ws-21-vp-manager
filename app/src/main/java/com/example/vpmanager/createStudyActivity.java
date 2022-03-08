@@ -287,9 +287,11 @@ public class createStudyActivity extends AppCompatActivity {
     //Creates the Datepicker for the dates
     private void datePicker() {
         final Calendar c = Calendar.getInstance();
+
         mYear = c.get(Calendar.YEAR);
         mMonth = c.get(Calendar.MONTH);
         mDay = c.get(Calendar.DAY_OF_MONTH);
+
 
         DatePickerDialog datePickerDialog = new DatePickerDialog(this,
                 new DatePickerDialog.OnDateSetListener() {
