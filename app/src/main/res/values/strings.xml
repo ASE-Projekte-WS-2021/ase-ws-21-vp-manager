@@ -73,6 +73,7 @@
         <item>VR</item>
         <item>AR</item>
         <item>Diary Study</item>
+        <item>Sonstige</item>
     </string-array>
 
     <string-array name="createExecutionTypeList">
@@ -86,7 +87,7 @@
 
     <!---findStudyActivity-->
     <string name="entryListHeader">Aktuelles Studienangebot</string>
-    <string name="vpHours"> VPs)</string>
+    <string name="vpHours"> VPs</string>
 
     <!---studyActivity-->
     <string name="studyViewHeader">Detailansicht - Studie</string>

@@ -4,8 +4,9 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import androidx.annotation.NonNull;
@@ -30,10 +31,16 @@ public class findStudyActivity extends AppCompatActivity {
     DrawerLayout drawerLayoutFind;
     NavigationView navigationViewFind;
 
+    //studyNamesAndVps has no use right now
+
     ListView studyList;
     ArrayList<ArrayList<String>> studyIdNameVp;
     ArrayList<String> studyNamesAndVps;
+    ArrayList<String> studyNames;
+    ArrayList<String> studyVPs;
     ArrayList<String> studyIds;
+    ArrayList<String> studyCats;
+    Animation animation;
     FirebaseFirestore db;
     CollectionReference studiesRef;
 
@@ -65,16 +72,49 @@ public class findStudyActivity extends AppCompatActivity {
         studyList = findViewById(R.id.listView);
         studyNamesAndVps = new ArrayList<>();
         studyIds = new ArrayList<>();
+
+
         //Store the names and the vps in an ArrayList
         //Store the ids in the same order in another ArrayList
         for (int i = 0; i < studyIdNameVp.size(); i++) {
-            studyNamesAndVps.add(studyIdNameVp.get(i).get(1) + "\t\t(" + studyIdNameVp.get(i).get(2) + getString(R.string.vpHours));
+
+            String studyName = studyIdNameVp.get(i).get(1);
+            String studyVp  = studyIdNameVp.get(i).get(2);
+            studyNamesAndVps.add(studyName + "\t\t(" + studyVp + getString(R.string.vpHours));
             studyIds.add(studyIdNameVp.get(i).get(0));
+
         }
-        ArrayAdapter arrayAdapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, studyNamesAndVps);
+
+        studyListAdapter arrayAdapter = new studyListAdapter(this, studyNamesAndVps);
+        animation = AnimationUtils.loadAnimation(this,R.anim.animation1);
         studyList.setAdapter(arrayAdapter);
         setupClickListener();
     }
+
+
+
+    public ArrayList<String> getStudyNames() {
+        studyNames = new ArrayList<String>();
+        for (int i = 0; i < studyIdNameVp.size(); i++) {
+            studyNames.add(studyIdNameVp.get(i).get(1));
+        }
+        return studyNames;
+    }
+
+
+    public ArrayList<String> getStudyVPs() {
+        studyVPs = new ArrayList<String>();
+        for (int i = 0; i < studyIdNameVp.size(); i++) {
+            studyVPs.add(studyIdNameVp.get(i).get(2) + getString(R.string.vpHours));
+        }
+        return studyVPs;
+    }
+
+    public ArrayList<String> getStudyCats() {
+        return studyCats;
+    }
+
+
 
     // Parameter:
     // Return values:
@@ -91,6 +131,7 @@ public class findStudyActivity extends AppCompatActivity {
         db = FirebaseFirestore.getInstance();
         studiesRef = db.collection(getString(R.string.collectionPathStudies));
         studyIdNameVp = new ArrayList<>();
+        studyCats = new ArrayList<String>();
 
         studiesRef.orderBy("name", Query.Direction.DESCENDING)
                 .get()
@@ -105,12 +146,15 @@ public class findStudyActivity extends AppCompatActivity {
                                 idNameVph.add(1, document.getString("name"));
                                 idNameVph.add(2, document.getString("vps"));
                                 studyIdNameVp.add(idNameVph);
+                                studyCats.add(document.getString("category"));
                             }
                             firestoreCallback.onCallback(studyIdNameVp);
                         }
                     }
                 });
     }
+
+
 
     // Parameter:
     // Return values:
@@ -167,4 +211,13 @@ public class findStudyActivity extends AppCompatActivity {
             }
         });
     }
+
+
+
+
+
+
+
+
+
 }

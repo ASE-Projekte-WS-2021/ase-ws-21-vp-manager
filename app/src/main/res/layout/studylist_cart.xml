@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/test_item"
+    android:padding="10dp">
+
+<!--    com.google.android.material.card.MaterialCardView -->
+    <androidx.cardview.widget.CardView
+        android:id="@+id/card_view"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:elevation="5dp"
+        app:cardCornerRadius="10dp"
+        app:cardMaxElevation="5dp"
+        >
+
+
+        <LinearLayout
+            android:id="@+id/ll_item"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/gradient_1"
+            android:orientation="vertical"
+            android:padding="10dp"
+            >
+
+
+            <TextView
+                android:id="@+id/textviewName"
+                android:layout_width="match_parent"
+                android:layout_height="20dp"
+                android:layout_marginTop="4dp"
+                android:layout_marginBottom="20dp"
+                android:fontFamily="@font/google_sans_medium"
+                android:textColor="@color/white"
+                android:textAlignment="center"
+                android:textSize="17dp"
+                android:textStyle="bold">
+
+            </TextView>
+            <!--android:textAlignment="center"-->
+
+            <TextView
+                android:id="@+id/textviewVP"
+                android:layout_width="100dp"
+                android:layout_height="20dp"
+                android:layout_marginTop="-10dp"
+                android:layout_marginBottom="20dp"
+                android:layout_marginLeft="90dp"
+                android:fontFamily="@font/google_sans_medium"
+                android:textAlignment="center"
+                android:textColor="@color/white"
+                android:textSize="17dp"
+                android:textStyle="bold">
+
+            </TextView>
+            <!--android:textAlignment="center"-->
+            <!--only aligns if with = matchparent-->
+
+            <TextView
+                android:id="@+id/textviewCat"
+                android:layout_width="100dp"
+                android:layout_height="20dp"
+                android:layout_marginTop="-40dp"
+                android:layout_marginBottom="20dp"
+                android:layout_marginLeft="170dp"
+                android:fontFamily="@font/audiowide"
+                android:textAlignment="center"
+                android:textColor="@color/white"
+                android:textSize="17dp"
+                >
+
+            </TextView>
+
+            <View
+                android:id="@+id/seperater"
+                android:layout_width="2dp"
+                android:layout_height="19dp"
+                android:layout_marginLeft="180dp"
+                android:layout_marginTop="-40dp"
+                android:layout_marginRight="20dp"
+                android:background="@color/white" />
+
+        </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
+
+</RelativeLayout>

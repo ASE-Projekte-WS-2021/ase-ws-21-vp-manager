@@ -2,6 +2,6 @@
 
 <!--change text color for current page in Navigation Menu-->
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
-    <item android:color="@color/lightblue_Main" android:state_checked="true" />
-    <item android:color="@color/orange_highlight" />
+    <item android:color="@color/green_light" android:state_checked="true" />
+    <item android:color="@color/white"/>
 </selector>
