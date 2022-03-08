@@ -13,40 +13,70 @@
     <string name="personalAccount">Persönliche Übersicht</string>
 
     <!---Create Study-->
-    <string name="createOfferedVP">Angebotene VP</string>
-    <string name="createStudyTitle">Titel der Studie</string>
     <string name="createStudyDesc">Studienbeschreibung</string>
     <string name="createAddDateButton">Termine hinzufügen</string>
     <string name="createCreateButton">Studie erstellen</string>
-    <string name="createPlatformHint">Welche Plattform?</string>
-    <string name="createLocationHint">Ort</string>
+    <string name="createPlatformHint">Primär Plattform*</string>
+    <string name="createPlatformHint2">Sekundär Plattform</string>
+    <string name="createLocationHint">Ort*</string>
     <string name="createRoomHint">Raum</string>
     <string name="createStreetHint">Straße</string>
-    <string name="createAlertBase">Bitten tragen Sie die fehlenden Angaben ein: \n</string>
-    <string name="createAlertTitle">Studientitel \n</string>
-    <string name="createAlertContact">Kontaktmöglichkeit \n</string>
-    <string name="createAlertStudyDesc">Studienbeschreibung \n</string>
-    <string name="createAlertExecutionType">Durchführungsart \n</string>
+    <string name="createAlertBase">Bitten tragen Sie die fehlenden Angaben ein:</string>
+    <string name="createAlertStudyDesc">Studienbeschreibung</string>
+    <string name="createAlertExecutionType">Durchführungsart</string>
     <string name="createAlertCategory">Kategorie \n</string>
-    <string name="createAlertLocation">Durchführungsort \n</string>
-    <string name="createAlertOptionalBase">Sind Sie sicher das Sie ohne folgende Angaben fortfahren wollen: \n</string>
-    <string name="createAlertVP">VP-Stunden \n</string>
-    <string name="createAlertRoom">Raum \n</string>
-    <string name="createAlertStreet">Straße \n</string>
-    <string name="createAlertPlatform">Plattform \n</string>
-    <string name="createAlertDates">Termine \n</string>
+    <string name="createAlertLocation">Durchführungsort</string>
+    <string name="createAlertOptionalBase">Sind Sie sicher das Sie ohne folgende Angaben fortfahren wollen:</string>
+    <string name="createAlertVP">VP-Stunden</string>
+    <string name="createAlertRoom">Raum</string>
+    <string name="createAlertStreet">Straße</string>
+    <string name="createAlertPlatform">Plattform</string>
+    <string name="createAlertDates">Termine</string>
     <string name="remoteString">Remote</string>
     <string name="presenceString">Präsenz</string>
 
+    <string name="createOfferedVP">Angebotene VP</string>
+    <string name="createStudyTitleHint">Titel*</string>
+    <string name="createStudyTitle">Titel</string>
+    <string name="createStudyExe">Durchführungsart</string>
+    <string name="createStudyContact">Kontaktmöglichkeit</string>
+    <string name="fragment_create_study_pageOneTitle">Grundinformationen</string>
+    <string name="fragment_create_study_pageBaseDesc">Um eine Studie zu erstellen, geben Sie in den folgenden Schritten bitte nähere Informationen zum Ablauf, der Studiendauer, der Zahl an VP Stunden und möglichen Terminen an. Optionale Angaben werden als solche gekennzeichnet (*). \n\n\n Potenzielle Teilnehmer können ihren Eintrag anschließend im Reiter \"Studie finden\" einsehen und sich für freistehende Termine eintragen.</string>
+    <string name="fragment_create_study_desc_page_one">Titel der Studie: Name/Bezeichnung, unter der Ihr Eintrag in der Studienliste sichtbar sein wird.\n \n Angebotene VP: Anzahl der zu erhaltenden Versuchspersonenstunden für die erfolgreiche Teilnahme an Ihrer Studie.</string>
+    <string name="fragment_create_study_desc_page_two">Um die Teilnehmer Ihrer Studie über den Inhalt und den Ablauf zu informieren, geben Sie bitte eine möglichst genaue Beschreibung an.</string>
+    <string name="fragment_create_study_pageBaseTitle">Willkommen</string>
+    <string name="fragment_create_study_pageOneContactTitle">Kommunikation</string>
+    <string name="fragment_create_study_pageOneContact_Hint_Contact">Kontaktmöglichkeit*</string>
+    <string name="fragment_create_study_pageOneContact_Hint_Contact2">Kontaktmöglichkeit 2</string>
+    <string name="fragment_create_study_pageOneContact_Hint_Contact3">Kontaktmöglichkeit 3</string>
+    <string name="fragment_create_study_desc_page_one_contact">Bei Fragen zu Terminen oder konkreten Inhalten der Studie soll Informationsaustausch auch außerhalb des VP-Managers möglich sein. \n\n Geben Sie hier an, wie potenzielle Teilnehmer Sie erreichen können.</string>
+    <string name="fragment_create_study_pageThreeTitle">Kategorie</string>
+    <string name="fragment_create_study_desc_page_four_remote">Geben Sie hier nähere Informationen zum Durchführungskontext an. \n\n Präferierte Streaming-Dienste für die Remote Ausführung, wie Zoom, Skype oder Discord können hier hinterlegt werden.</string>
+    <string name="fragment_create_study_desc_page_four_presence">Geben Sie hier nähere Informationen zum Durchführungsort an. \n\n Bitte achten Sie auf eine ausreichend detaillierte Beschreibung der Adresse.</string>
+    <string name="fragment_create_study_desc_page_three">Ordnen Sie hier Ihre Studie einer der thematischen Kategorien zu. \n\n Die Durchführungsart bezieht sich auf den lokalen Kontext (Remote / Präsenz).</string>
+    <string name="fragment_create_study_pageFourTitle">Durchführungsort</string>
+    <string name="fragment_create_study_pageFiveTitle">Termine</string>
+    <string name="fragment_create_study_desc_page_five">Wählen Sie mithilfe des Buttons Termine aus, an denen Interessierte an Ihrer Studie teilnehmen können. \n \n Bitte vermeiden Sie hier Fehlplanungen um möglichst problemfreie Teilnahmen zu gewährleisten.</string>
+    <string name="fragment_create_study_pageFive_fab">Neuer Termin</string>
+    <string name="fragment_create_study_pageFinalTitle">Bestätigung</string>
+    <string name="fragment_create_study_base_next">Weiter</string>
+    <string name="fragment_create_study_base_back">Zurück</string>
+    <string name="fragment_create_study_base_create">Erstellen</string>
+    <string name="fragment_create_study_base_main">Hauptmenü</string>
+    <string name="fragment_create_study_finalPage_title_three">Terminbestätigung</string>
+
+
+
+
     <string-array name="createCategoryList">
-        <item>Studienkategorie</item>
+        <item>Studienkategorie*</item>
         <item>VR</item>
         <item>AR</item>
         <item>Diary Study</item>
     </string-array>
 
     <string-array name="createExecutionTypeList">
-        <item>Durchführungsart</item>
+        <item>Durchführungsart*</item>
         <item>Remote</item>
         <item>Präsenz</item>
     </string-array>
@@ -69,10 +99,11 @@
     <!--General-->
     <string name="yes">Ja</string>
     <string name="no">Nein</string>
-    <string name="ok">Ok</string>
+    <string name="ok">OK</string>
     <string name="collectionPathUsers">users</string>
     <string name="collectionPathStudies">studies</string>
     <string name="collectionPathDates">dates</string>
+
 
 </resources>
 

@@ -5,8 +5,7 @@
     android:id="@+id/drawerLayoutCreate"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".createStudyActivity"
-    tools:openDrawer="start">
+    tools:context=".createStudyActivity">
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
@@ -15,6 +14,7 @@
 
         <com.google.android.material.appbar.AppBarLayout
             style="@style/Widget.MaterialComponents.AppBarLayout.PrimarySurface"
+            android:id="@+id/appbar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:fitsSystemWindows="true">
@@ -35,77 +35,76 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical"
-            app:layout_behavior="@string/appbar_scrolling_view_behavior">
+            app:layout_behavior="@string/appbar_scrolling_view_behavior"
+            android:weightSum="10">
 
-            <EditText
-                android:id="@+id/createStudyTitleInput"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:ems="10"
-                android:hint="@string/createStudyTitle"
-                android:inputType="text" />
 
-            <EditText
-                android:id="@+id/createContactInput"
+            <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:ems="10"
-                android:hint="@string/createContactInfo" />
+                android:layout_height="0dp"
+                android:layout_weight="8"
+                android:background="?android:windowBackground"
+                app:cardCornerRadius="20dp"
+                tools:context=".createStudyFragment_Base">
 
-            <EditText
-                android:id="@+id/createVPInput"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:ems="10"
-                android:hint="@string/createOfferedVP"
-                android:inputType="numberDecimal" />
+                <fragment
+                    android:id="@+id/fragment_container"
+                    android:name="com.example.vpmanager.createStudyFragment_Base"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginBottom="10dp" />
 
-            <EditText
-                android:id="@+id/createStudyDescInput"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:ems="10"
-                android:hint="@string/createStudyDesc"
-                android:inputType="textCapSentences|textMultiLine"
-                android:maxLength="2000"
-                android:maxLines="12" />
-
-            <Spinner
-                android:id="@+id/createCategories"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-
-            <Spinner
-                android:id="@+id/createExecutionType"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+            </com.google.android.material.card.MaterialCardView>
 
             <LinearLayout
-                android:id="@+id/locationLayout"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:orientation="horizontal"
+                android:weightSum="2">
+
+                <Button
+                    android:id="@+id/backButton"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    android:layout_weight="1"
+                    android:text="@string/fragment_create_study_base_main" />
+
+                <Button
+                    android:id="@+id/nextButton"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    android:layout_weight="1"
+                    android:text="@string/fragment_create_study_base_next" />
 
             </LinearLayout>
 
-            <Button
-                android:id="@+id/createAddDateButton"
+            <com.kofigyan.stateprogressbar.StateProgressBar
+                android:id="@+id/your_state_progress_bar_id"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/createAddDateButton" />
-
-            <Button
-                android:id="@+id/createCreateButton"
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:text="@string/createCreateButton" />
-
-            <ListView
-                android:id="@+id/createDatelist"
-                android:layout_width="fill_parent"
-                android:layout_height="fill_parent"
-                android:layout_marginBottom="5dp"
-                android:drawSelectorOnTop="false" />
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                app:spb_animateToCurrentProgressState="true"
+                app:spb_animationDuration="100000"
+                app:spb_checkStateCompleted="true"
+                app:spb_currentStateDescriptionColor="#009688"
+                app:spb_maxStateNumber="five"
+                app:spb_stateBackgroundColor="#BDBDBD"
+                app:spb_stateDescriptionColor="#808080"
+                app:spb_stateDescriptionSize="15sp"
+                app:spb_stateForegroundColor="#009688"
+                app:spb_stateLineThickness="10dp"
+                app:spb_stateNumberBackgroundColor="#808080"
+                app:spb_stateNumberForegroundColor="#eeeeee"
+                app:spb_stateSize="35dp"
+                app:spb_stateTextSize="15sp" />
 
         </LinearLayout>
 
@@ -117,9 +116,9 @@
         android:layout_height="match_parent"
         android:layout_gravity="start"
         app:headerLayout="@layout/header_navigation_drawer"
+        app:itemBackground="@android:color/transparent"
         app:itemIconTint="@color/drawer_item"
         app:itemTextColor="@color/drawer_item"
-        app:itemBackground="@android:color/transparent"
         app:menu="@menu/navigation_drawer" />
 
 </androidx.drawerlayout.widget.DrawerLayout>

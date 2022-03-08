@@ -3,26 +3,6 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/Users/basti/OneDrive/Desktop/SWE/REP/ase-ws-21-vp-manager/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.2703125" />
-        <entry key="..\:/Users/basti/OneDrive/Desktop/SWE/REP/ase-ws-21-vp-manager/app/src/main/res/drawable/ic_baseline_account_circle_24.xml" value="0.2703125" />
-        <entry key="..\:/Users/basti/OneDrive/Desktop/SWE/REP/ase-ws-21-vp-manager/app/src/main/res/drawable/ic_baseline_create_24.xml" value="0.2703125" />
-        <entry key="..\:/Users/basti/OneDrive/Desktop/SWE/REP/ase-ws-21-vp-manager/app/src/main/res/drawable/ic_baseline_folder_24.xml" value="0.2703125" />
-        <entry key="..\:/Users/basti/OneDrive/Desktop/SWE/REP/ase-ws-21-vp-manager/app/src/main/res/drawable/ic_baseline_home_24.xml" value="0.2703125" />
-        <entry key="..\:/Users/basti/OneDrive/Desktop/SWE/REP/ase-ws-21-vp-manager/app/src/main/res/drawable/ic_baseline_info_24.xml" value="0.2703125" />
-        <entry key="..\:/Users/basti/OneDrive/Desktop/SWE/REP/ase-ws-21-vp-manager/app/src/main/res/drawable/ic_baseline_menu_24.xml" value="0.2703125" />
-        <entry key="..\:/Users/basti/OneDrive/Desktop/SWE/REP/ase-ws-21-vp-manager/app/src/main/res/drawable/ic_baseline_search_24.xml" value="0.2703125" />
-        <entry key="..\:/Users/basti/OneDrive/Desktop/SWE/REP/ase-ws-21-vp-manager/app/src/main/res/drawable/ic_launcher_background.xml" value="0.2703125" />
-        <entry key="..\:/Users/basti/OneDrive/Desktop/SWE/REP/ase-ws-21-vp-manager/app/src/main/res/drawable/ic_round_location_on_24.xml" value="0.2703125" />
-        <entry key="..\:/Users/basti/OneDrive/Desktop/SWE/REP/ase-ws-21-vp-manager/app/src/main/res/drawable/textline.xml" value="0.2703125" />
-        <entry key="..\:/Users/basti/OneDrive/Desktop/SWE/REP/ase-ws-21-vp-manager/app/src/main/res/layout/activity_create_study.xml" value="0.24456521739130435" />
-        <entry key="..\:/Users/basti/OneDrive/Desktop/SWE/REP/ase-ws-21-vp-manager/app/src/main/res/layout/activity_find_study.xml" value="0.1" />
-        <entry key="..\:/Users/basti/OneDrive/Desktop/SWE/REP/ase-ws-21-vp-manager/app/src/main/res/layout/activity_home.xml" value="0.192481884057971" />
-        <entry key="..\:/Users/basti/OneDrive/Desktop/SWE/REP/ase-ws-21-vp-manager/app/src/main/res/layout/activity_personal_account.xml" value="0.192481884057971" />
-        <entry key="..\:/Users/basti/OneDrive/Desktop/SWE/REP/ase-ws-21-vp-manager/app/src/main/res/layout/activity_study.xml" value="0.192481884057971" />
-        <entry key="..\:/Users/basti/OneDrive/Desktop/SWE/REP/ase-ws-21-vp-manager/app/src/main/res/layout/expandable_list_group.xml" value="0.192481884057971" />
-        <entry key="..\:/Users/basti/OneDrive/Desktop/SWE/REP/ase-ws-21-vp-manager/app/src/main/res/layout/expandable_list_item.xml" value="0.192481884057971" />
-        <entry key="..\:/Users/basti/OneDrive/Desktop/SWE/REP/ase-ws-21-vp-manager/app/src/main/res/layout/header_navigation_drawer.xml" value="0.24456521739130435" />
-        <entry key="..\:/Users/basti/OneDrive/Desktop/SWE/REP/ase-ws-21-vp-manager/app/src/main/res/menu/navigation_drawer.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/nikla/AndroidStudioProjects/VPManagaer/app/src/main/res/layout/activity_main.xml" value="0.20520833333333333" />
         <entry key="..\:/Users/nikla/StudioProjects/ase-ws-21-vp-manager/app/src/main/res/drawable/ic_launcher_background.xml" value="0.3828125" />
         <entry key="..\:/Users/nikla/StudioProjects/ase-ws-21-vp-manager/app/src/main/res/drawable/textline.xml" value="0.22135416666666666" />
@@ -31,6 +11,19 @@
         <entry key="..\:/Users/nikla/StudioProjects/ase-ws-21-vp-manager/app/src/main/res/layout/expandableListItem.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/nikla/StudioProjects/ase-ws-21-vp-manager/app/src/main/res/layout/expandable_list_group.xml" value="0.25" />
         <entry key="..\:/Users/nikla/StudioProjects/ase-ws-21-vp-manager/app/src/main/res/layout/expandable_list_item.xml" value="0.20520833333333333" />
+        <entry key="..\:/Users/stron/AndroidStudioProjects/ase-ws-21-vp-manager/app/src/main/res/layout/activity_create_study.xml" value="0.2695035460992908" />
+        <entry key="..\:/Users/stron/AndroidStudioProjects/ase-ws-21-vp-manager/app/src/main/res/layout/activity_create_study_base.xml" value="0.33" />
+        <entry key="..\:/Users/stron/AndroidStudioProjects/ase-ws-21-vp-manager/app/src/main/res/layout/activity_home.xml" value="0.2695035460992908" />
+        <entry key="..\:/Users/stron/AndroidStudioProjects/ase-ws-21-vp-manager/app/src/main/res/layout/expandable_list_group.xml" value="0.3307291666666667" />
+        <entry key="..\:/Users/stron/AndroidStudioProjects/ase-ws-21-vp-manager/app/src/main/res/layout/expandable_list_item.xml" value="0.3307291666666667" />
+        <entry key="..\:/Users/stron/AndroidStudioProjects/ase-ws-21-vp-manager/app/src/main/res/layout/fragment_blank.xml" value="0.5541666666666667" />
+        <entry key="..\:/Users/stron/AndroidStudioProjects/ase-ws-21-vp-manager/app/src/main/res/layout/fragment_create_study.xml" value="0.5541666666666667" />
+        <entry key="..\:/Users/stron/AndroidStudioProjects/ase-ws-21-vp-manager/app/src/main/res/layout/fragment_create_study_1.xml" value="0.33" />
+        <entry key="..\:/Users/stron/AndroidStudioProjects/ase-ws-21-vp-manager/app/src/main/res/layout/fragment_create_study__step_three.xml" value="0.3307291666666667" />
+        <entry key="..\:/Users/stron/AndroidStudioProjects/ase-ws-21-vp-manager/app/src/main/res/layout/fragment_create_study__step_two.xml" value="0.44583333333333336" />
+        <entry key="..\:/Users/stron/AndroidStudioProjects/ase-ws-21-vp-manager/app/src/main/res/layout/fragment_create_study_step_one.xml" value="0.3307291666666667" />
+        <entry key="..\:/Users/stron/AndroidStudioProjects/ase-ws-21-vp-manager/app/src/main/res/layout/fragment_create_study_step_three.xml" value="0.3307291666666667" />
+        <entry key="..\:/Users/stron/AndroidStudioProjects/ase-ws-21-vp-manager/app/src/main/res/layout/fragment_create_study_step_two.xml" value="0.25" />
         <entry key="..\:/Users/user/AppData/Local/Android/Sdk/platforms/android-31/data/res/layout/simple_list_item_1.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/user/StudioProjects/ase-ws-21-vp-manager/app/src/main/res/drawable/ic_launcher_background.xml" value="0.2703125" />
         <entry key="..\:/Users/user/StudioProjects/ase-ws-21-vp-manager/app/src/main/res/drawable/textline.xml" value="0.2703125" />
