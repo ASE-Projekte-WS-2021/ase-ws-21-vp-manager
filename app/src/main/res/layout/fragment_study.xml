@@ -152,7 +152,6 @@
         android:layout_marginTop="12dp"
         android:layout_marginEnd="20dp"
         android:text="@string/dateListHeader"
-        android:textColor="@color/orange_highlight"
         android:textSize="18sp"
         android:textStyle="bold" />
 

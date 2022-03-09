@@ -29,7 +29,7 @@ public class StudyListRepository {
     //private ArrayList<StudyMetaInfoModel> studyMetaInfosArrayListTest = new ArrayList<>();
 
     //this array gets filled first after the db call. Contains the three infos about a study
-    private ArrayList<ArrayList<String>> studyIdNameVp;
+    private ArrayList<ArrayList<String>> studyIdNameVpCat;
 
     //Parameter:
     //Return Values: instance of the repository class
@@ -74,19 +74,22 @@ public class StudyListRepository {
                 new StudyMetaInfoModel(
                         "e5b44b34-1f91-484f-ada4-018bc99004c",
                         "Studie 1",
-                        "1 VP-Stunde")
+                        "1 VP-Stunde",
+                        "cat2")
         );
         studyMetaInfosArrayListTest.add(
                 new StudyMetaInfoModel(
                         "90e16b34-efbc-4c77-89a7-ea49a61d6f9",
                         "Studie 2",
-                        "2 VP-Stunden")
+                        "2 VP-Stunden",
+                        "cat2")
         );
         studyMetaInfosArrayListTest.add(
                 new StudyMetaInfoModel(
                         "121cbc7e-7487-4311-9c2c-e6ac58e090a",
                         "test für evtl zu langen Studiennamen ABCDEFG",
-                        "8 VP-Stunden")
+                        "8 VP-Stunden",
+                        "cat3")
         );
         Log.d("StudyListRepository","fillTestArrayList end");
     }
@@ -101,12 +104,13 @@ public class StudyListRepository {
         //THE LIST NEEDS TO BE CLEARED BEFORE, BECAUSE THE REPO-INSTANCE IS THE SAME AND IT ISN'T CREATED NEW!
         studyMetaInfosArrayList.clear();
         //new data is stored in the list
-        for (int i = 0; i < studyIdNameVp.size(); i++) {
+        for (int i = 0; i < studyIdNameVpCat.size(); i++) {
             studyMetaInfosArrayList.add(
                     new StudyMetaInfoModel(
-                            studyIdNameVp.get(i).get(0), //add Id
-                            studyIdNameVp.get(i).get(1), //add Name
-                            studyIdNameVp.get(i).get(2) + " " + "VP-Stunden") //add Vps
+                            studyIdNameVpCat.get(i).get(0), //add Id
+                            studyIdNameVpCat.get(i).get(1), //add Name
+                            studyIdNameVpCat.get(i).get(2) + " " + "VP-Stunden", //add vps
+                            studyIdNameVpCat.get(i).get(3)) //add category
             );
         }
         Log.d("StudyListRepository", "setStudyMetaInfo end");
@@ -123,7 +127,7 @@ public class StudyListRepository {
         Log.d("StudyListRepository", "getStudyInfosFromDB start");
         db = FirebaseFirestore.getInstance();
         studiesRef = db.collection("studies");
-        studyIdNameVp = new ArrayList<>();
+        studyIdNameVpCat = new ArrayList<>();
 
         //all studies are retrieved, sorted alphabetically by their names
         studiesRef.orderBy("name", Query.Direction.DESCENDING)
@@ -134,11 +138,12 @@ public class StudyListRepository {
                         if (task.isSuccessful()) {
                             for (QueryDocumentSnapshot document : task.getResult()) {
                                 //local ArrayList is stored in the big ArrayList for each existing study
-                                ArrayList<String> idNameVph = new ArrayList<>();
-                                idNameVph.add(0, document.getString("id"));
-                                idNameVph.add(1, document.getString("name"));
-                                idNameVph.add(2, document.getString("vps"));
-                                studyIdNameVp.add(idNameVph);
+                                ArrayList<String> idNameVphCat = new ArrayList<>();
+                                idNameVphCat.add(0, document.getString("id"));
+                                idNameVphCat.add(1, document.getString("name"));
+                                idNameVphCat.add(2, document.getString("vps"));
+                                idNameVphCat.add(3, document.getString("category"));
+                                studyIdNameVpCat.add(idNameVphCat);
                             }
                             firestoreCallback.onCallback();
                         } else {

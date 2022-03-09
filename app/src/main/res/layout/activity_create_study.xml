@@ -45,11 +45,11 @@
                 android:layout_weight="8"
                 android:background="?android:windowBackground"
                 app:cardCornerRadius="20dp"
-                tools:context=".createStudyFragment_Base">
+                tools:context=".views.createStudyFragment_Base">
 
                 <fragment
                     android:id="@+id/fragment_container"
-                    android:name="com.example.vpmanager.createStudyFragment_Base"
+                    android:name="com.example.vpmanager.views.createStudyFragment_Base"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_marginLeft="10dp"

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="100dp"
     android:fitsSystemWindows="true"
     android:orientation="vertical">
 
@@ -14,6 +14,7 @@
         android:text="VP Manager"
         android:textAppearance="?attr/textAppearanceHeadline6" />
 
+    <!--
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -23,5 +24,6 @@
         android:text="Uni Mail Addresse"
         android:textAppearance="?attr/textAppearanceBody2"
         android:textColor="@color/material_on_surface_emphasis_medium" />
+        -->
 
 </LinearLayout>
