@@ -5,7 +5,9 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.RelativeLayout;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -22,6 +24,7 @@ public class StudyListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
     private ArrayList<StudyMetaInfoModel> mStudyMetaInfos; //= new ArrayList<>()
     private Context mContext;
     private OnStudyItemClickListener mOnStudyItemClickListener;
+    private Animation animation;
 
     public StudyListAdapter(Context context, ArrayList<StudyMetaInfoModel> studyMetaInfos,
                             OnStudyItemClickListener onStudyItemClickListener) {
@@ -33,8 +36,8 @@ public class StudyListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
 
     @NonNull
     @Override
-    public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.study_list_item, parent, false);
+    public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) { //study_list_item
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.studylist_cart, parent, false);
         CustomViewHolder holder = new CustomViewHolder(view, mOnStudyItemClickListener);
         return holder;
     }
@@ -43,6 +46,8 @@ public class StudyListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
         ((CustomViewHolder) holder).studyTitle.setText(mStudyMetaInfos.get(position).getName());
         ((CustomViewHolder) holder).studyVps.setText(mStudyMetaInfos.get(position).getVps());
+        ((CustomViewHolder) holder).studyCat.setText(mStudyMetaInfos.get(position).getCategory());
+
     }
 
     @Override
@@ -52,17 +57,30 @@ public class StudyListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
 
     private class CustomViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
-        TextView studyTitle, studyVps;
-        RelativeLayout studyListParentLayout;
+        TextView studyTitle, studyVps, studyCat;
+        View separator;
+        LinearLayout studyListParentLayout; //RelativeLayout
         OnStudyItemClickListener onStudyItemClickListener;
 
         public CustomViewHolder(@NonNull View itemView, OnStudyItemClickListener onStudyItemClickListener) {
             super(itemView);
             this.onStudyItemClickListener = onStudyItemClickListener;
+            //Animation
+            animation = AnimationUtils.loadAnimation(mContext, R.anim.animation);
 
-            studyTitle = itemView.findViewById(R.id.studyListStudyTitle);
-            studyVps = itemView.findViewById(R.id.studyListStudyVps);
-            studyListParentLayout = itemView.findViewById(R.id.studyListParentLayout);
+            studyTitle = itemView.findViewById(R.id.textviewName); //studyListStudyTitle
+            studyTitle.setAnimation(animation);
+
+            studyVps = itemView.findViewById(R.id.textviewVP); //studyListStudyVps
+            studyVps.setAnimation(animation);
+
+            studyCat = itemView.findViewById(R.id.textviewCat);
+            studyCat.setAnimation(animation);
+
+            separator = itemView.findViewById(R.id.separator);
+            separator.setAnimation(animation);
+
+            studyListParentLayout = itemView.findViewById(R.id.ll_item); //studyListParentLayout
 
             studyListParentLayout.setOnClickListener(this);
         }

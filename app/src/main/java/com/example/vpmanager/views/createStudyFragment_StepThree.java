@@ -1,4 +1,4 @@
-package com.example.vpmanager;
+package com.example.vpmanager.views;
 
 import android.os.Bundle;
 
@@ -9,6 +9,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
+
+import com.example.vpmanager.R;
 
 public class createStudyFragment_StepThree extends Fragment {
     Spinner categories;

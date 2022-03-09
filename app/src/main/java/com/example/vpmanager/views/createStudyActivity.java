@@ -2,7 +2,6 @@ package com.example.vpmanager.views;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ListView;
@@ -15,7 +14,6 @@ import androidx.fragment.app.FragmentManager;
 
 import com.example.vpmanager.R;
 import com.example.vpmanager.accessDatabase;
-import com.example.vpmanager.views.mainActivity;
 import com.google.android.material.appbar.MaterialToolbar;
 import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.textfield.TextInputEditText;
@@ -116,6 +114,8 @@ public class createStudyActivity extends AppCompatActivity {
     //Return values:
     //Sets clickListener on navigation items
     private void setupListeners() {
+
+        /*
         //For NavigationDrawer to open
         topAppBarCreate.setNavigationOnClickListener(new View.OnClickListener() {
             public void onClick(View V) {
@@ -152,6 +152,7 @@ public class createStudyActivity extends AppCompatActivity {
                 return true;
             }
         });
+         */
 
         next.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -176,7 +177,7 @@ public class createStudyActivity extends AppCompatActivity {
         Map<String, Object> newStudy = new HashMap<>();
 
         newStudy.put("id", studyID); //New id for the study
-        newStudy.put("creator", homeActivity.uniqueID);
+        newStudy.put("creator", mainActivity.uniqueID);
         newStudy.put("name", studyTitle);
         newStudy.put("vps", VP);
         newStudy.put("contact", contact);
@@ -360,7 +361,7 @@ public class createStudyActivity extends AppCompatActivity {
             case 9:
                 stateProgressBar.setCurrentStateNumber(StateProgressBar.StateNumber.FIVE);
                 createDBEntry();
-                Intent homeIntent = new Intent(createStudyActivity.this, homeActivity.class);
+                Intent homeIntent = new Intent(createStudyActivity.this, mainActivity.class);
                 startActivity(homeIntent);
                 break;
             default:
@@ -374,7 +375,7 @@ public class createStudyActivity extends AppCompatActivity {
     private void backButton() {
         switch (currentFragment) {
             case 0:
-                Intent homeIntent = new Intent(createStudyActivity.this, homeActivity.class);
+                Intent homeIntent = new Intent(createStudyActivity.this, mainActivity.class);
                 startActivity(homeIntent);
                 break;
             case 1:

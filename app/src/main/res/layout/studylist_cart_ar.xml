@@ -1,20 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/test_item"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
     android:padding="10dp">
 
-<!--    com.google.android.material.card.MaterialCardView -->
+    <!--    com.google.android.material.card.MaterialCardView -->
     <androidx.cardview.widget.CardView
         android:id="@+id/card_view"
         android:layout_width="match_parent"
         android:layout_height="150dp"
         android:elevation="5dp"
         app:cardCornerRadius="10dp"
-        app:cardMaxElevation="5dp"
-        >
+        app:cardMaxElevation="5dp">
 
 
         <LinearLayout
@@ -23,8 +22,7 @@
             android:layout_height="match_parent"
             android:background="@color/black"
             android:orientation="vertical"
-            android:padding="10dp"
-            >
+            android:padding="10dp">
 
 
             <TextView
