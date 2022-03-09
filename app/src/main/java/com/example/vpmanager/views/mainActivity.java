@@ -37,18 +37,16 @@ public class mainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        Log.d("mainActivity", "onCreate start");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         setupUserId();
         setupNavigationView();
-        Log.d("mainActivity", "onCreate end");
     }
 
+    //closes the navigation drawer when returning to mainActivity
     @Override
     protected void onResume() {
         super.onResume();
-        //closes the navigation drawer when returning to mainActivity
         drawerLayoutMain.close();
     }
 
@@ -58,18 +56,19 @@ public class mainActivity extends AppCompatActivity {
         registerNewUser();
     }
 
-    // sets up all navigation components of the app (like the toolbar and the drawer)
-    // and connects the navigation graph.
+    //Parameter:
+    //Return Values:
+    //sets up all navigation components of the app and connects the navigation graph
     private void setupNavigationView() {
         Log.d("mainActivity", "setupNavigationView start");
         drawerLayoutMain = findViewById(R.id.drawerLayoutMain);
         topAppBarMain = findViewById(R.id.topAppBarMain);
 
-        // ActionBar assumes complete ownership of the (Material) Toolbar after the following call.
-        // Instead of the Toolbar, the ActionBar needs to be connected with the NavController!
+        //ActionBar assumes complete ownership of the (Material) Toolbar after the following call.
+        //Instead of the Toolbar, the ActionBar needs to be connected with the NavController!
         setSupportActionBar(topAppBarMain);
 
-        //this is the view with the drawer put together inside!!
+        //this is the view with the drawer
         navigationViewMain = findViewById(R.id.navigationViewMain);
 
         //get the navController like this because the code line below isn't working
@@ -82,12 +81,12 @@ public class mainActivity extends AppCompatActivity {
         appBarConfiguration = new AppBarConfiguration.Builder(R.id.homeFragment, R.id.findStudyFragment,
                 R.id.personalAccountFragment, R.id.ownStudyFragment).setDrawerLayout(drawerLayoutMain).build();
 
-        // Handle Navigation item clicks
-        // This works with no further action, if the menu and destination id’s match.
+        //handle Navigation item clicks
+        //this works with no further action, if the menu and destination id’s match.
         NavigationUI.setupWithNavController(navigationViewMain, navController);
 
-        // setupActionBarWithNavController needs to be called to connect the Action Bar.
-        // The line below can't be used as the (Material) Toolbar is already set as the ActionBar!
+        //setupActionBarWithNavController needs to be called to connect the Action Bar.
+        //the line below can't be used as the (Material) Toolbar is already set as the ActionBar!
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
         //NavigationUI.setupWithNavController(topAppBarMain, navController, appBarConfiguration);
 
@@ -96,8 +95,10 @@ public class mainActivity extends AppCompatActivity {
         Log.d("mainActivity", "setupNavigationView end");
     }
 
-    private void setWorkAround(){
-        Log.d("mainActivity", "setWorkaround start");
+    //Parameter:
+    //Return Values:
+    //sets an additional listener on the drawer menu items because it didn't work properly (only the first is needed)
+    private void setWorkAround() {
         navigationViewMain.getMenu().getItem(0).setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(MenuItem menuItem) {
@@ -136,14 +137,14 @@ public class mainActivity extends AppCompatActivity {
             }
         });
          */
-        Log.d("mainActivity", "setWorkaround end");
     }
 
+    //Parameter:
+    //Return Values: boolean (if the navigation was successful or not)
+    //allows NavigationUI to support proper up navigation (in the Action Bar)
     @Override
     public boolean onSupportNavigateUp() {
         Log.d("mainActivity", "onSupportNavigateUp start + end");
-        // Allows NavigationUI to support proper up navigation or the drawer layout
-        // drawer menu, depending on the situation.
         return NavigationUI.navigateUp(navController, appBarConfiguration) || super.onSupportNavigateUp();
     }
 

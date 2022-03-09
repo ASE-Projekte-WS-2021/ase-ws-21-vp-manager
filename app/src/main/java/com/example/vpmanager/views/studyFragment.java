@@ -65,38 +65,44 @@ public class studyFragment extends Fragment {
     TextView contactInfo;
 
     public studyFragment() {
-        //Empty public constructor required?
+    }
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
     }
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        //return super.onCreateView(inflater, container, savedInstanceState);
-        return inflater.inflate(R.layout.fragment_study, container, false);
+        View view = inflater.inflate(R.layout.fragment_study, container, false);
+        getRequiredInfos();
+        return view;
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        //Get the studyId early
-        currentStudyId = getArguments().getString("studyId");
-        currentUserId = mainActivity.createUserId(getActivity());
-        savedDateItem = new ArrayList<>();
-        savedDateItem.add(getString(R.string.dropDateView));
-
         setupStudyDetails(new studyFragment.FirestoreCallbackStudy() {
             @Override
             public void onCallback(ArrayList<String> arrayList) {
                 loadStudyData(view);
             }
         });
-
         setupDateListView(new studyFragment.FirestoreCallbackDates() {
             @Override
             public void onCallback(ArrayList<ArrayList<String>> arrayList) {
                 loadDatesData(view);
             }
         });
+    }
+
+    private void getRequiredInfos() {
+        //Get the studyId early
+        currentStudyId = getArguments().getString("studyId");
+        currentUserId = mainActivity.createUserId(getActivity());
+        savedDateItem = new ArrayList<>();
+        savedDateItem.add(getString(R.string.dropDateView));
     }
 
     public interface FirestoreCallbackStudy {

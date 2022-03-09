@@ -32,28 +32,35 @@ public class ownStudyFragment extends Fragment {
     CollectionReference studiesRef;
 
     public ownStudyFragment() {
-        //Empty public constructor required?
+    }
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
     }
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        //return super.onCreateView(inflater, container, savedInstanceState);
-        return inflater.inflate(R.layout.fragment_own_study, container, false);
-    }
-
-    @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-        setupListView(new ownStudyFragment.FirestoreCallback() {
+        View view = inflater.inflate(R.layout.fragment_own_study, container, false);
+        setupListView(new FirestoreCallback() {
             @Override
             public void onCallback(ArrayList<ArrayList<String>> arrayList) {
                 loadOwnStudiesData(view);
                 Log.d("OwnStudies", studyNamesAndVps.toString());
             }
         });
+        return view;
     }
 
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+    }
+
+    //Parameter: the fragment view
+    //Return Values:
+    //loads all retrieved studies in the list view
     private void loadOwnStudiesData(View view) {
         studyList = view.findViewById(R.id.listViewOwnStudyFragment);
         studyNamesAndVps = new ArrayList<>();
@@ -66,15 +73,16 @@ public class ownStudyFragment extends Fragment {
         }
         ArrayAdapter arrayAdapter = new ArrayAdapter(getActivity(), android.R.layout.simple_list_item_1, studyNamesAndVps);
         studyList.setAdapter(arrayAdapter);
-        //setupClickListener();
     }
 
     public interface FirestoreCallback {
         void onCallback(ArrayList<ArrayList<String>> arrayList);
     }
 
-    //gets all studies the user created and adds them in a list like the one with all studies
-    private void setupListView(ownStudyFragment.FirestoreCallback firestoreCallback) {
+    //Parameter: callback
+    //Return Values:
+    //gets all studies the user created
+    private void setupListView(FirestoreCallback firestoreCallback) {
 
         String currentUserId = mainActivity.uniqueID;
         db = FirebaseFirestore.getInstance();

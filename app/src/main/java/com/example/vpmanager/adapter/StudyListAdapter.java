@@ -16,7 +16,7 @@ import com.example.vpmanager.models.StudyMetaInfoModel;
 
 import java.util.ArrayList;
 
-//this adapter adapts the individual recyclerView layouts to the big recyclerView container
+//this adapter adapts the individual recyclerView layouts to the recyclerView container
 public class StudyListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     private ArrayList<StudyMetaInfoModel> mStudyMetaInfos; //= new ArrayList<>()
@@ -41,8 +41,8 @@ public class StudyListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
-        ((CustomViewHolder)holder).studyTitle.setText(mStudyMetaInfos.get(position).getName());
-        ((CustomViewHolder)holder).studyVps.setText(mStudyMetaInfos.get(position).getVps());
+        ((CustomViewHolder) holder).studyTitle.setText(mStudyMetaInfos.get(position).getName());
+        ((CustomViewHolder) holder).studyVps.setText(mStudyMetaInfos.get(position).getVps());
     }
 
     @Override

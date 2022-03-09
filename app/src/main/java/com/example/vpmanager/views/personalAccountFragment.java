@@ -34,30 +34,31 @@ public class personalAccountFragment extends Fragment {
     private NavController navController;
 
     public personalAccountFragment() {
-        //Empty public constructor required?
+    }
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
     }
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        //return super.onCreateView(inflater, container, savedInstanceState);
-        return inflater.inflate(R.layout.fragment_personal_account, container, false);
+        View view = inflater.inflate(R.layout.fragment_personal_account, container, false);
+        setupView(view);
+        return view;
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        setupView(view);
+        navController = Navigation.findNavController(view);
         setupClickListener();
     }
 
     private void setupView(View view) {
-        //navController = Navigation.findNavController(view);
-        navController = Navigation.findNavController(requireActivity(), R.id.nav_host_fragment_main);
-
         listView = view.findViewById(R.id.pa_fragment_expandableList);
         chart = view.findViewById(R.id.pa_fragment_pie_chart);
-
         expandableListDetail = PA_ExpandableListDataPump.getData();
         expandableListTitle = new ArrayList<String>(expandableListDetail.keySet());
         adapter = new PA_ExpandableListAdapter(getActivity(), expandableListTitle, expandableListDetail);

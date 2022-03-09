@@ -11,7 +11,6 @@ public class StudyMetaInfoModel {
     }
 
     public StudyMetaInfoModel(){
-        //empty constructor required?
     }
 
     public String getId() {
