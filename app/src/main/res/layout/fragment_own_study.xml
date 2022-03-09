@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="25dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="25dp"
+        android:text="Deine erstellten Studien"
+        android:textSize="20sp"
+        android:textStyle="bold" />
+    <!--android:textColor="@color/orange_highlight"-->
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="3dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="55dp"
+        android:layout_marginRight="20dp"
+        android:background="@color/color_two" />
+    <!--android:background="@color/lightorange_Main"-->
+
+    <ListView
+        android:id="@+id/listViewOwnStudyFragment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="70dp"
+        android:layout_weight="1"
+        android:dividerHeight="2dp" />
+    <!--android:divider="@color/lightorange_Main"-->
+
+</RelativeLayout>

@@ -1,24 +1,26 @@
-package com.example.vpmanager;
+package com.example.vpmanager.views;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.os.Bundle;
-import android.view.MenuItem;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
+import com.example.vpmanager.R;
+import com.example.vpmanager.accessDatabase;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
-import com.google.android.material.appbar.MaterialToolbar;
-import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
@@ -31,11 +33,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 
-public class studyActivity extends AppCompatActivity {
-
-    MaterialToolbar topAppBarStudy;
-    DrawerLayout drawerLayoutStudy;
-    NavigationView navigationViewStudy;
+public class studyFragment extends Fragment {
 
     ListView dateList;
     String currentStudyId;
@@ -55,7 +53,7 @@ public class studyActivity extends AppCompatActivity {
     FirebaseFirestore db;
     DocumentReference studyRef;
     CollectionReference datesRef;
-    accessDatabase accessDatabase = new accessDatabase();
+    com.example.vpmanager.accessDatabase accessDatabase = new accessDatabase();
 
     TextView headerText;
     TextView description;
@@ -66,74 +64,66 @@ public class studyActivity extends AppCompatActivity {
     TextView localData;
     TextView contactInfo;
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_study);
-        //Get the studyId early
-        currentStudyId = getIntent().getStringExtra("studyId");
-        currentUserId = homeActivity.createUserId(this);
-        savedDateItem = new ArrayList<>();
-        savedDateItem.add(getString(R.string.dropDateView));
-        setupView();
+    public studyFragment() {
+    }
 
-        // Parameter:
-        // Return values:
-        // load necessary data for clicked study
-        setupStudyDetails(new FirestoreCallbackStudy() {
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+    }
+
+    @Nullable
+    @Override
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.fragment_study, container, false);
+        getRequiredInfos();
+        return view;
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        setupStudyDetails(new studyFragment.FirestoreCallbackStudy() {
             @Override
             public void onCallback(ArrayList<String> arrayList) {
-                loadStudyData();
+                loadStudyData(view);
             }
         });
-
-        // Parameter:
-        // Return values:
-        // load available dates for date selection ListView for clicked study
-        setupDateListView(new FirestoreCallbackDates() {
+        setupDateListView(new studyFragment.FirestoreCallbackDates() {
             @Override
             public void onCallback(ArrayList<ArrayList<String>> arrayList) {
-                loadDatesData();
+                loadDatesData(view);
             }
         });
     }
 
-    private void setupView() {
-        topAppBarStudy = findViewById(R.id.topAppBarStudy);
-        setSupportActionBar(topAppBarStudy);
-        drawerLayoutStudy = findViewById(R.id.drawerLayoutStudy);
-        navigationViewStudy = findViewById(R.id.navigationViewStudy);
-        navigationViewStudy.getMenu().getItem(1).setChecked(true);
+    private void getRequiredInfos() {
+        //Get the studyId early
+        currentStudyId = getArguments().getString("studyId");
+        currentUserId = mainActivity.createUserId(getActivity());
+        savedDateItem = new ArrayList<>();
+        savedDateItem.add(getString(R.string.dropDateView));
     }
 
-    // Parameter:
-    // Return values:
-    // set up view one after data is loaded
     public interface FirestoreCallbackStudy {
         void onCallback(ArrayList<String> arrayList);
     }
 
-    // Parameter:
-    // Return values:
-    // set up view 2 after data is loaded
     public interface FirestoreCallbackDates {
         void onCallback(ArrayList<ArrayList<String>> arrayList);
     }
 
-    // Parameter:
-    // Return values:
-    // Get DB values from arraylist and load study data in associated textViews
-    private void loadStudyData() {
+    private void loadStudyData(View view) {
 
-        headerText = findViewById(R.id.activityHeader);
-        description = findViewById(R.id.description);
-        vpValue = findViewById(R.id.vpValue);
-        category = findViewById(R.id.category);
-        studyType = findViewById(R.id.type);
+        headerText = view.findViewById(R.id.studyFragmentHeader);
+        description = view.findViewById(R.id.descriptionStudyFragment);
+        vpValue = view.findViewById(R.id.vpValueStudyFragment);
+        category = view.findViewById(R.id.categoryStudyFragment);
+        studyType = view.findViewById(R.id.studyTypeStudyFragment);
         //Textview for further studyType data (depending on type)
-        remoteData = findViewById(R.id.remotyStudy);
-        localData = findViewById(R.id.localStudy);
-        contactInfo = findViewById(R.id.contactInformation);
+        remoteData = view.findViewById(R.id.remoteStudyStudyFragment);
+        localData = view.findViewById(R.id.localStudyStudyFragment);
+        contactInfo = view.findViewById(R.id.contactInformationStudyFragment);
 
         //store DB Data Strings in textViews
         headerText.setText(studyDetails.get(0));
@@ -153,11 +143,8 @@ public class studyActivity extends AppCompatActivity {
         }
     }
 
-    // Parameter:
-    // Return values:
-    // Get DB values from arraylist and load date data in associated textViews
-    private void loadDatesData() {
-        dateList = findViewById(R.id.listViewDates);
+    private void loadDatesData(View view) {
+        dateList = view.findViewById(R.id.listViewDatesStudyFragment);
         allDates = new ArrayList<>();
         dateIds = new ArrayList<>();
         userIdsOfDates = new ArrayList<>();
@@ -169,10 +156,8 @@ public class studyActivity extends AppCompatActivity {
             userIdsOfDates.add(freeAndOwnDatesInfo.get(i).get(2));
         }
 
-        setupNavigationListener();
-
         //makes date selection unavailable if user already picked a date from this study
-        if (userIdsOfDates.contains(homeActivity.createUserId(this))) {
+        if (userIdsOfDates.contains(mainActivity.createUserId(getActivity()))) { //before: homeActivity.createUserId(this);
             setSavedDateAdapter();
             setupSelectedDateClickListener();
         } else {
@@ -181,53 +166,7 @@ public class studyActivity extends AppCompatActivity {
         }
     }
 
-    // set up ClickListener for the app bar and the navigation drawer
-    private void setupNavigationListener() {
-
-        //For NavigationDrawer to open
-        topAppBarStudy.setNavigationOnClickListener(new View.OnClickListener() {
-            public void onClick(View V) {
-                drawerLayoutStudy.open();
-            }
-        });
-
-        //Handle click on single item in drawer here
-        navigationViewStudy.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
-            @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-
-                switch (item.getItemId()) {
-                    case R.id.nav_home:
-                        Intent homeIntent = new Intent(studyActivity.this, homeActivity.class);
-                        startActivity(homeIntent);
-                        break;
-                    case R.id.nav_search:
-                        Intent searchIntent = new Intent(studyActivity.this, findStudyActivity.class);
-                        startActivity(searchIntent);
-                        break;
-                    case R.id.nav_create:
-                        Intent createIntent = new Intent(studyActivity.this, createStudyActivity.class);
-                        startActivity(createIntent);
-                        break;
-                    case R.id.nav_overview:
-                        Intent overviewIntent = new Intent(studyActivity.this, personalAccountActivity.class);
-                        startActivity(overviewIntent);
-                        break;
-                    case R.id.nav_own:
-                        //Added later
-                        break;
-                }
-                drawerLayoutStudy.close();
-                return true;
-            }
-        });
-
-    }
-
-    // Parameters: firestoreCallbackStudy
-    // Return values:
-    // load DB Data for study details in arraylist
-    private void setupStudyDetails(FirestoreCallbackStudy firestoreCallbackStudy) {
+    private void setupStudyDetails(studyFragment.FirestoreCallbackStudy firestoreCallbackStudy) {
 
         db = FirebaseFirestore.getInstance();
         studyRef = db.collection(getString(R.string.collectionPathStudies)).document(currentStudyId);
@@ -257,10 +196,7 @@ public class studyActivity extends AppCompatActivity {
         });
     }
 
-    // Parameter: firestoreCallbackDates
-    // Return values:
-    // load DB data for available dates in arraylist
-    private void setupDateListView(FirestoreCallbackDates firestoreCallbackDates) {
+    private void setupDateListView(studyFragment.FirestoreCallbackDates firestoreCallbackDates) {
 
         db = FirebaseFirestore.getInstance();
         datesRef = db.collection(getString(R.string.collectionPathDates));
@@ -290,9 +226,6 @@ public class studyActivity extends AppCompatActivity {
                 });
     }
 
-    // Parameter:
-    // Return values:
-    // set up CLickListener for date list items to open register Pop-up
     private void setupClickListener() {
 
         dateList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -305,9 +238,6 @@ public class studyActivity extends AppCompatActivity {
         });
     }
 
-    // Parameter:
-    // Return values:
-    // set up CLickListener for register Pop-up options
     private void setupSelectedDateClickListener() {
 
         dateList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -318,9 +248,6 @@ public class studyActivity extends AppCompatActivity {
         });
     }
 
-    // Parameter:
-    // Return values:
-    // cancel registered appointment
     private void unSelectDateAlert() {
 
         DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener() {
@@ -337,15 +264,12 @@ public class studyActivity extends AppCompatActivity {
                 }
             }
         };
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         builder.setMessage(getString(R.string.dropDateQuestion))
                 .setPositiveButton(getString(R.string.yes), dialogClickListener)
                 .setNegativeButton(getString(R.string.no), dialogClickListener).show();
     }
 
-    // Parameter: dateId
-    // Return values:
-    // approve selected appointment
     private void selectDateAlert(String dateId) {
 
         DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener() {
@@ -362,59 +286,50 @@ public class studyActivity extends AppCompatActivity {
                 }
             }
         };
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         builder.setMessage(getString(R.string.selectDateQuestion))
                 .setPositiveButton(getString(R.string.yes), dialogClickListener)
                 .setNegativeButton(getString(R.string.no), dialogClickListener).show();
     }
 
-    // Parameter:
-    // Return values:
-    // set ArrayAdapter for saved dates
     private void setSavedDateAdapter() {
-        savedDateAdapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, savedDateItem);
+        savedDateAdapter = new ArrayAdapter(getActivity(), android.R.layout.simple_list_item_1, savedDateItem);
         dateList.setAdapter(savedDateAdapter);
     }
 
-    // Parameter:
-    // Return values:
-    // set ArrayAdapter for all available dates
     private void setAllDatesAdapter() {
-        availableDatesAdapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, allDates);
+        availableDatesAdapter = new ArrayAdapter(getActivity(), android.R.layout.simple_list_item_1, allDates);
         dateList.setAdapter(availableDatesAdapter);
     }
 
-    // Parameter: dateId
-    // Return values:
-    // update DB for registered appointment
     private void selectDate(String dateId) {
 
-        String userId = homeActivity.createUserId(this);
+        String userId = mainActivity.createUserId(getActivity()); //before: homeActivity.createUserId(this);
 
         Map<String, Object> updateDataMap = new HashMap<>();
         updateDataMap.put("selected", true);
         updateDataMap.put("userId", userId);
 
         accessDatabase.selectDate(updateDataMap, dateId);
-        reloadActivity();
+        reloadFragment();
     }
 
-    // Parameter:
-    // Return values:
-    // update DB for canceled appointment
     private void unSelectDate() {
-        int datePosition = userIdsOfDates.indexOf(homeActivity.createUserId(this));
+        int datePosition = userIdsOfDates.indexOf(mainActivity.createUserId(getActivity())); //before: homeActivity.createUserId(this);
         String dateId = dateIds.get(datePosition);
         accessDatabase.unselectDate(dateId);
-        reloadActivity();
+        reloadFragment();
     }
 
-    // Parameter:
-    // Return values:
-    // reload activity
-    private void reloadActivity() {
-        finish();
-        startActivity(getIntent());
+    private void reloadFragment() {
+        Bundle args = new Bundle();
+        args.putString("studyId", currentStudyId);
+
+        FragmentManager fragmentManager = getParentFragmentManager();
+        FragmentTransaction transaction = fragmentManager.beginTransaction();
+        transaction.setReorderingAllowed(true);
+        transaction.replace(R.id.nav_host_fragment_main, studyFragment.class, args);
+        transaction.commit();
     }
 
     public ArrayList<String> getStudyDetails() {
