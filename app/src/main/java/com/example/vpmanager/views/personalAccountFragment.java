@@ -56,10 +56,28 @@ public class personalAccountFragment extends Fragment {
         setupClickListener();
     }
 
+
+    private void loadData(View view)
+    {
+        PA_ExpandableListDataPump.getAllDates(new PA_ExpandableListDataPump.FirestoreCallbackDates() {
+            @Override
+            public void onCallback(boolean finished) {
+                if(finished)
+                    PA_ExpandableListDataPump.getAllStudies(new PA_ExpandableListDataPump.FirestoreCallbackStudy() {
+                        @Override
+                        public void onCallback() {
+                            PA_ExpandableListDataPump.createListEntries();
+                            setupView(view);
+                        }
+                    });
+            }
+        });
+    }
+
     private void setupView(View view) {
         listView = view.findViewById(R.id.pa_fragment_expandableList);
         chart = view.findViewById(R.id.pa_fragment_pie_chart);
-        expandableListDetail = PA_ExpandableListDataPump.getData();
+        expandableListDetail = PA_ExpandableListDataPump.EXPANDABLE_LIST_DETAIL;
         expandableListTitle = new ArrayList<String>(expandableListDetail.keySet());
         adapter = new PA_ExpandableListAdapter(getActivity(), expandableListTitle, expandableListDetail);
         listView.setAdapter(adapter);
@@ -74,6 +92,14 @@ public class personalAccountFragment extends Fragment {
                 String vps = vpList.get(i).split(",")[1];
                 double studyVPS = Double.parseDouble(vps);
                 plannedVP += studyVPS;
+            }
+        }
+        List<String> passedVpList = expandableListDetail.get("Vergangene Studien");
+        if (passedVpList != null) {
+            for (int i = 0; i < passedVpList.size(); i++) {
+                String vps = passedVpList.get(i).split(",")[1];
+                double studyVPS = Double.parseDouble(vps);
+                participatedVP += studyVPS;
             }
         }
         setPieChartData(completedVP, participatedVP, plannedVP);
