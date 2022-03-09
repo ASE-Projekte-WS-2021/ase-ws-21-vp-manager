@@ -81,7 +81,7 @@ public class createStudyFragment_StepFive extends Fragment {
         mMonth = c.get(Calendar.MONTH);
         mDay = c.get(Calendar.DAY_OF_MONTH);
 
-        DatePickerDialog datePickerDialog = new DatePickerDialog(getActivity(),
+        DatePickerDialog datePickerDialog = new DatePickerDialog(getActivity(),R.style.my_dialog_theme,
                 new DatePickerDialog.OnDateSetListener() {
                     @Override
                     public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
@@ -101,7 +101,7 @@ public class createStudyFragment_StepFive extends Fragment {
         mHour = c.get(Calendar.HOUR_OF_DAY);
         mMinute = c.get(Calendar.MINUTE);
 
-        TimePickerDialog timePickerDialog = new TimePickerDialog(getActivity(),
+        TimePickerDialog timePickerDialog = new TimePickerDialog(getActivity(),R.style.my_timepicker_theme,
                 new TimePickerDialog.OnTimeSetListener() {
                     @Override
                     public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
@@ -110,7 +110,7 @@ public class createStudyFragment_StepFive extends Fragment {
                         mMinute = minute;
                         addDateToList(hourOfDay, minute);
                     }
-                }, mHour, mMinute, false);
+                }, mHour, mMinute, true);
         timePickerDialog.show();
     }
 

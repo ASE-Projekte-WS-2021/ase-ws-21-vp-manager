@@ -65,6 +65,9 @@
                 android:layout_alignParentEnd="true"
                 android:layout_marginBottom="16dp"
                 android:layout_marginEnd="16dp"
+                app:strokeColor="@color/heatherred_Main"
+                app:strokeWidth="3dp"
+                android:backgroundTint="@color/green_light"
                 android:text="@string/fragment_create_study_pageFive_fab"
                 app:icon="@drawable/ic_baseline_add_24" />
 

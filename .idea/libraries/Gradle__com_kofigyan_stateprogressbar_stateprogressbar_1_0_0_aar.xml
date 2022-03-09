@@ -4,6 +4,9 @@
       <root url="jar://$USER_HOME$/.gradle/caches/transforms-3/dd55403c4395885172522e8d88f4076a/transformed/jetified-stateprogressbar-1.0.0/jars/classes.jar!/" />
       <root url="file://$USER_HOME$/.gradle/caches/transforms-3/dd55403c4395885172522e8d88f4076a/transformed/jetified-stateprogressbar-1.0.0/res" />
       <root url="file://$USER_HOME$/.gradle/caches/transforms-3/dd55403c4395885172522e8d88f4076a/transformed/jetified-stateprogressbar-1.0.0/AndroidManifest.xml" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-3/38a1e3a5ffa81e6887859b9bcf0e007c/transformed/jetified-stateprogressbar-1.0.0/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/38a1e3a5ffa81e6887859b9bcf0e007c/transformed/jetified-stateprogressbar-1.0.0/res" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/38a1e3a5ffa81e6887859b9bcf0e007c/transformed/jetified-stateprogressbar-1.0.0/AndroidManifest.xml" />
     </CLASSES>
     <JAVADOC>
       <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.kofigyan.stateprogressbar/stateprogressbar/1.0.0/43035ae58c22c1dbc52f44e5fe5635b38fc8477/stateprogressbar-1.0.0-javadoc.jar!/" />

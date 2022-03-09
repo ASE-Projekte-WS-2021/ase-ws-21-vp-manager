@@ -33,27 +33,32 @@
         <TextView
             android:id="@+id/pageDesc"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="3"
-            android:textSize="20sp"
-            android:textAlignment="center"
+            android:layout_height="0dp"
             android:layout_marginLeft="5dp"
-            android:layout_marginRight="5dp"
             android:layout_marginTop="30dp"
+            android:layout_marginRight="5dp"
+            android:layout_weight="3"
             android:text="@string/fragment_create_study_desc_page_three"
-            />
+            android:textAlignment="center"
+            android:textSize="20sp" />
+
 
         <Spinner
             android:id="@+id/createCategories"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="2" />
+            android:layout_weight="2"
+            android:popupBackground="@color/green_Main"
+            />
 
         <Spinner
             android:id="@+id/createExecutionType"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="2" />
+            android:layout_weight="2"
+            android:popupBackground="@color/green_Main"
+            />
+
     </LinearLayout>
 
 
