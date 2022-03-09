@@ -61,8 +61,45 @@
 
         <!--   add fonts here  -->
 
-
     </style>
+
+
+
+<!--    <style name="CalenderViewCustom" parent="Theme.AppCompat">
+        <item name="colorAccent">@color/white</item>
+        <item name="colorPrimary">@color/white</item>
+    </style>-->
+
+    <style name="my_dialog_theme" parent="ThemeOverlay.AppCompat.Dialog">
+        <item name="colorAccent">@color/green_light</item>                   <!--header background-->
+        <item name="android:windowBackground">@color/heatherred_light</item>     <!--calendar background-->
+        <item name="android:colorControlActivated">@color/green_light</item> <!--selected day-->
+        <item name="android:textColorPrimary">@color/white</item> <!--days of the month-->
+        <item name="android:textColorSecondary">@color/green_light</item>    <!--days of the week-->
+    </style>
+
+    <style name="my_timepicker_theme" parent="Theme.AppCompat.Dialog">
+        <item name="colorAccent">@color/green_light</item>
+        <item name="android:windowBackground">@color/heatherred_light</item>
+        <item name="android:colorControlActivated">@color/green_light</item>
+        <item name="android:textColorPrimary">@color/heatherred_dark</item>
+        <item name="android:textColorSecondary">@color/green_light</item>
+        <item name="android:color">@color/green_light</item>
+    </style>
+
+
+
+<!--    <style name="spinner_style">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:background">@drawable/gradient</item>
+        <item name="android:layout_margin">10dp</item>
+        <item name="android:paddingLeft">8dp</item>
+        <item name="android:paddingRight">20dp</item>
+        <item name="android:paddingTop">5dp</item>
+        <item name="android:paddingBottom">5dp</item>
+        <item name="android:popupBackground">#DFFFFFFF</item>
+    </style>-->
 
 
 

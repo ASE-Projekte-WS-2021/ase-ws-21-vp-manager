@@ -49,14 +49,14 @@
     <string name="fragment_create_study_pageOneContact_Hint_Contact">Kontaktmöglichkeit*</string>
     <string name="fragment_create_study_pageOneContact_Hint_Contact2">Kontaktmöglichkeit 2</string>
     <string name="fragment_create_study_pageOneContact_Hint_Contact3">Kontaktmöglichkeit 3</string>
-    <string name="fragment_create_study_desc_page_one_contact">Bei Fragen zu Terminen oder konkreten Inhalten der Studie soll Informationsaustausch auch außerhalb des VP-Managers möglich sein. \n\n Geben Sie hier an, wie potenzielle Teilnehmer Sie erreichen können.</string>
+    <string name="fragment_create_study_desc_page_one_contact">Geben Sie hier an, wie potenzielle Teilnehmer Sie bei Fragen zu Terminen oder konkreten Studieninhalten alternativ erreichen können. </string>
     <string name="fragment_create_study_pageThreeTitle">Kategorie</string>
     <string name="fragment_create_study_desc_page_four_remote">Geben Sie hier nähere Informationen zum Durchführungskontext an. \n\n Präferierte Streaming-Dienste für die Remote Ausführung, wie Zoom, Skype oder Discord können hier hinterlegt werden.</string>
     <string name="fragment_create_study_desc_page_four_presence">Geben Sie hier nähere Informationen zum Durchführungsort an. \n\n Bitte achten Sie auf eine ausreichend detaillierte Beschreibung der Adresse.</string>
     <string name="fragment_create_study_desc_page_three">Ordnen Sie hier Ihre Studie einer der thematischen Kategorien zu. \n\n Die Durchführungsart bezieht sich auf den lokalen Kontext (Remote / Präsenz).</string>
     <string name="fragment_create_study_pageFourTitle">Durchführungsort</string>
     <string name="fragment_create_study_pageFiveTitle">Termine</string>
-    <string name="fragment_create_study_desc_page_five">Wählen Sie mithilfe des Buttons Termine aus, an denen Interessierte an Ihrer Studie teilnehmen können. \n \n Bitte vermeiden Sie hier Fehlplanungen um möglichst problemfreie Teilnahmen zu gewährleisten.</string>
+    <string name="fragment_create_study_desc_page_five">Wählen Sie mithilfe des Buttons Termine aus, an denen Interessierte an Ihrer Studie teilnehmen können. \n \n Fehplanungen bitte vermeiden.</string>
     <string name="fragment_create_study_pageFive_fab">Neuer Termin</string>
     <string name="fragment_create_study_pageFinalTitle">Bestätigung</string>
     <string name="fragment_create_study_base_next">Weiter</string>

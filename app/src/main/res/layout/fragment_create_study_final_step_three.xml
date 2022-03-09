@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".createStudyFragment_finalStep_three"
     android:background="?android:windowBackground">
 
@@ -30,25 +31,36 @@
             android:background="@color/black" />
 
 
+        <TextView
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="25dp"
+            android:text="Ausgewählte Termine"
+            android:textColor="@color/heatherred_Main"
+            android:textSize="15sp"
+            android:textStyle="bold" />
+
         <com.google.android.material.card.MaterialCardView
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="6.5"
-
-            android:layout_marginRight="30dp"
+            android:layout_height="347dp"
             android:layout_marginLeft="30dp"
-            android:layout_marginTop="20dp">
+            android:layout_marginTop="12dp"
+            android:layout_marginRight="30dp"
+            android:layout_weight="5"
+            android:backgroundTint="@color/green_light"
+            android:foregroundTint="@color/heatherred_Main"
+            app:cardCornerRadius="11dp">
 
             <ListView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
                 android:id="@+id/confirmDates"
-                android:textSize="20sp"
+                android:layout_width="match_parent"
+                android:layout_height="497dp"
                 android:layout_gravity="top"
-                android:layout_marginTop="10dp"
                 android:layout_marginLeft="15dp"
-                android:layout_marginRight="15dp">
-            </ListView>
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="15dp"
+                android:textSize="40sp"></ListView>
 
         </com.google.android.material.card.MaterialCardView>
 
