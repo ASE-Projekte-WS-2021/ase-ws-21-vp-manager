@@ -52,6 +52,11 @@
             app:destination="@id/personalAccountFragment"
             app:popUpTo="@id/personalAccountFragment"
             app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_homeFragment_to_studyFragment"
+            app:destination="@id/studyFragment"
+            app:popUpTo="@id/studyFragment"
+            app:popUpToInclusive="true" />
     </fragment>
     <fragment
         android:id="@+id/findStudyFragment"

@@ -189,7 +189,103 @@ public class PA_ExpandableListDataPump extends Activity {
         return false;
     }
 
+    //Parameters
+    //Return Values
+    //this function iterates over the date List and finds all dates that the user has selected. Then it adds all dates belonging to studies which the user created, if said date is selected by another user
+    public static List<String[]> getAllArrivingDates() {
+        HashMap<String, String> studyIdList = new HashMap<>();
 
+        List<String[]> arrivingDates = new ArrayList<>();
+
+        for (Map<String, Object> map : dbDatesList) {
+            boolean saveDate = false;
+            String studyId = null;
+            String userID = null;
+            String date = null;
+            for (String key : map.keySet()) {
+                if (key.equals("studyId")) {
+                    studyId = map.get(key).toString();
+                }
+                if (key.equals("date")) {
+                    date = map.get(key).toString();
+                }
+                if (key.equals("userId")) {
+                    userID = map.get(key).toString();
+                    if (userID == uniqueID) {
+                        saveDate = true;
+                    }
+                }
+            }
+            if (saveDate && studyId != null && date != null) {
+                studyIdList.put(studyId, date);
+            }
+        }
+
+        for (Map<String, Object> map : dbStudiesList) {
+            List<String> dateList = new ArrayList<>();
+            boolean getDate = false;
+            String studyID = null;
+            String creator = null;
+            for (String key : map.keySet()) {
+                if (key.equals("creator")) {
+                    creator = map.get(key).toString();
+                    if (creator.equals(uniqueID)) {
+                        getDate = true;
+                    }
+                }
+                if (key.equals("id")) {
+                    studyID = map.get(key).toString();
+                }
+            }
+            if (getDate && studyID != null) {
+                for (Map<String, Object> datemap : dbDatesList) {
+                    boolean saveDate = false;
+                    boolean dateBooked = false;
+                    String date = null;
+                    for (String key : datemap.keySet()) {
+                        if (key.equals("studyId")) {
+                            String dateStudyId = datemap.get(key).toString();
+                            if (dateStudyId.equals(studyID)) {
+                                saveDate = true;
+                            }
+                        }
+                        if (key.equals("date")) {
+                            date = datemap.get(key).toString();
+                        }
+                        if (key.equals("selected")) {
+                            dateBooked = Boolean.parseBoolean(datemap.get(key).toString());
+                        }
+                    }
+                    if (saveDate && dateBooked && date != null) {
+                        studyIdList.put(studyID, date);
+                    }
+                }
+            }
+        }
+
+        for (String key : studyIdList.keySet()) {
+            String studyName = null;
+            String date = studyIdList.get(key);
+
+            for (Map<String, Object> map : dbStudiesList) {
+                if (map.get("studyId").toString().equals(key)) {
+                    if (map.get("name").toString() != null) {
+                        studyName = map.get("name").toString();
+                    }
+                }
+            }
+
+            if (studyName != null) {
+                String[] listEntry = new String[3];
+                listEntry[0] = studyName;
+                listEntry[0] = date;
+                listEntry[0] = key;
+
+                arrivingDates.add(listEntry);
+            }
+        }
+        return arrivingDates;
+    }
 
 
 

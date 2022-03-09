@@ -5,7 +5,9 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ListView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -13,7 +15,17 @@ import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 
+import com.example.vpmanager.PA_ExpandableListDataPump;
 import com.example.vpmanager.R;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.TreeMap;
 
 public class homeFragment extends Fragment {
 
@@ -22,6 +34,10 @@ public class homeFragment extends Fragment {
     private Button createStudyNavBtn;
     private Button overviewNavBtn;
     private Button ownStudyNavBtn;
+
+    private ListView arrivingDatesList;
+
+    private HashMap<String, String> getStudyIdByName = new HashMap<>();
 
     public homeFragment() {
     }
@@ -50,6 +66,7 @@ public class homeFragment extends Fragment {
     //Return Values:
     //connects the view components with their ids
     private void initHomeFragmentComponents(View view) {
+        arrivingDatesList = view.findViewById(R.id.listViewOwnArrivingStudyFragment);
         findStudyNavBtn = view.findViewById(R.id.findStudyCard);
         createStudyNavBtn = view.findViewById(R.id.createStudyCard);
         overviewNavBtn = view.findViewById(R.id.overviewCard);
@@ -92,5 +109,68 @@ public class homeFragment extends Fragment {
         Log.d("homeFragment", "setClickListeners end");
     }
 
-    //TODO: For now the "Anstehende Termine" are hardcoded. These need to be retrieved from the database later!
+    private void setUpDateList() {
+        final List<String[]>[] arrivingDates = new List[]{null};
+
+        PA_ExpandableListDataPump.getAllDates(new PA_ExpandableListDataPump.FirestoreCallbackDates() {
+            @Override
+            public void onCallback(boolean finished) {
+                if (finished)
+                    PA_ExpandableListDataPump.getAllStudies(new PA_ExpandableListDataPump.FirestoreCallbackStudy() {
+                        @Override
+                        public void onCallback() {
+                            arrivingDates[0] = PA_ExpandableListDataPump.getAllArrivingDates();
+                        }
+                    });
+            }
+        });
+
+        if (arrivingDates[0] != null) {
+            SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyy HH:mm");
+
+            List<String[]> dates = arrivingDates[0];
+            ArrayList<String> listEntries = new ArrayList<>();
+
+            Map<Date, String> sortingMap = new TreeMap<>();
+
+            for (String[] listEntry : dates) {
+                String name = listEntry[0];
+                String date = listEntry[1];
+                String studyID = listEntry[2];
+
+                Date studyDate = null;
+                try {
+                    studyDate = format.parse(date);
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+
+                sortingMap.put(studyDate, name);
+                //listEntries.add(name + "\t\t" + date);
+                getStudyIdByName.put(name, studyID);
+            }
+
+            for (Date key : sortingMap.keySet()) {
+                listEntries.add(sortingMap.get(key) + "\t\t" + key);
+            }
+
+            ArrayAdapter arrayAdapter = new ArrayAdapter(getActivity(), android.R.layout.simple_list_item_1, listEntries);
+            arrivingDatesList.setAdapter(arrayAdapter);
+            arrivingDatesList.setOnItemClickListener(new android.widget.AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                    String text = (String) arrivingDatesList.getItemAtPosition(position);
+                    String name = text.split("\t\t")[0];
+
+                    if (name != null) {
+                        String studyId = getStudyIdByName.get(name);
+                        //go to Study Detail View
+                        Bundle args = new Bundle();
+                        args.putString("studyId", studyId);
+                        navController.navigate(R.id.action_homeFragment_to_studyFragment, args);
+                    }
+                }
+            });
+        }
+    }
 }
