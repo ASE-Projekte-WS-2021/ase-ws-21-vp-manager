@@ -2,7 +2,6 @@ package com.example.vpmanager.views;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ListView;
@@ -15,7 +14,6 @@ import androidx.fragment.app.FragmentManager;
 
 import com.example.vpmanager.R;
 import com.example.vpmanager.accessDatabase;
-import com.example.vpmanager.views.mainActivity;
 import com.google.android.material.appbar.MaterialToolbar;
 import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.textfield.TextInputEditText;
