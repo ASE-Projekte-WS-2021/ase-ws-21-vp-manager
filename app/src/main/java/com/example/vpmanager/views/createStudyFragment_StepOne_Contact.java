@@ -9,9 +9,13 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.vpmanager.R;
+import com.google.android.material.textfield.TextInputEditText;
 
 public class createStudyFragment_StepOne_Contact extends Fragment {
 
+    TextInputEditText textInputEditTextContact;
+    TextInputEditText textInputEditTextContact2;
+    TextInputEditText textInputEditTextContact3;
     //Parameter:
     //Return values:
     //Sets the current fragment for the activity
@@ -32,6 +36,22 @@ public class createStudyFragment_StepOne_Contact extends Fragment {
 
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
+        setupView(view);
+        loadData();
     }
 
+    private void setupView(View view){
+        textInputEditTextContact = view.findViewById(R.id.inputContact1);
+        textInputEditTextContact2 = view.findViewById(R.id.inputContact2);
+        textInputEditTextContact3 = view.findViewById(R.id.inputContact3);
+    }
+
+    private void loadData() {
+        Bundle bundle = getArguments();
+        if(bundle != null){
+            textInputEditTextContact.setText(bundle.getString("contact"));
+            textInputEditTextContact.setText(bundle.getString("contact2"));
+            textInputEditTextContact.setText(bundle.getString("contact3"));
+        }
+    }
 }

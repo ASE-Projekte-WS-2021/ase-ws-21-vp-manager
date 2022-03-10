@@ -9,9 +9,11 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.vpmanager.R;
+import com.google.android.material.textfield.TextInputEditText;
 
 public class createStudyFragment_StepTwo extends Fragment {
 
+    TextInputEditText textInputEditTextDesc;
 
     //Parameter:
     //Return values:
@@ -34,7 +36,19 @@ public class createStudyFragment_StepTwo extends Fragment {
 
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
+        setupView(view);
+        loadData();
+    }
+
+    private void setupView(View view){
+        textInputEditTextDesc = view.findViewById(R.id.inputFieldStudyDesc);
 
     }
 
+    private void loadData() {
+        Bundle bundle = getArguments();
+        if(bundle != null){
+            textInputEditTextDesc.setText(bundle.getString("desc"));
+        }
+    }
 }
