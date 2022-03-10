@@ -152,6 +152,6 @@ public class ownStudyFragment extends Fragment implements StudyListAdapter.OnStu
         Bundle args = new Bundle();
         Log.d("ownStudyFragment", "onStudyClick - studyId:" + studyId);
         args.putString("studyId", studyId);
-        navController.navigate(R.id.action_ownStudyFragment_to_studyFragment, args);
+        navController.navigate(R.id.action_ownStudyFragment_to_studyCreatorFragment, args);
     }
 }

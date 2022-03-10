@@ -9,8 +9,10 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
 
 import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
@@ -35,11 +37,11 @@ public class editStudyFragment extends Fragment {
     EditText title;
     EditText name;
     EditText vp;
-    EditText category;
-    EditText execution;
+    Spinner categories;
+    Spinner execution;
     EditText location;
     EditText description;
-    EditText dates;
+   // EditText dates;
     EditText contact;
 
     Button saveButton;
@@ -85,12 +87,28 @@ public class editStudyFragment extends Fragment {
         title = view.findViewById(R.id.edit_study_title);
         name = view.findViewById(R.id.edit_study_name);
         vp = view.findViewById(R.id.edit_study_vp);
-        category = view.findViewById(R.id.edit_study_category);
+
+        //category = view.findViewById(R.id.edit_study_category);
+
+        categories = view.findViewById(R.id.edit_study_category);
+        ArrayAdapter<CharSequence> categoryAdapter = ArrayAdapter.createFromResource(getActivity(),
+                R.array.createCategoryList, android.R.layout.simple_spinner_item);
+        categoryAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        categories.setAdapter(categoryAdapter);
+
+
+        execution = view.findViewById(R.id.edit_study_execution);
+        ArrayAdapter<CharSequence> executionTypeAdapter = ArrayAdapter.createFromResource(getActivity(),
+                R.array.createExecutionTypeList, android.R.layout.simple_spinner_item);
+        executionTypeAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        execution.setAdapter(executionTypeAdapter);
+
+
         execution = view.findViewById(R.id.edit_study_execution);
         location = view.findViewById(R.id.edit_study_location);
         description = view.findViewById(R.id.edit_study_description);
         contact = view.findViewById(R.id.edit_study_contact);
-        dates = view.findViewById(R.id.edit_study_dates);
+        //dates = view.findViewById(R.id.edit_study_dates);
 
         saveButton = view.findViewById(R.id.edit_saving_button);
 
@@ -115,16 +133,16 @@ public class editStudyFragment extends Fragment {
     //Loads data in a Map for the Database
     private Map<String, Object> createDataMap() {
         Map<String, Object> dataMap = new HashMap<>();
-        dataMap.put("category", category.getText());
+        dataMap.put("category", categories.getSelectedItem());
         dataMap.put("contact", contact.getText());
         dataMap.put("dates", studyDateIds);
         dataMap.put("description", description.getText());
-        dataMap.put("executionType", execution.getText());
+        dataMap.put("executionType", execution.getSelectedItem());
         dataMap.put("name", title.getText());
 
-        if (execution.getText().equals("Remote"))
+        if (execution.getSelectedItem().equals("Remote"))
             dataMap.put("platform", location.getText());
-        else if (execution.getText().equals("Präsenz")) {
+        else if (execution.getSelectedItem().equals("Präsenz")) {
             String[] address = location.getText().toString().split("\n");
             dataMap.put("location", address[0]);
             dataMap.put("street", address[1]);
@@ -142,18 +160,18 @@ public class editStudyFragment extends Fragment {
         getAllStudies(() -> {
             for (Map<String, Object> map : DB_STUDIES_LIST) {
                 if (Objects.requireNonNull(map.get("id")).toString().equals(currentStudyId)) {
+
+                    loadSpinnerData(Objects.requireNonNull(map.get("category")).toString(), Objects.requireNonNull(map.get("executionType")).toString());
                     title.setText(Objects.requireNonNull(map.get("name")).toString());
                     name.setText(Objects.requireNonNull(map.get("name")).toString());
                     vp.setText(Objects.requireNonNull(map.get("vps")).toString());
-                    category.setText(Objects.requireNonNull(map.get("category")).toString());
-                    execution.setText(Objects.requireNonNull(map.get("executionType")).toString());
 
                     description.setText(Objects.requireNonNull(map.get("description")).toString());
 
                     contact.setText(Objects.requireNonNull(map.get("contact")).toString());
                     //dates.setText(Objects.requireNonNull(map.get("id")).toString());
 
-                    if (execution.getText().equals("Remote")) {
+                    if (execution.getSelectedItem().equals("Remote")) {
                         location.setText(Objects.requireNonNull(map.get("platform")).toString());
                     } else {
                         if (map.get("location") != null) {
@@ -180,7 +198,7 @@ public class editStudyFragment extends Fragment {
                             }
                         }
                     });
-                    dates.setText(dateList);
+                  //  dates.setText(dateList);
                 }
             }
         });
@@ -189,5 +207,31 @@ public class editStudyFragment extends Fragment {
 
     private void saveDataToDatabase(Map<String, Object> data) {
         PA_ExpandableListDataPump.updateStudyInDataBase(data, currentStudyId);
+    }
+
+    private void loadSpinnerData(String categoryType, String executionType) {
+
+        if(categoryType != null){
+            if(categoryType.equals("VR")){
+                categories.setSelection(1);
+            }
+            if(categoryType.equals("AR")){
+                categories.setSelection(2);
+            }
+            if(categoryType.equals("Diary Study")){
+                categories.setSelection(3);
+            }
+            if(categoryType.equals("Sonstige")){
+                categories.setSelection(4);
+            }
+            if(executionType != null) {
+                if (executionType.equals("Remote")) {
+                    execution.setSelection(1);
+                }
+                if (executionType.equals("Präsenz")) {
+                    execution.setSelection(2);
+                }
+            }
+        }
     }
 }
