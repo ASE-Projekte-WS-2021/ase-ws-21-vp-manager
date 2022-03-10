@@ -115,7 +115,7 @@ public class createStudyActivity extends AppCompatActivity {
     //Return values:
     //Sets clickListener on navigation items
     private void setupListeners() {
-
+        
         /*
         //For NavigationDrawer to open
         topAppBarCreate.setNavigationOnClickListener(new View.OnClickListener() {

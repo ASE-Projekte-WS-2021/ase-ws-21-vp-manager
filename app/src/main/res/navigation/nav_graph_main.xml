@@ -83,7 +83,7 @@
     <fragment
         android:id="@+id/ownStudyFragment"
         android:name="com.example.vpmanager.views.ownStudyFragment"
-        android:label="Meine Studien"
+        android:label="Eigene Studien"
         tools:layout="@layout/fragment_own_study" />
     <fragment
         android:id="@+id/studyFragment"
