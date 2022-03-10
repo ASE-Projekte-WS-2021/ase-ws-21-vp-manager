@@ -1,5 +1,7 @@
 package com.example.vpmanager.createStudy;
 
+import android.animation.Animator;
+import android.animation.AnimatorListenerAdapter;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -12,6 +14,7 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
+import com.airbnb.lottie.LottieAnimationView;
 import com.example.vpmanager.R;
 import com.example.vpmanager.accessDatabase;
 import com.example.vpmanager.views.mainActivity;
@@ -30,6 +33,8 @@ public class createStudyActivity extends AppCompatActivity {
     MaterialToolbar topAppBarCreate;
     DrawerLayout drawerLayoutCreate;
     NavigationView navigationViewCreate;
+
+    LottieAnimationView doneAnimation;
 
     String studyTitle = "";
     String VP = "0";
@@ -98,6 +103,7 @@ public class createStudyActivity extends AppCompatActivity {
     //Connects the code with the view
     private void setupView() {
         topAppBarCreate = findViewById(R.id.topAppBarCreate);
+        doneAnimation = findViewById(R.id.animationView);
         setSupportActionBar(topAppBarCreate);
         drawerLayoutCreate = findViewById(R.id.drawerLayoutCreate);
         navigationViewCreate = findViewById(R.id.navigationViewCreate);
@@ -381,8 +387,19 @@ public class createStudyActivity extends AppCompatActivity {
             case 9:
                 stateProgressBar.setCurrentStateNumber(StateProgressBar.StateNumber.FIVE);
                 createDBEntry();
-                Intent homeIntent = new Intent(createStudyActivity.this, mainActivity.class);
-                startActivity(homeIntent);
+                doneAnimation.setVisibility(LottieAnimationView.VISIBLE);
+                doneAnimation.setProgress(0);
+                doneAnimation.pauseAnimation();
+                doneAnimation.playAnimation();
+                doneAnimation.addAnimatorListener(new AnimatorListenerAdapter() {
+                                                      @Override
+                                                      public void onAnimationEnd(Animator animation) {
+                                                          super.onAnimationEnd(animation);
+                                                          Intent homeIntent = new Intent(createStudyActivity.this, mainActivity.class);
+                                                          startActivity(homeIntent);
+                                                      }
+                                                  }
+                );
                 break;
             default:
                 break;
@@ -470,29 +487,29 @@ public class createStudyActivity extends AppCompatActivity {
                 break;
             case 6:
                 getInput(currentFragment);
-                    bundle = createBundle(5);
-                    stateProgressBar.setCurrentStateNumber(StateProgressBar.StateNumber.THREE);
-                    if (execution.equals(getString(R.string.remoteString))) {
-                        createStudyFragment_StepFour_Remote createStudyFragment_stepFour_remote = new createStudyFragment_StepFour_Remote();
-                        createStudyFragment_stepFour_remote.setArguments(bundle);
-                        fragmentManager
-                                .beginTransaction()
-                                .setCustomAnimations(R.anim.enter_from_left, R.anim.exit_to_right,
-                                        R.anim.enter_from_right, R.anim.exit_to_left)
-                                .replace(R.id.fragment_container, createStudyFragment_stepFour_remote, null)
-                                .addToBackStack(null)
-                                .commit();
-                    } else {
-                        createStudyFragment_StepFour_Presence createStudyFragment_stepFour_presence = new createStudyFragment_StepFour_Presence();
-                        createStudyFragment_stepFour_presence.setArguments(bundle);
-                        fragmentManager
-                                .beginTransaction()
-                                .setCustomAnimations(R.anim.enter_from_left, R.anim.exit_to_right,
-                                        R.anim.enter_from_right, R.anim.exit_to_left)
-                                .replace(R.id.fragment_container, createStudyFragment_stepFour_presence, null)
-                                .addToBackStack(null)
-                                .commit();
-                    }
+                bundle = createBundle(5);
+                stateProgressBar.setCurrentStateNumber(StateProgressBar.StateNumber.THREE);
+                if (execution.equals(getString(R.string.remoteString))) {
+                    createStudyFragment_StepFour_Remote createStudyFragment_stepFour_remote = new createStudyFragment_StepFour_Remote();
+                    createStudyFragment_stepFour_remote.setArguments(bundle);
+                    fragmentManager
+                            .beginTransaction()
+                            .setCustomAnimations(R.anim.enter_from_left, R.anim.exit_to_right,
+                                    R.anim.enter_from_right, R.anim.exit_to_left)
+                            .replace(R.id.fragment_container, createStudyFragment_stepFour_remote, null)
+                            .addToBackStack(null)
+                            .commit();
+                } else {
+                    createStudyFragment_StepFour_Presence createStudyFragment_stepFour_presence = new createStudyFragment_StepFour_Presence();
+                    createStudyFragment_stepFour_presence.setArguments(bundle);
+                    fragmentManager
+                            .beginTransaction()
+                            .setCustomAnimations(R.anim.enter_from_left, R.anim.exit_to_right,
+                                    R.anim.enter_from_right, R.anim.exit_to_left)
+                            .replace(R.id.fragment_container, createStudyFragment_stepFour_presence, null)
+                            .addToBackStack(null)
+                            .commit();
+                }
                 break;
             case 7:
                 getInput(currentFragment);

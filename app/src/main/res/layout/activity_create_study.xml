@@ -106,7 +106,19 @@
                 app:spb_stateSize="35dp"
                 app:spb_stateTextSize="15sp" />
 
+
         </LinearLayout>
+
+        <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/animationView"
+            android:visibility="invisible"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:lottie_url="https://assets3.lottiefiles.com/dotlotties/dlf10_8m0i8okm.lottie"
+            android:scaleType="centerCrop"/>
+
+
+
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
@@ -121,4 +133,6 @@
         app:itemTextColor="@color/drawer_item"
         app:menu="@menu/navigation_drawer" />
 
+
 </androidx.drawerlayout.widget.DrawerLayout>
+

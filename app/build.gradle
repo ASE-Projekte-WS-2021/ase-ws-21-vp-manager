@@ -75,4 +75,6 @@ dependencies {
     implementation "androidx.navigation:navigation-ui:2.4.1"
     implementation "androidx.navigation:navigation-dynamic-features-fragment:2.4.1"
     androidTestImplementation "androidx.navigation:navigation-testing:2.4.1"
+    //Animation
+    implementation "com.airbnb.android:lottie:5.0.3"
 }
