@@ -6,6 +6,15 @@
     app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
     <TextView
+        android:id="@+id/ownStudiesInfoText"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:text="Bisher hast du noch keine Studien erstellt. Wähle im Menü den Reiter Studien erstellen um Studien zu erstellen!"
+        android:textAlignment="center"
+        android:visibility="gone" />
+
+    <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="25dp"
@@ -14,7 +23,6 @@
         android:text="Deine erstellten Studien"
         android:textSize="20sp"
         android:textStyle="bold" />
-    <!--android:textColor="@color/orange_highlight"-->
 
     <View
         android:layout_width="match_parent"
@@ -23,8 +31,15 @@
         android:layout_marginTop="55dp"
         android:layout_marginRight="20dp"
         android:background="@color/color_two" />
-    <!--android:background="@color/lightorange_Main"-->
 
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerViewOwnStudyFragment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="70dp"
+        android:dividerHeight="2dp" />
+
+    <!--
     <ListView
         android:id="@+id/listViewOwnStudyFragment"
         android:layout_width="match_parent"
@@ -32,6 +47,6 @@
         android:layout_marginTop="70dp"
         android:layout_weight="1"
         android:dividerHeight="2dp" />
-    <!--android:divider="@color/lightorange_Main"-->
+        -->
 
 </RelativeLayout>

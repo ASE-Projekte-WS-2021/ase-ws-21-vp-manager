@@ -84,7 +84,11 @@
         android:id="@+id/ownStudyFragment"
         android:name="com.example.vpmanager.views.ownStudyFragment"
         android:label="Meine Studien"
-        tools:layout="@layout/fragment_own_study" />
+        tools:layout="@layout/fragment_own_study" >
+        <action
+            android:id="@+id/action_ownStudyFragment_to_studyFragment"
+            app:destination="@id/studyFragment" />
+    </fragment>
     <fragment
         android:id="@+id/studyFragment"
         android:name="com.example.vpmanager.views.studyFragment"
