@@ -5,14 +5,19 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
-import android.widget.ListView;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.vpmanager.R;
+import com.example.vpmanager.adapter.StudyListAdapter;
+import com.example.vpmanager.models.StudyMetaInfoModel;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.CollectionReference;
@@ -22,14 +27,22 @@ import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
 
-public class ownStudyFragment extends Fragment {
+public class ownStudyFragment extends Fragment implements StudyListAdapter.OnStudyItemClickListener {
 
-    ListView studyList;
-    ArrayList<ArrayList<String>> studyIdNameVp;
-    ArrayList<String> studyNamesAndVps;
-    ArrayList<String> studyIds;
-    FirebaseFirestore db;
-    CollectionReference studiesRef;
+    private NavController navController;
+    private RecyclerView ownStudiesList;
+    private StudyListAdapter ownStudyListAdapter;
+    private ArrayList<StudyMetaInfoModel> ownStudiesModelArray;
+
+    private TextView noOwnStudies;
+    private ArrayList<ArrayList<String>> ownStudyIdNameVpCat;
+
+    private FirebaseFirestore db;
+    private CollectionReference studiesRef;
+
+    //private ArrayList<String> studyNamesAndVps;
+    //private ArrayList<String> studyIds;
+    //private ListView studyList;
 
     public ownStudyFragment() {
     }
@@ -45,9 +58,9 @@ public class ownStudyFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_own_study, container, false);
         setupListView(new FirestoreCallback() {
             @Override
-            public void onCallback(ArrayList<ArrayList<String>> arrayList) {
+            public void onCallback() { //ArrayList<ArrayList<String>> arrayList
                 loadOwnStudiesData(view);
-                Log.d("OwnStudies", studyNamesAndVps.toString());
+                Log.d("OwnStudies", ownStudyIdNameVpCat.toString());
             }
         });
         return view;
@@ -55,6 +68,7 @@ public class ownStudyFragment extends Fragment {
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        navController = Navigation.findNavController(view);
         super.onViewCreated(view, savedInstanceState);
     }
 
@@ -62,21 +76,42 @@ public class ownStudyFragment extends Fragment {
     //Return Values:
     //loads all retrieved studies in the list view
     private void loadOwnStudiesData(View view) {
-        studyList = view.findViewById(R.id.listViewOwnStudyFragment);
-        studyNamesAndVps = new ArrayList<>();
-        studyIds = new ArrayList<>();
+        //studyList = view.findViewById(R.id.listViewOwnStudyFragment);
+        noOwnStudies = view.findViewById(R.id.ownStudiesInfoText);
+
+        ownStudiesList = view.findViewById(R.id.recyclerViewOwnStudyFragment);
+        ownStudiesModelArray = new ArrayList<>();
+        //studyNamesAndVps = new ArrayList<>();
+        //studyIds = new ArrayList<>();
+
         //Store the names and the vps in an ArrayList
         //Store the ids in the same order in another ArrayList
-        for (int i = 0; i < studyIdNameVp.size(); i++) {
-            studyNamesAndVps.add(studyIdNameVp.get(i).get(1) + "\t\t(" + studyIdNameVp.get(i).get(2) + getString(R.string.vpHours));
-            studyIds.add(studyIdNameVp.get(i).get(0));
+        for (int i = 0; i < ownStudyIdNameVpCat.size(); i++) {
+            //studyNamesAndVps.add(ownStudyIdNameVpCat.get(i).get(1) + ownStudyIdNameVpCat.get(i).get(2) + getString(R.string.vpHours));
+            //studyIds.add(ownStudyIdNameVpCat.get(i).get(0));
+            ownStudiesModelArray.add(
+                    new StudyMetaInfoModel(
+                            ownStudyIdNameVpCat.get(i).get(0), //add Id
+                            ownStudyIdNameVpCat.get(i).get(1), //add Name
+                            ownStudyIdNameVpCat.get(i).get(2) + " " + "VP-Stunden", //add vps
+                            ownStudyIdNameVpCat.get(i).get(3)) //add category
+            );
         }
-        ArrayAdapter arrayAdapter = new ArrayAdapter(getActivity(), android.R.layout.simple_list_item_1, studyNamesAndVps);
-        studyList.setAdapter(arrayAdapter);
+        if (!ownStudyIdNameVpCat.isEmpty()) {
+            noOwnStudies.setVisibility(View.GONE);
+        } else {
+            noOwnStudies.setVisibility(View.VISIBLE);
+        }
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
+        ownStudyListAdapter = new StudyListAdapter(requireActivity(), ownStudiesModelArray, this);
+        //ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(getActivity(), R.layout.studylist_cart, studyNamesAndVps); //simple_list_item_1
+        //studyList.setAdapter(arrayAdapter);
+        ownStudiesList.setAdapter(ownStudyListAdapter);
+        ownStudiesList.setLayoutManager(linearLayoutManager);
     }
 
     public interface FirestoreCallback {
-        void onCallback(ArrayList<ArrayList<String>> arrayList);
+        void onCallback(); //ArrayList<ArrayList<String>> arrayList
     }
 
     //Parameter: callback
@@ -87,7 +122,7 @@ public class ownStudyFragment extends Fragment {
         String currentUserId = mainActivity.uniqueID;
         db = FirebaseFirestore.getInstance();
         studiesRef = db.collection(getString(R.string.collectionPathStudies));
-        studyIdNameVp = new ArrayList<>();
+        ownStudyIdNameVpCat = new ArrayList<>();
 
         studiesRef.whereEqualTo("creator", currentUserId).get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
@@ -100,11 +135,23 @@ public class ownStudyFragment extends Fragment {
                                 idNameVph.add(0, document.getString("id"));
                                 idNameVph.add(1, document.getString("name"));
                                 idNameVph.add(2, document.getString("vps"));
-                                studyIdNameVp.add(idNameVph);
+                                idNameVph.add(3, document.getString("category"));
+                                ownStudyIdNameVpCat.add(idNameVph);
                             }
-                            firestoreCallback.onCallback(studyIdNameVp);
+                            firestoreCallback.onCallback(); //ownStudyIdNameVpCat
                         }
                     }
                 });
+    }
+
+    //Parameter: the id of the ownStudy that was clicked on
+    //Return Values:
+    //navigates to the more detailed and changeable view of a study
+    @Override
+    public void onStudyClick(String studyId) {
+        Bundle args = new Bundle();
+        Log.d("ownStudyFragment", "onStudyClick - studyId:" + studyId);
+        args.putString("studyId", studyId);
+        navController.navigate(R.id.action_ownStudyFragment_to_studyFragment, args);
     }
 }
