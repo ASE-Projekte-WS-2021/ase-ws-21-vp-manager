@@ -92,7 +92,9 @@ public class personalAccountFragment extends Fragment {
         if (vpList != null) {
             for (int i = 0; i < vpList.size(); i++) {
                 String vps = vpList.get(i).split(",")[1];
-                double studyVPS = Double.parseDouble(vps);
+                double studyVPS = 0;
+                if(vps != null && !vps.equals(""))
+                    studyVPS = Double.parseDouble(vps);
                 plannedVP += studyVPS;
             }
         }
@@ -100,7 +102,9 @@ public class personalAccountFragment extends Fragment {
         if (passedVpList != null) {
             for (int i = 0; i < passedVpList.size(); i++) {
                 String vps = passedVpList.get(i).split(",")[1];
-                double studyVPS = Double.parseDouble(vps);
+                double studyVPS = 0;
+                if(vps != null && !vps.equals(""))
+                    studyVPS = Double.parseDouble(vps);
                 participatedVP += studyVPS;
             }
         }

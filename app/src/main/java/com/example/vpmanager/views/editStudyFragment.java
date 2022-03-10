@@ -49,7 +49,6 @@ public class editStudyFragment extends Fragment {
     //Return values:
     //Sets the current fragment for the activity
     public editStudyFragment() {
-        createStudyActivity.currentFragment = 7;
     }
 
     @Override
