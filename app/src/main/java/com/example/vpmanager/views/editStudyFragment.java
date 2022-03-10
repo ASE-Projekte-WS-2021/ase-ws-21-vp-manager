@@ -43,6 +43,7 @@ public class editStudyFragment extends Fragment {
 
     Button saveButton;
     ArrayList<String> studyDateIds;
+
     //Parameter:
     //Return values:
     //Sets the current fragment for the activity
@@ -80,7 +81,7 @@ public class editStudyFragment extends Fragment {
     //Parameter:
     //Return values:
     //Connects the code with the view and sets Listener for Saving
-    private void setupView(View view){
+    private void setupView(View view) {
         title = view.findViewById(R.id.edit_study_title);
         vp = view.findViewById(R.id.edit_study_vp);
         category = view.findViewById(R.id.edit_study_category);
@@ -108,24 +109,21 @@ public class editStudyFragment extends Fragment {
     }
 
 
-
     //Parameter:
     //Return values: Map with all inputs from Edittexts
     //Loads data in a Map for the Database
-    private Map<String, Object> createDataMap()
-    {
+    private Map<String, Object> createDataMap() {
         Map<String, Object> dataMap = new HashMap<>();
-        dataMap.put("category", category.getText() );
-        dataMap.put("contact", contact.getText() );
-        dataMap.put("dates", studyDateIds );
-        dataMap.put("description", description.getText() );
-        dataMap.put("executionType", execution.getText() );
-        dataMap.put("name", title.getText() );
+        dataMap.put("category", category.getText());
+        dataMap.put("contact", contact.getText());
+        dataMap.put("dates", studyDateIds);
+        dataMap.put("description", description.getText());
+        dataMap.put("executionType", execution.getText());
+        dataMap.put("name", title.getText());
 
-        if(execution.getText().equals("Remote"))
-            dataMap.put("platform", location.getText() );
-        else if(execution.getText().equals("Präsenz"))
-        {
+        if (execution.getText().equals("Remote"))
+            dataMap.put("platform", location.getText());
+        else if (execution.getText().equals("Präsenz")) {
             String[] address = location.getText().toString().split("\n");
             dataMap.put("location", address[0]);
             dataMap.put("street", address[1]);
@@ -139,12 +137,10 @@ public class editStudyFragment extends Fragment {
     //Return values:
     //Loads data recieved from the database into the edittexts
     private void loadData() {
-
+        studyDateIds = new ArrayList<>();
         getAllStudies(() -> {
-            for(Map<String, Object> map : dbStudiesList)
-            {
-                if(Objects.requireNonNull(map.get("id")).toString().equals(currentStudyId))
-                {
+            for (Map<String, Object> map : dbStudiesList) {
+                if (Objects.requireNonNull(map.get("id")).toString().equals(currentStudyId)) {
                     title.setText(Objects.requireNonNull(map.get("name")).toString());
                     vp.setText(Objects.requireNonNull(map.get("vps")).toString());
                     category.setText(Objects.requireNonNull(map.get("category")).toString());
@@ -155,29 +151,29 @@ public class editStudyFragment extends Fragment {
                     contact.setText(Objects.requireNonNull(map.get("contact")).toString());
                     //dates.setText(Objects.requireNonNull(map.get("id")).toString());
 
-                    if(execution.getText().equals("Remote")) {
+                    if (execution.getText().equals("Remote")) {
                         location.setText(Objects.requireNonNull(map.get("platform")).toString());
-                    }
-                    else
-                    {
-                        String locationString = Objects.requireNonNull(map.get("location")).toString() + "\n "
-                                +Objects.requireNonNull(map.get("street")).toString()+ "\n "
-                                +Objects.requireNonNull(map.get("room")).toString();
+                    } else {
+                        if (map.get("location") != null) {
+                            String locationString = Objects.requireNonNull(map.get("location")).toString() + "\n "
+                                    + Objects.requireNonNull(map.get("street")).toString() + "\n "
+                                    + Objects.requireNonNull(map.get("room")).toString();
 
-                        location.setText(locationString);
+                            location.setText(locationString);
+                        }
                     }
 
                     StringBuilder dateList = new StringBuilder();
 
                     getAllDates(finished -> {
-                        if(finished)
-                        {
-                            for(Map<String, Object> dateMap: dbDatesList)
-                            {
-                                if(dateMap != null && Objects.requireNonNull(dateMap.get("studyId")).toString().equals(currentStudyId))
-                                {
+                        if (finished) {
+                            for (Map<String, Object> dateMap : dbDatesList) {
+                                if (dateMap != null && Objects.requireNonNull(dateMap.get("studyId")).toString().equals(currentStudyId)) {
                                     dateList.append(Objects.requireNonNull(dateMap.get("date")).toString()).append("\n");
-                                    studyDateIds.add(Objects.requireNonNull(dateMap.get("id")).toString());
+                                    System.out.println("Pog: " +dateMap.get("id"));
+                                    if (dateMap.get("id") != null) {
+                                        studyDateIds.add(Objects.requireNonNull(dateMap.get("id")).toString());
+                                    }
                                 }
                             }
                         }
@@ -186,11 +182,10 @@ public class editStudyFragment extends Fragment {
                 }
             }
         });
-        }
+    }
 
 
-    private void saveDataToDatabase(Map<String, Object> data)
-    {
+    private void saveDataToDatabase(Map<String, Object> data) {
         PA_ExpandableListDataPump.updateStudyInDataBase(data, currentStudyId);
     }
 }

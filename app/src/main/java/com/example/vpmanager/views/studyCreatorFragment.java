@@ -213,8 +213,7 @@ public class studyCreatorFragment extends Fragment {
                                 idDateUser.add(0, document.getString("id"));
                                 idDateUser.add(1, document.getString("date"));
                                 idDateUser.add(2, document.getString("userId"));
-                                boolean selected = Boolean.parseBoolean(document.getString("selected"));
-                                idDateUser.add(3, String.valueOf(selected));
+                                idDateUser.add(3, document.getBoolean("selected").toString());
 
                                 studyDatesInfo.add(idDateUser);
                             }
@@ -236,7 +235,7 @@ public class studyCreatorFragment extends Fragment {
                 if(allDates.get(k).equals(date))
                 {
                     String seleceted = studyDatesInfo.get(k).get(3);
-                    if(Boolean.parseBoolean(seleceted))
+                    if(Boolean.parseBoolean(seleceted) && dateList.getChildAt(i) != null)
                     {
                         dateList.getChildAt(i).setBackgroundColor(Color.GREEN);
                     }
