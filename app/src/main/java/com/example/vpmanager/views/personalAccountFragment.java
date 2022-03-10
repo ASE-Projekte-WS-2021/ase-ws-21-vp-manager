@@ -45,7 +45,7 @@ public class personalAccountFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_personal_account, container, false);
-        setupView(view);
+        loadData(view);
         return view;
     }
 
@@ -57,12 +57,12 @@ public class personalAccountFragment extends Fragment {
     }
 
 
-    private void loadData(View view)
-    {
+    private void loadData(View view) {
+
         PA_ExpandableListDataPump.getAllDates(new PA_ExpandableListDataPump.FirestoreCallbackDates() {
             @Override
             public void onCallback(boolean finished) {
-                if(finished)
+                if (finished)
                     PA_ExpandableListDataPump.getAllStudies(new PA_ExpandableListDataPump.FirestoreCallbackStudy() {
                         @Override
                         public void onCallback() {

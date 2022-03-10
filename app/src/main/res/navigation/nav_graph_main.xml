@@ -98,6 +98,18 @@
         <argument
             android:name="study_id"
             app:argType="string" />
+        <action
+            android:id="@+id/action_studyFragment_to_studyCreatorFragment"
+            app:destination="@id/studyCreatorFragment"
+            app:popUpTo="@id/studyCreatorFragment"
+            app:popUpToInclusive="true" />
     </fragment>
-
+    <fragment
+        android:id="@+id/studyCreatorFragment"
+        android:name="com.example.vpmanager.views.studyCreatorFragment"
+        android:label="studyCreatorFragment">
+        <argument
+            android:name="study_id"
+            app:argType="string" />
+    </fragment>
 </navigation>

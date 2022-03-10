@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -19,7 +20,6 @@ import androidx.fragment.app.FragmentTransaction;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 
-import com.example.vpmanager.PA_ExpandableListDataPump;
 import com.example.vpmanager.R;
 import com.example.vpmanager.accessDatabase;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -36,7 +36,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 
-public class studyFragment extends Fragment {
+public class studyCreatorFragment extends Fragment {
 
     ListView dateList;
     String currentStudyId;
@@ -67,9 +67,11 @@ public class studyFragment extends Fragment {
     TextView localData;
     TextView contactInfo;
 
+    ImageView editButton;
+
     NavController navController;
 
-    public studyFragment() {
+    public studyCreatorFragment() {
     }
 
     @Override
@@ -80,22 +82,22 @@ public class studyFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_study, container, false);
-        navController = Navigation.findNavController(view);
+        View view = inflater.inflate(R.layout.fragment_creator_study, container, false);
         getRequiredInfos();
+        navController = Navigation.findNavController(view);
         return view;
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        setupStudyDetails(new studyFragment.FirestoreCallbackStudy() {
+        setupStudyDetails(new studyCreatorFragment.FirestoreCallbackStudy() {
             @Override
             public void onCallback(ArrayList<String> arrayList) {
                 loadStudyData(view);
             }
         });
-        setupDateListView(new studyFragment.FirestoreCallbackDates() {
+        setupDateListView(new studyCreatorFragment.FirestoreCallbackDates() {
             @Override
             public void onCallback(ArrayList<ArrayList<String>> arrayList) {
                 loadDatesData(view);
@@ -107,27 +109,6 @@ public class studyFragment extends Fragment {
         //Get the studyId early
         currentStudyId = getArguments().getString("studyId");
         currentUserId = mainActivity.createUserId(getActivity());
-
-        if(PA_ExpandableListDataPump.dbDatesList.size() == 0)
-        {
-            PA_ExpandableListDataPump.getAllDates(new PA_ExpandableListDataPump.FirestoreCallbackDates() {
-                @Override
-                public void onCallback(boolean finished) {
-
-                }
-            });
-        }
-
-        for (Map<String, Object> map : PA_ExpandableListDataPump.dbStudiesList)
-        {
-            if(map.get("creator").equals(currentUserId) && map.get("id").equals(currentStudyId))
-            {
-                Bundle args = new Bundle();
-                args.putString("studyId", currentStudyId);
-                navController.navigate(R.id.action_studyFragment_to_studyCreatorFragment, args);
-            }
-        }
-
         savedDateItem = new ArrayList<>();
         savedDateItem.add(getString(R.string.dropDateView));
     }
@@ -147,6 +128,7 @@ public class studyFragment extends Fragment {
         vpValue = view.findViewById(R.id.vpValueStudyFragment);
         category = view.findViewById(R.id.categoryStudyFragment);
         studyType = view.findViewById(R.id.studyTypeStudyFragment);
+        editButton = view.findViewById(R.id.editOwnStudyButton);
         //Textview for further studyType data (depending on type)
         remoteData = view.findViewById(R.id.remoteStudyStudyFragment);
         localData = view.findViewById(R.id.localStudyStudyFragment);
@@ -186,14 +168,13 @@ public class studyFragment extends Fragment {
         //makes date selection unavailable if user already picked a date from this study
         if (userIdsOfDates.contains(mainActivity.createUserId(getActivity()))) { //before: homeActivity.createUserId(this);
             setSavedDateAdapter();
-            setupSelectedDateClickListener();
         } else {
             setAllDatesAdapter();
             setupClickListener();
         }
     }
 
-    private void setupStudyDetails(studyFragment.FirestoreCallbackStudy firestoreCallbackStudy) {
+    private void setupStudyDetails(studyCreatorFragment.FirestoreCallbackStudy firestoreCallbackStudy) {
 
         db = FirebaseFirestore.getInstance();
         studyRef = db.collection(getString(R.string.collectionPathStudies)).document(currentStudyId);
@@ -223,7 +204,7 @@ public class studyFragment extends Fragment {
         });
     }
 
-    private void setupDateListView(studyFragment.FirestoreCallbackDates firestoreCallbackDates) {
+    private void setupDateListView(studyCreatorFragment.FirestoreCallbackDates firestoreCallbackDates) {
 
         db = FirebaseFirestore.getInstance();
         datesRef = db.collection(getString(R.string.collectionPathDates));
@@ -254,70 +235,16 @@ public class studyFragment extends Fragment {
     }
 
     private void setupClickListener() {
-
-        dateList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        editButton.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
-                String dateId = dateIds.get(position);
-                selectDateAlert(dateId);
+            public void onClick(View v) {
+                Bundle args = new Bundle();
+                args.putString("studyId", currentStudyId);
+                navController.navigate(R.id.action_studyFragment_to_studyCreatorFragment, args);
             }
         });
     }
 
-    private void setupSelectedDateClickListener() {
-
-        dateList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                unSelectDateAlert();
-            }
-        });
-    }
-
-    private void unSelectDateAlert() {
-
-        DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                switch (which) {
-                    case DialogInterface.BUTTON_POSITIVE:
-                        unSelectDate();
-                        setAllDatesAdapter();
-                        setupClickListener();
-                        break;
-                    case DialogInterface.BUTTON_NEGATIVE:
-                        break;
-                }
-            }
-        };
-        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-        builder.setMessage(getString(R.string.dropDateQuestion))
-                .setPositiveButton(getString(R.string.yes), dialogClickListener)
-                .setNegativeButton(getString(R.string.no), dialogClickListener).show();
-    }
-
-    private void selectDateAlert(String dateId) {
-
-        DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                switch (which) {
-                    case DialogInterface.BUTTON_POSITIVE:
-                        selectDate(dateId);
-                        setSavedDateAdapter();
-                        setupSelectedDateClickListener();
-                        break;
-                    case DialogInterface.BUTTON_NEGATIVE:
-                        break;
-                }
-            }
-        };
-        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-        builder.setMessage(getString(R.string.selectDateQuestion))
-                .setPositiveButton(getString(R.string.yes), dialogClickListener)
-                .setNegativeButton(getString(R.string.no), dialogClickListener).show();
-    }
 
     private void setSavedDateAdapter() {
         savedDateAdapter = new ArrayAdapter(getActivity(), android.R.layout.simple_list_item_1, savedDateItem);
@@ -355,7 +282,7 @@ public class studyFragment extends Fragment {
         FragmentManager fragmentManager = getParentFragmentManager();
         FragmentTransaction transaction = fragmentManager.beginTransaction();
         transaction.setReorderingAllowed(true);
-        transaction.replace(R.id.nav_host_fragment_main, studyFragment.class, args);
+        transaction.replace(R.id.nav_host_fragment_main, studyCreatorFragment.class, args);
         transaction.commit();
     }
 

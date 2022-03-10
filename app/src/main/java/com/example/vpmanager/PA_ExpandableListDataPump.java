@@ -161,7 +161,6 @@ public class PA_ExpandableListDataPump extends Activity {
                 }
             }
         }
-
         EXPANDABLE_LIST_DETAIL.put("Vergangene Studien", passedStudies);
         EXPANDABLE_LIST_DETAIL.put("Geplante Studien", ownStudies);
     }
