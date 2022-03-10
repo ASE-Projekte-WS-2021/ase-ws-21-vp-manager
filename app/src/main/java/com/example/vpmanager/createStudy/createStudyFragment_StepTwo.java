@@ -1,4 +1,4 @@
-package com.example.vpmanager.views;
+package com.example.vpmanager.createStudy;
 
 import android.os.Bundle;
 
@@ -11,15 +11,15 @@ import android.view.ViewGroup;
 import com.example.vpmanager.R;
 import com.google.android.material.textfield.TextInputEditText;
 
-public class createStudyFragment_StepFour_Remote extends Fragment {
+public class createStudyFragment_StepTwo extends Fragment {
 
-    TextInputEditText textInputEditTextPlatform;
-    TextInputEditText textInputEditTextOptionalPlatform;
+    TextInputEditText textInputEditTextDesc;
+
     //Parameter:
     //Return values:
     //Sets the current fragment for the activity
-    public createStudyFragment_StepFour_Remote() {
-        createStudyActivity.currentFragment = 5;
+    public createStudyFragment_StepTwo() {
+        createStudyActivity.currentFragment = 3;
     }
 
     @Override
@@ -30,7 +30,8 @@ public class createStudyFragment_StepFour_Remote extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_create_study_step_four_remote, container, false);
+        // Inflate the layout for this fragment
+        return inflater.inflate(R.layout.fragment_create_study_step_two, container, false);
     }
 
     @Override
@@ -43,8 +44,7 @@ public class createStudyFragment_StepFour_Remote extends Fragment {
     //Return values:
     //Connects the code with the view
     private void setupView(View view){
-        textInputEditTextPlatform = view.findViewById(R.id.inputFieldPlatform);
-        textInputEditTextOptionalPlatform = view.findViewById(R.id.inputFieldPlatformOptional);
+        textInputEditTextDesc = view.findViewById(R.id.inputFieldStudyDesc);
 
     }
 
@@ -54,8 +54,7 @@ public class createStudyFragment_StepFour_Remote extends Fragment {
     private void loadData() {
         Bundle bundle = getArguments();
         if(bundle != null){
-            textInputEditTextPlatform.setText(bundle.getString("platform"));
-            textInputEditTextOptionalPlatform.setText(bundle.getString("platform2"));
+            textInputEditTextDesc.setText(bundle.getString("desc"));
         }
     }
 }

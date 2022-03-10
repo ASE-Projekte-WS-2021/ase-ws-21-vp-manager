@@ -1,4 +1,4 @@
-package com.example.vpmanager.views;
+package com.example.vpmanager.createStudy;
 
 import android.os.Bundle;
 

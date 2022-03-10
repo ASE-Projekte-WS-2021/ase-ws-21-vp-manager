@@ -1,4 +1,4 @@
-package com.example.vpmanager.views;
+package com.example.vpmanager.createStudy;
 
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
