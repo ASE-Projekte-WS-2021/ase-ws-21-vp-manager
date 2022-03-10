@@ -121,7 +121,27 @@ public class createStudyActivity extends AppCompatActivity {
     //Return values:
     //Sets clickListener on navigation items
     private void setupListeners() {
-        
+        doneAnimation.addAnimatorListener(new AnimatorListenerAdapter() {
+                                              @Override
+                                              public void onAnimationEnd(Animator animation) {
+                                                  super.onAnimationEnd(animation);
+                                                  createDBEntry();
+                                                  Intent homeIntent = new Intent(createStudyActivity.this, mainActivity.class);
+                                                  startActivity(homeIntent);
+                                              }
+                                          }
+        );
+
+        topAppBarCreate.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent homeIntent = new Intent(createStudyActivity.this, mainActivity.class);
+                startActivity(homeIntent);
+            }
+        });
+
+
+
         /*
         //For NavigationDrawer to open
         topAppBarCreate.setNavigationOnClickListener(new View.OnClickListener() {
@@ -386,20 +406,11 @@ public class createStudyActivity extends AppCompatActivity {
                 break;
             case 9:
                 stateProgressBar.setCurrentStateNumber(StateProgressBar.StateNumber.FIVE);
-                createDBEntry();
                 doneAnimation.setVisibility(LottieAnimationView.VISIBLE);
                 doneAnimation.setProgress(0);
                 doneAnimation.pauseAnimation();
                 doneAnimation.playAnimation();
-                doneAnimation.addAnimatorListener(new AnimatorListenerAdapter() {
-                                                      @Override
-                                                      public void onAnimationEnd(Animator animation) {
-                                                          super.onAnimationEnd(animation);
-                                                          Intent homeIntent = new Intent(createStudyActivity.this, mainActivity.class);
-                                                          startActivity(homeIntent);
-                                                      }
-                                                  }
-                );
+
                 break;
             default:
                 break;
