@@ -61,7 +61,7 @@ public class homeFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         navController = Navigation.findNavController(view);
         setNavCardClickListeners();
-        new Thread(this::setUpDateList).start();
+        setUpDateList();
     }
 
     //Parameter: the fragment view
@@ -122,15 +122,21 @@ public class homeFragment extends Fragment {
                         @Override
                         public void onCallback() {
                             arrivingDates[0] = PA_ExpandableListDataPump.getAllArrivingDates();
+                            finsishSetupList(arrivingDates[0]);
                         }
                     });
             }
         });
 
-        if (arrivingDates[0] != null) {
+    }
+
+    private  void finsishSetupList(List <String[]> dates){
+
+
+        if (dates != null) {
             SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyy HH:mm");
 
-            List<String[]> dates = arrivingDates[0];
+//            List<String[]> dates = arrivingDates[0];
             ArrayList<String> listEntries = new ArrayList<>();
 
             Map<Date, String> sortingMap = new TreeMap<>();

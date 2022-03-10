@@ -271,7 +271,7 @@ public class PA_ExpandableListDataPump extends Activity {
             String date = studyIdList.get(key);
 
             for (Map<String, Object> map : dbStudiesList) {
-                if (map.get("studyId").toString().equals(key)) {
+                if (map.get("id").toString().equals(key)) {
                     if (map.get("name").toString() != null) {
                         studyName = map.get("name").toString();
                     }
@@ -281,8 +281,8 @@ public class PA_ExpandableListDataPump extends Activity {
             if (studyName != null) {
                 String[] listEntry = new String[3];
                 listEntry[0] = studyName;
-                listEntry[0] = date;
-                listEntry[0] = key;
+                listEntry[1] = date;
+                listEntry[2] = key;
 
                 arrivingDates.add(listEntry);
             }
