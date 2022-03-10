@@ -50,8 +50,8 @@ public class createStudyFragment_StepOne_Contact extends Fragment {
         Bundle bundle = getArguments();
         if(bundle != null){
             textInputEditTextContact.setText(bundle.getString("contact"));
-            textInputEditTextContact.setText(bundle.getString("contact2"));
-            textInputEditTextContact.setText(bundle.getString("contact3"));
+            textInputEditTextContact2.setText(bundle.getString("contact2"));
+            textInputEditTextContact3.setText(bundle.getString("contact3"));
         }
     }
 }

@@ -56,7 +56,7 @@
     <string name="fragment_create_study_desc_page_three">Ordnen Sie hier Ihre Studie einer der thematischen Kategorien zu. \n\n Die Durchführungsart bezieht sich auf den lokalen Kontext (Remote / Präsenz).</string>
     <string name="fragment_create_study_pageFourTitle">Durchführungsort</string>
     <string name="fragment_create_study_pageFiveTitle">Termine</string>
-    <string name="fragment_create_study_desc_page_five">Wählen Sie mithilfe des Buttons Termine aus, an denen Interessierte an Ihrer Studie teilnehmen können. \n \n Fehplanungen bitte vermeiden.</string>
+    <string name="fragment_create_study_desc_page_five">Wählen Sie mithilfe des Buttons Termine aus, an denen Interessierte an Ihrer Studie teilnehmen können. \n \n Fehlplanungen bitte vermeiden.</string>
     <string name="fragment_create_study_pageFive_fab">Neuer Termin</string>
     <string name="fragment_create_study_pageFinalTitle">Bestätigung</string>
     <string name="fragment_create_study_base_next">Weiter</string>

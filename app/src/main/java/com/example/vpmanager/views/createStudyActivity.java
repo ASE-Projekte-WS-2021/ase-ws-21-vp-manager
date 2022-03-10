@@ -354,7 +354,6 @@ public class createStudyActivity extends AppCompatActivity {
                 createStudyFragment_finalStep_two createStudyFragment_finalStep_two = new createStudyFragment_finalStep_two();
                 createStudyFragment_finalStep_two.setArguments(bundle);
                 stateProgressBar.setCurrentStateNumber(StateProgressBar.StateNumber.FIVE);
-                next.setText(getString(R.string.fragment_create_study_base_create));
                 fragmentManager
                         .beginTransaction()
                         .setCustomAnimations(R.anim.enter_from_right, R.anim.exit_to_left,
@@ -606,10 +605,10 @@ public class createStudyActivity extends AppCompatActivity {
                 }
                 break;
             case 6:
-
                 listViewDates = fragmentManager.getFragments().get(0).getView().findViewById(R.id.createDatelist);
                 for (int i = 0; i < listViewDates.getAdapter().getCount(); i++) {
                     System.out.println(listViewDates.getAdapter().getItem(i));
+                    System.out.println(listViewDates.getAdapter().getCount());
                     dates.add(listViewDates.getAdapter().getItem(i).toString());
                 }
                 break;

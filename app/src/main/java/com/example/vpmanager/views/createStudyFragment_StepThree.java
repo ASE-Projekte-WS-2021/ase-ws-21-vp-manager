@@ -37,7 +37,7 @@ public class createStudyFragment_StepThree extends Fragment {
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         setupView(view);
-
+        loadData();
     }
 
 
@@ -56,5 +56,30 @@ public class createStudyFragment_StepThree extends Fragment {
                 R.array.createExecutionTypeList, android.R.layout.simple_spinner_item);
         executionTypeAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         executionType.setAdapter(executionTypeAdapter);
+    }
+
+
+    private void loadData() {
+        Bundle bundle = getArguments();
+        if(bundle != null){
+            if(bundle.getString("category").equals("VR")){
+                categories.setSelection(1);
+            }
+            if(bundle.getString("category").equals("AR")){
+                categories.setSelection(2);
+            }
+            if(bundle.getString("category").equals("Diary Study")){
+                categories.setSelection(3);
+            }
+            if(bundle.getString("category").equals("Sonstige")){
+                categories.setSelection(4);
+            }
+            if(bundle.getString("exe").equals("Remote")){
+                executionType.setSelection(1);
+            }
+            if(bundle.getString("exe").equals("Präsenz")){
+                executionType.setSelection(2);
+            }
+        }
     }
 }
