@@ -26,6 +26,7 @@
                 android:layout_height="wrap_content"
                 android:text="Edit Study"
                 android:textAlignment="center"
+                android:textColor="@color/white"
                 android:textSize="35sp" />
 
             <View
@@ -45,6 +46,11 @@
                 android:layout_marginRight="30dp"
                 android:layout_marginLeft="30dp"
                 android:layout_marginTop="20dp">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:text="Name der Studie"/>
 
                 <EditText
                     android:layout_width="match_parent"
@@ -59,10 +65,15 @@
             <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_weight="1.5"
+                android:layout_weight="1"
                 android:layout_marginRight="30dp"
                 android:layout_marginLeft="30dp"
                 android:layout_marginTop="20dp">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:text="Versuchspersonenestunden"/>
 
                 <EditText
                     android:layout_width="match_parent"
@@ -77,12 +88,16 @@
             <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_weight="1.5"
+                android:layout_weight="1"
 
                 android:layout_marginRight="30dp"
                 android:layout_marginLeft="30dp"
                 android:layout_marginTop="20dp">
-
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:text="Kategorie"/>
                 <EditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -96,11 +111,17 @@
             <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_weight="6"
+                android:layout_weight="1"
 
                 android:layout_marginRight="30dp"
                 android:layout_marginLeft="30dp"
                 android:layout_marginTop="20dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:text="Durchführungsart"/>
 
                 <EditText
                     android:layout_width="match_parent"
@@ -116,11 +137,17 @@
             <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_weight="1.5"
+                android:layout_weight="1"
 
                 android:layout_marginRight="30dp"
                 android:layout_marginLeft="30dp"
                 android:layout_marginTop="20dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:text="Ort/Plattform"/>
 
                 <EditText
                     android:layout_width="match_parent"
@@ -144,11 +171,17 @@
             <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_weight="6"
+                android:layout_weight="1"
 
                 android:layout_marginRight="30dp"
                 android:layout_marginLeft="30dp"
                 android:layout_marginTop="20dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:text="Studienbeschreibung"/>
 
                 <EditText
                     android:layout_width="match_parent"
@@ -164,11 +197,17 @@
             <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_weight="3"
+                android:layout_weight="1"
 
                 android:layout_marginRight="30dp"
                 android:layout_marginLeft="30dp"
                 android:layout_marginTop="20dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:text="Kontaktmöglichkeit"/>
 
                 <EditText
                     android:layout_width="match_parent"
@@ -192,12 +231,17 @@
             <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_weight="6.5"
+                android:layout_weight="2"
 
                 android:layout_marginRight="30dp"
                 android:layout_marginLeft="30dp"
                 android:layout_marginTop="20dp">
 
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:text="Termine"/>
                 <EditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -215,6 +259,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
+                android:text="Save Study"
                 android:id="@+id/edit_saving_button"/>
         </LinearLayout>
 

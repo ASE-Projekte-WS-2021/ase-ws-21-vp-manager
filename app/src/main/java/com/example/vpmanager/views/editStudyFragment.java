@@ -22,6 +22,7 @@ import com.example.vpmanager.R;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
@@ -33,6 +34,7 @@ public class editStudyFragment extends Fragment {
     String currentUserId;
 
     EditText title;
+    EditText name;
     EditText vp;
     EditText category;
     EditText execution;
@@ -42,7 +44,7 @@ public class editStudyFragment extends Fragment {
     EditText contact;
 
     Button saveButton;
-    ArrayList<String> studyDateIds;
+    List<String> studyDateIds;
 
     //Parameter:
     //Return values:
@@ -83,6 +85,7 @@ public class editStudyFragment extends Fragment {
     //Connects the code with the view and sets Listener for Saving
     private void setupView(View view) {
         title = view.findViewById(R.id.edit_study_title);
+        name = view.findViewById(R.id.edit_study_name);
         vp = view.findViewById(R.id.edit_study_vp);
         category = view.findViewById(R.id.edit_study_category);
         execution = view.findViewById(R.id.edit_study_execution);
@@ -142,6 +145,7 @@ public class editStudyFragment extends Fragment {
             for (Map<String, Object> map : dbStudiesList) {
                 if (Objects.requireNonNull(map.get("id")).toString().equals(currentStudyId)) {
                     title.setText(Objects.requireNonNull(map.get("name")).toString());
+                    name.setText(Objects.requireNonNull(map.get("name")).toString());
                     vp.setText(Objects.requireNonNull(map.get("vps")).toString());
                     category.setText(Objects.requireNonNull(map.get("category")).toString());
                     execution.setText(Objects.requireNonNull(map.get("executionType")).toString());
