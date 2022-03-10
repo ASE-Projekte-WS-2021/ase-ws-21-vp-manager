@@ -25,6 +25,7 @@ import java.util.Dictionary;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 public class PA_ExpandableListDataPump extends Activity {
 
@@ -203,15 +204,17 @@ public class PA_ExpandableListDataPump extends Activity {
             String date = null;
             for (String key : map.keySet()) {
                 if (key.equals("studyId")) {
-                    studyId = map.get(key).toString();
+                    studyId = Objects.requireNonNull(map.get(key)).toString();
                 }
                 if (key.equals("date")) {
-                    date = map.get(key).toString();
+                    date = Objects.requireNonNull(map.get(key)).toString();
                 }
                 if (key.equals("userId")) {
-                    userID = map.get(key).toString();
-                    if (userID == uniqueID) {
-                        saveDate = true;
+                    if(map.get(key) != null) {
+                        userID = map.get(key).toString();
+                        if (userID.equals(uniqueID)) {
+                            saveDate = true;
+                        }
                     }
                 }
             }

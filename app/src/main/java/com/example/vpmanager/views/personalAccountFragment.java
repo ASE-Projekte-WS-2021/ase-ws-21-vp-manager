@@ -53,7 +53,6 @@ public class personalAccountFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         navController = Navigation.findNavController(view);
-        setupClickListener();
     }
 
 
@@ -68,6 +67,7 @@ public class personalAccountFragment extends Fragment {
                         public void onCallback() {
                             PA_ExpandableListDataPump.createListEntries();
                             setupView(view);
+                            setupClickListener();
                         }
                     });
             }
