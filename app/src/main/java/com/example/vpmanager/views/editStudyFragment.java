@@ -135,7 +135,7 @@ public class editStudyFragment extends Fragment {
         Map<String, Object> dataMap = new HashMap<>();
         dataMap.put("category", categories.getSelectedItem());
         dataMap.put("contact", contact.getText());
-        dataMap.put("dates", studyDateIds);
+        //dataMap.put("dates", studyDateIds);
         dataMap.put("description", description.getText());
         dataMap.put("executionType", execution.getSelectedItem());
         dataMap.put("name", title.getText());

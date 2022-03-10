@@ -12,6 +12,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
@@ -292,10 +293,14 @@ public class PA_ExpandableListDataPump extends Activity {
 
         db = FirebaseFirestore.getInstance();
 
-        db.collection("studies").document(studyID)
-                .update(updateData)
+        DocumentReference ref =db.collection("studies").document(studyID);
+
+        for(String key: updateData.keySet())
+        {
+               ref.update(key, updateData.get(key).toString())
                 .addOnSuccessListener(aVoid -> Log.d(TAG, "DocumentSnapshot successfully updated!"))
                 .addOnFailureListener(e -> Log.w(TAG, "Error updating document", e));
+        }
     }
 
     public static boolean navigateToStudyCreatorFragment(String currentUserId, String currentStudyId) {
