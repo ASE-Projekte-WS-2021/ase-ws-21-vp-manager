@@ -122,15 +122,14 @@ public class homeFragment extends Fragment {
                         @Override
                         public void onCallback() {
                             arrivingDates[0] = PA_ExpandableListDataPump.getAllArrivingDates();
-                            finsishSetupList(arrivingDates[0]);
+                            finishSetupList(arrivingDates[0]);
                         }
                     });
             }
         });
-
     }
 
-    private  void finsishSetupList(List <String[]> dates){
+    private  void finishSetupList(List <String[]> dates){
 
 
         if (dates != null) {

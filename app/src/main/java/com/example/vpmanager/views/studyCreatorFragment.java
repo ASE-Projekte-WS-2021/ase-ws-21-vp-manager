@@ -28,6 +28,7 @@ import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class studyCreatorFragment extends Fragment {
 
@@ -42,9 +43,7 @@ public class studyCreatorFragment extends Fragment {
     ArrayList<String> dateIds;
     ArrayList<String> userIdsOfDates;
 
-    ArrayList<String> savedDateItem;
     ArrayAdapter availableDatesAdapter;
-    ArrayAdapter savedDateAdapter;
 
     FirebaseFirestore db;
     DocumentReference studyRef;
@@ -76,8 +75,6 @@ public class studyCreatorFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_creator_study, container, false);
-        getRequiredInfos();
-
         return view;
     }
 
@@ -85,6 +82,7 @@ public class studyCreatorFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         navController = Navigation.findNavController(view);
+        getRequiredInfos();
         setupStudyDetails(new studyCreatorFragment.FirestoreCallbackStudy() {
             @Override
             public void onCallback(ArrayList<String> arrayList) {
@@ -103,8 +101,7 @@ public class studyCreatorFragment extends Fragment {
         //Get the studyId early
         currentStudyId = getArguments().getString("studyId");
         currentUserId = mainActivity.createUserId(getActivity());
-        savedDateItem = new ArrayList<>();
-        savedDateItem.add(getString(R.string.dropDateView));
+
     }
 
     public interface FirestoreCallbackStudy {
@@ -216,7 +213,8 @@ public class studyCreatorFragment extends Fragment {
                                 idDateUser.add(0, document.getString("id"));
                                 idDateUser.add(1, document.getString("date"));
                                 idDateUser.add(2, document.getString("userId"));
-                                idDateUser.add(3, document.getString("selected"));
+                                boolean selected = Boolean.parseBoolean(document.getString("selected"));
+                                idDateUser.add(3, String.valueOf(selected));
 
                                 studyDatesInfo.add(idDateUser);
                             }

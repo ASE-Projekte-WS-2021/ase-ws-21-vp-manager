@@ -81,6 +81,7 @@ public class studyFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_study, container, false);
+
         return view;
     }
 
@@ -108,23 +109,31 @@ public class studyFragment extends Fragment {
         currentStudyId = getArguments().getString("studyId");
         currentUserId = mainActivity.createUserId(getActivity());
 
-        if(PA_ExpandableListDataPump.dbDatesList.size() == 0)
-        {
+        if (PA_ExpandableListDataPump.dbDatesList.size() == 0) {
             PA_ExpandableListDataPump.getAllDates(new PA_ExpandableListDataPump.FirestoreCallbackDates() {
                 @Override
                 public void onCallback(boolean finished) {
-
+                    completeRequiredInfos();
                 }
             });
         }
-
+        else
+            completeRequiredInfos();
+    }
+    private void completeRequiredInfos()
+    {
         for (Map<String, Object> map : PA_ExpandableListDataPump.dbStudiesList)
         {
-            if(map.get("creator").equals(currentUserId) && map.get("id").equals(currentStudyId))
-            {
+            if(map.get("creator").equals(currentUserId) && map.get("id").equals(currentStudyId)) {
+                try {
+                    Thread.sleep(500);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
                 Bundle args = new Bundle();
                 args.putString("studyId", currentStudyId);
                 navController.navigate(R.id.action_studyFragment_to_studyCreatorFragment, args);
+
             }
         }
 
