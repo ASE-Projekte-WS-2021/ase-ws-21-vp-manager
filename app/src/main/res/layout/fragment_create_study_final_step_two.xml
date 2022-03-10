@@ -32,7 +32,7 @@
         <com.google.android.material.card.MaterialCardView
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="3"
+            android:layout_weight="5"
             android:layout_marginRight="30dp"
             android:layout_marginLeft="30dp"
             android:layout_marginTop="20dp">
@@ -41,7 +41,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/confirmDesc"
-                android:height="75dp"
+                android:height="120dp"
                 android:textSize="15sp"
                 android:gravity="top"
                 android:layout_marginStart="10dp"
