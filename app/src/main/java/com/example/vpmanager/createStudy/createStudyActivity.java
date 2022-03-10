@@ -1,4 +1,4 @@
-package com.example.vpmanager.views;
+package com.example.vpmanager.createStudy;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -14,6 +14,7 @@ import androidx.fragment.app.FragmentManager;
 
 import com.example.vpmanager.R;
 import com.example.vpmanager.accessDatabase;
+import com.example.vpmanager.views.mainActivity;
 import com.google.android.material.appbar.MaterialToolbar;
 import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.textfield.TextInputEditText;

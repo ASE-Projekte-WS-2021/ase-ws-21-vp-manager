@@ -104,7 +104,8 @@
     <string name="collectionPathUsers">users</string>
     <string name="collectionPathStudies">studies</string>
     <string name="collectionPathDates">dates</string>
-
+    <string name="findStudyCardDescText">Suche nach passenden Studien für deinen Uni-Alltag und sammle VP-Stunden!</string>
+    <string name="createStudyCardDescText">Erstelle deine eigenen Studien und präsentiere sie der Ziegruppe!</string>
 
 </resources>
 

@@ -18,10 +18,7 @@ import com.example.vpmanager.R;
 public class homeFragment extends Fragment {
 
     private NavController navController;
-    private Button findStudyNavBtn;
-    private Button createStudyNavBtn;
-    private Button overviewNavBtn;
-    private Button ownStudyNavBtn;
+    private Button findStudyNavBtn, createStudyNavBtn;
 
     public homeFragment() {
     }
@@ -50,17 +47,14 @@ public class homeFragment extends Fragment {
     //Return Values:
     //connects the view components with their ids
     private void initHomeFragmentComponents(View view) {
-        findStudyNavBtn = view.findViewById(R.id.findStudyCard);
-        createStudyNavBtn = view.findViewById(R.id.createStudyCard);
-        overviewNavBtn = view.findViewById(R.id.overviewCard);
-        ownStudyNavBtn = view.findViewById(R.id.ownStudyCard);
+        findStudyNavBtn = view.findViewById(R.id.findStudyBtn);
+        createStudyNavBtn = view.findViewById(R.id.createStudyBtn);
     }
 
     //Parameter:
     //Return Values:
     //sets click listeners on the four buttons to open their corresponding fragments
     private void setNavCardClickListeners() {
-        Log.d("homeFragment", "setClickListeners start");
         findStudyNavBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -75,21 +69,6 @@ public class homeFragment extends Fragment {
                 navController.navigate(R.id.action_homeFragment_to_createStudyActivity);
             }
         });
-        overviewNavBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Log.d("homeFragment", "Navigate to: personalAccountFragment");
-                navController.navigate(R.id.action_homeFragment_to_personalAccountFragment);
-            }
-        });
-        ownStudyNavBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Log.d("homeFragment", "Navigate to: ownStudyFragment");
-                navController.navigate(R.id.action_homeFragment_to_ownStudyFragment);
-            }
-        });
-        Log.d("homeFragment", "setClickListeners end");
     }
 
     //TODO: For now the "Anstehende Termine" are hardcoded. These need to be retrieved from the database later!

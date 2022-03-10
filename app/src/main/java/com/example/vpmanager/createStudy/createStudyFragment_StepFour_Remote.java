@@ -1,4 +1,4 @@
-package com.example.vpmanager.views;
+package com.example.vpmanager.createStudy;
 
 import android.os.Bundle;
 
@@ -10,14 +10,14 @@ import android.view.ViewGroup;
 
 import com.example.vpmanager.R;
 
-public class createStudyFragment_StepTwo extends Fragment {
+public class createStudyFragment_StepFour_Remote extends Fragment {
 
 
     //Parameter:
     //Return values:
     //Sets the current fragment for the activity
-    public createStudyFragment_StepTwo() {
-        createStudyActivity.currentFragment = 3;
+    public createStudyFragment_StepFour_Remote() {
+        createStudyActivity.currentFragment = 5;
     }
 
     @Override
@@ -28,13 +28,11 @@ public class createStudyFragment_StepTwo extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_create_study_step_two, container, false);
+        return inflater.inflate(R.layout.fragment_create_study_step_four_remote, container, false);
     }
 
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
 
     }
-
 }
