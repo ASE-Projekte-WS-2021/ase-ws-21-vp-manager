@@ -8,14 +8,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 
@@ -37,20 +36,23 @@ import java.util.Objects;
 
 public class studyFragment extends Fragment {
 
-    ListView dateList;
-    String currentStudyId;
-    String currentUserId;
+    private NavController navController;
+    private String currentStudyId;
+    private String currentUserId;
 
-    ArrayList<String> studyDetails;
+    private ListView dateList;
 
-    ArrayList<ArrayList<String>> freeAndOwnDatesInfo;
-    ArrayList<String> allDates;
-    ArrayList<String> dateIds;
-    ArrayList<String> userIdsOfDates;
+    //all details of one study
+    private ArrayList<String> studyDetails;
 
-    ArrayList<String> savedDateItem;
-    ArrayAdapter availableDatesAdapter;
-    ArrayAdapter savedDateAdapter;
+    private ArrayList<ArrayList<String>> freeAndOwnDatesInfo;
+    private ArrayList<String> allDates;
+    private ArrayList<String> dateIds;
+    private ArrayList<String> userIdsOfDates;
+
+    private ArrayList<String> savedDateItem;
+    //private ArrayAdapter availableDatesAdapter;
+    //private ArrayAdapter savedDateAdapter;
 
     FirebaseFirestore db;
     DocumentReference studyRef;
@@ -65,8 +67,6 @@ public class studyFragment extends Fragment {
     TextView remoteData;
     TextView localData;
     TextView contactInfo;
-
-    NavController navController;
 
     public studyFragment() {
     }
@@ -299,12 +299,12 @@ public class studyFragment extends Fragment {
     }
 
     private void setSavedDateAdapter() {
-        savedDateAdapter = new ArrayAdapter(getActivity(), android.R.layout.simple_list_item_1, savedDateItem);
+        ArrayAdapter<ListAdapter> savedDateAdapter = new ArrayAdapter(getActivity(), android.R.layout.simple_list_item_1, savedDateItem);
         dateList.setAdapter(savedDateAdapter);
     }
 
     private void setAllDatesAdapter() {
-        availableDatesAdapter = new ArrayAdapter(getActivity(), android.R.layout.simple_list_item_1, allDates);
+        ArrayAdapter<ListAdapter> availableDatesAdapter = new ArrayAdapter(getActivity(), android.R.layout.simple_list_item_1, allDates);
         dateList.setAdapter(availableDatesAdapter);
     }
 
@@ -331,11 +331,14 @@ public class studyFragment extends Fragment {
         Bundle args = new Bundle();
         args.putString("studyId", currentStudyId);
 
+        navController.navigate(R.id.action_studyFragment_self, args);
+        /*
         FragmentManager fragmentManager = getParentFragmentManager();
         FragmentTransaction transaction = fragmentManager.beginTransaction();
         transaction.setReorderingAllowed(true);
         transaction.replace(R.id.nav_host_fragment_main, studyFragment.class, args);
         transaction.commit();
+         */
     }
 
     public ArrayList<String> getStudyDetails() {
