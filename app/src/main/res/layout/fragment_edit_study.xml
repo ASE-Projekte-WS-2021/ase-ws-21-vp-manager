@@ -3,13 +3,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".views.createStudyFragment_finalStep"
     android:background="?android:windowBackground">
 
 
     <ScrollView
         android:id="@+id/fragment_edit_study_scrollView"
-        android:background="#000000"
+        android:background="@color/green_light"
         android:layout_width="match_parent"
         android:fillViewport="true"
         android:layout_height="match_parent" >
@@ -24,16 +23,14 @@
                 android:id="@+id/edit_study_title"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Edit Study"
                 android:textAlignment="center"
-                android:textColor="@color/white"
                 android:textSize="35sp" />
 
             <View
                 android:layout_width="match_parent"
                 android:layout_height="3dp"
                 android:layout_marginLeft="20dp"
-                android:layout_marginTop="5dp"
+                android:layout_marginTop="2dp"
                 android:layout_marginRight="20dp"
                 android:background="@color/black" />
 
@@ -41,11 +38,11 @@
             <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_weight="1.5"
+                android:layout_weight="1.2"
 
                 android:layout_marginRight="30dp"
                 android:layout_marginLeft="30dp"
-                android:layout_marginTop="20dp">
+                android:layout_marginTop="5dp">
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -65,15 +62,15 @@
             <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_weight="1"
+                android:layout_weight="1.2"
                 android:layout_marginRight="30dp"
                 android:layout_marginLeft="30dp"
-                android:layout_marginTop="20dp">
+                android:layout_marginTop="5dp">
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="5dp"
-                    android:text="Versuchspersonenestunden"/>
+                    android:text="Versuchspersonenstunden"/>
 
                 <EditText
                     android:layout_width="match_parent"
@@ -88,60 +85,47 @@
             <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_weight="1"
+                android:layout_weight="1.2"
 
                 android:layout_marginRight="30dp"
                 android:layout_marginLeft="30dp"
-                android:layout_marginTop="20dp">
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="5dp"
-                    android:text="Kategorie"/>
-                <EditText
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                android:layout_marginTop="5dp">
+
+
+                <Spinner
                     android:id="@+id/edit_study_category"
-                    android:textSize="20sp"
-                    android:layout_gravity="center"
-                    android:layout_marginStart="10dp">
-                </EditText>
-            </com.google.android.material.card.MaterialCardView>
-
-            <com.google.android.material.card.MaterialCardView
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="1"
-
-                android:layout_marginRight="30dp"
-                android:layout_marginLeft="30dp"
-                android:layout_marginTop="20dp">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="5dp"
-                    android:text="Durchführungsart"/>
-
-                <EditText
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/edit_study_execution"
-                    android:textSize="20sp"
-                    android:gravity="top"
-                    android:layout_marginStart="10dp"
-                    android:layout_marginTop="5dp">
-                </EditText>
+                    android:layout_height="40dp"
+                    android:layout_weight="0.7"
+                    android:popupBackground="@color/green_Main" />
             </com.google.android.material.card.MaterialCardView>
 
             <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_weight="1"
+                android:layout_weight="1.2"
 
                 android:layout_marginRight="30dp"
                 android:layout_marginLeft="30dp"
-                android:layout_marginTop="20dp">
+                android:layout_marginTop="5dp">
+
+                <Spinner
+                    android:id="@+id/edit_study_execution"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:layout_weight="0.7"
+                    android:popupBackground="@color/green_Main" />
+
+            </com.google.android.material.card.MaterialCardView>
+
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1.2"
+
+                android:layout_marginRight="30dp"
+                android:layout_marginLeft="30dp"
+                android:layout_marginTop="5dp">
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -171,11 +155,11 @@
             <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_weight="1"
+                android:layout_weight="3"
 
                 android:layout_marginRight="30dp"
                 android:layout_marginLeft="30dp"
-                android:layout_marginTop="20dp">
+                android:layout_marginTop="5dp">
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -197,11 +181,11 @@
             <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_weight="1"
+                android:layout_weight="1.2"
 
                 android:layout_marginRight="30dp"
                 android:layout_marginLeft="30dp"
-                android:layout_marginTop="20dp">
+                android:layout_marginTop="5dp">
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -223,11 +207,11 @@
                 android:layout_width="match_parent"
                 android:layout_height="3dp"
                 android:layout_marginLeft="20dp"
-                android:layout_marginTop="5dp"
+                android:layout_marginTop="2dp"
                 android:layout_marginRight="20dp"
                 android:background="@color/black" />
 
-
+<!--
             <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
@@ -254,13 +238,14 @@
                 </EditText>
 
             </com.google.android.material.card.MaterialCardView>
-
+-->
             <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
                 android:text="Save Study"
-                android:id="@+id/edit_saving_button"/>
+                android:id="@+id/edit_saving_button"
+                android:layout_gravity="right"/>
         </LinearLayout>
 
 

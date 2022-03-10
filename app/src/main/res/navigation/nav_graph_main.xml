@@ -106,8 +106,8 @@
         android:label="Eigene Studien"
         tools:layout="@layout/fragment_own_study" >
         <action
-            android:id="@+id/action_ownStudyFragment_to_studyFragment"
-            app:destination="@id/studyFragment" />
+            android:id="@+id/action_ownStudyFragment_to_studyCreatorFragment"
+            app:destination="@id/studyCreatorFragment" />
     </fragment>
     <fragment
         android:id="@+id/studyFragment"
@@ -121,7 +121,7 @@
     <fragment
         android:id="@+id/studyCreatorFragment"
         android:name="com.example.vpmanager.views.studyCreatorFragment"
-        android:label="studyCreatorFragment">
+        android:label="Studiendetails">
         <argument
             android:name="study_id"
             app:argType="string" />
@@ -134,10 +134,10 @@
     <fragment
         android:id="@+id/editStudyFragment"
         android:name="com.example.vpmanager.views.editStudyFragment"
-        android:label="editStudyFragment" >
-    <argument
-        android:name="study_id"
-        app:argType="string" />
+        android:label="Studieneditor">
+        <argument
+            android:name="study_id"
+            app:argType="string" />
         <action
             android:id="@+id/action_editStudyFragment_to_studyCreatorFragment"
             app:destination="@id/studyCreatorFragment"
