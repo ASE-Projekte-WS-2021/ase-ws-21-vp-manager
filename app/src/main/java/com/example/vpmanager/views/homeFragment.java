@@ -1,5 +1,7 @@
 package com.example.vpmanager.views;
 
+import static com.example.vpmanager.views.mainActivity.uniqueID;
+
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -174,7 +176,13 @@ public class homeFragment extends Fragment {
                         //go to Study Detail View
                         Bundle args = new Bundle();
                         args.putString("studyId", studyId);
-                        navController.navigate(R.id.action_homeFragment_to_studyFragment, args);
+                        if(PA_ExpandableListDataPump.navigateToStudyCreatorFragment(uniqueID, studyId)) {
+                            navController.navigate(R.id.action_homeFragment_to_studyCreatorFragment, args);
+                        }
+                        else
+                        {
+                            navController.navigate(R.id.action_homeFragment_to_studyFragment, args);
+                        }
                     }
                 }
             });

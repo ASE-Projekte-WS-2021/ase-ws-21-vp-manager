@@ -4,6 +4,7 @@ import static android.content.ContentValues.TAG;
 import static com.example.vpmanager.views.mainActivity.uniqueID;
 
 import android.app.Activity;
+import android.os.Bundle;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
@@ -299,6 +300,31 @@ public class PA_ExpandableListDataPump extends Activity {
                 .addOnSuccessListener(aVoid -> Log.d(TAG, "DocumentSnapshot successfully updated!"))
                 .addOnFailureListener(e -> Log.w(TAG, "Error updating document", e));
     }
+
+    public static boolean navigateToStudyCreatorFragment(String currentUserId, String currentStudyId) {
+
+        if(dbStudiesList.size() <= 0)
+        {
+            new Thread(() -> getAllStudies(() -> {       })).start();
+
+            try {
+                Thread.sleep(5000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+        for (Map<String, Object> map : dbStudiesList)
+        {
+            if (Objects.requireNonNull(map.get("creator")).toString().equals(currentUserId) &&
+                    Objects.requireNonNull(map.get("id")).toString().equals(currentStudyId))
+            {
+                    return true;
+            }
+        }
+        return false;
+    }
+
+
 
     public interface FirestoreCallbackDates {
         void onCallback(boolean finished);

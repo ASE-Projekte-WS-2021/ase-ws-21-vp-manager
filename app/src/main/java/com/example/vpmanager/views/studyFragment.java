@@ -108,35 +108,6 @@ public class studyFragment extends Fragment {
         //Get the studyId early
         currentStudyId = getArguments().getString("studyId");
         currentUserId = mainActivity.createUserId(getActivity());
-
-        if (PA_ExpandableListDataPump.dbDatesList.size() == 0) {
-            PA_ExpandableListDataPump.getAllDates(new PA_ExpandableListDataPump.FirestoreCallbackDates() {
-                @Override
-                public void onCallback(boolean finished) {
-                    completeRequiredInfos();
-                }
-            });
-        }
-        else
-            completeRequiredInfos();
-    }
-    private void completeRequiredInfos()
-    {
-        for (Map<String, Object> map : PA_ExpandableListDataPump.dbStudiesList)
-        {
-            if(map.get("creator").equals(currentUserId) && map.get("id").equals(currentStudyId)) {
-                try {
-                    Thread.sleep(500);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-                Bundle args = new Bundle();
-                args.putString("studyId", currentStudyId);
-                navController.navigate(R.id.action_studyFragment_to_studyCreatorFragment, args);
-
-            }
-        }
-
         savedDateItem = new ArrayList<>();
         savedDateItem.add(getString(R.string.dropDateView));
     }
