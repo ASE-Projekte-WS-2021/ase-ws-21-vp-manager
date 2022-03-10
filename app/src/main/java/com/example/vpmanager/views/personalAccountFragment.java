@@ -1,5 +1,7 @@
 package com.example.vpmanager.views;
 
+import static com.example.vpmanager.views.mainActivity.uniqueID;
+
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -45,7 +47,7 @@ public class personalAccountFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_personal_account, container, false);
-        setupView(view);
+        loadData(view);
         return view;
     }
 
@@ -53,13 +55,31 @@ public class personalAccountFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         navController = Navigation.findNavController(view);
-        setupClickListener();
+    }
+
+
+    private void loadData(View view) {
+
+        PA_ExpandableListDataPump.getAllDates(new PA_ExpandableListDataPump.FirestoreCallbackDates() {
+            @Override
+            public void onCallback(boolean finished) {
+                if (finished)
+                    PA_ExpandableListDataPump.getAllStudies(new PA_ExpandableListDataPump.FirestoreCallbackStudy() {
+                        @Override
+                        public void onCallback() {
+                            PA_ExpandableListDataPump.createListEntries();
+                            setupView(view);
+                            setupClickListener();
+                        }
+                    });
+            }
+        });
     }
 
     private void setupView(View view) {
         listView = view.findViewById(R.id.pa_fragment_expandableList);
         chart = view.findViewById(R.id.pa_fragment_pie_chart);
-        expandableListDetail = PA_ExpandableListDataPump.getData();
+        expandableListDetail = PA_ExpandableListDataPump.EXPANDABLE_LIST_DETAIL;
         expandableListTitle = new ArrayList<String>(expandableListDetail.keySet());
         adapter = new PA_ExpandableListAdapter(getActivity(), expandableListTitle, expandableListDetail);
         listView.setAdapter(adapter);
@@ -76,6 +96,14 @@ public class personalAccountFragment extends Fragment {
                 plannedVP += studyVPS;
             }
         }
+        List<String> passedVpList = expandableListDetail.get("Vergangene Studien");
+        if (passedVpList != null) {
+            for (int i = 0; i < passedVpList.size(); i++) {
+                String vps = passedVpList.get(i).split(",")[1];
+                double studyVPS = Double.parseDouble(vps);
+                participatedVP += studyVPS;
+            }
+        }
         setPieChartData(completedVP, participatedVP, plannedVP);
     }
 
@@ -89,8 +117,12 @@ public class personalAccountFragment extends Fragment {
 
                 Bundle args = new Bundle();
                 args.putString("studyId", studyTitle);
-                navController.navigate(R.id.action_personalAccountFragment_to_studyFragment, args);
-
+                if(PA_ExpandableListDataPump.navigateToStudyCreatorFragment(uniqueID, studyTitle)) {
+                    navController.navigate(R.id.action_personalAccountFragment_to_studyCreatorFragment, args);
+                }
+                else {
+                    navController.navigate(R.id.action_personalAccountFragment_to_studyFragment, args);
+                }
                 return false;
             }
         });

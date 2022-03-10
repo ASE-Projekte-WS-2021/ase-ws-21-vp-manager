@@ -1,5 +1,7 @@
 package com.example.vpmanager.views;
 
+import static com.example.vpmanager.views.mainActivity.uniqueID;
+
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -15,6 +17,7 @@ import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.vpmanager.PA_ExpandableListDataPump;
 import com.example.vpmanager.R;
 import com.example.vpmanager.adapter.StudyListAdapter;
 import com.example.vpmanager.viewmodels.FindStudyViewModel;
@@ -81,6 +84,11 @@ public class findStudyFragment extends Fragment implements StudyListAdapter.OnSt
         Bundle args = new Bundle();
         Log.d("findStudyFragment", "onStudyClick - studyId:" + studyId);
         args.putString("studyId", studyId);
-        navController.navigate(R.id.action_findStudyFragment_to_studyFragment, args);
+        if(PA_ExpandableListDataPump.navigateToStudyCreatorFragment(uniqueID, studyId)) {
+            navController.navigate(R.id.action_findStudyFragment_to_studyCreatorFragment, args);
+        }
+        else {
+            navController.navigate(R.id.action_findStudyFragment_to_studyFragment, args);
+        }                         //action_findStudyFragment_to_studyFragment
     }
 }
