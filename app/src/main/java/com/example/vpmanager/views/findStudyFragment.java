@@ -82,5 +82,6 @@ public class findStudyFragment extends Fragment implements StudyListAdapter.OnSt
         Log.d("findStudyFragment", "onStudyClick - studyId:" + studyId);
         args.putString("studyId", studyId);
         navController.navigate(R.id.action_findStudyFragment_to_studyFragment, args);
+                                  //action_findStudyFragment_to_studyFragment
     }
 }

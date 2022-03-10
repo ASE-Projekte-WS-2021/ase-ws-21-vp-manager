@@ -61,7 +61,7 @@ public class homeFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         navController = Navigation.findNavController(view);
         setNavCardClickListeners();
-        setUpDateList();
+        new Thread(this::setUpDateList).start();
     }
 
     //Parameter: the fragment view

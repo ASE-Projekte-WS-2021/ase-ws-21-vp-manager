@@ -1,5 +1,6 @@
 package com.example.vpmanager;
 
+import static android.content.ContentValues.TAG;
 import static com.example.vpmanager.views.mainActivity.uniqueID;
 
 import android.app.Activity;
@@ -289,7 +290,15 @@ public class PA_ExpandableListDataPump extends Activity {
         return arrivingDates;
     }
 
+    public static void updateStudyInDataBase(Map<String, Object> updateData, String studyID) {
 
+        db = FirebaseFirestore.getInstance();
+
+        db.collection("studies").document(studyID)
+                .update(updateData)
+                .addOnSuccessListener(aVoid -> Log.d(TAG, "DocumentSnapshot successfully updated!"))
+                .addOnFailureListener(e -> Log.w(TAG, "Error updating document", e));
+    }
 
     public interface FirestoreCallbackDates {
         void onCallback(boolean finished);

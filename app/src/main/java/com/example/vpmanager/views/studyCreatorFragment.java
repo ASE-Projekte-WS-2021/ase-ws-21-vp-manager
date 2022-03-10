@@ -77,13 +77,14 @@ public class studyCreatorFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_creator_study, container, false);
         getRequiredInfos();
-        navController = Navigation.findNavController(view);
+
         return view;
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        navController = Navigation.findNavController(view);
         setupStudyDetails(new studyCreatorFragment.FirestoreCallbackStudy() {
             @Override
             public void onCallback(ArrayList<String> arrayList) {
@@ -143,6 +144,12 @@ public class studyCreatorFragment extends Fragment {
             String locationString = studyDetails.get(6) + "\t\t" + studyDetails.get(7) + "\t\t" + studyDetails.get(8);
             localData.setText(locationString);
         }
+
+        editButton.setOnClickListener(v -> {
+            Bundle args = new Bundle();
+            args.putString("studyId", currentStudyId);
+            navController.navigate(R.id.action_studyCreatorFragment_to_editStudyFragment, args);
+        });
     }
 
     private void loadDatesData(View view) {
