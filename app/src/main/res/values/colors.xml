@@ -16,8 +16,6 @@
     <color name="pieChartRemaining">#808080</color>
 
 
-
-
     <!--individual color palette for application; based on Material Design color tool-->
 
     <!--primary colors-->
@@ -38,18 +36,11 @@
     <color name="purple_highlight">#8F40F6</color>
     <color name="pink_highlight">#F640A7</color>
 
-
     <!--independent UI Elements-->
     <color name="red_error">#D50000</color>
     <color name="lightorange_hint">#FFC39E</color>
     <color name="lightorange_gradient">#FE9455</color>
     <color name="heatherred_hint">#F2B7CB</color>
-
-
-
-
-
-
 
 
 </resources>

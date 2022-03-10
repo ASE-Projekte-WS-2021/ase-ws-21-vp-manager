@@ -230,25 +230,31 @@ public class createStudyActivity extends AppCompatActivity {
     private void nextButton() {
         switch (currentFragment) {
             case 0:
+                bundle = createBundle(1);
+                createStudyFragment_StepOne createStudyFragment_stepOne = new createStudyFragment_StepOne();
+                createStudyFragment_stepOne.setArguments(bundle);
                 back.setText(getString(R.string.fragment_create_study_base_back));
                 stateProgressBar.setCurrentStateNumber(StateProgressBar.StateNumber.ONE);
                 fragmentManager
                         .beginTransaction()
                         .setCustomAnimations(R.anim.enter_from_right, R.anim.exit_to_left,
                                 R.anim.enter_from_left, R.anim.exit_to_right)
-                        .replace(R.id.fragment_container, new createStudyFragment_StepOne(), null)
+                        .replace(R.id.fragment_container, createStudyFragment_stepOne, null)
                         .addToBackStack(null)
                         .commit();
                 break;
             case 1:
                 getInput(currentFragment);
                 if (mandatoryCheck(currentFragment)) {
+                    bundle = createBundle(2);
+                    createStudyFragment_StepOne_Contact createStudyFragment_stepOne_contact = new createStudyFragment_StepOne_Contact();
+                    createStudyFragment_stepOne_contact.setArguments(bundle);
                     stateProgressBar.setCurrentStateNumber(StateProgressBar.StateNumber.TWO);
                     fragmentManager
                             .beginTransaction()
                             .setCustomAnimations(R.anim.enter_from_right, R.anim.exit_to_left,
                                     R.anim.enter_from_left, R.anim.exit_to_right)
-                            .replace(R.id.fragment_container, new createStudyFragment_StepOne_Contact(), null)
+                            .replace(R.id.fragment_container, createStudyFragment_stepOne_contact, null)
                             .addToBackStack(null)
                             .commit();
                 }
@@ -256,12 +262,15 @@ public class createStudyActivity extends AppCompatActivity {
             case 2:
                 getInput(currentFragment);
                 if (mandatoryCheck(currentFragment)) {
+                    bundle = createBundle(3);
+                    createStudyFragment_StepTwo createStudyFragment_stepTwo = new createStudyFragment_StepTwo();
+                    createStudyFragment_stepTwo.setArguments(bundle);
                     stateProgressBar.setCurrentStateNumber(StateProgressBar.StateNumber.TWO);
                     fragmentManager
                             .beginTransaction()
                             .setCustomAnimations(R.anim.enter_from_right, R.anim.exit_to_left,
                                     R.anim.enter_from_left, R.anim.exit_to_right)
-                            .replace(R.id.fragment_container, new createStudyFragment_StepTwo(), null)
+                            .replace(R.id.fragment_container, createStudyFragment_stepTwo, null)
                             .addToBackStack(null)
                             .commit();
                 }
@@ -269,12 +278,15 @@ public class createStudyActivity extends AppCompatActivity {
             case 3:
                 getInput(currentFragment);
                 if (mandatoryCheck(currentFragment)) {
+                    bundle = createBundle(4);
+                    createStudyFragment_StepThree createStudyFragment_stepThree = new createStudyFragment_StepThree();
+                    createStudyFragment_stepThree.setArguments(bundle);
                     stateProgressBar.setCurrentStateNumber(StateProgressBar.StateNumber.THREE);
                     fragmentManager
                             .beginTransaction()
                             .setCustomAnimations(R.anim.enter_from_right, R.anim.exit_to_left,
                                     R.anim.enter_from_left, R.anim.exit_to_right)
-                            .replace(R.id.fragment_container, new createStudyFragment_StepThree(), null)
+                            .replace(R.id.fragment_container, createStudyFragment_stepThree, null)
                             .addToBackStack(null)
                             .commit();
                 }
@@ -282,21 +294,26 @@ public class createStudyActivity extends AppCompatActivity {
             case 4:
                 getInput(currentFragment);
                 if (mandatoryCheck(currentFragment)) {
+                    bundle = createBundle(5);
                     stateProgressBar.setCurrentStateNumber(StateProgressBar.StateNumber.THREE);
                     if (execution.equals(getString(R.string.remoteString))) {
+                        createStudyFragment_StepFour_Remote createStudyFragment_stepFour_remote = new createStudyFragment_StepFour_Remote();
+                        createStudyFragment_stepFour_remote.setArguments(bundle);
                         fragmentManager
                                 .beginTransaction()
                                 .setCustomAnimations(R.anim.enter_from_right, R.anim.exit_to_left,
                                         R.anim.enter_from_left, R.anim.exit_to_right)
-                                .replace(R.id.fragment_container, new createStudyFragment_StepFour_Remote(), null)
+                                .replace(R.id.fragment_container, createStudyFragment_stepFour_remote, null)
                                 .addToBackStack(null)
                                 .commit();
                     } else {
+                        createStudyFragment_StepFour_Presence createStudyFragment_stepFour_presence = new createStudyFragment_StepFour_Presence();
+                        createStudyFragment_stepFour_presence.setArguments(bundle);
                         fragmentManager
                                 .beginTransaction()
                                 .setCustomAnimations(R.anim.enter_from_right, R.anim.exit_to_left,
                                         R.anim.enter_from_left, R.anim.exit_to_right)
-                                .replace(R.id.fragment_container, new createStudyFragment_StepFour_Presence(), null)
+                                .replace(R.id.fragment_container, createStudyFragment_stepFour_presence, null)
                                 .addToBackStack(null)
                                 .commit();
                     }
@@ -305,19 +322,22 @@ public class createStudyActivity extends AppCompatActivity {
             case 5:
                 getInput(currentFragment);
                 if (mandatoryCheck(currentFragment)) {
+                    bundle = createBundle(6);
+                    createStudyFragment_StepFive createStudyFragment_stepFive = new createStudyFragment_StepFive();
+                    createStudyFragment_stepFive.setArguments(bundle);
                     stateProgressBar.setCurrentStateNumber(StateProgressBar.StateNumber.FOUR);
                     fragmentManager
                             .beginTransaction()
                             .setCustomAnimations(R.anim.enter_from_right, R.anim.exit_to_left,
                                     R.anim.enter_from_left, R.anim.exit_to_right)
-                            .replace(R.id.fragment_container, new createStudyFragment_StepFive(), null)
+                            .replace(R.id.fragment_container, createStudyFragment_stepFive, null)
                             .addToBackStack(null)
                             .commit();
                 }
                 break;
             case 6:
                 getInput(currentFragment);
-                bundle = createBundle(1);
+                bundle = createBundle(7);
                 createStudyFragment_finalStep createStudyFragment_finalStep = new createStudyFragment_finalStep();
                 createStudyFragment_finalStep.setArguments(bundle);
                 stateProgressBar.setCurrentStateNumber(StateProgressBar.StateNumber.FIVE);
@@ -330,11 +350,10 @@ public class createStudyActivity extends AppCompatActivity {
                         .commit();
                 break;
             case 7:
-                bundle = createBundle(2);
+                bundle = createBundle(8);
                 createStudyFragment_finalStep_two createStudyFragment_finalStep_two = new createStudyFragment_finalStep_two();
                 createStudyFragment_finalStep_two.setArguments(bundle);
                 stateProgressBar.setCurrentStateNumber(StateProgressBar.StateNumber.FIVE);
-                next.setText(getString(R.string.fragment_create_study_base_create));
                 fragmentManager
                         .beginTransaction()
                         .setCustomAnimations(R.anim.enter_from_right, R.anim.exit_to_left,
@@ -345,7 +364,7 @@ public class createStudyActivity extends AppCompatActivity {
                 break;
 
             case 8:
-                bundle = createBundle(3);
+                bundle = createBundle(9);
                 createStudyFragment_finalStep_three createStudyFragment_finalStep_three = new createStudyFragment_finalStep_three();
                 createStudyFragment_finalStep_three.setArguments(bundle);
                 stateProgressBar.setCurrentStateNumber(StateProgressBar.StateNumber.FIVE);
@@ -394,73 +413,103 @@ public class createStudyActivity extends AppCompatActivity {
             case 2:
                 getInput(currentFragment);
                 stateProgressBar.setCurrentStateNumber(StateProgressBar.StateNumber.ONE);
+                bundle = createBundle(1);
+                createStudyFragment_StepOne createStudyFragment_stepOne = new createStudyFragment_StepOne();
+                createStudyFragment_stepOne.setArguments(bundle);
                 fragmentManager
                         .beginTransaction()
                         .setCustomAnimations(R.anim.enter_from_left, R.anim.exit_to_right,
                                 R.anim.enter_from_right, R.anim.exit_to_left)
-                        .replace(R.id.fragment_container, new createStudyFragment_StepOne(), null)
+                        .replace(R.id.fragment_container, createStudyFragment_stepOne, null)
                         .addToBackStack(null)
                         .commit();
                 break;
             case 3:
                 getInput(currentFragment);
                 stateProgressBar.setCurrentStateNumber(StateProgressBar.StateNumber.ONE);
+                bundle = createBundle(2);
+                createStudyFragment_StepOne_Contact createStudyFragment_stepOne_contact = new createStudyFragment_StepOne_Contact();
+                createStudyFragment_stepOne_contact.setArguments(bundle);
                 fragmentManager
                         .beginTransaction()
                         .setCustomAnimations(R.anim.enter_from_left, R.anim.exit_to_right,
                                 R.anim.enter_from_right, R.anim.exit_to_left)
-                        .replace(R.id.fragment_container, new createStudyFragment_StepOne_Contact(), null)
+                        .replace(R.id.fragment_container, createStudyFragment_stepOne_contact, null)
                         .addToBackStack(null)
                         .commit();
                 break;
             case 4:
                 getInput(currentFragment);
+                bundle = createBundle(3);
+                createStudyFragment_StepTwo createStudyFragment_stepTwo = new createStudyFragment_StepTwo();
+                createStudyFragment_stepTwo.setArguments(bundle);
                 stateProgressBar.setCurrentStateNumber(StateProgressBar.StateNumber.TWO);
                 fragmentManager
                         .beginTransaction()
                         .setCustomAnimations(R.anim.enter_from_left, R.anim.exit_to_right,
                                 R.anim.enter_from_right, R.anim.exit_to_left)
-                        .replace(R.id.fragment_container, new createStudyFragment_StepTwo(), null)
+                        .replace(R.id.fragment_container, createStudyFragment_stepTwo, null)
                         .addToBackStack(null)
                         .commit();
                 break;
 
             case 5:
                 getInput(currentFragment);
+                bundle = createBundle(4);
+                createStudyFragment_StepThree createStudyFragment_stepThree = new createStudyFragment_StepThree();
+                createStudyFragment_stepThree.setArguments(bundle);
                 stateProgressBar.setCurrentStateNumber(StateProgressBar.StateNumber.THREE);
                 fragmentManager
                         .beginTransaction()
                         .setCustomAnimations(R.anim.enter_from_left, R.anim.exit_to_right,
                                 R.anim.enter_from_right, R.anim.exit_to_left)
-                        .replace(R.id.fragment_container, new createStudyFragment_StepThree(), null)
+                        .replace(R.id.fragment_container, createStudyFragment_stepThree, null)
                         .addToBackStack(null)
                         .commit();
                 break;
             case 6:
                 getInput(currentFragment);
-                stateProgressBar.setCurrentStateNumber(StateProgressBar.StateNumber.THREE);
-                fragmentManager
-                        .beginTransaction()
-                        .setCustomAnimations(R.anim.enter_from_left, R.anim.exit_to_right,
-                                R.anim.enter_from_right, R.anim.exit_to_left)
-                        .replace(R.id.fragment_container, new createStudyFragment_StepFour_Remote(), null)
-                        .addToBackStack(null)
-                        .commit();
+                    bundle = createBundle(5);
+                    stateProgressBar.setCurrentStateNumber(StateProgressBar.StateNumber.THREE);
+                    if (execution.equals(getString(R.string.remoteString))) {
+                        createStudyFragment_StepFour_Remote createStudyFragment_stepFour_remote = new createStudyFragment_StepFour_Remote();
+                        createStudyFragment_stepFour_remote.setArguments(bundle);
+                        fragmentManager
+                                .beginTransaction()
+                                .setCustomAnimations(R.anim.enter_from_left, R.anim.exit_to_right,
+                                        R.anim.enter_from_right, R.anim.exit_to_left)
+                                .replace(R.id.fragment_container, createStudyFragment_stepFour_remote, null)
+                                .addToBackStack(null)
+                                .commit();
+                    } else {
+                        createStudyFragment_StepFour_Presence createStudyFragment_stepFour_presence = new createStudyFragment_StepFour_Presence();
+                        createStudyFragment_stepFour_presence.setArguments(bundle);
+                        fragmentManager
+                                .beginTransaction()
+                                .setCustomAnimations(R.anim.enter_from_left, R.anim.exit_to_right,
+                                        R.anim.enter_from_right, R.anim.exit_to_left)
+                                .replace(R.id.fragment_container, createStudyFragment_stepFour_presence, null)
+                                .addToBackStack(null)
+                                .commit();
+                    }
                 break;
             case 7:
                 getInput(currentFragment);
+                bundle = createBundle(6);
+                createStudyFragment_StepFive createStudyFragment_stepFive = new createStudyFragment_StepFive();
+                createStudyFragment_stepFive.setArguments(bundle);
                 stateProgressBar.setCurrentStateNumber(StateProgressBar.StateNumber.FOUR);
                 fragmentManager
                         .beginTransaction()
                         .setCustomAnimations(R.anim.enter_from_left, R.anim.exit_to_right,
                                 R.anim.enter_from_right, R.anim.exit_to_left)
-                        .replace(R.id.fragment_container, new createStudyFragment_StepFive(), null)
+                        .replace(R.id.fragment_container, createStudyFragment_stepFive, null)
                         .addToBackStack(null)
                         .commit();
                 break;
 
             case 8:
-                bundle = createBundle(1);
+                bundle = createBundle(7);
                 createStudyFragment_finalStep createStudyFragment_finalStep = new createStudyFragment_finalStep();
                 createStudyFragment_finalStep.setArguments(bundle);
                 stateProgressBar.setCurrentStateNumber(StateProgressBar.StateNumber.FOUR);
@@ -473,7 +522,7 @@ public class createStudyActivity extends AppCompatActivity {
                         .commit();
                 break;
             case 9:
-                bundle = createBundle(2);
+                bundle = createBundle(8);
                 createStudyFragment_finalStep_two createStudyFragment_finalStep_two = new createStudyFragment_finalStep_two();
                 createStudyFragment_finalStep_two.setArguments(bundle);
                 next.setText(getString(R.string.fragment_create_study_base_next));
@@ -556,10 +605,10 @@ public class createStudyActivity extends AppCompatActivity {
                 }
                 break;
             case 6:
-
                 listViewDates = fragmentManager.getFragments().get(0).getView().findViewById(R.id.createDatelist);
                 for (int i = 0; i < listViewDates.getAdapter().getCount(); i++) {
                     System.out.println(listViewDates.getAdapter().getItem(i));
+                    System.out.println(listViewDates.getAdapter().getCount());
                     dates.add(listViewDates.getAdapter().getItem(i).toString());
                 }
                 break;
@@ -569,22 +618,57 @@ public class createStudyActivity extends AppCompatActivity {
     //Parameter:
     //Return values:
     //Creates a bundle which will be send to the fragments to display the data for the confirmation process
-    private Bundle createBundle(int finalPage) {
+    private Bundle createBundle(int page) {
         Bundle bundle = new Bundle();
-        if (finalPage == 1) {
-            prepareData();
-            bundle.putString("title", studyTitle);
-            bundle.putString("vp", VP);
-            bundle.putString("category", category);
-            bundle.putString("exe", execution);
-            bundle.putString("location", locationViewString);
-        }
-        if (finalPage == 2) {
-            bundle.putString("desc", studyDesc);
-            bundle.putString("contact", contactViewString);
-        }
-        if (finalPage == 3) {
-            bundle.putStringArrayList("dates", dates);
+        switch (page) {
+            case 1:
+                bundle.putString("title", studyTitle);
+                bundle.putString("vp", VP);
+                break;
+            case 2:
+                bundle.putString("contact", contact);
+                bundle.putString("contact2", contact2);
+                bundle.putString("contact3", contact3);
+                break;
+            case 3:
+                bundle.putString("desc", studyDesc);
+                break;
+            case 4:
+                bundle.putString("category", category);
+                bundle.putString("exe", execution);
+                break;
+            case 5:
+                if (execution.equals(getString(R.string.remoteString))) {
+                    bundle.putString("platform", platform);
+                    bundle.putString("platform2", optionalPlatform);
+
+                }
+                if (execution.equals((getString(R.string.presenceString)))) {
+                    bundle.putString("location", location);
+                    bundle.putString("street", street);
+                    bundle.putString("room", room);
+                }
+                break;
+            case 6:
+                bundle.putStringArrayList("dates", dates);
+                break;
+            case 7:
+                prepareData();
+                bundle.putString("title", studyTitle);
+                bundle.putString("vp", VP);
+                bundle.putString("category", category);
+                bundle.putString("exe", execution);
+                bundle.putString("location", locationViewString);
+                break;
+            case 8:
+                bundle.putString("desc", studyDesc);
+                bundle.putString("contact", contactViewString);
+                break;
+            case 9:
+                bundle.putStringArrayList("dates", dates);
+                break;
+            default:
+                break;
         }
         return bundle;
     }
@@ -669,4 +753,5 @@ public class createStudyActivity extends AppCompatActivity {
         moveTaskToBack(false);
         backButton();
     }
+
 }
