@@ -1,12 +1,10 @@
 package com.example.vpmanager.views;
 
-import android.app.AlertDialog;
-import android.content.DialogInterface;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
@@ -15,8 +13,6 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 
@@ -32,9 +28,6 @@ import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Objects;
 
 public class studyCreatorFragment extends Fragment {
 
@@ -44,7 +37,7 @@ public class studyCreatorFragment extends Fragment {
 
     ArrayList<String> studyDetails;
 
-    ArrayList<ArrayList<String>> freeAndOwnDatesInfo;
+    ArrayList<ArrayList<String>> studyDatesInfo;
     ArrayList<String> allDates;
     ArrayList<String> dateIds;
     ArrayList<String> userIdsOfDates;
@@ -159,19 +152,13 @@ public class studyCreatorFragment extends Fragment {
         userIdsOfDates = new ArrayList<>();
 
         //store ids and dates in different ArrayLists
-        for (int i = 0; i < freeAndOwnDatesInfo.size(); i++) {
-            dateIds.add(freeAndOwnDatesInfo.get(i).get(0));
-            allDates.add(freeAndOwnDatesInfo.get(i).get(1));
-            userIdsOfDates.add(freeAndOwnDatesInfo.get(i).get(2));
+        for (int i = 0; i < studyDatesInfo.size(); i++) {
+            dateIds.add(studyDatesInfo.get(i).get(0));
+            allDates.add(studyDatesInfo.get(i).get(1));
+            userIdsOfDates.add(studyDatesInfo.get(i).get(2));
         }
 
-        //makes date selection unavailable if user already picked a date from this study
-        if (userIdsOfDates.contains(mainActivity.createUserId(getActivity()))) { //before: homeActivity.createUserId(this);
-            setSavedDateAdapter();
-        } else {
-            setAllDatesAdapter();
-            setupClickListener();
-        }
+        setAllDatesAdapter();
     }
 
     private void setupStudyDetails(studyCreatorFragment.FirestoreCallbackStudy firestoreCallbackStudy) {
@@ -208,7 +195,7 @@ public class studyCreatorFragment extends Fragment {
 
         db = FirebaseFirestore.getInstance();
         datesRef = db.collection(getString(R.string.collectionPathDates));
-        freeAndOwnDatesInfo = new ArrayList<>();
+        studyDatesInfo = new ArrayList<>();
 
         //only the unselected dates should be retrieved here!
         datesRef.whereEqualTo("studyId", currentStudyId).get()
@@ -218,75 +205,38 @@ public class studyCreatorFragment extends Fragment {
                         if (task.isSuccessful()) {
                             for (QueryDocumentSnapshot document : task.getResult()) {
                                 ArrayList<String> idDateUser = new ArrayList<>();
-                                if (Objects.equals(document.getBoolean("selected"), true) &&
-                                        !Objects.equals(document.getString("userId"), currentUserId)) {
-                                    continue;
-                                }
+
                                 idDateUser.add(0, document.getString("id"));
                                 idDateUser.add(1, document.getString("date"));
                                 idDateUser.add(2, document.getString("userId"));
+                                idDateUser.add(3, document.getString("selected"));
 
-                                freeAndOwnDatesInfo.add(idDateUser);
+                                studyDatesInfo.add(idDateUser);
                             }
-                            firestoreCallbackDates.onCallback(freeAndOwnDatesInfo);
+                            firestoreCallbackDates.onCallback(studyDatesInfo);
                         }
                     }
                 });
     }
 
-    private void setupClickListener() {
-        editButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Bundle args = new Bundle();
-                args.putString("studyId", currentStudyId);
-                navController.navigate(R.id.action_studyFragment_to_studyCreatorFragment, args);
-            }
-        });
-    }
-
-
-    private void setSavedDateAdapter() {
-        savedDateAdapter = new ArrayAdapter(getActivity(), android.R.layout.simple_list_item_1, savedDateItem);
-        dateList.setAdapter(savedDateAdapter);
-    }
-
     private void setAllDatesAdapter() {
         availableDatesAdapter = new ArrayAdapter(getActivity(), android.R.layout.simple_list_item_1, allDates);
         dateList.setAdapter(availableDatesAdapter);
-    }
 
-    private void selectDate(String dateId) {
+        for(int i = 0; i< dateList.getCount(); i++) {
+            String date = (String) dateList.getItemAtPosition(i);
 
-        String userId = mainActivity.createUserId(getActivity()); //before: homeActivity.createUserId(this);
-
-        Map<String, Object> updateDataMap = new HashMap<>();
-        updateDataMap.put("selected", true);
-        updateDataMap.put("userId", userId);
-
-        accessDatabase.selectDate(updateDataMap, dateId);
-        reloadFragment();
-    }
-
-    private void unSelectDate() {
-        int datePosition = userIdsOfDates.indexOf(mainActivity.createUserId(getActivity())); //before: homeActivity.createUserId(this);
-        String dateId = dateIds.get(datePosition);
-        accessDatabase.unselectDate(dateId);
-        reloadFragment();
-    }
-
-    private void reloadFragment() {
-        Bundle args = new Bundle();
-        args.putString("studyId", currentStudyId);
-
-        FragmentManager fragmentManager = getParentFragmentManager();
-        FragmentTransaction transaction = fragmentManager.beginTransaction();
-        transaction.setReorderingAllowed(true);
-        transaction.replace(R.id.nav_host_fragment_main, studyCreatorFragment.class, args);
-        transaction.commit();
-    }
-
-    public ArrayList<String> getStudyDetails() {
-        return studyDetails;
+            for(int k = 0; k < allDates.size(); k++)
+            {
+                if(allDates.get(k).equals(date))
+                {
+                    String seleceted = studyDatesInfo.get(k).get(3);
+                    if(Boolean.parseBoolean(seleceted))
+                    {
+                        dateList.getChildAt(i).setBackgroundColor(Color.GREEN);
+                    }
+                }
+            }
+        }
     }
 }
