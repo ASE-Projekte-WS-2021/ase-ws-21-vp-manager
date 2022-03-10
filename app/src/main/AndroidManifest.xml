@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.example.vpmanager">
 
     <application
@@ -10,7 +11,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.VPManager">
         <activity
-            android:name="com.example.vpmanager.homeActivity"
+            android:name="com.example.vpmanager.views.mainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -18,10 +19,16 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="com.example.vpmanager.findStudyActivity" />
-        <activity android:name="com.example.vpmanager.createStudyActivity" />
-        <activity android:name="com.example.vpmanager.personalAccountActivity" />
-        <activity android:name="com.example.vpmanager.studyActivity" />
+
+        <meta-data
+            android:name="preloaded_fonts"
+            android:resource="@array/preloaded_fonts" />
+
+        <activity
+            android:name="com.example.vpmanager.createStudy.createStudyActivity"
+            android:exported="true">
+        </activity>
+
     </application>
 
 </manifest>
