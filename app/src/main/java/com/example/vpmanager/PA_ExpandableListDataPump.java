@@ -4,7 +4,6 @@ import static android.content.ContentValues.TAG;
 import static com.example.vpmanager.views.mainActivity.uniqueID;
 
 import android.app.Activity;
-import android.os.Bundle;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
@@ -17,14 +16,11 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
-import java.lang.reflect.Array;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.Dictionary;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -37,8 +33,8 @@ public class PA_ExpandableListDataPump extends Activity {
     public static CollectionReference studiesRef;
     public static final HashMap<String, List<String>> EXPANDABLE_LIST_DETAIL = new HashMap<>();
 
-    public static final List<Map<String, Object>> dbDatesList = new ArrayList<>();
-    public static final List<Map<String, Object>> dbStudiesList = new ArrayList<>();
+    public static final List<Map<String, Object>> DB_DATES_LIST = new ArrayList<>();
+    public static final List<Map<String, Object>> DB_STUDIES_LIST = new ArrayList<>();
 
     //Parameters
     //Return Values:
@@ -53,7 +49,7 @@ public class PA_ExpandableListDataPump extends Activity {
 
                         if (task.isSuccessful()) {
                             for (QueryDocumentSnapshot document : task.getResult()) {
-                                dbDatesList.add(document.getData());
+                                DB_DATES_LIST.add(document.getData());
                             }
                             firestoreCallbackDates.onCallback(true);
                         }
@@ -79,7 +75,7 @@ public class PA_ExpandableListDataPump extends Activity {
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
                         if (task.isSuccessful()) {
                             for (QueryDocumentSnapshot document : task.getResult()) {
-                                dbStudiesList.add(document.getData());
+                                DB_STUDIES_LIST.add(document.getData());
                                 createListEntries();
                             }
                             firestoreCallbackStudies.onCallback();
@@ -97,7 +93,7 @@ public class PA_ExpandableListDataPump extends Activity {
         HashMap<String, HashMap<String, String>> datesMap = new HashMap<>();
         HashMap<String, HashMap<String, String>> studiesMap = new HashMap<>();
 
-        for (Map<String, Object> map : dbDatesList) {
+        for (Map<String, Object> map : DB_DATES_LIST) {
             String id = null;
             HashMap<String, String> tempMap = new HashMap<>();
             for (String key : map.keySet()) {
@@ -116,7 +112,7 @@ public class PA_ExpandableListDataPump extends Activity {
             }
         }
 
-        for (Map<String, Object> map : dbStudiesList) {
+        for (Map<String, Object> map : DB_STUDIES_LIST) {
             String id = null;
             HashMap<String, String> tempMap = new HashMap<>();
             for (String key : map.keySet()) {
@@ -200,7 +196,7 @@ public class PA_ExpandableListDataPump extends Activity {
 
         List<String[]> arrivingDates = new ArrayList<>();
 
-        for (Map<String, Object> map : dbDatesList) {
+        for (Map<String, Object> map : DB_DATES_LIST) {
             boolean saveDate = false;
             String studyId = null;
             String userID = null;
@@ -226,7 +222,7 @@ public class PA_ExpandableListDataPump extends Activity {
             }
         }
 
-        for (Map<String, Object> map : dbStudiesList) {
+        for (Map<String, Object> map : DB_STUDIES_LIST) {
             List<String> dateList = new ArrayList<>();
             boolean getDate = false;
             String studyID = null;
@@ -243,7 +239,7 @@ public class PA_ExpandableListDataPump extends Activity {
                 }
             }
             if (getDate && studyID != null) {
-                for (Map<String, Object> datemap : dbDatesList) {
+                for (Map<String, Object> datemap : DB_DATES_LIST) {
                     boolean saveDate = false;
                     boolean dateBooked = false;
                     String date = null;
@@ -272,7 +268,7 @@ public class PA_ExpandableListDataPump extends Activity {
             String studyName = null;
             String date = studyIdList.get(key);
 
-            for (Map<String, Object> map : dbStudiesList) {
+            for (Map<String, Object> map : DB_STUDIES_LIST) {
                 if (map.get("id").toString().equals(key)) {
                     if (map.get("name").toString() != null) {
                         studyName = map.get("name").toString();
@@ -304,7 +300,7 @@ public class PA_ExpandableListDataPump extends Activity {
 
     public static boolean navigateToStudyCreatorFragment(String currentUserId, String currentStudyId) {
 
-        if(dbStudiesList.size() <= 0)
+        if(DB_STUDIES_LIST.size() <= 0)
         {
             new Thread(() -> getAllStudies(() -> {       })).start();
 
@@ -314,7 +310,7 @@ public class PA_ExpandableListDataPump extends Activity {
                 e.printStackTrace();
             }
         }
-        for (Map<String, Object> map : dbStudiesList)
+        for (Map<String, Object> map : DB_STUDIES_LIST)
         {
             if (Objects.requireNonNull(map.get("creator")).toString().equals(currentUserId) &&
                     Objects.requireNonNull(map.get("id")).toString().equals(currentStudyId))

@@ -1,7 +1,7 @@
 package com.example.vpmanager.views;
 
-import static com.example.vpmanager.PA_ExpandableListDataPump.dbDatesList;
-import static com.example.vpmanager.PA_ExpandableListDataPump.dbStudiesList;
+import static com.example.vpmanager.PA_ExpandableListDataPump.DB_DATES_LIST;
+import static com.example.vpmanager.PA_ExpandableListDataPump.DB_STUDIES_LIST;
 import static com.example.vpmanager.PA_ExpandableListDataPump.getAllDates;
 import static com.example.vpmanager.PA_ExpandableListDataPump.getAllStudies;
 
@@ -11,7 +11,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
@@ -142,7 +141,7 @@ public class editStudyFragment extends Fragment {
     private void loadData() {
         studyDateIds = new ArrayList<>();
         getAllStudies(() -> {
-            for (Map<String, Object> map : dbStudiesList) {
+            for (Map<String, Object> map : DB_STUDIES_LIST) {
                 if (Objects.requireNonNull(map.get("id")).toString().equals(currentStudyId)) {
                     title.setText(Objects.requireNonNull(map.get("name")).toString());
                     name.setText(Objects.requireNonNull(map.get("name")).toString());
@@ -171,7 +170,7 @@ public class editStudyFragment extends Fragment {
 
                     getAllDates(finished -> {
                         if (finished) {
-                            for (Map<String, Object> dateMap : dbDatesList) {
+                            for (Map<String, Object> dateMap : DB_DATES_LIST) {
                                 if (dateMap != null && Objects.requireNonNull(dateMap.get("studyId")).toString().equals(currentStudyId)) {
                                     dateList.append(Objects.requireNonNull(dateMap.get("date")).toString()).append("\n");
                                     System.out.println("Pog: " +dateMap.get("id"));
