@@ -39,12 +39,18 @@ public class createStudyFragment_StepFour_Remote extends Fragment {
         loadData();
     }
 
+    //Parameter:
+    //Return values:
+    //Connects the code with the view
     private void setupView(View view){
         textInputEditTextPlatform = view.findViewById(R.id.inputFieldPlatform);
         textInputEditTextOptionalPlatform = view.findViewById(R.id.inputFieldPlatformOptional);
 
     }
 
+    //Parameter:
+    //Return values:
+    //Loads data recieved from the activity into the inputfields
     private void loadData() {
         Bundle bundle = getArguments();
         if(bundle != null){

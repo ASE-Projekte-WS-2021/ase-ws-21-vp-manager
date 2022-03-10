@@ -40,12 +40,18 @@ public class createStudyFragment_StepOne_Contact extends Fragment {
         loadData();
     }
 
+    //Parameter:
+    //Return values:
+    //Connects the code with the view
     private void setupView(View view){
         textInputEditTextContact = view.findViewById(R.id.inputContact1);
         textInputEditTextContact2 = view.findViewById(R.id.inputContact2);
         textInputEditTextContact3 = view.findViewById(R.id.inputContact3);
     }
 
+    //Parameter:
+    //Return values:
+    //Loads data recieved from the activity into the inputfields
     private void loadData() {
         Bundle bundle = getArguments();
         if(bundle != null){

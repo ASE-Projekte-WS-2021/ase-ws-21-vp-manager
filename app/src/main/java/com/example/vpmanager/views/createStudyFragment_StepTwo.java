@@ -40,11 +40,17 @@ public class createStudyFragment_StepTwo extends Fragment {
         loadData();
     }
 
+    //Parameter:
+    //Return values:
+    //Connects the code with the view
     private void setupView(View view){
         textInputEditTextDesc = view.findViewById(R.id.inputFieldStudyDesc);
 
     }
 
+    //Parameter:
+    //Return values:
+    //Loads data recieved from the activity into the inputfields
     private void loadData() {
         Bundle bundle = getArguments();
         if(bundle != null){

@@ -39,6 +39,9 @@ public class createStudyFragment_StepFour_Presence extends Fragment {
         loadData();
     }
 
+    //Parameter:
+    //Return values:
+    //Connects the code with the view
     private void setupView(View view){
         textInputEditTextLocation = view.findViewById(R.id.inputFieldLocation);
         textInputEditTextStreet = view.findViewById(R.id.inputFieldStreet);
@@ -46,6 +49,9 @@ public class createStudyFragment_StepFour_Presence extends Fragment {
 
     }
 
+    //Parameter:
+    //Return values:
+    //Loads data recieved from the activity into the inputfields
     private void loadData() {
         Bundle bundle = getArguments();
         if(bundle != null){

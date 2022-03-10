@@ -58,7 +58,9 @@ public class createStudyFragment_StepThree extends Fragment {
         executionType.setAdapter(executionTypeAdapter);
     }
 
-
+    //Parameter:
+    //Return values:
+    //Loads data recieved from the activity into the spinners
     private void loadData() {
         Bundle bundle = getArguments();
         if(bundle != null){
