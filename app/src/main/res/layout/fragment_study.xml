@@ -5,9 +5,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="?android:windowBackground"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context=".views.studyFragment">
+    <!--android:background="?android:windowBackground"-->
 
     <TextView
         android:id="@+id/studyFragmentHeader"
