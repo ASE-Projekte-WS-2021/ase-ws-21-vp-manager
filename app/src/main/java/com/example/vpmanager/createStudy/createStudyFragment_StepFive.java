@@ -1,4 +1,4 @@
-package com.example.vpmanager.views;
+package com.example.vpmanager.createStudy;
 
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
@@ -34,7 +34,6 @@ public class createStudyFragment_StepFive extends Fragment {
     ArrayAdapter<String> datePickerAdapter;
 
 
-
     //Parameter:
     //Return values:
     //Sets the current fragment for the activity
@@ -63,6 +62,7 @@ public class createStudyFragment_StepFive extends Fragment {
     //Connects the code with the view
     private void setupView(View view) {
         dateList = view.findViewById(R.id.createDatelist);
+        loadData();
         setupDatePicker();
         ExtendedFloatingActionButton fab = view.findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -71,6 +71,19 @@ public class createStudyFragment_StepFive extends Fragment {
                 datePicker();
             }
         });
+    }
+
+
+    //Parameter:
+    //Return values:
+    //Loads data received from the activity into the listview
+    private void loadData() {
+        Bundle bundle = getArguments();
+        System.out.println(bundle);
+        if (bundle != null) {
+            //dates = bundle.getStringArrayList("dates");
+        }
+
     }
 
     //Parameter:
@@ -82,7 +95,7 @@ public class createStudyFragment_StepFive extends Fragment {
         mMonth = c.get(Calendar.MONTH);
         mDay = c.get(Calendar.DAY_OF_MONTH);
 
-        DatePickerDialog datePickerDialog = new DatePickerDialog(getActivity(),R.style.my_dialog_theme,
+        DatePickerDialog datePickerDialog = new DatePickerDialog(getActivity(), R.style.my_dialog_theme,
                 new DatePickerDialog.OnDateSetListener() {
                     @Override
                     public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
@@ -102,7 +115,7 @@ public class createStudyFragment_StepFive extends Fragment {
         mHour = c.get(Calendar.HOUR_OF_DAY);
         mMinute = c.get(Calendar.MINUTE);
 
-        TimePickerDialog timePickerDialog = new TimePickerDialog(getActivity(),R.style.my_timepicker_theme,
+        TimePickerDialog timePickerDialog = new TimePickerDialog(getActivity(), R.style.my_timepicker_theme,
                 new TimePickerDialog.OnTimeSetListener() {
                     @Override
                     public void onTimeSet(TimePicker view, int hourOfDay, int minute) {

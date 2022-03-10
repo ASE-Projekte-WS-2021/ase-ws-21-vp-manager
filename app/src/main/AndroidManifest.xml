@@ -25,7 +25,7 @@
             android:resource="@array/preloaded_fonts" />
 
         <activity
-            android:name="com.example.vpmanager.views.createStudyActivity"
+            android:name="com.example.vpmanager.createStudy.createStudyActivity"
             android:exported="true">
         </activity>
 

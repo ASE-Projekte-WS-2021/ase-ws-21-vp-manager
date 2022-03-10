@@ -1,4 +1,4 @@
-package com.example.vpmanager.views;
+package com.example.vpmanager.createStudy;
 
 import android.os.Bundle;
 
@@ -9,10 +9,13 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.vpmanager.R;
+import com.google.android.material.textfield.TextInputEditText;
 
 public class createStudyFragment_StepOne extends Fragment {
 
 
+    TextInputEditText textInputEditTextTitle;
+    TextInputEditText textInputEditTextVP;
     //Parameter:
     //Return values:
     //Sets the current fragment for the activity
@@ -33,7 +36,27 @@ public class createStudyFragment_StepOne extends Fragment {
 
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
+        setupView(view);
+        loadData();
+    }
 
+    //Parameter:
+    //Return values:
+    //Connects the code with the view
+    private void setupView(View view){
+        textInputEditTextTitle = view.findViewById(R.id.inputFieldTitle);
+        textInputEditTextVP = view.findViewById(R.id.inputFieldVP);
+    }
+
+    //Parameter:
+    //Return values:
+    //Loads data recieved from the activity into the inputfields
+    private void loadData() {
+        Bundle bundle = getArguments();
+        if(bundle != null){
+            textInputEditTextTitle.setText(bundle.getString("title"));
+            textInputEditTextVP.setText(bundle.getString("vp"));
+        }
     }
 
 }

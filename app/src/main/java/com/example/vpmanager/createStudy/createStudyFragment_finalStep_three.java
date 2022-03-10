@@ -1,4 +1,4 @@
-package com.example.vpmanager.views;
+package com.example.vpmanager.createStudy;
 
 import android.os.Bundle;
 
@@ -51,14 +51,14 @@ public class createStudyFragment_finalStep_three extends Fragment {
     //Connects the code with the view
     private void setupView(View view){
         dateList = view.findViewById(R.id.confirmDates);
-        setupDatePicker();
+        loadData();
 
     }
 
     //Parameter:
     //Return values:
     //Loads data recieved from the activity into the listview
-    private void setupDatePicker() {
+    private void loadData() {
         Bundle bundle = getArguments();
         System.out.println(bundle);
         if (bundle != null) {

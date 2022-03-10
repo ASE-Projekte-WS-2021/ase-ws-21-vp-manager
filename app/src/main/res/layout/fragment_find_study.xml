@@ -5,25 +5,30 @@
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-    <TextView
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="25dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="25dp"
-        android:text="Aktuelles Studienangebot"
-        android:textSize="20sp"
-        android:textStyle="bold" />
-    <!--android:textColor="@color/orange_highlight"-->
+        android:layout_height="70dp"
+        android:orientation="vertical">
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="3dp"
-        android:layout_marginLeft="20dp"
-        android:layout_marginTop="55dp"
-        android:layout_marginRight="20dp"
-        android:background="@color/color_two" />
-    <!--android:background="@color/lightorange_Main"-->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="25dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="25dp"
+            android:text="Ausgeschriebene Studien"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="3dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginRight="20dp"
+            android:background="@color/color_two" />
+
+    </LinearLayout>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerViewFindStudyFragment"
@@ -31,7 +36,6 @@
         android:layout_height="match_parent"
         android:layout_marginTop="70dp"
         android:dividerHeight="2dp" />
-    <!--android:divider="@color/lightorange_Main"-->
 
     <RelativeLayout
         android:layout_width="match_parent"
