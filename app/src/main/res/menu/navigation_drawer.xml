@@ -25,6 +25,10 @@
             android:id="@+id/ownStudyFragment"
             android:icon="@drawable/ic_baseline_folder_24"
             android:title="Eigene Studien" />
+        <item
+            android:id="@+id/loginFragment"
+            android:icon="@drawable/ic_baseline_exit_to_app_24"
+            android:title="Abmelden" />
     </group>
 
 </menu>

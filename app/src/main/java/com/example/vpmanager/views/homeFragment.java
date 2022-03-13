@@ -35,7 +35,7 @@ import java.util.TreeMap;
 public class homeFragment extends Fragment {
 
     private NavController navController;
-    private Button findStudyNavBtn, createStudyNavBtn, tempLoginBtn;
+    private Button findStudyNavBtn, createStudyNavBtn;
     FirebaseAuth firebaseAuth;
 
     private ListView arrivingDatesList;
@@ -63,17 +63,16 @@ public class homeFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         navController = Navigation.findNavController(view);
+        userLoggedIn();
+
         setNavCardClickListeners();
         setUpDateList();
-        userLoggedIn();
     }
 
     private void userLoggedIn(){
-        super.onStart();
         FirebaseUser user = firebaseAuth.getCurrentUser();
-        System.out.println("USERRRRRRRR: " + user);
         if(user == null) {
-            navController.navigate(R.id.action_homeFragment_to_loginFragment);
+            navController.navigate(R.id.action_global_loginFragment);
         }
     }
 
@@ -84,7 +83,6 @@ public class homeFragment extends Fragment {
         arrivingDatesList = view.findViewById(R.id.listViewOwnArrivingStudyFragment);
         findStudyNavBtn = view.findViewById(R.id.findStudyBtn);
         createStudyNavBtn = view.findViewById(R.id.createStudyBtn);
-        tempLoginBtn = view.findViewById(R.id.tempLogin);
     }
 
     //Parameter:
@@ -103,14 +101,6 @@ public class homeFragment extends Fragment {
             public void onClick(View view) {
                 Log.d("homeFragment", "Navigate to: createStudyActivity");
                 navController.navigate(R.id.action_homeFragment_to_createStudyActivity);
-            }
-        });
-
-        tempLoginBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Log.d("homeFragment", "Navigate to: createStudyActivity");
-                navController.navigate(R.id.action_homeFragment_to_loginFragment);
             }
         });
     }

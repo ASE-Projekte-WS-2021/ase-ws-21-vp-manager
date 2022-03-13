@@ -17,6 +17,7 @@ import com.example.vpmanager.R;
 import com.example.vpmanager.accessDatabase;
 import com.google.android.material.appbar.MaterialToolbar;
 import com.google.android.material.navigation.NavigationView;
+import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.UUID;
 
@@ -26,6 +27,7 @@ public class mainActivity extends AppCompatActivity {
     private NavController navController;
     private NavigationView navigationViewMain;
     private NavHostFragment navHostFragment;
+    FirebaseAuth firebaseAuth;
 
     private MaterialToolbar topAppBarMain;
     private AppBarConfiguration appBarConfiguration;
@@ -41,6 +43,7 @@ public class mainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         setupUserId();
         setupNavigationView();
+        firebaseAuth = FirebaseAuth.getInstance();
     }
 
     //closes the navigation drawer when returning to mainActivity
@@ -105,6 +108,16 @@ public class mainActivity extends AppCompatActivity {
                 navController.navigate(R.id.action_global_homeFragment);
                 Log.d("mainActivity", "menuItem" + navigationViewMain.getMenu().getItem(0).toString());
                 Log.d("mainActivity", "additional listener on homeMenuItem was active!");
+                return false;
+            }
+        });
+        navigationViewMain.getMenu().getItem(5).setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem menuItem) {
+                firebaseAuth.signOut();
+                navController.navigate(R.id.action_global_loginFragment);
+                Log.d("mainActivity", "menuItem" + navigationViewMain.getMenu().getItem(5).toString());
+                Log.d("mainActivity", "additional listener on logout was active!");
                 return false;
             }
         });

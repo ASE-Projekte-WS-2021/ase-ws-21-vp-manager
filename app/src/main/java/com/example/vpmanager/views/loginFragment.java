@@ -104,7 +104,7 @@ public class loginFragment extends Fragment {
                 @Override
                 public void onComplete(@NonNull Task<AuthResult> task) {
                     if(task.isSuccessful()){
-                        navController.navigate(R.id.action_loginFragment_to_homeFragment);
+                        navController.navigate(R.id.action_global_homeFragment);
                     } else {
                         Toast.makeText(getActivity(), "Anmeldung fehlgeschlagen: " + task.getException().getMessage() , Toast.LENGTH_SHORT).show();
                     }
