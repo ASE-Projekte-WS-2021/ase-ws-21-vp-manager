@@ -20,6 +20,8 @@ import androidx.navigation.Navigation;
 
 import com.example.vpmanager.PA_ExpandableListDataPump;
 import com.example.vpmanager.R;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -34,6 +36,7 @@ public class homeFragment extends Fragment {
 
     private NavController navController;
     private Button findStudyNavBtn, createStudyNavBtn;
+    FirebaseAuth firebaseAuth;
 
     private ListView arrivingDatesList;
 
@@ -45,6 +48,7 @@ public class homeFragment extends Fragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        firebaseAuth = FirebaseAuth.getInstance();
     }
 
     @Nullable
@@ -59,8 +63,17 @@ public class homeFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         navController = Navigation.findNavController(view);
+        userLoggedIn();
+
         setNavCardClickListeners();
         setUpDateList();
+    }
+
+    private void userLoggedIn(){
+        FirebaseUser user = firebaseAuth.getCurrentUser();
+        if(user == null) {
+            navController.navigate(R.id.action_global_loginFragment);
+        }
     }
 
     //Parameter: the fragment view

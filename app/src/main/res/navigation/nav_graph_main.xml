@@ -149,4 +149,10 @@
             app:popUpTo="@id/studyCreatorFragment"
             app:popUpToInclusive="true" />
     </fragment>
+    <fragment
+        android:id="@+id/loginFragment"
+        android:name="com.example.vpmanager.views.loginFragment"
+        android:label="Anmeldung"
+        tools:layout="@layout/fragment_login"/>
+    <action android:id="@+id/action_global_loginFragment" app:destination="@id/loginFragment" />
 </navigation>
