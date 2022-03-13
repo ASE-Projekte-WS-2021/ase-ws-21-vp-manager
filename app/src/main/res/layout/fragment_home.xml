@@ -65,6 +65,21 @@
 
         </LinearLayout>
 
+        <Button
+            android:id="@+id/tempLogin"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/heatherred_Main"
+            android:elevation="5dp"
+            android:layout_marginTop="10dp"
+            android:text="Login"
+            android:textAllCaps="true"
+            android:textColor="@color/white"
+            android:textSize="16sp"
+            android:textStyle="bold">
+
+        </Button>
+
         <View
             android:id="@+id/separator_homeFragment"
             android:layout_width="match_parent"

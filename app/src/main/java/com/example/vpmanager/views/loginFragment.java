@@ -4,6 +4,8 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
 
 import android.text.TextUtils;
 import android.view.LayoutInflater;
@@ -25,6 +27,7 @@ import com.google.firebase.auth.FirebaseUser;
 public class loginFragment extends Fragment {
 
 
+
     TextInputEditText emailEdittext;
     TextInputEditText passwordEditText;
     CheckBox rememberMeCheckBox;
@@ -33,6 +36,8 @@ public class loginFragment extends Fragment {
     Button registerButton;
 
     FirebaseAuth firebaseAuth;
+    NavController navController;
+
 
 
     public loginFragment() {
@@ -58,16 +63,10 @@ public class loginFragment extends Fragment {
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         setupView(view);
+        navController = Navigation.findNavController(view);
+        setOnClickListeners();
     }
 
-    @Override
-    public void onStart(){
-        super.onStart();
-        FirebaseUser user = firebaseAuth.getCurrentUser();
-        if(user == null) {
-        // von Main to Login !!
-        }
-    }
 
     private void setupView(View view){
         emailEdittext = view.findViewById(R.id.login_email_input);
@@ -76,6 +75,7 @@ public class loginFragment extends Fragment {
         forgotPasswordButton = view.findViewById(R.id.login_forgotPassword_button);
         loginButton = view.findViewById(R.id.login_button);
         registerButton = view.findViewById(R.id.register_button);
+
     }
 
     private void setOnClickListeners(){
@@ -104,11 +104,7 @@ public class loginFragment extends Fragment {
                 @Override
                 public void onComplete(@NonNull Task<AuthResult> task) {
                     if(task.isSuccessful()){
-                        homeFragment homeFragment = new homeFragment();
-                        getActivity().getSupportFragmentManager().beginTransaction()
-                                .replace(R.id.nav_host_fragment_main, homeFragment, "homeFrag")
-                                .addToBackStack(null)
-                                .commit();
+                        navController.navigate(R.id.action_loginFragment_to_homeFragment);
                     } else {
                         Toast.makeText(getActivity(), "Anmeldung fehlgeschlagen: " + task.getException().getMessage() , Toast.LENGTH_SHORT).show();
                     }

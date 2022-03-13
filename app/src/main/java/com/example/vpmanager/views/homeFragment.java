@@ -20,6 +20,8 @@ import androidx.navigation.Navigation;
 
 import com.example.vpmanager.PA_ExpandableListDataPump;
 import com.example.vpmanager.R;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -33,7 +35,8 @@ import java.util.TreeMap;
 public class homeFragment extends Fragment {
 
     private NavController navController;
-    private Button findStudyNavBtn, createStudyNavBtn;
+    private Button findStudyNavBtn, createStudyNavBtn, tempLoginBtn;
+    FirebaseAuth firebaseAuth;
 
     private ListView arrivingDatesList;
 
@@ -45,6 +48,7 @@ public class homeFragment extends Fragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        firebaseAuth = FirebaseAuth.getInstance();
     }
 
     @Nullable
@@ -61,6 +65,16 @@ public class homeFragment extends Fragment {
         navController = Navigation.findNavController(view);
         setNavCardClickListeners();
         setUpDateList();
+        userLoggedIn();
+    }
+
+    private void userLoggedIn(){
+        super.onStart();
+        FirebaseUser user = firebaseAuth.getCurrentUser();
+        System.out.println("USERRRRRRRR: " + user);
+        if(user == null) {
+            navController.navigate(R.id.action_homeFragment_to_loginFragment);
+        }
     }
 
     //Parameter: the fragment view
@@ -70,6 +84,7 @@ public class homeFragment extends Fragment {
         arrivingDatesList = view.findViewById(R.id.listViewOwnArrivingStudyFragment);
         findStudyNavBtn = view.findViewById(R.id.findStudyBtn);
         createStudyNavBtn = view.findViewById(R.id.createStudyBtn);
+        tempLoginBtn = view.findViewById(R.id.tempLogin);
     }
 
     //Parameter:
@@ -88,6 +103,14 @@ public class homeFragment extends Fragment {
             public void onClick(View view) {
                 Log.d("homeFragment", "Navigate to: createStudyActivity");
                 navController.navigate(R.id.action_homeFragment_to_createStudyActivity);
+            }
+        });
+
+        tempLoginBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Log.d("homeFragment", "Navigate to: createStudyActivity");
+                navController.navigate(R.id.action_homeFragment_to_loginFragment);
             }
         });
     }
