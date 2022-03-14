@@ -3,6 +3,7 @@ package com.example.vpmanager.views;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,16 +13,22 @@ import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentPagerAdapter;
+import androidx.fragment.app.FragmentStatePagerAdapter;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
+import androidx.viewpager.widget.ViewPager;
 
 import com.example.vpmanager.R;
 import com.example.vpmanager.accessDatabase;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.tabs.TabLayout;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
@@ -31,6 +38,7 @@ import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
@@ -54,6 +62,14 @@ public class studyFragment extends Fragment {
     //private ArrayAdapter availableDatesAdapter;
     //private ArrayAdapter savedDateAdapter;
 
+
+    private ViewPager viewPager;
+    private TabLayout tabLayout;
+
+    private studyDetails detailsFragment;
+    private studyDates datesFragment;
+
+
     FirebaseFirestore db;
     DocumentReference studyRef;
     CollectionReference datesRef;
@@ -68,20 +84,78 @@ public class studyFragment extends Fragment {
     TextView localData;
     TextView contactInfo;
 
+
+
     public studyFragment() {
     }
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
     }
+
+
+
+
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_study, container, false);
 
+
+        viewPager = (ViewPager) view.findViewById(R.id.view_pager);
+        tabLayout = (TabLayout) view.findViewById(R.id.tab_layout);
+
+        detailsFragment = new studyDetails();
+        datesFragment = new studyDates();
+
+        tabLayout.setupWithViewPager(viewPager);
+
+        viewPagerAdapter viewPagerAdapter = new viewPagerAdapter(getParentFragmentManager(),0);
+        viewPagerAdapter.addFragment(detailsFragment, "Details");
+        viewPagerAdapter.addFragment(datesFragment, "Termine");
+        viewPager.setAdapter(viewPagerAdapter);
+
+        Log.e("bug","onCreateView");
+
+
         return view;
+    }
+
+    private class viewPagerAdapter extends FragmentStatePagerAdapter {
+
+        private List<Fragment> fragments = new ArrayList<>();
+        private List<String> fragmentNames = new ArrayList<>();
+
+        public viewPagerAdapter(@NonNull FragmentManager fm, int behavior) {
+            super(fm, behavior);
+        }
+
+        public void addFragment(Fragment fragment, String title){
+            fragments.add(fragment);
+            fragmentNames.add(title);
+
+        }
+
+
+        @NonNull
+        @Override
+        public Fragment getItem(int position) {
+            return fragments.get(position);
+        }
+
+        @Override
+        public int getCount() {
+            return fragments.size();
+        }
+
+        @Nullable
+        @Override
+        public CharSequence getPageTitle(int position) {
+            return fragmentNames.get(position);
+        }
     }
 
     @Override
@@ -89,6 +163,7 @@ public class studyFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         navController = Navigation.findNavController(view);
         getRequiredInfos();
+        Log.e("bug","onviewCreated");
         setupStudyDetails(new studyFragment.FirestoreCallbackStudy() {
             @Override
             public void onCallback(ArrayList<String> arrayList) {
@@ -123,6 +198,7 @@ public class studyFragment extends Fragment {
 
         headerText = view.findViewById(R.id.studyFragmentHeader);
         description = view.findViewById(R.id.descriptionStudyFragment);
+        System.out.println("aaa "+ description);
         vpValue = view.findViewById(R.id.vpValueStudyFragment);
         category = view.findViewById(R.id.categoryStudyFragment);
         studyType = view.findViewById(R.id.studyTypeStudyFragment);
@@ -344,4 +420,7 @@ public class studyFragment extends Fragment {
     public ArrayList<String> getStudyDetails() {
         return studyDetails;
     }
+
+
+
 }

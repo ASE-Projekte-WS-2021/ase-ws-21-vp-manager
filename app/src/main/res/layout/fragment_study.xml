@@ -9,158 +9,26 @@
     tools:context=".views.studyFragment">
     <!--android:background="?android:windowBackground"-->
 
-    <TextView
-        android:id="@+id/studyFragmentHeader"
+
+
+    <com.google.android.material.tabs.TabLayout
+        android:id="@+id/tab_layout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="25dp"
-        android:layout_marginTop="15dp"
-        android:layout_marginEnd="25dp"
-        android:layout_marginBottom="10dp"
-        android:textSize="23sp"
-        android:textStyle="bold" />
-    <!--android:text="@string/studyViewHeader"-->
+        android:layout_height="wrap_content">
+        
+    </com.google.android.material.tabs.TabLayout>
 
-    <View
+
+
+    <androidx.viewpager.widget.ViewPager
+        android:id="@+id/view_pager"
         android:layout_width="match_parent"
-        android:layout_height="3dp"
-        android:layout_marginLeft="20dp"
-        android:layout_marginTop="15dp"
-        android:layout_marginRight="20dp"
-        android:layout_marginBottom="15dp"
-        android:background="@color/color_two" />
+        android:layout_height="match_parent"
+        />
+    <!--coordinatorlayout with attribute for layoutbehaviour missing-->
 
 
-    <ImageView
-        android:id="@+id/infoSymbolStudyFragment"
-        android:layout_width="91dp"
-        android:layout_height="29dp"
-        android:layout_marginTop="10dp"
-        app:srcCompat="@drawable/ic_baseline_info_24" />
 
 
-    <TextView
-        android:id="@+id/descriptionStudyFragment"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom"
-        android:layout_marginStart="35dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginEnd="35dp"
-        android:fontFamily="sans-serif-light"
-        android:textSize="17sp"
-        android:textStyle="bold"
-        android:weightSum="100" />
-
-    <TextView
-        android:id="@+id/vpValueStudyFragment"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom"
-        android:layout_marginStart="35dp"
-        android:layout_marginEnd="35dp"
-        android:fontFamily="sans-serif-light"
-        android:textSize="17sp"
-        android:textStyle="bold"
-        android:weightSum="100" />
-
-    <TextView
-        android:id="@+id/categoryStudyFragment"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom"
-        android:layout_marginStart="35dp"
-        android:layout_marginEnd="35dp"
-        android:fontFamily="sans-serif-light"
-        android:textSize="17sp"
-        android:textStyle="bold"
-        android:weightSum="100" />
-
-    <TextView
-        android:id="@+id/contactInformationStudyFragment"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom"
-        android:layout_marginStart="35dp"
-        android:layout_marginEnd="35dp"
-        android:fontFamily="sans-serif-light"
-        android:textSize="17sp"
-        android:textStyle="bold"
-        android:weightSum="100" />
-
-
-    <ImageView
-        android:id="@+id/locationSymbolStudyFragment"
-        android:layout_width="91dp"
-        android:layout_height="31dp"
-        android:layout_marginTop="30dp"
-        app:srcCompat="@drawable/ic_round_location_on_24" />
-
-    <TextView
-        android:id="@+id/studyTypeStudyFragment"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom"
-        android:layout_marginStart="35dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginEnd="35dp"
-        android:fontFamily="sans-serif-light"
-        android:textSize="17sp"
-        android:textStyle="bold"
-        android:weightSum="100" />
-
-    <!--  adapt design to studyType Textview-->
-    <TextView
-        android:id="@+id/remoteStudyStudyFragment"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom"
-        android:layout_marginStart="35dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginEnd="35dp"
-        android:fontFamily="sans-serif-light"
-        android:textSize="17sp"
-        android:textStyle="bold"
-        android:weightSum="100" />
-
-    <!-- position mit remoteStudy TextView Ã¼berlagern!-->
-    <TextView
-        android:id="@+id/localStudyStudyFragment"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom"
-        android:layout_marginStart="35dp"
-        android:layout_marginTop="-25dp"
-        android:layout_marginEnd="35dp"
-        android:fontFamily="sans-serif-light"
-        android:textSize="17sp"
-        android:textStyle="bold"
-        android:weightSum="100" />
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="3dp"
-        android:layout_marginLeft="20dp"
-        android:layout_marginTop="35dp"
-        android:layout_marginRight="20dp"
-        android:background="@color/color_two" />
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginStart="25dp"
-        android:layout_marginTop="12dp"
-        android:layout_marginEnd="20dp"
-        android:text="@string/dateListHeader"
-        android:textSize="18sp"
-        android:textStyle="bold" />
-
-    <ListView
-        android:id="@+id/listViewDatesStudyFragment"
-        android:layout_width="348dp"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="3dp" />
 
 </LinearLayout>
