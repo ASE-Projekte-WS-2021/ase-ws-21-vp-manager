@@ -1,6 +1,5 @@
 package com.example.vpmanager.views;
 
-import static com.example.vpmanager.views.mainActivity.rememberMe;
 import static com.example.vpmanager.views.mainActivity.uniqueID;
 
 import android.os.Bundle;
@@ -72,7 +71,7 @@ public class homeFragment extends Fragment {
 
     private void userLoggedIn(){
         FirebaseUser user = firebaseAuth.getCurrentUser();
-        if(user == null || !rememberMe) {
+        if(user == null) {
             navController.navigate(R.id.action_global_loginFragment);
         }
     }

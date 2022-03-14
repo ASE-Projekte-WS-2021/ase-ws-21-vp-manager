@@ -28,7 +28,6 @@ public class loginFragment extends Fragment {
 
     TextInputEditText emailEdittext;
     TextInputEditText passwordEditText;
-    CheckBox rememberMeCheckBox;
     Button forgotPasswordButton;
     Button loginButton;
     Button registerButton;
@@ -68,7 +67,6 @@ public class loginFragment extends Fragment {
     private void setupView(View view) {
         emailEdittext = view.findViewById(R.id.login_email_input);
         passwordEditText = view.findViewById(R.id.login_password_input);
-        rememberMeCheckBox = view.findViewById(R.id.login_rememberMe_checkbox);
         forgotPasswordButton = view.findViewById(R.id.login_forgotPassword_button);
         loginButton = view.findViewById(R.id.login_button);
         registerButton = view.findViewById(R.id.register_button);
@@ -100,9 +98,6 @@ public class loginFragment extends Fragment {
                 @Override
                 public void onComplete(@NonNull Task<AuthResult> task) {
                     if (task.isSuccessful()) {
-                        if(rememberMeCheckBox.isChecked()) {
-                            mainActivity.rememberMe = true;
-                        }
                         navController.navigate(R.id.action_global_homeFragment);
                     } else {
                         Toast.makeText(getActivity(), "Anmeldung fehlgeschlagen: " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();

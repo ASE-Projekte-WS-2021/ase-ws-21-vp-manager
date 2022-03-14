@@ -35,7 +35,6 @@ public class mainActivity extends AppCompatActivity {
     //logic to register a new user (app installation) if necessary
     com.example.vpmanager.accessDatabase accessDatabase;
     public static String uniqueID = null;
-    public static boolean rememberMe = false;
     private static final String PREF_UNIQUE_ID = "PREF_UNIQUE_ID";
 
     @Override
@@ -116,6 +115,7 @@ public class mainActivity extends AppCompatActivity {
             @Override
             public boolean onMenuItemClick(MenuItem menuItem) {
                 firebaseAuth.signOut();
+
                 navController.navigate(R.id.action_global_loginFragment);
                 Log.d("mainActivity", "menuItem" + navigationViewMain.getMenu().getItem(5).toString());
                 Log.d("mainActivity", "additional listener on logout was active!");
