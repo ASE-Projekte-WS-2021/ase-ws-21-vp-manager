@@ -35,6 +35,7 @@ public class mainActivity extends AppCompatActivity {
     //logic to register a new user (app installation) if necessary
     com.example.vpmanager.accessDatabase accessDatabase;
     public static String uniqueID = null;
+    public static boolean rememberMe = false;
     private static final String PREF_UNIQUE_ID = "PREF_UNIQUE_ID";
 
     @Override

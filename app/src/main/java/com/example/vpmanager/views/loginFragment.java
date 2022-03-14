@@ -26,7 +26,6 @@ import com.google.firebase.auth.FirebaseAuth;
 public class loginFragment extends Fragment {
 
 
-
     TextInputEditText emailEdittext;
     TextInputEditText passwordEditText;
     CheckBox rememberMeCheckBox;
@@ -36,7 +35,6 @@ public class loginFragment extends Fragment {
 
     FirebaseAuth firebaseAuth;
     NavController navController;
-
 
 
     public loginFragment() {
@@ -49,7 +47,7 @@ public class loginFragment extends Fragment {
         super.onCreate(savedInstanceState);
 
         firebaseAuth = FirebaseAuth.getInstance();
-        }
+    }
 
 
     @Override
@@ -67,7 +65,7 @@ public class loginFragment extends Fragment {
     }
 
 
-    private void setupView(View view){
+    private void setupView(View view) {
         emailEdittext = view.findViewById(R.id.login_email_input);
         passwordEditText = view.findViewById(R.id.login_password_input);
         rememberMeCheckBox = view.findViewById(R.id.login_rememberMe_checkbox);
@@ -77,7 +75,7 @@ public class loginFragment extends Fragment {
 
     }
 
-    private void setOnClickListeners(){
+    private void setOnClickListeners() {
         registerButton.setOnClickListener(view -> {
             createUser();
         });
@@ -91,21 +89,23 @@ public class loginFragment extends Fragment {
         String email = emailEdittext.getText().toString();
         String password = passwordEditText.getText().toString();
 
-        if(TextUtils.isEmpty(email)){
+        if (TextUtils.isEmpty(email)) {
             emailEdittext.setError("Email kann nicht leer sein");
             emailEdittext.requestFocus();
-        } else if(TextUtils.isEmpty(password)){
+        } else if (TextUtils.isEmpty(password)) {
             passwordEditText.setError("Passwort kann nicht leer sein");
             passwordEditText.requestFocus();
-        }
-        else{
+        } else {
             firebaseAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                 @Override
                 public void onComplete(@NonNull Task<AuthResult> task) {
-                    if(task.isSuccessful()){
+                    if (task.isSuccessful()) {
+                        if(rememberMeCheckBox.isChecked()) {
+                            mainActivity.rememberMe = true;
+                        }
                         navController.navigate(R.id.action_global_homeFragment);
                     } else {
-                        Toast.makeText(getActivity(), "Anmeldung fehlgeschlagen: " + task.getException().getMessage() , Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getActivity(), "Anmeldung fehlgeschlagen: " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
                     }
                 }
             });
@@ -116,27 +116,35 @@ public class loginFragment extends Fragment {
         String email = emailEdittext.getText().toString();
         String password = passwordEditText.getText().toString();
 
-        if(TextUtils.isEmpty(email)){
+        if (TextUtils.isEmpty(email)) {
             emailEdittext.setError("Email kann nicht leer sein");
             emailEdittext.requestFocus();
-        } else if(TextUtils.isEmpty(password)){
+        } else if (TextUtils.isEmpty(password)) {
             passwordEditText.setError("Passwort kann nicht leer sein");
             passwordEditText.requestFocus();
-        } else{
+        } else {
             firebaseAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                 @Override
                 public void onComplete(@NonNull Task<AuthResult> task) {
-                    if(task.isSuccessful()){
-                        Toast.makeText(getActivity(), "Registierung erfolgreich", Toast.LENGTH_SHORT).show();
+                    if (task.isSuccessful()) {
+                        firebaseAuth.getCurrentUser().sendEmailVerification().addOnCompleteListener(new OnCompleteListener<Void>() {
+                            @Override
+                            public void onComplete(@NonNull Task<Void> task) {
+                                if (task.isSuccessful()) {
+                                    Toast.makeText(getActivity(), "Registierung erfolgreich, bitte überprüfe deine Email-Postfach", Toast.LENGTH_SHORT).show();
+                                } else {
+                                    Toast.makeText(getActivity(), "Registierung fehlgeschlagen: " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                                }
+                            }
+                        });
                     } else {
-                        Toast.makeText(getActivity(), "Registierung fehlgeschlagen: " + task.getException().getMessage() , Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getActivity(), "Registierung fehlgeschlagen: " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+
                     }
                 }
             });
         }
     }
-
-
 
 
 }
