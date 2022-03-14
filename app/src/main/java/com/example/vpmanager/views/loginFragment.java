@@ -16,6 +16,7 @@ import android.widget.Toast;
 
 import com.example.vpmanager.R;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.auth.AuthResult;
@@ -80,7 +81,29 @@ public class loginFragment extends Fragment {
         loginButton.setOnClickListener(view -> {
             loginUser();
         });
+
+        forgotPasswordButton.setOnClickListener(view -> {
+            forgotPassword();
+        });
     }
+
+    private void forgotPassword() {
+        String email = emailEdittext.getText().toString();
+
+        if (TextUtils.isEmpty(email)) {
+            emailEdittext.setError("Bitte Email-Adresse angeben um Passwort zurückzusetzen");
+            emailEdittext.requestFocus();
+        } else {
+            firebaseAuth.sendPasswordResetEmail(email).addOnSuccessListener(new OnSuccessListener<Void>() {
+                @Override
+                public void onSuccess(Void unused) {
+                    Toast.makeText(getActivity(), "Bitte über Sie ihr Email-Postfach", Toast.LENGTH_SHORT).show();
+                }
+            });
+        }
+
+    }
+
 
     private void loginUser() {
         String email = emailEdittext.getText().toString();
