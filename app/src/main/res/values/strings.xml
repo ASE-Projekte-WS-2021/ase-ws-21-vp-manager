@@ -66,8 +66,6 @@
     <string name="fragment_create_study_finalPage_title_three">Terminbestätigung</string>
 
 
-
-
     <string-array name="createCategoryList">
         <item>Studienkategorie*</item>
         <item>VR</item>
@@ -106,6 +104,15 @@
     <string name="collectionPathDates">dates</string>
     <string name="findStudyCardDescText">Suche nach passenden Studien für deinen Uni-Alltag und sammle VP-Stunden!</string>
     <string name="createStudyCardDescText">Erstelle deine eigenen Studien und präsentiere sie der Ziegruppe!</string>
+
+
+    <!-- Login/Account Creation -->
+    <string name="login">Login</string>
+    <string name="login_email_address">Email-Adresse</string>
+    <string name="login_password">Passwort</string>
+    <string name="login_remember_me">Angemeldet bleiben</string>
+    <string name="login_forgot_password">Passwort vergessen</string>
+    <string name="login_create_account">Registrieren</string>
 
 </resources>
 
