@@ -26,14 +26,14 @@ import com.google.firebase.auth.FirebaseAuth;
 public class loginFragment extends Fragment {
 
 
-    TextInputEditText emailEdittext;
-    TextInputEditText passwordEditText;
-    Button forgotPasswordButton;
-    Button loginButton;
-    Button registerButton;
+    private TextInputEditText emailEdittext;
+    private TextInputEditText passwordEditText;
+    private Button forgotPasswordButton;
+    private Button loginButton;
+    private Button registerButton;
 
-    FirebaseAuth firebaseAuth;
-    NavController navController;
+    private FirebaseAuth firebaseAuth;
+    private NavController navController;
 
 
     public loginFragment() {
@@ -53,14 +53,22 @@ public class loginFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
+
         return inflater.inflate(R.layout.fragment_login, container, false);
     }
 
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         setupView(view);
+        ((mainActivity)getActivity()).setDrawerLocked();
         navController = Navigation.findNavController(view);
         setOnClickListeners();
+    }
+
+    @Override
+    public void onDestroyView(){
+        super.onDestroyView();
+        ((mainActivity)getActivity()).setDrawerUnlocked();
     }
 
 
@@ -86,6 +94,7 @@ public class loginFragment extends Fragment {
             forgotPassword();
         });
     }
+
 
     private void forgotPassword() {
         String email = emailEdittext.getText().toString();
@@ -162,6 +171,5 @@ public class loginFragment extends Fragment {
             });
         }
     }
-
 
 }

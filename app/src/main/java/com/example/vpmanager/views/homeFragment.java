@@ -63,10 +63,14 @@ public class homeFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         navController = Navigation.findNavController(view);
-        userLoggedIn();
-
         setNavCardClickListeners();
         setUpDateList();
+    }
+
+    @Override
+    public void onStart(){
+        super.onStart();
+        userLoggedIn();
     }
 
     private void userLoggedIn(){
