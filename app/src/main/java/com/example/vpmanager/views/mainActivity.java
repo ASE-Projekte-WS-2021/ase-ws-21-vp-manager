@@ -13,6 +13,7 @@ import androidx.navigation.fragment.NavHostFragment;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
+import com.example.vpmanager.DrawerController;
 import com.example.vpmanager.R;
 import com.example.vpmanager.accessDatabase;
 import com.google.android.material.appbar.MaterialToolbar;
@@ -21,7 +22,7 @@ import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.UUID;
 
-public class mainActivity extends AppCompatActivity {
+public class mainActivity extends AppCompatActivity implements DrawerController {
 
     private DrawerLayout drawerLayoutMain;
     private NavController navController;
@@ -187,5 +188,17 @@ public class mainActivity extends AppCompatActivity {
             }
         }
         return uniqueID;
+    }
+
+    @Override
+    public void setDrawerLocked() {
+        drawerLayoutMain.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
+        topAppBarMain.setNavigationIcon(null);
+    }
+
+    @Override
+    public void setDrawerUnlocked() {
+        drawerLayoutMain.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED);
+        topAppBarMain.setNavigationIcon(getDrawable(R.drawable.ic_baseline_menu_24));
     }
 }

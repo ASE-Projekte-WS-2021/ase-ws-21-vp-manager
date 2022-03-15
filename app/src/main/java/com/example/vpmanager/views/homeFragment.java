@@ -63,12 +63,19 @@ public class homeFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         navController = Navigation.findNavController(view);
-        userLoggedIn();
-
         setNavCardClickListeners();
         setUpDateList();
     }
 
+    @Override
+    public void onStart(){
+        super.onStart();
+        userLoggedIn();
+    }
+
+    //Parameter:
+    //Return values:
+    //Checks if the user is already logged in
     private void userLoggedIn(){
         FirebaseUser user = firebaseAuth.getCurrentUser();
         if(user == null) {

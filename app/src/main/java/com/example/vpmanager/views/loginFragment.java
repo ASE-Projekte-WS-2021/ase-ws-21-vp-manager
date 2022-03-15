@@ -26,14 +26,14 @@ import com.google.firebase.auth.FirebaseAuth;
 public class loginFragment extends Fragment {
 
 
-    TextInputEditText emailEdittext;
-    TextInputEditText passwordEditText;
-    Button forgotPasswordButton;
-    Button loginButton;
-    Button registerButton;
+    private TextInputEditText emailEdittext;
+    private TextInputEditText passwordEditText;
+    private Button forgotPasswordButton;
+    private Button loginButton;
+    private Button registerButton;
 
-    FirebaseAuth firebaseAuth;
-    NavController navController;
+    private FirebaseAuth firebaseAuth;
+    private NavController navController;
 
 
     public loginFragment() {
@@ -53,17 +53,28 @@ public class loginFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
+
         return inflater.inflate(R.layout.fragment_login, container, false);
     }
 
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         setupView(view);
+        ((mainActivity)getActivity()).setDrawerLocked();
         navController = Navigation.findNavController(view);
         setOnClickListeners();
     }
 
+    @Override
+    public void onDestroyView(){
+        super.onDestroyView();
+        ((mainActivity)getActivity()).setDrawerUnlocked();
+    }
 
+
+    //Parameter:
+    //Return values:
+    //Connects the code with the view
     private void setupView(View view) {
         emailEdittext = view.findViewById(R.id.login_email_input);
         passwordEditText = view.findViewById(R.id.login_password_input);
@@ -73,6 +84,9 @@ public class loginFragment extends Fragment {
 
     }
 
+    //Parameter:
+    //Return values:
+    //Sets clickListener on navigation items
     private void setOnClickListeners() {
         registerButton.setOnClickListener(view -> {
             createUser();
@@ -87,6 +101,10 @@ public class loginFragment extends Fragment {
         });
     }
 
+
+    //Parameter:
+    //Return values:
+    //Handles the forgot password button press and sends a email to reset password
     private void forgotPassword() {
         String email = emailEdittext.getText().toString();
 
@@ -105,6 +123,9 @@ public class loginFragment extends Fragment {
     }
 
 
+    //Parameter:
+    //Return values:
+    //Handles login if the and provides feedback if the task was successful
     private void loginUser() {
         String email = emailEdittext.getText().toString();
         String password = passwordEditText.getText().toString();
@@ -129,6 +150,9 @@ public class loginFragment extends Fragment {
         }
     }
 
+    //Parameter:
+    //Return values:
+    //Handles account creation if the and provides feedback if the task was successful
     private void createUser() {
         String email = emailEdittext.getText().toString();
         String password = passwordEditText.getText().toString();
@@ -162,6 +186,5 @@ public class loginFragment extends Fragment {
             });
         }
     }
-
 
 }
