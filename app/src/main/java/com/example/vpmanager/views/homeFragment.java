@@ -73,6 +73,9 @@ public class homeFragment extends Fragment {
         userLoggedIn();
     }
 
+    //Parameter:
+    //Return values:
+    //Checks if the user is already logged in
     private void userLoggedIn(){
         FirebaseUser user = firebaseAuth.getCurrentUser();
         if(user == null) {

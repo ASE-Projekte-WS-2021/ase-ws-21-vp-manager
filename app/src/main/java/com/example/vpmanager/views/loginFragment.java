@@ -72,6 +72,9 @@ public class loginFragment extends Fragment {
     }
 
 
+    //Parameter:
+    //Return values:
+    //Connects the code with the view
     private void setupView(View view) {
         emailEdittext = view.findViewById(R.id.login_email_input);
         passwordEditText = view.findViewById(R.id.login_password_input);
@@ -81,6 +84,9 @@ public class loginFragment extends Fragment {
 
     }
 
+    //Parameter:
+    //Return values:
+    //Sets clickListener on navigation items
     private void setOnClickListeners() {
         registerButton.setOnClickListener(view -> {
             createUser();
@@ -96,6 +102,9 @@ public class loginFragment extends Fragment {
     }
 
 
+    //Parameter:
+    //Return values:
+    //Handles the forgot password button press and sends a email to reset password
     private void forgotPassword() {
         String email = emailEdittext.getText().toString();
 
@@ -114,6 +123,9 @@ public class loginFragment extends Fragment {
     }
 
 
+    //Parameter:
+    //Return values:
+    //Handles login if the and provides feedback if the task was successful
     private void loginUser() {
         String email = emailEdittext.getText().toString();
         String password = passwordEditText.getText().toString();
@@ -138,6 +150,9 @@ public class loginFragment extends Fragment {
         }
     }
 
+    //Parameter:
+    //Return values:
+    //Handles account creation if the and provides feedback if the task was successful
     private void createUser() {
         String email = emailEdittext.getText().toString();
         String password = passwordEditText.getText().toString();
