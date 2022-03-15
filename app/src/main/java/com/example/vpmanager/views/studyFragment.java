@@ -98,11 +98,24 @@ public class studyFragment extends Fragment {
 
 
 
-
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_study, container, false);
+
+        getRequiredInfos();
+        setupStudyDetails(new studyFragment.FirestoreCallbackStudy() {
+            @Override
+            public void onCallback(ArrayList<String> arrayList) {
+                loadStudyData(view);
+            }
+        });
+        setupDateListView(new studyFragment.FirestoreCallbackDates() {
+            @Override
+            public void onCallback(ArrayList<ArrayList<String>> arrayList) {
+                loadDatesData(view);
+            }
+        });
 
 
         viewPager = (ViewPager) view.findViewById(R.id.view_pager);
@@ -124,7 +137,9 @@ public class studyFragment extends Fragment {
         return view;
     }
 
-    private class viewPagerAdapter extends FragmentStatePagerAdapter {
+    private class viewPagerAdapter extends FragmentStatePagerAdapter
+
+    {
 
         private List<Fragment> fragments = new ArrayList<>();
         private List<String> fragmentNames = new ArrayList<>();
@@ -162,8 +177,7 @@ public class studyFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         navController = Navigation.findNavController(view);
-        getRequiredInfos();
-        Log.e("bug","onviewCreated");
+      /*  getRequiredInfos();
         setupStudyDetails(new studyFragment.FirestoreCallbackStudy() {
             @Override
             public void onCallback(ArrayList<String> arrayList) {
@@ -175,12 +189,13 @@ public class studyFragment extends Fragment {
             public void onCallback(ArrayList<ArrayList<String>> arrayList) {
                 loadDatesData(view);
             }
-        });
+        });*/
     }
 
     private void getRequiredInfos() {
         //Get the studyId early
         currentStudyId = getArguments().getString("studyId");
+        Log.d("studyFragment",currentStudyId);
         currentUserId = mainActivity.createUserId(getActivity());
         savedDateItem = new ArrayList<>();
         savedDateItem.add(getString(R.string.dropDateView));
@@ -198,7 +213,6 @@ public class studyFragment extends Fragment {
 
         headerText = view.findViewById(R.id.studyFragmentHeader);
         description = view.findViewById(R.id.descriptionStudyFragment);
-        System.out.println("aaa "+ description);
         vpValue = view.findViewById(R.id.vpValueStudyFragment);
         category = view.findViewById(R.id.categoryStudyFragment);
         studyType = view.findViewById(R.id.studyTypeStudyFragment);
