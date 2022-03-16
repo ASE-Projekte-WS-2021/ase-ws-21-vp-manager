@@ -34,7 +34,7 @@
         <TextView
             android:layout_width="150dp"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
+            android:layout_marginStart="40dp"
             android:layout_marginTop="25dp"
             android:text="Ausgewählte Termine"
             android:textColor="@color/heatherred_Main"
@@ -45,7 +45,7 @@
             android:layout_width="match_parent"
             android:layout_height="347dp"
             android:layout_marginLeft="30dp"
-            android:layout_marginTop="12dp"
+            android:layout_marginTop="10dp"
             android:layout_marginRight="30dp"
             android:layout_weight="5"
             android:backgroundTint="@color/green_light"
