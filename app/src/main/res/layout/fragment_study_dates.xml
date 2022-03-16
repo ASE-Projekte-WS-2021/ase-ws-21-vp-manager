@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".views.studyDates"
+    >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        tools:context=".views.studyDates">
+        <!--android:background="?android:windowBackground"-->
+
+
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginStart="25dp"
+            android:layout_marginTop="12dp"
+            android:layout_marginEnd="20dp"
+            android:text="@string/dateListHeader"
+            android:textSize="23sp"
+            android:fontFamily="@font/maven_pro"
+            android:textStyle="bold" />
+
+
+        <ImageView
+            android:id="@+id/locationSymbolStudyFragment"
+            android:layout_width="91dp"
+            android:layout_height="31dp"
+            android:layout_gravity="right"
+            android:layout_marginEnd="80dp"
+            android:layout_marginTop="-30dp"
+            app:srcCompat="@drawable/ic_baseline_edit_calendar_24" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="3dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginBottom="15dp"
+            android:background="@color/green_dark" />
+
+
+
+        <ListView
+            android:id="@+id/listViewDatesStudyFragment"
+            android:layout_width="348dp"
+            android:divider="@color/color_two"
+            android:dividerHeight="1dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="3dp" />
+
+
+
+    </LinearLayout>
+
+</FrameLayout>
