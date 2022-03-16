@@ -37,7 +37,7 @@
             android:layout_marginStart="40dp"
             android:layout_marginTop="25dp"
             android:text="Ausgewählte Termine"
-            android:textColor="@color/heatherred_Main"
+            android:textColor="@color/heatherred_dark"
             android:textSize="15sp"
             android:textStyle="bold" />
 
