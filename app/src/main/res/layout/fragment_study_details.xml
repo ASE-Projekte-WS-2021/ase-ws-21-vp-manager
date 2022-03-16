@@ -20,10 +20,10 @@
             android:id="@+id/studyFragmentHeader"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="6dp"
+            android:layout_marginStart="7dp"
             android:layout_marginTop="10dp"
             android:layout_marginEnd="25dp"
-            android:layout_marginBottom="-3dp"
+            android:layout_marginBottom="2dp"
             android:fontFamily="@font/maven_pro"
             android:layout_gravity="left"
             android:textSize="25sp"
@@ -46,14 +46,14 @@
             android:layout_width="187dp"
             android:layout_height="3dp"
             android:layout_marginTop="-13dp"
-            android:background="@color/green_light" />
+            android:background="@color/green_Main" />
 
         <View
             android:layout_width="187dp"
             android:layout_height="3dp"
             android:layout_marginTop="-4dp"
             android:layout_gravity="right"
-            android:background="@color/green_light" />
+            android:background="@color/green_Main" />
 
 
 
@@ -64,11 +64,11 @@
             android:layout_gravity="bottom"
             android:layout_marginEnd="35dp"
             android:layout_marginStart="5dp"
-            android:layout_marginTop="5dp"
+            android:layout_marginTop="3dp"
             android:fontFamily="@font/maven_pro"
             android:textSize="15sp"
             android:text="Beschreibung"
-            android:textColor="@color/color_two"
+            android:textColor="@color/tabs_grey"
             android:textStyle="bold"
             android:weightSum="100" />
 
@@ -88,10 +88,7 @@
         <View
             android:layout_width="match_parent"
             android:layout_height="3dp"
-            android:layout_marginLeft="20dp"
-            android:layout_marginTop="15dp"
-            android:layout_marginEnd="20dp"
-            android:layout_marginBottom="15dp"
+            android:layout_marginTop="7dp"
             android:background="@color/color_two" />
 
         <TextView
@@ -101,11 +98,10 @@
             android:layout_gravity="bottom"
             android:layout_marginStart="5dp"
             android:layout_marginEnd="35dp"
-            android:layout_marginTop="-15dp"
             android:fontFamily="@font/maven_pro"
             android:textSize="15sp"
             android:text="VP-Stunden"
-            android:textColor="@color/color_two"
+            android:textColor="@color/tabs_grey"
             android:textStyle="bold"
             android:weightSum="100" />
 
@@ -126,10 +122,7 @@
         <View
             android:layout_width="match_parent"
             android:layout_height="3dp"
-            android:layout_marginLeft="20dp"
-            android:layout_marginTop="15dp"
-            android:layout_marginEnd="20dp"
-            android:layout_marginBottom="15dp"
+            android:layout_marginTop="7dp"
             android:background="@color/color_two" />
 
         <TextView
@@ -141,9 +134,8 @@
             android:layout_marginEnd="35dp"
             android:fontFamily="@font/maven_pro"
             android:textSize="15sp"
-            android:layout_marginTop="-15dp"
             android:text="Kategorie"
-            android:textColor="@color/color_two"
+            android:textColor="@color/tabs_grey"
             android:textStyle="bold"
             android:weightSum="100" />
 
@@ -163,10 +155,9 @@
         <View
             android:layout_width="match_parent"
             android:layout_height="3dp"
-            android:layout_marginLeft="20dp"
-            android:layout_marginTop="15dp"
-            android:layout_marginEnd="20dp"
-            android:layout_marginBottom="15dp"
+
+            android:layout_marginTop="7dp"
+
             android:background="@color/color_two" />
 
         <TextView
@@ -177,10 +168,9 @@
             android:layout_marginEnd="35dp"
             android:fontFamily="@font/maven_pro"
             android:textSize="15sp"
-            android:layout_marginTop="-15dp"
             android:text="Kontakt"
             android:layout_marginStart="5dp"
-            android:textColor="@color/color_two"
+            android:textColor="@color/tabs_grey"
             android:textStyle="bold"
             android:weightSum="100" />
 
@@ -197,6 +187,13 @@
             android:textStyle="bold"
             android:weightSum="100" />
 
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="3dp"
+            android:layout_marginTop="7dp"
+            android:layout_marginBottom="15dp"
+            android:background="@color/color_two" />
+
 
 
         <ImageView
@@ -204,7 +201,7 @@
             android:layout_width="91dp"
             android:layout_height="31dp"
             android:layout_gravity="center"
-            android:layout_marginTop="15dp"
+            android:layout_marginTop="30dp"
             android:layout_marginBottom="-3dp"
             app:srcCompat="@drawable/ic_round_location_on_24" />
 
@@ -212,14 +209,16 @@
             android:layout_width="187dp"
             android:layout_height="3dp"
             android:layout_marginTop="-13dp"
-            android:background="@color/green_light" />
+            android:background="@color/green_Main" />
 
         <View
             android:layout_width="187dp"
             android:layout_height="3dp"
             android:layout_marginTop="-4dp"
             android:layout_gravity="right"
-            android:background="@color/green_light" />
+            android:background="@color/green_Main" />
+
+
 
         <TextView
             android:id="@+id/studyTypeTag"
@@ -227,13 +226,13 @@
             android:layout_height="wrap_content"
             android:layout_gravity="bottom"
             android:layout_marginEnd="35dp"
-            android:layout_marginTop="5dp"
+            android:layout_marginTop="3dp"
             android:fontFamily="@font/maven_pro"
             android:textSize="15sp"
             android:text="Studientyp"
             android:layout_marginStart="5dp"
             android:textStyle="bold"
-            android:textColor="@color/color_two"
+            android:textColor="@color/tabs_grey"
             android:weightSum="100" />
 
         <TextView
@@ -252,10 +251,7 @@
         <View
             android:layout_width="match_parent"
             android:layout_height="3dp"
-            android:layout_marginLeft="20dp"
-            android:layout_marginTop="15dp"
-            android:layout_marginEnd="20dp"
-            android:layout_marginBottom="15dp"
+            android:layout_marginTop="7dp"
             android:background="@color/color_two" />
 
         <!--  adapt design to studyType Textview-->
@@ -266,12 +262,11 @@
             android:layout_height="wrap_content"
             android:layout_gravity="bottom"
             android:layout_marginEnd="35dp"
-            android:layout_marginTop="-15dp"
             android:fontFamily="@font/maven_pro"
             android:textSize="15sp"
             android:layout_marginStart="5dp"
             android:text="Ort / Plattform"
-            android:textColor="@color/color_two"
+            android:textColor="@color/tabs_grey"
             android:textStyle="bold"
             android:weightSum="100" />
 
@@ -303,6 +298,14 @@
             android:textSize="17sp"
             android:textStyle="bold"
             android:weightSum="100" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="3dp"
+
+            android:layout_marginTop="7dp"
+            android:layout_marginBottom="15dp"
+            android:background="@color/color_two" />
 
 
 

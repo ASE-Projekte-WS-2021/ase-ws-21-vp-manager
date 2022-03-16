@@ -151,7 +151,6 @@ public class studyFragment extends Fragment {
         public void addFragment(Fragment fragment, String title){
             fragments.add(fragment);
             fragmentNames.add(title);
-
         }
 
 
