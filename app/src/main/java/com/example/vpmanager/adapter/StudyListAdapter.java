@@ -57,7 +57,7 @@ public class StudyListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
 
     private class CustomViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
-        TextView studyTitle, studyVps, studyCat;
+        TextView studyTitle, studyVps, studyCat, studyTag;
         View separator;
         LinearLayout studyItemParentLayout;
         OnStudyItemClickListener onStudyItemClickListener;
@@ -74,11 +74,14 @@ public class StudyListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
             studyVps = itemView.findViewById(R.id.textviewVP);
             studyVps.setAnimation(animation);
 
+            studyTag = itemView.findViewById(R.id.textviewTag);
+            studyTag.setAnimation(animation);
+
             studyCat = itemView.findViewById(R.id.textviewCat);
             studyCat.setAnimation(animation);
 
-            separator = itemView.findViewById(R.id.separator);
-            separator.setAnimation(animation);
+            /*separator = itemView.findViewById(R.id.separator);
+            separator.setAnimation(animation);*/
 
             studyItemParentLayout = itemView.findViewById(R.id.ll_item);
 
