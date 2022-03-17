@@ -66,5 +66,10 @@ public class createStudyFragment_finalStep_two extends Fragment {
         }
     }
 
+   /* public Bundle getBundle(){
+        Bundle bundle = getArguments();
+        return bundle;
+    }*/
+
 }
 

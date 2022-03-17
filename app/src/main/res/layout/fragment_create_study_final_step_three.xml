@@ -17,52 +17,56 @@
         <TextView
             android:id="@+id/pageTitle"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
+            android:layout_weight="1"
             android:text="@string/fragment_create_study_finalPage_title_three"
             android:textAlignment="center"
             android:textSize="35sp" />
 
         <View
             android:layout_width="match_parent"
-            android:layout_height="3dp"
+            android:layout_height="0dp"
+            android:layout_weight="0.05"
             android:layout_marginLeft="20dp"
-            android:layout_marginTop="5dp"
             android:layout_marginRight="20dp"
             android:background="@color/black" />
 
 
         <TextView
-            android:layout_width="150dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="40dp"
+            android:layout_width="180dp"
+            android:layout_height="0dp"
+            android:layout_weight="0.4"
+            android:layout_marginStart="25dp"
             android:layout_marginTop="25dp"
-            android:text="Ausgewählte Termine"
-            android:textColor="@color/heatherred_dark"
-            android:textSize="15sp"
+            android:text="Ausgewählte Termine:"
+            android:textColor="@color/heatherred_Main"
+            android:fontFamily="@font/maven_pro"
+            android:textSize="17sp"
             android:textStyle="bold" />
 
-        <com.google.android.material.card.MaterialCardView
+        <!--<com.google.android.material.card.MaterialCardView
             android:layout_width="match_parent"
-            android:layout_height="347dp"
+            android:layout_height="0dp"
             android:layout_marginLeft="30dp"
             android:layout_marginTop="10dp"
             android:layout_marginRight="30dp"
-            android:layout_weight="5"
+            android:layout_weight="6"
             android:backgroundTint="@color/green_light"
             android:foregroundTint="@color/heatherred_Main"
-            app:cardCornerRadius="11dp">
+            app:cardCornerRadius="11dp">-->
 
             <ListView
                 android:id="@+id/confirmDates"
                 android:layout_width="match_parent"
-                android:layout_height="497dp"
+                android:layout_weight="5.3"
+                android:layout_height="0dp"
                 android:layout_gravity="top"
                 android:layout_marginLeft="15dp"
                 android:layout_marginTop="10dp"
                 android:layout_marginRight="15dp"
                 android:textSize="40sp"></ListView>
 
-        </com.google.android.material.card.MaterialCardView>
+<!--        </com.google.android.material.card.MaterialCardView>-->
 
 
     </LinearLayout>

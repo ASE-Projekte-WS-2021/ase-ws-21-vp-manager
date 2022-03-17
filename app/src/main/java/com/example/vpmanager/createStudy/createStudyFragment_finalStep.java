@@ -18,6 +18,8 @@ public class createStudyFragment_finalStep extends Fragment {
     TextView category;
     TextView execution;
     TextView location;
+    TextView desc;
+    TextView contact;
 
     //Parameter:
     //Return values:
@@ -52,6 +54,9 @@ public class createStudyFragment_finalStep extends Fragment {
         category = view.findViewById(R.id.confirmCategory);
         execution = view.findViewById(R.id.confirmExecution);
         location = view.findViewById(R.id.confirmLocation);
+        desc = view.findViewById(R.id.confirmDesc);
+        contact = view.findViewById(R.id.confirmContact);
+
     }
 
     //Parameter:
@@ -66,6 +71,10 @@ public class createStudyFragment_finalStep extends Fragment {
             String categoryTxT = getString(R.string.fragment_create_study_pageThreeTitle) + ": " + bundle.getString("category");
             String executionTxT = getString(R.string.createStudyExe) + ": " + bundle.getString("exe");
             String locationTxT = getString(R.string.fragment_create_study_pageFourTitle) + ": " + bundle.getString("location");
+            /*String descTxt = getString(R.string.createStudyDesc) + ": " + bundle.getString("desc");
+            String contactTxt = getString(R.string.createStudyContact) + ": " + bundle.getString("contact");
+            desc.setText(descTxt);
+            contact.setText(contactTxt)*/;
             title.setText(titleTxt);
             vp.setText(vpTxT);
             category.setText(categoryTxT);
