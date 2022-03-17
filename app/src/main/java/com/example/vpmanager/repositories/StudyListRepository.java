@@ -22,20 +22,22 @@ public class StudyListRepository {
     private FirebaseFirestore db;
     private CollectionReference studiesRef;
 
-    //this is the actual list that should be used
     private ArrayList<StudyMetaInfoModel> studyMetaInfosArrayList = new ArrayList<>();
 
-    //this is a test list with hard coded studies that are added below
-    //private ArrayList<StudyMetaInfoModel> studyMetaInfosArrayListTest = new ArrayList<>();
-
-    //this array gets filled first after the db call. Contains the three infos about a study
+    //This array gets filled first after the db call. Contains four infos about a study. Can be dropped in the future
     private ArrayList<ArrayList<String>> studyIdNameVpCat;
+
+    private StudyMetaDataListener studyMetaDataListener;
+
+    //Sets the viewModel as the listener for the callback
+    public void setFirestoreCallback(StudyMetaDataListener studyMetaDataListener) {
+        this.studyMetaDataListener = studyMetaDataListener;
+    }
 
     //Parameter:
     //Return Values: instance of the repository class
-    //creates an instance of the repo and returns always the same one
+    //Creates an instance of the repo and returns always the same one
     public static StudyListRepository getInstance() {
-
         if (instance == null) {
             instance = new StudyListRepository();
             Log.d("StudyListRepository", "instance was null and a new one was created");
@@ -44,56 +46,12 @@ public class StudyListRepository {
     }
 
     //Parameter:
-    //Return Values: arrayList of studyMetaInfoModels
-    //This method gets called when the ViewModel is initiated in the fragment (every time the fragment is opened)!
-    public ArrayList<StudyMetaInfoModel> getStudyMetaInfo() {
-        Log.d("StudyListRepository", "getStudyMetaInfo start");
-
-        //This method is called first, but needs to long to finish!
-        getStudyInfosFromDB(new FirestoreCallback() {
-            @Override
-            public void onCallback() {
-                Log.d("StudyListRepository", "The ArrayList of StudyInfoModels will be set now");
-                setStudyMetaInfo();
-                //send signal, that the db call is finished, here!
-            }
-        });
-
-        //hardcoded data is used, for getting example studies (but ids must match to go in detail!)
-        //fillTestArrayList();
-
-        Log.d("StudyListRepository", "getStudyMetaInfo end");
-        return studyMetaInfosArrayList;
+    //Return Values:
+    //This method gets called when new data about all studies is needed (every time the fragment is opened)
+    public void getStudyMetaInfo() { //ArrayList<StudyMetaInfoModel>
+        getStudyInfosFromDB();
+        //return studyMetaInfosArrayList;
     }
-
-    //Stores the hardcoded study infos in another arrayList, which is further used in this app
-    /*
-    private void fillTestArrayList(){
-        Log.d("StudyListRepository","fillTestArrayList start");
-        studyMetaInfosArrayListTest.add(
-                new StudyMetaInfoModel(
-                        "e5b44b34-1f91-484f-ada4-018bc99004c",
-                        "Studie 1",
-                        "1 VP-Stunde",
-                        "cat2")
-        );
-        studyMetaInfosArrayListTest.add(
-                new StudyMetaInfoModel(
-                        "90e16b34-efbc-4c77-89a7-ea49a61d6f9",
-                        "Studie 2",
-                        "2 VP-Stunden",
-                        "cat2")
-        );
-        studyMetaInfosArrayListTest.add(
-                new StudyMetaInfoModel(
-                        "121cbc7e-7487-4311-9c2c-e6ac58e090a",
-                        "test für evtl zu langen Studiennamen ABCDEFG",
-                        "8 VP-Stunden",
-                        "cat3")
-        );
-        Log.d("StudyListRepository","fillTestArrayList end");
-    }
-     */
 
     //Parameter:
     //Return Values:
@@ -116,14 +74,14 @@ public class StudyListRepository {
         Log.d("StudyListRepository", "setStudyMetaInfo end");
     }
 
-    private interface FirestoreCallback {
-        void onCallback();
+    public interface StudyMetaDataListener {
+        void onStudyMetaDataReady(ArrayList<StudyMetaInfoModel> studyMetaInfosArrayList);
     }
 
-    //Parameter: FirestoreCallback
+    //Parameter:
     //Return Values:
     //method with the actual db call
-    private void getStudyInfosFromDB(FirestoreCallback firestoreCallback) {
+    private void getStudyInfosFromDB() {
         Log.d("StudyListRepository", "getStudyInfosFromDB start");
         db = FirebaseFirestore.getInstance();
         studiesRef = db.collection("studies");
@@ -145,12 +103,12 @@ public class StudyListRepository {
                                 idNameVphCat.add(3, document.getString("category"));
                                 studyIdNameVpCat.add(idNameVphCat);
                             }
-                            firestoreCallback.onCallback();
+                            setStudyMetaInfo();
+                            studyMetaDataListener.onStudyMetaDataReady(studyMetaInfosArrayList);
                         } else {
                             Log.d("getStudyInfosFromDB", "Error:" + task.getException());
                         }
                     }
                 });
-        Log.d("StudyListRepository", "getStudyInfosFromDB end");
     }
 }

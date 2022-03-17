@@ -6,33 +6,42 @@ import androidx.lifecycle.ViewModel;
 
 import com.example.vpmanager.models.StudyMetaInfoModel;
 import com.example.vpmanager.repositories.StudyListRepository;
+import com.example.vpmanager.views.FindStudyFragment;
 
 import java.util.ArrayList;
 
-public class FindStudyViewModel extends ViewModel {
+public class FindStudyViewModel extends ViewModel implements StudyListRepository.StudyMetaDataListener {
+
+    //not best practise in my opinion
+    public FindStudyFragment findStudyFragment;
 
     private ArrayList<StudyMetaInfoModel> mStudyMetaInfo;
-    private StudyListRepository mRepo;
+    private StudyListRepository mStudyListRepo;
 
     //Parameter:
     //Return Values:
-    //get (always the same while app open) instance of the repo and fill ArrayList with StudyMetaInfoModel Objects
-    public void init() {
-        Log.d("FindStudyViewModel", "init start");
-        mRepo = StudyListRepository.getInstance();
-        //instance is the same but different data can be retrieved!
-        mStudyMetaInfo = mRepo.getStudyMetaInfo();
-        Log.d("FindStudyViewModel", "mStudyMetaInfo after init:" + mStudyMetaInfo.size());
-        Log.d("FindStudyViewModel", "init end");
+    //Gets (always the same while app open) instance of the repository class and fills an arrayList with StudyMetaInfoModel-objects
+    public void fetchStudyMetaData() {
+        mStudyListRepo = StudyListRepository.getInstance();
+        //Instance is the same but different data can be retrieved!
+        mStudyListRepo.setFirestoreCallback(this);
+        mStudyListRepo.getStudyMetaInfo();
     }
 
     //Parameter:
-    //Return Values: an arrayList with metaInfos of all currently existing studies
-    //returns the arrayList of the viewModel
+    //Return Values: an arrayList containing StudyMetaInfoModel-objects of all currently existing studies
+    //Returns the filled arrayList of study data
     public ArrayList<StudyMetaInfoModel> getStudyMetaInfo() {
         Log.d("FindStudyViewModel", "getStudyMetaInfo start + end (returns an ArrayList of StudyInfoModels)");
         return mStudyMetaInfo;
     }
 
-    //Methods could be put together (Always get instance of repo, fill array with data from repo and return it afterwards)
+    //Parameter: an arrayList containing StudyMetaInfoModel-objects of all currently existing studies
+    //Return Values:
+    //Updates a list of study data when the DB call is finished and connects the adapter for the data to be rendered in the fragment
+    @Override
+    public void onStudyMetaDataReady(ArrayList<StudyMetaInfoModel> studyMetaInfosArrayList) {
+        mStudyMetaInfo = studyMetaInfosArrayList;
+        findStudyFragment.connectStudyListAdapter();
+    }
 }
