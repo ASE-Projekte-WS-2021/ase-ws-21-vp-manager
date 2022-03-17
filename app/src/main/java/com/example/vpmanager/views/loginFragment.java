@@ -12,11 +12,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.CheckBox;
 import android.widget.Toast;
 
 import com.example.vpmanager.R;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.auth.AuthResult;
@@ -25,16 +25,14 @@ import com.google.firebase.auth.FirebaseAuth;
 
 public class loginFragment extends Fragment {
 
-    TextInputEditText emailEdittext;
-    TextInputEditText passwordEditText;
-    CheckBox rememberMeCheckBox;
-    Button forgotPasswordButton;
-    Button loginButton;
-    Button registerButton;
+    private TextInputEditText emailEdittext;
+    private TextInputEditText passwordEditText;
+    private Button forgotPasswordButton;
+    private Button loginButton;
+    private Button registerButton;
 
-    FirebaseAuth firebaseAuth;
-    NavController navController;
-
+    private FirebaseAuth firebaseAuth;
+    private NavController navController;
 
     public loginFragment() {
         // Required empty public constructor
@@ -52,26 +50,40 @@ public class loginFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
+
         return inflater.inflate(R.layout.fragment_login, container, false);
     }
 
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         setupView(view);
+        ((mainActivity)getActivity()).setDrawerLocked();
         navController = Navigation.findNavController(view);
 
         setOnClickListeners();
     }
 
+    @Override
+    public void onDestroyView(){
+        super.onDestroyView();
+        ((mainActivity)getActivity()).setDrawerUnlocked();
+    }
+
+
+    //Parameter:
+    //Return values:
+    //Connects the code with the view
     private void setupView(View view) {
         emailEdittext = view.findViewById(R.id.login_email_input);
         passwordEditText = view.findViewById(R.id.login_password_input);
-        rememberMeCheckBox = view.findViewById(R.id.login_rememberMe_checkbox);
         forgotPasswordButton = view.findViewById(R.id.login_forgotPassword_button);
         loginButton = view.findViewById(R.id.login_button);
         registerButton = view.findViewById(R.id.register_button);
     }
 
+    //Parameter:
+    //Return values:
+    //Sets clickListener on navigation items
     private void setOnClickListeners() {
         registerButton.setOnClickListener(view -> {
             createUser();
@@ -80,8 +92,37 @@ public class loginFragment extends Fragment {
         loginButton.setOnClickListener(view -> {
             loginUser();
         });
+
+        forgotPasswordButton.setOnClickListener(view -> {
+            forgotPassword();
+        });
     }
 
+
+    //Parameter:
+    //Return values:
+    //Handles the forgot password button press and sends a email to reset password
+    private void forgotPassword() {
+        String email = emailEdittext.getText().toString();
+
+        if (TextUtils.isEmpty(email)) {
+            emailEdittext.setError("Bitte Email-Adresse angeben um Passwort zurückzusetzen");
+            emailEdittext.requestFocus();
+        } else {
+            firebaseAuth.sendPasswordResetEmail(email).addOnSuccessListener(new OnSuccessListener<Void>() {
+                @Override
+                public void onSuccess(Void unused) {
+                    Toast.makeText(getActivity(), "Bitte über Sie ihr Email-Postfach", Toast.LENGTH_SHORT).show();
+                }
+            });
+        }
+
+    }
+
+
+    //Parameter:
+    //Return values:
+    //Handles login if the and provides feedback if the task was successful
     private void loginUser() {
         String email = emailEdittext.getText().toString();
         String password = passwordEditText.getText().toString();
@@ -106,6 +147,9 @@ public class loginFragment extends Fragment {
         }
     }
 
+    //Parameter:
+    //Return values:
+    //Handles account creation if the and provides feedback if the task was successful
     private void createUser() {
         String email = emailEdittext.getText().toString();
         String password = passwordEditText.getText().toString();
@@ -121,7 +165,16 @@ public class loginFragment extends Fragment {
                 @Override
                 public void onComplete(@NonNull Task<AuthResult> task) {
                     if (task.isSuccessful()) {
-                        Toast.makeText(getActivity(), "Registierung erfolgreich", Toast.LENGTH_SHORT).show();
+                        firebaseAuth.getCurrentUser().sendEmailVerification().addOnCompleteListener(new OnCompleteListener<Void>() {
+                            @Override
+                            public void onComplete(@NonNull Task<Void> task) {
+                                if (task.isSuccessful()) {
+                                    Toast.makeText(getActivity(), "Registierung erfolgreich, bitte überprüfe deine Email-Postfach", Toast.LENGTH_SHORT).show();
+                                } else {
+                                    Toast.makeText(getActivity(), "Registierung fehlgeschlagen: " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                                }
+                            }
+                        });
                     } else {
                         Toast.makeText(getActivity(), "Registierung fehlgeschlagen: " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
                     }
@@ -129,6 +182,4 @@ public class loginFragment extends Fragment {
             });
         }
     }
-
-
 }
