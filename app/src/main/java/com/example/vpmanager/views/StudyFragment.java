@@ -13,7 +13,6 @@ import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
@@ -23,8 +22,8 @@ import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.viewpager.widget.ViewPager;
 
+import com.example.vpmanager.AccessDatabase;
 import com.example.vpmanager.R;
-import com.example.vpmanager.accessDatabase;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.tabs.TabLayout;
@@ -41,7 +40,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
-public class studyFragment extends Fragment {
+public class StudyFragment extends Fragment {
 
     private NavController navController;
     private String currentStudyId;
@@ -72,7 +71,7 @@ public class studyFragment extends Fragment {
     FirebaseFirestore db;
     DocumentReference studyRef;
     CollectionReference datesRef;
-    com.example.vpmanager.accessDatabase accessDatabase = new accessDatabase();
+    AccessDatabase accessDatabase = new AccessDatabase();
 
     TextView headerText;
     TextView description;
@@ -83,9 +82,7 @@ public class studyFragment extends Fragment {
     TextView localData;
     TextView contactInfo;
 
-
-
-    public studyFragment() {
+    public StudyFragment() {
     }
 
     @Override
@@ -94,22 +91,19 @@ public class studyFragment extends Fragment {
 
     }
 
-
-
-
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_study, container, false);
 
         getRequiredInfos();
-        setupStudyDetails(new studyFragment.FirestoreCallbackStudy() {
+        setupStudyDetails(new StudyFragment.FirestoreCallbackStudy() {
             @Override
             public void onCallback(ArrayList<String> arrayList) {
                 loadStudyData(view);
             }
         });
-        setupDateListView(new studyFragment.FirestoreCallbackDates() {
+        setupDateListView(new StudyFragment.FirestoreCallbackDates() {
             @Override
             public void onCallback(ArrayList<ArrayList<String>> arrayList) {
                 loadDatesData(view);
@@ -136,9 +130,7 @@ public class studyFragment extends Fragment {
         return view;
     }
 
-    private class viewPagerAdapter extends FragmentStatePagerAdapter
-
-    {
+    private class viewPagerAdapter extends FragmentStatePagerAdapter {
 
         private List<Fragment> fragments = new ArrayList<>();
         private List<String> fragmentNames = new ArrayList<>();
@@ -260,7 +252,7 @@ public class studyFragment extends Fragment {
         }
     }
 
-    private void setupStudyDetails(studyFragment.FirestoreCallbackStudy firestoreCallbackStudy) {
+    private void setupStudyDetails(StudyFragment.FirestoreCallbackStudy firestoreCallbackStudy) {
 
         db = FirebaseFirestore.getInstance();
         studyRef = db.collection(getString(R.string.collectionPathStudies)).document(currentStudyId);
@@ -290,7 +282,7 @@ public class studyFragment extends Fragment {
         });
     }
 
-    private void setupDateListView(studyFragment.FirestoreCallbackDates firestoreCallbackDates) {
+    private void setupDateListView(StudyFragment.FirestoreCallbackDates firestoreCallbackDates) {
 
         db = FirebaseFirestore.getInstance();
         datesRef = db.collection(getString(R.string.collectionPathDates));
