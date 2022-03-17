@@ -6,6 +6,8 @@
     tools:context=".createStudy.createStudyFragment_StepThree"
     android:background="?android:windowBackground">
 
+    <!--NOT NEEDED ANYMORE-->
+
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -50,6 +52,7 @@
             android:layout_weight="2"
             android:popupBackground="@color/green_Main"
             />
+
 
         <Spinner
             android:id="@+id/createExecutionType"

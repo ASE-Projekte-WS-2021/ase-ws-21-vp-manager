@@ -8,6 +8,8 @@
     android:background="?android:windowBackground"
     tools:context=".createStudy.createStudyFragment_Base">
 
+    <!--page not needed anymore-->
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"

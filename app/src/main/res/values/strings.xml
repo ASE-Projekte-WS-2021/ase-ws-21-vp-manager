@@ -47,8 +47,10 @@
     <string name="fragment_create_study_pageBaseTitle">Willkommen</string>
     <string name="fragment_create_study_pageOneContactTitle">Kommunikation</string>
     <string name="fragment_create_study_pageOneContact_Hint_Contact">Mail*</string>
-    <string name="fragment_create_study_pageOneContact_Hint_Contact2">Tel</string>
-    <string name="fragment_create_study_pageOneContact_Hint_Contact3">Zoom/Teams/Discord ...</string>
+    <string name="fragment_create_study_pageOneContact_Hint_Contact2">Zoom</string>
+    <string name="fragment_create_study_pageOneContact_Hint_Contact3">Skype</string>
+    <string name="fragment_create_study_pageOneContact_Hint_Contact4">Discord</string>
+    <string name="fragment_create_study_pageOneContact_Hint_Contact5">Sonstige</string>
     <string name="fragment_create_study_desc_page_one_contact">So können potenzielle Teilnehmer sie alternativ erreichen: </string>
     <string name="fragment_create_study_pageThreeTitle">Kategorie</string>
     <string name="fragment_create_study_desc_page_four_remote">Präferierte Streaming-Dienste für die Remote Ausführung, wie Zoom, Skype oder Discord können hier hinterlegt werden.</string>

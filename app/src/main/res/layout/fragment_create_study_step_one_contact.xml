@@ -20,7 +20,7 @@
             android:id="@+id/pageTitle"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="0.6"
+            android:layout_weight="0.8"
             android:text="@string/fragment_create_study_pageOneContactTitle"
             android:textAlignment="center"
             android:textSize="35sp" />
@@ -48,17 +48,17 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_marginTop="30dp"
-            android:layout_weight="1.4">
+            android:layout_weight="1.2">
 
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/inputContact1"
                 style="@style/You.EditText.Style"
                 android:layout_width="match_parent"
-                android:layout_height="55dp"
+                android:layout_height="match_parent"
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="20dp"
-                android:layout_marginBottom="30dp"
+                android:layout_marginBottom="20dp"
                 android:hint="@string/fragment_create_study_pageOneContact_Hint_Contact" />
 
         </com.google.android.material.textfield.TextInputLayout>
@@ -67,17 +67,17 @@
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="1.4">
+            android:layout_weight="1.2">
 
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/inputContact2"
                 style="@style/You.EditText.Style"
                 android:layout_width="match_parent"
-                android:layout_height="55dp"
+                android:layout_height="match_parent"
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="20dp"
-                android:layout_marginBottom="30dp"
+                android:layout_marginBottom="20dp"
                 android:hint="@string/fragment_create_study_pageOneContact_Hint_Contact2" />
 
         </com.google.android.material.textfield.TextInputLayout>
@@ -86,18 +86,54 @@
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="1.4">
+            android:layout_weight="1.2">
 
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/inputContact3"
                 style="@style/You.EditText.Style"
                 android:layout_width="match_parent"
-                android:layout_height="55dp"
+                android:layout_height="match_parent"
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="20dp"
-                android:layout_marginBottom="30dp"
+                android:layout_marginBottom="20dp"
                 android:hint="@string/fragment_create_study_pageOneContact_Hint_Contact3" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1.2">
+
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/inputContact4"
+                style="@style/You.EditText.Style"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginBottom="20dp"
+                android:hint="@string/fragment_create_study_pageOneContact_Hint_Contact4" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1.2">
+
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/inputContact5"
+                style="@style/You.EditText.Style"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="20dp"
+                android:layout_marginBottom="20dp"
+                android:layout_marginRight="20dp"
+                android:hint="@string/fragment_create_study_pageOneContact_Hint_Contact5" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
