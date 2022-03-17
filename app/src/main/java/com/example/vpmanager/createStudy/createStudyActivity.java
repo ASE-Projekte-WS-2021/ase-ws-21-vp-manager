@@ -51,8 +51,8 @@ public class createStudyActivity extends AppCompatActivity {
     String contact3 = "";
 
 
-    String firstSpinnerItemExecution = "Durchführungsart";
-    String firstSpinnerItemCategory = "Studienkategorie";
+    String firstSpinnerItemExecution = "Durchführungsart*";
+    String firstSpinnerItemCategory = "Studienkategorie*";
 
     String contactViewString = "";
     String locationViewString = "";
