@@ -79,7 +79,7 @@ public class homeFragment extends Fragment {
     private void userLoggedIn(){
         FirebaseUser user = firebaseAuth.getCurrentUser();
         if(user == null) {
-            navController.navigate(R.id.action_global_loginFragment);
+            navController.navigate(R.id.action_global_nestedGraphLoginRegistration);
         }
     }
 
