@@ -13,13 +13,16 @@ import com.google.android.material.textfield.TextInputEditText;
 
 public class createStudyFragment_StepTwo extends Fragment {
 
-    TextInputEditText textInputEditTextDesc;
-
+    TextInputEditText textInputEditTextContactMail;
+    TextInputEditText textInputEditTextContactPhone;
+    TextInputEditText textInputEditTextContactSkype;
+    TextInputEditText textInputEditTextContactDiscord;
+    TextInputEditText textInputEditTextContactOthers;
     //Parameter:
     //Return values:
     //Sets the current fragment for the activity
     public createStudyFragment_StepTwo() {
-        createStudyActivity.currentFragment = 3;
+        createStudyActivity.currentFragment = 2;
     }
 
     @Override
@@ -30,7 +33,6 @@ public class createStudyFragment_StepTwo extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_create_study_step_two, container, false);
     }
 
@@ -44,8 +46,11 @@ public class createStudyFragment_StepTwo extends Fragment {
     //Return values:
     //Connects the code with the view
     private void setupView(View view){
-        textInputEditTextDesc = view.findViewById(R.id.inputFieldStudyDesc);
-
+        textInputEditTextContactMail = view.findViewById(R.id.inputContact1);
+        textInputEditTextContactPhone = view.findViewById(R.id.inputContact2);
+        textInputEditTextContactSkype = view.findViewById(R.id.inputContact3);
+        textInputEditTextContactDiscord = view.findViewById(R.id.inputContact4);
+        textInputEditTextContactOthers = view.findViewById(R.id.inputContact5);
     }
 
     //Parameter:
@@ -54,7 +59,11 @@ public class createStudyFragment_StepTwo extends Fragment {
     private void loadData() {
         Bundle bundle = getArguments();
         if(bundle != null){
-            textInputEditTextDesc.setText(bundle.getString("desc"));
+            textInputEditTextContactMail.setText(bundle.getString("contact"));
+            textInputEditTextContactPhone.setText(bundle.getString("contact2"));
+            textInputEditTextContactSkype.setText(bundle.getString("contact3"));
+            textInputEditTextContactDiscord.setText(bundle.getString("contact4"));
+            textInputEditTextContactOthers.setText(bundle.getString("contact5"));
         }
     }
 }

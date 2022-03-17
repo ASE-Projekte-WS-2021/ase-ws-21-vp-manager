@@ -12,14 +12,14 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:weightSum="7">
+        android:weightSum="6">
 
 
         <TextView
             android:id="@+id/pageTitle"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="0.9"
+            android:layout_weight="0.7"
             android:text="@string/fragment_create_study_pageFiveTitle"
             android:textAlignment="center"
             android:textSize="35sp" />
@@ -48,7 +48,7 @@
             android:layout_marginTop="25dp"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="6.2"
+            android:layout_weight="5.25"
             android:orientation="vertical">
 
             <ListView

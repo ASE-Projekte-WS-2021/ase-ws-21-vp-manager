@@ -21,7 +21,7 @@ public class createStudyFragment_finalStep_two extends Fragment {
     //Return values:
     //Sets the current fragment for the activity
     public createStudyFragment_finalStep_two() {
-        createStudyActivity.currentFragment = 8;
+        createStudyActivity.currentFragment = 7;
     }
 
     @Override
@@ -59,7 +59,8 @@ public class createStudyFragment_finalStep_two extends Fragment {
         Bundle bundle = getArguments();
         System.out.println(bundle);
         if (bundle != null) {
-            String descTxt = getString(R.string.createStudyDesc) + ": " + bundle.getString("desc");
+            String descTxt = getString(R.string.createStudyDesc) + ": \n" + bundle.getString("desc");
+            System.out.println("HELLO ," + bundle.getString("contact"));
             String contactTxt = getString(R.string.createStudyContact) + ": " + bundle.getString("contact");
             desc.setText(descTxt);
             contact.setText(contactTxt);

@@ -75,6 +75,24 @@ public class createStudyFragment_StepOne extends Fragment {
         if(bundle != null){
             textInputEditTextTitle.setText(bundle.getString("title"));
             textInputEditTextVP.setText(bundle.getString("vp"));
+            if(bundle.getString("category").equals("VR")){
+                categories.setSelection(1);
+            }
+            if(bundle.getString("category").equals("AR")){
+                categories.setSelection(2);
+            }
+            if(bundle.getString("category").equals("Diary Study")){
+                categories.setSelection(3);
+            }
+            if(bundle.getString("category").equals("Sonstige")){
+                categories.setSelection(4);
+            }
+            if(bundle.getString("exe").equals("Remote")){
+                executionType.setSelection(1);
+            }
+            if(bundle.getString("exe").equals("Präsenz")){
+                executionType.setSelection(2);
+            }
         }
     }
 

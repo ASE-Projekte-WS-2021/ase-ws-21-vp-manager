@@ -25,7 +25,7 @@ public class createStudyFragment_finalStep extends Fragment {
     //Return values:
     //Sets the current fragment for the activity
     public createStudyFragment_finalStep() {
-        createStudyActivity.currentFragment = 7;
+        createStudyActivity.currentFragment = 6;
     }
 
     @Override
@@ -71,10 +71,6 @@ public class createStudyFragment_finalStep extends Fragment {
             String categoryTxT = getString(R.string.fragment_create_study_pageThreeTitle) + ": " + bundle.getString("category");
             String executionTxT = getString(R.string.createStudyExe) + ": " + bundle.getString("exe");
             String locationTxT = getString(R.string.fragment_create_study_pageFourTitle) + ": " + bundle.getString("location");
-            /*String descTxt = getString(R.string.createStudyDesc) + ": " + bundle.getString("desc");
-            String contactTxt = getString(R.string.createStudyContact) + ": " + bundle.getString("contact");
-            desc.setText(descTxt);
-            contact.setText(contactTxt)*/;
             title.setText(titleTxt);
             vp.setText(vpTxT);
             category.setText(categoryTxT);
