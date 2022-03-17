@@ -49,8 +49,8 @@
 
             <ImageView
                 android:id="@+id/infoSymbolStudyFragment"
-                android:layout_width="97dp"
-                android:layout_height="35dp"
+                android:layout_width="99dp"
+                android:layout_height="37dp"
                 android:layout_gravity="right"
                 android:layout_marginTop="-20dp"
                 app:srcCompat="@drawable/ic_baseline_category_24_white" />
