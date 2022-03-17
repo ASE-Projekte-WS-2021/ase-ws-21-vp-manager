@@ -14,7 +14,7 @@ import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
 import com.example.vpmanager.R;
-import com.example.vpmanager.accessDatabase;
+import com.example.vpmanager.AccessDatabase;
 import com.google.android.material.appbar.MaterialToolbar;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
@@ -23,7 +23,7 @@ import java.util.UUID;
 
 public class mainActivity extends AppCompatActivity {
 
-    private DrawerLayout drawerLayoutMain;
+    public DrawerLayout drawerLayoutMain;
     private NavController navController;
     private NavigationView navigationViewMain;
     private NavHostFragment navHostFragment;
@@ -33,7 +33,7 @@ public class mainActivity extends AppCompatActivity {
     private AppBarConfiguration appBarConfiguration;
 
     //logic to register a new user (app installation) if necessary
-    com.example.vpmanager.accessDatabase accessDatabase;
+    AccessDatabase accessDatabase;
     public static String uniqueID = null;
     private static final String PREF_UNIQUE_ID = "PREF_UNIQUE_ID";
 
@@ -55,7 +55,7 @@ public class mainActivity extends AppCompatActivity {
 
     private void setupUserId() {
         uniqueID = createUserId(this);
-        accessDatabase = new accessDatabase();
+        accessDatabase = new AccessDatabase();
         registerNewUser();
     }
 
@@ -111,16 +111,19 @@ public class mainActivity extends AppCompatActivity {
                 return false;
             }
         });
+        /*
         navigationViewMain.getMenu().getItem(5).setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(MenuItem menuItem) {
                 firebaseAuth.signOut();
-                navController.navigate(R.id.action_global_loginFragment);
+                navController.navigate(R.id.action_global_nestedGraphLoginRegistration);
                 Log.d("mainActivity", "menuItem" + navigationViewMain.getMenu().getItem(5).toString());
                 Log.d("mainActivity", "additional listener on logout was active!");
                 return false;
             }
         });
+
+         */
         /*
         navigationViewMain.getMenu().getItem(1).setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
             @Override
@@ -158,7 +161,7 @@ public class mainActivity extends AppCompatActivity {
     @Override
     public boolean onSupportNavigateUp() {
         Log.d("mainActivity", "onSupportNavigateUp start + end");
-        return NavigationUI.navigateUp(navController, appBarConfiguration) || super.onSupportNavigateUp();
+        return NavigationUI.navigateUp(navController, appBarConfiguration)  || super.onSupportNavigateUp();
     }
 
     //Parameter:

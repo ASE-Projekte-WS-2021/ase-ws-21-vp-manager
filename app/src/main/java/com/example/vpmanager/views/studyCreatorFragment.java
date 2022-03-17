@@ -17,7 +17,7 @@ import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 
 import com.example.vpmanager.R;
-import com.example.vpmanager.accessDatabase;
+import com.example.vpmanager.AccessDatabase;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.CollectionReference;
@@ -47,7 +47,7 @@ public class studyCreatorFragment extends Fragment {
     FirebaseFirestore db;
     DocumentReference studyRef;
     CollectionReference datesRef;
-    com.example.vpmanager.accessDatabase accessDatabase = new accessDatabase();
+    AccessDatabase accessDatabase = new AccessDatabase();
 
     TextView headerText;
     TextView description;

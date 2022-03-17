@@ -16,7 +16,7 @@ import androidx.fragment.app.FragmentManager;
 
 import com.airbnb.lottie.LottieAnimationView;
 import com.example.vpmanager.R;
-import com.example.vpmanager.accessDatabase;
+import com.example.vpmanager.AccessDatabase;
 import com.example.vpmanager.views.mainActivity;
 import com.google.android.material.appbar.MaterialToolbar;
 import com.google.android.material.navigation.NavigationView;
@@ -58,7 +58,7 @@ public class createStudyActivity extends AppCompatActivity {
     String locationViewString = "";
     ArrayList<String> dates = new ArrayList<>();
 
-    accessDatabase accessDatabase = new accessDatabase();
+    AccessDatabase accessDatabase = new AccessDatabase();
 
     StateProgressBar stateProgressBar;
     String[] descriptionData = {"Basis", "Info", "Kategorie", "Termine", "Bestätigen"};

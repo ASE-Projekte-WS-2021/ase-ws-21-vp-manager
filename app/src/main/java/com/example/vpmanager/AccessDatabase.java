@@ -15,7 +15,7 @@ import com.google.firebase.firestore.Transaction;
 import java.util.HashMap;
 import java.util.Map;
 
-public class accessDatabase {
+public class AccessDatabase {
     FirebaseFirestore db;
 
     //HomeActivity --------------------------------------------------------------------------------!
