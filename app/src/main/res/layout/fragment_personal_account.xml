@@ -14,7 +14,7 @@
         android:layout_height="150dp"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="10dp"
         android:elevation="10dp"
         app:cardBackgroundColor="@color/cardview_light_background"
         app:cardCornerRadius="10dp">
@@ -67,7 +67,8 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="20dp"
-                    android:layout_gravity="center_vertical">
+                    android:layout_gravity="center_vertical"
+                    android:id="@+id/pa_completed_layout">
 
                     <!--View to display the yellow color icon-->
                     <View
@@ -194,16 +195,16 @@
             tools:ignore="RtlCompat" />
     </androidx.cardview.widget.CardView>
 
-
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
         android:layout_marginStart="25dp"
-        android:layout_marginTop="20dp"
         android:layout_marginEnd="25dp"
-        android:text="Studiendetails"
-        android:textSize="23sp"
+        android:text="Studien"
+        android:textSize="18sp"
         android:textStyle="bold" />
+
 
     <ScrollView
         android:layout_width="match_parent"
@@ -216,15 +217,24 @@
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
             android:layout_marginTop="10dp"
+            android:layout_marginBottom="5dp"
             android:elevation="10dp"
+
             app:cardBackgroundColor="@color/cardview_light_background"
             app:cardCornerRadius="10dp">
 
+            <ListView
+                android:id="@+id/pa_fragment_listView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="10dp"
+                android:background="@color/cardview_light_background"/>
 
             <ExpandableListView
                 android:id="@+id/pa_fragment_expandableList"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:background="@color/cardview_light_background"/>
         </androidx.cardview.widget.CardView>
     </ScrollView>
 

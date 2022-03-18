@@ -1,13 +1,9 @@
 package com.example.vpmanager.views;
 
-import static com.example.vpmanager.views.mainActivity.uniqueID;
-
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import androidx.annotation.NonNull;
@@ -18,6 +14,7 @@ import androidx.navigation.Navigation;
 
 import com.example.vpmanager.PA_ExpandableListDataPump;
 import com.example.vpmanager.R;
+import com.example.vpmanager.adapter.CustomListViewAdapterAppointments;
 import com.google.firebase.auth.FirebaseAuth;
 
 import java.text.ParseException;
@@ -69,7 +66,9 @@ public class UpcomingAppointments extends Fragment {
 
     }
 
-
+    //Parameter:
+    //Return Values:
+    //gets necessary data from database converts it into a list
     private void setUpDateList() {
         final List<String[]>[] arrivingDates = new List[]{null};
 
@@ -88,8 +87,10 @@ public class UpcomingAppointments extends Fragment {
         });
     }
 
+    //Parameter: data list from database call
+    //Return Values:
+    //converts and sorts the data. calls listview adapter to set up list entries
     private  void finishSetupList(List <String[]> dates){
-
 
         if (dates != null) {
             SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyy HH:mm");
@@ -111,38 +112,18 @@ public class UpcomingAppointments extends Fragment {
                     e.printStackTrace();
                 }
 
-                sortingMap.put(studyDate, name);
-                //listEntries.add(name + "\t\t" + date);
+                if(studyDate != null && name != null)
+                {
+                    sortingMap.put(studyDate, name);
                 getStudyIdByName.put(name, studyID);
+                }
             }
 
             for (Date key : sortingMap.keySet()) {
                 listEntries.add(sortingMap.get(key) + "\t\t" + key);
             }
+             arrivingDatesList.setAdapter(new CustomListViewAdapterAppointments(this.getContext(), this.getActivity(), navController, listEntries, getStudyIdByName));
 
-            ArrayAdapter arrayAdapter = new ArrayAdapter(getActivity(), android.R.layout.simple_list_item_1, listEntries);
-            arrivingDatesList.setAdapter(arrayAdapter);
-            arrivingDatesList.setOnItemClickListener(new android.widget.AdapterView.OnItemClickListener() {
-                @Override
-                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                    String text = (String) arrivingDatesList.getItemAtPosition(position);
-                    String name = text.split("\t\t")[0];
-
-                    if (name != null) {
-                        String studyId = getStudyIdByName.get(name);
-                        //go to Study Detail View
-                        Bundle args = new Bundle();
-                        args.putString("studyId", studyId);
-                        if(PA_ExpandableListDataPump.navigateToStudyCreatorFragment(uniqueID, studyId)) {
-                            navController.navigate(R.id.action_homeFragment_to_studyCreatorFragment, args);
-                        }
-                        else
-                        {
-                            navController.navigate(R.id.action_homeFragment_to_studyFragment, args);
-                        }
-                    }
-                }
-            });
         }
     }
 
