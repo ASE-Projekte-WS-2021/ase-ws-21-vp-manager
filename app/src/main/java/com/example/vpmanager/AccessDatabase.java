@@ -67,7 +67,7 @@ public class AccessDatabase {
     //studyActivity -------------------------------------------------------------------------------!
     //in studyActivity
 
-    //updateData should contain ("selected": true) and ("userId: the User Id)
+    /*
     public void selectDate(Map<String, Object> updateData, String dateId) {
 
         db = FirebaseFirestore.getInstance();
@@ -87,5 +87,5 @@ public class AccessDatabase {
                 .addOnSuccessListener(aVoid -> Log.d(TAG, "DocumentSnapshot successfully updated!"))
                 .addOnFailureListener(e -> Log.w(TAG, "Error updating document", e));
     }
-
+     */
 }

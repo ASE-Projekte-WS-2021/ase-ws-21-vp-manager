@@ -15,23 +15,6 @@
         app:destination="@id/nestedGraphLoginRegistration"
         app:popUpTo="@id/nestedGraphLoginRegistration"
         app:popUpToInclusive="true" />
-    <!--
-    <action
-        android:id="@+id/action_global_findStudyFragment"
-        app:destination="@id/findStudyFragment"
-        app:popUpTo="@id/findStudyFragment"
-        app:popUpToInclusive="true"/>
-    <action
-        android:id="@+id/action_global_personalAccountFragment"
-        app:destination="@id/personalAccountFragment"
-        app:popUpTo="@id/personalAccountFragment"
-        app:popUpToInclusive="true"/>
-    <action
-        android:id="@+id/action_global_ownStudyFragment"
-        app:destination="@id/ownStudyFragment"
-        app:popUpTo="@id/ownStudyFragment"
-        app:popUpToInclusive="true"/>
-    -->
     <fragment
         android:id="@+id/homeFragment"
         android:name="com.example.vpmanager.views.homeFragment"
@@ -116,17 +99,12 @@
     </fragment>
     <fragment
         android:id="@+id/studyFragment"
-        android:name="com.example.vpmanager.views.StudyFragment"
+        android:name="com.example.vpmanager.views.studyDetails.StudyFragment"
         android:label="Studiendetails"
         tools:layout="@layout/fragment_study">
         <argument
             android:name="study_id"
             app:argType="string" />
-        <action
-            android:id="@+id/action_studyFragment_self"
-            app:destination="@id/studyFragment"
-            app:popUpTo="@id/studyFragment"
-            app:popUpToInclusive="true" />
     </fragment>
     <fragment
         android:id="@+id/studyCreatorFragment"
