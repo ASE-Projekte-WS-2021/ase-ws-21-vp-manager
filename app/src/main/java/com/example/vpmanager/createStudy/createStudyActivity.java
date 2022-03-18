@@ -743,6 +743,8 @@ public class createStudyActivity extends AppCompatActivity {
                 if (!contactMail.isEmpty()) {
                     return true;
                 }
+                textInputEditTextContactMail.setError("Email-Kontakt muss angegeben werden");
+                textInputEditTextContactMail.requestFocus();
                 break;
             case 3:
                 if (!studyDesc.isEmpty()) {
