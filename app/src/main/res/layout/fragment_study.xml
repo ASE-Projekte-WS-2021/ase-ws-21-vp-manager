@@ -7,47 +7,20 @@
     android:orientation="vertical"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context=".views.StudyFragment">
-    <!--android:background="?android:windowBackground"-->
-
-
 
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/tab_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:tabRippleColor="@color/green_light"
         app:tabIndicatorColor="@color/green_Main"
+        app:tabRippleColor="@color/green_light"
         app:tabSelectedTextColor="@color/green_Main">
 
-        
     </com.google.android.material.tabs.TabLayout>
-
-
-   <!-- <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom"
-        android:layout_marginEnd="35dp"
-        android:layout_marginStart="5dp"
-        android:layout_marginTop="3dp"
-        android:fontFamily="@font/maven_pro"
-        android:textSize="15sp"
-        android:text="Swipe to change views"
-        android:textColor="@color/color_two"
-        android:textStyle="bold"
-        android:weightSum="100" />-->
-
-
 
     <androidx.viewpager.widget.ViewPager
         android:id="@+id/view_pager"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        />
-    <!--coordinatorlayout with attribute for layoutbehaviour missing-->
-
-
-
-
+        android:layout_height="match_parent" />
 
 </LinearLayout>
