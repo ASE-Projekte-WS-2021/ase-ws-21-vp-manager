@@ -74,7 +74,7 @@
                     android:layout_marginLeft="20dp"
                     android:layout_marginRight="20dp"
                     android:layout_weight="1"
-                    android:text="@string/fragment_create_study_base_main" />
+                    android:text="@string/fragment_create_study_base_back" />
 
                 <Button
                     android:id="@+id/nextButton"
