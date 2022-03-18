@@ -1,4 +1,4 @@
-package com.example.vpmanager.views;
+package com.example.vpmanager.views.studyDetails;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
@@ -22,10 +22,10 @@ import android.widget.TextView;
 
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link StudyDates#newInstance} factory method to
+ * Use the {@link StudyDatesFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class StudyDates extends Fragment implements StudyDatesAdapter.OnDateClickListener {
+public class StudyDatesFragment extends Fragment implements StudyDatesAdapter.OnDateClickListener {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -49,7 +49,7 @@ public class StudyDates extends Fragment implements StudyDatesAdapter.OnDateClic
     private String mParam1;
     private String mParam2;
 
-    public StudyDates() {
+    public StudyDatesFragment() {
         // Required empty public constructor
     }
 
@@ -62,8 +62,8 @@ public class StudyDates extends Fragment implements StudyDatesAdapter.OnDateClic
      * @return A new instance of fragment studyDates.
      */
     // TODO: Rename and change types and number of parameters
-    public static StudyDates newInstance(String param1, String param2) {
-        StudyDates fragment = new StudyDates();
+    public static StudyDatesFragment newInstance(String param1, String param2) {
+        StudyDatesFragment fragment = new StudyDatesFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -93,7 +93,7 @@ public class StudyDates extends Fragment implements StudyDatesAdapter.OnDateClic
         currentStudyId = StudyFragment.currentStudyId;
         currentUserId = StudyFragment.currentUserId;
         studyViewModel = new ViewModelProvider(requireActivity()).get(StudyViewModel.class);
-        studyViewModel.studyDates = this;
+        studyViewModel.studyDatesFragment = this;
         studyViewModel.prepareRepo();
     }
 

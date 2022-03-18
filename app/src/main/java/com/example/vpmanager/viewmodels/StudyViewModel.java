@@ -8,15 +8,15 @@ import com.example.vpmanager.interfaces.StudyDetailsListener;
 import com.example.vpmanager.models.DateModel;
 import com.example.vpmanager.models.StudyDetailModel;
 import com.example.vpmanager.repositories.StudyRepository;
-import com.example.vpmanager.views.StudyDates;
-import com.example.vpmanager.views.StudyDetails;
+import com.example.vpmanager.views.studyDetails.StudyDatesFragment;
+import com.example.vpmanager.views.studyDetails.StudyDetailsFragment;
 
 import java.util.ArrayList;
 
 public class StudyViewModel extends ViewModel implements StudyDetailsListener, StudyDatesListener, SelectUnselectDateListener {
 
-    public StudyDetails studyDetails;
-    public StudyDates studyDates;
+    public StudyDetailsFragment studyDetailsFragment;
+    public StudyDatesFragment studyDatesFragment;
 
     private StudyDetailModel mStudyDetails;
     private ArrayList<DateModel> mStudyDates;
@@ -77,7 +77,7 @@ public class StudyViewModel extends ViewModel implements StudyDetailsListener, S
     @Override
     public void onStudyDetailsReady(StudyDetailModel studyDetailModel) {
         mStudyDetails = studyDetailModel;
-        studyDetails.setStudyDetails();
+        studyDetailsFragment.setStudyDetails();
     }
 
     @Override
@@ -89,11 +89,11 @@ public class StudyViewModel extends ViewModel implements StudyDetailsListener, S
         for (int i = 0; i < mStudyDates.size(); i++) {
             userIdsOfDates.add(mStudyDates.get(i).getUserId());
         }
-        studyDates.setDatesView();
+        studyDatesFragment.setDatesView();
     }
 
     @Override
     public void onDateActionFinished() {
-        studyDates.reloadDates();
+        studyDatesFragment.reloadDates();
     }
 }

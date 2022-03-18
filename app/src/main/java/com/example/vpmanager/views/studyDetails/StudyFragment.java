@@ -1,4 +1,4 @@
-package com.example.vpmanager.views;
+package com.example.vpmanager.views.studyDetails;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -15,6 +15,7 @@ import androidx.navigation.Navigation;
 import androidx.viewpager.widget.ViewPager;
 
 import com.example.vpmanager.R;
+import com.example.vpmanager.views.mainActivity;
 import com.google.android.material.tabs.TabLayout;
 
 import java.util.ArrayList;
@@ -30,8 +31,8 @@ public class StudyFragment extends Fragment {
     private ViewPager viewPager;
     private TabLayout tabLayout;
 
-    private StudyDetails detailsFragment;
-    private StudyDates datesFragment;
+    private StudyDetailsFragment detailsFragment;
+    private StudyDatesFragment datesFragment;
 
     public StudyFragment() {
     }
@@ -50,8 +51,8 @@ public class StudyFragment extends Fragment {
         viewPager = (ViewPager) view.findViewById(R.id.view_pager);
         tabLayout = (TabLayout) view.findViewById(R.id.tab_layout);
 
-        detailsFragment = new StudyDetails();
-        datesFragment = new StudyDates();
+        detailsFragment = new StudyDetailsFragment();
+        datesFragment = new StudyDatesFragment();
 
         tabLayout.setupWithViewPager(viewPager);
 

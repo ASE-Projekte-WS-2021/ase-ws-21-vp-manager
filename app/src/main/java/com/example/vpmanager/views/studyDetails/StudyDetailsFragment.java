@@ -1,4 +1,4 @@
-package com.example.vpmanager.views;
+package com.example.vpmanager.views.studyDetails;
 
 import android.os.Bundle;
 
@@ -15,10 +15,10 @@ import android.widget.TextView;
 
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link StudyDetails#newInstance} factory method to
+ * Use the {@link StudyDetailsFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class StudyDetails extends Fragment {
+public class StudyDetailsFragment extends Fragment {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -43,7 +43,7 @@ public class StudyDetails extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    public StudyDetails() {
+    public StudyDetailsFragment() {
         // Required empty public constructor
     }
 
@@ -56,8 +56,8 @@ public class StudyDetails extends Fragment {
      * @return A new instance of fragment studyDetails.
      */
     // TODO: Rename and change types and number of parameters
-    public static StudyDetails newInstance(String param1, String param2) {
-        StudyDetails fragment = new StudyDetails();
+    public static StudyDetailsFragment newInstance(String param1, String param2) {
+        StudyDetailsFragment fragment = new StudyDetailsFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -86,7 +86,7 @@ public class StudyDetails extends Fragment {
     private void prepareComponents() {
         currentStudyId = StudyFragment.currentStudyId;
         studyViewModel = new ViewModelProvider(requireActivity()).get(StudyViewModel.class);
-        studyViewModel.studyDetails = this;
+        studyViewModel.studyDetailsFragment = this;
         studyViewModel.prepareRepo();
     }
 
