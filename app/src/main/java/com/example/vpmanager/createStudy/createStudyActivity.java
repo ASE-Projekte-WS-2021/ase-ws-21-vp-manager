@@ -750,6 +750,8 @@ public class createStudyActivity extends AppCompatActivity {
                 if (!studyDesc.isEmpty()) {
                     return true;
                 }
+                textInputEditTextDesc.setError("Studienbeschreibung darf nicht leer sein");
+                textInputEditTextDesc.requestFocus();
                 break;
             case 4:
                 if (!location.isEmpty()) {
