@@ -18,12 +18,14 @@ public class createStudyFragment_finalStep extends Fragment {
     TextView category;
     TextView execution;
     TextView location;
+    TextView desc;
+    TextView contact;
 
     //Parameter:
     //Return values:
     //Sets the current fragment for the activity
     public createStudyFragment_finalStep() {
-        createStudyActivity.currentFragment = 7;
+        createStudyActivity.currentFragment = 6;
     }
 
     @Override
@@ -52,6 +54,9 @@ public class createStudyFragment_finalStep extends Fragment {
         category = view.findViewById(R.id.confirmCategory);
         execution = view.findViewById(R.id.confirmExecution);
         location = view.findViewById(R.id.confirmLocation);
+        desc = view.findViewById(R.id.confirmDesc);
+        contact = view.findViewById(R.id.confirmContact);
+
     }
 
     //Parameter:

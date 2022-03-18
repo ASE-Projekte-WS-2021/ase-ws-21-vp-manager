@@ -19,7 +19,7 @@ public class createStudyFragment_StepFour_Presence extends Fragment {
     //Return values:
     //Sets the current fragment for the activity
     public createStudyFragment_StepFour_Presence() {
-        createStudyActivity.currentFragment = 5;
+        createStudyActivity.currentFragment = 4;
     }
 
     @Override

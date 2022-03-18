@@ -19,7 +19,7 @@ public class createStudyFragment_StepFour_Remote extends Fragment {
     //Return values:
     //Sets the current fragment for the activity
     public createStudyFragment_StepFour_Remote() {
-        createStudyActivity.currentFragment = 5;
+        createStudyActivity.currentFragment = 4;
     }
 
     @Override

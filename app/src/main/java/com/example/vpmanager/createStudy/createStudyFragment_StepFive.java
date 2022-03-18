@@ -42,7 +42,7 @@ public class createStudyFragment_StepFive extends Fragment {
     //Return values:
     //Sets the current fragment for the activity
     public createStudyFragment_StepFive() {
-        createStudyActivity.currentFragment = 6;
+        createStudyActivity.currentFragment = 5;
     }
 
     @Override
@@ -107,7 +107,7 @@ public class createStudyFragment_StepFive extends Fragment {
                         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("EEEE");
                         Date date = new Date(year, monthOfYear, dayOfMonth-1);
                         weekDay = simpleDateFormat.format(date);
-                        date_time = weekDay + " den " + dayOfMonth + "." + (monthOfYear + 1) + "." + year + " um ";
+                        date_time = weekDay + ", " + dayOfMonth + "." + (monthOfYear + 1) + "." + year + " um ";
                         timePicker();
                     }
                 }, mYear, mMonth, mDay);
@@ -149,7 +149,7 @@ public class createStudyFragment_StepFive extends Fragment {
         if (hourOfDay < 10) {
             hours = "0" + hourOfDay;
         }
-        dates.add(date_time + hours + ":" + minutes);
+        dates.add(date_time + hours + ":" + minutes + " Uhr");
         datePickerAdapter.notifyDataSetChanged();
     }
 

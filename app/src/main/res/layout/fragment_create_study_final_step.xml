@@ -3,7 +3,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".createStudy.createStudyFragment_finalStep"
     android:background="?android:windowBackground">
 
@@ -12,134 +11,111 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:weightSum="10">
+        android:weightSum="6">
 
         <TextView
             android:id="@+id/pageTitle"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
+            android:layout_weight="0.7"
             android:text="@string/fragment_create_study_pageFinalTitle"
             android:textAlignment="center"
             android:textSize="35sp" />
 
         <View
             android:layout_width="match_parent"
-            android:layout_height="3dp"
+            android:layout_height="0dp"
+            android:layout_weight="0.05"
             android:layout_marginLeft="20dp"
-            android:layout_marginTop="5dp"
             android:layout_marginRight="20dp"
+            android:layout_marginBottom="20dp"
             android:background="@color/black" />
 
-
-        <com.google.android.material.card.MaterialCardView
+        <com.google.android.material.textview.MaterialTextView
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="2.1"
+            android:layout_weight="1.05"
             android:layout_marginRight="30dp"
             android:layout_marginLeft="30dp"
-            android:layout_marginTop="0dp">
+            android:layout_marginTop="5dp"
+            android:id="@+id/confirmTitle"
+            android:textSize="15sp"
+            android:fontFamily="@font/maven_pro"
+            android:textStyle="bold"
+            android:textColor="@color/heatherred_Main"
+            android:gravity="top">
+        </com.google.android.material.textview.MaterialTextView>
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/confirmTitle"
-                android:textSize="15sp"
-                android:textStyle="bold"
-                android:height="50dp"
-                android:textColor="@color/heatherred_Main"
-                android:gravity="top"
-                android:layout_marginStart="10dp">
-            </TextView>
-        </com.google.android.material.card.MaterialCardView>
 
-        <com.google.android.material.card.MaterialCardView
+        <com.google.android.material.textview.MaterialTextView
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="2"
+            android:layout_weight="1.05"
+            android:fontFamily="@font/maven_pro"
             android:layout_marginRight="30dp"
             android:layout_marginLeft="30dp"
-            android:layout_marginTop="5dp">
+            android:layout_marginTop="10dp"
+            android:id="@+id/confirmVP"
+            android:textSize="15sp"
+            android:textStyle="bold"
+            android:textColor="@color/heatherred_Main"
+            android:gravity="top">
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/confirmVP"
-                android:textSize="15sp"
-                android:textColor="@color/heatherred_Main"
-                android:textStyle="bold"
-                android:gravity="top"
-                android:height="40dp"
-                android:layout_marginStart="10dp">
-            </TextView>
-        </com.google.android.material.card.MaterialCardView>
 
-        <com.google.android.material.card.MaterialCardView
+        </com.google.android.material.textview.MaterialTextView>
+
+        <com.google.android.material.textview.MaterialTextView
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="2"
+            android:layout_weight="1.05"
             android:layout_marginRight="30dp"
             android:layout_marginLeft="30dp"
-            android:layout_marginTop="5dp">
-            <!--app:cardBackgroundColor="@color/black"-->
+            android:layout_marginTop="10dp"
+            android:fontFamily="@font/maven_pro"
+            android:id="@+id/confirmCategory"
+            android:textSize="15sp"
+            android:textStyle="bold"
+            android:textColor="@color/heatherred_Main"
+            android:gravity="top">
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/confirmCategory"
-                android:textSize="15sp"
-                android:textStyle="bold"
-                android:textColor="@color/heatherred_Main"
-                android:gravity="top"
-                android:height="40dp"
-                android:layout_marginStart="10dp">
-            </TextView>
-        </com.google.android.material.card.MaterialCardView>
 
-        <com.google.android.material.card.MaterialCardView
+        </com.google.android.material.textview.MaterialTextView>
+
+
+        <com.google.android.material.textview.MaterialTextView
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="2"
-
+            android:layout_weight="1.05"
+            android:fontFamily="@font/maven_pro"
             android:layout_marginRight="30dp"
             android:layout_marginLeft="30dp"
-            android:layout_marginTop="5dp">
+            android:layout_marginTop="10dp"
+            android:id="@+id/confirmExecution"
+            android:textSize="15sp"
+            android:textStyle="bold"
+            android:textColor="@color/heatherred_Main"
+            android:gravity="top">
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/confirmExecution"
-                android:textSize="15sp"
-                android:textStyle="bold"
-                android:gravity="top"
-                android:height="40dp"
-                android:layout_marginStart="10dp"
-                android:textColor="@color/heatherred_Main">
-            </TextView>
-        </com.google.android.material.card.MaterialCardView>
 
-        <com.google.android.material.card.MaterialCardView
+        </com.google.android.material.textview.MaterialTextView>
+
+        <com.google.android.material.textview.MaterialTextView
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="2.2"
+            android:layout_weight="1.05"
+            android:fontFamily="@font/maven_pro"
             android:layout_marginRight="30dp"
             android:layout_marginLeft="30dp"
-            android:layout_marginTop="5dp">
+            android:layout_marginTop="10dp"
+            android:id="@+id/confirmLocation"
+            android:textSize="15sp"
+            android:textStyle="bold"
+            android:textColor="@color/heatherred_Main"
+            android:gravity="top">
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/confirmLocation"
-                android:textSize="15sp"
-                android:textStyle="bold"
-                android:layout_gravity="top"
-                android:height="60dp"
-                android:textColor="@color/heatherred_Main"
-                android:layout_marginStart="10dp"
-                >
-            </TextView>
-<!--         works-->
 
-        </com.google.android.material.card.MaterialCardView>
+        </com.google.android.material.textview.MaterialTextView>
+
 
     </LinearLayout>
 
