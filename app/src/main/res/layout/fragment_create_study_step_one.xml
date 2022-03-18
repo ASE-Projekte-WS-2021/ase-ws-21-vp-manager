@@ -5,6 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="?android:windowBackground"
     tools:context=".createStudy.createStudyFragment_StepOne">
 
@@ -47,11 +48,20 @@
             android:textSize="20sp" />-->
 
 
+
         <com.google.android.material.textfield.TextInputLayout
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_marginTop="30dp"
-            android:layout_weight="1.35">
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_weight="1.35"
+            app:boxStrokeColor="@color/black"
+            app:boxStrokeWidthFocused="2dp"
+            android:textColorHint="@color/heatherred_Main"
+            android:hint="@string/createStudyTitleHint"
+            app:hintTextColor="@color/heatherred_Main">
 
 
             <com.google.android.material.textfield.TextInputEditText
@@ -59,18 +69,25 @@
                 style="@style/You.EditText.Style"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginLeft="20dp"
-                android:layout_marginRight="20dp"
+                android:textColorHint="@color/tabs_grey"
                 android:hint="@string/createStudyTitleHint" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
 
         <com.google.android.material.textfield.TextInputLayout
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_marginTop="30dp"
-            android:layout_weight="1.35">
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_weight="1.35"
+            app:boxStrokeColor="@color/black"
+            app:boxStrokeWidthFocused="2dp"
+            android:textColorHint="@color/heatherred_Main"
+            android:hint="@string/createOfferedVP"
+            app:hintTextColor="@color/heatherred_Main">
 
 
             <com.google.android.material.textfield.TextInputEditText
@@ -78,9 +95,8 @@
                 style="@style/You.EditText.Style"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginLeft="20dp"
-                android:layout_marginRight="20dp"
                 android:hint="@string/createOfferedVP"
+                android:textColorHint="@color/tabs_grey"
                 android:inputType="numberDecimal" />
 
         </com.google.android.material.textfield.TextInputLayout>
@@ -93,7 +109,7 @@
             android:layout_marginStart="13dp"
             android:layout_marginEnd="13dp"
             android:layout_weight="1.25"
-            android:popupBackground="@color/green_Main"
+            android:popupBackground="@color/green_dark"
             />
 
         <Spinner
@@ -104,7 +120,7 @@
             android:layout_marginTop="10dp"
             android:layout_height="0dp"
             android:layout_weight="1.25"
-            android:popupBackground="@color/green_Main"
+            android:popupBackground="@color/green_dark"
             />
 
     </LinearLayout>

@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".createStudy.createStudyFragment_StepThree"
     android:background="?android:windowBackground">
 
@@ -11,7 +12,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:weightSum="7">
+        android:weightSum="6">
 
 
         <TextView
@@ -47,9 +48,17 @@
 
 
         <com.google.android.material.textfield.TextInputLayout
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="6.25">
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_weight="5.25"
+            app:boxStrokeColor="@color/black"
+            app:boxStrokeWidthFocused="2dp"
+            android:textColorHint="@color/heatherred_Main"
+            android:hint="@string/createStudyDesc"
+            app:hintTextColor="@color/heatherred_Main">
 
 
             <com.google.android.material.textfield.TextInputEditText
@@ -57,12 +66,10 @@
                 android:layout_height="match_parent"
                 style="@style/You.EditText.Style"
                 android:id="@+id/inputFieldStudyDesc"
-                android:layout_marginRight="20dp"
-                android:layout_marginLeft="20dp"
-                android:layout_marginBottom="20dp"
                 android:gravity="top"
                 android:inputType="textMultiLine"
-                android:lines="10"
+                android:lines="15"
+                android:textColorHint="@color/tabs_grey"
                 android:hint="@string/createStudyDesc">
             </com.google.android.material.textfield.TextInputEditText>
 
