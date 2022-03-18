@@ -757,8 +757,16 @@ public class createStudyActivity extends AppCompatActivity {
                 if (!location.isEmpty()) {
                     return true;
                 }
+                if(execution.equals("Präsenz")) {
+                    textInputEditTextLocation.setError("Ort der Studie muss angegeben werden");
+                    textInputEditTextLocation.requestFocus();
+                }
                 if (!platform.isEmpty()) {
                     return true;
+                }
+                if(execution.equals("Remote")) {
+                    textInputEditTextPlatform.setError("Primärplattform muss angegeben werden");
+                    textInputEditTextPlatform.requestFocus();
                 }
                 break;
             default:
