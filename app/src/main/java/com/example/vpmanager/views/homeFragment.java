@@ -1,49 +1,36 @@
 package com.example.vpmanager.views;
 
-import static com.example.vpmanager.views.mainActivity.uniqueID;
-
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.Button;
-import android.widget.ListView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentStatePagerAdapter;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
+import androidx.viewpager.widget.ViewPager;
 
-import com.example.vpmanager.PA_ExpandableListDataPump;
 import com.example.vpmanager.R;
+import com.google.android.material.tabs.TabLayout;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-import java.util.TreeMap;
 
 public class homeFragment extends Fragment {
 
     private NavController navController;
-    private Button findStudyNavBtn, createStudyNavBtn;
     FirebaseAuth firebaseAuth;
-
-    private ListView arrivingDatesList;
-
-    private HashMap<String, String> getStudyIdByName = new HashMap<>();
 
     public homeFragment() {
     }
+
+
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -54,28 +41,45 @@ public class homeFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_home, container, false);
-        initHomeFragmentComponents(view);
-        return view;
+        return inflater.inflate(R.layout.fragment_home, container, false);
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         navController = Navigation.findNavController(view);
-        setNavCardClickListeners();
-        setUpDateList();
+        userLoggedIn();
+        createTabs(view);
+
     }
 
-    @Override
-    public void onStart(){
-        super.onStart();
-        userLoggedIn();
+    //Parameter: current view to find components
+    //Return values:
+    //sets up the tablayout and adds and adapter for the content
+    private void createTabs(View view) {
+
+        ViewPager viewPager = view.findViewById(R.id.view_pager_home);
+        TabLayout tabLayout = view.findViewById(R.id.tab_layout_home);
+
+        com.example.vpmanager.views.personalAccountFragment personalAccountFragment = new personalAccountFragment();
+        UpcomingAppointments appointments = new UpcomingAppointments();
+
+        tabLayout.addTab(tabLayout.newTab().setText("Persönliche Übersicht"));
+        tabLayout.addTab(tabLayout.newTab().setText("Termine"));
+
+        ViewPagerAdapter viewPagerAdapter = new ViewPagerAdapter(getParentFragmentManager(), 0);//tabLayout.getTabCount());
+        viewPagerAdapter.addFragment(personalAccountFragment, "Persönliche Übersicht");
+        viewPagerAdapter.addFragment(appointments, "Termine");
+
+        viewPager.setAdapter(viewPagerAdapter);
+
+        viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
+        System.out.println("Tab Count: " + tabLayout.getTabCount());
     }
 
     //Parameter:
     //Return values:
-    //Checks if the user is already logged in
+    //checks if the user is currently logged in. If not sends him to login screen
     private void userLoggedIn(){
         FirebaseUser user = firebaseAuth.getCurrentUser();
         if(user == null) {
@@ -83,108 +87,38 @@ public class homeFragment extends Fragment {
         }
     }
 
-    //Parameter: the fragment view
-    //Return Values:
-    //connects the view components with their ids
-    private void initHomeFragmentComponents(View view) {
-        arrivingDatesList = view.findViewById(R.id.listViewOwnArrivingStudyFragment);
-        findStudyNavBtn = view.findViewById(R.id.findStudyBtn);
-        createStudyNavBtn = view.findViewById(R.id.createStudyBtn);
-    }
-
     //Parameter:
-    //Return Values:
-    //sets click listeners on the four buttons to open their corresponding fragments
-    private void setNavCardClickListeners() {
-        findStudyNavBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Log.d("homeFragment", "Navigate to: findStudyFragment");
-                navController.navigate(R.id.action_homeFragment_to_findStudyFragment);
-            }
-        });
-        createStudyNavBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Log.d("homeFragment", "Navigate to: createStudyActivity");
-                navController.navigate(R.id.action_homeFragment_to_createStudyActivity);
-            }
-        });
-    }
+    //Return values:
+    //defining adapter class for the tabLayout
+    private static class ViewPagerAdapter extends FragmentStatePagerAdapter
+    {
+        private final List<Fragment> fragments = new ArrayList<>();
+        private final List<String> fragmentNames = new ArrayList<>();
 
-    private void setUpDateList() {
-        final List<String[]>[] arrivingDates = new List[]{null};
+        public ViewPagerAdapter(@NonNull FragmentManager fm, int behavior) {
+            super(fm, behavior);
+        }
 
-        PA_ExpandableListDataPump.getAllDates(new PA_ExpandableListDataPump.FirestoreCallbackDates() {
-            @Override
-            public void onCallback(boolean finished) {
-                if (finished)
-                    PA_ExpandableListDataPump.getAllStudies(new PA_ExpandableListDataPump.FirestoreCallbackStudy() {
-                        @Override
-                        public void onCallback() {
-                            arrivingDates[0] = PA_ExpandableListDataPump.getAllArrivingDates();
-                            finishSetupList(arrivingDates[0]);
-                        }
-                    });
-            }
-        });
-    }
+        public void addFragment(Fragment fragment, String title){
+            fragments.add(fragment);
+            fragmentNames.add(title);
+        }
 
-    private  void finishSetupList(List <String[]> dates){
+        @NonNull
+        @Override
+        public Fragment getItem(int position) {
+            return fragments.get(position);
+        }
 
+        @Override
+        public int getCount() {
+            return fragments.size();
+        }
 
-        if (dates != null) {
-            SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyy HH:mm");
-
-//            List<String[]> dates = arrivingDates[0];
-            ArrayList<String> listEntries = new ArrayList<>();
-
-            Map<Date, String> sortingMap = new TreeMap<>();
-
-            for (String[] listEntry : dates) {
-                String name = listEntry[0];
-                String date = listEntry[1];
-                String studyID = listEntry[2];
-
-                Date studyDate = null;
-                try {
-                    studyDate = format.parse(date);
-                } catch (ParseException e) {
-                    e.printStackTrace();
-                }
-
-                sortingMap.put(studyDate, name);
-                //listEntries.add(name + "\t\t" + date);
-                getStudyIdByName.put(name, studyID);
-            }
-
-            for (Date key : sortingMap.keySet()) {
-                listEntries.add(sortingMap.get(key) + "\t\t" + key);
-            }
-
-            ArrayAdapter arrayAdapter = new ArrayAdapter(getActivity(), android.R.layout.simple_list_item_1, listEntries);
-            arrivingDatesList.setAdapter(arrayAdapter);
-            arrivingDatesList.setOnItemClickListener(new android.widget.AdapterView.OnItemClickListener() {
-                @Override
-                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                    String text = (String) arrivingDatesList.getItemAtPosition(position);
-                    String name = text.split("\t\t")[0];
-
-                    if (name != null) {
-                        String studyId = getStudyIdByName.get(name);
-                        //go to Study Detail View
-                        Bundle args = new Bundle();
-                        args.putString("studyId", studyId);
-                        if(PA_ExpandableListDataPump.navigateToStudyCreatorFragment(uniqueID, studyId)) {
-                            navController.navigate(R.id.action_homeFragment_to_studyCreatorFragment, args);
-                        }
-                        else
-                        {
-                            navController.navigate(R.id.action_homeFragment_to_studyFragment, args);
-                        }
-                    }
-                }
-            });
+        @Nullable
+        @Override
+        public CharSequence getPageTitle(int position) {
+            return fragmentNames.get(position);
         }
     }
 }

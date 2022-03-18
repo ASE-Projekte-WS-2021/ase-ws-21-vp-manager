@@ -20,6 +20,7 @@ import com.google.android.material.appbar.MaterialToolbar;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 
+import java.util.Objects;
 import java.util.UUID;
 
 public class mainActivity extends AppCompatActivity implements DrawerController {
@@ -164,7 +165,17 @@ public class mainActivity extends AppCompatActivity implements DrawerController 
     @Override
     public boolean onSupportNavigateUp() {
         Log.d("mainActivity", "onSupportNavigateUp start + end");
-        return NavigationUI.navigateUp(navController, appBarConfiguration)  || super.onSupportNavigateUp();
+        if (!Objects.requireNonNull(navController.getCurrentDestination()).toString()
+                .equals("Destination(com.example.vpmanager:id/homeFragment) label=Startseite class=com.example.vpmanager.views.homeFragment")) {
+            if (NavigationUI.navigateUp(navController, appBarConfiguration)) {
+                if (Objects.requireNonNull(navController.getCurrentDestination()).toString()
+                        .equals("Destination(com.example.vpmanager:id/homeFragment) label=Startseite class=com.example.vpmanager.views.homeFragment")) {
+                    navController.navigate(R.id.action_global_homeFragment);
+                    return true;
+                }
+            }
+        }
+        return NavigationUI.navigateUp(navController, appBarConfiguration) || super.onSupportNavigateUp();
     }
 
     //Parameter:
@@ -204,5 +215,23 @@ public class mainActivity extends AppCompatActivity implements DrawerController 
     public void setDrawerUnlocked() {
         drawerLayoutMain.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED);
         topAppBarMain.setNavigationIcon(getDrawable(R.drawable.ic_baseline_menu_24));
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (!Objects.requireNonNull(navController.getCurrentDestination()).toString()
+                .equals("Destination(com.example.vpmanager:id/homeFragment) label=Startseite class=com.example.vpmanager.views.homeFragment")) {
+            if (NavigationUI.navigateUp(navController, appBarConfiguration)) {
+                if (Objects.requireNonNull(navController.getCurrentDestination()).toString()
+                        .equals("Destination(com.example.vpmanager:id/homeFragment) label=Startseite class=com.example.vpmanager.views.homeFragment")) {
+                    System.out.println(Objects.requireNonNull(navController.getCurrentDestination()).toString());
+                    navController.navigate(R.id.action_global_homeFragment);
+                }
+            }
+        }
+        else
+        {
+            super.onBackPressed();
+        }
     }
 }
