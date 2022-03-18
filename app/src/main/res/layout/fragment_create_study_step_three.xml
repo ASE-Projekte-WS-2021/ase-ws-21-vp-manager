@@ -56,9 +56,9 @@
             android:layout_weight="5.25"
             app:boxStrokeColor="@color/black"
             app:boxStrokeWidthFocused="2dp"
-            android:textColorHint="@color/black"
+            android:textColorHint="@color/heatherred_Main"
             android:hint="@string/createStudyDesc"
-            app:hintTextColor="@color/black">
+            app:hintTextColor="@color/heatherred_Main">
 
 
             <com.google.android.material.textfield.TextInputEditText

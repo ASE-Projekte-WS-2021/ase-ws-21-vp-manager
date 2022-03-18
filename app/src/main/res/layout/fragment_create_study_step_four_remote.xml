@@ -54,9 +54,9 @@
             android:layout_weight="1.4"
             app:boxStrokeColor="@color/black"
             app:boxStrokeWidthFocused="2dp"
-            android:textColorHint="@color/black"
+            android:textColorHint="@color/heatherred_Main"
             android:hint="@string/createPlatformHint"
-            app:hintTextColor="@color/black">
+            app:hintTextColor="@color/heatherred_Main">
 
 
             <com.google.android.material.textfield.TextInputEditText
@@ -81,9 +81,9 @@
             android:layout_weight="1.4"
             app:boxStrokeColor="@color/black"
             app:boxStrokeWidthFocused="2dp"
-            android:textColorHint="@color/black"
+            android:textColorHint="@color/heatherred_Main"
             android:hint="@string/createPlatformHint2"
-            app:hintTextColor="@color/black">
+            app:hintTextColor="@color/heatherred_Main">
 
 
             <com.google.android.material.textfield.TextInputEditText

@@ -55,9 +55,9 @@
             android:layout_weight="1.4"
             app:boxStrokeColor="@color/black"
             app:boxStrokeWidthFocused="2dp"
-            android:textColorHint="@color/black"
+            android:textColorHint="@color/heatherred_Main"
             android:hint="@string/createLocationHint"
-            app:hintTextColor="@color/black">
+            app:hintTextColor="@color/heatherred_Main">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
@@ -81,9 +81,9 @@
             android:layout_weight="1.4"
             app:boxStrokeColor="@color/black"
             app:boxStrokeWidthFocused="2dp"
-            android:textColorHint="@color/black"
+            android:textColorHint="@color/heatherred_Main"
             android:hint="@string/createStreetHint"
-            app:hintTextColor="@color/black">
+            app:hintTextColor="@color/heatherred_Main">
 
 
             <com.google.android.material.textfield.TextInputEditText
@@ -106,9 +106,9 @@
             android:layout_weight="1.4"
             app:boxStrokeColor="@color/black"
             app:boxStrokeWidthFocused="2dp"
-            android:textColorHint="@color/black"
+            android:textColorHint="@color/heatherred_Main"
             android:hint="@string/createRoomHint"
-            app:hintTextColor="@color/black">
+            app:hintTextColor="@color/heatherred_Main">
 
 
             <com.google.android.material.textfield.TextInputEditText

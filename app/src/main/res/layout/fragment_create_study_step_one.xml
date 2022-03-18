@@ -59,9 +59,9 @@
             android:layout_weight="1.35"
             app:boxStrokeColor="@color/black"
             app:boxStrokeWidthFocused="2dp"
-            android:textColorHint="@color/black"
+            android:textColorHint="@color/heatherred_Main"
             android:hint="@string/createStudyTitleHint"
-            app:hintTextColor="@color/black">
+            app:hintTextColor="@color/heatherred_Main">
 
 
             <com.google.android.material.textfield.TextInputEditText
@@ -85,9 +85,9 @@
             android:layout_weight="1.35"
             app:boxStrokeColor="@color/black"
             app:boxStrokeWidthFocused="2dp"
-            android:textColorHint="@color/black"
+            android:textColorHint="@color/heatherred_Main"
             android:hint="@string/createOfferedVP"
-            app:hintTextColor="@color/black">
+            app:hintTextColor="@color/heatherred_Main">
 
 
             <com.google.android.material.textfield.TextInputEditText
@@ -109,7 +109,7 @@
             android:layout_marginStart="13dp"
             android:layout_marginEnd="13dp"
             android:layout_weight="1.25"
-            android:popupBackground="@color/green_Main"
+            android:popupBackground="@color/green_dark"
             />
 
         <Spinner
@@ -120,7 +120,7 @@
             android:layout_marginTop="10dp"
             android:layout_height="0dp"
             android:layout_weight="1.25"
-            android:popupBackground="@color/green_Main"
+            android:popupBackground="@color/green_dark"
             />
 
     </LinearLayout>
