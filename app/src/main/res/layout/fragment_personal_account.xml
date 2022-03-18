@@ -5,49 +5,237 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    tools:context=".views.personalAccountFragment"
     app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-    <LinearLayout
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardViewGraph"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="50"
-        android:orientation="vertical">
+        android:layout_height="150dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="10dp"
+        android:elevation="10dp"
+        app:cardBackgroundColor="@color/cardview_light_background"
+        app:cardCornerRadius="10dp">
 
-        <!--Pie chart to display VPs-->
-        <org.eazegraph.lib.charts.PieChart
-            android:id="@+id/pa_fragment_pie_chart"
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:srcCompat="@drawable/ic_settings_preferences"
+            android:id="@+id/vp_settings_icon"
+            android:layout_gravity="right"
+            android:layout_marginEnd="5dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="10dp"
+            app:tint="@color/heatherred_dark" />
+        <!--Linear layout to display pie chart -->
+        <!-- and details of pie chart-->
+
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="15dp"
-            android:layout_weight="30"
-            android:padding="6dp"
-            app:egLegendTextSize="18sp"
-            tools:ignore="NestedWeights" />
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
 
-    </LinearLayout>
+            android:weightSum="2">
+
+            <!--Pie chart to display the data-->
+
+            <org.eazegraph.lib.charts.PieChart
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+                android:id="@+id/pa_fragment_pie_chart"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:padding="6dp"
+                android:layout_weight="1"
+                android:layout_marginTop="15dp"
+                android:layout_marginStart="15dp"
+                android:layout_marginBottom="15dp"
+                />
+
+            <!--Creating another linear layout -->
+            <!-- to display pie chart details -->
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:layout_marginStart="10dp"
+                android:orientation="vertical"
+                android:gravity="center_vertical"
+                >
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="20dp"
+                    android:layout_gravity="center_vertical"
+                    android:id="@+id/pa_completed_layout">
+
+                    <!--View to display the yellow color icon-->
+                    <View
+                        android:layout_width="15dp"
+                        android:layout_height="match_parent"
+                        android:background="@color/pieChartSafe"/>
+
+                    <!--Text view to display R -->
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/pa_completed"
+                        android:paddingLeft="10dp"/>
+
+                </LinearLayout>
+
+                <!--Linear layout to display Python-->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="20dp"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginTop="5dp"
+                    android:id="@+id/pa_parcticipated_layout">
+
+                    <!--View to display the green color icon-->
+                    <View
+                        android:layout_width="15dp"
+                        android:layout_height="match_parent"
+                        android:background="@color/pieChartParticipation"/>
+
+                    <!--Text view to display python text -->
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/pa_participated"
+                        android:paddingLeft="10dp"/>
+
+                </LinearLayout>
+
+                <!--Linear layout to display C++-->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="20dp"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginTop="5dp"
+                    android:id="@+id/pa_planned_layout">
+
+                    <!--View to display the red color icon-->
+                    <View
+                        android:layout_width="15dp"
+                        android:layout_height="match_parent"
+                        android:background="@color/pieChartPlanned"/>
+
+                    <!--Text view to display C++ text -->
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/pa_planned"
+                        android:paddingLeft="10dp"/>
+
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="20dp"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginTop="5dp">
+
+                    <!--View to display the red color icon-->
+                    <View
+                        android:layout_width="15dp"
+                        android:layout_height="match_parent"
+                        android:background="@color/pieChartRemaining"/>
+
+                    <!--Text view to display C++ text -->
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/pa_remaining"
+                        android:paddingLeft="10dp"/>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="10dp"
+        android:elevation="10dp"
+        app:cardBackgroundColor="@color/cardview_light_background"
+        app:cardCornerRadius="10dp">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:textAlignment="center"
+            android:paddingTop="7dp"
+            android:layout_marginStart="10dp"
+            android:text="In der App gesammelt"/>
+
+        <Switch
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:id="@+id/vp_source_switch"
+            android:background="@color/cardview_light_background"
+            android:thumbTint="@color/heatherred_dark"
+            android:trackTint="@color/heatherred_light"
+            tools:ignore="UseSwitchCompatOrMaterialXml" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginEnd="10dp"
+            android:layout_gravity="right"
+            android:textAlignment="center"
+            android:paddingTop="7dp"
+            android:text="Bereits Verbuchte VP"
+            tools:ignore="RtlCompat" />
+    </androidx.cardview.widget.CardView>
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
         android:layout_marginStart="25dp"
-        android:layout_marginTop="20dp"
         android:layout_marginEnd="25dp"
-        android:text="Studiendetails"
-        android:textSize="23sp"
+        android:text="Studien"
+        android:textSize="18sp"
         android:textStyle="bold" />
+
 
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="100"
         android:fillViewport="true">
-
-        <ExpandableListView
-            android:id="@+id/pa_fragment_expandableList"
+        <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="5dp"
+            android:elevation="10dp"
 
+            app:cardBackgroundColor="@color/cardview_light_background"
+            app:cardCornerRadius="10dp">
+
+            <ListView
+                android:id="@+id/pa_fragment_listView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="10dp"
+                android:background="@color/cardview_light_background"/>
+
+            <ExpandableListView
+                android:id="@+id/pa_fragment_expandableList"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/cardview_light_background"/>
+        </androidx.cardview.widget.CardView>
     </ScrollView>
 
 </LinearLayout>

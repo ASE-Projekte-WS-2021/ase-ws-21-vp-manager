@@ -15,7 +15,7 @@ import com.google.firebase.firestore.Transaction;
 import java.util.HashMap;
 import java.util.Map;
 
-public class accessDatabase {
+public class AccessDatabase {
     FirebaseFirestore db;
 
     //HomeActivity --------------------------------------------------------------------------------!
@@ -67,7 +67,7 @@ public class accessDatabase {
     //studyActivity -------------------------------------------------------------------------------!
     //in studyActivity
 
-    //updateData should contain ("selected": true) and ("userId: the User Id)
+    /*
     public void selectDate(Map<String, Object> updateData, String dateId) {
 
         db = FirebaseFirestore.getInstance();
@@ -87,5 +87,5 @@ public class accessDatabase {
                 .addOnSuccessListener(aVoid -> Log.d(TAG, "DocumentSnapshot successfully updated!"))
                 .addOnFailureListener(e -> Log.w(TAG, "Error updating document", e));
     }
-
+     */
 }

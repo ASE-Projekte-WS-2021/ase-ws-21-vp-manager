@@ -3,7 +3,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".createStudy.createStudyFragment_finalStep_three"
     android:background="?android:windowBackground">
 
@@ -12,57 +11,61 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:weightSum="7">
+        android:weightSum="6">
 
         <TextView
             android:id="@+id/pageTitle"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
+            android:layout_weight="0.7"
             android:text="@string/fragment_create_study_finalPage_title_three"
             android:textAlignment="center"
             android:textSize="35sp" />
 
         <View
             android:layout_width="match_parent"
-            android:layout_height="3dp"
+            android:layout_height="0dp"
+            android:layout_weight="0.05"
             android:layout_marginLeft="20dp"
-            android:layout_marginTop="5dp"
             android:layout_marginRight="20dp"
             android:background="@color/black" />
 
 
         <TextView
-            android:layout_width="150dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
+            android:layout_width="180dp"
+            android:layout_height="0dp"
+            android:layout_weight="0.4"
+            android:layout_marginStart="25dp"
             android:layout_marginTop="25dp"
-            android:text="Ausgewählte Termine"
+            android:text="Ausgewählte Termine:"
             android:textColor="@color/heatherred_Main"
-            android:textSize="15sp"
+            android:fontFamily="@font/maven_pro"
+            android:textSize="17sp"
             android:textStyle="bold" />
 
-        <com.google.android.material.card.MaterialCardView
+        <!--<com.google.android.material.card.MaterialCardView
             android:layout_width="match_parent"
-            android:layout_height="347dp"
+            android:layout_height="0dp"
             android:layout_marginLeft="30dp"
-            android:layout_marginTop="12dp"
+            android:layout_marginTop="10dp"
             android:layout_marginRight="30dp"
-            android:layout_weight="5"
+            android:layout_weight="6"
             android:backgroundTint="@color/green_light"
             android:foregroundTint="@color/heatherred_Main"
-            app:cardCornerRadius="11dp">
+            app:cardCornerRadius="11dp">-->
 
-            <ListView
-                android:id="@+id/confirmDates"
-                android:layout_width="match_parent"
-                android:layout_height="497dp"
-                android:layout_gravity="top"
-                android:layout_marginLeft="15dp"
-                android:layout_marginTop="10dp"
-                android:layout_marginRight="15dp"
-                android:textSize="40sp"></ListView>
+        <ListView
+            android:id="@+id/confirmDates"
+            android:layout_width="match_parent"
+            android:layout_weight="4.85"
+            android:layout_height="0dp"
+            android:layout_gravity="top"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="15dp"
+            android:textSize="40sp" />
 
-        </com.google.android.material.card.MaterialCardView>
+<!--        </com.google.android.material.card.MaterialCardView>-->
 
 
     </LinearLayout>

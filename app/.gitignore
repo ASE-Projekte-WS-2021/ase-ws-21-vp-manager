@@ -22,5 +22,5 @@ google-services.json
 # Android Studio
 *.iml
 build
-../.gradle
-../.idea
+../.gradle/
+../.idea/

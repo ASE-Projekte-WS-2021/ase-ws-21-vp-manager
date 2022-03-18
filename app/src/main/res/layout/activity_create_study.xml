@@ -13,8 +13,8 @@
         android:fitsSystemWindows="true">
 
         <com.google.android.material.appbar.AppBarLayout
-            style="@style/Widget.MaterialComponents.AppBarLayout.PrimarySurface"
             android:id="@+id/appbar"
+            style="@style/Widget.MaterialComponents.AppBarLayout.PrimarySurface"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:fitsSystemWindows="true">
@@ -35,8 +35,8 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical"
-            app:layout_behavior="@string/appbar_scrolling_view_behavior"
-            android:weightSum="10">
+            android:weightSum="10"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
 
             <com.google.android.material.card.MaterialCardView
@@ -44,6 +44,7 @@
                 android:layout_height="0dp"
                 android:layout_weight="8"
                 android:background="?android:windowBackground"
+                android:theme="@style/Theme.MaterialComponents.Light"
                 app:cardCornerRadius="20dp"
                 tools:context=".createStudy.createStudyFragment_Base">
 
@@ -111,13 +112,11 @@
 
         <com.airbnb.lottie.LottieAnimationView
             android:id="@+id/animationView"
-            android:visibility="invisible"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            app:lottie_url="https://assets3.lottiefiles.com/dotlotties/dlf10_8m0i8okm.lottie"
-            android:scaleType="centerCrop"/>
-
-
+            android:scaleType="centerCrop"
+            android:visibility="invisible"
+            app:lottie_url="https://assets3.lottiefiles.com/dotlotties/dlf10_8m0i8okm.lottie" />
 
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>

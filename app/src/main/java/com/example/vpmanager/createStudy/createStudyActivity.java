@@ -16,7 +16,7 @@ import androidx.fragment.app.FragmentManager;
 
 import com.airbnb.lottie.LottieAnimationView;
 import com.example.vpmanager.R;
-import com.example.vpmanager.accessDatabase;
+import com.example.vpmanager.AccessDatabase;
 import com.example.vpmanager.views.mainActivity;
 import com.google.android.material.appbar.MaterialToolbar;
 import com.google.android.material.navigation.NavigationView;
@@ -46,19 +46,21 @@ public class createStudyActivity extends AppCompatActivity {
     String location = "";
     String street = "";
     String room = "";
-    String contact = "";
-    String contact2 = "";
-    String contact3 = "";
+    String contactMail = "";
+    String contactPhone = "";
+    String contactSkype = "";
+    String contactDiscord = "";
+    String contactOthers = "";
 
 
-    String firstSpinnerItemExecution = "Durchführungsart";
-    String firstSpinnerItemCategory = "Studienkategorie";
+    String firstSpinnerItemExecution = "Durchführungsart*";
+    String firstSpinnerItemCategory = "Studienkategorie*";
 
     String contactViewString = "";
     String locationViewString = "";
     ArrayList<String> dates = new ArrayList<>();
 
-    accessDatabase accessDatabase = new accessDatabase();
+    AccessDatabase accessDatabase = new AccessDatabase();
 
     StateProgressBar stateProgressBar;
     String[] descriptionData = {"Basis", "Info", "Kategorie", "Termine", "Bestätigen"};
@@ -77,12 +79,14 @@ public class createStudyActivity extends AppCompatActivity {
     TextInputEditText textInputEditTextLocation;
     TextInputEditText textInputEditTextStreet;
     TextInputEditText textInputEditTextRoom;
-    TextInputEditText textInputEditTextContact;
-    TextInputEditText textInputEditTextContact2;
-    TextInputEditText textInputEditTextContact3;
+    TextInputEditText textInputEditTextContactMail;
+    TextInputEditText textInputEditTextContactZoom;
+    TextInputEditText textInputEditTextContactSkype;
+    TextInputEditText textInputEditTextContactDiscord;
+    TextInputEditText textInputEditTextContactOthers;
     ListView listViewDates;
-    Spinner categories;
-    Spinner executionType;
+    Spinner categoriesSpinner;
+    Spinner executionTypeSpinner;
 
 
     Fragment fragment_container;
@@ -207,16 +211,18 @@ public class createStudyActivity extends AppCompatActivity {
         newStudy.put("creator", mainActivity.uniqueID);
         newStudy.put("name", studyTitle);
         newStudy.put("vps", VP);
-        newStudy.put("contact", contact);
-        newStudy.put("contact2", contact2);
-        newStudy.put("contact3", contact3);
+        newStudy.put("contact", contactMail);
+        newStudy.put("contact2", contactPhone);
+        newStudy.put("contact3", contactSkype);
+        newStudy.put("contact4", contactDiscord);
+        newStudy.put("contact5", contactOthers);
         newStudy.put("description", studyDesc);
         newStudy.put("category", category);
         newStudy.put("executionType", execution);
-        if (executionType.getSelectedItem().toString().equals(getString(R.string.remoteString))) {
+        if (executionTypeSpinner.getSelectedItem().toString().equals(getString(R.string.remoteString))) {
             newStudy.put("platform", platform);
             newStudy.put("platform2", optionalPlatform);
-        } else if (executionType.getSelectedItem().toString().equals(getString(R.string.presenceString))) {
+        } else if (executionTypeSpinner.getSelectedItem().toString().equals(getString(R.string.presenceString))) {
             newStudy.put("location", location);
             newStudy.put("street", street);
             newStudy.put("room", room);
@@ -274,14 +280,14 @@ public class createStudyActivity extends AppCompatActivity {
                 getInput(currentFragment);
                 if (mandatoryCheck(currentFragment)) {
                     bundle = createBundle(2);
-                    createStudyFragment_StepOne_Contact createStudyFragment_stepOne_contact = new createStudyFragment_StepOne_Contact();
-                    createStudyFragment_stepOne_contact.setArguments(bundle);
+                    createStudyFragment_StepTwo createStudyFragment_stepTwo = new createStudyFragment_StepTwo();
+                    createStudyFragment_stepTwo.setArguments(bundle);
                     stateProgressBar.setCurrentStateNumber(StateProgressBar.StateNumber.TWO);
                     fragmentManager
                             .beginTransaction()
                             .setCustomAnimations(R.anim.enter_from_right, R.anim.exit_to_left,
                                     R.anim.enter_from_left, R.anim.exit_to_right)
-                            .replace(R.id.fragment_container, createStudyFragment_stepOne_contact, null)
+                            .replace(R.id.fragment_container, createStudyFragment_stepTwo, null)
                             .addToBackStack(null)
                             .commit();
                 }
@@ -290,7 +296,7 @@ public class createStudyActivity extends AppCompatActivity {
                 getInput(currentFragment);
                 if (mandatoryCheck(currentFragment)) {
                     bundle = createBundle(3);
-                    createStudyFragment_StepTwo createStudyFragment_stepTwo = new createStudyFragment_StepTwo();
+                    createStudyFragment_StepThree createStudyFragment_stepTwo = new createStudyFragment_StepThree();
                     createStudyFragment_stepTwo.setArguments(bundle);
                     stateProgressBar.setCurrentStateNumber(StateProgressBar.StateNumber.TWO);
                     fragmentManager
@@ -306,22 +312,6 @@ public class createStudyActivity extends AppCompatActivity {
                 getInput(currentFragment);
                 if (mandatoryCheck(currentFragment)) {
                     bundle = createBundle(4);
-                    createStudyFragment_StepThree createStudyFragment_stepThree = new createStudyFragment_StepThree();
-                    createStudyFragment_stepThree.setArguments(bundle);
-                    stateProgressBar.setCurrentStateNumber(StateProgressBar.StateNumber.THREE);
-                    fragmentManager
-                            .beginTransaction()
-                            .setCustomAnimations(R.anim.enter_from_right, R.anim.exit_to_left,
-                                    R.anim.enter_from_left, R.anim.exit_to_right)
-                            .replace(R.id.fragment_container, createStudyFragment_stepThree, null)
-                            .addToBackStack(null)
-                            .commit();
-                }
-                break;
-            case 4:
-                getInput(currentFragment);
-                if (mandatoryCheck(currentFragment)) {
-                    bundle = createBundle(5);
                     stateProgressBar.setCurrentStateNumber(StateProgressBar.StateNumber.THREE);
                     if (execution.equals(getString(R.string.remoteString))) {
                         createStudyFragment_StepFour_Remote createStudyFragment_stepFour_remote = new createStudyFragment_StepFour_Remote();
@@ -344,12 +334,12 @@ public class createStudyActivity extends AppCompatActivity {
                                 .addToBackStack(null)
                                 .commit();
                     }
-                    break;
                 }
-            case 5:
+                break;
+            case 4:
                 getInput(currentFragment);
                 if (mandatoryCheck(currentFragment)) {
-                    bundle = createBundle(6);
+                    bundle = createBundle(5);
                     createStudyFragment_StepFive createStudyFragment_stepFive = new createStudyFragment_StepFive();
                     createStudyFragment_stepFive.setArguments(bundle);
                     stateProgressBar.setCurrentStateNumber(StateProgressBar.StateNumber.FOUR);
@@ -362,9 +352,9 @@ public class createStudyActivity extends AppCompatActivity {
                             .commit();
                 }
                 break;
-            case 6:
+            case 5:
                 getInput(currentFragment);
-                bundle = createBundle(7);
+                bundle = createBundle(6);
                 createStudyFragment_finalStep createStudyFragment_finalStep = new createStudyFragment_finalStep();
                 createStudyFragment_finalStep.setArguments(bundle);
                 stateProgressBar.setCurrentStateNumber(StateProgressBar.StateNumber.FIVE);
@@ -376,8 +366,8 @@ public class createStudyActivity extends AppCompatActivity {
                         .addToBackStack(null)
                         .commit();
                 break;
-            case 7:
-                bundle = createBundle(8);
+            case 6:
+                bundle = createBundle(7);
                 createStudyFragment_finalStep_two createStudyFragment_finalStep_two = new createStudyFragment_finalStep_two();
                 createStudyFragment_finalStep_two.setArguments(bundle);
                 stateProgressBar.setCurrentStateNumber(StateProgressBar.StateNumber.FIVE);
@@ -390,8 +380,8 @@ public class createStudyActivity extends AppCompatActivity {
                         .commit();
                 break;
 
-            case 8:
-                bundle = createBundle(9);
+            case 7:
+                bundle = createBundle(8);
                 createStudyFragment_finalStep_three createStudyFragment_finalStep_three = new createStudyFragment_finalStep_three();
                 createStudyFragment_finalStep_three.setArguments(bundle);
                 stateProgressBar.setCurrentStateNumber(StateProgressBar.StateNumber.FIVE);
@@ -404,7 +394,7 @@ public class createStudyActivity extends AppCompatActivity {
                         .addToBackStack(null)
                         .commit();
                 break;
-            case 9:
+            case 8:
                 stateProgressBar.setCurrentStateNumber(StateProgressBar.StateNumber.FIVE);
                 doneAnimation.setVisibility(LottieAnimationView.VISIBLE);
                 doneAnimation.setProgress(0);
@@ -457,7 +447,7 @@ public class createStudyActivity extends AppCompatActivity {
                 getInput(currentFragment);
                 stateProgressBar.setCurrentStateNumber(StateProgressBar.StateNumber.ONE);
                 bundle = createBundle(2);
-                createStudyFragment_StepOne_Contact createStudyFragment_stepOne_contact = new createStudyFragment_StepOne_Contact();
+                createStudyFragment_StepTwo createStudyFragment_stepOne_contact = new createStudyFragment_StepTwo();
                 createStudyFragment_stepOne_contact.setArguments(bundle);
                 fragmentManager
                         .beginTransaction()
@@ -470,7 +460,7 @@ public class createStudyActivity extends AppCompatActivity {
             case 4:
                 getInput(currentFragment);
                 bundle = createBundle(3);
-                createStudyFragment_StepTwo createStudyFragment_stepTwo = new createStudyFragment_StepTwo();
+                createStudyFragment_StepThree createStudyFragment_stepTwo = new createStudyFragment_StepThree();
                 createStudyFragment_stepTwo.setArguments(bundle);
                 stateProgressBar.setCurrentStateNumber(StateProgressBar.StateNumber.TWO);
                 fragmentManager
@@ -485,20 +475,6 @@ public class createStudyActivity extends AppCompatActivity {
             case 5:
                 getInput(currentFragment);
                 bundle = createBundle(4);
-                createStudyFragment_StepThree createStudyFragment_stepThree = new createStudyFragment_StepThree();
-                createStudyFragment_stepThree.setArguments(bundle);
-                stateProgressBar.setCurrentStateNumber(StateProgressBar.StateNumber.THREE);
-                fragmentManager
-                        .beginTransaction()
-                        .setCustomAnimations(R.anim.enter_from_left, R.anim.exit_to_right,
-                                R.anim.enter_from_right, R.anim.exit_to_left)
-                        .replace(R.id.fragment_container, createStudyFragment_stepThree, null)
-                        .addToBackStack(null)
-                        .commit();
-                break;
-            case 6:
-                getInput(currentFragment);
-                bundle = createBundle(5);
                 stateProgressBar.setCurrentStateNumber(StateProgressBar.StateNumber.THREE);
                 if (execution.equals(getString(R.string.remoteString))) {
                     createStudyFragment_StepFour_Remote createStudyFragment_stepFour_remote = new createStudyFragment_StepFour_Remote();
@@ -522,9 +498,9 @@ public class createStudyActivity extends AppCompatActivity {
                             .commit();
                 }
                 break;
-            case 7:
+            case 6:
                 getInput(currentFragment);
-                bundle = createBundle(6);
+                bundle = createBundle(5);
                 createStudyFragment_StepFive createStudyFragment_stepFive = new createStudyFragment_StepFive();
                 createStudyFragment_stepFive.setArguments(bundle);
                 stateProgressBar.setCurrentStateNumber(StateProgressBar.StateNumber.FOUR);
@@ -537,8 +513,8 @@ public class createStudyActivity extends AppCompatActivity {
                         .commit();
                 break;
 
-            case 8:
-                bundle = createBundle(7);
+            case 7:
+                bundle = createBundle(6);
                 createStudyFragment_finalStep createStudyFragment_finalStep = new createStudyFragment_finalStep();
                 createStudyFragment_finalStep.setArguments(bundle);
                 stateProgressBar.setCurrentStateNumber(StateProgressBar.StateNumber.FOUR);
@@ -550,8 +526,8 @@ public class createStudyActivity extends AppCompatActivity {
                         .addToBackStack(null)
                         .commit();
                 break;
-            case 9:
-                bundle = createBundle(8);
+            case 8:
+                bundle = createBundle(7);
                 createStudyFragment_finalStep_two createStudyFragment_finalStep_two = new createStudyFragment_finalStep_two();
                 createStudyFragment_finalStep_two.setArguments(bundle);
                 next.setText(getString(R.string.fragment_create_study_base_next));
@@ -580,16 +556,27 @@ public class createStudyActivity extends AppCompatActivity {
                 studyTitle = Objects.requireNonNull(textInputEditTextTitle.getText()).toString();
                 VP = Objects.requireNonNull(textInputEditTextVP.getText()).toString();
                 System.out.println(VP + " " + studyTitle);
+
+                categoriesSpinner = fragmentManager.getFragments().get(0).getView().findViewById(R.id.createCategories);
+                executionTypeSpinner = fragmentManager.getFragments().get(0).getView().findViewById(R.id.createExecutionType);
+                category = categoriesSpinner.getSelectedItem().toString();
+                execution = executionTypeSpinner.getSelectedItem().toString();
+                System.out.println("Kategorie: " + category);
+                System.out.println("Durchführung: " + execution);
                 break;
 
             case 2:
-                textInputEditTextContact = fragmentManager.getFragments().get(0).getView().findViewById(R.id.inputContact1);
-                textInputEditTextContact2 = fragmentManager.getFragments().get(0).getView().findViewById(R.id.inputContact2);
-                textInputEditTextContact3 = fragmentManager.getFragments().get(0).getView().findViewById(R.id.inputContact3);
+                textInputEditTextContactMail = fragmentManager.getFragments().get(0).getView().findViewById(R.id.inputContact1);
+                textInputEditTextContactZoom = fragmentManager.getFragments().get(0).getView().findViewById(R.id.inputContact2);
+                textInputEditTextContactSkype = fragmentManager.getFragments().get(0).getView().findViewById(R.id.inputContact3);
+                textInputEditTextContactDiscord = fragmentManager.getFragments().get(0).getView().findViewById(R.id.inputContact4);
+                textInputEditTextContactOthers = fragmentManager.getFragments().get(0).getView().findViewById(R.id.inputContact5);
 
-                contact = Objects.requireNonNull(textInputEditTextContact.getText()).toString();
-                contact2 = Objects.requireNonNull(textInputEditTextContact2.getText()).toString();
-                contact3 = Objects.requireNonNull(textInputEditTextContact3.getText()).toString();
+                contactMail = Objects.requireNonNull(textInputEditTextContactMail.getText()).toString();
+                contactPhone = Objects.requireNonNull(textInputEditTextContactZoom.getText()).toString();
+                contactSkype = Objects.requireNonNull(textInputEditTextContactSkype.getText()).toString();
+                contactDiscord = Objects.requireNonNull(textInputEditTextContactDiscord.getText()).toString();
+                contactOthers = Objects.requireNonNull(textInputEditTextContactOthers.getText()).toString();
                 break;
 
             case 3:
@@ -598,17 +585,7 @@ public class createStudyActivity extends AppCompatActivity {
                 System.out.println(studyDesc);
                 break;
 
-
             case 4:
-                categories = fragmentManager.getFragments().get(0).getView().findViewById(R.id.createCategories);
-                executionType = fragmentManager.getFragments().get(0).getView().findViewById(R.id.createExecutionType);
-                category = categories.getSelectedItem().toString();
-                execution = executionType.getSelectedItem().toString();
-                System.out.println("Kategorie: " + category);
-                System.out.println("Durchführung: " + execution);
-                break;
-
-            case 5:
                 if (execution.equals(getString(R.string.remoteString))) {
                     // GET REMOTE STUFF HERE
                     location = "";
@@ -633,7 +610,7 @@ public class createStudyActivity extends AppCompatActivity {
                     room = Objects.requireNonNull(textInputEditTextRoom.getText()).toString();
                 }
                 break;
-            case 6:
+            case 5:
                 listViewDates = fragmentManager.getFragments().get(0).getView().findViewById(R.id.createDatelist);
                 for (int i = 0; i < listViewDates.getAdapter().getCount(); i++) {
                     System.out.println(listViewDates.getAdapter().getItem(i));
@@ -653,20 +630,20 @@ public class createStudyActivity extends AppCompatActivity {
             case 1:
                 bundle.putString("title", studyTitle);
                 bundle.putString("vp", VP);
+                bundle.putString("category", category);
+                bundle.putString("exe", execution);
                 break;
             case 2:
-                bundle.putString("contact", contact);
-                bundle.putString("contact2", contact2);
-                bundle.putString("contact3", contact3);
+                bundle.putString("contact", contactMail);
+                bundle.putString("contact2", contactPhone);
+                bundle.putString("contact3", contactSkype);
+                bundle.putString("contact4", contactDiscord);
+                bundle.putString("contact5", contactOthers);
                 break;
             case 3:
                 bundle.putString("desc", studyDesc);
                 break;
             case 4:
-                bundle.putString("category", category);
-                bundle.putString("exe", execution);
-                break;
-            case 5:
                 if (execution.equals(getString(R.string.remoteString))) {
                     bundle.putString("platform", platform);
                     bundle.putString("platform2", optionalPlatform);
@@ -678,10 +655,10 @@ public class createStudyActivity extends AppCompatActivity {
                     bundle.putString("room", room);
                 }
                 break;
-            case 6:
+            case 5:
                 bundle.putStringArrayList("dates", dates);
                 break;
-            case 7:
+            case 6:
                 prepareData();
                 bundle.putString("title", studyTitle);
                 bundle.putString("vp", VP);
@@ -689,11 +666,11 @@ public class createStudyActivity extends AppCompatActivity {
                 bundle.putString("exe", execution);
                 bundle.putString("location", locationViewString);
                 break;
-            case 8:
+            case 7:
                 bundle.putString("desc", studyDesc);
                 bundle.putString("contact", contactViewString);
                 break;
-            case 9:
+            case 8:
                 bundle.putStringArrayList("dates", dates);
                 break;
             default:
@@ -708,12 +685,18 @@ public class createStudyActivity extends AppCompatActivity {
     private void prepareData() {
         contactViewString = "\n";
         locationViewString = "\n";
-        contactViewString += contact;
-        if (!contact2.isEmpty()) {
-            contactViewString += "\n" + contact2;
+        contactViewString += "Email-adresese: " + contactMail;
+        if (!contactPhone.isEmpty()) {
+            contactViewString += "\nHandynummer: " + contactPhone;
         }
-        if (!contact3.isEmpty()) {
-            contactViewString += "\n" + contact3;
+        if (!contactSkype.isEmpty()) {
+            contactViewString += "\nSkype: " + contactSkype;
+        }
+        if (!contactDiscord.isEmpty()) {
+            contactViewString += "\nDiscord: " + contactDiscord;
+        }
+        if (!contactOthers.isEmpty()) {
+            contactViewString += "\nSonstige: " + contactOthers;
         }
 
         if (!location.isEmpty()) {
@@ -732,32 +715,58 @@ public class createStudyActivity extends AppCompatActivity {
     private boolean mandatoryCheck(int page) {
         switch (page) {
             case 1:
-                if (!studyTitle.isEmpty()) {
+                if (!studyTitle.isEmpty()&& !category.equals(firstSpinnerItemCategory) && !execution.equals(firstSpinnerItemExecution)) {
                     System.out.println(studyTitle);
                     return true;
                 }
+                if(studyTitle.isEmpty()){
+                    textInputEditTextTitle.setError("Titel darf nicht leer sein");
+                    textInputEditTextTitle.requestFocus();
+                    break;
+                }
+                if(category.equals(firstSpinnerItemCategory)){
+                    categoriesSpinner.setFocusable(true);
+                    categoriesSpinner.setFocusableInTouchMode(true);
+                    categoriesSpinner.requestFocus();
+                    categoriesSpinner.performClick();
+                    break;
+                }
+                if(execution.equals(firstSpinnerItemExecution)){
+                    executionTypeSpinner.setFocusable(true);
+                    executionTypeSpinner.setFocusableInTouchMode(true);
+                    executionTypeSpinner.requestFocus();
+                    executionTypeSpinner.performClick();
+                    break;
+                }
                 break;
             case 2:
-                if (!contact.isEmpty()) {
+                if (!contactMail.isEmpty()) {
                     return true;
                 }
+                textInputEditTextContactMail.setError("Email-Kontakt muss angegeben werden");
+                textInputEditTextContactMail.requestFocus();
                 break;
             case 3:
                 if (!studyDesc.isEmpty()) {
                     return true;
                 }
+                textInputEditTextDesc.setError("Studienbeschreibung darf nicht leer sein");
+                textInputEditTextDesc.requestFocus();
                 break;
             case 4:
-                if (!category.equals(firstSpinnerItemCategory) && !execution.equals(firstSpinnerItemExecution)) {
-                    return true;
-                }
-                break;
-            case 5:
                 if (!location.isEmpty()) {
                     return true;
                 }
+                if(execution.equals("Präsenz")) {
+                    textInputEditTextLocation.setError("Ort der Studie muss angegeben werden");
+                    textInputEditTextLocation.requestFocus();
+                }
                 if (!platform.isEmpty()) {
                     return true;
+                }
+                if(execution.equals("Remote")) {
+                    textInputEditTextPlatform.setError("Primärplattform muss angegeben werden");
+                    textInputEditTextPlatform.requestFocus();
                 }
                 break;
             default:

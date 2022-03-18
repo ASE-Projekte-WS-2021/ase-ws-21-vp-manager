@@ -17,14 +17,18 @@ import android.widget.TimePicker;
 import com.example.vpmanager.R;
 import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
+import java.util.Locale;
 
 public class createStudyFragment_StepFive extends Fragment {
 
     int mYear;
     int mMonth;
     int mDay;
+    String weekDay = "";
     int mHour;
     int mMinute;
     String date_time = "";
@@ -38,7 +42,7 @@ public class createStudyFragment_StepFive extends Fragment {
     //Return values:
     //Sets the current fragment for the activity
     public createStudyFragment_StepFive() {
-        createStudyActivity.currentFragment = 6;
+        createStudyActivity.currentFragment = 5;
     }
 
     @Override
@@ -91,6 +95,7 @@ public class createStudyFragment_StepFive extends Fragment {
     //Creates a datepicker, which will be displayed as a popup in the fragment
     private void datePicker() {
         final Calendar c = Calendar.getInstance();
+        Locale.setDefault(Locale.GERMANY);
         mYear = c.get(Calendar.YEAR);
         mMonth = c.get(Calendar.MONTH);
         mDay = c.get(Calendar.DAY_OF_MONTH);
@@ -99,13 +104,17 @@ public class createStudyFragment_StepFive extends Fragment {
                 new DatePickerDialog.OnDateSetListener() {
                     @Override
                     public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
-
-                        date_time = dayOfMonth + "-" + (monthOfYear + 1) + "-" + year;
+                        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("EEEE");
+                        Date date = new Date(year, monthOfYear, dayOfMonth-1);
+                        weekDay = simpleDateFormat.format(date);
+                        date_time = weekDay + ", " + dayOfMonth + "." + (monthOfYear + 1) + "." + year + " um ";
                         timePicker();
                     }
                 }, mYear, mMonth, mDay);
         datePickerDialog.show();
     }
+
+
 
     //Parameter:
     //Return values:
@@ -140,17 +149,18 @@ public class createStudyFragment_StepFive extends Fragment {
         if (hourOfDay < 10) {
             hours = "0" + hourOfDay;
         }
-        dates.add(date_time + " " + hours + ":" + minutes);
+        dates.add(date_time + hours + ":" + minutes + " Uhr");
         datePickerAdapter.notifyDataSetChanged();
     }
 
     //Parameter:
     //Return values:
     //Sets an adapter for the Listview
-    public void setupDatePicker() {
+    private void setupDatePicker() {
         datePickerAdapter = new ArrayAdapter<String>(getActivity(),
                 android.R.layout.simple_list_item_1,
                 dates);
         dateList.setAdapter(datePickerAdapter);
     }
+
 }

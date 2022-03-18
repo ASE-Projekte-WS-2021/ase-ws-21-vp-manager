@@ -25,7 +25,6 @@ import com.google.firebase.auth.FirebaseAuth;
 
 public class loginFragment extends Fragment {
 
-
     private TextInputEditText emailEdittext;
     private TextInputEditText passwordEditText;
     private Button forgotPasswordButton;
@@ -34,7 +33,6 @@ public class loginFragment extends Fragment {
 
     private FirebaseAuth firebaseAuth;
     private NavController navController;
-
 
     public loginFragment() {
         // Required empty public constructor
@@ -47,7 +45,6 @@ public class loginFragment extends Fragment {
 
         firebaseAuth = FirebaseAuth.getInstance();
     }
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -62,6 +59,7 @@ public class loginFragment extends Fragment {
         setupView(view);
         ((mainActivity)getActivity()).setDrawerLocked();
         navController = Navigation.findNavController(view);
+
         setOnClickListeners();
     }
 
@@ -81,7 +79,6 @@ public class loginFragment extends Fragment {
         forgotPasswordButton = view.findViewById(R.id.login_forgotPassword_button);
         loginButton = view.findViewById(R.id.login_button);
         registerButton = view.findViewById(R.id.register_button);
-
     }
 
     //Parameter:
@@ -180,11 +177,9 @@ public class loginFragment extends Fragment {
                         });
                     } else {
                         Toast.makeText(getActivity(), "Registierung fehlgeschlagen: " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
-
                     }
                 }
             });
         }
     }
-
 }

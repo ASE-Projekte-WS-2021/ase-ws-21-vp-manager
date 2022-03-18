@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".createStudy.createStudyFragment_StepThree"
     android:background="?android:windowBackground">
 
@@ -11,53 +12,69 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:weightSum="7">
+        android:weightSum="6">
 
 
         <TextView
             android:id="@+id/pageTitle"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/fragment_create_study_pageThreeTitle"
+            android:layout_height="0dp"
+            android:layout_weight="0.7"
+            android:text="@string/createStudyDesc"
             android:textAlignment="center"
             android:textSize="35sp" />
 
         <View
             android:layout_width="match_parent"
-            android:layout_height="3dp"
+            android:layout_height="0dp"
+            android:layout_weight="0.05"
             android:layout_marginLeft="20dp"
-            android:layout_marginTop="5dp"
             android:layout_marginRight="20dp"
-            android:background="@color/black" />
+            android:background="@color/black"
+            android:layout_marginBottom="30dp"/>
 
-        <TextView
+        <!--<TextView
             android:id="@+id/pageDesc"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_marginLeft="5dp"
-            android:layout_marginTop="30dp"
-            android:layout_marginRight="5dp"
             android:layout_weight="3"
-            android:text="@string/fragment_create_study_desc_page_three"
+            android:textSize="20sp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
             android:textAlignment="center"
-            android:textSize="20sp" />
+            android:layout_marginTop="30dp"
+            android:text="@string/fragment_create_study_desc_page_two" />-->
 
 
-        <Spinner
-            android:id="@+id/createCategories"
+
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="2"
-            android:popupBackground="@color/green_Main"
-            />
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_weight="5.25"
+            app:boxStrokeColor="@color/black"
+            app:boxStrokeWidthFocused="2dp"
+            android:textColorHint="@color/heatherred_Main"
+            android:hint="@string/createStudyDesc"
+            app:hintTextColor="@color/heatherred_Main">
 
-        <Spinner
-            android:id="@+id/createExecutionType"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="2"
-            android:popupBackground="@color/green_Main"
-            />
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                style="@style/You.EditText.Style"
+                android:id="@+id/inputFieldStudyDesc"
+                android:gravity="top"
+                android:inputType="textMultiLine"
+                android:lines="15"
+                android:textColorHint="@color/tabs_grey"
+                android:hint="@string/createStudyDesc">
+            </com.google.android.material.textfield.TextInputEditText>
+
+        </com.google.android.material.textfield.TextInputLayout>
+
 
     </LinearLayout>
 

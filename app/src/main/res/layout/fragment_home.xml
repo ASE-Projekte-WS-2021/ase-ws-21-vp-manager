@@ -1,153 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="?android:windowBackground"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
     app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-    <LinearLayout
-        android:id="@+id/linearLayoutHomeNav"
+    <com.google.android.material.tabs.TabLayout
+        android:id="@+id/tab_layout_home"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:orientation="vertical"
-        android:padding="10dp">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="120dp"
-            android:baselineAligned="false"
-            android:orientation="horizontal"
-            android:weightSum="2">
-
-            <RelativeLayout
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:background="@drawable/border">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerInParent="true"
-                    android:paddingStart="5dp"
-                    android:paddingEnd="5dp"
-                    android:text="@string/findStudyCardDescText"
-                    android:textAlignment="center"
-                    android:textColor="@color/black"
-                    android:textSize="16sp"
-                    android:textStyle="bold" />
-
-            </RelativeLayout>
-
-            <RelativeLayout
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1">
-
-                <Button
-                    android:id="@+id/findStudyBtn"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_centerInParent="true"
-                    android:background="@color/heatherred_Main"
-                    android:elevation="5dp"
-                    android:text="Studien finden"
-                    android:textAllCaps="true"
-                    android:textColor="@color/white"
-                    android:textSize="16sp"
-                    android:textStyle="bold">
-
-                </Button>
-
-            </RelativeLayout>
-
-        </LinearLayout>
+        app:tabRippleColor="@color/green_light"
+        app:tabIndicatorColor="@color/green_Main"
+        app:tabSelectedTextColor="@color/white"
+        app:tabTextColor="@color/white"
+        android:clickable="true"
+        android:focusable="true">
 
 
-        <View
-            android:id="@+id/separator_homeFragment"
-            android:layout_width="match_parent"
-            android:layout_height="20dp" />
+    </com.google.android.material.tabs.TabLayout>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="120dp"
-            android:baselineAligned="false"
-            android:orientation="horizontal"
-            android:weightSum="2">
 
-            <RelativeLayout
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1">
 
-                <Button
-                    android:id="@+id/createStudyBtn"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_centerInParent="true"
-                    android:background="@color/heatherred_Main"
-                    android:elevation="5dp"
-                    android:text="Studien erstellen"
-                    android:textAllCaps="true"
-                    android:textColor="@color/white"
-                    android:textSize="16sp"
-                    android:textStyle="bold">
-
-                </Button>
-
-            </RelativeLayout>
-
-            <RelativeLayout
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:background="@drawable/border">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerInParent="true"
-                    android:paddingStart="5dp"
-                    android:paddingEnd="5dp"
-                    android:text="@string/createStudyCardDescText"
-                    android:textAlignment="center"
-                    android:textColor="@color/black"
-                    android:textSize="16sp"
-                    android:textStyle="bold" />
-
-            </RelativeLayout>
-
-        </LinearLayout>
-
-    </LinearLayout>
-
-    <LinearLayout
+    <androidx.viewpager.widget.ViewPager
+        android:id="@+id/view_pager_home"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/linearLayoutHomeNav"
-        android:orientation="vertical">
+        />
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="25dp"
-        android:layout_marginTop="30dp"
-        android:layout_marginEnd="25dp"
-        android:text="Anstehende Termine"
-        android:textSize="20sp"
-        android:textStyle="bold" />
-
-    <ListView
-        android:id="@+id/listViewOwnArrivingStudyFragment"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="20dp"
-        android:layout_weight="1"
-        android:dividerHeight="2dp" />
-
-    </LinearLayout>
-
-</RelativeLayout>
+</LinearLayout>

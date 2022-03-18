@@ -15,16 +15,17 @@ import androidx.navigation.ui.NavigationUI;
 
 import com.example.vpmanager.DrawerController;
 import com.example.vpmanager.R;
-import com.example.vpmanager.accessDatabase;
+import com.example.vpmanager.AccessDatabase;
 import com.google.android.material.appbar.MaterialToolbar;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 
+import java.util.Objects;
 import java.util.UUID;
 
 public class mainActivity extends AppCompatActivity implements DrawerController {
 
-    private DrawerLayout drawerLayoutMain;
+    public DrawerLayout drawerLayoutMain;
     private NavController navController;
     private NavigationView navigationViewMain;
     private NavHostFragment navHostFragment;
@@ -34,7 +35,7 @@ public class mainActivity extends AppCompatActivity implements DrawerController 
     private AppBarConfiguration appBarConfiguration;
 
     //logic to register a new user (app installation) if necessary
-    com.example.vpmanager.accessDatabase accessDatabase;
+    AccessDatabase accessDatabase;
     public static String uniqueID = null;
     private static final String PREF_UNIQUE_ID = "PREF_UNIQUE_ID";
 
@@ -56,7 +57,7 @@ public class mainActivity extends AppCompatActivity implements DrawerController 
 
     private void setupUserId() {
         uniqueID = createUserId(this);
-        accessDatabase = new accessDatabase();
+        accessDatabase = new AccessDatabase();
         registerNewUser();
     }
 
@@ -82,8 +83,7 @@ public class mainActivity extends AppCompatActivity implements DrawerController 
         //navController = Navigation.findNavController(this, R.id.nav_host_fragment_main);
 
         //Top level destinations are configured here. createStudyActivity and studyFragment should not be included!
-        appBarConfiguration = new AppBarConfiguration.Builder(R.id.homeFragment, R.id.findStudyFragment,
-                R.id.personalAccountFragment, R.id.ownStudyFragment).setDrawerLayout(drawerLayoutMain).build();
+        appBarConfiguration = new AppBarConfiguration.Builder(R.id.homeFragment, R.id.findStudyFragment, R.id.ownStudyFragment).setDrawerLayout(drawerLayoutMain).build();
 
         //handle Navigation item clicks
         //this works with no further action, if the menu and destination id’s match.
@@ -112,17 +112,21 @@ public class mainActivity extends AppCompatActivity implements DrawerController 
                 return false;
             }
         });
+        /*
         navigationViewMain.getMenu().getItem(5).setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(MenuItem menuItem) {
                 firebaseAuth.signOut();
+                
+                navController.navigate(R.id.action_global_nestedGraphLoginRegistration);
 
-                navController.navigate(R.id.action_global_loginFragment);
                 Log.d("mainActivity", "menuItem" + navigationViewMain.getMenu().getItem(5).toString());
                 Log.d("mainActivity", "additional listener on logout was active!");
                 return false;
             }
         });
+
+         */
         /*
         navigationViewMain.getMenu().getItem(1).setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
             @Override
@@ -160,6 +164,16 @@ public class mainActivity extends AppCompatActivity implements DrawerController 
     @Override
     public boolean onSupportNavigateUp() {
         Log.d("mainActivity", "onSupportNavigateUp start + end");
+        if (!Objects.requireNonNull(navController.getCurrentDestination()).toString()
+                .equals("Destination(com.example.vpmanager:id/homeFragment) label=Startseite class=com.example.vpmanager.views.homeFragment")) {
+            if (NavigationUI.navigateUp(navController, appBarConfiguration)) {
+                if (Objects.requireNonNull(navController.getCurrentDestination()).toString()
+                        .equals("Destination(com.example.vpmanager:id/homeFragment) label=Startseite class=com.example.vpmanager.views.homeFragment")) {
+                    navController.navigate(R.id.action_global_homeFragment);
+                    return true;
+                }
+            }
+        }
         return NavigationUI.navigateUp(navController, appBarConfiguration) || super.onSupportNavigateUp();
     }
 
@@ -200,5 +214,23 @@ public class mainActivity extends AppCompatActivity implements DrawerController 
     public void setDrawerUnlocked() {
         drawerLayoutMain.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED);
         topAppBarMain.setNavigationIcon(getDrawable(R.drawable.ic_baseline_menu_24));
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (!Objects.requireNonNull(navController.getCurrentDestination()).toString()
+                .equals("Destination(com.example.vpmanager:id/homeFragment) label=Startseite class=com.example.vpmanager.views.homeFragment")) {
+            if (NavigationUI.navigateUp(navController, appBarConfiguration)) {
+                if (Objects.requireNonNull(navController.getCurrentDestination()).toString()
+                        .equals("Destination(com.example.vpmanager:id/homeFragment) label=Startseite class=com.example.vpmanager.views.homeFragment")) {
+                    System.out.println(Objects.requireNonNull(navController.getCurrentDestination()).toString());
+                    navController.navigate(R.id.action_global_homeFragment);
+                }
+            }
+        }
+        else
+        {
+            super.onBackPressed();
+        }
     }
 }

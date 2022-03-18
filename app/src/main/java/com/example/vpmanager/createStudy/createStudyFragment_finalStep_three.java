@@ -25,7 +25,7 @@ public class createStudyFragment_finalStep_three extends Fragment {
     //Return values:
     //Sets the current fragment for the activity
     public createStudyFragment_finalStep_three() {
-        createStudyActivity.currentFragment = 9;
+        createStudyActivity.currentFragment = 8;
     }
 
     @Override

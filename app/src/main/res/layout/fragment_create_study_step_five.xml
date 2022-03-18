@@ -12,26 +12,27 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:weightSum="7">
+        android:weightSum="6">
 
 
         <TextView
             android:id="@+id/pageTitle"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
+            android:layout_weight="0.7"
             android:text="@string/fragment_create_study_pageFiveTitle"
             android:textAlignment="center"
             android:textSize="35sp" />
 
         <View
             android:layout_width="match_parent"
-            android:layout_height="3dp"
+            android:layout_height="0dp"
+            android:layout_weight="0.05"
             android:layout_marginLeft="20dp"
-            android:layout_marginTop="5dp"
             android:layout_marginRight="20dp"
             android:background="@color/black" />
 
-        <TextView
+        <!--<TextView
             android:id="@+id/pageDesc"
             android:layout_width="match_parent"
             android:layout_height="0dp"
@@ -41,37 +42,41 @@
             android:layout_weight="3"
             android:text="@string/fragment_create_study_desc_page_five"
             android:textAlignment="center"
-            android:textSize="20sp" />
+            android:textSize="20sp" />-->
 
         <RelativeLayout
+            android:layout_marginTop="25dp"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="4"
+            android:layout_weight="5.25"
             android:orientation="vertical">
 
             <ListView
                 android:id="@+id/createDatelist"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginBottom="5dp"
-                android:layout_marginStart="5dp"
+                android:layout_marginBottom="10dp"
+                android:layout_marginStart="10dp"
                 android:drawSelectorOnTop="false" />
 
-            <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
-                android:id="@+id/fab"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentBottom="true"
-                android:layout_alignParentEnd="true"
-                android:layout_marginBottom="16dp"
-                android:layout_marginEnd="16dp"
-                app:strokeColor="@color/heatherred_Main"
-                app:strokeWidth="3dp"
-                android:backgroundTint="@color/green_light"
-                android:text="@string/fragment_create_study_pageFive_fab"
-                app:icon="@drawable/ic_baseline_add_24" />
 
         </RelativeLayout>
+
+        <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+            android:id="@+id/fab"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginBottom="16dp"
+            android:layout_marginEnd="16dp"
+            app:strokeColor="@color/heatherred_Main"
+            app:strokeWidth="3dp"
+            android:backgroundTint="@color/green_light"
+            android:text="@string/fragment_create_study_pageFive_fab"
+            app:icon="@drawable/ic_baseline_add_24" />
+
 
 
     </LinearLayout>
