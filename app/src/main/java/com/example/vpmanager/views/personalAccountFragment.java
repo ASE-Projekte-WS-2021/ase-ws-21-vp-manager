@@ -122,10 +122,10 @@ public class personalAccountFragment extends Fragment {
                 Bundle args = new Bundle();
                 args.putString("studyId", studyTitle);
                 if(PA_ExpandableListDataPump.navigateToStudyCreatorFragment(uniqueID, studyTitle)) {
-                    navController.navigate(R.id.action_personalAccountFragment_to_studyCreatorFragment, args);
+                    navController.navigate(R.id.action_homeFragment_to_studyCreatorFragment, args);
                 }
                 else {
-                    navController.navigate(R.id.action_personalAccountFragment_to_studyFragment, args);
+                    navController.navigate(R.id.action_homeFragment_to_studyFragment, args);
                 }
                 return false;
             }
