@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.ExpandableListView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ListView;
 import android.widget.Switch;
 import android.widget.TextView;
 
@@ -21,6 +22,7 @@ import androidx.navigation.Navigation;
 import com.example.vpmanager.PA_ExpandableListAdapter;
 import com.example.vpmanager.PA_ExpandableListDataPump;
 import com.example.vpmanager.R;
+import com.example.vpmanager.adapter.CustomListViewAdapter;
 
 import org.eazegraph.lib.charts.PieChart;
 import org.eazegraph.lib.models.PieModel;
@@ -37,13 +39,14 @@ import java.util.List;
 public class personalAccountFragment extends Fragment {
 
     private ExpandableListView listView;
+    private ListView newListView;
     private PA_ExpandableListAdapter adapter;
     private List<String> expandableListTitle;
     private HashMap<String, List<String>> expandableListDetail;
     private PieChart chart;
     private Switch sourceSwitch;
     private ImageView settings;
-    private LinearLayout participatedLayout, plannedLayout;
+    private LinearLayout participatedLayout, plannedLayout, completedLayout;
 
     private static String martikelNumber;
 
@@ -96,12 +99,10 @@ public class personalAccountFragment extends Fragment {
                             PA_ExpandableListDataPump.getVPandMatrikelnumber(new PA_ExpandableListDataPump.FirestoreCallbackUser() {
                                 @Override
                                 public void onCallback(String vps, String matrikelNumber) {
-                                    if(vps != null && matrikelNumber != null && !vps.equals("") && !matrikelNumber.equals("")) {
+                                    if (vps != null && matrikelNumber != null && !vps.equals("") && !matrikelNumber.equals("")) {
                                         sumVPs = Float.parseFloat(vps);
                                         martikelNumber = matrikelNumber;
-                                    }
-                                    else
-                                    {
+                                    } else {
                                         sumVPs = 15;
                                         martikelNumber = "";
                                     }
@@ -121,8 +122,10 @@ public class personalAccountFragment extends Fragment {
     //Return values:
     //Setting the view components and readint the content Lists for the piechart values
     private void setupView(View view) {
+        newListView = view.findViewById(R.id.pa_fragment_listView);
         participatedLayout = view.findViewById(R.id.pa_parcticipated_layout);
         plannedLayout = view.findViewById(R.id.pa_planned_layout);
+        completedLayout = view.findViewById(R.id.pa_completed_layout);
         planned = view.findViewById(R.id.pa_planned);
         participated = view.findViewById(R.id.pa_participated);
         completed = view.findViewById(R.id.pa_completed);
@@ -134,7 +137,9 @@ public class personalAccountFragment extends Fragment {
         expandableListDetail = PA_ExpandableListDataPump.EXPANDABLE_LIST_DETAIL;
         expandableListTitle = new ArrayList<String>(expandableListDetail.keySet());
         adapter = new PA_ExpandableListAdapter(getActivity(), expandableListTitle, expandableListDetail);
-        listView.setAdapter(adapter);
+        //listView.setAdapter(adapter);
+
+        newListView.setAdapter(new CustomListViewAdapter(this.getContext() , this.getActivity(), navController));
 
         plannedVP = 0;
         completedVP = 0;
@@ -145,7 +150,7 @@ public class personalAccountFragment extends Fragment {
             for (int i = 0; i < vpList.size(); i++) {
                 String vps = vpList.get(i).split(",")[1];
                 double studyVPS = 0;
-                if(vps != null && !vps.equals(""))
+                if (vps != null && !vps.equals(""))
                     studyVPS = Double.parseDouble(vps);
                 plannedVP += studyVPS;
             }
@@ -155,12 +160,12 @@ public class personalAccountFragment extends Fragment {
             for (int i = 0; i < passedVpList.size(); i++) {
                 String vps = passedVpList.get(i).split(",")[1];
                 double studyVPS = 0;
-                if(vps != null && !vps.equals(""))
+                if (vps != null && !vps.equals(""))
                     studyVPS = Double.parseDouble(vps);
                 participatedVP += studyVPS;
             }
         }
-        setPieChartData(completedVP, participatedVP, plannedVP);
+        switchPieChart(sourceSwitch.isChecked());
     }
 
 
@@ -180,9 +185,22 @@ public class personalAccountFragment extends Fragment {
                 navController.navigate(R.id.action_homeFragment_to_studyFragment, args);
             }
             return false;
-        });
+        });/*
+        newListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Bundle args = new Bundle();
+                StudyObject study = (StudyObject) newListView.getChildAt(position).getTag();
+                args.putString("studyId", study.getStudyId() );
+                if (PA_ExpandableListDataPump.navigateToStudyCreatorFragment(uniqueID, study.getStudyId())) {
+                    navController.navigate(R.id.action_homeFragment_to_studyCreatorFragment, args);
+                } else {
+                    navController.navigate(R.id.action_homeFragment_to_studyFragment, args);
+                }
+            }
+        });*/
         sourceSwitch.setOnCheckedChangeListener((buttonView, isChecked) -> {
-                    switchPieChart(isChecked);
+            switchPieChart(isChecked);
         });
         settings.setOnClickListener(v -> {
             personalAccountFragment fragment = personalAccountFragment.this;
@@ -194,8 +212,8 @@ public class personalAccountFragment extends Fragment {
     //Parameter: boolean input to switch between app as source and web
     //Return values:
     //resets the piechart depending on switch position to get the new source and displaying them
-    private void switchPieChart(boolean isSourceWeb){
-        if(isSourceWeb) {
+    private void switchPieChart(boolean isSourceWeb) {
+        if (isSourceWeb) {
             if (martikelNumber.isEmpty()) {
                 CustomAlertReminder reminder = new CustomAlertReminder(this);
                 reminder.show();
@@ -226,16 +244,18 @@ public class personalAccountFragment extends Fragment {
                             setPieChartData(Double.parseDouble(VPS), 0, 0);
                             plannedLayout.setVisibility(View.INVISIBLE);
                             participatedLayout.setVisibility(View.INVISIBLE);
+                            completedLayout.setVisibility(View.VISIBLE);
                         }
                     }
                 }
             }
         }
-        if(!isSourceWeb)
-        {
+        if (!isSourceWeb) {
             setPieChartData(completedVP, participatedVP, plannedVP);
             plannedLayout.setVisibility(View.VISIBLE);
+            completedLayout.setVisibility(View.INVISIBLE);
             participatedLayout.setVisibility(View.VISIBLE);
+
         }
     }
 
@@ -244,7 +264,7 @@ public class personalAccountFragment extends Fragment {
     //Converts the inputs into percentage and adds slices to piechart
     private void setPieChartData(double completedVP, double participationVP, double plannedVP) {
         chart.clearChart();
-        int max = (int) (sumVPs *100);
+        int max = (int) (sumVPs * 100);
         int scaledCompletedVP = (int) completedVP * 100;
         int scaledParticipationVP = (int) participationVP * 100;
         int scaledPlannedVP = (int) plannedVP * 100;
@@ -266,7 +286,7 @@ public class personalAccountFragment extends Fragment {
                         getString(R.string.pieSliceLabelParticipation),
                         scaledParticipationVP,
                         getResources().getColor(R.color.pieChartParticipation)));
-        participated.setText("Teilgenommen: " + participationVP + " VP");
+        participated.setText("Vergangene: " + participationVP + " VP");
         chart.addPieSlice(
                 new PieModel(
                         getString(R.string.pieSliceLabelPlanned),
@@ -278,7 +298,7 @@ public class personalAccountFragment extends Fragment {
                         getString(R.string.pieSliceLabelRemaining),
                         remainingVP,
                         getResources().getColor(R.color.pieChartRemaining)));
-        remaining.setText("Übrig: " +remainingVP/100 + " VP");
+        remaining.setText("Übrig: " + remainingVP / 100 + " VP");
 
 
         //chart.setUseInnerPadding(false);
@@ -291,11 +311,11 @@ public class personalAccountFragment extends Fragment {
     //Creates and calls a getRequest to get the saved number of vps from the universities website. saves the count in a string
     private void createGetRequest() throws IOException {
         HttpURLConnection urlConnection = null;
-        URL url = new URL("https://vp.software-engineering.education/" + martikelNumber +"/vps");
+        URL url = new URL("https://vp.software-engineering.education/" + martikelNumber + "/vps");
         urlConnection = (HttpURLConnection) url.openConnection();
         urlConnection.setRequestMethod("GET");
-        urlConnection.setReadTimeout(10000 /* milliseconds */ );
-        urlConnection.setConnectTimeout(15000 /* milliseconds */ );
+        urlConnection.setReadTimeout(10000 /* milliseconds */);
+        urlConnection.setConnectTimeout(15000 /* milliseconds */);
         urlConnection.setDoOutput(true);
         urlConnection.connect();
 
@@ -314,8 +334,7 @@ public class personalAccountFragment extends Fragment {
     //Parameter: Input from CustomAlertDialog containing the count of vps and the users matrikelnumber
     //Return values:
     //Saves the input as local values and calls a database method to update the values in the users profile
-    public void closeDialog(String vps, String matrikelnumber)
-    {
+    public void closeDialog(String vps, String matrikelnumber) {
         martikelNumber = matrikelnumber;
         sumVPs = Float.parseFloat(vps);
 
@@ -325,3 +344,12 @@ public class personalAccountFragment extends Fragment {
 
     }
 }
+
+
+
+
+
+
+
+
+

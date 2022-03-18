@@ -83,8 +83,7 @@ public class mainActivity extends AppCompatActivity implements DrawerController 
         //navController = Navigation.findNavController(this, R.id.nav_host_fragment_main);
 
         //Top level destinations are configured here. createStudyActivity and studyFragment should not be included!
-        appBarConfiguration = new AppBarConfiguration.Builder(R.id.homeFragment, R.id.findStudyFragment,
-                R.id.personalAccountFragment, R.id.ownStudyFragment).setDrawerLayout(drawerLayoutMain).build();
+        appBarConfiguration = new AppBarConfiguration.Builder(R.id.homeFragment, R.id.findStudyFragment, R.id.ownStudyFragment).setDrawerLayout(drawerLayoutMain).build();
 
         //handle Navigation item clicks
         //this works with no further action, if the menu and destination id’s match.

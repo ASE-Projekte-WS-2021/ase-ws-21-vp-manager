@@ -18,7 +18,7 @@
     <fragment
         android:id="@+id/homeFragment"
         android:name="com.example.vpmanager.views.homeFragment"
-        android:label="Startseite"
+        android:label="VP Manager"
         tools:layout="@layout/fragment_home">
         <action
             android:id="@+id/action_homeFragment_to_findStudyFragment"
@@ -34,11 +34,6 @@
             android:id="@+id/action_homeFragment_to_createStudyActivity"
             app:destination="@id/createStudyActivity"
             app:popUpTo="@id/createStudyActivity"
-            app:popUpToInclusive="true" />
-        <action
-            android:id="@+id/action_homeFragment_to_personalAccountFragment"
-            app:destination="@id/personalAccountFragment"
-            app:popUpTo="@id/personalAccountFragment"
             app:popUpToInclusive="true" />
         <action
             android:id="@+id/action_homeFragment_to_studyFragment"
@@ -72,22 +67,6 @@
         android:name="com.example.vpmanager.createStudy.createStudyActivity"
         android:label="Studien erstellen"
         tools:layout="@layout/activity_create_study" />
-    <fragment
-        android:id="@+id/personalAccountFragment"
-        android:name="com.example.vpmanager.views.personalAccountFragment"
-        android:label="Meine Übersicht"
-        tools:layout="@layout/fragment_personal_account">
-        <action
-            android:id="@+id/action_personalAccountFragment_to_studyFragment"
-            app:destination="@id/studyFragment"
-            app:popUpTo="@id/studyFragment"
-            app:popUpToInclusive="true" />
-        <action
-            android:id="@+id/action_personalAccountFragment_to_studyCreatorFragment"
-            app:destination="@id/studyCreatorFragment"
-            app:popUpTo="@id/studyCreatorFragment"
-            app:popUpToInclusive="true" />
-    </fragment>
     <fragment
         android:id="@+id/ownStudyFragment"
         android:name="com.example.vpmanager.views.ownStudyFragment"
