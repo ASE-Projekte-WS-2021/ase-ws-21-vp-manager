@@ -196,44 +196,43 @@ public class personalAccountFragment extends Fragment {
     //Return values:
     //resets the piechart depending on switch position to get the new source and displaying them
     private void switchPieChart(boolean isSourceWeb){
+        if(isSourceWeb) {
+            if (martikelNumber.isEmpty()) {
+                CustomAlertReminder reminder = new CustomAlertReminder(this);
+                reminder.show();
+                sourceSwitch.setChecked(false);
+                switchPieChart(false);
+            } else {
+                Thread getRequest = new Thread(() -> {
+                    try {
+                        createGetRequest();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                });
+                getRequest.start();
 
-        if(martikelNumber.isEmpty())
-        {
-            CustomAlertReminder reminder = new CustomAlertReminder(this);
-            reminder.show();
-            sourceSwitch.setChecked(!isSourceWeb);
-        }
-        else if(isSourceWeb)
-        {
-            Thread getRequest = new Thread(() -> {
                 try {
-                    createGetRequest();
-                } catch (IOException e) {
+                    getRequest.join();
+                } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
-            });
-            getRequest.start();
 
-            try {
-                getRequest.join();
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-
-            if(jsonString != null && !jsonString.isEmpty() && jsonString.contains("matriculationNumber")) {
-                System.out.println("JSON: " + jsonString);
-                String[] entries = jsonString.split(",");
-                if (entries.length == 3) {
-                    String VPS = entries[1].split(":")[1];
-                    if (!VPS.isEmpty()) {
-                        setPieChartData(Double.parseDouble(VPS), 0, 0);
-                        plannedLayout.setVisibility(View.INVISIBLE);
-                        participatedLayout.setVisibility(View.INVISIBLE);
+                if (jsonString != null && !jsonString.isEmpty() && jsonString.contains("matriculationNumber")) {
+                    System.out.println("JSON: " + jsonString);
+                    String[] entries = jsonString.split(",");
+                    if (entries.length == 3) {
+                        String VPS = entries[1].split(":")[1];
+                        if (!VPS.isEmpty()) {
+                            setPieChartData(Double.parseDouble(VPS), 0, 0);
+                            plannedLayout.setVisibility(View.INVISIBLE);
+                            participatedLayout.setVisibility(View.INVISIBLE);
+                        }
                     }
                 }
             }
         }
-        else
+        if(!isSourceWeb)
         {
             setPieChartData(completedVP, participatedVP, plannedVP);
             plannedLayout.setVisibility(View.VISIBLE);
