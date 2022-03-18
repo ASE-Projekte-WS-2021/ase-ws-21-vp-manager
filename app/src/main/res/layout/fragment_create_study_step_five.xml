@@ -60,18 +60,20 @@
                 android:drawSelectorOnTop="false" />
 
 
-        </RelativeLayout>
-
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/fab"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="right"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentEnd="true"
             android:layout_marginBottom="16dp"
             android:layout_marginEnd="16dp"
             android:src="@drawable/ic_baseline_add_24"
-            android:backgroundTint="@color/green_light" />
+            android:backgroundTint="@color/green_light"
+            app:elevation="4dp"/>
 
+    </RelativeLayout>
 
 
     </LinearLayout>
