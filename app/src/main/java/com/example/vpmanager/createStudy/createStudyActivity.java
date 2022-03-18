@@ -85,8 +85,8 @@ public class createStudyActivity extends AppCompatActivity {
     TextInputEditText textInputEditTextContactDiscord;
     TextInputEditText textInputEditTextContactOthers;
     ListView listViewDates;
-    Spinner categories;
-    Spinner executionType;
+    Spinner categoriesSpinner;
+    Spinner executionTypeSpinner;
 
 
     Fragment fragment_container;
@@ -219,10 +219,10 @@ public class createStudyActivity extends AppCompatActivity {
         newStudy.put("description", studyDesc);
         newStudy.put("category", category);
         newStudy.put("executionType", execution);
-        if (executionType.getSelectedItem().toString().equals(getString(R.string.remoteString))) {
+        if (executionTypeSpinner.getSelectedItem().toString().equals(getString(R.string.remoteString))) {
             newStudy.put("platform", platform);
             newStudy.put("platform2", optionalPlatform);
-        } else if (executionType.getSelectedItem().toString().equals(getString(R.string.presenceString))) {
+        } else if (executionTypeSpinner.getSelectedItem().toString().equals(getString(R.string.presenceString))) {
             newStudy.put("location", location);
             newStudy.put("street", street);
             newStudy.put("room", room);
@@ -557,10 +557,10 @@ public class createStudyActivity extends AppCompatActivity {
                 VP = Objects.requireNonNull(textInputEditTextVP.getText()).toString();
                 System.out.println(VP + " " + studyTitle);
 
-                categories = fragmentManager.getFragments().get(0).getView().findViewById(R.id.createCategories);
-                executionType = fragmentManager.getFragments().get(0).getView().findViewById(R.id.createExecutionType);
-                category = categories.getSelectedItem().toString();
-                execution = executionType.getSelectedItem().toString();
+                categoriesSpinner = fragmentManager.getFragments().get(0).getView().findViewById(R.id.createCategories);
+                executionTypeSpinner = fragmentManager.getFragments().get(0).getView().findViewById(R.id.createExecutionType);
+                category = categoriesSpinner.getSelectedItem().toString();
+                execution = executionTypeSpinner.getSelectedItem().toString();
                 System.out.println("Kategorie: " + category);
                 System.out.println("Durchführung: " + execution);
                 break;
@@ -718,6 +718,25 @@ public class createStudyActivity extends AppCompatActivity {
                 if (!studyTitle.isEmpty()&& !category.equals(firstSpinnerItemCategory) && !execution.equals(firstSpinnerItemExecution)) {
                     System.out.println(studyTitle);
                     return true;
+                }
+                if(studyTitle.isEmpty()){
+                    textInputEditTextTitle.setError("Titel darf nicht leer sein");
+                    textInputEditTextTitle.requestFocus();
+                    break;
+                }
+                if(category.equals(firstSpinnerItemCategory)){
+                    categoriesSpinner.setFocusable(true);
+                    categoriesSpinner.setFocusableInTouchMode(true);
+                    categoriesSpinner.requestFocus();
+                    categoriesSpinner.performClick();
+                    break;
+                }
+                if(execution.equals(firstSpinnerItemExecution)){
+                    executionTypeSpinner.setFocusable(true);
+                    executionTypeSpinner.setFocusableInTouchMode(true);
+                    executionTypeSpinner.requestFocus();
+                    executionTypeSpinner.performClick();
+                    break;
                 }
                 break;
             case 2:
