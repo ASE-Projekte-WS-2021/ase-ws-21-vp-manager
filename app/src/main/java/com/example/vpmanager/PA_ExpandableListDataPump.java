@@ -8,14 +8,18 @@ import android.util.Log;
 
 import androidx.annotation.NonNull;
 
+import com.example.vpmanager.views.StudyFragment;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
+import com.google.firebase.firestore.Transaction;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -26,6 +30,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
+import java.util.TreeMap;
 
 public class PA_ExpandableListDataPump extends Activity {
 
@@ -289,6 +294,10 @@ public class PA_ExpandableListDataPump extends Activity {
         return arrivingDates;
     }
 
+
+    //Parameters: Dataset to update, identifier for entry in database
+    //Return Values
+    //updates a given with the given dataset
     public static void updateStudyInDataBase(Map<String, Object> updateData, String studyID) {
 
         db = FirebaseFirestore.getInstance();
@@ -303,6 +312,10 @@ public class PA_ExpandableListDataPump extends Activity {
         }
     }
 
+
+    //Parameters: identifier of user, identifier of study
+    //Return Values
+    //checks if a given user is the creator of a given study
     public static boolean navigateToStudyCreatorFragment(String currentUserId, String currentStudyId) {
 
         if(DB_STUDIES_LIST.size() <= 0)
@@ -326,6 +339,46 @@ public class PA_ExpandableListDataPump extends Activity {
         return false;
     }
 
+    //Parameters
+    //Return Values
+    //searches the current user in database and gets the VP count and the matrikelnumber
+    public static void getVPandMatrikelnumber(FirestoreCallbackUser firestoreCallbackUser)
+    {
+        db = FirebaseFirestore.getInstance();
+        CollectionReference usersRef = db.collection("users");
+        usersRef.whereEqualTo("deviceId", uniqueID).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                if (task.isSuccessful()) {
+                    String vps= "", matrikelNumber = "";
+                    for (QueryDocumentSnapshot document : task.getResult()) {
+                        vps = document.getString("vps");
+                        matrikelNumber = document.getString("matrikelNumber");
+                    }
+                    firestoreCallbackUser.onCallback(vps, matrikelNumber);
+                }
+            }
+        }).addOnFailureListener(e -> firestoreCallbackUser.onCallback("",""));
+    }
+
+    //Parameters: count of the vp, matrikelnumber of user
+    //Return Values
+    //updates the current user in database with given matrikelnumber and VP count
+    public static void saveVPandMatrikelnumber(String vp, String matrikelnumber)
+    {
+        Map<String, Object> updateData = new TreeMap<>();
+        updateData.put("deviceId", uniqueID);
+        updateData.put("vps", vp);
+        updateData.put("matrikelNumber", matrikelnumber);
+
+        db.collection("users").document(uniqueID)
+                .update(updateData)
+                .addOnSuccessListener(aVoid -> System.out.println("DocumentSnapshot successfully updated!"))
+                .addOnFailureListener(e ->System.out.println("Error updating document"));
+
+    }
+
+
 
 
     public interface FirestoreCallbackDates {
@@ -334,5 +387,10 @@ public class PA_ExpandableListDataPump extends Activity {
 
     public interface FirestoreCallbackStudy {
         void onCallback();
+    }
+
+    public interface FirestoreCallbackUser
+    {
+        void onCallback(String vps, String matrikelNumber);
     }
 }

@@ -53,6 +53,9 @@ public class homeFragment extends Fragment {
 
     }
 
+    //Parameter: current view to find components
+    //Return values:
+    //sets up the tablayout and adds and adapter for the content
     private void createTabs(View view) {
 
         ViewPager viewPager = view.findViewById(R.id.view_pager_home);
@@ -74,6 +77,9 @@ public class homeFragment extends Fragment {
         System.out.println("Tab Count: " + tabLayout.getTabCount());
     }
 
+    //Parameter:
+    //Return values:
+    //checks if the user is currently logged in. If not sends him to login screen
     private void userLoggedIn(){
         FirebaseUser user = firebaseAuth.getCurrentUser();
         if(user == null) {
@@ -81,6 +87,9 @@ public class homeFragment extends Fragment {
         }
     }
 
+    //Parameter:
+    //Return values:
+    //defining adapter class for the tabLayout
     private static class ViewPagerAdapter extends FragmentStatePagerAdapter
     {
         private final List<Fragment> fragments = new ArrayList<>();
