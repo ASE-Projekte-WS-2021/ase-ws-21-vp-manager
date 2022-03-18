@@ -7,8 +7,6 @@ import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
 
-import androidx.fragment.app.Fragment;
-
 import com.example.vpmanager.R;
 
 public class CustomAlertDialog extends Dialog implements android.view.View.OnClickListener {
