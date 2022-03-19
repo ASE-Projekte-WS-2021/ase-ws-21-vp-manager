@@ -32,6 +32,7 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class personalAccountFragment extends Fragment {
@@ -379,6 +380,31 @@ public class personalAccountFragment extends Fragment {
             default:
                 break;
         }
+        listView.setAdapter(null);
+        CustomListViewAdapter adapter = null;
+        if(sortAlphabeticallyActive)
+        {
+            adapter = new CustomListViewAdapter(this.getContext() , this.getActivity(), navController, sortByName(false));
+        }
+        else if(sortAppointmentsActive)
+        {
+            adapter = new CustomListViewAdapter(this.getContext() , this.getActivity(), navController, sortByDate(false));
+        }
+        else if(sortVpCountActive)
+        {}
+        else
+        {
+            adapter = new CustomListViewAdapter(this.getContext() , this.getActivity(), navController);
+        }
+        listView.setAdapter(adapter);
+
+        if(removeCompleted.isChecked())
+            filterListViewColorTags(true, R.color.pieChartSafe);
+        if(removeParticipated.isChecked())
+            filterListViewColorTags(true, R.color.pieChartParticipation);
+        if(removePlanned.isChecked())
+            filterListViewColorTags(true, R.color.pieChartPlanned);
+
     }
 
     private void filterListViewColorTags(boolean state, int color)
@@ -412,6 +438,73 @@ public class personalAccountFragment extends Fragment {
             }
             adapter.notifyDataSetChanged();
         }
+    }
+
+
+    private ArrayList<StudyObject> sortByName(boolean invert)
+    {
+        ArrayList<StudyObject> list = new ArrayList<>();
+        for (int i = 0; i < listView.getCount(); i++) {
+            if(listView != null && listView.getChildAt(i) != null) {
+                StudyObject item = (StudyObject) listView.getChildAt(i).getTag();
+                list.add(item);
+            }
+        }
+        for(int i = 0; i < list.size(); i++)
+        {
+            for(int k = 0; k < list.size(); k++)
+            {
+                if(k<list.size()-1)
+                {
+                    if(list.get(k).getTitle().compareToIgnoreCase(list.get(k+1).getTitle()) < 0)
+                    {
+                        StudyObject tempStudy = list.get(k);
+                        list.remove(k);
+                        list.add(k, list.get(k+1));
+                        list.remove(k+1);
+                        list.add(k+1, tempStudy);
+                    }
+                }
+            }
+        }
+
+        if(invert)
+            Collections.reverse(list);
+
+        return list;
+    }
+
+    private ArrayList<StudyObject> sortByDate(boolean invert)
+    {
+        ArrayList<StudyObject> list = new ArrayList<>();
+        for (int i = 0; i < listView.getCount(); i++) {
+            if(listView != null && listView.getChildAt(i) != null) {
+                StudyObject item = (StudyObject) listView.getChildAt(i).getTag();
+                list.add(item);
+            }
+        }
+        for(int i = 0; i < list.size(); i++)
+        {
+            for(int k = 0; k < list.size(); k++)
+            {
+                if(k<list.size()-1)
+                {
+                    if(list.get(k).getDate().compareToIgnoreCase(list.get(k+1).getDate()) < 0)
+                    {
+                        StudyObject tempStudy = list.get(k);
+                        list.remove(k);
+                        list.add(k, list.get(k+1));
+                        list.remove(k+1);
+                        list.add(k+1, tempStudy);
+                    }
+                }
+            }
+        }
+
+        if(invert)
+            Collections.reverse(list);
+
+        return list;
     }
 }
 

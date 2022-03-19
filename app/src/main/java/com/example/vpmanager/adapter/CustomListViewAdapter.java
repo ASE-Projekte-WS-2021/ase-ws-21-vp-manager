@@ -45,6 +45,14 @@ public class CustomListViewAdapter extends BaseAdapter {
         this.activity = activity;
     }
 
+    public CustomListViewAdapter(Context context, Activity activity, NavController nav, ArrayList<StudyObject> list) {
+        super();
+        inflater = LayoutInflater.from(context);
+        navController = nav;
+        this.objects = list;
+        this.activity = activity;
+    }
+
     private ArrayList<StudyObject> transformLists() {
         ArrayList<StudyObject> list = new ArrayList<>();
         HashMap<String, List<String>> dataList = PA_ExpandableListDataPump.EXPANDABLE_LIST_DETAIL;
