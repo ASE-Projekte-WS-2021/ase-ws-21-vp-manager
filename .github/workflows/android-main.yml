@@ -103,7 +103,7 @@ jobs:
       - name: Sign artifact
         uses: r0adkll/sign-android-release@v1.0.4
         with:
-          releaseDirectory: app\build\outputs\apk\release
+          releaseDirectory: app/build/outputs/apk/release
           alias: ${{ secrets.SIGNING_KEY_ALIAS }}
           signingKeyBase64: ${{ secrets.KEYSTORE }}
           keyStorePassword: ${{ secrets.KEYSTORE_PASSWORD }}
@@ -125,6 +125,6 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: app\build\outputs\apk\release\app-release-unsigned-signed.apk
+          asset_path: app/build/outputs/apk/release/app-release-unsigned-signed.apk
           asset_name: VP-Manager_release.apk
           asset_content_type: application/zip
