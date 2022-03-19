@@ -27,6 +27,7 @@ public class StudyFragment extends Fragment {
     public static String currentUserId;
 
     private NavController navController;
+    private static NavController staticnavcontroller;
 
     private ViewPager viewPager;
     private TabLayout tabLayout;
@@ -67,12 +68,19 @@ public class StudyFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         navController = Navigation.findNavController(view);
+        staticnavcontroller = navController;
         super.onViewCreated(view, savedInstanceState);
     }
 
     private void getRequiredInfos() {
         currentStudyId = getArguments().getString("studyId");
         currentUserId = mainActivity.createUserId(getActivity());
+    }
+
+    public static void creatorDetailViewCall(){
+        Bundle args = new Bundle();
+        args.putString("studyId", currentStudyId);
+        staticnavcontroller.navigate(R.id.action_studyFragment_to_editStudyFragment, args);
     }
 
     private class viewPagerAdapter extends FragmentStatePagerAdapter {
@@ -106,4 +114,6 @@ public class StudyFragment extends Fragment {
             return fragmentNames.get(position);
         }
     }
+
+
 }

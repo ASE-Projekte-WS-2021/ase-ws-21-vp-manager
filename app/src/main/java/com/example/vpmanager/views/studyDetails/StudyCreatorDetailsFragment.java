@@ -1,23 +1,21 @@
 package com.example.vpmanager.views.studyDetails;
 
 import android.os.Bundle;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.TextView;
-
-import androidx.fragment.app.Fragment;
-import androidx.lifecycle.ViewModelProvider;
 
 import com.example.vpmanager.R;
 import com.example.vpmanager.viewmodels.StudyCreatorViewModel;
-import com.example.vpmanager.viewmodels.StudyViewModel;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link StudyCreatorDetailsFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
+import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.NavController;
+
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.TextView;
+
+
 public class StudyCreatorDetailsFragment extends Fragment {
 
     // TODO: Rename parameter arguments, choose names that match
@@ -39,7 +37,11 @@ public class StudyCreatorDetailsFragment extends Fragment {
     private TextView remoteData;
     private TextView localData;
 
-    // TODO: Rename and change types of parameters
+    ImageView editButton;
+
+    NavController navController;
+
+
     private String mParam1;
     private String mParam2;
 
@@ -47,15 +49,8 @@ public class StudyCreatorDetailsFragment extends Fragment {
         // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment studyDetails.
-     */
-    // TODO: Rename and change types and number of parameters
+
+
     public static StudyCreatorDetailsFragment newInstance(String param1, String param2) {
         StudyCreatorDetailsFragment fragment = new StudyCreatorDetailsFragment();
         Bundle args = new Bundle();
@@ -88,12 +83,16 @@ public class StudyCreatorDetailsFragment extends Fragment {
         studyViewModel = new ViewModelProvider(requireActivity()).get(StudyCreatorViewModel.class);
         studyViewModel.studyCreatorDetailsFragment = this;
         studyViewModel.prepareRepo();
+        editButton.setOnClickListener(v -> {
+         StudyFragment.creatorDetailViewCall();
+        });
     }
 
     private void initDetailViews(View view) {
         headerText = view.findViewById(R.id.studyFragmentHeader);
         description = view.findViewById(R.id.descriptionStudyFragment);
         vpValue = view.findViewById(R.id.vpValueStudyFragment);
+        editButton = view.findViewById(R.id.editOwnStudyButton);
         contactInfo = view.findViewById(R.id.contactInformationStudyFragment);
         category = view.findViewById(R.id.categoryStudyFragment);
         studyType = view.findViewById(R.id.studyTypeStudyFragment);
@@ -120,5 +119,7 @@ public class StudyCreatorDetailsFragment extends Fragment {
                     studyViewModel.getStudyDetails().getStreet() + "\t\t" + studyViewModel.getStudyDetails().getRoom();
             localData.setText(locationString);
         }
+
     }
 }
+
