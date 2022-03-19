@@ -99,7 +99,6 @@ public class createStudyActivity extends AppCompatActivity {
         setupView();
         setupListeners();
         //Checks if a new user needs to be registered
-
     }
 
     //Parameter:
@@ -631,7 +630,7 @@ public class createStudyActivity extends AppCompatActivity {
                 bundle.putString("exe", execution);
                 break;
             case 2:
-                bundle.putString("contact", contactMail);
+                bundle.putString("contact", mainActivity.createUserId(this));
                 bundle.putString("contact2", contactPhone);
                 bundle.putString("contact3", contactSkype);
                 bundle.putString("contact4", contactDiscord);

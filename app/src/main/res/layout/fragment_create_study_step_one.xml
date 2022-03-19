@@ -66,9 +66,7 @@
                 android:id="@+id/inputFieldTitle"
                 style="@style/You.EditText.Style"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:hint="@string/createStudyTitleHint"
-                android:textColorHint="@color/tabs_grey" />
+                android:layout_height="match_parent" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -93,9 +91,7 @@
                 style="@style/You.EditText.Style"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:hint="@string/createOfferedVP"
-                android:inputType="numberDecimal"
-                android:textColorHint="@color/tabs_grey" />
+                android:hint="@string/createOfferedVP" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
