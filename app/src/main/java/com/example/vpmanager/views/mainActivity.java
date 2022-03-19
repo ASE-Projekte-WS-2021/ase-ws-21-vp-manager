@@ -165,10 +165,10 @@ public class mainActivity extends AppCompatActivity implements DrawerController 
     public boolean onSupportNavigateUp() {
         Log.d("mainActivity", "onSupportNavigateUp start + end");
         if (!Objects.requireNonNull(navController.getCurrentDestination()).toString()
-                .equals("Destination(com.example.vpmanager:id/homeFragment) label=Startseite class=com.example.vpmanager.views.homeFragment")) {
+                .equals("Destination(com.example.vpmanager:id/homeFragment) label=VP Manager class=com.example.vpmanager.views.homeFragment")) {
             if (NavigationUI.navigateUp(navController, appBarConfiguration)) {
                 if (Objects.requireNonNull(navController.getCurrentDestination()).toString()
-                        .equals("Destination(com.example.vpmanager:id/homeFragment) label=Startseite class=com.example.vpmanager.views.homeFragment")) {
+                        .equals("Destination(com.example.vpmanager:id/homeFragment) label=VP Manager class=com.example.vpmanager.views.homeFragment")) {
                     navController.navigate(R.id.action_global_homeFragment);
                     return true;
                 }
@@ -219,10 +219,10 @@ public class mainActivity extends AppCompatActivity implements DrawerController 
     @Override
     public void onBackPressed() {
         if (!Objects.requireNonNull(navController.getCurrentDestination()).toString()
-                .equals("Destination(com.example.vpmanager:id/homeFragment) label=Startseite class=com.example.vpmanager.views.homeFragment")) {
+                .equals("Destination(com.example.vpmanager:id/homeFragment) label=VP Manager class=com.example.vpmanager.views.homeFragment")) {
             if (NavigationUI.navigateUp(navController, appBarConfiguration)) {
                 if (Objects.requireNonNull(navController.getCurrentDestination()).toString()
-                        .equals("Destination(com.example.vpmanager:id/homeFragment) label=Startseite class=com.example.vpmanager.views.homeFragment")) {
+                        .equals("Destination(com.example.vpmanager:id/homeFragment) label=VP Manager class=com.example.vpmanager.views.homeFragment")) {
                     System.out.println(Objects.requireNonNull(navController.getCurrentDestination()).toString());
                     navController.navigate(R.id.action_global_homeFragment);
                 }
