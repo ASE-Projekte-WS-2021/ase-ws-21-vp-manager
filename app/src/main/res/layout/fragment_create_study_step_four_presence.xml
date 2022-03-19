@@ -76,6 +76,7 @@
             android:layout_marginTop="20dp"
             android:layout_marginRight="20dp"
             android:layout_weight="1.4"
+            android:hint="@string/createStreetHint"
             android:textColorHint="@color/heatherred_Main"
             app:boxStrokeColor="@color/black"
             app:boxStrokeWidthFocused="2dp">
