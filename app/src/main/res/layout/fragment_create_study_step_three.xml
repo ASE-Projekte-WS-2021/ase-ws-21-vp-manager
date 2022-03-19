@@ -70,7 +70,7 @@
                 android:inputType="textMultiLine"
                 android:lines="15"
                 android:textColorHint="@color/tabs_grey"
-                android:hint="@string/createStudyDesc">
+                android:hint="@string/createAlertStudyDesc">
             </com.google.android.material.textfield.TextInputEditText>
 
         </com.google.android.material.textfield.TextInputLayout>

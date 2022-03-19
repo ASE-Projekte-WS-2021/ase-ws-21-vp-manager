@@ -266,7 +266,6 @@ public class createStudyActivity extends AppCompatActivity {
                 bundle = createBundle(1);
                 createStudyFragment_StepOne createStudyFragment_stepOne = new createStudyFragment_StepOne();
                 createStudyFragment_stepOne.setArguments(bundle);
-                back.setText(getString(R.string.fragment_create_study_base_back));
                 stateProgressBar.setCurrentStateNumber(StateProgressBar.StateNumber.ONE);
                 fragmentManager
                         .beginTransaction()
@@ -418,8 +417,6 @@ public class createStudyActivity extends AppCompatActivity {
                 break;
             case 1:
                 getInput(currentFragment);
-                back.setText(getString(R.string.fragment_create_study_base_main));
-                //MAKE PROGRESSBAR INVIS
                 stateProgressBar.setCurrentStateNumber(StateProgressBar.StateNumber.ONE);
                 fragmentManager
                         .beginTransaction()
