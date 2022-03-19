@@ -114,9 +114,9 @@
             android:id="@+id/animationView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:scaleType="centerCrop"
             android:visibility="invisible"
-            app:lottie_url="https://assets3.lottiefiles.com/dotlotties/dlf10_8m0i8okm.lottie" />
+            android:background="@color/black"
+            app:lottie_url="https://assets5.lottiefiles.com/packages/lf20_nwuqqxfv.json" />
 
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
