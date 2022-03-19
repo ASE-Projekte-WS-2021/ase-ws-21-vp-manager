@@ -2,6 +2,7 @@ package com.example.vpmanager.createStudy;
 
 import android.os.Bundle;
 
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
@@ -48,6 +49,7 @@ public class createStudyFragment_StepTwo extends Fragment {
     private void setupView(View view){
         textInputEditTextContactMail = view.findViewById(R.id.inputContact1);
         textInputEditTextContactMail.setFocusable(false);
+        textInputEditTextContactMail.setTextColor(ContextCompat.getColor(getActivity(), R.color.pieChartRemaining));
         textInputEditTextContactPhone = view.findViewById(R.id.inputContact2);
         textInputEditTextContactSkype = view.findViewById(R.id.inputContact3);
         textInputEditTextContactDiscord = view.findViewById(R.id.inputContact4);
