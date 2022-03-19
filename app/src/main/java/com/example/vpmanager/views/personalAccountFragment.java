@@ -15,6 +15,7 @@ import android.widget.ToggleButton;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
@@ -380,8 +381,8 @@ public class personalAccountFragment extends Fragment {
             default:
                 break;
         }
-        listView.setAdapter(null);
-        CustomListViewAdapter adapter = null;
+        CustomListViewAdapter adapter;
+
         if(sortAlphabeticallyActive)
         {
             adapter = new CustomListViewAdapter(this.getContext() , this.getActivity(), navController, sortByName(false));
@@ -391,84 +392,118 @@ public class personalAccountFragment extends Fragment {
             adapter = new CustomListViewAdapter(this.getContext() , this.getActivity(), navController, sortByDate(false));
         }
         else if(sortVpCountActive)
-        {}
+        {
+            adapter = new CustomListViewAdapter(this.getContext() , this.getActivity(), navController, sortByVPS(false));
+        }
         else
         {
             adapter = new CustomListViewAdapter(this.getContext() , this.getActivity(), navController);
         }
-        listView.setAdapter(adapter);
 
-        if(removeCompleted.isChecked())
-            filterListViewColorTags(true, R.color.pieChartSafe);
-        if(removeParticipated.isChecked())
-            filterListViewColorTags(true, R.color.pieChartParticipation);
-        if(removePlanned.isChecked())
-            filterListViewColorTags(true, R.color.pieChartPlanned);
+        setNewListViewAdapter(adapter);
 
+        System.out.println("sortlist" + adapter.getObjects());
+
+
+        if(!removeCompleted.isChecked())
+            filterListViewColorTags(false, R.color.pieChartSafe);
+        if(!removeParticipated.isChecked())
+            filterListViewColorTags(false, R.color.pieChartParticipation);
+        if(!removePlanned.isChecked())
+            filterListViewColorTags(false, R.color.pieChartPlanned);
     }
 
-    private void filterListViewColorTags(boolean state, int color)
-    {
+    private void setNewListViewAdapter(CustomListViewAdapter adapter) {
+        CustomListViewAdapter currentAdapter = (CustomListViewAdapter) listView.getAdapter();
+        currentAdapter.getObjects().clear();
+        currentAdapter.notifyDataSetChanged();
+
+        listView.setAdapter(adapter);
+
+        adapter.notifyDataSetChanged();
+    }
+
+    private void filterListViewColorTags(boolean state, int color) {
         if(state)
         {
-            listView.setAdapter(null);
             CustomListViewAdapter adapter = new CustomListViewAdapter(this.getContext() , this.getActivity(), navController);
             listView.setAdapter(adapter);
             if(!removePlanned.isChecked())
-                filterListViewColorTags(removeCompleted.isChecked(), R.color.pieChartPlanned);
+                filterListViewColorTags(removePlanned.isChecked(), R.color.pieChartPlanned);
             if(!removeCompleted.isChecked())
-                filterListViewColorTags(removePlanned.isChecked(), R.color.pieChartSafe);
+                filterListViewColorTags(removeCompleted.isChecked(), R.color.pieChartSafe);
             if(!removeParticipated.isChecked())
                 filterListViewColorTags(removeParticipated.isChecked(), R.color.pieChartParticipation);
+
+            if(sortAlphabeticallyActive)
+                filterListViewTextTags(false, "names");
+            if(sortAppointmentsActive)
+                filterListViewTextTags(false, "dates");
+            if(sortVpCountActive)
+                filterListViewTextTags(false, "vps");
         }
         else {
+            CustomListViewAdapter adapter = (CustomListViewAdapter) listView.getAdapter();
             List<StudyObject> removeList = new ArrayList<>();
-            for (int i = 0; i < listView.getCount(); i++) {
-                if(listView != null && listView.getChildAt(i) != null) {
-                    StudyObject item = (StudyObject) listView.getChildAt(i).getTag();
-                    if (item.getColor() == color) {
-                        removeList.add(item);
+
+
+            for (StudyObject object: adapter.getObjects()) {
+                if(listView != null && object != null) {
+                    if (object.getColor() == color) {
+                        removeList.add(object);
                     }
                 }
             }
-            CustomListViewAdapter adapter = (CustomListViewAdapter) listView.getAdapter();
+
             for(StudyObject object: removeList)
             {
                 adapter.getObjects().remove(object);
             }
+
+            listView.setAdapter(null);
             adapter.notifyDataSetChanged();
+            listView.setAdapter(adapter);
+
+            System.out.println(adapter.getObjects());
         }
     }
 
-
     private ArrayList<StudyObject> sortByName(boolean invert)
     {
+        CustomListViewAdapter adapter = (CustomListViewAdapter) listView.getAdapter();
         ArrayList<StudyObject> list = new ArrayList<>();
-        for (int i = 0; i < listView.getCount(); i++) {
-            if(listView != null && listView.getChildAt(i) != null) {
-                StudyObject item = (StudyObject) listView.getChildAt(i).getTag();
+        for (int i = 0; i < adapter.getObjects().size(); i++) {
+            if(listView != null && adapter.getObjects().get(i) != null) {
+                StudyObject item = adapter.getObjects().get(i);
                 list.add(item);
             }
         }
-        for(int i = 0; i < list.size(); i++)
+        StudyObject[] studyList = new StudyObject[list.size()];
+        System.out.println("list size: " + list.size());
+        for(int i = 0; i <list.size(); i++)
         {
-            for(int k = 0; k < list.size(); k++)
+            studyList[i] = list.get(i);
+        }
+
+        for(int i = 0; i < studyList.length; i++)
+        {
+
+            for(int k = 0; k < studyList.length-1; k++)
             {
-                if(k<list.size()-1)
+                if(studyList[k].getTitle().compareToIgnoreCase(studyList[k+1].getTitle()) < 0)
                 {
-                    if(list.get(k).getTitle().compareToIgnoreCase(list.get(k+1).getTitle()) < 0)
-                    {
-                        StudyObject tempStudy = list.get(k);
-                        list.remove(k);
-                        list.add(k, list.get(k+1));
-                        list.remove(k+1);
-                        list.add(k+1, tempStudy);
-                    }
+                    StudyObject tempStudy = studyList[k];
+                    studyList[k]= studyList[k+1];
+                    studyList[k+1]= tempStudy;
                 }
             }
         }
-
-        if(invert)
+        list.clear();
+        for(StudyObject ob: studyList) {
+            list.add(ob);
+        }
+        System.out.println("list after clear" + list.size());
+        if(!invert)
             Collections.reverse(list);
 
         return list;
@@ -476,32 +511,75 @@ public class personalAccountFragment extends Fragment {
 
     private ArrayList<StudyObject> sortByDate(boolean invert)
     {
+        CustomListViewAdapter adapter = (CustomListViewAdapter) listView.getAdapter();
         ArrayList<StudyObject> list = new ArrayList<>();
-        for (int i = 0; i < listView.getCount(); i++) {
-            if(listView != null && listView.getChildAt(i) != null) {
-                StudyObject item = (StudyObject) listView.getChildAt(i).getTag();
+        for (int i = 0; i < adapter.getObjects().size(); i++) {
+            if(listView != null && adapter.getObjects().get(i) != null) {
+                StudyObject item = adapter.getObjects().get(i);
                 list.add(item);
             }
         }
-        for(int i = 0; i < list.size(); i++)
+        StudyObject[] studyList = new StudyObject[list.size()];
+        for(int i = 0; i <list.size(); i++)
         {
-            for(int k = 0; k < list.size(); k++)
-            {
-                if(k<list.size()-1)
-                {
-                    if(list.get(k).getDate().compareToIgnoreCase(list.get(k+1).getDate()) < 0)
-                    {
-                        StudyObject tempStudy = list.get(k);
-                        list.remove(k);
-                        list.add(k, list.get(k+1));
-                        list.remove(k+1);
-                        list.add(k+1, tempStudy);
-                    }
+            studyList[i] = list.get(i);
+        }
+
+        for(int i = 0; i < studyList.length; i++)
+        {
+            for(int k = 0; k < studyList.length-1; k++) {
+                if (studyList[k].getDate().compareToIgnoreCase(studyList[k + 1].getDate()) < 0) {
+                    StudyObject tempStudy = studyList[k];
+                    studyList[k] = studyList[k + 1];
+                    studyList[k + 1] = tempStudy;
                 }
             }
         }
+        list.clear();
+        for(StudyObject ob: studyList) {
+            list.add(ob);
+        }
 
-        if(invert)
+        if(!invert)
+            Collections.reverse(list);
+
+        return list;
+    }
+
+    private ArrayList<StudyObject> sortByVPS(boolean invert)
+    {
+        CustomListViewAdapter adapter = (CustomListViewAdapter) listView.getAdapter();
+        ArrayList<StudyObject> list = new ArrayList<>();
+        for (int i = 0; i < adapter.getObjects().size(); i++) {
+            if(listView != null && adapter.getObjects().get(i) != null) {
+                StudyObject item = adapter.getObjects().get(i);
+                list.add(item);
+            }
+        }
+        StudyObject[] studyList = new StudyObject[list.size()];
+        for(int i = 0; i <list.size(); i++)
+        {
+            studyList[i] = list.get(i);
+        }
+
+        for(int i = 0; i < studyList.length; i++)
+        {
+            for(int k = 0; k < studyList.length-1; k++)
+            {
+                if(Float.parseFloat(studyList[k].getVps()) > Float.parseFloat(studyList[k+1].getVps()))
+                {
+                    StudyObject tempStudy = studyList[k];
+                    studyList[k]= studyList[k+1];
+                    studyList[k+1]= tempStudy;
+                }
+            }
+        }
+        list.clear();
+        for(StudyObject ob: studyList) {
+            list.add(ob);
+        }
+
+        if(!invert)
             Collections.reverse(list);
 
         return list;
