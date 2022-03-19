@@ -83,10 +83,28 @@ jobs:
     # The "release_job" is only executed if the push or pull_request event includes a version number as a tag.
     runs-on: ubuntu-latest
     steps:
-      - name: Download APK
-        uses: actions/download-artifact@v2
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: set up JDK 11
+        uses: actions/setup-java@v2
         with:
-          name: apk
+          java-version: '11'
+          distribution: 'adopt'
+          cache: gradle
+
+      - name: Build APK
+        run: ./gradlew assembleRelease --stacktrace       
+
+
+      - name: Sign artifact
+        uses: r0adkll/sign-android-release@v1.0.4
+        with:
+          releaseDirectory: .
+          alias: ${{ secrets.SIGNING_KEY_ALIAS }}
+          signingKeyBase64: ${{ secrets.KEYSTORE }}
+          keyStorePassword: ${{ secrets.KEYSTORE_PASSWORD }}
+          keyPassword: ${{ secrets.KEY_PASSWORD }}
 
       - name: Create a Release on Github
         id: create_release
@@ -104,9 +122,6 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: apk/app-debug.apk
-          asset_name: VP-Manager-debug.apk
+          asset_path: app\build\outputs\apk\release\app-release-unsigned-signed.apk
+          asset_name: VP-Manager_release.apk
           asset_content_type: application/zip
-        # The "release_job" is guided by the last parts of this example workflow:
-        # https://gist.github.com/alexanderbazo/227476190ef5ab655795e34ec0d314d6
-        # Instead of the debugAPK, the releaseAPK might be used here in the future.
