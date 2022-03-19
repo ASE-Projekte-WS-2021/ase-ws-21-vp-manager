@@ -1,17 +1,17 @@
 package com.example.vpmanager.views;
 
-import static com.example.vpmanager.views.mainActivity.uniqueID;
-
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ExpandableListView;
+import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.Switch;
 import android.widget.TextView;
+import android.widget.ToggleButton;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -19,7 +19,6 @@ import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 
-import com.example.vpmanager.PA_ExpandableListAdapter;
 import com.example.vpmanager.PA_ExpandableListDataPump;
 import com.example.vpmanager.R;
 import com.example.vpmanager.adapter.CustomListViewAdapter;
@@ -33,28 +32,24 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 public class personalAccountFragment extends Fragment {
 
-    private ExpandableListView listView;
-    private ListView newListView;
-    private PA_ExpandableListAdapter adapter;
-    private List<String> expandableListTitle;
-    private HashMap<String, List<String>> expandableListDetail;
+    private ListView listView;
     private PieChart chart;
     private Switch sourceSwitch;
-    private ImageView settings;
+    private ImageView settings, sortAlphabetically, sortAppointments;
     private LinearLayout participatedLayout, plannedLayout, completedLayout;
 
     private static String martikelNumber;
 
-    private TextView planned, participated, completed, remaining;
+    private TextView planned, participated, completed, remaining, sortVpCount;
+    private ToggleButton removeCompleted, removePlanned, removeParticipated;
 
-    private double plannedVP;
-    private double completedVP;
-    private double participatedVP;
+    private boolean sortAlphabeticallyActive, sortAppointmentsActive, sortVpCountActive;
+
+    private double plannedVP, completedVP, participatedVP;
 
     private NavController navController;
     private String jsonString;
@@ -109,9 +104,11 @@ public class personalAccountFragment extends Fragment {
                                     PA_ExpandableListDataPump.createListEntries();
                                     setupView(view);
                                     setupClickListener();
+                                    sortAlphabeticallyActive = false;
+                                    sortAppointmentsActive = false;
+                                    sortVpCountActive = false;
                                 }
                             });
-
                         }
                     });
             }
@@ -122,7 +119,15 @@ public class personalAccountFragment extends Fragment {
     //Return values:
     //Setting the view components and readint the content Lists for the piechart values
     private void setupView(View view) {
-        newListView = view.findViewById(R.id.pa_fragment_listView);
+
+        removeCompleted = view.findViewById(R.id.pa_remove_completed);
+        removePlanned = view.findViewById(R.id.pa_remove_planned);
+        removeParticipated = view.findViewById(R.id.pa_remove_participation);
+        sortAlphabetically = view.findViewById(R.id.pa_sort_alphabetical);
+        sortAppointments = view.findViewById(R.id.pa_sort_date);
+        sortVpCount = view.findViewById(R.id.pa_sort_vp);
+        completedLayout = view.findViewById(R.id.pa_completed_layout);
+        listView = view.findViewById(R.id.pa_fragment_listView);
         participatedLayout = view.findViewById(R.id.pa_parcticipated_layout);
         plannedLayout = view.findViewById(R.id.pa_planned_layout);
         completedLayout = view.findViewById(R.id.pa_completed_layout);
@@ -132,20 +137,15 @@ public class personalAccountFragment extends Fragment {
         remaining = view.findViewById(R.id.pa_remaining);
         settings = view.findViewById(R.id.vp_settings_icon);
         sourceSwitch = view.findViewById(R.id.vp_source_switch);
-        listView = view.findViewById(R.id.pa_fragment_expandableList);
         chart = view.findViewById(R.id.pa_fragment_pie_chart);
-        expandableListDetail = PA_ExpandableListDataPump.EXPANDABLE_LIST_DETAIL;
-        expandableListTitle = new ArrayList<String>(expandableListDetail.keySet());
-        adapter = new PA_ExpandableListAdapter(getActivity(), expandableListTitle, expandableListDetail);
-        //listView.setAdapter(adapter);
 
-        newListView.setAdapter(new CustomListViewAdapter(this.getContext() , this.getActivity(), navController));
+        listView.setAdapter(new CustomListViewAdapter(this.getContext() , this.getActivity(), navController));
 
         plannedVP = 0;
         completedVP = 0;
         participatedVP = 0;
 
-        List<String> vpList = expandableListDetail.get("Geplante Studien");
+        List<String> vpList = PA_ExpandableListDataPump.EXPANDABLE_LIST_DETAIL.get("Geplante Studien");
         if (vpList != null) {
             for (int i = 0; i < vpList.size(); i++) {
                 String vps = vpList.get(i).split(",")[1];
@@ -155,7 +155,7 @@ public class personalAccountFragment extends Fragment {
                 plannedVP += studyVPS;
             }
         }
-        List<String> passedVpList = expandableListDetail.get("Vergangene Studien");
+        List<String> passedVpList = PA_ExpandableListDataPump.EXPANDABLE_LIST_DETAIL.get("Vergangene Studien");
         if (passedVpList != null) {
             for (int i = 0; i < passedVpList.size(); i++) {
                 String vps = passedVpList.get(i).split(",")[1];
@@ -173,32 +173,7 @@ public class personalAccountFragment extends Fragment {
     //Return values:
     //Setup clicklisteners for all clickable objects
     private void setupClickListener() {
-        listView.setOnChildClickListener((parent, v, groupPosition, childPosition, id) -> {
-            String studyTitle = expandableListDetail.get(expandableListTitle.get(groupPosition))
-                    .get(childPosition).split(",")[3];
 
-            Bundle args = new Bundle();
-            args.putString("studyId", studyTitle);
-            if (PA_ExpandableListDataPump.navigateToStudyCreatorFragment(uniqueID, studyTitle)) {
-                navController.navigate(R.id.action_homeFragment_to_studyCreatorFragment, args);
-            } else {
-                navController.navigate(R.id.action_homeFragment_to_studyFragment, args);
-            }
-            return false;
-        });/*
-        newListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Bundle args = new Bundle();
-                StudyObject study = (StudyObject) newListView.getChildAt(position).getTag();
-                args.putString("studyId", study.getStudyId() );
-                if (PA_ExpandableListDataPump.navigateToStudyCreatorFragment(uniqueID, study.getStudyId())) {
-                    navController.navigate(R.id.action_homeFragment_to_studyCreatorFragment, args);
-                } else {
-                    navController.navigate(R.id.action_homeFragment_to_studyFragment, args);
-                }
-            }
-        });*/
         sourceSwitch.setOnCheckedChangeListener((buttonView, isChecked) -> {
             switchPieChart(isChecked);
         });
@@ -207,6 +182,14 @@ public class personalAccountFragment extends Fragment {
             CustomAlertDialog dialog = new CustomAlertDialog(fragment, Float.toString(sumVPs), martikelNumber);
             dialog.show();
         });
+        removeCompleted.setOnCheckedChangeListener((buttonView, isChecked) -> filterListViewColorTags(isChecked, R.color.pieChartSafe));
+        removePlanned.setOnCheckedChangeListener((buttonView, isChecked) -> filterListViewColorTags(isChecked, R.color.pieChartPlanned));
+        removeParticipated.setOnCheckedChangeListener((buttonView, isChecked) -> filterListViewColorTags(isChecked, R.color.pieChartParticipation));
+
+        sortAlphabetically.setOnClickListener(v -> filterListViewTextTags(sortAlphabeticallyActive, "names"));
+        sortAppointments.setOnClickListener(v -> filterListViewTextTags(sortAppointmentsActive, "dates"));
+        sortVpCount.setOnClickListener(v -> filterListViewTextTags(sortVpCountActive, "vps"));
+
     }
 
     //Parameter: boolean input to switch between app as source and web
@@ -244,7 +227,6 @@ public class personalAccountFragment extends Fragment {
                             setPieChartData(Double.parseDouble(VPS), 0, 0);
                             plannedLayout.setVisibility(View.INVISIBLE);
                             participatedLayout.setVisibility(View.INVISIBLE);
-                            completedLayout.setVisibility(View.VISIBLE);
                         }
                     }
                 }
@@ -253,7 +235,6 @@ public class personalAccountFragment extends Fragment {
         if (!isSourceWeb) {
             setPieChartData(completedVP, participatedVP, plannedVP);
             plannedLayout.setVisibility(View.VISIBLE);
-            completedLayout.setVisibility(View.INVISIBLE);
             participatedLayout.setVisibility(View.VISIBLE);
 
         }
@@ -286,7 +267,7 @@ public class personalAccountFragment extends Fragment {
                         getString(R.string.pieSliceLabelParticipation),
                         scaledParticipationVP,
                         getResources().getColor(R.color.pieChartParticipation)));
-        participated.setText("Vergangene: " + participationVP + " VP");
+        participated.setText("Teilgenommen: " + participationVP + " VP");
         chart.addPieSlice(
                 new PieModel(
                         getString(R.string.pieSliceLabelPlanned),
@@ -342,6 +323,95 @@ public class personalAccountFragment extends Fragment {
 
         PA_ExpandableListDataPump.saveVPandMatrikelnumber(vps, matrikelnumber);
 
+    }
+
+
+    private void filterListViewTextTags(boolean active, String type)
+    {
+        switch(type)
+        {
+            case "names":
+                sortAlphabeticallyActive = !active;
+                if(sortAlphabeticallyActive)
+                    sortAlphabetically.setBackgroundColor(Color.LTGRAY);
+                else
+                    sortAlphabetically.setBackgroundColor(Color.WHITE);
+                if(sortAppointmentsActive) {
+                    sortAppointmentsActive = false;
+                    sortAppointments.setBackgroundColor(Color.WHITE);
+                }
+                if(sortVpCountActive) {
+                    sortVpCountActive = false;
+                    sortVpCount.setBackgroundColor(Color.WHITE);
+                }
+                break;
+            case "dates":
+                sortAppointmentsActive = !active;
+                if(sortAppointmentsActive)
+                    sortAppointments.setBackgroundColor(Color.LTGRAY);
+                else
+                    sortAppointments.setBackgroundColor(Color.WHITE);
+
+                if(sortVpCountActive) {
+                    sortVpCount.setBackgroundColor(Color.WHITE);
+                    sortVpCountActive = false;
+                }
+                if(sortAlphabeticallyActive) {
+                    sortAlphabeticallyActive = false;
+                    sortAlphabetically.setBackgroundColor(Color.WHITE);
+                }
+                break;
+            case "vps":
+                sortVpCountActive = !active;
+                if(sortVpCountActive)
+                    sortVpCount.setBackgroundColor(Color.LTGRAY);
+                else
+                    sortVpCount.setBackgroundColor(Color.WHITE);
+                if(sortAlphabeticallyActive) {
+                    sortAlphabeticallyActive = false;
+                    sortAlphabetically.setBackgroundColor(Color.WHITE);
+                }
+                if(sortAppointmentsActive) {
+                    sortAppointmentsActive = false;
+                    sortAppointments.setBackgroundColor(Color.WHITE);
+                }
+                break;
+            default:
+                break;
+        }
+    }
+
+    private void filterListViewColorTags(boolean state, int color)
+    {
+        if(state)
+        {
+            listView.setAdapter(null);
+            CustomListViewAdapter adapter = new CustomListViewAdapter(this.getContext() , this.getActivity(), navController);
+            listView.setAdapter(adapter);
+            if(!removePlanned.isChecked())
+                filterListViewColorTags(removeCompleted.isChecked(), R.color.pieChartPlanned);
+            if(!removeCompleted.isChecked())
+                filterListViewColorTags(removePlanned.isChecked(), R.color.pieChartSafe);
+            if(!removeParticipated.isChecked())
+                filterListViewColorTags(removeParticipated.isChecked(), R.color.pieChartParticipation);
+        }
+        else {
+            List<StudyObject> removeList = new ArrayList<>();
+            for (int i = 0; i < listView.getCount(); i++) {
+                if(listView != null && listView.getChildAt(i) != null) {
+                    StudyObject item = (StudyObject) listView.getChildAt(i).getTag();
+                    if (item.getColor() == color) {
+                        removeList.add(item);
+                    }
+                }
+            }
+            CustomListViewAdapter adapter = (CustomListViewAdapter) listView.getAdapter();
+            for(StudyObject object: removeList)
+            {
+                adapter.getObjects().remove(object);
+            }
+            adapter.notifyDataSetChanged();
+        }
     }
 }
 
