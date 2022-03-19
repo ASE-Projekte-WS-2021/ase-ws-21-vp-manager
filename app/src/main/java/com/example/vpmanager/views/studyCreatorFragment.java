@@ -181,7 +181,7 @@ public class studyCreatorFragment extends Fragment {
         vpValue = view.findViewById(R.id.vpValueStudyFragment);
         category = view.findViewById(R.id.categoryStudyFragment);
         studyType = view.findViewById(R.id.studyTypeStudyFragment);
-//        editButton = view.findViewById(R.id.editOwnStudyButton);
+        editButton = view.findViewById(R.id.editOwnStudyButton);
 
         //Textview for further studyType data (depending on type)
         remoteData = view.findViewById(R.id.remoteStudyStudyFragment);

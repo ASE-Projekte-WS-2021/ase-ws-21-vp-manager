@@ -13,8 +13,6 @@
         tools:context=".views.studyDetails.StudyCreatorDetailsFragment">
 
 
-
-
         <!--put over tabs in main fragment-->
         <TextView
             android:id="@+id/studyFragmentHeader"

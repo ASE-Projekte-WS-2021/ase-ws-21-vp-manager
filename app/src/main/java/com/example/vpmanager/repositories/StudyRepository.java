@@ -60,33 +60,34 @@ public class StudyRepository {
 
     private void loadStudyDetails(String currentStudyId) {
         db = FirebaseFirestore.getInstance();
-        DocumentReference studyDocRef = db.collection("studies").document(currentStudyId);
+        CollectionReference studyDocRef = db.collection("studies");
         studyDetailObject = new StudyDetailModel();
 
-        studyDocRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+        studyDocRef.whereEqualTo("studyId", currentStudyId).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
-            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
                 if (task.isSuccessful()) {
-                    DocumentSnapshot document = task.getResult();
-                    if (document.exists()) {
-                        studyDetailObject.setId(document.getString("id"));
-                        studyDetailObject.setName(document.getString("name"));
-                        studyDetailObject.setDescription(document.getString("description"));
-                        studyDetailObject.setVps(document.getString("vps"));
-                        studyDetailObject.setContactOne(document.getString("contact"));
-                        studyDetailObject.setContactTwo(document.getString("contact2"));
-                        studyDetailObject.setContactThree(document.getString("contact3"));
-                        studyDetailObject.setCategory(document.getString("category"));
-                        studyDetailObject.setExecutionType(document.getString("executionType"));
-                        studyDetailObject.setRemotePlatformOne(document.getString("platform"));
-                        studyDetailObject.setRemotePlatformTwo(document.getString("platform2"));
-                        studyDetailObject.setLocation(document.getString("location"));
-                        studyDetailObject.setStreet(document.getString("street"));
-                        studyDetailObject.setRoom(document.getString("room"));
-                    } else {
-                        Log.d("loadStudyDetails", "Error: the document does not exist!");
+                    for(QueryDocumentSnapshot document : task.getResult()) {
+                        if (document != null) {
+                            studyDetailObject.setId(document.getString("id"));
+                            studyDetailObject.setName(document.getString("name"));
+                            studyDetailObject.setDescription(document.getString("description"));
+                            studyDetailObject.setVps(document.getString("vps"));
+                            studyDetailObject.setContactOne(document.getString("contact"));
+                            studyDetailObject.setContactTwo(document.getString("contact2"));
+                            studyDetailObject.setContactThree(document.getString("contact3"));
+                            studyDetailObject.setCategory(document.getString("category"));
+                            studyDetailObject.setExecutionType(document.getString("executionType"));
+                            studyDetailObject.setRemotePlatformOne(document.getString("platform"));
+                            studyDetailObject.setRemotePlatformTwo(document.getString("platform2"));
+                            studyDetailObject.setLocation(document.getString("location"));
+                            studyDetailObject.setStreet(document.getString("street"));
+                            studyDetailObject.setRoom(document.getString("room"));
+                        } else {
+                            Log.d("loadStudyDetails", "Error: the document does not exist!");
+                        }
+                        studyDetailsListener.onStudyDetailsReady(studyDetailObject);
                     }
-                    studyDetailsListener.onStudyDetailsReady(studyDetailObject);
                 } else {
                     Log.d("loadStudyDetails", "Error:" + task.getException());
                 }
