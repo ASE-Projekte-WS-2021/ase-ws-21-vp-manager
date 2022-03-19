@@ -13,13 +13,20 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentStatePagerAdapter;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
+import androidx.viewpager.widget.ViewPager;
 
 import com.example.vpmanager.R;
 import com.example.vpmanager.AccessDatabase;
+import com.example.vpmanager.views.studyDetails.StudyDatesFragment;
+import com.example.vpmanager.views.studyDetails.StudyDetailsFragment;
+import com.example.vpmanager.views.studyDetails.StudyFragment;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.tabs.TabLayout;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
@@ -28,6 +35,8 @@ import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
+import java.util.List;
+
 
 public class studyCreatorFragment extends Fragment {
 
@@ -49,6 +58,12 @@ public class studyCreatorFragment extends Fragment {
     CollectionReference datesRef;
     AccessDatabase accessDatabase = new AccessDatabase();
 
+    private ViewPager viewPager;
+    private TabLayout tabLayout;
+
+    private StudyDetailsFragment detailsFragment;
+    private StudyDatesFragment datesFragment;
+
     TextView headerText;
     TextView description;
     TextView vpValue;
@@ -65,6 +80,38 @@ public class studyCreatorFragment extends Fragment {
     public studyCreatorFragment() {
     }
 
+    private class viewPagerAdapter extends FragmentStatePagerAdapter {
+
+        private List<Fragment> fragments = new ArrayList<>();
+        private List<String> fragmentNames = new ArrayList<>();
+
+        public viewPagerAdapter(@NonNull FragmentManager fm, int behavior) {
+            super(fm, behavior);
+        }
+
+        public void addFragment(Fragment fragment, String title) {
+            fragments.add(fragment);
+            fragmentNames.add(title);
+        }
+
+        @NonNull
+        @Override
+        public Fragment getItem(int position) {
+            return fragments.get(position);
+        }
+
+        @Override
+        public int getCount() {
+            return fragments.size();
+        }
+
+        @Nullable
+        @Override
+        public CharSequence getPageTitle(int position) {
+            return fragmentNames.get(position);
+        }
+    }
+
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -73,7 +120,22 @@ public class studyCreatorFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_creator_study, container, false);
+        View view = inflater.inflate(R.layout.fragment_study, container, false);
+
+        viewPager = (ViewPager) view.findViewById(R.id.view_pager);
+        tabLayout = (TabLayout) view.findViewById(R.id.tab_layout);
+
+        detailsFragment = new StudyDetailsFragment();
+        datesFragment = new StudyDatesFragment();
+
+        tabLayout.setupWithViewPager(viewPager);
+
+        studyCreatorFragment.viewPagerAdapter viewPagerAdapter = new studyCreatorFragment.viewPagerAdapter(getParentFragmentManager(), 0);
+        viewPagerAdapter.addFragment(detailsFragment, "Details");
+        viewPagerAdapter.addFragment(datesFragment, "Termine");
+        viewPager.setAdapter(viewPagerAdapter);
+
+
         return view;
     }
 
@@ -95,6 +157,7 @@ public class studyCreatorFragment extends Fragment {
             }
         });
     }
+
 
     private void getRequiredInfos() {
         //Get the studyId early
@@ -118,7 +181,8 @@ public class studyCreatorFragment extends Fragment {
         vpValue = view.findViewById(R.id.vpValueStudyFragment);
         category = view.findViewById(R.id.categoryStudyFragment);
         studyType = view.findViewById(R.id.studyTypeStudyFragment);
-        editButton = view.findViewById(R.id.editOwnStudyButton);
+//        editButton = view.findViewById(R.id.editOwnStudyButton);
+
         //Textview for further studyType data (depending on type)
         remoteData = view.findViewById(R.id.remoteStudyStudyFragment);
         localData = view.findViewById(R.id.localStudyStudyFragment);
