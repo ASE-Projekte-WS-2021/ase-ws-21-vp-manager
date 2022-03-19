@@ -13,7 +13,7 @@
     <string name="personalAccount">Persönliche Übersicht</string>
 
     <!---Create Study-->
-    <string name="createStudyDesc">Studienbeschreibung*</string>
+    <string name="createStudyDesc">Studienbeschreibung</string>
     <string name="createAddDateButton">Termine hinzufügen</string>
     <string name="createCreateButton">Studie erstellen</string>
     <string name="createPlatformHint">Primär Plattform*</string>
@@ -22,7 +22,7 @@
     <string name="createRoomHint">Raum</string>
     <string name="createStreetHint">Straße</string>
     <string name="createAlertBase">Bitten tragen Sie die fehlenden Angaben ein:</string>
-    <string name="createAlertStudyDesc">Studienbeschreibung</string>
+    <string name="createAlertStudyDesc">Studienbeschreibung*</string>
     <string name="createAlertExecutionType">Durchführungsart</string>
     <string name="createAlertCategory">Kategorie \n</string>
     <string name="createAlertLocation">Durchführungsort</string>
@@ -41,7 +41,7 @@
     <string name="createStudyExe">Durchführungsart</string>
     <string name="createStudyContact">Kontaktmöglichkeit</string>
     <string name="fragment_create_study_pageOneTitle">Basisinformationen</string>
-    <string name="fragment_create_study_pageBaseDesc">Um eine Studie zu erstellen, geben Sie in den folgenden Schritten bitte die nötigen Informationen zum Ablauf, der Studiendauer, der Zahl an VP Stunden und möglichen Terminen an. Optionale Angaben werden als solche gekennzeichnet (*). \n\n\n Potenzielle Teilnehmer können ihren Eintrag anschließend im Reiter \"Studie finden\" einsehen und sich für freistehende Termine eintragen.</string>
+    <string name="fragment_create_study_pageBaseDesc">Geben Sie in den folgenden Schritten alle relevanten Informationen zu Ihrer Studie an. Optionale Angaben werden als solche gekennzeichnet (*). \n\n Potenziell Teilnehmer können ihren Eintrag anschließend im Reiter \"Studie finden\" einsehen.</string>
     <string name="fragment_create_study_desc_page_one">Unter folgendem Namen wird anschließend ein Eintrag in der Studienliste erstellt.</string>
     <string name="fragment_create_study_desc_page_two">Hier können sie genauere Details zum Studienablauf und konreten Inhalten bereitstellen.</string>
     <string name="fragment_create_study_pageBaseTitle">Willkommen</string>
@@ -65,7 +65,6 @@
     <string name="fragment_create_study_base_next">Weiter</string>
     <string name="fragment_create_study_base_back">Zurück</string>
     <string name="fragment_create_study_base_create">Erstellen</string>
-    <string name="fragment_create_study_base_main">Hauptmenü</string>
     <string name="fragment_create_study_finalPage_title_three">Terminbestätigung</string>
 
 

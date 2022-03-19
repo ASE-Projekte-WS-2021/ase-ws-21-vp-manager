@@ -2,10 +2,10 @@
 
 
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="?android:windowBackground"
     tools:context=".createStudy.createStudyFragment_StepOne">
 
@@ -30,10 +30,9 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_marginLeft="20dp"
-            android:layout_weight="0.05"
             android:layout_marginRight="20dp"
-            android:background="@color/black"
-            />
+            android:layout_weight="0.05"
+            android:background="@color/black" />
 
         <!--<TextView
             android:id="@+id/pageDesc"
@@ -48,19 +47,18 @@
             android:textSize="20sp" />-->
 
 
-
         <com.google.android.material.textfield.TextInputLayout
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_marginTop="30dp"
             android:layout_marginLeft="20dp"
+            android:layout_marginTop="30dp"
             android:layout_marginRight="20dp"
             android:layout_weight="1.35"
+            android:hint="@string/createStudyTitleHint"
+            android:textColorHint="@color/heatherred_Main"
             app:boxStrokeColor="@color/black"
             app:boxStrokeWidthFocused="2dp"
-            android:textColorHint="@color/heatherred_Main"
-            android:hint="@string/createStudyTitleHint"
             app:hintTextColor="@color/heatherred_Main">
 
 
@@ -68,9 +66,7 @@
                 android:id="@+id/inputFieldTitle"
                 style="@style/You.EditText.Style"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:textColorHint="@color/tabs_grey"
-                android:hint="@string/createStudyTitleHint" />
+                android:layout_height="match_parent" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -79,14 +75,14 @@
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_marginTop="30dp"
             android:layout_marginLeft="20dp"
+            android:layout_marginTop="30dp"
             android:layout_marginRight="20dp"
             android:layout_weight="1.35"
+            android:hint="@string/createOfferedVP"
+            android:textColorHint="@color/heatherred_Main"
             app:boxStrokeColor="@color/black"
             app:boxStrokeWidthFocused="2dp"
-            android:textColorHint="@color/heatherred_Main"
-            android:hint="@string/createOfferedVP"
             app:hintTextColor="@color/heatherred_Main">
 
 
@@ -95,34 +91,29 @@
                 style="@style/You.EditText.Style"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:hint="@string/createOfferedVP"
-                android:textColorHint="@color/tabs_grey"
-                android:inputType="numberDecimal" />
+                android:hint="@string/createOfferedVP" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
         <Spinner
-            android:layout_marginTop="20dp"
             android:id="@+id/createCategories"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_marginStart="13dp"
+            android:layout_marginTop="20dp"
             android:layout_marginEnd="13dp"
             android:layout_weight="1.25"
-            android:popupBackground="@color/green_dark"
-            />
+            android:popupBackground="@color/heatherred_Main" />
 
         <Spinner
             android:id="@+id/createExecutionType"
             android:layout_width="match_parent"
-            android:layout_marginStart="13dp"
-            android:layout_marginEnd="13dp"
-            android:layout_marginTop="10dp"
             android:layout_height="0dp"
+            android:layout_marginStart="13dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="13dp"
             android:layout_weight="1.25"
-            android:popupBackground="@color/green_dark"
-            />
-
+            android:popupBackground="@color/heatherred_Main" />
     </LinearLayout>
 
 </FrameLayout>

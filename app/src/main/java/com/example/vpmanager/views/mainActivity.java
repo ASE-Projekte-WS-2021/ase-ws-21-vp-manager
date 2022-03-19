@@ -19,9 +19,9 @@ import com.example.vpmanager.AccessDatabase;
 import com.google.android.material.appbar.MaterialToolbar;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 import java.util.Objects;
-import java.util.UUID;
 
 public class mainActivity extends AppCompatActivity implements DrawerController {
 
@@ -190,15 +190,19 @@ public class mainActivity extends AppCompatActivity implements DrawerController 
     //Generates an unique id for every installation of the app.
     //Source: https://ssaurel.medium.com/how-to-retrieve-an-unique-id-to-identify-android-devices-6f99fd5369eb
     public synchronized static String createUserId(Context context) {
-        if (uniqueID == null) {
-            SharedPreferences sharedPrefs = context.getSharedPreferences(
-                    PREF_UNIQUE_ID, Context.MODE_PRIVATE);
-            uniqueID = sharedPrefs.getString(PREF_UNIQUE_ID, null);
-            if (uniqueID == null) {
-                uniqueID = UUID.randomUUID().toString();
-                SharedPreferences.Editor editor = sharedPrefs.edit();
-                editor.putString(PREF_UNIQUE_ID, uniqueID);
-                editor.apply();
+        FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
+        FirebaseUser user = firebaseAuth.getCurrentUser();
+        if(user != null) {
+            if (uniqueID == null || !uniqueID.equals(user.getEmail())) {
+                SharedPreferences sharedPrefs = context.getSharedPreferences(
+                        PREF_UNIQUE_ID, Context.MODE_PRIVATE);
+                uniqueID = sharedPrefs.getString(PREF_UNIQUE_ID, null);
+                if (uniqueID == null || !uniqueID.equals(user.getEmail())) {
+                    uniqueID = user.getEmail();
+                    SharedPreferences.Editor editor = sharedPrefs.edit();
+                    editor.putString(PREF_UNIQUE_ID, uniqueID);
+                    editor.apply();
+                }
             }
         }
         return uniqueID;
@@ -223,7 +227,6 @@ public class mainActivity extends AppCompatActivity implements DrawerController 
             if (NavigationUI.navigateUp(navController, appBarConfiguration)) {
                 if (Objects.requireNonNull(navController.getCurrentDestination()).toString()
                         .equals("Destination(com.example.vpmanager:id/homeFragment) label=Startseite class=com.example.vpmanager.views.homeFragment")) {
-                    System.out.println(Objects.requireNonNull(navController.getCurrentDestination()).toString());
                     navController.navigate(R.id.action_global_homeFragment);
                 }
             }
