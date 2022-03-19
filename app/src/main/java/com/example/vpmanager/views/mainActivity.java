@@ -19,6 +19,7 @@ import com.example.vpmanager.AccessDatabase;
 import com.google.android.material.appbar.MaterialToolbar;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 import java.util.Objects;
 import java.util.UUID;
@@ -182,6 +183,7 @@ public class mainActivity extends AppCompatActivity implements DrawerController 
     //Registers a new user (installation of the app)  in the DB, if the user doesn't already exist
     private void registerNewUser() {
         String deviceID = createUserId(this);
+        System.out.println("Email: " + deviceID);
         accessDatabase.createNewUser(deviceID);
     }
 
@@ -190,15 +192,20 @@ public class mainActivity extends AppCompatActivity implements DrawerController 
     //Generates an unique id for every installation of the app.
     //Source: https://ssaurel.medium.com/how-to-retrieve-an-unique-id-to-identify-android-devices-6f99fd5369eb
     public synchronized static String createUserId(Context context) {
-        if (uniqueID == null) {
-            SharedPreferences sharedPrefs = context.getSharedPreferences(
-                    PREF_UNIQUE_ID, Context.MODE_PRIVATE);
-            uniqueID = sharedPrefs.getString(PREF_UNIQUE_ID, null);
-            if (uniqueID == null) {
-                uniqueID = UUID.randomUUID().toString();
-                SharedPreferences.Editor editor = sharedPrefs.edit();
-                editor.putString(PREF_UNIQUE_ID, uniqueID);
-                editor.apply();
+        FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
+        FirebaseUser user = firebaseAuth.getCurrentUser();
+        if(user != null) {
+            System.out.println("Firebasemail "+ user.getEmail());
+            if (uniqueID == null || !uniqueID.equals(user.getEmail())) {
+                SharedPreferences sharedPrefs = context.getSharedPreferences(
+                        PREF_UNIQUE_ID, Context.MODE_PRIVATE);
+                uniqueID = sharedPrefs.getString(PREF_UNIQUE_ID, null);
+                if (uniqueID == null || !uniqueID.equals(user.getEmail())) {
+                    uniqueID = user.getEmail();
+                    SharedPreferences.Editor editor = sharedPrefs.edit();
+                    editor.putString(PREF_UNIQUE_ID, uniqueID);
+                    editor.apply();
+                }
             }
         }
         return uniqueID;

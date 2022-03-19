@@ -47,6 +47,7 @@ public class createStudyFragment_StepTwo extends Fragment {
     //Connects the code with the view
     private void setupView(View view){
         textInputEditTextContactMail = view.findViewById(R.id.inputContact1);
+        textInputEditTextContactMail.setFocusable(false);
         textInputEditTextContactPhone = view.findViewById(R.id.inputContact2);
         textInputEditTextContactSkype = view.findViewById(R.id.inputContact3);
         textInputEditTextContactDiscord = view.findViewById(R.id.inputContact4);
