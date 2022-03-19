@@ -22,7 +22,6 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
 import java.util.Objects;
-import java.util.UUID;
 
 public class mainActivity extends AppCompatActivity implements DrawerController {
 
