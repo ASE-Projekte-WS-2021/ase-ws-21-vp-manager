@@ -1,5 +1,6 @@
 package com.example.vpmanager.views.studyDetails;
 
+import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
@@ -7,6 +8,7 @@ import android.os.Bundle;
 import com.example.vpmanager.R;
 import com.example.vpmanager.adapter.StudyDatesAdapter;
 import com.example.vpmanager.viewmodels.StudyViewModel;
+import com.google.android.material.snackbar.Snackbar;
 
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
@@ -193,5 +195,21 @@ public class StudyDatesFragment extends Fragment implements StudyDatesAdapter.On
 
     public void reloadDates() {
         studyViewModel.fetchStudyDates(currentStudyId, currentUserId);
+    }
+
+    public void showSnackBarSelectionSuccessful(){
+        Snackbar.make(getView(), "Erfolgreich angemeldet!", Snackbar.LENGTH_LONG)
+                .show();
+    }
+
+    public void showSnackBarDeselectionSuccessful(){
+        Snackbar.make(getView(), "Erfolgreich abgemeldet!", Snackbar.LENGTH_LONG)
+                .show();
+    }
+
+    @SuppressLint("ResourceAsColor")
+    public void showSnackBarSelectionUnsuccessful(){
+        Snackbar.make(getView(), "Termin ist nicht mehr verfügbar!", Snackbar.LENGTH_LONG)
+                .show();
     }
 }

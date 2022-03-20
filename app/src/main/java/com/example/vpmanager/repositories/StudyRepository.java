@@ -6,17 +6,22 @@ import android.util.Log;
 
 import androidx.annotation.NonNull;
 
-import com.example.vpmanager.interfaces.SelectUnselectDateListener;
+import com.example.vpmanager.interfaces.SelectDateListener;
+import com.example.vpmanager.interfaces.UnselectDateListener;
 import com.example.vpmanager.interfaces.StudyDatesListener;
 import com.example.vpmanager.interfaces.StudyDetailsListener;
 import com.example.vpmanager.models.DateModel;
 import com.example.vpmanager.models.StudyDetailModel;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
+import com.google.firebase.firestore.Transaction;
 
 import java.util.ArrayList;
 import java.util.Objects;
@@ -31,7 +36,8 @@ public class StudyRepository {
 
     private StudyDetailsListener studyDetailsListener;
     private StudyDatesListener studyDatesListener;
-    private SelectUnselectDateListener selectUnselectDateListener;
+    private UnselectDateListener unselectDateListener;
+    private SelectDateListener selectDateListener;
 
     public static StudyRepository getInstance() {
         if (instance == null) {
@@ -54,10 +60,11 @@ public class StudyRepository {
 
     //Sets the viewModel as the listener for the callbacks
     public void setFirestoreCallback(StudyDetailsListener studyDetailsListener, StudyDatesListener studyDatesListener,
-                                     SelectUnselectDateListener selectUnselectDateListener) {
+                                     UnselectDateListener unselectDateListener, SelectDateListener selectDateListener) {
         this.studyDetailsListener = studyDetailsListener;
         this.studyDatesListener = studyDatesListener;
-        this.selectUnselectDateListener = selectUnselectDateListener;
+        this.unselectDateListener = unselectDateListener;
+        this.selectDateListener = selectDateListener;
     }
 
     public void setFirestoreCallback(StudyDetailsListener studyDetailsListener, StudyDatesListener studyDatesListener) {
@@ -164,18 +171,54 @@ public class StudyRepository {
 
     public void selectDate(String dateId, String currentUserId) {
         db = FirebaseFirestore.getInstance();
+        final DocumentReference specificDate = db.collection("dates").document(dateId);
+
+        db.runTransaction(new Transaction.Function<Boolean>() {
+            @NonNull
+            @Override
+            public Boolean apply(@NonNull Transaction transaction) throws FirebaseFirestoreException {
+                DocumentSnapshot snapshot = transaction.get(specificDate);
+                boolean selected = snapshot.getBoolean("selected");
+                boolean updated = false;
+                if (!selected){
+                    transaction.update(specificDate, "selected", true, "userId", currentUserId );
+                    updated = true;
+                }else {
+                    try {
+                        throw new Exception("Dieser Termin ist nicht mehr verfügbar!");
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }
+                return updated;
+            }
+        }).addOnSuccessListener(new OnSuccessListener<Boolean>() {
+            @Override
+            public void onSuccess(Boolean updated) {
+                //Transaction is always successful. Check for updated or not is made later
+                selectDateListener.onDateSelected(updated);
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Log.w(TAG, "Error updating document", e);
+                selectDateListener.onDateSelected(false);
+            }
+        });
+        /*
         db.collection("dates").document(dateId)
                 .update("selected", true, "userId", currentUserId)
                 .addOnSuccessListener(aVoid -> selectUnselectDateListener.onDateActionFinished(),
                         aVoid -> Log.d(TAG, "DocumentSnapshot successfully updated!"))
                 .addOnFailureListener(e -> Log.w(TAG, "Error updating document", e));
+         */
     }
 
     public void unselectDate(String dateId) {
         db = FirebaseFirestore.getInstance();
         db.collection("dates").document(dateId)
                 .update("selected", false, "userId", null)
-                .addOnSuccessListener(aVoid -> selectUnselectDateListener.onDateActionFinished(),
+                .addOnSuccessListener(aVoid -> unselectDateListener.onDateUnselected(),
                         aVoid -> Log.d(TAG, "DocumentSnapshot successfully updated!"))
                 .addOnFailureListener(e -> Log.w(TAG, "Error updating document", e));
     }

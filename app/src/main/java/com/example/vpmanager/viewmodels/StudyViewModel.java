@@ -2,7 +2,8 @@ package com.example.vpmanager.viewmodels;
 
 import androidx.lifecycle.ViewModel;
 
-import com.example.vpmanager.interfaces.SelectUnselectDateListener;
+import com.example.vpmanager.interfaces.SelectDateListener;
+import com.example.vpmanager.interfaces.UnselectDateListener;
 import com.example.vpmanager.interfaces.StudyDatesListener;
 import com.example.vpmanager.interfaces.StudyDetailsListener;
 import com.example.vpmanager.models.DateModel;
@@ -13,7 +14,8 @@ import com.example.vpmanager.views.studyDetails.StudyDetailsFragment;
 
 import java.util.ArrayList;
 
-public class StudyViewModel extends ViewModel implements StudyDetailsListener, StudyDatesListener, SelectUnselectDateListener {
+public class StudyViewModel extends ViewModel implements StudyDetailsListener, StudyDatesListener,
+        UnselectDateListener, SelectDateListener {
 
     public StudyDetailsFragment studyDetailsFragment;
     public StudyDatesFragment studyDatesFragment;
@@ -29,7 +31,7 @@ public class StudyViewModel extends ViewModel implements StudyDetailsListener, S
     public void prepareRepo() {
         mStudyRepo = StudyRepository.getInstance();
         //Instance is the same but different data can be retrieved!
-        mStudyRepo.setFirestoreCallback(this, this, this);
+        mStudyRepo.setFirestoreCallback(this, this, this, this);
     }
 
     public void fetchStudyDetails(String currentStudyId) {
@@ -93,7 +95,18 @@ public class StudyViewModel extends ViewModel implements StudyDetailsListener, S
     }
 
     @Override
-    public void onDateActionFinished() {
+    public void onDateUnselected() {
+        studyDatesFragment.showSnackBarDeselectionSuccessful();
+        studyDatesFragment.reloadDates();
+    }
+
+    @Override
+    public void onDateSelected(Boolean updated) {
+        if (updated){
+            studyDatesFragment.showSnackBarSelectionSuccessful();
+        } else {
+            studyDatesFragment.showSnackBarSelectionUnsuccessful();
+        }
         studyDatesFragment.reloadDates();
     }
 }

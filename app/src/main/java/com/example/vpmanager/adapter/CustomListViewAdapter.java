@@ -15,6 +15,7 @@ import androidx.navigation.NavController;
 
 import com.example.vpmanager.PA_ExpandableListDataPump;
 import com.example.vpmanager.R;
+import com.example.vpmanager.views.StudyObject;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -23,7 +24,7 @@ import java.util.List;
 public class CustomListViewAdapter extends BaseAdapter {
 
     private LayoutInflater inflater;
-    private ArrayList<StudyObject> objects;
+    public ArrayList<StudyObject> objects;
     private Activity activity;
     NavController navController;
 
@@ -44,6 +45,14 @@ public class CustomListViewAdapter extends BaseAdapter {
         this.activity = activity;
     }
 
+    public CustomListViewAdapter(Context context, Activity activity, NavController nav, ArrayList<StudyObject> list) {
+        super();
+        inflater = LayoutInflater.from(context);
+        navController = nav;
+        this.objects = list;
+        this.activity = activity;
+    }
+
     private ArrayList<StudyObject> transformLists() {
         ArrayList<StudyObject> list = new ArrayList<>();
         HashMap<String, List<String>> dataList = PA_ExpandableListDataPump.EXPANDABLE_LIST_DETAIL;
@@ -52,7 +61,7 @@ public class CustomListViewAdapter extends BaseAdapter {
             List<String> tempList = dataList.get(key);
 
             for (int i = 0; i < (tempList != null ? tempList.size() : 0); i++) {
-                String[] values = tempList.get(i).split(",");
+                String[] values = tempList.get(i).split(";");
                 StudyObject object = null;
 
                 switch (key) {
@@ -75,6 +84,10 @@ public class CustomListViewAdapter extends BaseAdapter {
             }
         }
         return list;
+    }
+    public ArrayList<StudyObject> getObjects()
+    {
+        return objects;
     }
 
 
@@ -103,19 +116,19 @@ public class CustomListViewAdapter extends BaseAdapter {
             convertView = inflater.inflate(R.layout.pa_listview_item, null); //NOT SURE
 
             titleView = convertView.findViewById(R.id.listviewItemTitle);
-            titleView.setText(objects.get(position).title);
+            titleView.setText(objects.get(position).getTitle());
 
             vpsView = convertView.findViewById(R.id.pa_VP_view);
-            vpsView.setText(objects.get(position).vps);
+            vpsView.setText(objects.get(position).getVps());
 
             dateView = convertView.findViewById(R.id.pa_date_view);
-            dateView.setText(objects.get(position).date);
+            dateView.setText(objects.get(position).getDate());
 
             colorView = convertView.findViewById(R.id.pa_listView_colorTag);
-            colorView.setBackgroundResource(objects.get(position).color);
+            colorView.setBackgroundResource(objects.get(position).getColor());
 
 
-            convertView.setTag(objects);
+            convertView.setTag(objects.get(position));
 
             holder.titleTextView = titleView;
             holder.dateTextView = dateView;
@@ -136,43 +149,5 @@ public class CustomListViewAdapter extends BaseAdapter {
             });
         }
         return convertView;
-    }
-}
-class StudyObject
-{
-    String title;
-    String vps;
-    String studyId;
-    String date;
-    int color;
-
-    public StudyObject(String _title, String _vps, String _studyId, String _date, int _color)
-    {
-        title = _title;
-        vps = _vps;
-        studyId = _studyId;
-        date = _date;
-        color = _color;
-    }
-
-    public String getTitle()
-    {
-        return title;
-    }
-    public String getDate()
-    {
-        return date;
-    }
-    public String getVps()
-    {
-        return vps;
-    }
-    public String getStudyId()
-    {
-        return studyId;
-    }
-    public int getColor()
-    {
-        return color;
     }
 }
