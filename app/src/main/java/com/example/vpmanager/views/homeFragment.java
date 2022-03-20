@@ -27,6 +27,10 @@ public class homeFragment extends Fragment {
     private NavController navController;
     FirebaseAuth firebaseAuth;
 
+
+    private ViewPager viewPager;
+    private ViewPagerAdapter viewPagerAdapter;
+
     public homeFragment() {
     }
 
@@ -47,7 +51,6 @@ public class homeFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         navController = Navigation.findNavController(view);
         createTabs(view);
-
     }
 
     @Override
@@ -62,7 +65,7 @@ public class homeFragment extends Fragment {
     //sets up the tablayout and adds and adapter for the content
     private void createTabs(View view) {
 
-        ViewPager viewPager = view.findViewById(R.id.view_pager_home);
+        viewPager = view.findViewById(R.id.view_pager_home);
         TabLayout tabLayout = view.findViewById(R.id.tab_layout_home);
 
         com.example.vpmanager.views.personalAccountFragment personalAccountFragment = new personalAccountFragment();
@@ -89,7 +92,7 @@ public class homeFragment extends Fragment {
             }
         });
 
-        ViewPagerAdapter viewPagerAdapter = new ViewPagerAdapter(getParentFragmentManager(), 0);//tabLayout.getTabCount());
+        viewPagerAdapter = new ViewPagerAdapter(getChildFragmentManager(), 0);//tabLayout.getTabCount());
         viewPagerAdapter.addFragment(personalAccountFragment, "Persönliche Übersicht");
         viewPagerAdapter.addFragment(appointments, "Termine");
 
