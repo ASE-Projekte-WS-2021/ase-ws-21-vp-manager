@@ -347,7 +347,21 @@ public class personalAccountFragment extends Fragment {
         switch(type)
         {
             case "names":
-                sortAlphabeticallyActive = !active;
+                if(!sortAlphabeticallyInvert && !sortAlphabeticallyActive)
+                {
+                    sortAlphabeticallyInvert = false;
+                    sortAlphabeticallyActive = !active;
+                }
+                else if(sortAlphabeticallyActive && !sortAlphabeticallyInvert)
+                {
+                    sortAlphabeticallyInvert = true;
+                    sortAlphabeticallyActive = true;
+                }
+                else
+                {
+                    sortAlphabeticallyInvert = false;
+                    sortAlphabeticallyActive = false;
+                }
                 if(sortAlphabeticallyActive)
                     sortAlphabetically.setBackgroundColor(Color.LTGRAY);
                 else
@@ -360,9 +374,25 @@ public class personalAccountFragment extends Fragment {
                     sortVpCountActive = false;
                     sortVpCount.setBackgroundColor(Color.WHITE);
                 }
+                sortAppointmentsInvert = false;
+                sortVpCountInvert = false;
                 break;
             case "dates":
-                sortAppointmentsActive = !active;
+                if(!sortAppointmentsInvert && !sortAppointmentsActive)
+                {
+                    sortAppointmentsInvert = false;
+                    sortAppointmentsActive = !active;
+                }
+                else if(sortAppointmentsActive && !sortAppointmentsInvert)
+                {
+                    sortAppointmentsInvert = true;
+                    sortAppointmentsActive = true;
+                }
+                else
+                {
+                    sortAppointmentsInvert = false;
+                    sortAppointmentsActive = false;
+                }
                 if(sortAppointmentsActive)
                     sortAppointments.setBackgroundColor(Color.LTGRAY);
                 else
@@ -376,9 +406,26 @@ public class personalAccountFragment extends Fragment {
                     sortAlphabeticallyActive = false;
                     sortAlphabetically.setBackgroundColor(Color.WHITE);
                 }
+                sortAlphabeticallyInvert =false;
+                sortVpCountInvert = false;
                 break;
             case "vps":
-                sortVpCountActive = !active;
+
+                if(!sortVpCountInvert && !sortVpCountActive)
+                {
+                    sortVpCountInvert = false;
+                    sortVpCountActive = !active;
+                }
+                else if(sortVpCountActive && !sortVpCountInvert)
+                {
+                    sortVpCountInvert = true;
+                    sortVpCountActive = true;
+                }
+                else
+                {
+                    sortVpCountInvert = false;
+                    sortVpCountActive = false;
+                }
                 if(sortVpCountActive)
                     sortVpCount.setBackgroundColor(Color.LTGRAY);
                 else
@@ -391,6 +438,8 @@ public class personalAccountFragment extends Fragment {
                     sortAppointmentsActive = false;
                     sortAppointments.setBackgroundColor(Color.WHITE);
                 }
+                sortAlphabeticallyInvert = false;
+                sortAppointmentsInvert = false;
                 break;
             default:
                 break;
@@ -403,15 +452,15 @@ public class personalAccountFragment extends Fragment {
 
         if(sortAlphabeticallyActive)
         {
-            adapter = new CustomListViewAdapter(this.getContext() , this.getActivity(), navController, sortByName(false));
+            adapter = new CustomListViewAdapter(this.getContext() , this.getActivity(), navController, sortByName(sortAlphabeticallyInvert));
         }
         else if(sortAppointmentsActive)
         {
-            adapter = new CustomListViewAdapter(this.getContext() , this.getActivity(), navController, sortByDate(false));
+            adapter = new CustomListViewAdapter(this.getContext() , this.getActivity(), navController, sortByDate(sortAppointmentsInvert));
         }
         else if(sortVpCountActive)
         {
-            adapter = new CustomListViewAdapter(this.getContext() , this.getActivity(), navController, sortByVPS(false));
+            adapter = new CustomListViewAdapter(this.getContext() , this.getActivity(), navController, sortByVPS(sortVpCountInvert));
         }
         else
         {
