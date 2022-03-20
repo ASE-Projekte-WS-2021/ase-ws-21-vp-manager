@@ -116,7 +116,6 @@ public class loginFragment extends Fragment {
                 }
             });
         }
-
     }
 
 

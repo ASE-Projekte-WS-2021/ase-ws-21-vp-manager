@@ -113,21 +113,19 @@ public class mainActivity extends AppCompatActivity implements DrawerController 
                 return false;
             }
         });
-        /*
-        navigationViewMain.getMenu().getItem(5).setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+        navigationViewMain.getMenu().getItem(4).setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(MenuItem menuItem) {
                 firebaseAuth.signOut();
-                
+
                 navController.navigate(R.id.action_global_nestedGraphLoginRegistration);
 
-                Log.d("mainActivity", "menuItem" + navigationViewMain.getMenu().getItem(5).toString());
+                Log.d("mainActivity", "menuItem" + navigationViewMain.getMenu().getItem(4).toString());
                 Log.d("mainActivity", "additional listener on logout was active!");
                 return false;
             }
         });
 
-         */
         /*
         navigationViewMain.getMenu().getItem(1).setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
             @Override
@@ -164,20 +162,21 @@ public class mainActivity extends AppCompatActivity implements DrawerController 
     //allows NavigationUI to support proper up navigation (in the Action Bar)
     @Override
     public boolean onSupportNavigateUp() {
-        Log.d("mainActivity", "onSupportNavigateUp start + end");
+/*
+        System.out.println(navController.getCurrentDestination().toString());
         if (!Objects.requireNonNull(navController.getCurrentDestination()).toString()
                 .equals("Destination(com.example.vpmanager:id/homeFragment) label=VP Manager class=com.example.vpmanager.views.homeFragment")) {
             boolean navResult = NavigationUI.navigateUp(navController, appBarConfiguration);
             if (navResult) {
                 if (Objects.requireNonNull(navController.getCurrentDestination()).toString()
                         .equals("Destination(com.example.vpmanager:id/homeFragment) label=VP Manager class=com.example.vpmanager.views.homeFragment")) {
+                    System.out.println(navController.getCurrentDestination().toString());
                     navController.navigate(R.id.action_global_homeFragment);
                     return true;
                 }
-            }
-            else
+            } else
                 return navResult || super.onSupportNavigateUp();
-        }
+        }*/
         return NavigationUI.navigateUp(navController, appBarConfiguration) || super.onSupportNavigateUp();
     }
 
@@ -196,7 +195,7 @@ public class mainActivity extends AppCompatActivity implements DrawerController 
     public synchronized static String createUserId(Context context) {
         FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
         FirebaseUser user = firebaseAuth.getCurrentUser();
-        if(user != null) {
+        if (user != null) {
             if (uniqueID == null || !uniqueID.equals(user.getEmail())) {
                 SharedPreferences sharedPrefs = context.getSharedPreferences(
                         PREF_UNIQUE_ID, Context.MODE_PRIVATE);
@@ -226,19 +225,13 @@ public class mainActivity extends AppCompatActivity implements DrawerController 
 
     @Override
     public void onBackPressed() {
-        if (!Objects.requireNonNull(navController.getCurrentDestination()).toString()
-                .equals("Destination(com.example.vpmanager:id/homeFragment) label=VP Manager class=com.example.vpmanager.views.homeFragment")) {
-            if (NavigationUI.navigateUp(navController, appBarConfiguration)) {
-                if (Objects.requireNonNull(navController.getCurrentDestination()).toString()
-                        .equals("Destination(com.example.vpmanager:id/homeFragment) label=VP Manager class=com.example.vpmanager.views.homeFragment")) {
-                    System.out.println(Objects.requireNonNull(navController.getCurrentDestination()).toString());
-                    navController.navigate(R.id.action_global_homeFragment);
-                }
-            }
-        }
-        else
+
+        if (drawerLayoutMain.isOpen())
         {
-            super.onBackPressed();
+            drawerLayoutMain.close();
+        }
+        else {
+                super.onBackPressed();
         }
     }
 }

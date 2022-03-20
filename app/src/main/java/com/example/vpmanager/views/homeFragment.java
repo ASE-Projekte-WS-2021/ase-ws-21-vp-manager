@@ -30,8 +30,6 @@ public class homeFragment extends Fragment {
     public homeFragment() {
     }
 
-
-
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,9 +46,15 @@ public class homeFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         navController = Navigation.findNavController(view);
-        userLoggedIn();
         createTabs(view);
 
+    }
+
+    @Override
+    public void onStart()
+    {
+        super.onStart();
+        userLoggedIn();
     }
 
     //Parameter: current view to find components
