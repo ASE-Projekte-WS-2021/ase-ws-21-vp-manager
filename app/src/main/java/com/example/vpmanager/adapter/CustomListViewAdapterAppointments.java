@@ -15,6 +15,7 @@ import androidx.navigation.NavController;
 
 import com.example.vpmanager.PA_ExpandableListDataPump;
 import com.example.vpmanager.R;
+import com.example.vpmanager.views.StudyObject;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -50,6 +51,7 @@ public class CustomListViewAdapterAppointments extends BaseAdapter {
             String id = getStudyIdByName.get(values[0]);
             assert id != null;
             if(!id.equals("")) {
+                System.out.println(values[1]);
                 StudyObject object = new StudyObject(values[0],null, id, values[1], 0);
                 returnList.add(object);
             }
@@ -82,10 +84,10 @@ public class CustomListViewAdapterAppointments extends BaseAdapter {
             convertView = inflater.inflate(R.layout.pa_upcoming_listview_item, null); //NOT SURE
 
             titleView = convertView.findViewById(R.id.upcoming_listviewItemTitle);
-            titleView.setText(objects.get(position).title);
+            titleView.setText(objects.get(position).getTitle());
 
             dateView = convertView.findViewById(R.id.pa_upcoming_date_view);
-            dateView.setText(objects.get(position).date);
+            dateView.setText(objects.get(position).getDate());
 
             convertView.setTag(objects);
 

@@ -17,8 +17,6 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -27,6 +25,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 import java.util.TreeMap;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class PA_ExpandableListDataPump extends Activity {
 
@@ -154,15 +154,16 @@ public class PA_ExpandableListDataPump extends Activity {
 
                             if(isDateInPast(dateString))
                             {
-                                passedStudies.add(studyNameString + "," + studyVPSString + "," + dateString + "," + StudyId);
+                                passedStudies.add(studyNameString + ";" + studyVPSString + ";" + dateString + ";" + StudyId);
                             }
                             else
-                                ownStudies.add(studyNameString + "," + studyVPSString + "," + dateString + "," + StudyId);
+                                ownStudies.add(studyNameString + ";" + studyVPSString + ";" + dateString + ";" + StudyId);
                         }
                     }
                 }
             }
         }
+        EXPANDABLE_LIST_DETAIL.put("Abgeschlossene Studien", new ArrayList<>());
         EXPANDABLE_LIST_DETAIL.put("Vergangene Studien", passedStudies);
         EXPANDABLE_LIST_DETAIL.put("Geplante Studien", ownStudies);
     }
@@ -172,22 +173,28 @@ public class PA_ExpandableListDataPump extends Activity {
     //Return Values: boolean to tell if a date is in the future or past
     //this function parses a given string to a date and checks if the date is already in the past, or in the future
     private static boolean isDateInPast(String date) {
+
+        Calendar c = Calendar.getInstance();
+        int day = c.get(Calendar.DAY_OF_MONTH);
+        int month = c.get(Calendar.MONTH);
+        int year = c.get(Calendar.YEAR);
+        String currentDate = day + "." + (month+1) + "." + year;
+        //
         Date currentTime = Calendar.getInstance().getTime();
 
-        SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyy HH:mm");
-
-        try {
-            Date meetingDate = format.parse(date);
-
-            if (currentTime.after(meetingDate))
-                return true;
-            else
-                return false;
-
-        } catch (ParseException e) {
-            e.printStackTrace();
+        Pattern pattern = Pattern.compile("\\d\\d:\\d\\d:\\d\\d");
+        Matcher matcher = pattern.matcher(currentTime.toString());
+        if (matcher.find())
+        {
+            currentDate += " " + matcher.group(0);
         }
-        return false;
+
+        String testDate = date.substring(date.indexOf(",")+2);
+        testDate = testDate.replaceAll("um", "");
+
+        if(testDate.compareToIgnoreCase(currentDate) > 0)
+            return false;
+        return true;
     }
 
     //Parameters
@@ -219,7 +226,7 @@ public class PA_ExpandableListDataPump extends Activity {
                     }
                 }
             }
-            if (saveDate && studyId != null && date != null) {
+            if (saveDate && studyId != null && date != null  && !isDateInPast(date)) {
                 studyIdList.put(studyId, date);
             }
         }
@@ -287,7 +294,40 @@ public class PA_ExpandableListDataPump extends Activity {
                 arrivingDates.add(listEntry);
             }
         }
-        return arrivingDates;
+        return sortListByDate((ArrayList<String[]>) arrivingDates);
+    }
+
+    private static ArrayList<String[]> sortListByDate(ArrayList<String[]> list)
+    {
+        ArrayList<String[]> sortList = list;
+
+        String[][] stringList = new String[list.size()][3];
+        for(int i = 0; i <list.size(); i++)
+        {
+            stringList[i][0] = sortList.get(i)[0];
+            stringList[i][1] = sortList.get(i)[1];
+            stringList[i][2] = sortList.get(i)[2];
+        }
+
+        for(int i = 0; i < stringList.length; i++)
+        {
+            for(int k = 0; k < stringList.length-1; k++) {
+
+                String date1 = stringList[k][1].substring(stringList[k][1].indexOf(",")+2);
+                String date2 = stringList[k+1][1].substring(stringList[k+1][1].indexOf(",")+2);
+
+                if (date1.compareToIgnoreCase(date2) < 0) {
+                    String[] tempString = stringList[k];
+                    stringList[k] = stringList[k + 1];
+                    stringList[k + 1] = tempString;
+                }
+            }
+        }
+        list.clear();
+        for(String[] ob: stringList) {
+            list.add(ob);
+        }
+        return sortList;
     }
 
 

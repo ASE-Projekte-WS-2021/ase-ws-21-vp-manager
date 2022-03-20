@@ -205,6 +205,110 @@
         android:textSize="18sp"
         android:textStyle="bold" />
 
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="10dp"
+        android:elevation="10dp"
+        app:cardBackgroundColor="@color/cardview_light_background"
+        app:cardCornerRadius="10dp">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="25dp"
+            android:layout_marginStart="25dp"
+            android:layout_marginEnd="25dp"
+            android:layout_marginVertical="10dp"
+            android:text="Filter"
+            android:textSize="15sp"
+            android:gravity="center_vertical"/>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_gravity="right"
+            android:layout_marginHorizontal="10dp"
+            android:layout_marginVertical="10dp">
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="95dp"
+                android:layout_height="25dp"
+                android:layout_marginHorizontal="40dp"
+                android:elevation="10dp"
+                android:layout_gravity="right"
+                app:cardBackgroundColor="@color/cardview_light_background"
+                app:cardCornerRadius="10dp">
+                <ImageView
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:id="@+id/pa_sort_alphabetical"
+                    app:srcCompat="@drawable/ic_baseline_sort_by_alpha_24"
+                    app:tint="@color/heatherred_dark"
+                    android:layout_gravity="left"/>
+
+                <ImageView
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:layout_marginHorizontal="5dp"
+                    android:id="@+id/pa_sort_date"
+                    app:srcCompat="@drawable/ic_baseline_date_range_24"
+                    app:tint="@color/heatherred_dark"
+                    android:layout_gravity="center"/>
+
+                <TextView
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:text="VP"
+                    android:textStyle="bold"
+                    android:id="@+id/pa_sort_vp"
+                    android:gravity="center"
+                    android:textColor="@color/heatherred_dark"
+                    android:layout_gravity="right"/>
+
+
+            </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="75dp"
+            android:layout_height="25dp"
+            android:elevation="10dp"
+            android:layout_gravity="right"
+            app:cardBackgroundColor="@color/cardview_light_background"
+            app:cardCornerRadius="10dp"
+            android:layout_marginHorizontal="20dp">
+            <ToggleButton
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:background="@color/pieChartPlanned"
+                android:id="@+id/pa_remove_planned"
+                android:checked="true"
+                android:layout_gravity="left"/>
+
+            <ToggleButton
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:id="@+id/pa_remove_participation"
+                android:background="@color/pieChartParticipation"
+                android:checked="true"
+                android:layout_gravity="center"/>
+
+            <ToggleButton
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:id="@+id/pa_remove_completed"
+                android:background="@color/pieChartSafe"
+                android:checked="true"
+                android:layout_gravity="right"/>
+
+
+        </androidx.cardview.widget.CardView>
+
+
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
 
     <ScrollView
         android:layout_width="match_parent"
