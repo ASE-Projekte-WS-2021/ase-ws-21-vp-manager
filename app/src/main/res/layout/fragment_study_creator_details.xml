@@ -5,17 +5,20 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"
-        tools:context=".views.studyDetails.StudyCreatorDetailsFragment">
+        tools:context=".views.studyCreatorDetails.StudyCreatorDetailsFragment">
 
 
         <!--put over tabs in main fragment-->
         <TextView
-            android:id="@+id/studyFragmentHeader"
+            android:id="@+id/creator_studyFragmentHeader"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="left"
@@ -30,7 +33,7 @@
 
 
         <ImageView
-            android:id="@+id/infoSymbolStudyFragment"
+            android:id="@+id/creator_infoSymbolStudyFragment"
             android:layout_width="91dp"
             android:layout_height="29dp"
             android:layout_gravity="center"
@@ -51,7 +54,7 @@
             android:background="@color/green_Main" />
 
         <TextView
-            android:id="@+id/descriptionTag"
+            android:id="@+id/creator_descriptionTag"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom"
@@ -66,7 +69,7 @@
             android:weightSum="100" />
 
         <TextView
-            android:id="@+id/descriptionStudyFragment"
+            android:id="@+id/creator_descriptionStudyFragment"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom"
@@ -85,7 +88,7 @@
             android:background="@color/color_two" />
 
         <TextView
-            android:id="@+id/vpTag"
+            android:id="@+id/creator_vpTag"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom"
@@ -99,7 +102,7 @@
             android:weightSum="100" />
 
         <TextView
-            android:id="@+id/vpValueStudyFragment"
+            android:id="@+id/creator_vpValueStudyFragment"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom"
@@ -132,7 +135,7 @@
             android:weightSum="100" />
 
         <TextView
-            android:id="@+id/categoryStudyFragment"
+            android:id="@+id/creator_categoryStudyFragment"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom"
@@ -151,7 +154,7 @@
             android:background="@color/color_two" />
 
         <TextView
-            android:id="@+id/contactTag"
+            android:id="@+id/creator_contactTag"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom"
@@ -165,7 +168,7 @@
             android:weightSum="100" />
 
         <TextView
-            android:id="@+id/contactInformationStudyFragment"
+            android:id="@+id/creator_contactInformationStudyFragment"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom"
@@ -186,7 +189,7 @@
 
 
         <ImageView
-            android:id="@+id/locationSymbolStudyFragment"
+            android:id="@+id/creator_locationSymbolStudyFragment"
             android:layout_width="91dp"
             android:layout_height="31dp"
             android:layout_gravity="center"
@@ -209,7 +212,7 @@
 
 
         <TextView
-            android:id="@+id/studyTypeTag"
+            android:id="@+id/creator_studyTypeTag"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom"
@@ -224,7 +227,7 @@
             android:weightSum="100" />
 
         <TextView
-            android:id="@+id/studyTypeStudyFragment"
+            android:id="@+id/creator_studyTypeStudyFragment"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom"
@@ -243,7 +246,7 @@
             android:background="@color/color_two" />
 
         <TextView
-            android:id="@+id/locationTag"
+            android:id="@+id/creator_locationTag"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom"
@@ -257,7 +260,7 @@
             android:weightSum="100" />
 
         <TextView
-            android:id="@+id/remoteStudyStudyFragment"
+            android:id="@+id/creator_remoteStudyStudyFragment"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom"
@@ -271,7 +274,7 @@
 
 
         <TextView
-            android:id="@+id/localStudyStudyFragment"
+            android:id="@+id/creator_localStudyStudyFragment"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom"
@@ -287,19 +290,18 @@
             android:layout_width="match_parent"
             android:layout_height="3dp"
             android:layout_marginTop="7dp"
-            android:layout_marginBottom="150dp"
+            android:layout_marginBottom="100dp"
             android:background="@color/color_two" />
 
 
 
-        <View
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:layout_marginTop="-13dp"
             android:background="@color/green_Main" />
 
         <ImageView
-            android:id="@+id/editOwnStudyButton"
+            android:id="@+id/creator_editOwnStudyButton"
             android:layout_width="91dp"
             android:layout_height="29dp"
             android:layout_gravity="center"
@@ -318,8 +320,6 @@
             android:layout_marginTop="-50dp"
             android:background="@color/heatherred_Main" />
 
-
-
     </LinearLayout>
-
+    </ScrollView>
 </FrameLayout>

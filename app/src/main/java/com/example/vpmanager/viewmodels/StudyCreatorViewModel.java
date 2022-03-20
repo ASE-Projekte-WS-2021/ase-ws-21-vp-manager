@@ -8,16 +8,15 @@ import com.example.vpmanager.interfaces.StudyDetailsListener;
 import com.example.vpmanager.models.DateModel;
 import com.example.vpmanager.models.StudyDetailModel;
 import com.example.vpmanager.repositories.StudyRepository;
-import com.example.vpmanager.views.studyDetails.StudyCreatorDetailsFragment;
-import com.example.vpmanager.views.studyDetails.StudyDatesFragment;
-import com.example.vpmanager.views.studyDetails.StudyDetailsFragment;
+import com.example.vpmanager.views.studyCreatorDetails.StudyCreatorDatesFragment;
+import com.example.vpmanager.views.studyCreatorDetails.StudyCreatorDetailsFragment;
 
 import java.util.ArrayList;
 
 public class StudyCreatorViewModel extends ViewModel implements StudyDetailsListener, StudyDatesListener, SelectUnselectDateListener {
 
     public StudyCreatorDetailsFragment studyCreatorDetailsFragment;
-    public StudyDatesFragment studyDatesFragment;
+    public StudyCreatorDatesFragment studyDatesFragment;
 
     private StudyDetailModel mStudyDetails;
     private ArrayList<DateModel> mStudyDates;
@@ -37,8 +36,8 @@ public class StudyCreatorViewModel extends ViewModel implements StudyDetailsList
         mStudyRepo.getStudyDetails(currentStudyId);
     }
 
-    public void fetchStudyDates(String currentStudyId, String currentUserId) {
-        mStudyRepo.getStudyDates(currentStudyId, currentUserId);
+    public void fetchStudyDates(String currentStudyId) {
+        mStudyRepo.getAllStudyDates(currentStudyId);
     }
 
     public void selectDate(String dateId, String currentUserId) {
@@ -84,13 +83,7 @@ public class StudyCreatorViewModel extends ViewModel implements StudyDetailsList
     @Override
     public void onStudyDatesReady(ArrayList<DateModel> datesArrayList) {
         mStudyDates = datesArrayList;
-
-        //set the list of userIds
-        userIdsOfDates.clear();
-        for (int i = 0; i < mStudyDates.size(); i++) {
-            userIdsOfDates.add(mStudyDates.get(i).getUserId());
-        }
-        studyDatesFragment.setDatesView();
+        studyDatesFragment.connectDatesAdapter();
     }
 
     @Override

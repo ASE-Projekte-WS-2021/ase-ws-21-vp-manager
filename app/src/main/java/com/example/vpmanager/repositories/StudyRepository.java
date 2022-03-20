@@ -12,6 +12,7 @@ import com.example.vpmanager.interfaces.StudyDetailsListener;
 import com.example.vpmanager.models.DateModel;
 import com.example.vpmanager.models.StudyDetailModel;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
@@ -50,6 +51,10 @@ public class StudyRepository {
         loadStudyDates(currentStudyId, currentUserId);
     }
 
+    public void getAllStudyDates(String currentStudyId) {
+        loadAllStudyDates(currentStudyId);
+    }
+
     //Sets the viewModel as the listener for the callbacks
     public void setFirestoreCallback(StudyDetailsListener studyDetailsListener, StudyDatesListener studyDatesListener,
                                      SelectUnselectDateListener selectUnselectDateListener) {
@@ -63,7 +68,7 @@ public class StudyRepository {
         CollectionReference studyDocRef = db.collection("studies");
         studyDetailObject = new StudyDetailModel();
 
-        studyDocRef.whereEqualTo("studyId", currentStudyId).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+        studyDocRef.whereEqualTo("id", currentStudyId).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
                 if (task.isSuccessful()) {
@@ -111,6 +116,34 @@ public class StudyRepository {
                                         !Objects.equals(document.getString("userId"), currentUserId)) {
                                     continue;
                                 }
+                                datesArrayList.add(
+                                        new DateModel(
+                                                document.getString("id"),      //id of the date
+                                                document.getString("date"),    //the date itself
+                                                document.getString("studyId"), //id of corresponding study
+                                                document.getString("userId"))  //id of user who selected the date
+                                );
+                            }
+                            studyDatesListener.onStudyDatesReady(datesArrayList);
+                        } else {
+                            Log.d("loadStudyDates", "Error:" + task.getException());
+                        }
+                    }
+                });
+    }
+
+    private void loadAllStudyDates(String currentStudyId) {
+        db = FirebaseFirestore.getInstance();
+        CollectionReference datesRef = db.collection("dates");
+        datesArrayList.clear();
+
+        //All dates of one study are retrieved with this db call. Then, the results are filtered.
+        datesRef.whereEqualTo("studyId", currentStudyId).get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            for (QueryDocumentSnapshot document : task.getResult()) {
                                 datesArrayList.add(
                                         new DateModel(
                                                 document.getString("id"),      //id of the date

@@ -84,13 +84,10 @@
         <argument
             android:name="study_id"
             app:argType="string" />
-        <action
-            android:id="@+id/action_studyFragment_to_editStudyFragment"
-            app:destination="@id/editStudyFragment" />
     </fragment>
     <fragment
         android:id="@+id/studyCreatorFragment"
-        android:name="com.example.vpmanager.views.studyCreatorFragment"
+        android:name="com.example.vpmanager.views.studyCreatorDetails.studyCreatorFragment"
         android:label="Studiendetails">
         <argument
             android:name="study_id"

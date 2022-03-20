@@ -8,7 +8,6 @@ import com.example.vpmanager.interfaces.StudyDetailsListener;
 import com.example.vpmanager.models.DateModel;
 import com.example.vpmanager.models.StudyDetailModel;
 import com.example.vpmanager.repositories.StudyRepository;
-import com.example.vpmanager.views.studyDetails.StudyCreatorDetailsFragment;
 import com.example.vpmanager.views.studyDetails.StudyDatesFragment;
 import com.example.vpmanager.views.studyDetails.StudyDetailsFragment;
 

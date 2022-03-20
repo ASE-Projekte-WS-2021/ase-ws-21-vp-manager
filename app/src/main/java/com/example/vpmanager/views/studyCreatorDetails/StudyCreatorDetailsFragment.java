@@ -1,13 +1,17 @@
-package com.example.vpmanager.views.studyDetails;
+package com.example.vpmanager.views.studyCreatorDetails;
 
 import android.os.Bundle;
 
 import com.example.vpmanager.R;
 import com.example.vpmanager.viewmodels.StudyCreatorViewModel;
+import com.example.vpmanager.views.studyDetails.StudyFragment;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -78,27 +82,37 @@ public class StudyCreatorDetailsFragment extends Fragment {
         return view;
     }
 
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        navController = Navigation.findNavController(view);
+    }
+
     private void prepareComponents() {
-        currentStudyId = StudyFragment.currentStudyId;
+        currentStudyId = studyCreatorFragment.currentStudyId;
         studyViewModel = new ViewModelProvider(requireActivity()).get(StudyCreatorViewModel.class);
         studyViewModel.studyCreatorDetailsFragment = this;
         studyViewModel.prepareRepo();
-        editButton.setOnClickListener(v -> {
-         StudyFragment.creatorDetailViewCall();
-        });
+
     }
 
     private void initDetailViews(View view) {
-        headerText = view.findViewById(R.id.studyFragmentHeader);
-        description = view.findViewById(R.id.descriptionStudyFragment);
-        vpValue = view.findViewById(R.id.vpValueStudyFragment);
-        editButton = view.findViewById(R.id.editOwnStudyButton);
-        contactInfo = view.findViewById(R.id.contactInformationStudyFragment);
-        category = view.findViewById(R.id.categoryStudyFragment);
-        studyType = view.findViewById(R.id.studyTypeStudyFragment);
+        headerText = view.findViewById(R.id.creator_studyFragmentHeader);
+        description = view.findViewById(R.id.creator_descriptionStudyFragment);
+        vpValue = view.findViewById(R.id.creator_vpValueStudyFragment);
+        editButton = view.findViewById(R.id.creator_editOwnStudyButton);
+        contactInfo = view.findViewById(R.id.creator_contactInformationStudyFragment);
+        category = view.findViewById(R.id.creator_categoryStudyFragment);
+        studyType = view.findViewById(R.id.creator_studyTypeStudyFragment);
         //Textview for further studyType data (depending on type)
-        remoteData = view.findViewById(R.id.remoteStudyStudyFragment);
-        localData = view.findViewById(R.id.localStudyStudyFragment);
+        remoteData = view.findViewById(R.id.creator_remoteStudyStudyFragment);
+        localData = view.findViewById(R.id.creator_localStudyStudyFragment);
+
+        editButton.setOnClickListener(v -> {
+            Bundle args = new Bundle();
+            args.putString("studyId", currentStudyId);
+            navController.navigate(R.id.action_studyCreatorFragment_to_editStudyFragment, args);
+        });
     }
 
     public void setStudyDetails() {
