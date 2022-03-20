@@ -15,7 +15,7 @@ import android.widget.ListView;
 import android.widget.TimePicker;
 
 import com.example.vpmanager.R;
-import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -68,7 +68,7 @@ public class createStudyFragment_StepFive extends Fragment {
         dateList = view.findViewById(R.id.createDatelist);
         loadData();
         setupDatePicker();
-        ExtendedFloatingActionButton fab = view.findViewById(R.id.fab);
+        FloatingActionButton fab = view.findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -111,6 +111,7 @@ public class createStudyFragment_StepFive extends Fragment {
                         timePicker();
                     }
                 }, mYear, mMonth, mDay);
+        datePickerDialog.getDatePicker().setMinDate(System.currentTimeMillis() - 1000);
         datePickerDialog.show();
     }
 

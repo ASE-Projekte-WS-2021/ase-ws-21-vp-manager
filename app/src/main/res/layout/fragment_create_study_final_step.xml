@@ -34,32 +34,36 @@
         <com.google.android.material.textview.MaterialTextView
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="1.05"
+            android:layout_weight="1"
             android:layout_marginRight="30dp"
             android:layout_marginLeft="30dp"
-            android:layout_marginTop="5dp"
+            android:layout_marginTop="10dp"
+            android:padding="10dp"
             android:id="@+id/confirmTitle"
             android:textSize="15sp"
             android:fontFamily="@font/maven_pro"
             android:textStyle="bold"
             android:textColor="@color/heatherred_Main"
-            android:gravity="top">
+            android:gravity="top"
+            android:background="@drawable/border">
         </com.google.android.material.textview.MaterialTextView>
 
 
         <com.google.android.material.textview.MaterialTextView
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="1.05"
+            android:layout_weight="1"
             android:fontFamily="@font/maven_pro"
             android:layout_marginRight="30dp"
             android:layout_marginLeft="30dp"
             android:layout_marginTop="10dp"
+            android:padding="10dp"
             android:id="@+id/confirmVP"
             android:textSize="15sp"
             android:textStyle="bold"
             android:textColor="@color/heatherred_Main"
-            android:gravity="top">
+            android:gravity="top"
+            android:background="@drawable/border">
 
 
         </com.google.android.material.textview.MaterialTextView>
@@ -67,16 +71,18 @@
         <com.google.android.material.textview.MaterialTextView
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="1.05"
+            android:layout_weight="1"
             android:layout_marginRight="30dp"
             android:layout_marginLeft="30dp"
             android:layout_marginTop="10dp"
+            android:padding="10dp"
             android:fontFamily="@font/maven_pro"
             android:id="@+id/confirmCategory"
             android:textSize="15sp"
             android:textStyle="bold"
             android:textColor="@color/heatherred_Main"
-            android:gravity="top">
+            android:gravity="top"
+            android:background="@drawable/border">
 
 
         </com.google.android.material.textview.MaterialTextView>
@@ -85,16 +91,18 @@
         <com.google.android.material.textview.MaterialTextView
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="1.05"
+            android:layout_weight="1"
             android:fontFamily="@font/maven_pro"
             android:layout_marginRight="30dp"
             android:layout_marginLeft="30dp"
             android:layout_marginTop="10dp"
+            android:padding="10dp"
             android:id="@+id/confirmExecution"
             android:textSize="15sp"
             android:textStyle="bold"
             android:textColor="@color/heatherred_Main"
-            android:gravity="top">
+            android:gravity="top"
+            android:background="@drawable/border">
 
 
         </com.google.android.material.textview.MaterialTextView>
@@ -102,18 +110,18 @@
         <com.google.android.material.textview.MaterialTextView
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="1.05"
+            android:layout_weight="1"
             android:fontFamily="@font/maven_pro"
             android:layout_marginRight="30dp"
             android:layout_marginLeft="30dp"
             android:layout_marginTop="10dp"
+            android:padding="10dp"
             android:id="@+id/confirmLocation"
             android:textSize="15sp"
             android:textStyle="bold"
             android:textColor="@color/heatherred_Main"
-            android:gravity="top">
-
-
+            android:gravity="top"
+            android:background="@drawable/border">
         </com.google.android.material.textview.MaterialTextView>
 
 
