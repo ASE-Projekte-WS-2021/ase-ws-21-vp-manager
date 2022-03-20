@@ -20,7 +20,7 @@ import com.example.vpmanager.viewmodels.StudyCreatorViewModel;
  * Use the {@link StudyCreatorDatesFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class StudyCreatorDatesFragment extends Fragment implements StudyDatesAdapter.OnDateClickListener {
+public class StudyCreatorDatesFragment extends Fragment {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -100,13 +100,4 @@ public class StudyCreatorDatesFragment extends Fragment implements StudyDatesAda
         datesList.setLayoutManager(linearLayoutManager);
     }
 
-    @Override
-    public void onDateClick(String dateId) {
-
-    }
-
-
-    public void reloadDates() {
-        studyViewModel.fetchStudyDates(currentStudyId);
-    }
 }
