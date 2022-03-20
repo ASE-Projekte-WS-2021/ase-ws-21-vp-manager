@@ -4,7 +4,6 @@ import android.os.Bundle;
 
 import com.example.vpmanager.R;
 import com.example.vpmanager.viewmodels.StudyCreatorViewModel;
-import com.example.vpmanager.views.studyDetails.StudyFragment;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;

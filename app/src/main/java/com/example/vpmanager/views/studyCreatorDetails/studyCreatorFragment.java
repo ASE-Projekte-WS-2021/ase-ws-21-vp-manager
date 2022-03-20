@@ -16,10 +16,6 @@ import androidx.viewpager.widget.ViewPager;
 
 import com.example.vpmanager.R;
 import com.example.vpmanager.views.mainActivity;
-import com.example.vpmanager.views.studyCreatorDetails.StudyCreatorDatesFragment;
-import com.example.vpmanager.views.studyCreatorDetails.StudyCreatorDetailsFragment;
-import com.example.vpmanager.views.studyDetails.StudyDatesFragment;
-import com.example.vpmanager.views.studyDetails.StudyDetailsFragment;
 import com.google.android.material.tabs.TabLayout;
 
 import java.util.ArrayList;
