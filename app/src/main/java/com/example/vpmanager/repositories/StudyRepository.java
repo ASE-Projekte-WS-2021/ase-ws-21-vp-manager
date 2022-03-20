@@ -60,6 +60,11 @@ public class StudyRepository {
         this.selectUnselectDateListener = selectUnselectDateListener;
     }
 
+    public void setFirestoreCallback(StudyDetailsListener studyDetailsListener, StudyDatesListener studyDatesListener) {
+        this.studyDetailsListener = studyDetailsListener;
+        this.studyDatesListener = studyDatesListener;
+    }
+
     private void loadStudyDetails(String currentStudyId) {
         db = FirebaseFirestore.getInstance();
         CollectionReference studyDocRef = db.collection("studies");

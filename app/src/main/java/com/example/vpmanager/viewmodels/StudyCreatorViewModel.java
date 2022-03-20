@@ -2,7 +2,6 @@ package com.example.vpmanager.viewmodels;
 
 import androidx.lifecycle.ViewModel;
 
-import com.example.vpmanager.interfaces.SelectUnselectDateListener;
 import com.example.vpmanager.interfaces.StudyDatesListener;
 import com.example.vpmanager.interfaces.StudyDetailsListener;
 import com.example.vpmanager.models.DateModel;
@@ -13,7 +12,7 @@ import com.example.vpmanager.views.studyCreatorDetails.StudyCreatorDetailsFragme
 
 import java.util.ArrayList;
 
-public class StudyCreatorViewModel extends ViewModel implements StudyDetailsListener, StudyDatesListener, SelectUnselectDateListener {
+public class StudyCreatorViewModel extends ViewModel implements StudyDetailsListener, StudyDatesListener {
 
     public StudyCreatorDetailsFragment studyCreatorDetailsFragment;
     public StudyCreatorDatesFragment studyDatesFragment;
@@ -29,7 +28,7 @@ public class StudyCreatorViewModel extends ViewModel implements StudyDetailsList
     public void prepareRepo() {
         mStudyRepo = StudyRepository.getInstance();
         //Instance is the same but different data can be retrieved!
-        mStudyRepo.setFirestoreCallback(this, this, this);
+        mStudyRepo.setFirestoreCallback(this, this);
     }
 
     public void fetchStudyDetails(String currentStudyId) {
@@ -58,9 +57,5 @@ public class StudyCreatorViewModel extends ViewModel implements StudyDetailsList
     public void onStudyDatesReady(ArrayList<DateModel> datesArrayList) {
         mStudyDates = datesArrayList;
         studyDatesFragment.connectDatesAdapter();
-    }
-
-    @Override
-    public void onDateActionFinished() {
     }
 }
