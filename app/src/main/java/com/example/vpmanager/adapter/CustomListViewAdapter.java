@@ -62,7 +62,7 @@ public class CustomListViewAdapter extends BaseAdapter {
             List<String> tempList = dataList.get(key);
 
             for (int i = 0; i < (tempList != null ? tempList.size() : 0); i++) {
-                String[] values = tempList.get(i).split(",");
+                String[] values = tempList.get(i).split(";");
                 StudyObject object = null;
 
                 switch (key) {

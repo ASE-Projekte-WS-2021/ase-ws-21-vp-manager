@@ -49,7 +49,7 @@ public class personalAccountFragment extends Fragment {
     private TextView planned, participated, completed, remaining, sortVpCount;
     private ToggleButton removeCompleted, removePlanned, removeParticipated;
 
-    private boolean sortAlphabeticallyActive, sortAppointmentsActive, sortVpCountActive;
+    private boolean sortAlphabeticallyActive, sortAppointmentsActive, sortVpCountActive, sortAlphabeticallyInvert, sortAppointmentsInvert, sortVpCountInvert;
 
     private double plannedVP, completedVP, participatedVP;
 
@@ -109,6 +109,9 @@ public class personalAccountFragment extends Fragment {
                                     sortAlphabeticallyActive = false;
                                     sortAppointmentsActive = false;
                                     sortVpCountActive = false;
+                                    sortAlphabeticallyInvert = false;
+                                    sortAppointmentsInvert = false;
+                                    sortVpCountInvert = false;
                                 }
                             });
                         }
@@ -147,10 +150,21 @@ public class personalAccountFragment extends Fragment {
         completedVP = 0;
         participatedVP = 0;
 
+        List<String> savedList = PA_ExpandableListDataPump.EXPANDABLE_LIST_DETAIL.get("Abgeschlossene Studien");
+        if (savedList != null) {
+            for (int i = 0; i < savedList.size(); i++) {
+                String vps = savedList.get(i).split(";")[1];
+                double studyVPS = 0;
+                if (vps != null && !vps.equals(""))
+                    studyVPS = Double.parseDouble(vps);
+                completedVP += studyVPS;
+            }
+        }
+
         List<String> vpList = PA_ExpandableListDataPump.EXPANDABLE_LIST_DETAIL.get("Geplante Studien");
         if (vpList != null) {
             for (int i = 0; i < vpList.size(); i++) {
-                String vps = vpList.get(i).split(",")[1];
+                String vps = vpList.get(i).split(";")[1];
                 double studyVPS = 0;
                 if (vps != null && !vps.equals(""))
                     studyVPS = Double.parseDouble(vps);
@@ -160,7 +174,7 @@ public class personalAccountFragment extends Fragment {
         List<String> passedVpList = PA_ExpandableListDataPump.EXPANDABLE_LIST_DETAIL.get("Vergangene Studien");
         if (passedVpList != null) {
             for (int i = 0; i < passedVpList.size(); i++) {
-                String vps = passedVpList.get(i).split(",")[1];
+                String vps = passedVpList.get(i).split(";")[1];
                 double studyVPS = 0;
                 if (vps != null && !vps.equals(""))
                     studyVPS = Double.parseDouble(vps);
@@ -381,6 +395,10 @@ public class personalAccountFragment extends Fragment {
             default:
                 break;
         }
+        filterListViewTextContent();
+    }
+
+    private void filterListViewTextContent() {
         CustomListViewAdapter adapter;
 
         if(sortAlphabeticallyActive)
@@ -528,7 +546,11 @@ public class personalAccountFragment extends Fragment {
         for(int i = 0; i < studyList.length; i++)
         {
             for(int k = 0; k < studyList.length-1; k++) {
-                if (studyList[k].getDate().compareToIgnoreCase(studyList[k + 1].getDate()) < 0) {
+
+                String date1 = studyList[k].getDate().substring(studyList[k].getDate().indexOf(",")+2);
+                String date2 = studyList[k+1].getDate().substring(studyList[k+1].getDate().indexOf(",")+2);
+
+                if (date1.compareToIgnoreCase(date2) < 0) {
                     StudyObject tempStudy = studyList[k];
                     studyList[k] = studyList[k + 1];
                     studyList[k + 1] = tempStudy;

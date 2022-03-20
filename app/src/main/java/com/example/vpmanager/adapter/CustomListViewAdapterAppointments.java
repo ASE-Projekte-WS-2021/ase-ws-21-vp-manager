@@ -51,6 +51,7 @@ public class CustomListViewAdapterAppointments extends BaseAdapter {
             String id = getStudyIdByName.get(values[0]);
             assert id != null;
             if(!id.equals("")) {
+                System.out.println(values[1]);
                 StudyObject object = new StudyObject(values[0],null, id, values[1], 0);
                 returnList.add(object);
             }

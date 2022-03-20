@@ -166,13 +166,16 @@ public class mainActivity extends AppCompatActivity implements DrawerController 
         Log.d("mainActivity", "onSupportNavigateUp start + end");
         if (!Objects.requireNonNull(navController.getCurrentDestination()).toString()
                 .equals("Destination(com.example.vpmanager:id/homeFragment) label=VP Manager class=com.example.vpmanager.views.homeFragment")) {
-            if (NavigationUI.navigateUp(navController, appBarConfiguration)) {
+            boolean navResult = NavigationUI.navigateUp(navController, appBarConfiguration);
+            if (navResult) {
                 if (Objects.requireNonNull(navController.getCurrentDestination()).toString()
                         .equals("Destination(com.example.vpmanager:id/homeFragment) label=VP Manager class=com.example.vpmanager.views.homeFragment")) {
                     navController.navigate(R.id.action_global_homeFragment);
                     return true;
                 }
             }
+            else
+                return navResult || super.onSupportNavigateUp();
         }
         return NavigationUI.navigateUp(navController, appBarConfiguration) || super.onSupportNavigateUp();
     }

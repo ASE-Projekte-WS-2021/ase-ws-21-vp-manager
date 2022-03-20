@@ -8,7 +8,7 @@
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
-        android:layout_height="55dp"
+        android:layout_height="85dp"
         android:layout_marginBottom="5dp"
         android:elevation="10dp"
         app:cardBackgroundColor="@color/heatherred_hint"
@@ -55,8 +55,12 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom"
-            android:layout_marginTop="5dp">
+            android:layout_marginTop="5dp"
+            android:orientation="vertical">
 
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_marginBottom="5dp"
@@ -76,11 +80,11 @@
             android:textStyle="bold"
                 android:text="1" />
 
+        </LinearLayout>
 
-            <View
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_weight="1" />
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
 
             <TextView
                 android:layout_width="wrap_content"
@@ -90,7 +94,7 @@
                 android:layout_marginBottom="5dp"
                 android:layout_marginEnd="5dp"
                 android:text="Termin:"
-                />
+                android:paddingLeft="?android:attr/expandableListPreferredChildPaddingLeft" />
             <TextView
                 android:id="@+id/pa_date_view"
                 android:layout_width="wrap_content"
@@ -102,7 +106,7 @@
                 android:text="22013213532523342"
                 android:paddingEnd="?android:attr/expandableListPreferredChildPaddingLeft"
                 />
-
+            </LinearLayout>
 
         </LinearLayout>
     </androidx.cardview.widget.CardView>

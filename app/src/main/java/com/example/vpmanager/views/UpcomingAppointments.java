@@ -98,28 +98,23 @@ public class UpcomingAppointments extends Fragment {
 //            List<String[]> dates = arrivingDates[0];
             ArrayList<String> listEntries = new ArrayList<>();
 
-            Map<Date, String> sortingMap = new TreeMap<>();
+            HashMap<String, String> sortingMap = new HashMap<>();
 
             for (String[] listEntry : dates) {
                 String name = listEntry[0];
                 String date = listEntry[1];
                 String studyID = listEntry[2];
 
-                Date studyDate = null;
-                try {
-                    studyDate = format.parse(date);
-                } catch (ParseException e) {
-                    e.printStackTrace();
-                }
 
-                if(studyDate != null && name != null)
+
+                if(date != null && name != null)
                 {
-                    sortingMap.put(studyDate, name);
+                    sortingMap.put(date, name);
                 getStudyIdByName.put(name, studyID);
                 }
             }
 
-            for (Date key : sortingMap.keySet()) {
+            for (String key : sortingMap.keySet()) {
                 listEntries.add(sortingMap.get(key) + "\t\t" + key);
             }
              arrivingDatesList.setAdapter(new CustomListViewAdapterAppointments(this.getContext(), this.getActivity(), navController, listEntries, getStudyIdByName));
