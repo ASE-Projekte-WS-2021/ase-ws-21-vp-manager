@@ -56,7 +56,8 @@ public class mainActivity extends AppCompatActivity implements DrawerController 
     }
 
     private void setupUserId() {
-        uniqueID = createUserId(this);
+        //uniqueID = createUserId(this);
+        uniqueID = "default";
         accessDatabase = new AccessDatabase();
         registerNewUser();
     }
