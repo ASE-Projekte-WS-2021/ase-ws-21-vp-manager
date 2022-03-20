@@ -95,8 +95,10 @@ public class StudyCreatorDatesFragment extends Fragment implements StudyDatesAda
 
     public void connectDatesAdapter() {
         //connect recyclerView with data here
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(requireActivity());
         studyDatesAdapter = new StudyDatesAdapter(requireActivity(), studyViewModel.getStudyDates(), null);
         datesList.setAdapter(studyDatesAdapter);
+        datesList.setLayoutManager(linearLayoutManager);
     }
 
     @Override
