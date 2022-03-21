@@ -6,18 +6,20 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".views.personalAccountFragment"
-    app:layout_behavior="@string/appbar_scrolling_view_behavior">
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    android:weightSum="11">
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cardViewGraph"
         android:layout_width="match_parent"
-        android:layout_height="150dp"
+        android:layout_height="0dp"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
         android:layout_marginTop="10dp"
         android:elevation="10dp"
         app:cardBackgroundColor="@color/cardview_light_background"
-        app:cardCornerRadius="10dp">
+        app:cardCornerRadius="10dp"
+        android:layout_weight="3">
 
         <ImageView
             android:layout_width="wrap_content"
@@ -159,13 +161,14 @@
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
         android:layout_marginTop="10dp"
         android:elevation="10dp"
         app:cardBackgroundColor="@color/cardview_light_background"
-        app:cardCornerRadius="10dp">
+        app:cardCornerRadius="10dp"
+        android:layout_weight="0.7">
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
@@ -197,26 +200,28 @@
 
     <TextView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         android:layout_marginTop="10dp"
         android:layout_marginStart="25dp"
         android:layout_marginEnd="25dp"
         android:text="Studien"
         android:textSize="18sp"
-        android:textStyle="bold" />
+        android:textStyle="bold"
+        android:layout_weight="0.5"/>
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
         android:layout_marginTop="10dp"
         android:elevation="10dp"
         app:cardBackgroundColor="@color/cardview_light_background"
-        app:cardCornerRadius="10dp">
+        app:cardCornerRadius="10dp"
+        android:layout_weight="1">
         <TextView
             android:layout_width="match_parent"
-            android:layout_height="25dp"
+            android:layout_height="30dp"
             android:layout_marginStart="25dp"
             android:layout_marginEnd="25dp"
             android:layout_marginVertical="10dp"
@@ -229,28 +234,27 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:layout_gravity="right"
-            android:layout_marginHorizontal="10dp"
             android:layout_marginVertical="10dp">
 
             <androidx.cardview.widget.CardView
-                android:layout_width="95dp"
-                android:layout_height="25dp"
-                android:layout_marginHorizontal="40dp"
+                android:layout_width="135dp"
+                android:layout_height="30dp"
+                android:layout_marginHorizontal="20dp"
                 android:elevation="10dp"
                 android:layout_gravity="right"
                 app:cardBackgroundColor="@color/cardview_light_background"
                 app:cardCornerRadius="10dp">
                 <ImageView
-                    android:layout_width="25dp"
-                    android:layout_height="25dp"
+                    android:layout_width="40dp"
+                    android:layout_height="30dp"
                     android:id="@+id/pa_sort_alphabetical"
                     app:srcCompat="@drawable/ic_baseline_sort_by_alpha_24"
                     app:tint="@color/heatherred_dark"
                     android:layout_gravity="left"/>
 
                 <ImageView
-                    android:layout_width="25dp"
-                    android:layout_height="25dp"
+                    android:layout_width="40dp"
+                    android:layout_height="30dp"
                     android:layout_marginHorizontal="5dp"
                     android:id="@+id/pa_sort_date"
                     app:srcCompat="@drawable/ic_baseline_date_range_24"
@@ -258,45 +262,45 @@
                     android:layout_gravity="center"/>
 
                 <TextView
-                    android:layout_width="25dp"
-                    android:layout_height="25dp"
+                    android:layout_width="40dp"
+                    android:layout_height="30dp"
                     android:text="VP"
-                    android:textStyle="bold"
                     android:id="@+id/pa_sort_vp"
                     android:gravity="center"
                     android:textColor="@color/heatherred_dark"
-                    android:layout_gravity="right"/>
+                    android:layout_gravity="right"
+                    android:textSize="20sp"/>
 
 
             </androidx.cardview.widget.CardView>
 
         <androidx.cardview.widget.CardView
-            android:layout_width="75dp"
-            android:layout_height="25dp"
+            android:layout_width="120dp"
+            android:layout_height="30dp"
             android:elevation="10dp"
             android:layout_gravity="right"
             app:cardBackgroundColor="@color/cardview_light_background"
             app:cardCornerRadius="10dp"
-            android:layout_marginHorizontal="20dp">
+            android:layout_marginHorizontal="10dp">
             <ToggleButton
-                android:layout_width="25dp"
-                android:layout_height="25dp"
+                android:layout_width="40dp"
+                android:layout_height="30dp"
                 android:background="@color/pieChartPlanned"
                 android:id="@+id/pa_remove_planned"
                 android:checked="true"
                 android:layout_gravity="left"/>
 
             <ToggleButton
-                android:layout_width="25dp"
-                android:layout_height="25dp"
+                android:layout_width="40dp"
+                android:layout_height="30dp"
                 android:id="@+id/pa_remove_participation"
                 android:background="@color/pieChartParticipation"
                 android:checked="true"
                 android:layout_gravity="center"/>
 
             <ToggleButton
-                android:layout_width="25dp"
-                android:layout_height="25dp"
+                android:layout_width="40dp"
+                android:layout_height="30dp"
                 android:id="@+id/pa_remove_completed"
                 android:background="@color/pieChartSafe"
                 android:checked="true"
@@ -309,10 +313,13 @@
         </LinearLayout>
     </androidx.cardview.widget.CardView>
 
-
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="0dp"
+    android:layout_weight="5.8">
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:layout_weight="100"
         android:fillViewport="true">
         <androidx.cardview.widget.CardView
@@ -341,5 +348,5 @@
                 android:background="@color/cardview_light_background"/>
         </androidx.cardview.widget.CardView>
     </ScrollView>
-
+</LinearLayout>
 </LinearLayout>
