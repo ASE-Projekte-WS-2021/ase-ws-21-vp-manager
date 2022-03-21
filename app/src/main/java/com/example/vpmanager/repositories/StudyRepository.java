@@ -56,6 +56,10 @@ public class StudyRepository {
         loadStudyDates(currentStudyId, currentUserId);
     }
 
+    public void getAllStudyDates(String currentStudyId) {
+        loadAllStudyDates(currentStudyId);
+    }
+
     //Sets the viewModel as the listener for the callbacks
     public void setFirestoreCallback(StudyDetailsListener studyDetailsListener, StudyDatesListener studyDatesListener,
                                      UnselectDateListener unselectDateListener, SelectDateListener selectDateListener) {
@@ -65,35 +69,41 @@ public class StudyRepository {
         this.selectDateListener = selectDateListener;
     }
 
+    public void setFirestoreCallback(StudyDetailsListener studyDetailsListener, StudyDatesListener studyDatesListener) {
+        this.studyDetailsListener = studyDetailsListener;
+        this.studyDatesListener = studyDatesListener;
+    }
+
     private void loadStudyDetails(String currentStudyId) {
         db = FirebaseFirestore.getInstance();
-        DocumentReference studyDocRef = db.collection("studies").document(currentStudyId);
+        CollectionReference studyDocRef = db.collection("studies");
         studyDetailObject = new StudyDetailModel();
 
-        studyDocRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+        studyDocRef.whereEqualTo("id", currentStudyId).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
-            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
                 if (task.isSuccessful()) {
-                    DocumentSnapshot document = task.getResult();
-                    if (document.exists()) {
-                        studyDetailObject.setId(document.getString("id"));
-                        studyDetailObject.setName(document.getString("name"));
-                        studyDetailObject.setDescription(document.getString("description"));
-                        studyDetailObject.setVps(document.getString("vps"));
-                        studyDetailObject.setContactOne(document.getString("contact"));
-                        studyDetailObject.setContactTwo(document.getString("contact2"));
-                        studyDetailObject.setContactThree(document.getString("contact3"));
-                        studyDetailObject.setCategory(document.getString("category"));
-                        studyDetailObject.setExecutionType(document.getString("executionType"));
-                        studyDetailObject.setRemotePlatformOne(document.getString("platform"));
-                        studyDetailObject.setRemotePlatformTwo(document.getString("platform2"));
-                        studyDetailObject.setLocation(document.getString("location"));
-                        studyDetailObject.setStreet(document.getString("street"));
-                        studyDetailObject.setRoom(document.getString("room"));
-                    } else {
-                        Log.d("loadStudyDetails", "Error: the document does not exist!");
+                    for(QueryDocumentSnapshot document : task.getResult()) {
+                        if (document != null) {
+                            studyDetailObject.setId(document.getString("id"));
+                            studyDetailObject.setName(document.getString("name"));
+                            studyDetailObject.setDescription(document.getString("description"));
+                            studyDetailObject.setVps(document.getString("vps"));
+                            studyDetailObject.setContactOne(document.getString("contact"));
+                            studyDetailObject.setContactTwo(document.getString("contact2"));
+                            studyDetailObject.setContactThree(document.getString("contact3"));
+                            studyDetailObject.setCategory(document.getString("category"));
+                            studyDetailObject.setExecutionType(document.getString("executionType"));
+                            studyDetailObject.setRemotePlatformOne(document.getString("platform"));
+                            studyDetailObject.setRemotePlatformTwo(document.getString("platform2"));
+                            studyDetailObject.setLocation(document.getString("location"));
+                            studyDetailObject.setStreet(document.getString("street"));
+                            studyDetailObject.setRoom(document.getString("room"));
+                        } else {
+                            Log.d("loadStudyDetails", "Error: the document does not exist!");
+                        }
+                        studyDetailsListener.onStudyDetailsReady(studyDetailObject);
                     }
-                    studyDetailsListener.onStudyDetailsReady(studyDetailObject);
                 } else {
                     Log.d("loadStudyDetails", "Error:" + task.getException());
                 }
@@ -117,6 +127,34 @@ public class StudyRepository {
                                         !Objects.equals(document.getString("userId"), currentUserId)) {
                                     continue;
                                 }
+                                datesArrayList.add(
+                                        new DateModel(
+                                                document.getString("id"),      //id of the date
+                                                document.getString("date"),    //the date itself
+                                                document.getString("studyId"), //id of corresponding study
+                                                document.getString("userId"))  //id of user who selected the date
+                                );
+                            }
+                            studyDatesListener.onStudyDatesReady(datesArrayList);
+                        } else {
+                            Log.d("loadStudyDates", "Error:" + task.getException());
+                        }
+                    }
+                });
+    }
+
+    private void loadAllStudyDates(String currentStudyId) {
+        db = FirebaseFirestore.getInstance();
+        CollectionReference datesRef = db.collection("dates");
+        datesArrayList.clear();
+
+        //All dates of one study are retrieved with this db call. Then, the results are filtered.
+        datesRef.whereEqualTo("studyId", currentStudyId).get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            for (QueryDocumentSnapshot document : task.getResult()) {
                                 datesArrayList.add(
                                         new DateModel(
                                                 document.getString("id"),      //id of the date

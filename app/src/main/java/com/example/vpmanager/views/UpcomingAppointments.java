@@ -16,15 +16,10 @@ import com.example.vpmanager.PA_ExpandableListDataPump;
 import com.example.vpmanager.R;
 import com.example.vpmanager.adapter.CustomListViewAdapterAppointments;
 import com.google.firebase.auth.FirebaseAuth;
-
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-import java.util.TreeMap;
 
 public class UpcomingAppointments extends Fragment {
 
@@ -93,35 +88,27 @@ public class UpcomingAppointments extends Fragment {
     private  void finishSetupList(List <String[]> dates){
 
         if (dates != null) {
-            SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyy HH:mm");
 
-//            List<String[]> dates = arrivingDates[0];
             ArrayList<String> listEntries = new ArrayList<>();
 
-            Map<Date, String> sortingMap = new TreeMap<>();
+            HashMap<String, String> sortingMap = new HashMap<>();
 
             for (String[] listEntry : dates) {
                 String name = listEntry[0];
                 String date = listEntry[1];
                 String studyID = listEntry[2];
 
-                Date studyDate = null;
-                try {
-                    studyDate = format.parse(date);
-                } catch (ParseException e) {
-                    e.printStackTrace();
-                }
-
-                if(studyDate != null && name != null)
+                if(date != null && name != null)
                 {
-                    sortingMap.put(studyDate, name);
-                getStudyIdByName.put(name, studyID);
+                    sortingMap.put(date, name);
+                    getStudyIdByName.put(name, studyID);
                 }
             }
 
-            for (Date key : sortingMap.keySet()) {
+            for (String key : sortingMap.keySet()) {
                 listEntries.add(sortingMap.get(key) + "\t\t" + key);
             }
+            Collections.reverse(listEntries);
              arrivingDatesList.setAdapter(new CustomListViewAdapterAppointments(this.getContext(), this.getActivity(), navController, listEntries, getStudyIdByName));
 
         }
