@@ -32,8 +32,12 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.text.Format;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Date;
 import java.util.List;
 
 public class personalAccountFragment extends Fragment {
@@ -599,10 +603,24 @@ public class personalAccountFragment extends Fragment {
                 String date1 = studyList[k].getDate().substring(studyList[k].getDate().indexOf(",")+2);
                 String date2 = studyList[k+1].getDate().substring(studyList[k+1].getDate().indexOf(",")+2);
 
-                if (date1.compareToIgnoreCase(date2) < 0) {
-                    StudyObject tempStudy = studyList[k];
-                    studyList[k] = studyList[k + 1];
-                    studyList[k + 1] = tempStudy;
+                date1 = date1.replaceAll("um", "");
+                date1 = date1.replaceAll("Uhr", "");
+                date2 = date2.replaceAll("um", "");
+                date2 = date2.replaceAll("Uhr", "");
+
+                Format format = new SimpleDateFormat("dd.MM.yyyy hh:mm");
+                try {
+
+                    Date d1_Date = (Date) format.parseObject(date1);
+                    Date d2_Date = (Date) format.parseObject(date2);
+
+                    if (d2_Date.before(d1_Date)) {
+                        StudyObject tempStudy = studyList[k];
+                        studyList[k]= studyList[k+1];
+                        studyList[k+1]= tempStudy;
+                    }
+                } catch (ParseException e) {
+                    e.printStackTrace();
                 }
             }
         }

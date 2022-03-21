@@ -18,6 +18,7 @@ import com.example.vpmanager.adapter.CustomListViewAdapterAppointments;
 import com.google.firebase.auth.FirebaseAuth;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 
@@ -88,9 +89,7 @@ public class UpcomingAppointments extends Fragment {
     private  void finishSetupList(List <String[]> dates){
 
         if (dates != null) {
-            SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyy HH:mm");
 
-//            List<String[]> dates = arrivingDates[0];
             ArrayList<String> listEntries = new ArrayList<>();
 
             HashMap<String, String> sortingMap = new HashMap<>();
@@ -100,18 +99,17 @@ public class UpcomingAppointments extends Fragment {
                 String date = listEntry[1];
                 String studyID = listEntry[2];
 
-
-
                 if(date != null && name != null)
                 {
                     sortingMap.put(date, name);
-                getStudyIdByName.put(name, studyID);
+                    getStudyIdByName.put(name, studyID);
                 }
             }
 
             for (String key : sortingMap.keySet()) {
                 listEntries.add(sortingMap.get(key) + "\t\t" + key);
             }
+            Collections.reverse(listEntries);
              arrivingDatesList.setAdapter(new CustomListViewAdapterAppointments(this.getContext(), this.getActivity(), navController, listEntries, getStudyIdByName));
 
         }
