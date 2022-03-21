@@ -246,7 +246,7 @@ public class personalAccountFragment extends Fragment {
                         if (!VPS.isEmpty()) {
                             setPieChartData(Double.parseDouble(VPS), 0, 0);
                             plannedLayout.setVisibility(View.INVISIBLE);
-                            participatedLayout.setVisibility(View.INVISIBLE);
+                            completedLayout.setVisibility(View.VISIBLE);
                         }
                     }
                 }
@@ -287,7 +287,7 @@ public class personalAccountFragment extends Fragment {
                         getString(R.string.pieSliceLabelParticipation),
                         scaledParticipationVP,
                         getResources().getColor(R.color.pieChartParticipation)));
-        participated.setText("Teilgenommen: " + participationVP + " VP");
+        participated.setText("Vergangene: " + participationVP + " VP");
         chart.addPieSlice(
                 new PieModel(
                         getString(R.string.pieSliceLabelPlanned),
