@@ -17,6 +17,9 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
+import java.text.Format;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -178,23 +181,34 @@ public class PA_ExpandableListDataPump extends Activity {
         int day = c.get(Calendar.DAY_OF_MONTH);
         int month = c.get(Calendar.MONTH);
         int year = c.get(Calendar.YEAR);
-        String currentDate = day + "." + (month+1) + "." + year;
+        String currentDate = day + "." + (month + 1) + "." + year;
         //
         Date currentTime = Calendar.getInstance().getTime();
 
         Pattern pattern = Pattern.compile("\\d\\d:\\d\\d:\\d\\d");
         Matcher matcher = pattern.matcher(currentTime.toString());
-        if (matcher.find())
-        {
+        if (matcher.find()) {
             currentDate += " " + matcher.group(0);
+            currentDate = currentDate.substring(0, currentDate.lastIndexOf(":"));
         }
 
-        String testDate = date.substring(date.indexOf(",")+2);
+        String testDate = date.substring(date.indexOf(",") + 2);
         testDate = testDate.replaceAll("um", "");
+        testDate = testDate.replaceAll("Uhr", "");
 
-        if(testDate.compareToIgnoreCase(currentDate) > 0)
-            return false;
-        return true;
+        Format format = new SimpleDateFormat("dd.MM.yyyy hh:mm");
+        try {
+
+            Date c_Date = (Date) format.parseObject(currentDate);
+            Date t_Date = (Date) format.parseObject(testDate);
+
+            if (t_Date.before(c_Date)) {
+                return true;
+            }
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return false;
     }
 
     //Parameters
@@ -232,7 +246,6 @@ public class PA_ExpandableListDataPump extends Activity {
         }
 
         for (Map<String, Object> map : DB_STUDIES_LIST) {
-            List<String> dateList = new ArrayList<>();
             boolean getDate = false;
             String studyID = null;
             String creator = null;
@@ -294,40 +307,7 @@ public class PA_ExpandableListDataPump extends Activity {
                 arrivingDates.add(listEntry);
             }
         }
-        return sortListByDate((ArrayList<String[]>) arrivingDates);
-    }
-
-    private static ArrayList<String[]> sortListByDate(ArrayList<String[]> list)
-    {
-        ArrayList<String[]> sortList = list;
-
-        String[][] stringList = new String[list.size()][3];
-        for(int i = 0; i <list.size(); i++)
-        {
-            stringList[i][0] = sortList.get(i)[0];
-            stringList[i][1] = sortList.get(i)[1];
-            stringList[i][2] = sortList.get(i)[2];
-        }
-
-        for(int i = 0; i < stringList.length; i++)
-        {
-            for(int k = 0; k < stringList.length-1; k++) {
-
-                String date1 = stringList[k][1].substring(stringList[k][1].indexOf(",")+2);
-                String date2 = stringList[k+1][1].substring(stringList[k+1][1].indexOf(",")+2);
-
-                if (date1.compareToIgnoreCase(date2) < 0) {
-                    String[] tempString = stringList[k];
-                    stringList[k] = stringList[k + 1];
-                    stringList[k + 1] = tempString;
-                }
-            }
-        }
-        list.clear();
-        for(String[] ob: stringList) {
-            list.add(ob);
-        }
-        return sortList;
+        return arrivingDates;
     }
 
 
