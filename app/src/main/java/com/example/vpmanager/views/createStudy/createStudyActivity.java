@@ -1,4 +1,4 @@
-package com.example.vpmanager.createStudy;
+package com.example.vpmanager.views.createStudy;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
@@ -29,7 +29,9 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.UUID;
 
+/*
 public class createStudyActivity extends AppCompatActivity {
+
     MaterialToolbar topAppBarCreate;
     DrawerLayout drawerLayoutCreate;
     NavigationView navigationViewCreate;
@@ -125,15 +127,16 @@ public class createStudyActivity extends AppCompatActivity {
     //Return values:
     //Sets clickListener on navigation items
     private void setupListeners() {
-        doneAnimation.addAnimatorListener(new AnimatorListenerAdapter() {
-                                              @Override
-                                              public void onAnimationEnd(Animator animation) {
-                                                  super.onAnimationEnd(animation);
-                                                  createDBEntry();
-                                                  Intent homeIntent = new Intent(createStudyActivity.this, mainActivity.class);
-                                                  startActivity(homeIntent);
-                                              }
-                                          }
+        doneAnimation.addAnimatorListener(
+                new AnimatorListenerAdapter() {
+                    @Override
+                    public void onAnimationEnd(Animator animation) {
+                        super.onAnimationEnd(animation);
+                        createDBEntry();
+                        Intent homeIntent = new Intent(createStudyActivity.this, mainActivity.class);
+                        startActivity(homeIntent);
+                    }
+                }
         );
 
         topAppBarCreate.setNavigationOnClickListener(new View.OnClickListener() {
@@ -146,7 +149,7 @@ public class createStudyActivity extends AppCompatActivity {
 
 
 
-        /*
+
         //For NavigationDrawer to open
         topAppBarCreate.setNavigationOnClickListener(new View.OnClickListener() {
             public void onClick(View V) {
@@ -183,7 +186,7 @@ public class createStudyActivity extends AppCompatActivity {
                 return true;
             }
         });
-         */
+
 
         next.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -711,23 +714,23 @@ public class createStudyActivity extends AppCompatActivity {
     private boolean mandatoryCheck(int page) {
         switch (page) {
             case 1:
-                if (!studyTitle.isEmpty()&& !category.equals(firstSpinnerItemCategory) && !execution.equals(firstSpinnerItemExecution)) {
+                if (!studyTitle.isEmpty() && !category.equals(firstSpinnerItemCategory) && !execution.equals(firstSpinnerItemExecution)) {
                     System.out.println(studyTitle);
                     return true;
                 }
-                if(studyTitle.isEmpty()){
+                if (studyTitle.isEmpty()) {
                     textInputEditTextTitle.setError("Titel darf nicht leer sein");
                     textInputEditTextTitle.requestFocus();
                     break;
                 }
-                if(category.equals(firstSpinnerItemCategory)){
+                if (category.equals(firstSpinnerItemCategory)) {
                     categoriesSpinner.setFocusable(true);
                     categoriesSpinner.setFocusableInTouchMode(true);
                     categoriesSpinner.requestFocus();
                     categoriesSpinner.performClick();
                     break;
                 }
-                if(execution.equals(firstSpinnerItemExecution)){
+                if (execution.equals(firstSpinnerItemExecution)) {
                     executionTypeSpinner.setFocusable(true);
                     executionTypeSpinner.setFocusableInTouchMode(true);
                     executionTypeSpinner.requestFocus();
@@ -753,14 +756,14 @@ public class createStudyActivity extends AppCompatActivity {
                 if (!location.isEmpty()) {
                     return true;
                 }
-                if(execution.equals("Präsenz")) {
+                if (execution.equals("Präsenz")) {
                     textInputEditTextLocation.setError("Ort der Studie muss angegeben werden");
                     textInputEditTextLocation.requestFocus();
                 }
                 if (!platform.isEmpty()) {
                     return true;
                 }
-                if(execution.equals("Remote")) {
+                if (execution.equals("Remote")) {
                     textInputEditTextPlatform.setError("Primärplattform muss angegeben werden");
                     textInputEditTextPlatform.requestFocus();
                 }
@@ -789,3 +792,5 @@ public class createStudyActivity extends AppCompatActivity {
     }
 
 }
+*/
+

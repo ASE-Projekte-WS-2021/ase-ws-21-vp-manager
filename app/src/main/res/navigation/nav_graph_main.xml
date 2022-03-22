@@ -15,6 +15,11 @@
         app:destination="@id/nestedGraphLoginRegistration"
         app:popUpTo="@id/nestedGraphLoginRegistration"
         app:popUpToInclusive="true" />
+    <action
+        android:id="@+id/action_global_createStudyFragment"
+        app:destination="@id/createStudyFragment"
+        app:popUpTo="@id/createStudyFragment"
+        app:popUpToInclusive="true"/>
     <fragment
         android:id="@+id/homeFragment"
         android:name="com.example.vpmanager.views.homeFragment"
@@ -30,11 +35,13 @@
             app:destination="@id/ownStudyFragment"
             app:popUpTo="@id/ownStudyFragment"
             app:popUpToInclusive="true" />
+        <!--
         <action
             android:id="@+id/action_homeFragment_to_createStudyActivity"
             app:destination="@id/createStudyActivity"
             app:popUpTo="@id/createStudyActivity"
             app:popUpToInclusive="true" />
+            -->
         <action
             android:id="@+id/action_homeFragment_to_studyFragment"
             app:destination="@id/studyFragment"
@@ -44,6 +51,11 @@
             android:id="@+id/action_homeFragment_to_studyCreatorFragment"
             app:destination="@id/studyCreatorFragment"
             app:popUpTo="@id/studyCreatorFragment"
+            app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_homeFragment_to_createStudyFragment"
+            app:destination="@id/createStudyFragment"
+            app:popUpTo="@id/createStudyFragment"
             app:popUpToInclusive="true" />
     </fragment>
     <fragment
@@ -62,11 +74,13 @@
             app:popUpTo="@id/studyCreatorFragment"
             app:popUpToInclusive="true" />
     </fragment>
+    <!--
     <activity
         android:id="@+id/createStudyActivity"
         android:name="com.example.vpmanager.createStudy.createStudyActivity"
         android:label="Studien erstellen"
         tools:layout="@layout/activity_create_study" />
+        -->
     <fragment
         android:id="@+id/ownStudyFragment"
         android:name="com.example.vpmanager.views.ownStudyFragment"
@@ -120,5 +134,9 @@
             android:label="Login / Register"
             tools:layout="@layout/fragment_login" />
     </navigation>
+    <fragment
+        android:id="@+id/createStudyFragment"
+        android:name="com.example.vpmanager.views.createStudy.CreateStudyFragment"
+        android:label="Studien erstellen" />
 
 </navigation>
