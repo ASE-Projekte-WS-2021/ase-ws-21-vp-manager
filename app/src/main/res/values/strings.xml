@@ -120,8 +120,10 @@
     <string name="login_forgot_password">Passwort vergessen</string>
     <string name="login_create_account">Registrieren</string>
     <string name="register_optional">Optional</string>
-    <string name="login_no_account">Sie haben noch keinen Account? \n<font color='#01C6DB'>Account erstellen.</font>"</string>
-    <string name="already_have_an_account">Sie haben bereits einen Account? \n<font color='#01C6DB'>Login</font></string>
+    <string name="login_no_account">Sie haben noch keinen Account?</string>
+    <string name="login_no_account_clickable"><font color='#01C6DB'>Account erstellen.</font></string>
+    <string name="already_have_an_account">Sie haben bereits einen Account?</string>
+    <string name="already_have_an_account_clickable"><font color='#01C6DB'>Login</font></string>
 
 </resources>
 

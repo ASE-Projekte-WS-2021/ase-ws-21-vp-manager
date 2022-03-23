@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -29,6 +30,7 @@ public class registerFragment extends Fragment {
     private TextInputEditText matnrEditText;
     private TextInputEditText vpEditText;
     private Button registerButton;
+    private TextView toLoginTextView;
 
     private FirebaseAuth firebaseAuth;
     private NavController navController;
@@ -50,7 +52,7 @@ public class registerFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
 
-        return inflater.inflate(R.layout.fragment_login, container, false);
+        return inflater.inflate(R.layout.fragment_register, container, false);
     }
 
     @Override
@@ -60,12 +62,6 @@ public class registerFragment extends Fragment {
         navController = Navigation.findNavController(view);
 
         setOnClickListeners();
-    }
-
-    @Override
-    public void onDestroyView(){
-        super.onDestroyView();
-        ((mainActivity)getActivity()).setDrawerUnlocked();
     }
 
 
@@ -78,6 +74,7 @@ public class registerFragment extends Fragment {
         matnrEditText = view.findViewById(R.id.register_matnr);
         vpEditText = view.findViewById(R.id.register_vp);
         registerButton = view.findViewById(R.id.register_button);
+        toLoginTextView = view.findViewById(R.id.already_have_an_account_clickable);
     }
 
     //Parameter:
@@ -86,6 +83,10 @@ public class registerFragment extends Fragment {
     private void setOnClickListeners() {
         registerButton.setOnClickListener(view -> {
             createUser();
+        });
+
+        toLoginTextView.setOnClickListener(view -> {
+            navController.navigate(R.id.action_registerFragment_to_loginFragment);
         });
     }
 
@@ -96,7 +97,6 @@ public class registerFragment extends Fragment {
     private void createUser() {
         String email = emailEdittext.getText().toString();
         String password = passwordEditText.getText().toString();
-
         if (TextUtils.isEmpty(email)) {
             emailEdittext.setError("Email kann nicht leer sein");
             emailEdittext.requestFocus();
@@ -112,6 +112,7 @@ public class registerFragment extends Fragment {
                             @Override
                             public void onComplete(@NonNull Task<Void> task) {
                                 if (task.isSuccessful()) {
+                                    createDBEntry();
                                     Toast.makeText(getActivity(), "Registierung erfolgreich, bitte überprüfe deine Email-Postfach", Toast.LENGTH_SHORT).show();
                                 } else {
                                     Toast.makeText(getActivity(), "Registierung fehlgeschlagen: " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
@@ -124,5 +125,10 @@ public class registerFragment extends Fragment {
                 }
             });
         }
+    }
+
+    private void createDBEntry(){
+        mainActivity.uniqueID = emailEdittext.getText().toString();
+        mainActivity.createUserId(getActivity());
     }
 }

@@ -50,6 +50,7 @@
                         android:id="@+id/login_email_input"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
+                        android:hint="@string/login_email_address"
                         android:fontFamily="@font/google_sans_bold"
                         android:inputType="text">
 
@@ -75,6 +76,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:fontFamily="@font/google_sans_bold"
+                        android:hint="@string/login_password"
                         android:inputType="textPassword">
 
                     </com.google.android.material.textfield.TextInputEditText>
@@ -102,18 +104,33 @@
                     android:id="@+id/login_button"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="20dp"
+                    android:layout_marginTop="15dp"
                     android:background="@color/black"
                     android:text="@string/login"
                     android:textColor="@color/white" />
 
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="20dp"
-                    android:text="@string/login_no_account"
-                    android:textSize="17sp"/>
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:id="@+id/already_have_an_account"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp"
+                        android:text="@string/login_no_account"
+                        android:textSize="17sp" />
+
+                    <TextView
+                        android:id="@+id/already_have_an_account_clickable"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/already_have_an_account"
+                        android:text="@string/login_no_account_clickable"
+                        android:textSize="17sp" />
+
+                </RelativeLayout>
 
             </LinearLayout>
 
