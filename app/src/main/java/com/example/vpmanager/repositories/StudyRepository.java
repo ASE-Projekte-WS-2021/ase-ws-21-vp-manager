@@ -83,6 +83,8 @@ public class StudyRepository {
                         studyDetailObject.setContactOne(document.getString("contact"));
                         studyDetailObject.setContactTwo(document.getString("contact2"));
                         studyDetailObject.setContactThree(document.getString("contact3"));
+                        studyDetailObject.setContactFour(document.getString("contact4"));
+                        studyDetailObject.setContactFive(document.getString("contact5"));
                         studyDetailObject.setCategory(document.getString("category"));
                         studyDetailObject.setExecutionType(document.getString("executionType"));
                         studyDetailObject.setRemotePlatformOne(document.getString("platform"));

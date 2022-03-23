@@ -1,4 +1,4 @@
-package com.example.vpmanager.createStudy;
+package com.example.vpmanager.views.createStudy;
 
 import android.os.Bundle;
 
@@ -15,17 +15,16 @@ import com.google.android.material.textfield.TextInputEditText;
 
 public class createStudyFragment_StepOne extends Fragment {
 
-
-    TextInputEditText textInputEditTextTitle;
-    TextInputEditText textInputEditTextVP;
-    Spinner categories;
-    Spinner executionType;
+    public static TextInputEditText textInputEditTextTitle;
+    public static TextInputEditText textInputEditTextVP;
+    public static Spinner categories;
+    public static Spinner executionType;
 
     //Parameter:
     //Return values:
     //Sets the current fragment for the activity
     public createStudyFragment_StepOne() {
-        createStudyActivity.currentFragment = 1;
+        CreateStudyFragment.currentFragment = 1;
     }
 
     @Override
@@ -34,8 +33,7 @@ public class createStudyFragment_StepOne extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         return inflater.inflate(R.layout.fragment_create_study_step_one, container, false);
     }
 
@@ -48,7 +46,8 @@ public class createStudyFragment_StepOne extends Fragment {
     //Parameter:
     //Return values:
     //Connects the code with the view
-    private void setupView(View view){
+    private void setupView(View view) {
+
         textInputEditTextTitle = view.findViewById(R.id.inputFieldTitle);
         textInputEditTextVP = view.findViewById(R.id.inputFieldVP);
 
@@ -66,15 +65,47 @@ public class createStudyFragment_StepOne extends Fragment {
     }
 
 
-
     //Parameter:
     //Return values:
     //Loads data recieved from the activity into the inputfields
     private void loadData() {
+
+        if (CreateStudyFragment.createStudyViewModel.studyCreationProcessData.get("name") != null){
+            textInputEditTextTitle.setText(CreateStudyFragment.createStudyViewModel.studyCreationProcessData.get("name").toString());
+        }
+        if (CreateStudyFragment.createStudyViewModel.studyCreationProcessData.get("vps") != null){
+            textInputEditTextVP.setText(CreateStudyFragment.createStudyViewModel.studyCreationProcessData.get("vps").toString());
+        }
+        if (CreateStudyFragment.createStudyViewModel.studyCreationProcessData.get("category") != null){
+            String cat = CreateStudyFragment.createStudyViewModel.studyCreationProcessData.get("category").toString();
+            if (cat.equals("VR")) {
+                categories.setSelection(1);
+            }
+            if (cat.equals("AR")) {
+                categories.setSelection(2);
+            }
+            if (cat.equals("Diary Study")) {
+                categories.setSelection(3);
+            }
+            if (cat.equals("Sonstige")) {
+                categories.setSelection(4);
+            }
+        }
+        if (CreateStudyFragment.createStudyViewModel.studyCreationProcessData.get("executionType") != null) {
+            String exe = CreateStudyFragment.createStudyViewModel.studyCreationProcessData.get("executionType").toString();
+            if (exe.equals("Remote")) {
+                executionType.setSelection(1);
+            }
+            if (exe.equals("Präsenz")) {
+                executionType.setSelection(2);
+            }
+        }
+        /*
         Bundle bundle = getArguments();
         if(bundle != null){
             textInputEditTextTitle.setText(bundle.getString("title"));
             textInputEditTextVP.setText(bundle.getString("vp"));
+
             if(bundle.getString("category").equals("VR")){
                 categories.setSelection(1);
             }
@@ -87,6 +118,7 @@ public class createStudyFragment_StepOne extends Fragment {
             if(bundle.getString("category").equals("Sonstige")){
                 categories.setSelection(4);
             }
+
             if(bundle.getString("exe").equals("Remote")){
                 executionType.setSelection(1);
             }
@@ -94,6 +126,7 @@ public class createStudyFragment_StepOne extends Fragment {
                 executionType.setSelection(2);
             }
         }
+         */
     }
 
 }
