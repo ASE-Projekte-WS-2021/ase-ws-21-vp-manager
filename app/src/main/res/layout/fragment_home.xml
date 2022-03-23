@@ -6,29 +6,146 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".views.homeFragment"
-
+    android:weightSum="10"
     app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-    <com.google.android.material.tabs.TabLayout
-        android:id="@+id/tab_layout_home"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:tabRippleColor="@color/green_light"
-        app:tabIndicatorColor="@color/green_Main"
-        app:tabSelectedTextColor="@color/white"
-        app:tabTextColor="@color/white"
-        android:clickable="true"
-        android:focusable="true">
+
+   <androidx.cardview.widget.CardView
+      android:layout_width="match_parent"
+      android:layout_height="0dp"
+      android:layout_weight="6"
+       app:cardBackgroundColor="@color/heatherred_hint"
+       app:cardCornerRadius="10dp"
+       android:layout_margin="10dp">
+      <LinearLayout
+          android:layout_width="match_parent"
+          android:layout_height="match_parent"
+          android:orientation="vertical"
+          android:weightSum="10">
+
+         <TextView
+             android:layout_width="wrap_content"
+             android:layout_height="0dp"
+            android:layout_weight="1"
+            android:text="Übersicht"
+            android:layout_margin="10dp"
+            android:textSize="24sp"
+            android:textStyle="bold"/>
+
+      <LinearLayout
+          android:layout_width="match_parent"
+          android:layout_height="0dp"
+          android:orientation="horizontal"
+          android:layout_weight="2"
+          android:layout_margin="10dp"
+          android:weightSum="7">
+
+         <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+             android:layout_weight="3"
+            android:text="SpaceHolder">
+         </TextView>
+
+         <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="SpaceHolder">
+         </TextView>
+
+         <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="3"
+            android:text="SpaceHolder">
+         </TextView>
+
+      </LinearLayout>
 
 
-    </com.google.android.material.tabs.TabLayout>
+         <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="4.5"
+            android:weightSum="5"
+             android:orientation="vertical">
+
+            <LinearLayout
+               android:layout_width="match_parent"
+               android:layout_height="0dp"
+               android:layout_weight="2"
+               android:weightSum="5"
+               android:orientation="horizontal" >
+
+               <TextView
+                   android:layout_width="0dp"
+                   android:layout_height="match_parent"
+                  android:layout_weight="4"/>
+               <TextView
+                   android:layout_width="0dp"
+                   android:layout_height="match_parent"
+                  android:layout_weight="1"/>
+
+            </LinearLayout>
+
+            <TextView
+               android:layout_width="match_parent"
+               android:layout_height="0dp"
+               android:layout_weight="3"/>
 
 
+         </LinearLayout>
 
-    <androidx.viewpager.widget.ViewPager
-        android:id="@+id/view_pager_home"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        />
+         <TextView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="0.5"
+            android:text="Im Lehrstuhl bereits eingetragene VP-Stunden"
+            android:layout_marginHorizontal="20dp"
+            android:layout_marginBottom="10dp"
+            android:textAlignment="center"/>
+
+         <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:layout_marginHorizontal="20dp"
+            app:cardCornerRadius="20dp">
+
+            <ProgressBar
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:id="@+id/homeOverViewProgressBar"/>
+
+         </androidx.cardview.widget.CardView>
+
+         <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_weight="0.5"
+            android:layout_gravity="center_horizontal"
+            android:id="@+id/homeProgressHint"
+            android:text="0/15"/>
+
+      </LinearLayout>
+
+
+   </androidx.cardview.widget.CardView>
+
+   <ListView
+      android:layout_width="match_parent"
+      android:layout_height="0dp"
+      android:layout_weight="3"
+      android:id="@+id/homeAppointmentList"/>
+
+   <Button
+      android:layout_width="match_parent"
+      android:layout_height="0dp"
+      android:layout_weight="1"
+      android:layout_marginHorizontal="20dp"
+      android:layout_marginVertical="10dp"
+      android:id="@+id/homeAllAppointmetsButton"/>
+
 
 </LinearLayout>

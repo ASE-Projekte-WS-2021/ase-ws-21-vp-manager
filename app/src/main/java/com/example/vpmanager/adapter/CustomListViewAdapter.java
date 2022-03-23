@@ -141,9 +141,9 @@ public class CustomListViewAdapter extends BaseAdapter {
                     StudyObject study = objects.get(position);
                     args.putString("studyId", study.getStudyId());
                     if (PA_ExpandableListDataPump.navigateToStudyCreatorFragment(uniqueID, study.getStudyId())) {
-                        navController.navigate(R.id.action_homeFragment_to_studyCreatorFragment, args);
+                        navController.navigate(R.id.action_ownStudyFragment_to_studyCreatorFragment, args);
                     } else {
-                        navController.navigate(R.id.action_homeFragment_to_studyFragment, args);
+                        navController.navigate(R.id.action_ownStudyFragment_to_studyFragment, args);
                     }
                 }
             });
