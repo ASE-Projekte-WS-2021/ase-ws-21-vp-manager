@@ -1,6 +1,7 @@
 package com.example.vpmanager.views;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,6 +15,7 @@ import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.viewpager.widget.ViewPager;
 
+import com.example.vpmanager.AccessDatabase;
 import com.example.vpmanager.R;
 import com.google.android.material.tabs.TabLayout;
 import com.google.firebase.auth.FirebaseAuth;
@@ -26,6 +28,7 @@ public class homeFragment extends Fragment {
 
     private NavController navController;
     FirebaseAuth firebaseAuth;
+    private AccessDatabase accessDatabase;
 
     public homeFragment() {
     }
@@ -48,9 +51,17 @@ public class homeFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         navController = Navigation.findNavController(view);
-        userLoggedIn();
+        //userLoggedIn();
+        registerNewUser();
         createTabs(view);
 
+    }
+
+    private void registerNewUser() {
+        accessDatabase = new AccessDatabase();
+        String deviceID = mainActivity.createUserId(getActivity());
+        Log.d("deviceId", "deviceId" + deviceID);
+        accessDatabase.createNewUser(deviceID);
     }
 
     //Parameter: current view to find components
@@ -103,6 +114,13 @@ public class homeFragment extends Fragment {
         if(user == null) {
             navController.navigate(R.id.action_global_nestedGraphLoginRegistration);
         }
+    }
+
+    @Override
+    public void onStart(){
+        super.onStart();
+        userLoggedIn();
+
     }
 
     //Parameter:
