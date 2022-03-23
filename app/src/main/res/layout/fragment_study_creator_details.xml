@@ -20,39 +20,50 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="7dp"
                 android:layout_marginTop="10dp"
-                android:layout_marginBottom="20dp"
+                android:layout_marginBottom="15dp"
                 android:fontFamily="@font/maven_pro"
                 android:gravity="left"
                 android:textSize="25sp"
                 android:textStyle="bold" />
+
+
+
+            <View
+                android:id="@+id/creator_infoLine"
+                android:layout_width="wrap_content"
+                android:layout_height="3dp"
+                android:layout_below="@id/creator_infoSymbolStudyFragment"
+                android:layout_alignParentLeft="true"
+                android:layout_gravity="right"
+                android:background="@color/green_Main" />
+
+            <View
+                android:id="@+id/whiteviewTwo"
+                android:layout_width="37dp"
+                android:layout_height="37dp"
+                android:layout_below="@id/creator_infoSymbolStudyFragment"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="-25dp"
+                android:background="@color/white" />
 
             <ImageView
                 android:id="@+id/creator_infoSymbolStudyFragment"
                 android:layout_width="94dp"
                 android:layout_height="32dp"
                 android:layout_below="@id/creator_studyFragmentHeader"
-                android:layout_gravity="center"
+                android:layout_centerHorizontal="true"
                 android:layout_marginBottom="-14dp"
-                android:layout_toLeftOf="@id/creator_infoLineRight"
-                android:layout_toRightOf="@id/creator_infoLineLeft"
+                app:elevation="4dp"
                 app:srcCompat="@drawable/ic_baseline_info_24" />
 
-            <View
+            <!--<View
                 android:id="@+id/creator_infoLineRight"
                 android:layout_width="187dp"
                 android:layout_height="3dp"
                 android:layout_below="@id/creator_infoSymbolStudyFragment"
                 android:layout_alignParentRight="true"
-                android:background="@color/green_Main" />
+                android:background="@color/green_Main" />-->
 
-            <View
-                android:id="@+id/creator_infoLineLeft"
-                android:layout_width="187dp"
-                android:layout_height="3dp"
-                android:layout_below="@id/creator_infoSymbolStudyFragment"
-                android:layout_alignParentLeft="true"
-                android:layout_gravity="right"
-                android:background="@color/green_Main" />
 
             <TextView
                 android:id="@+id/creator_descriptionTag"
@@ -197,34 +208,43 @@
                 android:layout_marginBottom="15dp"
                 android:background="@color/color_two" />
 
-            <ImageView
-                android:id="@+id/creator_locationSymbolStudyFragment"
-                android:layout_width="94dp"
-                android:layout_height="32dp"
-                android:layout_below="@id/sepSix"
-                android:layout_gravity="center"
-                android:layout_marginTop="40dp"
-                android:layout_marginBottom="-13dp"
-                android:layout_toLeftOf="@id/infoLineRightLoc"
-                android:layout_toRightOf="@id/infoLineLeftLoc"
-                app:srcCompat="@drawable/ic_round_location_on_24" />
+
+
+
+
+
 
             <View
-                android:id="@+id/infoLineRightLoc"
-                android:layout_width="187dp"
-                android:layout_height="3dp"
-                android:layout_below="@id/creator_locationSymbolStudyFragment"
-                android:layout_alignParentRight="true"
-                android:background="@color/green_Main" />
-
-            <View
-                android:id="@+id/infoLineLeftLoc"
-                android:layout_width="187dp"
+                android:id="@+id/infoLoc"
+                android:layout_width="wrap_content"
                 android:layout_height="3dp"
                 android:layout_below="@id/creator_locationSymbolStudyFragment"
                 android:layout_alignParentLeft="true"
                 android:layout_gravity="right"
                 android:background="@color/green_Main" />
+
+
+
+            <View
+                android:id="@+id/whiteviewOne"
+                android:layout_width="37dp"
+                android:layout_height="37dp"
+                android:layout_marginTop="-25dp"
+                android:layout_below="@id/creator_locationSymbolStudyFragment"
+                android:layout_centerHorizontal="true"
+                android:background = "@color/white"/>
+
+            <ImageView
+                android:id="@+id/creator_locationSymbolStudyFragment"
+                android:layout_width="94dp"
+                android:layout_height="32dp"
+                android:layout_below="@id/sepSix"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="40dp"
+                android:layout_marginBottom="-13dp"
+                app:elevation="4dp"
+                app:srcCompat="@drawable/ic_round_location_on_24" />
+
 
             <TextView
                 android:id="@+id/studyTypeTag"
@@ -350,6 +370,8 @@
                 android:src="@drawable/ic_baseline_edit_note_24"
                 app:borderWidth="3dp"
                 app:elevation="4dp" />
+
+
 
 
         </RelativeLayout>
