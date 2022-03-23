@@ -120,5 +120,13 @@
     <string name="login_forgot_password">Passwort vergessen</string>
     <string name="login_create_account">Registrieren</string>
 
+    <!-- Study Dteails Tags -->
+    <string name="descTag">Beschreibung</string>
+    <string name="vpTag">VP-Stunden</string>
+    <string name="catTag">Kategorie</string>
+    <string name="conTag">Kontakt</string>
+    <string name="typeTag">Studientyp</string>
+    <string name="locTag">Ort / plattform</string>
+
 </resources>
 
