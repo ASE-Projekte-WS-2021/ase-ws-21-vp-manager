@@ -8,318 +8,354 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior"
-        tools:context=".views.studyCreatorDetails.StudyCreatorDetailsFragment">
 
-
-        <!--put over tabs in main fragment-->
-        <TextView
-            android:id="@+id/creator_studyFragmentHeader"
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="left"
-            android:layout_marginStart="7dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginEnd="25dp"
-            android:layout_marginBottom="2dp"
-            android:fontFamily="@font/maven_pro"
-            android:textSize="25sp"
-            android:textStyle="bold" />
+            app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+            <TextView
+                android:id="@+id/creator_studyFragmentHeader"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="7dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="20dp"
+                android:fontFamily="@font/maven_pro"
+                android:gravity="left"
+                android:textSize="25sp"
+                android:textStyle="bold" />
+
+            <ImageView
+                android:id="@+id/creator_infoSymbolStudyFragment"
+                android:layout_width="94dp"
+                android:layout_height="32dp"
+                android:layout_below="@id/creator_studyFragmentHeader"
+                android:layout_gravity="center"
+                android:layout_marginBottom="-14dp"
+                android:layout_toLeftOf="@id/creator_infoLineRight"
+                android:layout_toRightOf="@id/creator_infoLineLeft"
+                app:srcCompat="@drawable/ic_baseline_info_24" />
+
+            <View
+                android:id="@+id/creator_infoLineRight"
+                android:layout_width="187dp"
+                android:layout_height="3dp"
+                android:layout_below="@id/creator_infoSymbolStudyFragment"
+                android:layout_alignParentRight="true"
+                android:background="@color/green_Main" />
+
+            <View
+                android:id="@+id/creator_infoLineLeft"
+                android:layout_width="187dp"
+                android:layout_height="3dp"
+                android:layout_below="@id/creator_infoSymbolStudyFragment"
+                android:layout_alignParentLeft="true"
+                android:layout_gravity="right"
+                android:background="@color/green_Main" />
+
+            <TextView
+                android:id="@+id/creator_descriptionTag"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/creator_infoSymbolStudyFragment"
+                android:layout_marginStart="5dp"
+                android:layout_marginTop="3dp"
+                android:fontFamily="@font/maven_pro"
+                android:text="Beschreibung"
+                android:textColor="@color/tabs_grey"
+                android:textSize="15sp"
+                android:textStyle="bold"
+                android:weightSum="100" />
+
+            <TextView
+                android:id="@+id/creator_descriptionStudyFragment"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/creator_descriptionTag"
+                android:layout_marginStart="35dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginEnd="35dp"
+                android:fontFamily="sans-serif-light"
+                android:textSize="17sp"
+                android:textStyle="bold"
+                android:weightSum="100" />
+
+            <View
+                android:id="@+id/sepOne"
+                android:layout_width="match_parent"
+                android:layout_height="3dp"
+                android:layout_below="@+id/creator_descriptionStudyFragment"
+                android:layout_marginTop="7dp"
+                android:background="@color/color_two" />
+
+            <TextView
+                android:id="@+id/creator_vpTag"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/sepOne"
+                android:layout_marginStart="5dp"
+                android:layout_marginTop="3dp"
+                android:fontFamily="@font/maven_pro"
+                android:text="VP-Stunden"
+                android:textColor="@color/tabs_grey"
+                android:textSize="15sp"
+                android:textStyle="bold"
+                android:weightSum="100" />
+
+            <TextView
+                android:id="@+id/creator_vpValueStudyFragment"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/creator_vpTag"
+                android:layout_marginStart="35dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginEnd="35dp"
+                android:fontFamily="sans-serif-light"
+                android:textSize="17sp"
+                android:textStyle="bold"
+                android:weightSum="100" />
+
+            <View
+                android:id="@+id/sepThree"
+                android:layout_width="match_parent"
+                android:layout_height="3dp"
+                android:layout_below="@+id/creator_vpValueStudyFragment"
+                android:layout_marginTop="7dp"
+                android:background="@color/color_two" />
+
+            <TextView
+                android:id="@+id/creator_categoryTag"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/sepThree"
+                android:layout_marginStart="5dp"
+                android:layout_marginEnd="35dp"
+                android:fontFamily="@font/maven_pro"
+                android:text="Kategorie"
+                android:textColor="@color/tabs_grey"
+                android:textSize="15sp"
+                android:textStyle="bold"
+                android:weightSum="100" />
+
+            <TextView
+                android:id="@+id/creator_categoryStudyFragment"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/creator_categoryTag"
+                android:layout_marginStart="35dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginEnd="35dp"
+                android:fontFamily="sans-serif-light"
+                android:textSize="17sp"
+                android:textStyle="bold"
+                android:weightSum="100" />
+
+            <View
+                android:id="@+id/sepFour"
+                android:layout_width="match_parent"
+                android:layout_height="3dp"
+                android:layout_below="@id/creator_categoryStudyFragment"
+                android:layout_marginTop="7dp"
+                android:background="@color/color_two" />
+
+            <TextView
+                android:id="@+id/creator_contactTag"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/sepFour"
+                android:layout_marginStart="5dp"
+                android:layout_marginEnd="35dp"
+                android:fontFamily="@font/maven_pro"
+                android:text="Kontakt"
+                android:textColor="@color/tabs_grey"
+                android:textSize="15sp"
+                android:textStyle="bold"
+                android:weightSum="100" />
+
+            <TextView
+                android:id="@+id/creator_contactInformationStudyFragment"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/creator_contactTag"
+                android:layout_marginStart="35dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginEnd="35dp"
+                android:fontFamily="sans-serif-light"
+                android:textSize="17sp"
+                android:textStyle="bold"
+                android:weightSum="100" />
 
 
 
-        <ImageView
-            android:id="@+id/creator_infoSymbolStudyFragment"
-            android:layout_width="91dp"
-            android:layout_height="29dp"
-            android:layout_gravity="center"
-            android:layout_marginBottom="-3dp"
-            app:srcCompat="@drawable/ic_baseline_info_24" />
+            <View
+                android:id="@+id/sepSix"
+                android:layout_width="match_parent"
+                android:layout_height="3dp"
+                android:layout_below="@+id/creator_contactInformationStudyFragment"
+                android:layout_marginTop="7dp"
+                android:layout_marginBottom="15dp"
+                android:background="@color/color_two" />
 
-        <View
-            android:layout_width="187dp"
-            android:layout_height="3dp"
-            android:layout_marginTop="-13dp"
-            android:background="@color/green_Main" />
+            <ImageView
+                android:id="@+id/creator_locationSymbolStudyFragment"
+                android:layout_width="94dp"
+                android:layout_height="32dp"
+                android:layout_below="@id/sepSix"
+                android:layout_gravity="center"
+                android:layout_marginTop="40dp"
+                android:layout_marginBottom="-13dp"
+                android:layout_toLeftOf="@id/infoLineRightLoc"
+                android:layout_toRightOf="@id/infoLineLeftLoc"
+                app:srcCompat="@drawable/ic_round_location_on_24" />
 
-        <View
-            android:layout_width="187dp"
-            android:layout_height="3dp"
-            android:layout_gravity="right"
-            android:layout_marginTop="-4dp"
-            android:background="@color/green_Main" />
+            <View
+                android:id="@+id/infoLineRightLoc"
+                android:layout_width="187dp"
+                android:layout_height="3dp"
+                android:layout_below="@id/creator_locationSymbolStudyFragment"
+                android:layout_alignParentRight="true"
+                android:background="@color/green_Main" />
 
-        <TextView
-            android:id="@+id/creator_descriptionTag"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="bottom"
-            android:layout_marginStart="5dp"
-            android:layout_marginTop="3dp"
-            android:layout_marginEnd="35dp"
-            android:fontFamily="@font/maven_pro"
-            android:text="Beschreibung"
-            android:textColor="@color/tabs_grey"
-            android:textSize="15sp"
-            android:textStyle="bold"
-            android:weightSum="100" />
+            <View
+                android:id="@+id/infoLineLeftLoc"
+                android:layout_width="187dp"
+                android:layout_height="3dp"
+                android:layout_below="@id/creator_locationSymbolStudyFragment"
+                android:layout_alignParentLeft="true"
+                android:layout_gravity="right"
+                android:background="@color/green_Main" />
 
-        <TextView
-            android:id="@+id/creator_descriptionStudyFragment"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="bottom"
-            android:layout_marginStart="35dp"
-            android:layout_marginTop="5dp"
-            android:layout_marginEnd="35dp"
-            android:fontFamily="sans-serif-light"
-            android:textSize="17sp"
-            android:textStyle="bold"
-            android:weightSum="100" />
+            <TextView
+                android:id="@+id/studyTypeTag"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/creator_locationSymbolStudyFragment"
+                android:layout_marginStart="5dp"
+                android:layout_marginTop="3dp"
+                android:layout_marginEnd="35dp"
+                android:fontFamily="@font/maven_pro"
+                android:text="Studientyp"
+                android:textColor="@color/tabs_grey"
+                android:textSize="15sp"
+                android:textStyle="bold"
+                android:weightSum="100" />
 
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="3dp"
-            android:layout_marginTop="7dp"
-            android:background="@color/color_two" />
+            <TextView
+                android:id="@+id/creator_studyTypeStudyFragment"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/studyTypeTag"
+                android:layout_marginStart="35dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginEnd="35dp"
+                android:fontFamily="sans-serif-light"
+                android:textSize="17sp"
+                android:textStyle="bold"
+                android:weightSum="100" />
 
-        <TextView
-            android:id="@+id/creator_vpTag"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="bottom"
-            android:layout_marginStart="5dp"
-            android:layout_marginEnd="35dp"
-            android:fontFamily="@font/maven_pro"
-            android:text="VP-Stunden"
-            android:textColor="@color/tabs_grey"
-            android:textSize="15sp"
-            android:textStyle="bold"
-            android:weightSum="100" />
+            <View
+                android:id="@+id/sepSeven"
+                android:layout_width="match_parent"
+                android:layout_height="3dp"
+                android:layout_below="@id/creator_studyTypeStudyFragment"
+                android:layout_marginTop="7dp"
+                android:background="@color/color_two" />
 
-        <TextView
-            android:id="@+id/creator_vpValueStudyFragment"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="bottom"
-            android:layout_marginStart="35dp"
-            android:layout_marginTop="5dp"
-            android:layout_marginEnd="35dp"
-            android:fontFamily="sans-serif-light"
-            android:textSize="17sp"
-            android:textStyle="bold"
-            android:weightSum="100" />
+            <TextView
+                android:id="@+id/creator_locationTag"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/sepSeven"
+                android:layout_marginStart="5dp"
+                android:layout_marginTop="3dp"
+                android:layout_marginEnd="35dp"
+                android:layout_marginBottom="5dp"
+                android:fontFamily="@font/maven_pro"
+                android:text="Ort / Plattform"
+                android:textColor="@color/tabs_grey"
+                android:textSize="15sp"
+                android:textStyle="bold"
+                android:weightSum="100" />
 
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="3dp"
-            android:layout_marginTop="7dp"
-            android:background="@color/color_two" />
-
-        <TextView
-            android:id="@+id/categoryTag"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="bottom"
-            android:layout_marginStart="5dp"
-            android:layout_marginEnd="35dp"
-            android:fontFamily="@font/maven_pro"
-            android:text="Kategorie"
-            android:textColor="@color/tabs_grey"
-            android:textSize="15sp"
-            android:textStyle="bold"
-            android:weightSum="100" />
-
-        <TextView
-            android:id="@+id/creator_categoryStudyFragment"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="bottom"
-            android:layout_marginStart="35dp"
-            android:layout_marginTop="5dp"
-            android:layout_marginEnd="35dp"
-            android:fontFamily="sans-serif-light"
-            android:textSize="17sp"
-            android:textStyle="bold"
-            android:weightSum="100" />
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="3dp"
-            android:layout_marginTop="7dp"
-            android:background="@color/color_two" />
-
-        <TextView
-            android:id="@+id/creator_contactTag"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="bottom"
-            android:layout_marginStart="5dp"
-            android:layout_marginEnd="35dp"
-            android:fontFamily="@font/maven_pro"
-            android:text="Kontakt"
-            android:textColor="@color/tabs_grey"
-            android:textSize="15sp"
-            android:textStyle="bold"
-            android:weightSum="100" />
-
-        <TextView
-            android:id="@+id/creator_contactInformationStudyFragment"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="bottom"
-            android:layout_marginStart="35dp"
-            android:layout_marginTop="5dp"
-            android:layout_marginEnd="35dp"
-            android:fontFamily="sans-serif-light"
-            android:textSize="17sp"
-            android:textStyle="bold"
-            android:weightSum="100" />
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="3dp"
-            android:layout_marginTop="7dp"
-            android:layout_marginBottom="15dp"
-            android:background="@color/color_two" />
+            <TextView
+                android:id="@+id/creator_remoteStudyStudyFragment"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/creator_locationTag"
+                android:layout_marginStart="35dp"
+                android:layout_marginEnd="35dp"
+                android:fontFamily="sans-serif-light"
+                android:textSize="17sp"
+                android:textStyle="bold"
+                android:weightSum="100" />
 
 
-        <ImageView
-            android:id="@+id/creator_locationSymbolStudyFragment"
-            android:layout_width="91dp"
-            android:layout_height="31dp"
-            android:layout_gravity="center"
-            android:layout_marginTop="30dp"
-            android:layout_marginBottom="-3dp"
-            app:srcCompat="@drawable/ic_round_location_on_24" />
+            <TextView
+                android:id="@+id/creator_localStudyStudyFragment"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/creator_locationTag"
+                android:layout_marginStart="35dp"
+                android:layout_marginEnd="35dp"
+                android:fontFamily="sans-serif-light"
+                android:textSize="17sp"
+                android:textStyle="bold"
+                android:weightSum="100" />
 
-        <View
-            android:layout_width="187dp"
-            android:layout_height="3dp"
-            android:layout_marginTop="-13dp"
-            android:background="@color/green_Main" />
-
-        <View
-            android:layout_width="187dp"
-            android:layout_height="3dp"
-            android:layout_gravity="right"
-            android:layout_marginTop="-4dp"
-            android:background="@color/green_Main" />
-
-
-        <TextView
-            android:id="@+id/creator_studyTypeTag"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="bottom"
-            android:layout_marginStart="5dp"
-            android:layout_marginTop="3dp"
-            android:layout_marginEnd="35dp"
-            android:fontFamily="@font/maven_pro"
-            android:text="Studientyp"
-            android:textColor="@color/tabs_grey"
-            android:textSize="15sp"
-            android:textStyle="bold"
-            android:weightSum="100" />
-
-        <TextView
-            android:id="@+id/creator_studyTypeStudyFragment"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="bottom"
-            android:layout_marginStart="35dp"
-            android:layout_marginTop="5dp"
-            android:layout_marginEnd="35dp"
-            android:fontFamily="sans-serif-light"
-            android:textSize="17sp"
-            android:textStyle="bold"
-            android:weightSum="100" />
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="3dp"
-            android:layout_marginTop="7dp"
-            android:background="@color/color_two" />
-
-        <TextView
-            android:id="@+id/creator_locationTag"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="bottom"
-            android:layout_marginStart="5dp"
-            android:layout_marginEnd="35dp"
-            android:fontFamily="@font/maven_pro"
-            android:text="Ort / Plattform"
-            android:textColor="@color/tabs_grey"
-            android:textSize="15sp"
-            android:textStyle="bold"
-            android:weightSum="100" />
-
-        <TextView
-            android:id="@+id/creator_remoteStudyStudyFragment"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="bottom"
-            android:layout_marginStart="35dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginEnd="35dp"
-            android:fontFamily="sans-serif-light"
-            android:textSize="17sp"
-            android:textStyle="bold"
-            android:weightSum="100" />
-
-
-        <TextView
-            android:id="@+id/creator_localStudyStudyFragment"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="bottom"
-            android:layout_marginStart="35dp"
-            android:layout_marginTop="-25dp"
-            android:layout_marginEnd="35dp"
-            android:fontFamily="sans-serif-light"
-            android:textSize="17sp"
-            android:textStyle="bold"
-            android:weightSum="100" />
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="3dp"
-            android:layout_marginTop="7dp"
-            android:layout_marginBottom="80dp"
-            android:background="@color/color_two" />
+            <View
+                android:id="@+id/sepEight"
+                android:layout_width="match_parent"
+                android:layout_height="3dp"
+                android:layout_below="@+id/creator_localStudyStudyFragment"
+                android:layout_marginTop="7dp"
+                android:background="@color/color_two" />
 
 
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:background="@color/green_Main" />
 
-        <ImageView
-            android:id="@+id/creator_editOwnStudyButton"
-            android:layout_width="91dp"
-            android:layout_height="29dp"
-            android:layout_gravity="center"
-            android:layout_marginTop="-40dp"
-            app:srcCompat="@drawable/ic_baseline_create_24" />
+            <!--<ImageView
+                android:id="@+id/creator_editOwnStudyButton"
+                android:layout_width="100dp"
+                android:layout_height="38dp"
+                android:layout_below="@id/sepEight"
+                android:layout_centerHorizontal="true"
+                app:srcCompat="@drawable/ic_baseline_edit_note_24_red" />-->
 
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="3dp"
-            android:layout_marginTop="8dp"
-            android:background="@color/heatherred_Main" />
+            <!--<View
+                android:id="@+id/buttonSepOne"
+                android:layout_width="match_parent"
+                android:layout_height="3dp"
+                android:layout_below="@id/creator_editOwnStudyButton"
+                android:layout_marginTop="5dp"
+                android:background="@color/color_two" />
 
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="3dp"
-            android:layout_marginTop="-50dp"
-            android:background="@color/heatherred_Main" />
+            <View
+                android:id="@+id/buttonSepTwo"
+                android:layout_width="match_parent"
+                android:layout_height="3dp"
+                android:layout_below="@id/sepEight"
+                android:layout_marginTop="-5dp"
+                android:background="@color/color_two" />
+-->
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/creator_editOwnStudyButton"
+                android:layout_width="233dp"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/sepEight"
+                android:layout_centerHorizontal="true"
+                android:layout_marginBottom="20dp"
+                android:layout_marginTop="30dp"
+                android:backgroundTint="@color/green_light"
+                android:src="@drawable/ic_baseline_edit_note_24"
+                app:borderWidth="3dp"
+                app:elevation="4dp" />
 
-    </LinearLayout>
+
+        </RelativeLayout>
+
+
+
+
     </ScrollView>
 </FrameLayout>

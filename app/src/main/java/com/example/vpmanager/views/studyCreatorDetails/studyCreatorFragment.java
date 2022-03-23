@@ -56,7 +56,7 @@ public class studyCreatorFragment extends Fragment {
 
         tabLayout.setupWithViewPager(viewPager);
 
-        viewPagerAdapter viewPagerAdapter = new viewPagerAdapter(getParentFragmentManager(), 0);
+        viewPagerAdapter viewPagerAdapter = new viewPagerAdapter(getChildFragmentManager(), 0);
         viewPagerAdapter.addFragment(detailsFragment, "Details");
         viewPagerAdapter.addFragment(datesFragment, "Termine");
         viewPager.setAdapter(viewPagerAdapter);
