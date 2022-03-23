@@ -1,18 +1,17 @@
 package com.example.vpmanager.views;
 
 import android.os.Bundle;
-
-import androidx.annotation.NonNull;
-import androidx.fragment.app.Fragment;
-import androidx.navigation.NavController;
-import androidx.navigation.Navigation;
-
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
 
 import com.example.vpmanager.R;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -23,17 +22,18 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 
 
-public class loginFragment extends Fragment {
+public class registerFragment extends Fragment {
 
     private TextInputEditText emailEdittext;
     private TextInputEditText passwordEditText;
-    private Button forgotPasswordButton;
-    private Button loginButton;
+    private TextInputEditText matnrEditText;
+    private TextInputEditText vpEditText;
+    private Button registerButton;
 
     private FirebaseAuth firebaseAuth;
     private NavController navController;
 
-    public loginFragment() {
+    public registerFragment() {
         // Required empty public constructor
     }
 
@@ -75,70 +75,20 @@ public class loginFragment extends Fragment {
     private void setupView(View view) {
         emailEdittext = view.findViewById(R.id.login_email_input);
         passwordEditText = view.findViewById(R.id.login_password_input);
-        forgotPasswordButton = view.findViewById(R.id.login_forgotPassword_button);
-        loginButton = view.findViewById(R.id.login_button);
+        matnrEditText = view.findViewById(R.id.register_matnr);
+        vpEditText = view.findViewById(R.id.register_vp);
+        registerButton = view.findViewById(R.id.register_button);
     }
 
     //Parameter:
     //Return values:
     //Sets clickListener on navigation items
     private void setOnClickListeners() {
-        loginButton.setOnClickListener(view -> {
-            loginUser();
-        });
-
-        forgotPasswordButton.setOnClickListener(view -> {
-            forgotPassword();
+        registerButton.setOnClickListener(view -> {
+            createUser();
         });
     }
 
-
-    //Parameter:
-    //Return values:
-    //Handles the forgot password button press and sends a email to reset password
-    private void forgotPassword() {
-        String email = emailEdittext.getText().toString();
-
-        if (TextUtils.isEmpty(email)) {
-            emailEdittext.setError("Bitte Email-Adresse angeben um Passwort zurückzusetzen");
-            emailEdittext.requestFocus();
-        } else {
-            firebaseAuth.sendPasswordResetEmail(email).addOnSuccessListener(new OnSuccessListener<Void>() {
-                @Override
-                public void onSuccess(Void unused) {
-                    Toast.makeText(getActivity(), "Bitte über Sie ihr Email-Postfach", Toast.LENGTH_SHORT).show();
-                }
-            });
-        }
-    }
-
-
-    //Parameter:
-    //Return values:
-    //Handles login if the and provides feedback if the task was successful
-    private void loginUser() {
-        String email = emailEdittext.getText().toString();
-        String password = passwordEditText.getText().toString();
-
-        if (TextUtils.isEmpty(email)) {
-            emailEdittext.setError("Email kann nicht leer sein");
-            emailEdittext.requestFocus();
-        } else if (TextUtils.isEmpty(password)) {
-            passwordEditText.setError("Passwort kann nicht leer sein");
-            passwordEditText.requestFocus();
-        } else {
-            firebaseAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                @Override
-                public void onComplete(@NonNull Task<AuthResult> task) {
-                    if (task.isSuccessful()) {
-                        navController.navigate(R.id.action_global_homeFragment);
-                    } else {
-                        Toast.makeText(getActivity(), "Anmeldung fehlgeschlagen: " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
-                    }
-                }
-            });
-        }
-    }
 
     //Parameter:
     //Return values:

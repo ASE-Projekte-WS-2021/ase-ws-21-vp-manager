@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".views.loginFragment">
+    tools:context=".views.registerFragment">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -22,7 +22,7 @@
                 android:layout_height="match_parent"
                 android:layout_marginTop="50dp"
                 android:fontFamily="@font/google_sans_bold"
-                android:text="@string/login"
+                android:text="@string/login_create_account"
                 android:textAllCaps="true"
                 android:textColor="@color/black"
                 android:textSize="40sp" />
@@ -81,42 +81,81 @@
 
                 </com.google.android.material.textfield.TextInputLayout>
 
-                <RelativeLayout
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="20dp"
+                    android:fontFamily="@font/google_sans_bold"
+                    android:text="@string/register_optional"
+                    android:textAllCaps="true"
+                    android:textColor="@color/black"
+                    android:textSize="20sp" />
+
+                <com.google.android.material.textfield.TextInputLayout
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp">
+                    android:hint="Matrikelnummer"
+                    app:boxStrokeColor="@color/black"
+                    app:boxStrokeWidthFocused="2dp"
+                    app:endIconMode="clear_text"
+                    app:endIconTint="@color/black"
+                    app:hintTextColor="@color/black"
+                    app:startIconTint="@color/black">
 
-                    <Button
-                        android:id="@+id/login_forgotPassword_button"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentEnd="true"
-                        android:background="#0000"
-                        android:text="@string/login_forgot_password"
-                        android:textColor="@color/black"
-                        android:textSize="12sp" />
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/register_matnr"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:fontFamily="@font/google_sans_bold"
+                        android:inputType="text">
 
-                </RelativeLayout>
+                    </com.google.android.material.textfield.TextInputEditText>
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Benötige VP"
+                    app:boxStrokeColor="@color/black"
+                    app:boxStrokeWidthFocused="2dp"
+                    app:endIconMode="clear_text"
+                    app:endIconTint="@color/black"
+                    app:hintTextColor="@color/black"
+                    app:startIconTint="@color/black">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/register_vp"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:fontFamily="@font/google_sans_bold"
+                        android:inputType="text">
+
+                    </com.google.android.material.textfield.TextInputEditText>
+
+                </com.google.android.material.textfield.TextInputLayout>
+
 
                 <Button
-                    android:id="@+id/login_button"
+                    android:id="@+id/register_button"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="20dp"
                     android:background="@color/black"
-                    android:text="@string/login"
+                    android:text="@string/login_create_account"
                     android:textColor="@color/white" />
-
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="20dp"
-                    android:text="@string/login_no_account"
-                    android:textSize="17sp"/>
+                    android:text="@string/already_have_an_account"
+                    android:textSize="17sp" />
 
             </LinearLayout>
-
 
         </LinearLayout>
 
