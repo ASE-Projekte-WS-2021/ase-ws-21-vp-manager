@@ -21,39 +21,41 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="7dp"
                 android:layout_marginTop="10dp"
-                android:layout_marginBottom="20dp"
+                android:layout_marginBottom="10dp"
                 android:fontFamily="@font/maven_pro"
                 android:gravity="left"
                 android:textSize="25sp"
                 android:textStyle="bold" />
+
+            <View
+                android:id="@+id/infoLine"
+                android:layout_width="wrap_content"
+                android:layout_height="3dp"
+                android:layout_below="@id/infoSymbolStudyFragment"
+                android:layout_alignParentLeft="true"
+                android:layout_gravity="right"
+                android:background="@color/green_Main" />
+
+            <View
+                android:id="@+id/whiteviewTwo"
+                android:layout_width="37dp"
+                android:layout_height="37dp"
+                android:layout_below="@id/infoSymbolStudyFragment"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="-25dp"
+                android:background="@color/white" />
 
             <ImageView
                 android:id="@+id/infoSymbolStudyFragment"
                 android:layout_width="94dp"
                 android:layout_height="32dp"
                 android:layout_below="@id/studyFragmentHeader"
-                android:layout_gravity="center"
+                android:layout_centerHorizontal="true"
                 android:layout_marginBottom="-14dp"
-                android:layout_toLeftOf="@id/infoLineRight"
-                android:layout_toRightOf="@id/infoLineLeft"
+                android:elevation="4dp"
                 app:srcCompat="@drawable/ic_baseline_info_24" />
 
-            <View
-                android:id="@+id/infoLineRight"
-                android:layout_width="187dp"
-                android:layout_height="3dp"
-                android:layout_below="@id/infoSymbolStudyFragment"
-                android:layout_alignParentRight="true"
-                android:background="@color/green_Main" />
 
-            <View
-                android:id="@+id/infoLineLeft"
-                android:layout_width="187dp"
-                android:layout_height="3dp"
-                android:layout_below="@id/infoSymbolStudyFragment"
-                android:layout_alignParentLeft="true"
-                android:layout_gravity="right"
-                android:background="@color/green_Main" />
 
             <TextView
                 android:id="@+id/descriptionTag"
@@ -63,7 +65,7 @@
                 android:layout_marginStart="5dp"
                 android:layout_marginTop="3dp"
                 android:fontFamily="@font/maven_pro"
-                android:text="Beschreibung"
+                android:text="@string/descTag"
                 android:textColor="@color/tabs_grey"
                 android:textSize="15sp"
                 android:textStyle="bold"
@@ -98,7 +100,7 @@
                 android:layout_marginStart="5dp"
                 android:layout_marginTop="3dp"
                 android:fontFamily="@font/maven_pro"
-                android:text="VP-Stunden"
+                android:text="@string/vpTag"
                 android:textColor="@color/tabs_grey"
                 android:textSize="15sp"
                 android:textStyle="bold"
@@ -133,7 +135,7 @@
                 android:layout_marginStart="5dp"
                 android:layout_marginEnd="35dp"
                 android:fontFamily="@font/maven_pro"
-                android:text="Kategorie"
+                android:text="@string/catTag"
                 android:textColor="@color/tabs_grey"
                 android:textSize="15sp"
                 android:textStyle="bold"
@@ -168,7 +170,7 @@
                 android:layout_marginStart="5dp"
                 android:layout_marginEnd="35dp"
                 android:fontFamily="@font/maven_pro"
-                android:text="Kontakt"
+                android:text="@string/conTag"
                 android:textColor="@color/tabs_grey"
                 android:textSize="15sp"
                 android:textStyle="bold"
@@ -198,34 +200,38 @@
                 android:layout_marginBottom="15dp"
                 android:background="@color/color_two" />
 
-            <ImageView
-                android:id="@+id/locationSymbolStudyFragment"
-                android:layout_width="94dp"
-                android:layout_height="32dp"
-                android:layout_below="@id/sepSix"
-                android:layout_gravity="center"
-                android:layout_marginTop="40dp"
-                android:layout_marginBottom="-13dp"
-                android:layout_toLeftOf="@id/infoLineRight"
-                android:layout_toRightOf="@id/infoLineLeft"
-                app:srcCompat="@drawable/ic_round_location_on_24" />
-
             <View
-                android:id="@+id/infoLineRightLoc"
-                android:layout_width="187dp"
-                android:layout_height="3dp"
-                android:layout_below="@id/locationSymbolStudyFragment"
-                android:layout_alignParentRight="true"
-                android:background="@color/green_Main" />
-
-            <View
-                android:id="@+id/infoLineLeftLoc"
-                android:layout_width="187dp"
+                android:id="@+id/infoLoc"
+                android:layout_width="wrap_content"
                 android:layout_height="3dp"
                 android:layout_below="@id/locationSymbolStudyFragment"
                 android:layout_alignParentLeft="true"
                 android:layout_gravity="right"
                 android:background="@color/green_Main" />
+
+
+
+            <View
+                android:id="@+id/whiteviewOne"
+                android:layout_width="37dp"
+                android:layout_height="37dp"
+                android:layout_marginTop="-25dp"
+                android:layout_below="@id/locationSymbolStudyFragment"
+                android:layout_centerHorizontal="true"
+                android:background = "@color/white"/>
+
+            <ImageView
+                android:id="@+id/locationSymbolStudyFragment"
+                android:layout_width="94dp"
+                android:layout_height="32dp"
+                android:layout_below="@id/sepSix"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="40dp"
+                android:layout_marginBottom="-13dp"
+                android:elevation="4dp"
+                app:srcCompat="@drawable/ic_round_location_on_24" />
+
+
 
             <TextView
                 android:id="@+id/studyTypeTag"
@@ -236,7 +242,7 @@
                 android:layout_marginTop="3dp"
                 android:layout_marginEnd="35dp"
                 android:fontFamily="@font/maven_pro"
-                android:text="Studientyp"
+                android:text="@string/typeTag"
                 android:textColor="@color/tabs_grey"
                 android:textSize="15sp"
                 android:textStyle="bold"
@@ -272,7 +278,7 @@
                 android:layout_marginStart="5dp"
                 android:layout_marginEnd="35dp"
                 android:fontFamily="@font/maven_pro"
-                android:text="Ort / Plattform"
+                android:text="@string/locTag"
                 android:textColor="@color/tabs_grey"
                 android:layout_marginBottom="5dp"
                 android:textSize="15sp"
