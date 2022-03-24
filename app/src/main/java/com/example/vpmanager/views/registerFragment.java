@@ -14,6 +14,7 @@ import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 
+import com.example.vpmanager.AccessDatabase;
 import com.example.vpmanager.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -27,6 +28,7 @@ public class registerFragment extends Fragment {
 
     private TextInputEditText emailEdittext;
     private TextInputEditText passwordEditText;
+    private TextInputEditText passwordConfirmEditText;
     private TextInputEditText matnrEditText;
     private TextInputEditText vpEditText;
     private Button registerButton;
@@ -34,6 +36,7 @@ public class registerFragment extends Fragment {
 
     private FirebaseAuth firebaseAuth;
     private NavController navController;
+    private AccessDatabase accessDatabase;
 
     public registerFragment() {
         // Required empty public constructor
@@ -58,9 +61,9 @@ public class registerFragment extends Fragment {
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         setupView(view);
+        accessDatabase = new AccessDatabase();
         ((mainActivity)getActivity()).setDrawerLocked();
         navController = Navigation.findNavController(view);
-
         setOnClickListeners();
     }
 
@@ -75,6 +78,7 @@ public class registerFragment extends Fragment {
         vpEditText = view.findViewById(R.id.register_vp);
         registerButton = view.findViewById(R.id.register_button);
         toLoginTextView = view.findViewById(R.id.already_have_an_account_clickable);
+        passwordConfirmEditText = view.findViewById(R.id.confirm_login_password_input);
     }
 
     //Parameter:
@@ -90,6 +94,10 @@ public class registerFragment extends Fragment {
         });
     }
 
+    private void registerNewUser(String email, String matNr, String neededVP) {
+        accessDatabase.createNewUser(email, matNr, neededVP);
+    }
+
 
     //Parameter:
     //Return values:
@@ -97,13 +105,23 @@ public class registerFragment extends Fragment {
     private void createUser() {
         String email = emailEdittext.getText().toString();
         String password = passwordEditText.getText().toString();
+        String confirmPassword = passwordConfirmEditText.getText().toString();
+        String matNr = matnrEditText.getText().toString();
+        String neededVP = vpEditText.getText().toString();
+        if(TextUtils.isEmpty(neededVP)){
+            neededVP = "15";
+        }
         if (TextUtils.isEmpty(email)) {
             emailEdittext.setError("Email kann nicht leer sein");
             emailEdittext.requestFocus();
         } else if (TextUtils.isEmpty(password)) {
             passwordEditText.setError("Passwort kann nicht leer sein");
             passwordEditText.requestFocus();
+        } else if (!password.equals(confirmPassword)) {
+            passwordConfirmEditText.setError("Passwörter müssen übereinstimmen");
+            passwordConfirmEditText.requestFocus();
         } else {
+            String finalNeededVP = neededVP;
             firebaseAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                 @Override
                 public void onComplete(@NonNull Task<AuthResult> task) {
@@ -112,7 +130,7 @@ public class registerFragment extends Fragment {
                             @Override
                             public void onComplete(@NonNull Task<Void> task) {
                                 if (task.isSuccessful()) {
-                                    createDBEntry();
+                                    registerNewUser(email, matNr, finalNeededVP);
                                     Toast.makeText(getActivity(), "Registierung erfolgreich, bitte überprüfe deine Email-Postfach", Toast.LENGTH_SHORT).show();
                                 } else {
                                     Toast.makeText(getActivity(), "Registierung fehlgeschlagen: " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
@@ -125,10 +143,5 @@ public class registerFragment extends Fragment {
                 }
             });
         }
-    }
-
-    private void createDBEntry(){
-        mainActivity.uniqueID = emailEdittext.getText().toString();
-        mainActivity.createUserId(getActivity());
     }
 }

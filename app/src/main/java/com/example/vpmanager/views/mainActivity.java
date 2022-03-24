@@ -35,7 +35,7 @@ public class mainActivity extends AppCompatActivity implements DrawerController 
 
     //logic to register a new user (app installation) if necessary
     AccessDatabase accessDatabase;
-    public static String uniqueID = null;
+    public static String uniqueID = "";
     private static final String PREF_UNIQUE_ID = "PREF_UNIQUE_ID";
 
     @Override
@@ -55,10 +55,9 @@ public class mainActivity extends AppCompatActivity implements DrawerController 
     }
 
     private void setupUserId() {
-        //uniqueID = createUserId(this);
-        uniqueID = "default";
+        uniqueID = createUserId(this);
         accessDatabase = new AccessDatabase();
-        registerNewUser();
+       // registerNewUser();
     }
 
     //Parameter:
@@ -184,7 +183,7 @@ public class mainActivity extends AppCompatActivity implements DrawerController 
     //Registers a new user (installation of the app)  in the DB, if the user doesn't already exist
     private void registerNewUser() {
         String deviceID = createUserId(this);
-        accessDatabase.createNewUser(deviceID);
+       // accessDatabase.createNewUser(deviceID);
     }
 
     //Parameter: context

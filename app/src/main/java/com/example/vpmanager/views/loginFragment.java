@@ -15,6 +15,7 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.vpmanager.AccessDatabase;
 import com.example.vpmanager.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -35,6 +36,8 @@ public class loginFragment extends Fragment {
 
     private FirebaseAuth firebaseAuth;
     private NavController navController;
+    private AccessDatabase accessDatabase;
+
 
     public loginFragment() {
         // Required empty public constructor
@@ -59,6 +62,7 @@ public class loginFragment extends Fragment {
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         setupView(view);
+        accessDatabase = new AccessDatabase();
         ((mainActivity) getActivity()).setDrawerLocked();
         navController = Navigation.findNavController(view);
         setOnClickListeners();
@@ -113,7 +117,6 @@ public class loginFragment extends Fragment {
         }
     }
 
-
     //Parameter:
     //Return values:
     //Handles login if the and provides feedback if the task was successful
@@ -141,6 +144,7 @@ public class loginFragment extends Fragment {
                                 navController.navigate(R.id.action_global_homeFragment);
                             } else {
                                 firebaseAuth.signOut();
+                                Toast.makeText(getActivity(), "Bitte verifiziere Sie zuerst Ihre Email Adresse", Toast.LENGTH_SHORT).show();
                             }
                         }
                     } else {
