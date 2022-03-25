@@ -15,13 +15,11 @@ import androidx.navigation.ui.NavigationUI;
 
 import com.example.vpmanager.DrawerController;
 import com.example.vpmanager.R;
-import com.example.vpmanager.AccessDatabase;
 import com.google.android.material.appbar.MaterialToolbar;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
-import java.util.Objects;
 
 public class mainActivity extends AppCompatActivity implements DrawerController {
 
@@ -36,8 +34,9 @@ public class mainActivity extends AppCompatActivity implements DrawerController 
     private AppBarConfiguration appBarConfiguration;
 
     //logic to register a new user (app installation) if necessary
-    private AccessDatabase accessDatabase;
-    public static String uniqueID = "default";
+
+    public static String uniqueID = "";
+
     private static final String PREF_UNIQUE_ID = "PREF_UNIQUE_ID";
 
     @Override
@@ -60,9 +59,6 @@ public class mainActivity extends AppCompatActivity implements DrawerController 
         System.out.println("before " + uniqueID);
         uniqueID = createUserId(this);
         System.out.println("after " + uniqueID);
-        accessDatabase = new AccessDatabase();
-        //registerNewUser();
-
     }
 
     //Parameter:
@@ -118,21 +114,19 @@ public class mainActivity extends AppCompatActivity implements DrawerController 
                 return false;
             }
         });
-        /*
-        navigationViewMain.getMenu().getItem(5).setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+        navigationViewMain.getMenu().getItem(4).setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(MenuItem menuItem) {
                 firebaseAuth.signOut();
-                
+
                 navController.navigate(R.id.action_global_nestedGraphLoginRegistration);
 
-                Log.d("mainActivity", "menuItem" + navigationViewMain.getMenu().getItem(5).toString());
+                Log.d("mainActivity", "menuItem" + navigationViewMain.getMenu().getItem(4).toString());
                 Log.d("mainActivity", "additional listener on logout was active!");
                 return false;
             }
         });
 
-         */
         /*
         navigationViewMain.getMenu().getItem(1).setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
             @Override
@@ -169,28 +163,8 @@ public class mainActivity extends AppCompatActivity implements DrawerController 
     //allows NavigationUI to support proper up navigation (in the Action Bar)
     @Override
     public boolean onSupportNavigateUp() {
-
-        if (!Objects.requireNonNull(navController.getCurrentDestination()).toString()
-                .equals("Destination(com.example.vpmanager:id/homeFragment) label=Startseite class=com.example.vpmanager.views.homeFragment")) {
-            if (NavigationUI.navigateUp(navController, appBarConfiguration)) {
-                if (Objects.requireNonNull(navController.getCurrentDestination()).toString()
-                        .equals("Destination(com.example.vpmanager:id/homeFragment) label=Startseite class=com.example.vpmanager.views.homeFragment")) {
-                    navController.navigate(R.id.action_global_homeFragment);
-                    return true;
-                }
-            }
-        }
-
+      
         return NavigationUI.navigateUp(navController, appBarConfiguration) || super.onSupportNavigateUp();
-    }
-
-    //Parameter:
-    //Return values:
-    //Registers a new user (installation of the app)  in the DB, if the user doesn't already exist
-    private void registerNewUser() {
-        String deviceID = createUserId(this);
-        Log.d("deviceId", "deviceId" + deviceID);
-        accessDatabase.createNewUser(deviceID);
     }
 
     //Parameter: context
@@ -201,9 +175,7 @@ public class mainActivity extends AppCompatActivity implements DrawerController 
         FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
         Log.d("mainActivity", "firebaseAuth: " + firebaseAuth);
         FirebaseUser user = firebaseAuth.getCurrentUser();
-        Log.d("mainActivity", "user: " + user);
         if (user != null) {
-            Log.d("mainActivity", "user was not null");
             if (uniqueID == null || !uniqueID.equals(user.getEmail())) {
                 SharedPreferences sharedPrefs = context.getSharedPreferences(
                         PREF_UNIQUE_ID, Context.MODE_PRIVATE);
@@ -235,18 +207,13 @@ public class mainActivity extends AppCompatActivity implements DrawerController 
 
     @Override
     public void onBackPressed() {
-        if (!Objects.requireNonNull(navController.getCurrentDestination()).toString()
-                .equals("Destination(com.example.vpmanager:id/homeFragment) label=Startseite class=com.example.vpmanager.views.homeFragment")) {
-            if (NavigationUI.navigateUp(navController, appBarConfiguration)) {
-                if (Objects.requireNonNull(navController.getCurrentDestination()).toString()
-                        .equals("Destination(com.example.vpmanager:id/homeFragment) label=Startseite class=com.example.vpmanager.views.homeFragment")) {
-                    navController.navigate(R.id.action_global_homeFragment);
-                }
-            }
-        }
-        else
+
+        if (drawerLayoutMain.isOpen())
         {
-            super.onBackPressed();
+            drawerLayoutMain.close();
+        }
+        else {
+                super.onBackPressed();
         }
     }
 }

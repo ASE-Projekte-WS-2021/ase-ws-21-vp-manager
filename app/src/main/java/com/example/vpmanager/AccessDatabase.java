@@ -20,7 +20,7 @@ public class AccessDatabase {
 
     //HomeActivity --------------------------------------------------------------------------------!
     //Adds a new user (installation of the app) to the database, if it doesn't already exist
-    public void createNewUser(String deviceId) {
+    public void createNewUser(String deviceId, String matNr, String neededVP) {
         db = FirebaseFirestore.getInstance();
         //A DocumentReference refers to a document location
         final DocumentReference userDocRef = db.collection("users").document(deviceId);
@@ -32,6 +32,8 @@ public class AccessDatabase {
                 if (!snapshot.exists()) {
                     Map<String, Object> user = new HashMap<>();
                     user.put("deviceId", deviceId);
+                    user.put("matrikelNumber", matNr);
+                    user.put("vps", neededVP);
                     transaction.set(userDocRef, user);
                 }
                 return null;

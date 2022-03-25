@@ -30,10 +30,12 @@ public class homeFragment extends Fragment {
     FirebaseAuth firebaseAuth;
     private AccessDatabase accessDatabase;
 
+
+    private ViewPager viewPager;
+    private ViewPagerAdapter viewPagerAdapter;
+
     public homeFragment() {
     }
-
-
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -51,10 +53,14 @@ public class homeFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         navController = Navigation.findNavController(view);
-        //userLoggedIn();
-        registerNewUser();
         createTabs(view);
+    }
 
+    @Override
+    public void onStart()
+    {
+        super.onStart();
+        userLoggedIn();
     }
 
     private void registerNewUser() {
@@ -69,7 +75,7 @@ public class homeFragment extends Fragment {
     //sets up the tablayout and adds and adapter for the content
     private void createTabs(View view) {
 
-        ViewPager viewPager = view.findViewById(R.id.view_pager_home);
+        viewPager = view.findViewById(R.id.view_pager_home);
         TabLayout tabLayout = view.findViewById(R.id.tab_layout_home);
 
         com.example.vpmanager.views.personalAccountFragment personalAccountFragment = new personalAccountFragment();
@@ -96,7 +102,7 @@ public class homeFragment extends Fragment {
             }
         });
 
-        ViewPagerAdapter viewPagerAdapter = new ViewPagerAdapter(getParentFragmentManager(), 0);//tabLayout.getTabCount());
+        viewPagerAdapter = new ViewPagerAdapter(getChildFragmentManager(), 0);//tabLayout.getTabCount());
         viewPagerAdapter.addFragment(personalAccountFragment, "Persönliche Übersicht");
         viewPagerAdapter.addFragment(appointments, "Termine");
 

@@ -26,13 +26,13 @@
             <TextView
                 android:id="@+id/textviewName"
                 android:layout_width="match_parent"
-                android:layout_height="20dp"
+                android:layout_height="26dp"
                 android:layout_gravity="left"
                 android:layout_marginTop="4dp"
-                android:layout_marginBottom="17dp"
+                android:layout_marginBottom="13dp"
                 android:fontFamily="@font/google_sans_medium"
-                android:textColor="@color/white"
-                android:textSize="20dp"
+                android:textColor="@color/white_header"
+                android:textSize="21dp"
                 android:textStyle="bold" />
 
             <TextView
@@ -43,24 +43,23 @@
                 android:fontFamily="@font/google_sans_medium"
                 android:gravity="left"
                 android:textColor="@color/white"
-                android:layout_marginBottom="2dp"
                 android:textSize="17dp" />
 
 
             <ImageView
                 android:id="@+id/infoSymbolStudyFragment"
-                android:layout_width="99dp"
-                android:layout_height="37dp"
+                android:layout_width="102dp"
+                android:layout_height="40dp"
                 android:layout_gravity="right"
                 android:layout_marginTop="-20dp"
                 app:srcCompat="@drawable/ic_baseline_category_24_white" />
 
             <TextView
                 android:id="@+id/textviewCat"
-                android:layout_width="100dp"
+                android:layout_width="170dp"
                 android:layout_height="20dp"
                 android:layout_gravity="left"
-                android:layout_marginTop="-7dp"
+                android:layout_marginTop="-8dp"
                 android:textStyle="italic"
                 android:layout_marginStart= "100dp"
                 android:fontFamily="@font/google_sans_medium"
@@ -73,6 +72,7 @@
                 android:layout_height="20dp"
                 android:layout_gravity="left"
                 android:layout_marginTop="-20dp"
+                android:layout_marginBottom="2dp"
                 android:fontFamily="@font/google_sans_medium"
                 android:textColor="@color/white"
                 android:textSize="17dp" />

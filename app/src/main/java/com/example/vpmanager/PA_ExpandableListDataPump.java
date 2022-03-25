@@ -17,6 +17,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
+import java.text.Format;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -27,6 +28,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 import java.util.TreeMap;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class PA_ExpandableListDataPump extends Activity {
 
@@ -154,15 +157,16 @@ public class PA_ExpandableListDataPump extends Activity {
 
                             if(isDateInPast(dateString))
                             {
-                                passedStudies.add(studyNameString + "," + studyVPSString + "," + dateString + "," + StudyId);
+                                passedStudies.add(studyNameString + ";" + studyVPSString + ";" + dateString + ";" + StudyId);
                             }
                             else
-                                ownStudies.add(studyNameString + "," + studyVPSString + "," + dateString + "," + StudyId);
+                                ownStudies.add(studyNameString + ";" + studyVPSString + ";" + dateString + ";" + StudyId);
                         }
                     }
                 }
             }
         }
+        EXPANDABLE_LIST_DETAIL.put("Abgeschlossene Studien", new ArrayList<>());
         EXPANDABLE_LIST_DETAIL.put("Vergangene Studien", passedStudies);
         EXPANDABLE_LIST_DETAIL.put("Geplante Studien", ownStudies);
     }
@@ -172,18 +176,35 @@ public class PA_ExpandableListDataPump extends Activity {
     //Return Values: boolean to tell if a date is in the future or past
     //this function parses a given string to a date and checks if the date is already in the past, or in the future
     private static boolean isDateInPast(String date) {
+
+        Calendar c = Calendar.getInstance();
+        int day = c.get(Calendar.DAY_OF_MONTH);
+        int month = c.get(Calendar.MONTH);
+        int year = c.get(Calendar.YEAR);
+        String currentDate = day + "." + (month + 1) + "." + year;
+        //
         Date currentTime = Calendar.getInstance().getTime();
 
-        SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyy HH:mm");
+        Pattern pattern = Pattern.compile("\\d\\d:\\d\\d:\\d\\d");
+        Matcher matcher = pattern.matcher(currentTime.toString());
+        if (matcher.find()) {
+            currentDate += " " + matcher.group(0);
+            currentDate = currentDate.substring(0, currentDate.lastIndexOf(":"));
+        }
 
+        String testDate = date.substring(date.indexOf(",") + 2);
+        testDate = testDate.replaceAll("um", "");
+        testDate = testDate.replaceAll("Uhr", "");
+
+        Format format = new SimpleDateFormat("dd.MM.yyyy hh:mm");
         try {
-            Date meetingDate = format.parse(date);
 
-            if (currentTime.after(meetingDate))
+            Date c_Date = (Date) format.parseObject(currentDate);
+            Date t_Date = (Date) format.parseObject(testDate);
+
+            if (t_Date.before(c_Date)) {
                 return true;
-            else
-                return false;
-
+            }
         } catch (ParseException e) {
             e.printStackTrace();
         }
@@ -219,13 +240,12 @@ public class PA_ExpandableListDataPump extends Activity {
                     }
                 }
             }
-            if (saveDate && studyId != null && date != null) {
+            if (saveDate && studyId != null && date != null  && !isDateInPast(date)) {
                 studyIdList.put(studyId, date);
             }
         }
 
         for (Map<String, Object> map : DB_STUDIES_LIST) {
-            List<String> dateList = new ArrayList<>();
             boolean getDate = false;
             String studyID = null;
             String creator = null;

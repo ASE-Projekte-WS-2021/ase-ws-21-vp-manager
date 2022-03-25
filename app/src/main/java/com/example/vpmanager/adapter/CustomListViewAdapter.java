@@ -15,7 +15,9 @@ import androidx.navigation.NavController;
 
 import com.example.vpmanager.PA_ExpandableListDataPump;
 import com.example.vpmanager.R;
+
 import com.example.vpmanager.models.StudyObjectPa;
+
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -47,13 +49,23 @@ public class CustomListViewAdapter extends BaseAdapter {
 
     private ArrayList<StudyObjectPa> transformLists() {
         ArrayList<StudyObjectPa> list = new ArrayList<>();
+
+    public CustomListViewAdapter(Context context, Activity activity, NavController nav, ArrayList<StudyObject> list) {
+        super();
+        inflater = LayoutInflater.from(context);
+        navController = nav;
+        this.objects = list;
+        this.activity = activity;
+    }
+
         HashMap<String, List<String>> dataList = PA_ExpandableListDataPump.EXPANDABLE_LIST_DETAIL;
 
         for (String key : dataList.keySet()) {
             List<String> tempList = dataList.get(key);
 
             for (int i = 0; i < (tempList != null ? tempList.size() : 0); i++) {
-                String[] values = tempList.get(i).split(",");
+
+                String[] values = tempList.get(i).split(";");
                 StudyObjectPa object = null;
 
                 switch (key) {
@@ -76,6 +88,10 @@ public class CustomListViewAdapter extends BaseAdapter {
             }
         }
         return list;
+    }
+    public ArrayList<StudyObject> getObjects()
+    {
+        return objects;
     }
 
 
@@ -104,6 +120,7 @@ public class CustomListViewAdapter extends BaseAdapter {
             convertView = inflater.inflate(R.layout.pa_listview_item, null); //NOT SURE
 
             titleView = convertView.findViewById(R.id.listviewItemTitle);
+
             titleView.setText(objects.get(position).getTitle()); //title
 
             vpsView = convertView.findViewById(R.id.pa_VP_view);
@@ -116,7 +133,7 @@ public class CustomListViewAdapter extends BaseAdapter {
             colorView.setBackgroundResource(objects.get(position).getColor()); //color
 
 
-            convertView.setTag(objects);
+            convertView.setTag(objects.get(position));
 
             holder.titleTextView = titleView;
             holder.dateTextView = dateView;
