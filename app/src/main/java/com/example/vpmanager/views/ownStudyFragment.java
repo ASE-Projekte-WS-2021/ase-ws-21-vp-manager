@@ -71,8 +71,8 @@ public class ownStudyFragment extends Fragment {
         com.example.vpmanager.views.personalAccountFragment personalAccountFragment = new personalAccountFragment();
         SelfcreatedStudiesFragment studies = new SelfcreatedStudiesFragment();
 
-        tabLayout.addTab(tabLayout.newTab().setText("Studienteilnahmen"));
-        tabLayout.addTab(tabLayout.newTab().setText("Studienveranstaltungen"));
+        tabLayout.addTab(tabLayout.newTab().setText("Teilnahmen"));
+        tabLayout.addTab(tabLayout.newTab().setText("Veranstaltungen"));
 
         tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
@@ -93,8 +93,8 @@ public class ownStudyFragment extends Fragment {
         });
 
         viewPagerAdapter = new ViewPagerAdapter(getChildFragmentManager(), 0);//tabLayout.getTabCount());
-        viewPagerAdapter.addFragment(personalAccountFragment, "Studienteilnahmen");
-        viewPagerAdapter.addFragment(studies, "Studienveranstaltungen");
+        viewPagerAdapter.addFragment(personalAccountFragment, "Teilnahmen");
+        viewPagerAdapter.addFragment(studies, "Veranstaltungen");
 
         viewPager.setAdapter(viewPagerAdapter);
 

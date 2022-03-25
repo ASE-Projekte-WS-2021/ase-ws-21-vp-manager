@@ -26,7 +26,7 @@ public class CustomListViewAdapterAppointments extends BaseAdapter {
     private ArrayList<StudyObject> objects;
     private Activity activity;
     NavController navController;
-
+    private String sourceFragment;
 
     private class ViewHolder {
         TextView titleTextView;
@@ -34,12 +34,13 @@ public class CustomListViewAdapterAppointments extends BaseAdapter {
 
     }
 
-    public CustomListViewAdapterAppointments(Context context, Activity activity, NavController nav, ArrayList<String> list, HashMap<String, String> getStudyIdByName) {
+    public CustomListViewAdapterAppointments(Context context, Activity activity, NavController nav, ArrayList<String> list, HashMap<String, String> getStudyIdByName, String source) {
         super();
         inflater = LayoutInflater.from(context);
         navController = nav;
         this.objects = transformUpcomingAppointments(list, getStudyIdByName);
         this.activity = activity;
+        sourceFragment = source;
     }
 
     private ArrayList<StudyObject> transformUpcomingAppointments(ArrayList<String> list, HashMap<String, String> getStudyIdByName) {
@@ -93,19 +94,41 @@ public class CustomListViewAdapterAppointments extends BaseAdapter {
 
             holder.titleTextView = titleView;
             holder.dateTextView = dateView;
-            convertView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Bundle args = new Bundle();
-                    StudyObject study = objects.get(position);
-                    args.putString("studyId", study.getStudyId());
-                    if (PA_ExpandableListDataPump.navigateToStudyCreatorFragment(uniqueID, study.getStudyId())) {
-                        navController.navigate(R.id.action_homeFragment_to_studyCreatorFragment, args);
-                    } else {
-                        navController.navigate(R.id.action_homeFragment_to_studyFragment, args);
-                    }
-                }
-            });
+            switch(sourceFragment) {
+                case "homeFragment":
+
+                    convertView.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            Bundle args = new Bundle();
+                            StudyObject study = objects.get(position);
+                            args.putString("studyId", study.getStudyId());
+                            if (PA_ExpandableListDataPump.navigateToStudyCreatorFragment(uniqueID, study.getStudyId())) {
+                                navController.navigate(R.id.action_homeFragment_to_studyCreatorFragment, args);
+                            } else {
+                                navController.navigate(R.id.action_homeFragment_to_studyFragment, args);
+                            }
+                        }
+                    });
+                    break;
+                case "UpcomingAppointmentsFragment":
+
+                    convertView.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            Bundle args = new Bundle();
+                            StudyObject study = objects.get(position);
+                            args.putString("studyId", study.getStudyId());
+                            if (PA_ExpandableListDataPump.navigateToStudyCreatorFragment(uniqueID, study.getStudyId())) {
+                                navController.navigate(R.id.action_upcomingAppointmentsFragment_to_studyCreatorFragment, args);
+                            } else {
+                                navController.navigate(R.id.action_upcomingAppointmentsFragment_to_studyFragment, args);
+                            }
+                        }
+                    });
+                    break;
+
+            }
         }
         return convertView;
     }

@@ -44,8 +44,7 @@ public class personalAccountFragment extends Fragment {
 
     private ListView listView;
     private PieChart chart;
-    private Switch sourceSwitch;
-    private ImageView settings, sortAlphabetically, sortAppointments;
+    private ImageView sortAlphabetically, sortAppointments;
     private LinearLayout participatedLayout, plannedLayout, completedLayout;
 
     private static String martikelNumber;
@@ -144,8 +143,6 @@ public class personalAccountFragment extends Fragment {
         participated = view.findViewById(R.id.pa_participated);
         completed = view.findViewById(R.id.pa_completed);
         remaining = view.findViewById(R.id.pa_remaining);
-        settings = view.findViewById(R.id.vp_settings_icon);
-        sourceSwitch = view.findViewById(R.id.vp_source_switch);
         chart = view.findViewById(R.id.pa_fragment_pie_chart);
 
         listView.setAdapter(new CustomListViewAdapter(this.getContext() , this.getActivity(), navController));
@@ -185,7 +182,7 @@ public class personalAccountFragment extends Fragment {
                 participatedVP += studyVPS;
             }
         }
-        switchPieChart(sourceSwitch.isChecked());
+        setPieChartData(completedVP, participatedVP, plannedVP);
     }
 
 
@@ -194,14 +191,6 @@ public class personalAccountFragment extends Fragment {
     //Setup clicklisteners for all clickable objects
     private void setupClickListener() {
 
-        sourceSwitch.setOnCheckedChangeListener((buttonView, isChecked) -> {
-            switchPieChart(isChecked);
-        });
-        settings.setOnClickListener(v -> {
-            personalAccountFragment fragment = personalAccountFragment.this;
-            CustomAlertDialog dialog = new CustomAlertDialog(fragment, Float.toString(sumVPs), martikelNumber);
-            dialog.show();
-        });
         removeCompleted.setOnCheckedChangeListener((buttonView, isChecked) -> filterListViewColorTags(isChecked, R.color.pieChartSafe));
         removePlanned.setOnCheckedChangeListener((buttonView, isChecked) -> filterListViewColorTags(isChecked, R.color.pieChartPlanned));
         removeParticipated.setOnCheckedChangeListener((buttonView, isChecked) -> filterListViewColorTags(isChecked, R.color.pieChartParticipation));
@@ -215,50 +204,7 @@ public class personalAccountFragment extends Fragment {
     //Parameter: boolean input to switch between app as source and web
     //Return values:
     //resets the piechart depending on switch position to get the new source and displaying them
-    private void switchPieChart(boolean isSourceWeb) {
-        if (isSourceWeb) {
-            if (martikelNumber.isEmpty()) {
-                CustomAlertReminder reminder = new CustomAlertReminder(this);
-                reminder.show();
-                sourceSwitch.setChecked(false);
-                switchPieChart(false);
-            } else {
-                Thread getRequest = new Thread(() -> {
-                    try {
-                        createGetRequest();
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                });
-                getRequest.start();
 
-                try {
-                    getRequest.join();
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-
-                if (jsonString != null && !jsonString.isEmpty() && jsonString.contains("matriculationNumber")) {
-                    System.out.println("JSON: " + jsonString);
-                    String[] entries = jsonString.split(",");
-                    if (entries.length == 3) {
-                        String VPS = entries[1].split(":")[1];
-                        if (!VPS.isEmpty()) {
-                            setPieChartData(Double.parseDouble(VPS), 0, 0);
-                            plannedLayout.setVisibility(View.INVISIBLE);
-                            completedLayout.setVisibility(View.VISIBLE);
-                        }
-                    }
-                }
-            }
-        }
-        if (!isSourceWeb) {
-            setPieChartData(completedVP, participatedVP, plannedVP);
-            plannedLayout.setVisibility(View.VISIBLE);
-            participatedLayout.setVisibility(View.VISIBLE);
-
-        }
-    }
 
     //Parameter: Input are double values to determine the size of the piechart slices
     //Return values:
@@ -306,45 +252,6 @@ public class personalAccountFragment extends Fragment {
         chart.setInnerPaddingColor(getResources().getColor(R.color.cardview_light_background));
         chart.startAnimation();
     }
-
-    //Parameter:
-    //Return values:
-    //Creates and calls a getRequest to get the saved number of vps from the universities website. saves the count in a string
-    private void createGetRequest() throws IOException {
-        HttpURLConnection urlConnection = null;
-        URL url = new URL("https://vp.software-engineering.education/" + martikelNumber + "/vps");
-        urlConnection = (HttpURLConnection) url.openConnection();
-        urlConnection.setRequestMethod("GET");
-        urlConnection.setReadTimeout(10000 /* milliseconds */);
-        urlConnection.setConnectTimeout(15000 /* milliseconds */);
-        urlConnection.setDoOutput(true);
-        urlConnection.connect();
-
-        BufferedReader br = new BufferedReader(new InputStreamReader(url.openStream()));
-        StringBuilder sb = new StringBuilder();
-
-        String line;
-        while ((line = br.readLine()) != null) {
-            sb.append(line).append("\n");
-        }
-        br.close();
-
-        jsonString = sb.toString();
-    }
-
-    //Parameter: Input from CustomAlertDialog containing the count of vps and the users matrikelnumber
-    //Return values:
-    //Saves the input as local values and calls a database method to update the values in the users profile
-    public void closeDialog(String vps, String matrikelnumber) {
-        martikelNumber = matrikelnumber;
-        sumVPs = Float.parseFloat(vps);
-
-        switchPieChart(sourceSwitch.isChecked());
-
-        PA_ExpandableListDataPump.saveVPandMatrikelnumber(vps, matrikelnumber);
-
-    }
-
 
     private void filterListViewTextTags(boolean active, String type)
     {
