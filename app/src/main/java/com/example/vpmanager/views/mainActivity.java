@@ -15,7 +15,6 @@ import androidx.navigation.ui.NavigationUI;
 
 import com.example.vpmanager.DrawerController;
 import com.example.vpmanager.R;
-import com.example.vpmanager.AccessDatabase;
 import com.google.android.material.appbar.MaterialToolbar;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
@@ -26,25 +25,26 @@ public class mainActivity extends AppCompatActivity implements DrawerController 
 
     public DrawerLayout drawerLayoutMain;
     private NavController navController;
+    public static NavController staticNavController;
     private NavigationView navigationViewMain;
     private NavHostFragment navHostFragment;
-    FirebaseAuth firebaseAuth;
+    private FirebaseAuth firebaseAuth;
 
     private MaterialToolbar topAppBarMain;
     private AppBarConfiguration appBarConfiguration;
 
     //logic to register a new user (app installation) if necessary
-    //NOTE !!!! Accessdatabase neeeded here?
-    AccessDatabase accessDatabase;
+
     public static String uniqueID = "";
+
     private static final String PREF_UNIQUE_ID = "PREF_UNIQUE_ID";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        setupUserId();
         setupNavigationView();
+        setupUserId();
         firebaseAuth = FirebaseAuth.getInstance();
     }
 
@@ -56,9 +56,9 @@ public class mainActivity extends AppCompatActivity implements DrawerController 
     }
 
     private void setupUserId() {
+        System.out.println("before " + uniqueID);
         uniqueID = createUserId(this);
-        accessDatabase = new AccessDatabase();
-       // registerNewUser();
+        System.out.println("after " + uniqueID);
     }
 
     //Parameter:
@@ -80,10 +80,12 @@ public class mainActivity extends AppCompatActivity implements DrawerController 
         navHostFragment = (NavHostFragment) getSupportFragmentManager().findFragmentById(R.id.nav_host_fragment_main);
         assert navHostFragment != null;
         navController = navHostFragment.getNavController();
+        staticNavController = navController;
         //navController = Navigation.findNavController(this, R.id.nav_host_fragment_main);
 
         //Top level destinations are configured here. createStudyActivity and studyFragment should not be included!
-        appBarConfiguration = new AppBarConfiguration.Builder(R.id.homeFragment, R.id.findStudyFragment, R.id.ownStudyFragment).setDrawerLayout(drawerLayoutMain).build();
+        appBarConfiguration = new AppBarConfiguration.Builder(R.id.homeFragment, R.id.findStudyFragment,
+                R.id.createStudyFragment, R.id.ownStudyFragment).setDrawerLayout(drawerLayoutMain).build();
 
         //handle Navigation item clicks
         //this works with no further action, if the menu and destination id’s match.
@@ -161,21 +163,7 @@ public class mainActivity extends AppCompatActivity implements DrawerController 
     //allows NavigationUI to support proper up navigation (in the Action Bar)
     @Override
     public boolean onSupportNavigateUp() {
-/*
-        System.out.println(navController.getCurrentDestination().toString());
-        if (!Objects.requireNonNull(navController.getCurrentDestination()).toString()
-                .equals("Destination(com.example.vpmanager:id/homeFragment) label=VP Manager class=com.example.vpmanager.views.homeFragment")) {
-            boolean navResult = NavigationUI.navigateUp(navController, appBarConfiguration);
-            if (navResult) {
-                if (Objects.requireNonNull(navController.getCurrentDestination()).toString()
-                        .equals("Destination(com.example.vpmanager:id/homeFragment) label=VP Manager class=com.example.vpmanager.views.homeFragment")) {
-                    System.out.println(navController.getCurrentDestination().toString());
-                    navController.navigate(R.id.action_global_homeFragment);
-                    return true;
-                }
-            } else
-                return navResult || super.onSupportNavigateUp();
-        }*/
+      
         return NavigationUI.navigateUp(navController, appBarConfiguration) || super.onSupportNavigateUp();
     }
 
@@ -185,6 +173,7 @@ public class mainActivity extends AppCompatActivity implements DrawerController 
     //Source: https://ssaurel.medium.com/how-to-retrieve-an-unique-id-to-identify-android-devices-6f99fd5369eb
     public synchronized static String createUserId(Context context) {
         FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
+        Log.d("mainActivity", "firebaseAuth: " + firebaseAuth);
         FirebaseUser user = firebaseAuth.getCurrentUser();
         if (user != null) {
             if (uniqueID == null || !uniqueID.equals(user.getEmail())) {
@@ -198,6 +187,8 @@ public class mainActivity extends AppCompatActivity implements DrawerController 
                     editor.apply();
                 }
             }
+        } else {
+            staticNavController.navigate(R.id.action_global_nestedGraphLoginRegistration);
         }
         return uniqueID;
     }

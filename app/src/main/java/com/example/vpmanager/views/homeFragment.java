@@ -14,6 +14,7 @@ import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.viewpager.widget.ViewPager;
 
+import com.example.vpmanager.AccessDatabase;
 import com.example.vpmanager.R;
 import com.google.android.material.tabs.TabLayout;
 import com.google.firebase.auth.FirebaseAuth;
@@ -26,6 +27,7 @@ public class homeFragment extends Fragment {
 
     private NavController navController;
     FirebaseAuth firebaseAuth;
+    private AccessDatabase accessDatabase;
 
 
     private ViewPager viewPager;

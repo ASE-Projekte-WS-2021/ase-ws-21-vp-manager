@@ -42,8 +42,9 @@ public class AccessDatabase {
         )).addOnFailureListener(e -> Log.w(TAG, "Transaction failure.", e));
     }
 
-
     //CreateStudyActivity -------------------------------------------------------------------------!
+
+    /*
     public void addNewStudy(Map<String, Object> newStudy, String studyID) {
 
         db = FirebaseFirestore.getInstance();
@@ -63,6 +64,7 @@ public class AccessDatabase {
                 .addOnSuccessListener(aVoid -> Log.d(TAG, "DocumentSnapshot successfully written!"))
                 .addOnFailureListener(e -> Log.w(TAG, "Error writing document", e));
     }
+     */
 
     //FindStudyActivity ---------------------------------------------------------------------------!
     //in findStudyActivity

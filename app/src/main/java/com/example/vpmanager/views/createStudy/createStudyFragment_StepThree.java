@@ -1,4 +1,4 @@
-package com.example.vpmanager.createStudy;
+package com.example.vpmanager.views.createStudy;
 
 import android.os.Bundle;
 
@@ -13,13 +13,13 @@ import com.google.android.material.textfield.TextInputEditText;
 
 public class createStudyFragment_StepThree extends Fragment {
 
-    TextInputEditText textInputEditTextDesc;
+    public static TextInputEditText textInputEditTextDesc;
 
     //Parameter:
     //Return values:
     //Sets the current fragment for the activity
     public createStudyFragment_StepThree() {
-        createStudyActivity.currentFragment = 3;
+        CreateStudyFragment.currentFragment = 3;
     }
 
     @Override
@@ -28,9 +28,7 @@ public class createStudyFragment_StepThree extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         return inflater.inflate(R.layout.fragment_create_study_step_three, container, false);
     }
 
@@ -43,18 +41,24 @@ public class createStudyFragment_StepThree extends Fragment {
     //Parameter:
     //Return values:
     //Connects the code with the view
-    private void setupView(View view){
+    private void setupView(View view) {
         textInputEditTextDesc = view.findViewById(R.id.inputFieldStudyDesc);
-
     }
 
     //Parameter:
     //Return values:
     //Loads data recieved from the activity into the inputfields
     private void loadData() {
+
+        if (CreateStudyFragment.createStudyViewModel.studyCreationProcessData.get("description") != null) {
+            textInputEditTextDesc.setText(
+                    CreateStudyFragment.createStudyViewModel.studyCreationProcessData.get("description").toString());
+        }
+        /*
         Bundle bundle = getArguments();
         if(bundle != null){
             textInputEditTextDesc.setText(bundle.getString("desc"));
         }
+         */
     }
 }
