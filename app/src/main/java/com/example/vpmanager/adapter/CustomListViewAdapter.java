@@ -15,7 +15,9 @@ import androidx.navigation.NavController;
 
 import com.example.vpmanager.PA_ExpandableListDataPump;
 import com.example.vpmanager.R;
-import com.example.vpmanager.views.StudyObject;
+
+import com.example.vpmanager.models.StudyObjectPa;
+
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -24,9 +26,9 @@ import java.util.List;
 public class CustomListViewAdapter extends BaseAdapter {
 
     private LayoutInflater inflater;
-    public ArrayList<StudyObject> objects;
+    private ArrayList<StudyObjectPa> objects;
     private Activity activity;
-    NavController navController;
+    private NavController navController;
 
 
     private class ViewHolder {
@@ -45,7 +47,7 @@ public class CustomListViewAdapter extends BaseAdapter {
         this.activity = activity;
     }
 
-    public CustomListViewAdapter(Context context, Activity activity, NavController nav, ArrayList<StudyObject> list) {
+    public CustomListViewAdapter(Context context, Activity activity, NavController nav, ArrayList<StudyObjectPa> list) {
         super();
         inflater = LayoutInflater.from(context);
         navController = nav;
@@ -53,8 +55,8 @@ public class CustomListViewAdapter extends BaseAdapter {
         this.activity = activity;
     }
 
-    private ArrayList<StudyObject> transformLists() {
-        ArrayList<StudyObject> list = new ArrayList<>();
+    private ArrayList<StudyObjectPa> transformLists() {
+        ArrayList<StudyObjectPa> list = new ArrayList<>();
         HashMap<String, List<String>> dataList = PA_ExpandableListDataPump.EXPANDABLE_LIST_DETAIL;
 
         for (String key : dataList.keySet()) {
@@ -62,20 +64,20 @@ public class CustomListViewAdapter extends BaseAdapter {
 
             for (int i = 0; i < (tempList != null ? tempList.size() : 0); i++) {
                 String[] values = tempList.get(i).split(";");
-                StudyObject object = null;
+                StudyObjectPa object = null;
 
                 switch (key) {
                     case "Vergangene Studien":
-                        object = new StudyObject(values[0], values[1], values[3], values[2], R.color.pieChartParticipation);
+                        object = new StudyObjectPa(values[0], values[1], values[3], values[2], R.color.pieChartParticipation);
                         break;
                     case "Geplante Studien":
-                        object = new StudyObject(values[0], values[1], values[3], values[2], R.color.pieChartPlanned);
+                        object = new StudyObjectPa(values[0], values[1], values[3], values[2], R.color.pieChartPlanned);
                         break;
                     case "Abgeschlossene Studien":
-                        object = new StudyObject(values[0], values[1], values[3], values[2], R.color.pieChartSafe);
+                        object = new StudyObjectPa(values[0], values[1], values[3], values[2], R.color.pieChartSafe);
                         break;
                     default:
-                        object = new StudyObject(values[0], values[1], values[3], values[2], R.color.heatherred_dark);
+                        object = new StudyObjectPa(values[0], values[1], values[3], values[2], R.color.heatherred_dark);
                         break;
                 }
                 if (object != null) {
@@ -85,7 +87,8 @@ public class CustomListViewAdapter extends BaseAdapter {
         }
         return list;
     }
-    public ArrayList<StudyObject> getObjects()
+
+    public ArrayList<StudyObjectPa> getObjects()
     {
         return objects;
     }
@@ -97,7 +100,7 @@ public class CustomListViewAdapter extends BaseAdapter {
     }
 
     @Override
-    public StudyObject getItem(int position) {
+    public StudyObjectPa getItem(int position) {
         return objects.get(position);
     }
 
@@ -116,16 +119,17 @@ public class CustomListViewAdapter extends BaseAdapter {
             convertView = inflater.inflate(R.layout.pa_listview_item, null); //NOT SURE
 
             titleView = convertView.findViewById(R.id.listviewItemTitle);
-            titleView.setText(objects.get(position).getTitle());
+
+            titleView.setText(objects.get(position).getTitle()); //title
 
             vpsView = convertView.findViewById(R.id.pa_VP_view);
-            vpsView.setText(objects.get(position).getVps());
+            vpsView.setText(objects.get(position).getVps()); //vps
 
             dateView = convertView.findViewById(R.id.pa_date_view);
-            dateView.setText(objects.get(position).getDate());
+            dateView.setText(objects.get(position).getDate()); //date
 
             colorView = convertView.findViewById(R.id.pa_listView_colorTag);
-            colorView.setBackgroundResource(objects.get(position).getColor());
+            colorView.setBackgroundResource(objects.get(position).getColor()); //color
 
 
             convertView.setTag(objects.get(position));
@@ -138,7 +142,7 @@ public class CustomListViewAdapter extends BaseAdapter {
                 @Override
                 public void onClick(View v) {
                     Bundle args = new Bundle();
-                    StudyObject study = objects.get(position);
+                    StudyObjectPa study = objects.get(position);
                     args.putString("studyId", study.getStudyId());
                     if (PA_ExpandableListDataPump.navigateToStudyCreatorFragment(uniqueID, study.getStudyId())) {
                         navController.navigate(R.id.action_homeFragment_to_studyCreatorFragment, args);

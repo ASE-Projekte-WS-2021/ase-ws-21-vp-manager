@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:weightSum="10">
+
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="8"
+            android:background="?android:windowBackground"
+            android:theme="@style/Theme.MaterialComponents.Light"
+            app:cardCornerRadius="20dp"
+            tools:context=".views.createStudy.createStudyFragment_Base">
+
+            <!--
+            <androidx.viewpager2.widget.ViewPager2
+                android:id="@+id/viewPager_create_study"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginBottom="10dp" />
+            -->
+            <androidx.fragment.app.FragmentContainerView
+                android:id="@+id/fragment_container_create_study"
+                android:name="com.example.vpmanager.views.createStudy.createStudyFragment_Base"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginBottom="10dp" />
+
+
+        </com.google.android.material.card.MaterialCardView>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:orientation="horizontal"
+            android:weightSum="2">
+
+            <Button
+                android:id="@+id/backButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_weight="1"
+                android:text="@string/fragment_create_study_base_back" />
+
+            <Button
+                android:id="@+id/nextButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_weight="1"
+                android:text="@string/fragment_create_study_base_next" />
+
+        </LinearLayout>
+
+        <com.kofigyan.stateprogressbar.StateProgressBar
+            android:id="@+id/your_state_progress_bar_id"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            app:spb_animateToCurrentProgressState="true"
+            app:spb_animationDuration="100000"
+            app:spb_checkStateCompleted="true"
+            app:spb_currentStateDescriptionColor="@color/green_light"
+            app:spb_maxStateNumber="five"
+            app:spb_stateBackgroundColor="#BDBDBD"
+            app:spb_stateDescriptionColor="#808080"
+            app:spb_stateDescriptionSize="15sp"
+            app:spb_stateForegroundColor="@color/green_light"
+            app:spb_stateLineThickness="10dp"
+            app:spb_stateNumberBackgroundColor="@color/white"
+            app:spb_stateNumberForegroundColor="@color/heatherred_Main"
+            app:spb_stateSize="35dp"
+            app:spb_stateTextSize="15sp" />
+
+    </LinearLayout>
+
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/animationView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/black"
+        android:visibility="invisible"
+        app:lottie_url="https://assets5.lottiefiles.com/packages/lf20_nwuqqxfv.json" />
+
+</RelativeLayout>

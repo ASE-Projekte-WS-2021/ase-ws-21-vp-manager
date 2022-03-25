@@ -14,7 +14,7 @@
     <module name="UnusedImports"/>        <!-- Checks for Size                                          -->
     <!-- See http://checkstyle.sourceforge.net/config_sizes       -->
     <module name="ParameterNumber">
-        <property name="max" value="14"/>
+        <property name="max" value="16"/>
     </module>        <!-- other rules ignored for brevity -->
 </module>
 </module>

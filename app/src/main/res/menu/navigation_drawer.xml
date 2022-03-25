@@ -14,13 +14,19 @@
             android:icon="@drawable/ic_baseline_search_24"
             android:title="Studien finden" />
         <item
-            android:id="@+id/createStudyActivity"
+            android:id="@+id/createStudyFragment"
             android:icon="@drawable/ic_baseline_create_24"
             android:title="Studien erstellen" />
         <item
             android:id="@+id/ownStudyFragment"
             android:icon="@drawable/ic_baseline_folder_24"
             android:title="Eigene Studien" />
+    </group>
+
+    <group
+        android:id="@+id/group2"
+        android:checkableBehavior="single">
+
         <item
             android:id="@+id/nestedGraphLoginRegistration"
             android:icon="@drawable/ic_baseline_exit_to_app_24"
