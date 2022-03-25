@@ -1,5 +1,5 @@
 package com.example.vpmanager.views.createStudy;
-
+/*
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.content.Intent;
@@ -29,7 +29,7 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.UUID;
 
-/*
+
 public class createStudyActivity extends AppCompatActivity {
 
     MaterialToolbar topAppBarCreate;

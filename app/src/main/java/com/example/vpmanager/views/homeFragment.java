@@ -1,7 +1,6 @@
 package com.example.vpmanager.views;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -63,13 +62,6 @@ public class homeFragment extends Fragment {
         userLoggedIn();
     }
 
-    private void registerNewUser() {
-        accessDatabase = new AccessDatabase();
-        String deviceID = mainActivity.createUserId(getActivity());
-        Log.d("deviceId", "deviceId" + deviceID);
-        accessDatabase.createNewUser(deviceID);
-    }
-
     //Parameter: current view to find components
     //Return values:
     //sets up the tablayout and adds and adapter for the content
@@ -120,13 +112,6 @@ public class homeFragment extends Fragment {
         if(user == null) {
             navController.navigate(R.id.action_global_nestedGraphLoginRegistration);
         }
-    }
-
-    @Override
-    public void onStart(){
-        super.onStart();
-        userLoggedIn();
-
     }
 
     //Parameter:

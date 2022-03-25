@@ -11,7 +11,6 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.vpmanager.R;
-import com.example.vpmanager.models.DateModel;
 
 import java.util.ArrayList;
 
