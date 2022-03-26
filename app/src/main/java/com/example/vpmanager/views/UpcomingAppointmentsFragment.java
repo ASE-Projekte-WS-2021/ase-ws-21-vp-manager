@@ -21,7 +21,7 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 
-public class UpcomingAppointments extends Fragment {
+public class UpcomingAppointmentsFragment extends Fragment {
 
     private NavController navController;
     FirebaseAuth firebaseAuth;
@@ -39,7 +39,7 @@ public class UpcomingAppointments extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_home_dates, container, false);
+        View view = inflater.inflate(R.layout.fragment_upcoming_appointments, container, false);
         initHomeFragmentComponents(view);
 
         return view;
@@ -66,6 +66,9 @@ public class UpcomingAppointments extends Fragment {
     //gets necessary data from database converts it into a list
     private void setUpDateList() {
         final List<String[]>[] arrivingDates = new List[]{null};
+
+        PA_ExpandableListDataPump.DB_DATES_LIST.clear();
+        PA_ExpandableListDataPump.DB_STUDIES_LIST.clear();
 
         PA_ExpandableListDataPump.getAllDates(new PA_ExpandableListDataPump.FirestoreCallbackDates() {
             @Override
@@ -109,8 +112,7 @@ public class UpcomingAppointments extends Fragment {
                 listEntries.add(sortingMap.get(key) + "\t\t" + key);
             }
             Collections.reverse(listEntries);
-             arrivingDatesList.setAdapter(new CustomListViewAdapterAppointments(this.getContext(), this.getActivity(), navController, listEntries, getStudyIdByName));
-
+             arrivingDatesList.setAdapter(new CustomListViewAdapterAppointments(this.getContext(), this.getActivity(), navController, listEntries, getStudyIdByName, "UpcomingAppointmentsFragment"));
         }
     }
 
