@@ -1,4 +1,4 @@
-package com.example.vpmanager.views.studyDetails;
+package com.example.vpmanager.views.studyCreatorDetails;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -21,21 +21,20 @@ import com.google.android.material.tabs.TabLayout;
 import java.util.ArrayList;
 import java.util.List;
 
-public class StudyFragment extends Fragment {
+public class studyCreatorFragment extends Fragment {
 
     public static String currentStudyId;
     public static String currentUserId;
 
     private NavController navController;
-    private static NavController staticnavcontroller;
 
     private ViewPager viewPager;
     private TabLayout tabLayout;
 
-    private StudyDetailsFragment detailsFragment;
-    private StudyDatesFragment datesFragment;
+    private StudyCreatorDetailsFragment detailsFragment;
+    private StudyCreatorDatesFragment datesFragment;
 
-    public StudyFragment() {
+    public studyCreatorFragment() {
     }
 
     @Override
@@ -46,18 +45,18 @@ public class StudyFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_study, container, false);
+        View view = inflater.inflate(R.layout.fragment_creator_study, container, false);
         getRequiredInfos();
 
-        viewPager = (ViewPager) view.findViewById(R.id.view_pager);
-        tabLayout = (TabLayout) view.findViewById(R.id.tab_layout);
+        viewPager = (ViewPager) view.findViewById(R.id.creator_view_pager);
+        tabLayout = (TabLayout) view.findViewById(R.id.creator_tab_layout);
 
-        detailsFragment = new StudyDetailsFragment();
-        datesFragment = new StudyDatesFragment();
+        detailsFragment = new StudyCreatorDetailsFragment();
+        datesFragment = new StudyCreatorDatesFragment();
 
         tabLayout.setupWithViewPager(viewPager);
 
-        viewPagerAdapter viewPagerAdapter = new viewPagerAdapter(getParentFragmentManager(), 0);
+        viewPagerAdapter viewPagerAdapter = new viewPagerAdapter(getChildFragmentManager(), 0);
         viewPagerAdapter.addFragment(detailsFragment, "Details");
         viewPagerAdapter.addFragment(datesFragment, "Termine");
         viewPager.setAdapter(viewPagerAdapter);
@@ -68,7 +67,6 @@ public class StudyFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         navController = Navigation.findNavController(view);
-        staticnavcontroller = navController;
         super.onViewCreated(view, savedInstanceState);
     }
 
@@ -76,6 +74,7 @@ public class StudyFragment extends Fragment {
         currentStudyId = getArguments().getString("studyId");
         currentUserId = mainActivity.createUserId(getActivity());
     }
+
 
     private class viewPagerAdapter extends FragmentStatePagerAdapter {
 

@@ -16,17 +16,12 @@ import com.example.vpmanager.PA_ExpandableListDataPump;
 import com.example.vpmanager.R;
 import com.example.vpmanager.adapter.CustomListViewAdapterAppointments;
 import com.google.firebase.auth.FirebaseAuth;
-
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-import java.util.TreeMap;
 
-public class UpcomingAppointments extends Fragment {
+public class UpcomingAppointmentsFragment extends Fragment {
 
     private NavController navController;
     FirebaseAuth firebaseAuth;
@@ -44,7 +39,7 @@ public class UpcomingAppointments extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_home_dates, container, false);
+        View view = inflater.inflate(R.layout.fragment_upcoming_appointments, container, false);
         initHomeFragmentComponents(view);
 
         return view;
@@ -72,6 +67,9 @@ public class UpcomingAppointments extends Fragment {
     private void setUpDateList() {
         final List<String[]>[] arrivingDates = new List[]{null};
 
+        PA_ExpandableListDataPump.DB_DATES_LIST.clear();
+        PA_ExpandableListDataPump.DB_STUDIES_LIST.clear();
+
         PA_ExpandableListDataPump.getAllDates(new PA_ExpandableListDataPump.FirestoreCallbackDates() {
             @Override
             public void onCallback(boolean finished) {
@@ -93,37 +91,28 @@ public class UpcomingAppointments extends Fragment {
     private  void finishSetupList(List <String[]> dates){
 
         if (dates != null) {
-            SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyy HH:mm");
 
-//            List<String[]> dates = arrivingDates[0];
             ArrayList<String> listEntries = new ArrayList<>();
 
-            Map<Date, String> sortingMap = new TreeMap<>();
+            HashMap<String, String> sortingMap = new HashMap<>();
 
             for (String[] listEntry : dates) {
                 String name = listEntry[0];
                 String date = listEntry[1];
                 String studyID = listEntry[2];
 
-                Date studyDate = null;
-                try {
-                    studyDate = format.parse(date);
-                } catch (ParseException e) {
-                    e.printStackTrace();
-                }
-
-                if(studyDate != null && name != null)
+                if(date != null && name != null)
                 {
-                    sortingMap.put(studyDate, name);
-                getStudyIdByName.put(name, studyID);
+                    sortingMap.put(date, name);
+                    getStudyIdByName.put(name, studyID);
                 }
             }
 
-            for (Date key : sortingMap.keySet()) {
+            for (String key : sortingMap.keySet()) {
                 listEntries.add(sortingMap.get(key) + "\t\t" + key);
             }
-             arrivingDatesList.setAdapter(new CustomListViewAdapterAppointments(this.getContext(), this.getActivity(), navController, listEntries, getStudyIdByName));
-
+            Collections.reverse(listEntries);
+             arrivingDatesList.setAdapter(new CustomListViewAdapterAppointments(this.getContext(), this.getActivity(), navController, listEntries, getStudyIdByName, "UpcomingAppointmentsFragment"));
         }
     }
 

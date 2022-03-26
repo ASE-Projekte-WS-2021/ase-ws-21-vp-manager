@@ -17,6 +17,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
+import java.text.Format;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -27,6 +28,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 import java.util.TreeMap;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class PA_ExpandableListDataPump extends Activity {
 
@@ -42,6 +45,7 @@ public class PA_ExpandableListDataPump extends Activity {
     //Return Values:
     //this function saves all Dates from DB to list
     public static void getAllDates(FirestoreCallbackDates firestoreCallbackDates) {
+        DB_DATES_LIST.clear();
         db = FirebaseFirestore.getInstance();
         datesRef = db.collection("dates");
         datesRef.get()
@@ -69,6 +73,7 @@ public class PA_ExpandableListDataPump extends Activity {
     //Return Values:
     //this function saves all Studie Documents from DB to static List
     public static void getAllStudies(FirestoreCallbackStudy firestoreCallbackStudies) {
+        DB_STUDIES_LIST.clear();
         db = FirebaseFirestore.getInstance();
         studiesRef = db.collection("studies");
         studiesRef.get()
@@ -154,15 +159,16 @@ public class PA_ExpandableListDataPump extends Activity {
 
                             if(isDateInPast(dateString))
                             {
-                                passedStudies.add(studyNameString + "," + studyVPSString + "," + dateString + "," + StudyId);
+                                passedStudies.add(studyNameString + ";" + studyVPSString + ";" + dateString + ";" + StudyId);
                             }
                             else
-                                ownStudies.add(studyNameString + "," + studyVPSString + "," + dateString + "," + StudyId);
+                                ownStudies.add(studyNameString + ";" + studyVPSString + ";" + dateString + ";" + StudyId);
                         }
                     }
                 }
             }
         }
+        EXPANDABLE_LIST_DETAIL.put("Abgeschlossene Studien", new ArrayList<>());
         EXPANDABLE_LIST_DETAIL.put("Vergangene Studien", passedStudies);
         EXPANDABLE_LIST_DETAIL.put("Geplante Studien", ownStudies);
     }
@@ -172,18 +178,35 @@ public class PA_ExpandableListDataPump extends Activity {
     //Return Values: boolean to tell if a date is in the future or past
     //this function parses a given string to a date and checks if the date is already in the past, or in the future
     private static boolean isDateInPast(String date) {
+
+        Calendar c = Calendar.getInstance();
+        int day = c.get(Calendar.DAY_OF_MONTH);
+        int month = c.get(Calendar.MONTH);
+        int year = c.get(Calendar.YEAR);
+        String currentDate = day + "." + (month + 1) + "." + year;
+        //
         Date currentTime = Calendar.getInstance().getTime();
 
-        SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyy HH:mm");
+        Pattern pattern = Pattern.compile("\\d\\d:\\d\\d:\\d\\d");
+        Matcher matcher = pattern.matcher(currentTime.toString());
+        if (matcher.find()) {
+            currentDate += " " + matcher.group(0);
+            currentDate = currentDate.substring(0, currentDate.lastIndexOf(":"));
+        }
 
+        String testDate = date.substring(date.indexOf(",") + 2);
+        testDate = testDate.replaceAll("um", "");
+        testDate = testDate.replaceAll("Uhr", "");
+
+        Format format = new SimpleDateFormat("dd.MM.yyyy hh:mm");
         try {
-            Date meetingDate = format.parse(date);
 
-            if (currentTime.after(meetingDate))
+            Date c_Date = (Date) format.parseObject(currentDate);
+            Date t_Date = (Date) format.parseObject(testDate);
+
+            if (t_Date.before(c_Date)) {
                 return true;
-            else
-                return false;
-
+            }
         } catch (ParseException e) {
             e.printStackTrace();
         }
@@ -219,13 +242,12 @@ public class PA_ExpandableListDataPump extends Activity {
                     }
                 }
             }
-            if (saveDate && studyId != null && date != null) {
+            if (saveDate && studyId != null && date != null  && !isDateInPast(date)) {
                 studyIdList.put(studyId, date);
             }
         }
 
         for (Map<String, Object> map : DB_STUDIES_LIST) {
-            List<String> dateList = new ArrayList<>();
             boolean getDate = false;
             String studyID = null;
             String creator = null;
@@ -308,6 +330,76 @@ public class PA_ExpandableListDataPump extends Activity {
         }
     }
 
+
+    public static String getLastParticipationDate()
+    {
+        ArrayList<String> datesList = new ArrayList<>();
+
+        for (Map<String, Object> map : DB_DATES_LIST) {
+            boolean saveDate = false;
+            String studyId = null;
+            String userID = null;
+            String date = null;
+            for (String key : map.keySet()) {
+                if (key.equals("date")) {
+                    date = Objects.requireNonNull(map.get(key)).toString();
+                }
+                if (key.equals("userId")) {
+                    if(map.get(key) != null) {
+                        userID = map.get(key).toString();
+                        if (userID.equals(uniqueID)) {
+                            saveDate = true;
+                        }
+                    }
+                }
+            }
+            if (saveDate && date != null  && !isDateInPast(date)) {
+                datesList.add(date);
+            }
+        }
+
+        String[] studyList = new String[datesList.size()];
+        for(int i = 0; i <datesList.size(); i++)
+        {
+            studyList[i] = datesList.get(i);
+        }
+
+        for(int i = 0; i < studyList.length; i++)
+        {
+            for(int k = 0; k < studyList.length-1; k++) {
+
+                String date1 = studyList[k].substring(studyList[k].indexOf(",")+2);
+                String date2 = studyList[k+1].substring(studyList[k+1].indexOf(",")+2);
+
+                date1 = date1.replaceAll("um", "");
+                date1 = date1.replaceAll("Uhr", "");
+                date2 = date2.replaceAll("um", "");
+                date2 = date2.replaceAll("Uhr", "");
+
+                Format format = new SimpleDateFormat("dd.MM.yyyy hh:mm");
+                try {
+
+                    Date d1_Date = (Date) format.parseObject(date1);
+                    Date d2_Date = (Date) format.parseObject(date2);
+
+                    if (d2_Date.before(d1_Date)) {
+                        String tempString = studyList[k];
+                        studyList[k]= studyList[k+1];
+                        studyList[k+1]= tempString;
+                    }
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+        datesList.clear();
+        for(String s: studyList) {
+            datesList.add(s);
+        }
+        if(datesList.size() > 0)
+            return datesList.get(0);
+        return null;
+    }
 
     //Parameters: identifier of user, identifier of study
     //Return Values

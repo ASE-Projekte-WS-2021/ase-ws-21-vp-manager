@@ -17,7 +17,8 @@
             android:layout_marginTop="20dp"
             android:layout_marginEnd="25dp"
             android:text="Ausgeschriebene Studien"
-            android:textSize="20sp"
+            android:fontFamily="@font/google_sans_medium"
+            android:textSize="23sp"
             android:textStyle="bold" />
 
         <View
