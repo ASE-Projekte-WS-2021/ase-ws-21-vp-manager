@@ -11,8 +11,6 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.vpmanager.R;
-import com.example.vpmanager.models.DateModel;
-import com.example.vpmanager.views.createStudy.createStudyFragment_StepFive;
 import com.google.android.material.snackbar.Snackbar;
 
 import java.util.ArrayList;
