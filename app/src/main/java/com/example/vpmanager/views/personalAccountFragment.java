@@ -22,6 +22,7 @@ import androidx.navigation.Navigation;
 import com.example.vpmanager.PA_ExpandableListDataPump;
 import com.example.vpmanager.R;
 import com.example.vpmanager.adapter.CustomListViewAdapter;
+import com.example.vpmanager.models.StudyObjectPa;
 
 import java.text.Format;
 import java.text.ParseException;
@@ -423,10 +424,10 @@ public class personalAccountFragment extends Fragment {
         }
         else {
             CustomListViewAdapter adapter = (CustomListViewAdapter) listView.getAdapter();
-            List<StudyObject> removeList = new ArrayList<>();
+            List<StudyObjectPa> removeList = new ArrayList<>();
 
 
-            for (StudyObject object: adapter.getObjects()) {
+            for (StudyObjectPa object: adapter.getObjects()) {
                 if(listView != null && object != null) {
                     if (object.getColor() == color) {
                         removeList.add(object);
@@ -434,7 +435,7 @@ public class personalAccountFragment extends Fragment {
                 }
             }
 
-            for(StudyObject object: removeList)
+            for(StudyObjectPa object: removeList)
             {
                 adapter.getObjects().remove(object);
             }
@@ -447,17 +448,17 @@ public class personalAccountFragment extends Fragment {
         }
     }
 
-    private ArrayList<StudyObject> sortByName(boolean invert)
+    private ArrayList<StudyObjectPa> sortByName(boolean invert)
     {
         CustomListViewAdapter adapter = (CustomListViewAdapter) listView.getAdapter();
-        ArrayList<StudyObject> list = new ArrayList<>();
+        ArrayList<StudyObjectPa> list = new ArrayList<>();
         for (int i = 0; i < adapter.getObjects().size(); i++) {
             if(listView != null && adapter.getObjects().get(i) != null) {
-                StudyObject item = adapter.getObjects().get(i);
+                StudyObjectPa item = adapter.getObjects().get(i);
                 list.add(item);
             }
         }
-        StudyObject[] studyList = new StudyObject[list.size()];
+        StudyObjectPa[] studyList = new StudyObjectPa[list.size()];
         System.out.println("list size: " + list.size());
         for(int i = 0; i <list.size(); i++)
         {
@@ -471,14 +472,14 @@ public class personalAccountFragment extends Fragment {
             {
                 if(studyList[k].getTitle().compareToIgnoreCase(studyList[k+1].getTitle()) < 0)
                 {
-                    StudyObject tempStudy = studyList[k];
+                    StudyObjectPa tempStudy = studyList[k];
                     studyList[k]= studyList[k+1];
                     studyList[k+1]= tempStudy;
                 }
             }
         }
         list.clear();
-        for(StudyObject ob: studyList) {
+        for(StudyObjectPa ob: studyList) {
             list.add(ob);
         }
         System.out.println("list after clear" + list.size());
@@ -488,17 +489,17 @@ public class personalAccountFragment extends Fragment {
         return list;
     }
 
-    private ArrayList<StudyObject> sortByDate(boolean invert)
+    private ArrayList<StudyObjectPa> sortByDate(boolean invert)
     {
         CustomListViewAdapter adapter = (CustomListViewAdapter) listView.getAdapter();
-        ArrayList<StudyObject> list = new ArrayList<>();
+        ArrayList<StudyObjectPa> list = new ArrayList<>();
         for (int i = 0; i < adapter.getObjects().size(); i++) {
             if(listView != null && adapter.getObjects().get(i) != null) {
-                StudyObject item = adapter.getObjects().get(i);
+                StudyObjectPa item = adapter.getObjects().get(i);
                 list.add(item);
             }
         }
-        StudyObject[] studyList = new StudyObject[list.size()];
+        StudyObjectPa[] studyList = new StudyObjectPa[list.size()];
         for(int i = 0; i <list.size(); i++)
         {
             studyList[i] = list.get(i);
@@ -523,7 +524,7 @@ public class personalAccountFragment extends Fragment {
                     Date d2_Date = (Date) format.parseObject(date2);
 
                     if (d2_Date.before(d1_Date)) {
-                        StudyObject tempStudy = studyList[k];
+                        StudyObjectPa tempStudy = studyList[k];
                         studyList[k]= studyList[k+1];
                         studyList[k+1]= tempStudy;
                     }
@@ -533,7 +534,7 @@ public class personalAccountFragment extends Fragment {
             }
         }
         list.clear();
-        for(StudyObject ob: studyList) {
+        for(StudyObjectPa ob: studyList) {
             list.add(ob);
         }
 
@@ -543,17 +544,17 @@ public class personalAccountFragment extends Fragment {
         return list;
     }
 
-    private ArrayList<StudyObject> sortByVPS(boolean invert)
+    private ArrayList<StudyObjectPa> sortByVPS(boolean invert)
     {
         CustomListViewAdapter adapter = (CustomListViewAdapter) listView.getAdapter();
-        ArrayList<StudyObject> list = new ArrayList<>();
+        ArrayList<StudyObjectPa> list = new ArrayList<>();
         for (int i = 0; i < adapter.getObjects().size(); i++) {
             if(listView != null && adapter.getObjects().get(i) != null) {
-                StudyObject item = adapter.getObjects().get(i);
+                StudyObjectPa item = adapter.getObjects().get(i);
                 list.add(item);
             }
         }
-        StudyObject[] studyList = new StudyObject[list.size()];
+        StudyObjectPa[] studyList = new StudyObjectPa[list.size()];
         for(int i = 0; i <list.size(); i++)
         {
             studyList[i] = list.get(i);
@@ -565,14 +566,14 @@ public class personalAccountFragment extends Fragment {
             {
                 if(Float.parseFloat(studyList[k].getVps()) > Float.parseFloat(studyList[k+1].getVps()))
                 {
-                    StudyObject tempStudy = studyList[k];
+                    StudyObjectPa tempStudy = studyList[k];
                     studyList[k]= studyList[k+1];
                     studyList[k+1]= tempStudy;
                 }
             }
         }
         list.clear();
-        for(StudyObject ob: studyList) {
+        for(StudyObjectPa ob: studyList) {
             list.add(ob);
         }
 
