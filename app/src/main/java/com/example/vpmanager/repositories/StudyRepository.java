@@ -103,6 +103,7 @@ public class StudyRepository {
                             Log.d("loadStudyDetails", "Error: the document does not exist!");
                         }
                         studyDetailsListener.onStudyDetailsReady(studyDetailObject);
+
                     }
                 } else {
                     Log.d("loadStudyDetails", "Error:" + task.getException());

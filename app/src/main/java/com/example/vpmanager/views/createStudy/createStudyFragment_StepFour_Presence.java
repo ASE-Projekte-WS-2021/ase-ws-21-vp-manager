@@ -1,4 +1,4 @@
-package com.example.vpmanager.createStudy;
+package com.example.vpmanager.views.createStudy;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -12,14 +12,15 @@ import com.google.android.material.textfield.TextInputEditText;
 
 public class createStudyFragment_StepFour_Presence extends Fragment {
 
-    TextInputEditText textInputEditTextLocation;
-    TextInputEditText textInputEditTextStreet;
-    TextInputEditText textInputEditTextRoom;
+    public static TextInputEditText textInputEditTextLocation;
+    public static TextInputEditText textInputEditTextStreet;
+    public static TextInputEditText textInputEditTextRoom;
+
     //Parameter:
     //Return values:
     //Sets the current fragment for the activity
     public createStudyFragment_StepFour_Presence() {
-        createStudyActivity.currentFragment = 4;
+        CreateStudyFragment.currentFragment = 4;
     }
 
     @Override
@@ -28,8 +29,7 @@ public class createStudyFragment_StepFour_Presence extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         return inflater.inflate(R.layout.fragment_create_study_step_four_presence, container, false);
     }
 
@@ -53,11 +53,25 @@ public class createStudyFragment_StepFour_Presence extends Fragment {
     //Return values:
     //Loads data recieved from the activity into the inputfields
     private void loadData() {
+        if (CreateStudyFragment.createStudyViewModel.studyCreationProcessData.get("location") != null) {
+            textInputEditTextLocation.setText(
+                    CreateStudyFragment.createStudyViewModel.studyCreationProcessData.get("location").toString());
+        }
+        if (CreateStudyFragment.createStudyViewModel.studyCreationProcessData.get("street") != null) {
+            textInputEditTextStreet.setText(
+                    CreateStudyFragment.createStudyViewModel.studyCreationProcessData.get("street").toString());
+        }
+        if (CreateStudyFragment.createStudyViewModel.studyCreationProcessData.get("room") != null) {
+            textInputEditTextRoom.setText(
+                    CreateStudyFragment.createStudyViewModel.studyCreationProcessData.get("room").toString());
+        }
+        /*
         Bundle bundle = getArguments();
         if(bundle != null){
             textInputEditTextLocation.setText(bundle.getString("location"));
             textInputEditTextStreet.setText(bundle.getString("street"));
             textInputEditTextRoom.setText(bundle.getString("room"));
         }
+         */
     }
 }

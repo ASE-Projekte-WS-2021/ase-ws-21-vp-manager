@@ -17,6 +17,9 @@ import com.example.vpmanager.PA_ExpandableListDataPump;
 import com.example.vpmanager.R;
 import com.example.vpmanager.models.StudyObjectPa;
 
+import com.example.vpmanager.views.StudyObject;
+
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -26,7 +29,7 @@ public class CustomListViewAdapter extends BaseAdapter {
     private LayoutInflater inflater;
     public ArrayList<StudyObjectPa> objects;
     private Activity activity;
-    NavController navController;
+    private NavController navController;
 
 
     private class ViewHolder {

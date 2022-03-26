@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".createStudy.createStudyFragment_finalStep_three"
+    tools:context=".views.createStudy.createStudyFragment_finalStep_three"
     android:background="?android:windowBackground">
 
 

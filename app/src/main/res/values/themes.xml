@@ -65,10 +65,6 @@
 
 
 
-<!--    <style name="CalenderViewCustom" parent="Theme.AppCompat">
-        <item name="colorAccent">@color/white</item>
-        <item name="colorPrimary">@color/white</item>
-    </style>-->
 
     <style name="my_dialog_theme" parent="ThemeOverlay.AppCompat.Dialog">
         <item name="colorAccent">@color/green_light</item>                   <!--header background-->

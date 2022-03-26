@@ -3,14 +3,15 @@ package com.example.vpmanager.models;
 public class StudyDetailModel {
 
     private String id, name, description, vps;
-    private String contactOne, contactTwo, contactThree;
+    private String contactOne, contactTwo, contactThree, contactFour, contactFive;
     private String category, executionType;
+
     private String remotePlatformOne, remotePlatformTwo;
     private String location, street, room;
 
 
     public StudyDetailModel(String id, String name, String description, String vps,
-                            String contactOne, String contactTwo, String contactThree,
+                            String contactOne, String contactTwo, String contactThree, String contactFour, String contactFive,
                             String category, String executionType,
                             String remotePlatformOne, String remotePlatformTwo,
                             String location, String street, String room) {
@@ -18,13 +19,19 @@ public class StudyDetailModel {
         this.name = name;
         this.description = description;
         this.vps = vps;
+
         this.contactOne = contactOne;
         this.contactTwo = contactTwo;
         this.contactThree = contactThree;
+        this.contactFour = contactFour;
+        this.contactFive = contactFive;
+
         this.category = category;
         this.executionType = executionType;
+
         this.remotePlatformOne = remotePlatformOne;
         this.remotePlatformTwo = remotePlatformTwo;
+
         this.location = location;
         this.street = street;
         this.room = room;
@@ -50,6 +57,7 @@ public class StudyDetailModel {
         return vps;
     }
 
+
     public String getContactOne() {
         return contactOne;
     }
@@ -61,6 +69,15 @@ public class StudyDetailModel {
     public String getContactThree() {
         return contactThree;
     }
+
+    public String getContactFour() {
+        return contactFour;
+    }
+
+    public String getContactFive() {
+        return contactFive;
+    }
+
 
     public String getCategory() {
         return category;
@@ -118,6 +135,14 @@ public class StudyDetailModel {
         this.contactThree = contactThree;
     }
 
+    public void setContactFour(String contactFour) {
+        this.contactFour = contactFour;
+    }
+
+    public void setContactFive(String contactFive) {
+        this.contactFive = contactFive;
+    }
+
     public void setCategory(String category) {
         this.category = category;
     }
@@ -126,6 +151,7 @@ public class StudyDetailModel {
         this.executionType = executionType;
     }
 
+
     public void setRemotePlatformOne(String remotePlatformOne) {
         this.remotePlatformOne = remotePlatformOne;
     }
@@ -133,6 +159,7 @@ public class StudyDetailModel {
     public void setRemotePlatformTwo(String remotePlatformTwo) {
         this.remotePlatformTwo = remotePlatformTwo;
     }
+
 
     public void setLocation(String location) {
         this.location = location;

@@ -52,8 +52,8 @@ public class CustomListViewAdapterAppointments extends BaseAdapter {
             String id = getStudyIdByName.get(values[0]);
             assert id != null;
             if(!id.equals("")) {
-                System.out.println(values[1]);
                 StudyObjectPa object = new StudyObjectPa(values[0],null, id, values[1], 0);
+
                 returnList.add(object);
             }
         }
@@ -85,10 +85,11 @@ public class CustomListViewAdapterAppointments extends BaseAdapter {
             convertView = inflater.inflate(R.layout.pa_upcoming_listview_item, null); //NOT SURE
 
             titleView = convertView.findViewById(R.id.upcoming_listviewItemTitle);
-            titleView.setText(objects.get(position).getTitle());
+
+            titleView.setText(objects.get(position).getTitle()); //title
 
             dateView = convertView.findViewById(R.id.pa_upcoming_date_view);
-            dateView.setText(objects.get(position).getDate());
+            dateView.setText(objects.get(position).getDate()); //date
 
             convertView.setTag(objects);
 
