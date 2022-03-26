@@ -15,7 +15,7 @@ import androidx.navigation.NavController;
 
 import com.example.vpmanager.PA_ExpandableListDataPump;
 import com.example.vpmanager.R;
-import com.example.vpmanager.views.StudyObject;
+import com.example.vpmanager.models.StudyObjectPa;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -23,7 +23,7 @@ import java.util.HashMap;
 public class CustomListViewAdapterAppointments extends BaseAdapter {
 
     private LayoutInflater inflater;
-    private ArrayList<StudyObject> objects;
+    private ArrayList<StudyObjectPa> objects;
     private Activity activity;
     NavController navController;
     private String sourceFragment;
@@ -43,8 +43,8 @@ public class CustomListViewAdapterAppointments extends BaseAdapter {
         sourceFragment = source;
     }
 
-    private ArrayList<StudyObject> transformUpcomingAppointments(ArrayList<String> list, HashMap<String, String> getStudyIdByName) {
-        ArrayList<StudyObject> returnList = new ArrayList<>();
+    private ArrayList<StudyObjectPa> transformUpcomingAppointments(ArrayList<String> list, HashMap<String, String> getStudyIdByName) {
+        ArrayList<StudyObjectPa> returnList = new ArrayList<>();
 
         for(int i = 0; i < list.size(); i++)
         {
@@ -52,8 +52,8 @@ public class CustomListViewAdapterAppointments extends BaseAdapter {
             String id = getStudyIdByName.get(values[0]);
             assert id != null;
             if(!id.equals("")) {
-                System.out.println(values[1]);
-                StudyObject object = new StudyObject(values[0],null, id, values[1], 0);
+                StudyObjectPa object = new StudyObjectPa(values[0],null, id, values[1], 0);
+
                 returnList.add(object);
             }
         }
@@ -66,7 +66,7 @@ public class CustomListViewAdapterAppointments extends BaseAdapter {
     }
 
     @Override
-    public StudyObject getItem(int position) {
+    public StudyObjectPa getItem(int position) {
         return objects.get(position);
     }
 
@@ -85,10 +85,11 @@ public class CustomListViewAdapterAppointments extends BaseAdapter {
             convertView = inflater.inflate(R.layout.pa_upcoming_listview_item, null); //NOT SURE
 
             titleView = convertView.findViewById(R.id.upcoming_listviewItemTitle);
-            titleView.setText(objects.get(position).getTitle());
+
+            titleView.setText(objects.get(position).getTitle()); //title
 
             dateView = convertView.findViewById(R.id.pa_upcoming_date_view);
-            dateView.setText(objects.get(position).getDate());
+            dateView.setText(objects.get(position).getDate()); //date
 
             convertView.setTag(objects);
 
@@ -127,7 +128,6 @@ public class CustomListViewAdapterAppointments extends BaseAdapter {
                         }
                     });
                     break;
-
             }
         }
         return convertView;

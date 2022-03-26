@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="?android:windowBackground"
-    tools:context=".createStudy.createStudyFragment_StepThree">
+    tools:context=".views.createStudy.createStudyFragment_StepThree">
 
 
     <LinearLayout

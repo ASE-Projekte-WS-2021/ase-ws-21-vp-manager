@@ -1,14 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="?android:windowBackground"
-    tools:context=".createStudy.createStudyFragment_Base">
-
-    <!--page not needed anymore-->
+    tools:context=".views.createStudy.createStudyFragment_Base">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -20,8 +16,8 @@
             android:id="@+id/pageTitle"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:text="@string/fragment_create_study_pageBaseTitle"
             android:layout_weight="0.7"
+            android:text="@string/fragment_create_study_pageBaseTitle"
             android:textAlignment="center"
             android:textSize="35sp" />
 
@@ -39,8 +35,8 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_marginLeft="5dp"
-            android:layout_marginRight="5dp"
             android:layout_marginTop="30dp"
+            android:layout_marginRight="5dp"
             android:layout_weight="6.25"
             android:text="@string/fragment_create_study_pageBaseDesc"
             android:textAlignment="center"

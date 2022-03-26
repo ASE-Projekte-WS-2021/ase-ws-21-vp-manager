@@ -26,10 +26,11 @@
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
 
+        <!--
         <activity
             android:name="com.example.vpmanager.createStudy.createStudyActivity"
             android:exported="true">
-        </activity>
+        </activity> -->
 
     </application>
 

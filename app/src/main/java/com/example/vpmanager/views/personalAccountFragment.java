@@ -22,6 +22,7 @@ import androidx.navigation.Navigation;
 import com.example.vpmanager.PA_ExpandableListDataPump;
 import com.example.vpmanager.R;
 import com.example.vpmanager.adapter.CustomListViewAdapter;
+import com.example.vpmanager.models.StudyObjectPa;
 
 import java.text.Format;
 import java.text.ParseException;
@@ -139,7 +140,7 @@ public class personalAccountFragment extends Fragment {
         participatedView = view.findViewById(R.id.progress_section_participated);
         restView = view.findViewById(R.id.progress_section_rest);
 
-        listView.setAdapter(new CustomListViewAdapter(this.getContext() , this.getActivity(), navController));
+        listView.setAdapter(new CustomListViewAdapter(this.getContext(), this.getActivity(), navController));
 
         plannedVP = 0;
         completedVP = 0;
@@ -254,35 +255,29 @@ public class personalAccountFragment extends Fragment {
         restView.setLayoutParams(param);
     }
 
-    private void filterListViewTextTags(boolean active, String type)
-    {
-        switch(type)
-        {
+
+    private void filterListViewTextTags(boolean active, String type) {
+        switch (type) {
             case "names":
-                if(!sortAlphabeticallyInvert && !sortAlphabeticallyActive)
-                {
+                if (!sortAlphabeticallyInvert && !sortAlphabeticallyActive) {
                     sortAlphabeticallyInvert = false;
                     sortAlphabeticallyActive = !active;
-                }
-                else if(sortAlphabeticallyActive && !sortAlphabeticallyInvert)
-                {
+                } else if (sortAlphabeticallyActive && !sortAlphabeticallyInvert) {
                     sortAlphabeticallyInvert = true;
                     sortAlphabeticallyActive = true;
-                }
-                else
-                {
+                } else {
                     sortAlphabeticallyInvert = false;
                     sortAlphabeticallyActive = false;
                 }
-                if(sortAlphabeticallyActive)
+                if (sortAlphabeticallyActive)
                     sortAlphabetically.setBackgroundColor(Color.LTGRAY);
                 else
                     sortAlphabetically.setBackgroundColor(Color.WHITE);
-                if(sortAppointmentsActive) {
+                if (sortAppointmentsActive) {
                     sortAppointmentsActive = false;
                     sortAppointments.setBackgroundColor(Color.WHITE);
                 }
-                if(sortVpCountActive) {
+                if (sortVpCountActive) {
                     sortVpCountActive = false;
                     sortVpCount.setBackgroundColor(Color.WHITE);
                 }
@@ -290,63 +285,53 @@ public class personalAccountFragment extends Fragment {
                 sortVpCountInvert = false;
                 break;
             case "dates":
-                if(!sortAppointmentsInvert && !sortAppointmentsActive)
-                {
+                if (!sortAppointmentsInvert && !sortAppointmentsActive) {
                     sortAppointmentsInvert = false;
                     sortAppointmentsActive = !active;
-                }
-                else if(sortAppointmentsActive && !sortAppointmentsInvert)
-                {
+                } else if (sortAppointmentsActive && !sortAppointmentsInvert) {
                     sortAppointmentsInvert = true;
                     sortAppointmentsActive = true;
-                }
-                else
-                {
+                } else {
                     sortAppointmentsInvert = false;
                     sortAppointmentsActive = false;
                 }
-                if(sortAppointmentsActive)
+                if (sortAppointmentsActive)
                     sortAppointments.setBackgroundColor(Color.LTGRAY);
                 else
                     sortAppointments.setBackgroundColor(Color.WHITE);
 
-                if(sortVpCountActive) {
+                if (sortVpCountActive) {
                     sortVpCount.setBackgroundColor(Color.WHITE);
                     sortVpCountActive = false;
                 }
-                if(sortAlphabeticallyActive) {
+                if (sortAlphabeticallyActive) {
                     sortAlphabeticallyActive = false;
                     sortAlphabetically.setBackgroundColor(Color.WHITE);
                 }
-                sortAlphabeticallyInvert =false;
+                sortAlphabeticallyInvert = false;
                 sortVpCountInvert = false;
                 break;
             case "vps":
 
-                if(!sortVpCountInvert && !sortVpCountActive)
-                {
+                if (!sortVpCountInvert && !sortVpCountActive) {
                     sortVpCountInvert = false;
                     sortVpCountActive = !active;
-                }
-                else if(sortVpCountActive && !sortVpCountInvert)
-                {
+                } else if (sortVpCountActive && !sortVpCountInvert) {
                     sortVpCountInvert = true;
                     sortVpCountActive = true;
-                }
-                else
-                {
+                } else {
                     sortVpCountInvert = false;
                     sortVpCountActive = false;
                 }
-                if(sortVpCountActive)
+                if (sortVpCountActive)
                     sortVpCount.setBackgroundColor(Color.LTGRAY);
                 else
                     sortVpCount.setBackgroundColor(Color.WHITE);
-                if(sortAlphabeticallyActive) {
+                if (sortAlphabeticallyActive) {
                     sortAlphabeticallyActive = false;
                     sortAlphabetically.setBackgroundColor(Color.WHITE);
                 }
-                if(sortAppointmentsActive) {
+                if (sortAppointmentsActive) {
                     sortAppointmentsActive = false;
                     sortAppointments.setBackgroundColor(Color.WHITE);
                 }
@@ -362,21 +347,14 @@ public class personalAccountFragment extends Fragment {
     private void filterListViewTextContent() {
         CustomListViewAdapter adapter;
 
-        if(sortAlphabeticallyActive)
-        {
-            adapter = new CustomListViewAdapter(this.getContext() , this.getActivity(), navController, sortByName(sortAlphabeticallyInvert));
-        }
-        else if(sortAppointmentsActive)
-        {
-            adapter = new CustomListViewAdapter(this.getContext() , this.getActivity(), navController, sortByDate(sortAppointmentsInvert));
-        }
-        else if(sortVpCountActive)
-        {
-            adapter = new CustomListViewAdapter(this.getContext() , this.getActivity(), navController, sortByVPS(sortVpCountInvert));
-        }
-        else
-        {
-            adapter = new CustomListViewAdapter(this.getContext() , this.getActivity(), navController);
+        if (sortAlphabeticallyActive) {
+            adapter = new CustomListViewAdapter(this.getContext(), this.getActivity(), navController, sortByName(sortAlphabeticallyInvert));
+        } else if (sortAppointmentsActive) {
+            adapter = new CustomListViewAdapter(this.getContext(), this.getActivity(), navController, sortByDate(sortAppointmentsInvert));
+        } else if (sortVpCountActive) {
+            adapter = new CustomListViewAdapter(this.getContext(), this.getActivity(), navController, sortByVPS(sortVpCountInvert));
+        } else {
+            adapter = new CustomListViewAdapter(this.getContext(), this.getActivity(), navController);
         }
 
         setNewListViewAdapter(adapter);
@@ -384,11 +362,11 @@ public class personalAccountFragment extends Fragment {
         System.out.println("sortlist" + adapter.getObjects());
 
 
-        if(!removeCompleted.isChecked())
+        if (!removeCompleted.isChecked())
             filterListViewColorTags(false, R.color.pieChartSafe);
-        if(!removeParticipated.isChecked())
+        if (!removeParticipated.isChecked())
             filterListViewColorTags(false, R.color.pieChartParticipation);
-        if(!removePlanned.isChecked())
+        if (!removePlanned.isChecked())
             filterListViewColorTags(false, R.color.pieChartPlanned);
     }
 
@@ -403,39 +381,36 @@ public class personalAccountFragment extends Fragment {
     }
 
     private void filterListViewColorTags(boolean state, int color) {
-        if(state)
-        {
-            CustomListViewAdapter adapter = new CustomListViewAdapter(this.getContext() , this.getActivity(), navController);
+        if (state) {
+            CustomListViewAdapter adapter = new CustomListViewAdapter(this.getContext(), this.getActivity(), navController);
             listView.setAdapter(adapter);
-            if(!removePlanned.isChecked())
+            if (!removePlanned.isChecked())
                 filterListViewColorTags(removePlanned.isChecked(), R.color.pieChartPlanned);
-            if(!removeCompleted.isChecked())
+            if (!removeCompleted.isChecked())
                 filterListViewColorTags(removeCompleted.isChecked(), R.color.pieChartSafe);
-            if(!removeParticipated.isChecked())
+            if (!removeParticipated.isChecked())
                 filterListViewColorTags(removeParticipated.isChecked(), R.color.pieChartParticipation);
 
-            if(sortAlphabeticallyActive)
+            if (sortAlphabeticallyActive)
                 filterListViewTextTags(false, "names");
-            if(sortAppointmentsActive)
+            if (sortAppointmentsActive)
                 filterListViewTextTags(false, "dates");
-            if(sortVpCountActive)
+            if (sortVpCountActive)
                 filterListViewTextTags(false, "vps");
-        }
-        else {
+        } else {
             CustomListViewAdapter adapter = (CustomListViewAdapter) listView.getAdapter();
-            List<StudyObject> removeList = new ArrayList<>();
+            List<StudyObjectPa> removeList = new ArrayList<>();
 
 
-            for (StudyObject object: adapter.getObjects()) {
-                if(listView != null && object != null) {
+            for (StudyObjectPa object : adapter.getObjects()) {
+                if (listView != null && object != null) {
                     if (object.getColor() == color) {
                         removeList.add(object);
                     }
                 }
             }
 
-            for(StudyObject object: removeList)
-            {
+            for (StudyObjectPa object : removeList) {
                 adapter.getObjects().remove(object);
             }
 
@@ -447,69 +422,61 @@ public class personalAccountFragment extends Fragment {
         }
     }
 
-    private ArrayList<StudyObject> sortByName(boolean invert)
-    {
+    private ArrayList<StudyObjectPa> sortByName(boolean invert) {
         CustomListViewAdapter adapter = (CustomListViewAdapter) listView.getAdapter();
-        ArrayList<StudyObject> list = new ArrayList<>();
+        ArrayList<StudyObjectPa> list = new ArrayList<>();
         for (int i = 0; i < adapter.getObjects().size(); i++) {
-            if(listView != null && adapter.getObjects().get(i) != null) {
-                StudyObject item = adapter.getObjects().get(i);
+            if (listView != null && adapter.getObjects().get(i) != null) {
+                StudyObjectPa item = adapter.getObjects().get(i);
                 list.add(item);
             }
         }
-        StudyObject[] studyList = new StudyObject[list.size()];
+        StudyObjectPa[] studyList = new StudyObjectPa[list.size()];
         System.out.println("list size: " + list.size());
-        for(int i = 0; i <list.size(); i++)
-        {
+        for (int i = 0; i < list.size(); i++) {
             studyList[i] = list.get(i);
         }
 
-        for(int i = 0; i < studyList.length; i++)
-        {
+        for (int i = 0; i < studyList.length; i++) {
 
-            for(int k = 0; k < studyList.length-1; k++)
-            {
-                if(studyList[k].getTitle().compareToIgnoreCase(studyList[k+1].getTitle()) < 0)
-                {
-                    StudyObject tempStudy = studyList[k];
-                    studyList[k]= studyList[k+1];
-                    studyList[k+1]= tempStudy;
+            for (int k = 0; k < studyList.length - 1; k++) {
+                if (studyList[k].getTitle().compareToIgnoreCase(studyList[k + 1].getTitle()) < 0) {
+                    StudyObjectPa tempStudy = studyList[k];
+                    studyList[k] = studyList[k + 1];
+                    studyList[k + 1] = tempStudy;
                 }
             }
         }
         list.clear();
-        for(StudyObject ob: studyList) {
+        for (StudyObjectPa ob : studyList) {
             list.add(ob);
         }
         System.out.println("list after clear" + list.size());
-        if(!invert)
+        if (!invert)
             Collections.reverse(list);
 
         return list;
     }
 
-    private ArrayList<StudyObject> sortByDate(boolean invert)
-    {
+    private ArrayList<StudyObjectPa> sortByDate(boolean invert) {
         CustomListViewAdapter adapter = (CustomListViewAdapter) listView.getAdapter();
-        ArrayList<StudyObject> list = new ArrayList<>();
+        ArrayList<StudyObjectPa> list = new ArrayList<>();
         for (int i = 0; i < adapter.getObjects().size(); i++) {
-            if(listView != null && adapter.getObjects().get(i) != null) {
-                StudyObject item = adapter.getObjects().get(i);
+            if (listView != null && adapter.getObjects().get(i) != null) {
+                StudyObjectPa item = adapter.getObjects().get(i);
                 list.add(item);
             }
         }
-        StudyObject[] studyList = new StudyObject[list.size()];
-        for(int i = 0; i <list.size(); i++)
-        {
+        StudyObjectPa[] studyList = new StudyObjectPa[list.size()];
+        for (int i = 0; i < list.size(); i++) {
             studyList[i] = list.get(i);
         }
 
-        for(int i = 0; i < studyList.length; i++)
-        {
-            for(int k = 0; k < studyList.length-1; k++) {
+        for (int i = 0; i < studyList.length; i++) {
+            for (int k = 0; k < studyList.length - 1; k++) {
 
-                String date1 = studyList[k].getDate().substring(studyList[k].getDate().indexOf(",")+2);
-                String date2 = studyList[k+1].getDate().substring(studyList[k+1].getDate().indexOf(",")+2);
+                String date1 = studyList[k].getDate().substring(studyList[k].getDate().indexOf(",") + 2);
+                String date2 = studyList[k + 1].getDate().substring(studyList[k + 1].getDate().indexOf(",") + 2);
 
                 date1 = date1.replaceAll("um", "");
                 date1 = date1.replaceAll("Uhr", "");
@@ -523,9 +490,9 @@ public class personalAccountFragment extends Fragment {
                     Date d2_Date = (Date) format.parseObject(date2);
 
                     if (d2_Date.before(d1_Date)) {
-                        StudyObject tempStudy = studyList[k];
-                        studyList[k]= studyList[k+1];
-                        studyList[k+1]= tempStudy;
+                        StudyObjectPa tempStudy = studyList[k];
+                        studyList[k] = studyList[k + 1];
+                        studyList[k + 1] = tempStudy;
                     }
                 } catch (ParseException e) {
                     e.printStackTrace();
@@ -533,50 +500,45 @@ public class personalAccountFragment extends Fragment {
             }
         }
         list.clear();
-        for(StudyObject ob: studyList) {
+        for (StudyObjectPa ob : studyList) {
             list.add(ob);
         }
 
-        if(!invert)
+        if (!invert)
             Collections.reverse(list);
 
         return list;
     }
 
-    private ArrayList<StudyObject> sortByVPS(boolean invert)
-    {
+    private ArrayList<StudyObjectPa> sortByVPS(boolean invert) {
         CustomListViewAdapter adapter = (CustomListViewAdapter) listView.getAdapter();
-        ArrayList<StudyObject> list = new ArrayList<>();
+        ArrayList<StudyObjectPa> list = new ArrayList<>();
         for (int i = 0; i < adapter.getObjects().size(); i++) {
-            if(listView != null && adapter.getObjects().get(i) != null) {
-                StudyObject item = adapter.getObjects().get(i);
+            if (listView != null && adapter.getObjects().get(i) != null) {
+                StudyObjectPa item = adapter.getObjects().get(i);
                 list.add(item);
             }
         }
-        StudyObject[] studyList = new StudyObject[list.size()];
-        for(int i = 0; i <list.size(); i++)
-        {
+        StudyObjectPa[] studyList = new StudyObjectPa[list.size()];
+        for (int i = 0; i < list.size(); i++) {
             studyList[i] = list.get(i);
         }
 
-        for(int i = 0; i < studyList.length; i++)
-        {
-            for(int k = 0; k < studyList.length-1; k++)
-            {
-                if(Float.parseFloat(studyList[k].getVps()) > Float.parseFloat(studyList[k+1].getVps()))
-                {
-                    StudyObject tempStudy = studyList[k];
-                    studyList[k]= studyList[k+1];
-                    studyList[k+1]= tempStudy;
+        for (int i = 0; i < studyList.length; i++) {
+            for (int k = 0; k < studyList.length - 1; k++) {
+                if (Float.parseFloat(studyList[k].getVps()) > Float.parseFloat(studyList[k + 1].getVps())) {
+                    StudyObjectPa tempStudy = studyList[k];
+                    studyList[k] = studyList[k + 1];
+                    studyList[k + 1] = tempStudy;
                 }
             }
         }
         list.clear();
-        for(StudyObject ob: studyList) {
+        for (StudyObjectPa ob : studyList) {
             list.add(ob);
         }
 
-        if(!invert)
+        if (!invert)
             Collections.reverse(list);
 
         return list;

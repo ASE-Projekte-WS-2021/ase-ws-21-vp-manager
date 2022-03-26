@@ -1,20 +1,22 @@
-package com.example.vpmanager.createStudy;
+package com.example.vpmanager.views.createStudy;
 
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.DatePicker;
-import android.widget.ListView;
 import android.widget.TimePicker;
 
 import com.example.vpmanager.R;
+import com.example.vpmanager.adapter.SwipeableDatesAdapter;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.text.SimpleDateFormat;
@@ -25,24 +27,28 @@ import java.util.Locale;
 
 public class createStudyFragment_StepFive extends Fragment {
 
-    int mYear;
-    int mMonth;
-    int mDay;
-    String weekDay = "";
-    int mHour;
-    int mMinute;
-    String date_time = "";
+    private int mYear;
+    private int mMonth;
+    private int mDay;
+    private String weekDay = "";
+    private int mHour;
+    private int mMinute;
+    private String date_time = "";
 
-    ListView dateList;
-    ArrayList<String> dates = new ArrayList<>();
-    ArrayAdapter<String> datePickerAdapter;
+    //private ListView dateList;
+    //private ArrayAdapter<String> datePickerAdapter;
+    private RecyclerView dateListRecycler;
+    private SwipeableDatesAdapter swipeableDatesAdapter;
+
+    //the complete date+time strings are stored here and passed to the adapter
+    public static ArrayList<String> dates = new ArrayList<>();
 
 
     //Parameter:
     //Return values:
     //Sets the current fragment for the activity
     public createStudyFragment_StepFive() {
-        createStudyActivity.currentFragment = 5;
+        CreateStudyFragment.currentFragment = 5;
     }
 
     @Override
@@ -51,8 +57,7 @@ public class createStudyFragment_StepFive extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         return inflater.inflate(R.layout.fragment_create_study_step_five, container, false);
     }
 
@@ -65,8 +70,9 @@ public class createStudyFragment_StepFive extends Fragment {
     //Return values:
     //Connects the code with the view
     private void setupView(View view) {
-        dateList = view.findViewById(R.id.createDatelist);
-        loadData();
+        //dateList = view.findViewById(R.id.createDatelist);
+        dateListRecycler = view.findViewById(R.id.createDateRecyclerView);
+        //loadData();
         setupDatePicker();
         FloatingActionButton fab = view.findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -77,7 +83,6 @@ public class createStudyFragment_StepFive extends Fragment {
         });
     }
 
-
     //Parameter:
     //Return values:
     //Loads data received from the activity into the listview
@@ -87,7 +92,18 @@ public class createStudyFragment_StepFive extends Fragment {
         if (bundle != null) {
             //dates = bundle.getStringArrayList("dates");
         }
+    }
 
+    //Parameter:
+    //Return values:
+    //Sets an adapter for the Listview
+    private void setupDatePicker() {
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(requireActivity());
+        //datePickerAdapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_1, dates);
+        swipeableDatesAdapter = new SwipeableDatesAdapter(requireActivity(), dates);
+        //dateList.setAdapter(datePickerAdapter);
+        dateListRecycler.setAdapter(swipeableDatesAdapter);
+        dateListRecycler.setLayoutManager(linearLayoutManager);
     }
 
     //Parameter:
@@ -105,7 +121,7 @@ public class createStudyFragment_StepFive extends Fragment {
                     @Override
                     public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
                         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("EEEE");
-                        Date date = new Date(year, monthOfYear, dayOfMonth-1);
+                        Date date = new Date(year, monthOfYear, dayOfMonth - 1);
                         weekDay = simpleDateFormat.format(date);
                         date_time = weekDay + ", " + dayOfMonth + "." + (monthOfYear + 1) + "." + year + " um ";
                         timePicker();
@@ -114,7 +130,6 @@ public class createStudyFragment_StepFive extends Fragment {
         datePickerDialog.getDatePicker().setMinDate(System.currentTimeMillis() - 1000);
         datePickerDialog.show();
     }
-
 
 
     //Parameter:
@@ -150,18 +165,10 @@ public class createStudyFragment_StepFive extends Fragment {
         if (hourOfDay < 10) {
             hours = "0" + hourOfDay;
         }
+        Log.d("addDatetoList", "before add new" + dates);
         dates.add(date_time + hours + ":" + minutes + " Uhr");
-        datePickerAdapter.notifyDataSetChanged();
+        //datePickerAdapter.notifyDataSetChanged();
+        swipeableDatesAdapter.notifyDataSetChanged();
+        Log.d("addDatetoList", "after notity" + dates);
     }
-
-    //Parameter:
-    //Return values:
-    //Sets an adapter for the Listview
-    private void setupDatePicker() {
-        datePickerAdapter = new ArrayAdapter<String>(getActivity(),
-                android.R.layout.simple_list_item_1,
-                dates);
-        dateList.setAdapter(datePickerAdapter);
-    }
-
 }
