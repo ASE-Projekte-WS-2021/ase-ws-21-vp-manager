@@ -17,9 +17,6 @@ import com.example.vpmanager.PA_ExpandableListDataPump;
 import com.example.vpmanager.R;
 import com.example.vpmanager.models.StudyObjectPa;
 
-import com.example.vpmanager.views.StudyObject;
-
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -146,7 +143,7 @@ public class CustomListViewAdapter extends BaseAdapter {
                     if (PA_ExpandableListDataPump.navigateToStudyCreatorFragment(uniqueID, study.getStudyId())) {
                         navController.navigate(R.id.action_ownStudyFragment_to_studyCreatorFragment, args);
                     } else {
-                        navController.navigate(R.id.action_ownStudyFragment_to_studyFragment, args);
+                        navController.navigate(R.id.action_ownStudyFragment_to_studyCreatorFragment, args);
                     }
                 }
             });
