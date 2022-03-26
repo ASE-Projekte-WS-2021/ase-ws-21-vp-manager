@@ -9,7 +9,6 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
-import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.ToggleButton;
 
@@ -24,14 +23,6 @@ import com.example.vpmanager.PA_ExpandableListDataPump;
 import com.example.vpmanager.R;
 import com.example.vpmanager.adapter.CustomListViewAdapter;
 
-import org.eazegraph.lib.charts.PieChart;
-import org.eazegraph.lib.models.PieModel;
-
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.URL;
 import java.text.Format;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -43,14 +34,16 @@ import java.util.List;
 public class personalAccountFragment extends Fragment {
 
     private ListView listView;
-    private PieChart chart;
     private ImageView sortAlphabetically, sortAppointments;
-    private LinearLayout participatedLayout, plannedLayout, completedLayout;
 
     private static String martikelNumber;
 
     private TextView planned, participated, completed, remaining, sortVpCount;
     private ToggleButton removeCompleted, removePlanned, removeParticipated;
+
+
+    private View completedView, plannedView, participatedView, restView;
+    private LinearLayout  customProgressBar;
 
     private boolean sortAlphabeticallyActive, sortAppointmentsActive, sortVpCountActive, sortAlphabeticallyInvert, sortAppointmentsInvert, sortVpCountInvert;
 
@@ -134,16 +127,17 @@ public class personalAccountFragment extends Fragment {
         sortAlphabetically = view.findViewById(R.id.pa_sort_alphabetical);
         sortAppointments = view.findViewById(R.id.pa_sort_date);
         sortVpCount = view.findViewById(R.id.pa_sort_vp);
-        completedLayout = view.findViewById(R.id.pa_completed_layout);
         listView = view.findViewById(R.id.pa_fragment_listView);
-        participatedLayout = view.findViewById(R.id.pa_parcticipated_layout);
-        plannedLayout = view.findViewById(R.id.pa_planned_layout);
-        completedLayout = view.findViewById(R.id.pa_completed_layout);
-        planned = view.findViewById(R.id.pa_planned);
-        participated = view.findViewById(R.id.pa_participated);
-        completed = view.findViewById(R.id.pa_completed);
-        remaining = view.findViewById(R.id.pa_remaining);
-        chart = view.findViewById(R.id.pa_fragment_pie_chart);
+        planned = view.findViewById(R.id.pa_planned_progressBar);
+        participated = view.findViewById(R.id.pa_participated_progressBar);
+        completed = view.findViewById(R.id.pa_completed_progressBar);
+        remaining = view.findViewById(R.id.pa_remaining_progressBar);
+
+        customProgressBar = view.findViewById(R.id.customProgressBar);
+        completedView = view.findViewById(R.id.progress_section_completed);
+        plannedView = view.findViewById(R.id.progress_section_planned);
+        participatedView = view.findViewById(R.id.progress_section_participated);
+        restView = view.findViewById(R.id.progress_section_rest);
 
         listView.setAdapter(new CustomListViewAdapter(this.getContext() , this.getActivity(), navController));
 
@@ -182,7 +176,7 @@ public class personalAccountFragment extends Fragment {
                 participatedVP += studyVPS;
             }
         }
-        setPieChartData(completedVP, participatedVP, plannedVP);
+        setProgressBarData(completedVP, participatedVP, plannedVP);
     }
 
 
@@ -206,11 +200,10 @@ public class personalAccountFragment extends Fragment {
     //resets the piechart depending on switch position to get the new source and displaying them
 
 
-    //Parameter: Input are double values to determine the size of the piechart slices
+    //Parameter: Input are double values to determine the size of the progressbar slices
     //Return values:
-    //Converts the inputs into percentage and adds slices to piechart
-    private void setPieChartData(double completedVP, double participationVP, double plannedVP) {
-        chart.clearChart();
+    //Converts the inputs into percentage and adds slices to progressbar
+    private void setProgressBarData(double completedVP, double participationVP, double plannedVP) {
         int max = (int) (sumVPs * 100);
         int scaledCompletedVP = (int) completedVP * 100;
         int scaledParticipationVP = (int) participationVP * 100;
@@ -220,37 +213,45 @@ public class personalAccountFragment extends Fragment {
             remainingVP = 0;
         }
 
-
-        chart.addPieSlice(
-                new PieModel(
-                        getString(R.string.pieSliceLabelSafe),
-                        scaledCompletedVP,
-                        getResources().getColor(R.color.pieChartSafe)));
         completed.setText("Erledigt: " + completedVP + " VP");
-        //Color.parseColor(String.valueOf(ContextCompat.getColor(this, R.color.pieChartSafe)))));
-        chart.addPieSlice(
-                new PieModel(
-                        getString(R.string.pieSliceLabelParticipation),
-                        scaledParticipationVP,
-                        getResources().getColor(R.color.pieChartParticipation)));
+
         participated.setText("Vergangene: " + participationVP + " VP");
-        chart.addPieSlice(
-                new PieModel(
-                        getString(R.string.pieSliceLabelPlanned),
-                        scaledPlannedVP,
-                        getResources().getColor(R.color.pieChartPlanned)));
+
         planned.setText("Geplant: " + plannedVP + " VP");
-        chart.addPieSlice(
-                new PieModel(
-                        getString(R.string.pieSliceLabelRemaining),
-                        remainingVP,
-                        getResources().getColor(R.color.pieChartRemaining)));
+
         remaining.setText("Übrig: " + remainingVP / 100 + " VP");
 
+        customProgressBar.setWeightSum(sumVPs*100);
 
-        //chart.setUseInnerPadding(false);
-        chart.setInnerPaddingColor(getResources().getColor(R.color.cardview_light_background));
-        chart.startAnimation();
+        LinearLayout.LayoutParams param;
+
+        param = new LinearLayout.LayoutParams(
+                0,
+                LinearLayout.LayoutParams.MATCH_PARENT,
+                (float) completedVP*100
+        );
+        completedView.setLayoutParams(param);
+
+        param = new LinearLayout.LayoutParams(
+                0,
+                LinearLayout.LayoutParams.MATCH_PARENT,
+                (float) participatedVP*100
+        );
+        participatedView.setLayoutParams(param);
+
+        param = new LinearLayout.LayoutParams(
+                0,
+                LinearLayout.LayoutParams.MATCH_PARENT,
+                (float) plannedVP*100
+        );
+        plannedView.setLayoutParams(param);
+
+        param = new LinearLayout.LayoutParams(
+                0,
+                LinearLayout.LayoutParams.MATCH_PARENT,
+                (float) (sumVPs - (completedVP + participatedVP + plannedVP))*100
+        );
+        restView.setLayoutParams(param);
     }
 
     private void filterListViewTextTags(boolean active, String type)

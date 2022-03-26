@@ -142,7 +142,9 @@ public class homeFragment extends Fragment {
         findStudyButton = view.findViewById(R.id.homeFindStudyButton);
         registerMatrikelnummer = view.findViewById(R.id.homeRegisterMatrikelnummer);
         registerMatrikelnumberLayout = view.findViewById(R.id.homeRegisterVPLayout);
-        
+
+
+
         registerMatrikelnummer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

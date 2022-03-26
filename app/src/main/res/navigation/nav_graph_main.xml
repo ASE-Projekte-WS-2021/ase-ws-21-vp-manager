@@ -129,7 +129,7 @@
     <fragment
         android:id="@+id/upcomingAppointmentsFragment"
         android:name="com.example.vpmanager.views.UpcomingAppointmentsFragment"
-        android:label="fragment_upcoming_appointments"
+        android:label="Termine"
         tools:layout="@layout/fragment_upcoming_appointments" >
         <action
             android:id="@+id/action_upcomingAppointmentsFragment_to_studyFragment"

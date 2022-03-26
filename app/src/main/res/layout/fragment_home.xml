@@ -64,7 +64,7 @@
             android:layout_height="wrap_content"
             android:paddingStart="5dp"
             android:textSize="16sp"
-            android:text="Laut aktuellem Planung in der App werden Sie zum">
+            android:text="Laut aktueller Planung des VP-Managers werden Sie zum">
          </TextView>
 
          <TextView
@@ -84,8 +84,7 @@
             android:paddingStart="5dp"
             android:id="@+id/homePlannedCompletionVps"
             android:textStyle="bold"
-            android:textColor="@color/heatherred_dark"
-            android:text="13">
+            android:textColor="@color/heatherred_dark">
          </TextView>
 
          <TextView
@@ -140,7 +139,7 @@
                    android:layout_width="wrap_content"
                    android:layout_height="match_parent"
                    android:textSize="16sp"
-                   android:text="VPS."/>
+                   android:text="VP-Stunden."/>
 
             </LinearLayout>
 
