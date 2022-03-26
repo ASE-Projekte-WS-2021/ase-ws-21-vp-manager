@@ -15,9 +15,7 @@ import androidx.navigation.NavController;
 
 import com.example.vpmanager.PA_ExpandableListDataPump;
 import com.example.vpmanager.R;
-
 import com.example.vpmanager.models.StudyObjectPa;
-
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -26,7 +24,7 @@ import java.util.List;
 public class CustomListViewAdapter extends BaseAdapter {
 
     private LayoutInflater inflater;
-    private ArrayList<StudyObjectPa> objects;
+    public ArrayList<StudyObjectPa> objects;
     private Activity activity;
     private NavController navController;
 
@@ -87,7 +85,6 @@ public class CustomListViewAdapter extends BaseAdapter {
         }
         return list;
     }
-
     public ArrayList<StudyObjectPa> getObjects()
     {
         return objects;
@@ -119,17 +116,16 @@ public class CustomListViewAdapter extends BaseAdapter {
             convertView = inflater.inflate(R.layout.pa_listview_item, null); //NOT SURE
 
             titleView = convertView.findViewById(R.id.listviewItemTitle);
-
-            titleView.setText(objects.get(position).getTitle()); //title
+            titleView.setText(objects.get(position).getTitle());
 
             vpsView = convertView.findViewById(R.id.pa_VP_view);
-            vpsView.setText(objects.get(position).getVps()); //vps
+            vpsView.setText(objects.get(position).getVps());
 
             dateView = convertView.findViewById(R.id.pa_date_view);
-            dateView.setText(objects.get(position).getDate()); //date
+            dateView.setText(objects.get(position).getDate());
 
             colorView = convertView.findViewById(R.id.pa_listView_colorTag);
-            colorView.setBackgroundResource(objects.get(position).getColor()); //color
+            colorView.setBackgroundResource(objects.get(position).getColor());
 
 
             convertView.setTag(objects.get(position));
@@ -145,9 +141,9 @@ public class CustomListViewAdapter extends BaseAdapter {
                     StudyObjectPa study = objects.get(position);
                     args.putString("studyId", study.getStudyId());
                     if (PA_ExpandableListDataPump.navigateToStudyCreatorFragment(uniqueID, study.getStudyId())) {
-                        navController.navigate(R.id.action_homeFragment_to_studyCreatorFragment, args);
+                        navController.navigate(R.id.action_ownStudyFragment_to_studyCreatorFragment, args);
                     } else {
-                        navController.navigate(R.id.action_homeFragment_to_studyFragment, args);
+                        navController.navigate(R.id.action_ownStudyFragment_to_studyCreatorFragment, args);
                     }
                 }
             });

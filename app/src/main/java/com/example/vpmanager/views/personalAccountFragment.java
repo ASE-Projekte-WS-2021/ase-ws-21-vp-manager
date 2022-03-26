@@ -9,7 +9,6 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
-import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.ToggleButton;
 
@@ -25,14 +24,6 @@ import com.example.vpmanager.R;
 import com.example.vpmanager.adapter.CustomListViewAdapter;
 import com.example.vpmanager.models.StudyObjectPa;
 
-import org.eazegraph.lib.charts.PieChart;
-import org.eazegraph.lib.models.PieModel;
-
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.URL;
 import java.text.Format;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -44,15 +35,16 @@ import java.util.List;
 public class personalAccountFragment extends Fragment {
 
     private ListView listView;
-    private PieChart chart;
-    private Switch sourceSwitch;
-    private ImageView settings, sortAlphabetically, sortAppointments;
-    private LinearLayout participatedLayout, plannedLayout, completedLayout;
+    private ImageView sortAlphabetically, sortAppointments;
 
     private static String martikelNumber;
 
     private TextView planned, participated, completed, remaining, sortVpCount;
     private ToggleButton removeCompleted, removePlanned, removeParticipated;
+
+
+    private View completedView, plannedView, participatedView, restView;
+    private LinearLayout  customProgressBar;
 
     private boolean sortAlphabeticallyActive, sortAppointmentsActive, sortVpCountActive, sortAlphabeticallyInvert, sortAppointmentsInvert, sortVpCountInvert;
 
@@ -136,18 +128,17 @@ public class personalAccountFragment extends Fragment {
         sortAlphabetically = view.findViewById(R.id.pa_sort_alphabetical);
         sortAppointments = view.findViewById(R.id.pa_sort_date);
         sortVpCount = view.findViewById(R.id.pa_sort_vp);
-        completedLayout = view.findViewById(R.id.pa_completed_layout);
         listView = view.findViewById(R.id.pa_fragment_listView);
-        participatedLayout = view.findViewById(R.id.pa_parcticipated_layout);
-        plannedLayout = view.findViewById(R.id.pa_planned_layout);
-        completedLayout = view.findViewById(R.id.pa_completed_layout);
-        planned = view.findViewById(R.id.pa_planned);
-        participated = view.findViewById(R.id.pa_participated);
-        completed = view.findViewById(R.id.pa_completed);
-        remaining = view.findViewById(R.id.pa_remaining);
-        settings = view.findViewById(R.id.vp_settings_icon);
-        sourceSwitch = view.findViewById(R.id.vp_source_switch);
-        chart = view.findViewById(R.id.pa_fragment_pie_chart);
+        planned = view.findViewById(R.id.pa_planned_progressBar);
+        participated = view.findViewById(R.id.pa_participated_progressBar);
+        completed = view.findViewById(R.id.pa_completed_progressBar);
+        remaining = view.findViewById(R.id.pa_remaining_progressBar);
+
+        customProgressBar = view.findViewById(R.id.customProgressBar);
+        completedView = view.findViewById(R.id.progress_section_completed);
+        plannedView = view.findViewById(R.id.progress_section_planned);
+        participatedView = view.findViewById(R.id.progress_section_participated);
+        restView = view.findViewById(R.id.progress_section_rest);
 
         listView.setAdapter(new CustomListViewAdapter(this.getContext(), this.getActivity(), navController));
 
@@ -186,7 +177,7 @@ public class personalAccountFragment extends Fragment {
                 participatedVP += studyVPS;
             }
         }
-        switchPieChart(sourceSwitch.isChecked());
+        setProgressBarData(completedVP, participatedVP, plannedVP);
     }
 
 
@@ -195,14 +186,6 @@ public class personalAccountFragment extends Fragment {
     //Setup clicklisteners for all clickable objects
     private void setupClickListener() {
 
-        sourceSwitch.setOnCheckedChangeListener((buttonView, isChecked) -> {
-            switchPieChart(isChecked);
-        });
-        settings.setOnClickListener(v -> {
-            personalAccountFragment fragment = personalAccountFragment.this;
-            CustomAlertDialog dialog = new CustomAlertDialog(fragment, Float.toString(sumVPs), martikelNumber);
-            dialog.show();
-        });
         removeCompleted.setOnCheckedChangeListener((buttonView, isChecked) -> filterListViewColorTags(isChecked, R.color.pieChartSafe));
         removePlanned.setOnCheckedChangeListener((buttonView, isChecked) -> filterListViewColorTags(isChecked, R.color.pieChartPlanned));
         removeParticipated.setOnCheckedChangeListener((buttonView, isChecked) -> filterListViewColorTags(isChecked, R.color.pieChartParticipation));
@@ -216,56 +199,12 @@ public class personalAccountFragment extends Fragment {
     //Parameter: boolean input to switch between app as source and web
     //Return values:
     //resets the piechart depending on switch position to get the new source and displaying them
-    private void switchPieChart(boolean isSourceWeb) {
-        if (isSourceWeb) {
-            if (martikelNumber.isEmpty()) {
-                CustomAlertReminder reminder = new CustomAlertReminder(this);
-                reminder.show();
-                sourceSwitch.setChecked(false);
-                switchPieChart(false);
-            } else {
-                Thread getRequest = new Thread(() -> {
-                    try {
-                        createGetRequest();
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                });
-                getRequest.start();
 
-                try {
-                    getRequest.join();
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
 
-                if (jsonString != null && !jsonString.isEmpty() && jsonString.contains("matriculationNumber")) {
-                    System.out.println("JSON: " + jsonString);
-                    String[] entries = jsonString.split(",");
-                    if (entries.length == 3) {
-                        String VPS = entries[1].split(":")[1];
-                        if (!VPS.isEmpty()) {
-                            setPieChartData(Double.parseDouble(VPS), 0, 0);
-                            plannedLayout.setVisibility(View.INVISIBLE);
-                            completedLayout.setVisibility(View.VISIBLE);
-                        }
-                    }
-                }
-            }
-        }
-        if (!isSourceWeb) {
-            setPieChartData(completedVP, participatedVP, plannedVP);
-            plannedLayout.setVisibility(View.VISIBLE);
-            participatedLayout.setVisibility(View.VISIBLE);
-
-        }
-    }
-
-    //Parameter: Input are double values to determine the size of the piechart slices
+    //Parameter: Input are double values to determine the size of the progressbar slices
     //Return values:
-    //Converts the inputs into percentage and adds slices to piechart
-    private void setPieChartData(double completedVP, double participationVP, double plannedVP) {
-        chart.clearChart();
+    //Converts the inputs into percentage and adds slices to progressbar
+    private void setProgressBarData(double completedVP, double participationVP, double plannedVP) {
         int max = (int) (sumVPs * 100);
         int scaledCompletedVP = (int) completedVP * 100;
         int scaledParticipationVP = (int) participationVP * 100;
@@ -275,75 +214,45 @@ public class personalAccountFragment extends Fragment {
             remainingVP = 0;
         }
 
-
-        chart.addPieSlice(
-                new PieModel(
-                        getString(R.string.pieSliceLabelSafe),
-                        scaledCompletedVP,
-                        getResources().getColor(R.color.pieChartSafe)));
         completed.setText("Erledigt: " + completedVP + " VP");
-        //Color.parseColor(String.valueOf(ContextCompat.getColor(this, R.color.pieChartSafe)))));
-        chart.addPieSlice(
-                new PieModel(
-                        getString(R.string.pieSliceLabelParticipation),
-                        scaledParticipationVP,
-                        getResources().getColor(R.color.pieChartParticipation)));
+
         participated.setText("Vergangene: " + participationVP + " VP");
-        chart.addPieSlice(
-                new PieModel(
-                        getString(R.string.pieSliceLabelPlanned),
-                        scaledPlannedVP,
-                        getResources().getColor(R.color.pieChartPlanned)));
+
         planned.setText("Geplant: " + plannedVP + " VP");
-        chart.addPieSlice(
-                new PieModel(
-                        getString(R.string.pieSliceLabelRemaining),
-                        remainingVP,
-                        getResources().getColor(R.color.pieChartRemaining)));
+
         remaining.setText("Übrig: " + remainingVP / 100 + " VP");
 
+        customProgressBar.setWeightSum(sumVPs*100);
 
-        //chart.setUseInnerPadding(false);
-        chart.setInnerPaddingColor(getResources().getColor(R.color.cardview_light_background));
-        chart.startAnimation();
-    }
+        LinearLayout.LayoutParams param;
 
-    //Parameter:
-    //Return values:
-    //Creates and calls a getRequest to get the saved number of vps from the universities website. saves the count in a string
-    private void createGetRequest() throws IOException {
-        HttpURLConnection urlConnection = null;
-        URL url = new URL("https://vp.software-engineering.education/" + martikelNumber + "/vps");
-        urlConnection = (HttpURLConnection) url.openConnection();
-        urlConnection.setRequestMethod("GET");
-        urlConnection.setReadTimeout(10000 /* milliseconds */);
-        urlConnection.setConnectTimeout(15000 /* milliseconds */);
-        urlConnection.setDoOutput(true);
-        urlConnection.connect();
+        param = new LinearLayout.LayoutParams(
+                0,
+                LinearLayout.LayoutParams.MATCH_PARENT,
+                (float) completedVP*100
+        );
+        completedView.setLayoutParams(param);
 
-        BufferedReader br = new BufferedReader(new InputStreamReader(url.openStream()));
-        StringBuilder sb = new StringBuilder();
+        param = new LinearLayout.LayoutParams(
+                0,
+                LinearLayout.LayoutParams.MATCH_PARENT,
+                (float) participatedVP*100
+        );
+        participatedView.setLayoutParams(param);
 
-        String line;
-        while ((line = br.readLine()) != null) {
-            sb.append(line).append("\n");
-        }
-        br.close();
+        param = new LinearLayout.LayoutParams(
+                0,
+                LinearLayout.LayoutParams.MATCH_PARENT,
+                (float) plannedVP*100
+        );
+        plannedView.setLayoutParams(param);
 
-        jsonString = sb.toString();
-    }
-
-    //Parameter: Input from CustomAlertDialog containing the count of vps and the users matrikelnumber
-    //Return values:
-    //Saves the input as local values and calls a database method to update the values in the users profile
-    public void closeDialog(String vps, String matrikelnumber) {
-        martikelNumber = matrikelnumber;
-        sumVPs = Float.parseFloat(vps);
-
-        switchPieChart(sourceSwitch.isChecked());
-
-        PA_ExpandableListDataPump.saveVPandMatrikelnumber(vps, matrikelnumber);
-
+        param = new LinearLayout.LayoutParams(
+                0,
+                LinearLayout.LayoutParams.MATCH_PARENT,
+                (float) (sumVPs - (completedVP + participatedVP + plannedVP))*100
+        );
+        restView.setLayoutParams(param);
     }
 
 
@@ -513,7 +422,8 @@ public class personalAccountFragment extends Fragment {
         }
     }
 
-    private ArrayList<StudyObjectPa> sortByName(boolean invert) {
+    private ArrayList<StudyObjectPa> sortByName(boolean invert)
+    {
         CustomListViewAdapter adapter = (CustomListViewAdapter) listView.getAdapter();
         ArrayList<StudyObjectPa> list = new ArrayList<>();
         for (int i = 0; i < adapter.getObjects().size(); i++) {
@@ -591,7 +501,7 @@ public class personalAccountFragment extends Fragment {
             }
         }
         list.clear();
-        for (StudyObjectPa ob : studyList) {
+        for(StudyObjectPa ob: studyList) {
             list.add(ob);
         }
 
@@ -625,7 +535,7 @@ public class personalAccountFragment extends Fragment {
             }
         }
         list.clear();
-        for (StudyObjectPa ob : studyList) {
+        for(StudyObjectPa ob: studyList) {
             list.add(ob);
         }
 

@@ -57,6 +57,9 @@
             app:destination="@id/createStudyFragment"
             app:popUpTo="@id/createStudyFragment"
             app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_homeFragment_to_upcomingAppointmentsFragment"
+            app:destination="@id/upcomingAppointmentsFragment" />
     </fragment>
     <fragment
         android:id="@+id/findStudyFragment"
@@ -151,5 +154,17 @@
         android:id="@+id/createStudyFragment"
         android:name="com.example.vpmanager.views.createStudy.CreateStudyFragment"
         android:label="Studien erstellen" />
+    <fragment
+        android:id="@+id/upcomingAppointmentsFragment"
+        android:name="com.example.vpmanager.views.UpcomingAppointmentsFragment"
+        android:label="Termine"
+        tools:layout="@layout/fragment_upcoming_appointments" >
+        <action
+            android:id="@+id/action_upcomingAppointmentsFragment_to_studyFragment"
+            app:destination="@id/studyFragment" />
+        <action
+            android:id="@+id/action_upcomingAppointmentsFragment_to_studyCreatorFragment"
+            app:destination="@id/studyCreatorFragment" />
+    </fragment>
 
 </navigation>

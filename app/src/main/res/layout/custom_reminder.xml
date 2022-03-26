@@ -2,9 +2,21 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_gravity="center"
     android:layout_width="250dp"
-    android:layout_height="120dp"
+    android:layout_height="150dp"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical">
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        android:src="@drawable/ic_baseline_star_24"
+        app:tint="@color/heatherred_dark"
+        android:rotation="270"
+        android:layout_gravity="right"
+        android:layout_marginEnd="30dp"
+        android:paddingBottom="-10dp"
+        android:layout_marginBottom="-15dp"
+        />
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cardViewGraph"
@@ -12,7 +24,11 @@
         android:layout_height="120dp"
         android:elevation="10dp"
         app:cardBackgroundColor="@color/heatherred_dark"
-        android:layout_gravity="center_horizontal">
+        android:layout_gravity="center_horizontal"
+        app:cardCornerRadius="20dp"
+        android:layout_weight="4">
+
+
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -22,6 +38,7 @@
             <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:id="@+id/customAlertText"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="10dp"
         android:layout_marginEnd="20dp"
