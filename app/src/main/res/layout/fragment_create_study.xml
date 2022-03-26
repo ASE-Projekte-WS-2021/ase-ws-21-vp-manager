@@ -32,14 +32,15 @@
                 android:layout_marginBottom="10dp" />
             -->
             <androidx.fragment.app.FragmentContainerView
-                android:id="@+id/fragment_container_create_study"
-                android:name="com.example.vpmanager.views.createStudy.createStudyFragment_Base"
+                android:id="@+id/nav_host_fragment_create"
+                android:name="androidx.navigation.fragment.NavHostFragment"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginLeft="10dp"
                 android:layout_marginTop="10dp"
                 android:layout_marginRight="10dp"
-                android:layout_marginBottom="10dp" />
+                android:layout_marginBottom="10dp"
+                app:navGraph="@navigation/nav_graph_create"/>
 
 
         </com.google.android.material.card.MaterialCardView>
