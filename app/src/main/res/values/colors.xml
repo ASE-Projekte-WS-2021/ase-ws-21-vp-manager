@@ -42,6 +42,7 @@
     <color name="lightorange_gradient">#FE9455</color>
     <color name="heatherred_hint">#F2B7CB</color>
     <color name="tabs_grey">#C4C4C4</color>
+    <color name="white_header">#F0F0F0</color>
 
 
 </resources>

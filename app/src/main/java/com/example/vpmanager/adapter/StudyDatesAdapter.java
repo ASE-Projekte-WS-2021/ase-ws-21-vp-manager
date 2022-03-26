@@ -64,8 +64,10 @@ public class StudyDatesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
             dateDate = itemView.findViewById(R.id.dateItemDate);
             dateOtherInfos = itemView.findViewById(R.id.dateItemLayoutProposal);
 
-            dateItemParentLayout = itemView.findViewById(R.id.dateItemParentLayout);
-            dateItemParentLayout.setOnClickListener(this);
+            if (this.onDateClickListener != null) {
+                dateItemParentLayout = itemView.findViewById(R.id.dateItemParentLayout);
+                dateItemParentLayout.setOnClickListener(this);
+            }
         }
 
         @Override

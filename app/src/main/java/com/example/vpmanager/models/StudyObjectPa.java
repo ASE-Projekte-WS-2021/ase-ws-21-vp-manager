@@ -13,7 +13,7 @@ public class StudyObjectPa {
         this.color = _color;
     }
 
-    public StudyObjectPa(){
+    public StudyObjectPa() {
 
     }
 

@@ -4,27 +4,27 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".views.loginFragment">
+    tools:context=".views.registerFragment">
 
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:padding="30dp">
+        android:padding="30dp"
+        android:scrollbarThumbVertical="@null"
+        android:scrollbarThumbHorizontal="@null">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:scrollbarThumbVertical="@null"
-            android:scrollbarThumbHorizontal="@null">
+            android:orientation="vertical">
 
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginTop="50dp"
+                android:layout_marginTop="30dp"
                 android:fontFamily="@font/google_sans_bold"
-                android:text="@string/login"
+                android:text="@string/login_create_account"
                 android:textAllCaps="true"
                 android:textColor="@color/black"
                 android:textSize="40sp" />
@@ -32,7 +32,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="80dp"
+                android:layout_marginTop="30dp"
                 android:orientation="vertical">
 
                 <com.google.android.material.textfield.TextInputLayout
@@ -77,40 +77,107 @@
                         android:id="@+id/login_password_input"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:fontFamily="@font/google_sans_bold"
                         android:hint="@string/login_password"
+                        android:fontFamily="@font/google_sans_bold"
                         android:inputType="textPassword">
 
                     </com.google.android.material.textfield.TextInputEditText>
 
                 </com.google.android.material.textfield.TextInputLayout>
 
-                <RelativeLayout
+                <com.google.android.material.textfield.TextInputLayout
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp">
+                    android:hint="Passwort wiederholen"
+                    app:boxStrokeColor="@color/black"
+                    app:boxStrokeWidthFocused="2dp"
+                    app:endIconMode="password_toggle"
+                    app:endIconTint="@color/black"
+                    app:hintTextColor="@color/black"
+                    app:startIconDrawable="@drawable/ic_baseline_lock_24"
+                    app:startIconTint="@color/black">
 
-                    <Button
-                        android:id="@+id/login_forgotPassword_button"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentEnd="true"
-                        android:background="#0000"
-                        android:text="@string/login_forgot_password"
-                        android:textColor="@color/black"
-                        android:textSize="12sp" />
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/confirm_login_password_input"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:hint="Passwort wiederholen"
+                        android:fontFamily="@font/google_sans_bold"
+                        android:inputType="textPassword">
 
-                </RelativeLayout>
+                    </com.google.android.material.textfield.TextInputEditText>
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="20dp"
+                    android:fontFamily="@font/google_sans_bold"
+                    android:text="@string/register_optional"
+                    android:textAllCaps="true"
+                    android:textColor="@color/black"
+                    android:textSize="20sp" />
+
+                <com.google.android.material.textfield.TextInputLayout
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Matrikelnummer"
+                    app:boxStrokeColor="@color/black"
+                    app:boxStrokeWidthFocused="2dp"
+                    app:endIconMode="clear_text"
+                    app:endIconTint="@color/black"
+                    app:hintTextColor="@color/black"
+                    app:startIconTint="@color/black">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/register_matnr"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:hint="Matrikelnummer"
+                        android:fontFamily="@font/google_sans_bold"
+                        android:inputType="text">
+
+                    </com.google.android.material.textfield.TextInputEditText>
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Benötige VP"
+                    app:boxStrokeColor="@color/black"
+                    app:boxStrokeWidthFocused="2dp"
+                    app:endIconMode="clear_text"
+                    app:endIconTint="@color/black"
+                    app:hintTextColor="@color/black"
+                    app:startIconTint="@color/black">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/register_vp"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:hint="Benötige VP"
+                        android:fontFamily="@font/google_sans_bold"
+                        android:inputType="text">
+
+                    </com.google.android.material.textfield.TextInputEditText>
+
+                </com.google.android.material.textfield.TextInputLayout>
+
 
                 <Button
-                    android:id="@+id/login_button"
+                    android:id="@+id/register_button"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="15dp"
                     android:background="@color/black"
-                    android:text="@string/login"
+                    android:text="@string/login_create_account"
                     android:textColor="@color/white" />
-
 
                 <RelativeLayout
                     android:layout_width="match_parent"
@@ -121,7 +188,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="20dp"
-                        android:text="@string/login_no_account"
+                        android:text="@string/already_have_an_account"
                         android:textSize="17sp" />
 
                     <TextView
@@ -129,13 +196,12 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_below="@id/already_have_an_account"
-                        android:text="@string/login_no_account_clickable"
+                        android:text="@string/already_have_an_account_clickable"
                         android:textSize="17sp" />
 
                 </RelativeLayout>
 
             </LinearLayout>
-
 
         </LinearLayout>
 

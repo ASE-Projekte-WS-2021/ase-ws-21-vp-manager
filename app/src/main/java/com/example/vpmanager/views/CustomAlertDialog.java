@@ -11,14 +11,14 @@ import com.example.vpmanager.R;
 
 public class CustomAlertDialog extends Dialog implements android.view.View.OnClickListener {
 
-        public personalAccountFragment fragment;
+        public homeFragment fragment;
         public Dialog d;
         public Button yes, no;
         public EditText vps, matrikelnumber;
         public String vpString, matrikelString;
 
 
-        public CustomAlertDialog(personalAccountFragment a , String vp, String martikelnumber ) {
+        public CustomAlertDialog(homeFragment a , String vp, String martikelnumber ) {
                 super(a.getContext());
                 fragment = a;
                 vpString = vp;
