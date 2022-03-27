@@ -12,7 +12,6 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.vpmanager.R;
-import com.example.vpmanager.adapter.StudyDatesAdapter;
 import com.example.vpmanager.adapter.StudyDatesCreatorAdapter;
 import com.example.vpmanager.viewmodels.StudyCreatorViewModel;
 
