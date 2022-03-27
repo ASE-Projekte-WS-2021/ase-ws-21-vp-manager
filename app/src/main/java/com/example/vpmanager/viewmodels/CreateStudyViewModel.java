@@ -32,6 +32,7 @@ public class CreateStudyViewModel extends ViewModel implements CreateStudyListen
         String studyId = getNewId();
         studyCreationProcessData.put("id", studyId);
         studyCreationProcessData.put("creator", mainActivity.uniqueID);
+        studyCreationProcessData.put("studyStateClosed", false);
 
         if (!datesCreationProcessData.isEmpty()) {
             //local list of all dateIds to pass to the studyMap
@@ -47,6 +48,7 @@ public class CreateStudyViewModel extends ViewModel implements CreateStudyListen
                 newDate.put("userId", null);
                 newDate.put("date", datesCreationProcessData.get(i));
                 newDate.put("selected", false);
+                newDate.put("participated", false);
 
                 dateIds.add(dateId);
                 //Repo call

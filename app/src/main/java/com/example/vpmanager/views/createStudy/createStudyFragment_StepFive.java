@@ -5,6 +5,7 @@ import android.app.TimePickerDialog;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -17,6 +18,7 @@ import android.widget.TimePicker;
 
 import com.example.vpmanager.R;
 import com.example.vpmanager.adapter.SwipeableDatesAdapter;
+import com.example.vpmanager.helper.SwipeToDeleteCallback;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.text.SimpleDateFormat;
@@ -73,7 +75,7 @@ public class createStudyFragment_StepFive extends Fragment {
         //dateList = view.findViewById(R.id.createDatelist);
         dateListRecycler = view.findViewById(R.id.createDateRecyclerView);
         //loadData();
-        setupDatePicker();
+        setupDatePicker(view);
         FloatingActionButton fab = view.findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -97,13 +99,15 @@ public class createStudyFragment_StepFive extends Fragment {
     //Parameter:
     //Return values:
     //Sets an adapter for the Listview
-    private void setupDatePicker() {
+    private void setupDatePicker(View view) {
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(requireActivity());
         //datePickerAdapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_1, dates);
-        swipeableDatesAdapter = new SwipeableDatesAdapter(requireActivity(), dates);
+        swipeableDatesAdapter = new SwipeableDatesAdapter(requireActivity(), dates, view);
         //dateList.setAdapter(datePickerAdapter);
         dateListRecycler.setAdapter(swipeableDatesAdapter);
         dateListRecycler.setLayoutManager(linearLayoutManager);
+        ItemTouchHelper itemTouchHelper = new ItemTouchHelper(new SwipeToDeleteCallback(swipeableDatesAdapter));
+        itemTouchHelper.attachToRecyclerView(dateListRecycler);
     }
 
     //Parameter:

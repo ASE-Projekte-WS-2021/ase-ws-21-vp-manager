@@ -83,7 +83,10 @@
         <item name="android:color">@color/green_light</item>
     </style>
 
+<style name="dateState_theme" parent="Widget.MaterialComponents.Button.OutlinedButton">
+    <item name="android:textColor">@color/heatherred_dark</item>
 
+</style>
 
 <!--    <style name="spinner_style">
         <item name="android:layout_width">match_parent</item>

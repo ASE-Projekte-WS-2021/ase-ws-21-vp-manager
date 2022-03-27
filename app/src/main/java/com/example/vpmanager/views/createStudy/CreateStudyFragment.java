@@ -12,10 +12,10 @@ import android.widget.Button;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
+import androidx.navigation.fragment.NavHostFragment;
 
 import com.airbnb.lottie.LottieAnimationView;
 import com.example.vpmanager.R;
@@ -24,11 +24,12 @@ import com.kofigyan.stateprogressbar.StateProgressBar;
 
 public class CreateStudyFragment extends Fragment {
 
-    private NavController navController;
+    private NavController navControllerMain;
     public static CreateStudyViewModel createStudyViewModel;
 
-    //maybe replaced with a navigation graph later
-    private FragmentManager fragmentManager;
+    //private FragmentManager fragmentManager;
+    private NavHostFragment navHostFragmentCreate;
+    private NavController navControllerCreate;
 
     private Button backBtn;
     private Button nextBtn;
@@ -44,53 +45,6 @@ public class CreateStudyFragment extends Fragment {
     //private FragmentStateAdapter pagerAdapter;
     //NEW
 
-    /*
-    String studyTitle = "";
-    String VP = "";
-    String studyDesc = "";
-
-    String category = "";
-    String execution = "";
-
-    //remote
-    String platform = "";
-    String optionalPlatform = "";
-    //local
-    String location = "";
-    String street = "";
-    String room = "";
-
-    String contactMail = "";
-    String contactPhone = "";
-    String contactSkype = "";
-    String contactDiscord = "";
-    String contactOthers = "";
-     */
-
-    /*
-    TextInputEditText textInputEditTextTitle;
-    TextInputEditText textInputEditTextVP;
-    Spinner categoriesSpinner;
-    Spinner executionTypeSpinner;
-
-
-    TextInputEditText textInputEditTextContactMail;
-    TextInputEditText textInputEditTextContactZoom;
-    TextInputEditText textInputEditTextContactSkype;
-    TextInputEditText textInputEditTextContactDiscord;
-    TextInputEditText textInputEditTextContactOthers;
-
-    TextInputEditText textInputEditTextDesc;
-
-    TextInputEditText textInputEditTextPlatform;
-    TextInputEditText textInputEditTextOptionalPlatform;
-
-    TextInputEditText textInputEditTextLocation;
-    TextInputEditText textInputEditTextStreet;
-    TextInputEditText textInputEditTextRoom;
-
-     */
-
     public CreateStudyFragment() {
     }
 
@@ -103,6 +57,7 @@ public class CreateStudyFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_create_study, container, false);
+        setupNavigation();
         setupView(view);
         setupListeners();
         return view;
@@ -110,8 +65,15 @@ public class CreateStudyFragment extends Fragment {
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        navController = Navigation.findNavController(view);
+        navControllerMain = Navigation.findNavController(view);
         super.onViewCreated(view, savedInstanceState);
+    }
+
+    private void setupNavigation(){
+        //getChildFragmentManager is important!
+        navHostFragmentCreate = (NavHostFragment) getChildFragmentManager().findFragmentById(R.id.nav_host_fragment_create);
+        assert navHostFragmentCreate != null;
+        navControllerCreate = navHostFragmentCreate.getNavController();
     }
 
     private void setupView(View view) {
@@ -126,7 +88,8 @@ public class CreateStudyFragment extends Fragment {
         //pagerAdapter = new ScreenSlidePagerAdapter(this);
         //viewPager.setAdapter(pagerAdapter);
         //NEW
-        fragmentManager = getParentFragmentManager(); //instead of getSupportFragmentManager
+
+        //fragmentManager = getParentFragmentManager(); //instead of getSupportFragmentManager
         backBtn = view.findViewById(R.id.backButton);
         nextBtn = view.findViewById(R.id.nextButton);
 
@@ -207,238 +170,193 @@ public class CreateStudyFragment extends Fragment {
         });
     }
 
-    /*
-    private void createDBEntry() {
-
-        String studyID = getNewId();
-        Map<String, Object> newStudy = new HashMap<>();
-
-        newStudy.put("id", studyID); //New id for the study
-        newStudy.put("creator", mainActivity.uniqueID);
-
-        newStudy.put("name", studyTitle);
-        newStudy.put("vps", VP);
-        newStudy.put("description", studyDesc);
-
-        newStudy.put("contact", contactMail);
-        newStudy.put("contact2", contactPhone);
-        newStudy.put("contact3", contactSkype);
-        newStudy.put("contact4", contactDiscord);
-        newStudy.put("contact5", contactOthers);
-
-
-        newStudy.put("category", category);
-        newStudy.put("executionType", execution);
-        if (executionTypeSpinner.getSelectedItem().toString().equals(getString(R.string.remoteString))) {
-            newStudy.put("platform", platform);
-            newStudy.put("platform2", optionalPlatform);
-        } else if (executionTypeSpinner.getSelectedItem().toString().equals(getString(R.string.presenceString))) {
-            newStudy.put("location", location);
-            newStudy.put("street", street);
-            newStudy.put("room", room);
-        }
-        if (!dates.isEmpty()) {
-            ArrayList<String> dateIds = new ArrayList<>();
-
-            for (int i = 0; i < dates.size(); i++) {
-                Map<String, Object> newDate = new HashMap<>();
-                String dateID = getNewId();
-
-                newDate.put("id", dateID); //New id for every date
-                newDate.put("studyId", studyID);
-                newDate.put("userId", null);
-                newDate.put("date", dates.get(i));
-                newDate.put("selected", false);
-                dateIds.add(dateID);
-                accessDatabase.addNewDate(newDate, dateID);
-            }
-            newStudy.put("dates", dateIds);
-        }
-        System.out.println("Here");
-        accessDatabase.addNewStudy(newStudy, studyID);
-
-        reNavigateToCreateStudyFragment();
-    }
-
- */
-
     private void nextButton() {
         switch (currentFragment) {
-            //done
             case 0:
                 System.out.println("currentFragment case0 " + currentFragment);
-                //bundle = createBundle(1);
                 createStudyFragment_StepOne createStudyFragment_stepOne = new createStudyFragment_StepOne();
-                //createStudyFragment_stepOne.setArguments(bundle);
                 stateProgressBar.setVisibility(View.VISIBLE);
                 stateProgressBar.setCurrentStateNumber(StateProgressBar.StateNumber.ONE);
+
+                navControllerCreate.navigate(R.id.action_createStudyFragment_Base_to_createStudyFragment_StepOne);
+                /*
                 fragmentManager
                         .beginTransaction()
                         .setCustomAnimations(R.anim.enter_from_right, R.anim.exit_to_left,
                                 R.anim.enter_from_left, R.anim.exit_to_right)
-                        .replace(R.id.fragment_container_create_study, createStudyFragment_stepOne, null)
+                        .replace(R.id.nav_host_fragment_create, createStudyFragment_stepOne, null)
                         //.addToBackStack(null)
                         .setReorderingAllowed(true)
                         .commit();
+                 */
                 break;
-            //done
             case 1:
                 System.out.println("currentFragment case1 " + currentFragment);
-                //getInput(currentFragment);
                 System.out.println("case1 before saveData" + createStudyViewModel.studyCreationProcessData.toString());
                 saveDataInViewModelStepOne();
                 System.out.println("case1 after saveData" + createStudyViewModel.studyCreationProcessData.toString());
                 if (mandatoryCheck(currentFragment)) {
-                    //bundle = createBundle(2);
                     createStudyFragment_StepTwo createStudyFragment_stepTwo = new createStudyFragment_StepTwo();
-                    //createStudyFragment_stepTwo.setArguments(bundle);
                     stateProgressBar.setCurrentStateNumber(StateProgressBar.StateNumber.ONE);
+
+                    navControllerCreate.navigate(R.id.action_createStudyFragment_StepOne_to_createStudyFragment_StepTwo);
+                    /*
                     fragmentManager
                             .beginTransaction()
                             .setCustomAnimations(R.anim.enter_from_right, R.anim.exit_to_left,
                                     R.anim.enter_from_left, R.anim.exit_to_right)
-                            .replace(R.id.fragment_container_create_study, createStudyFragment_stepTwo, null)
+                            .replace(R.id.nav_host_fragment_create, createStudyFragment_stepTwo, null)
                             //.addToBackStack(null)
                             .setReorderingAllowed(true)
                             .commit();
+                     */
                 }
                 break;
-            //done
             case 2:
                 System.out.println("currentFragment case2" + currentFragment);
-                //getInput(currentFragment);
                 System.out.println("case2 before saveData" + createStudyViewModel.studyCreationProcessData.toString());
                 saveDataInViewModelStepTwo();
                 System.out.println("case2 after saveData" + createStudyViewModel.studyCreationProcessData.toString());
                 if (mandatoryCheck(currentFragment)) {
-                    //bundle = createBundle(3);
                     createStudyFragment_StepThree createStudyFragment_stepThree = new createStudyFragment_StepThree();
-                    //createStudyFragment_stepThree.setArguments(bundle);
                     stateProgressBar.setCurrentStateNumber(StateProgressBar.StateNumber.TWO);
+
+                    navControllerCreate.navigate(R.id.action_createStudyFragment_StepTwo_to_createStudyFragment_StepThree);
+                    /*
                     fragmentManager
                             .beginTransaction()
                             .setCustomAnimations(R.anim.enter_from_right, R.anim.exit_to_left,
                                     R.anim.enter_from_left, R.anim.exit_to_right)
-                            .replace(R.id.fragment_container_create_study, createStudyFragment_stepThree, null)
+                            .replace(R.id.nav_host_fragment_create, createStudyFragment_stepThree, null)
                             //.addToBackStack(null)
                             .setReorderingAllowed(true)
                             .commit();
+                     */
                 }
                 break;
-            //done
             case 3:
                 System.out.println("currentFragment case3" + currentFragment);
-                //getInput(currentFragment);
                 System.out.println("case3 before saveData" + createStudyViewModel.studyCreationProcessData.toString());
                 saveDataInViewModelStepThree();
                 System.out.println("case3 after saveData" + createStudyViewModel.studyCreationProcessData.toString());
                 if (mandatoryCheck(currentFragment)) {
-                    //bundle = createBundle(4);
                     stateProgressBar.setCurrentStateNumber(StateProgressBar.StateNumber.THREE);
                     String executionType = createStudyViewModel.studyCreationProcessData.get("executionType").toString();
                     Log.d("executionType", "is: " + executionType);
                     if (executionType.equals(getString(R.string.remoteString))) {
                         createStudyFragment_StepFour_Remote createStudyFragment_stepFour_remote = new createStudyFragment_StepFour_Remote();
-                        //createStudyFragment_stepFour_remote.setArguments(bundle);
+
+                        navControllerCreate.navigate(R.id.action_createStudyFragment_StepThree_to_createStudyFragment_StepFour_Remote);
+                        /*
                         fragmentManager
                                 .beginTransaction()
                                 .setCustomAnimations(R.anim.enter_from_right, R.anim.exit_to_left,
                                         R.anim.enter_from_left, R.anim.exit_to_right)
-                                .replace(R.id.fragment_container_create_study, createStudyFragment_stepFour_remote, null)
+                                .replace(R.id.nav_host_fragment_create, createStudyFragment_stepFour_remote, null)
                                 //.addToBackStack(null)
                                 .setReorderingAllowed(true)
                                 .commit();
+                         */
                     } else {
                         createStudyFragment_StepFour_Presence createStudyFragment_stepFour_presence = new createStudyFragment_StepFour_Presence();
-                        //createStudyFragment_stepFour_presence.setArguments(bundle);
+
+                        navControllerCreate.navigate(R.id.action_createStudyFragment_StepThree_to_createStudyFragment_StepFour_Presence);
+                        /*
                         fragmentManager
                                 .beginTransaction()
                                 .setCustomAnimations(R.anim.enter_from_right, R.anim.exit_to_left,
                                         R.anim.enter_from_left, R.anim.exit_to_right)
-                                .replace(R.id.fragment_container_create_study, createStudyFragment_stepFour_presence, null)
+                                .replace(R.id.nav_host_fragment_create, createStudyFragment_stepFour_presence, null)
                                 //.addToBackStack(null)
                                 .setReorderingAllowed(true)
                                 .commit();
+                         */
                     }
                 }
                 break;
-            //done
             case 4:
                 System.out.println("currentFragment case4" + currentFragment);
-                //getInput(currentFragment);
                 System.out.println("case4 before saveData" + createStudyViewModel.studyCreationProcessData.toString());
                 saveDataInViewModelStepFour();
                 System.out.println("case4 after saveData" + createStudyViewModel.studyCreationProcessData.toString());
                 if (mandatoryCheck(currentFragment)) {
-                    //bundle = createBundle(5);
                     createStudyFragment_StepFive createStudyFragment_stepFive = new createStudyFragment_StepFive();
-                    //createStudyFragment_stepFive.setArguments(bundle);
                     stateProgressBar.setCurrentStateNumber(StateProgressBar.StateNumber.FOUR);
+
+                    String executionType = createStudyViewModel.studyCreationProcessData.get("executionType").toString();
+                    if(executionType.equals(getString(R.string.remoteString))){
+                        navControllerCreate.navigate(R.id.action_createStudyFragment_StepFour_Remote_to_createStudyFragment_StepFive);
+                    }else {
+                        navControllerCreate.navigate(R.id.action_createStudyFragment_StepFour_Presence_to_createStudyFragment_StepFive);
+                    }
+                    /*
                     fragmentManager
                             .beginTransaction()
                             .setCustomAnimations(R.anim.enter_from_right, R.anim.exit_to_left,
                                     R.anim.enter_from_left, R.anim.exit_to_right)
-                            .replace(R.id.fragment_container_create_study, createStudyFragment_stepFive, null)
+                            .replace(R.id.nav_host_fragment_create, createStudyFragment_stepFive, null)
                             //.addToBackStack(null)
                             .setReorderingAllowed(true)
                             .commit();
+                     */
                 }
                 break;
-            //done
             case 5:
                 System.out.println("currentFragment case5" + currentFragment);
-                //getInput(currentFragment);
                 System.out.println("case5 before saveData" + createStudyViewModel.datesCreationProcessData.toString());
                 saveDataInViewModelStepFive();
                 System.out.println("case5 after saveData" + createStudyViewModel.datesCreationProcessData.toString());
-                //bundle = createBundle(6);
                 createStudyFragment_finalStep createStudyFragment_finalStep = new createStudyFragment_finalStep();
-                //createStudyFragment_finalStep.setArguments(bundle);
                 stateProgressBar.setCurrentStateNumber(StateProgressBar.StateNumber.FIVE);
+
+                navControllerCreate.navigate(R.id.action_createStudyFragment_StepFive_to_createStudyFragment_finalStep);
+                /*
                 fragmentManager
                         .beginTransaction()
                         .setCustomAnimations(R.anim.enter_from_right, R.anim.exit_to_left,
                                 R.anim.enter_from_left, R.anim.exit_to_right)
-                        .replace(R.id.fragment_container_create_study, createStudyFragment_finalStep, null)
+                        .replace(R.id.nav_host_fragment_create, createStudyFragment_finalStep, null)
                         //.addToBackStack(null)
                         .setReorderingAllowed(true)
                         .commit();
+                 */
                 break;
-            //done
             case 6:
                 System.out.println("currentFragment case6" + currentFragment);
-                //bundle = createBundle(7);
                 createStudyFragment_finalStep_two createStudyFragment_finalStep_two = new createStudyFragment_finalStep_two();
-                //createStudyFragment_finalStep_two.setArguments(bundle);
                 stateProgressBar.setCurrentStateNumber(StateProgressBar.StateNumber.FIVE);
+
+                navControllerCreate.navigate(R.id.action_createStudyFragment_finalStep_to_createStudyFragment_finalStep_two);
+                /*
                 fragmentManager
                         .beginTransaction()
                         .setCustomAnimations(R.anim.enter_from_right, R.anim.exit_to_left,
                                 R.anim.enter_from_left, R.anim.exit_to_right)
-                        .replace(R.id.fragment_container_create_study, createStudyFragment_finalStep_two, null)
+                        .replace(R.id.nav_host_fragment_create, createStudyFragment_finalStep_two, null)
                         //.addToBackStack(null)
                         .setReorderingAllowed(true)
                         .commit();
+                 */
                 break;
-            //done
             case 7:
                 System.out.println("currentFragment case7" + currentFragment);
-                //bundle = createBundle(8);
                 createStudyFragment_finalStep_three createStudyFragment_finalStep_three = new createStudyFragment_finalStep_three();
-                //createStudyFragment_finalStep_three.setArguments(bundle);
                 stateProgressBar.setCurrentStateNumber(StateProgressBar.StateNumber.FIVE);
                 nextBtn.setText(getString(R.string.fragment_create_study_base_create));
                 nextBtn.setBackgroundColor(getResources().getColor(R.color.green_Main));
+
+                navControllerCreate.navigate(R.id.action_createStudyFragment_finalStep_two_to_createStudyFragment_finalStep_three);
+                /*
                 fragmentManager
                         .beginTransaction()
                         .setCustomAnimations(R.anim.enter_from_right, R.anim.exit_to_left,
                                 R.anim.enter_from_left, R.anim.exit_to_right)
-                        .replace(R.id.fragment_container_create_study, createStudyFragment_finalStep_three, null)
+                        .replace(R.id.nav_host_fragment_create, createStudyFragment_finalStep_three, null)
                         //.addToBackStack(null)
                         .setReorderingAllowed(true)
                         .commit();
+                 */
                 break;
-            //done
             case 8:
                 System.out.println("currentFragment case8" + currentFragment);
                 createStudyViewModel.saveStudyInDb();
@@ -452,140 +370,160 @@ public class CreateStudyFragment extends Fragment {
     private void backButton() {
         switch (currentFragment) {
             case 0:
-                navController.navigate(R.id.action_global_homeFragment);
+                navControllerMain.navigate(R.id.action_global_homeFragment);
                 break;
             case 1:
-                //getInput(currentFragment);
                 stateProgressBar.setVisibility(View.INVISIBLE);
                 createStudyFragment_Base createStudyFragment_base = new createStudyFragment_Base();
+
+                navControllerCreate.navigate(R.id.action_createStudyFragment_StepOne_to_createStudyFragment_Base);
+                /*
                 fragmentManager
                         .beginTransaction()
                         .setCustomAnimations(R.anim.enter_from_left, R.anim.exit_to_right,
                                 R.anim.enter_from_right, R.anim.exit_to_left)
-                        .replace(R.id.fragment_container_create_study, createStudyFragment_base, null)
+                        .replace(R.id.nav_host_fragment_create, createStudyFragment_base, null)
                         //.addToBackStack(null)
                         .setReorderingAllowed(true)
                         .commit();
+                 */
                 break;
             case 2:
-                //getInput(currentFragment);
                 stateProgressBar.setCurrentStateNumber(StateProgressBar.StateNumber.ONE);
-                //bundle = createBundle(1);
                 createStudyFragment_StepOne createStudyFragment_stepOne = new createStudyFragment_StepOne();
-                //createStudyFragment_stepOne.setArguments(bundle);
+
+                navControllerCreate.navigate(R.id.action_createStudyFragment_StepTwo_to_createStudyFragment_StepOne);
+                /*
                 fragmentManager
                         .beginTransaction()
                         .setCustomAnimations(R.anim.enter_from_left, R.anim.exit_to_right,
                                 R.anim.enter_from_right, R.anim.exit_to_left)
-                        .replace(R.id.fragment_container_create_study, createStudyFragment_stepOne, null)
+                        .replace(R.id.nav_host_fragment_create, createStudyFragment_stepOne, null)
                         //.addToBackStack(null)
                         .setReorderingAllowed(true)
                         .commit();
+                 */
                 break;
             case 3:
-                //getInput(currentFragment);
                 stateProgressBar.setCurrentStateNumber(StateProgressBar.StateNumber.ONE);
-                //bundle = createBundle(2);
                 createStudyFragment_StepTwo createStudyFragment_stepTwo = new createStudyFragment_StepTwo();
-                //createStudyFragment_stepTwo.setArguments(bundle);
+
+                navControllerCreate.navigate(R.id.action_createStudyFragment_StepThree_to_createStudyFragment_StepTwo);
+                /*
                 fragmentManager
                         .beginTransaction()
                         .setCustomAnimations(R.anim.enter_from_left, R.anim.exit_to_right,
                                 R.anim.enter_from_right, R.anim.exit_to_left)
-                        .replace(R.id.fragment_container_create_study, createStudyFragment_stepTwo, null)
+                        .replace(R.id.nav_host_fragment_create, createStudyFragment_stepTwo, null)
                         //.addToBackStack(null)
                         .setReorderingAllowed(true)
                         .commit();
+                 */
                 break;
             case 4:
-                //getInput(currentFragment);
                 stateProgressBar.setCurrentStateNumber(StateProgressBar.StateNumber.TWO);
-                //bundle = createBundle(3);
                 createStudyFragment_StepThree createStudyFragment_stepThree = new createStudyFragment_StepThree();
-                //createStudyFragment_stepThree.setArguments(bundle);
+
+                String executionTypeCase4 = createStudyViewModel.studyCreationProcessData.get("executionType").toString();
+                if (executionTypeCase4.equals(getString(R.string.remoteString))){
+                    navControllerCreate.navigate(R.id.action_createStudyFragment_StepFour_Remote_to_createStudyFragment_StepThree);
+                } else {
+                    navControllerCreate.navigate(R.id.action_createStudyFragment_StepFour_Presence_to_createStudyFragment_StepThree);
+                }
+                /*
                 fragmentManager
                         .beginTransaction()
                         .setCustomAnimations(R.anim.enter_from_left, R.anim.exit_to_right,
                                 R.anim.enter_from_right, R.anim.exit_to_left)
-                        .replace(R.id.fragment_container_create_study, createStudyFragment_stepThree, null)
+                        .replace(R.id.nav_host_fragment_create, createStudyFragment_stepThree, null)
                         //.addToBackStack(null)
                         .setReorderingAllowed(true)
                         .commit();
+                 */
                 break;
             case 5:
-                //getInput(currentFragment);
                 stateProgressBar.setCurrentStateNumber(StateProgressBar.StateNumber.THREE);
-                //bundle = createBundle(4);
-                String executionType = createStudyViewModel.studyCreationProcessData.get("executionType").toString();
-                Log.d("executionType", "is: " + executionType);
-                if (executionType.equals(getString(R.string.remoteString))) {
+                String executionTypeCase5 = createStudyViewModel.studyCreationProcessData.get("executionType").toString();
+                Log.d("executionType", "is: " + executionTypeCase5);
+                if (executionTypeCase5.equals(getString(R.string.remoteString))) {
                     createStudyFragment_StepFour_Remote createStudyFragment_stepFour_remote = new createStudyFragment_StepFour_Remote();
-                    //createStudyFragment_stepFour_remote.setArguments(bundle);
+
+                    navControllerCreate.navigate(R.id.action_createStudyFragment_StepFive_to_createStudyFragment_StepFour_Remote);
+                    /*
                     fragmentManager
                             .beginTransaction()
                             .setCustomAnimations(R.anim.enter_from_left, R.anim.exit_to_right,
                                     R.anim.enter_from_right, R.anim.exit_to_left)
-                            .replace(R.id.fragment_container_create_study, createStudyFragment_stepFour_remote, null)
+                            .replace(R.id.nav_host_fragment_create, createStudyFragment_stepFour_remote, null)
                             //.addToBackStack(null)
                             .setReorderingAllowed(true)
                             .commit();
+                     */
                 } else {
                     createStudyFragment_StepFour_Presence createStudyFragment_stepFour_presence = new createStudyFragment_StepFour_Presence();
-                    //createStudyFragment_stepFour_presence.setArguments(bundle);
+
+                    navControllerCreate.navigate(R.id.action_createStudyFragment_StepFive_to_createStudyFragment_StepFour_Presence);
+                    /*
                     fragmentManager
                             .beginTransaction()
                             .setCustomAnimations(R.anim.enter_from_left, R.anim.exit_to_right,
                                     R.anim.enter_from_right, R.anim.exit_to_left)
-                            .replace(R.id.fragment_container_create_study, createStudyFragment_stepFour_presence, null)
+                            .replace(R.id.nav_host_fragment_create, createStudyFragment_stepFour_presence, null)
                             //.addToBackStack(null)
                             .setReorderingAllowed(true)
                             .commit();
+                     */
                 }
                 break;
             case 6:
-                //getInput(currentFragment);
                 stateProgressBar.setCurrentStateNumber(StateProgressBar.StateNumber.FOUR);
-                //bundle = createBundle(5);
                 createStudyFragment_StepFive createStudyFragment_stepFive = new createStudyFragment_StepFive();
-                //createStudyFragment_stepFive.setArguments(bundle);
+
+                navControllerCreate.navigate(R.id.action_createStudyFragment_finalStep_to_createStudyFragment_StepFive);
+                /*
                 fragmentManager
                         .beginTransaction()
                         .setCustomAnimations(R.anim.enter_from_left, R.anim.exit_to_right,
                                 R.anim.enter_from_right, R.anim.exit_to_left)
-                        .replace(R.id.fragment_container_create_study, createStudyFragment_stepFive, null)
+                        .replace(R.id.nav_host_fragment_create, createStudyFragment_stepFive, null)
                         //.addToBackStack(null)
                         .setReorderingAllowed(true)
                         .commit();
+                 */
                 break;
             case 7:
                 stateProgressBar.setCurrentStateNumber(StateProgressBar.StateNumber.FOUR);
-                //bundle = createBundle(6);
                 createStudyFragment_finalStep createStudyFragment_finalStep = new createStudyFragment_finalStep();
-                //createStudyFragment_finalStep.setArguments(bundle);
+
+                navControllerCreate.navigate(R.id.action_createStudyFragment_finalStep_two_to_createStudyFragment_finalStep);
+                /*
                 fragmentManager
                         .beginTransaction()
                         .setCustomAnimations(R.anim.enter_from_left, R.anim.exit_to_right,
                                 R.anim.enter_from_right, R.anim.exit_to_left)
-                        .replace(R.id.fragment_container_create_study, createStudyFragment_finalStep, null)
+                        .replace(R.id.nav_host_fragment_create, createStudyFragment_finalStep, null)
                         //.addToBackStack(null)
                         .setReorderingAllowed(true)
                         .commit();
+                 */
                 break;
             case 8:
                 stateProgressBar.setCurrentStateNumber(StateProgressBar.StateNumber.FIVE);
-                //bundle = createBundle(7);
                 createStudyFragment_finalStep_two createStudyFragment_finalStep_two = new createStudyFragment_finalStep_two();
-                //createStudyFragment_finalStep_two.setArguments(bundle);
                 nextBtn.setText(getString(R.string.fragment_create_study_base_next));
                 nextBtn.setBackgroundColor(getResources().getColor(R.color.heatherred_dark));
+
+                navControllerCreate.navigate(R.id.action_createStudyFragment_finalStep_three_to_createStudyFragment_finalStep_two);
+                /*
                 fragmentManager
                         .beginTransaction()
                         .setCustomAnimations(R.anim.enter_from_left, R.anim.exit_to_right,
                                 R.anim.enter_from_right, R.anim.exit_to_left)
-                        .replace(R.id.fragment_container_create_study, createStudyFragment_finalStep_two, null)
+                        .replace(R.id.nav_host_fragment_create, createStudyFragment_finalStep_two, null)
                         //.addToBackStack(null)
                         .setReorderingAllowed(true)
                         .commit();
+                 */
                 break;
             default:
                 break;
@@ -684,171 +622,6 @@ public class CreateStudyFragment extends Fragment {
         }
     }
 
-    /*
-    private void getInput(int page) {
-        int currentFragmentIndex = fragmentManager.getFragments().size() - 1;
-        switch (page) {
-            case 1:
-                textInputEditTextTitle = fragmentManager.getFragments().get(currentFragmentIndex).getView().findViewById(R.id.inputFieldTitle);
-                textInputEditTextVP = fragmentManager.getFragments().get(currentFragmentIndex).getView().findViewById(R.id.inputFieldVP);
-                studyTitle = Objects.requireNonNull(textInputEditTextTitle.getText()).toString();
-                VP = Objects.requireNonNull(textInputEditTextVP.getText()).toString();
-                System.out.println("getInput" + textInputEditTextTitle + " " + textInputEditTextVP);
-                System.out.println(VP + " " + studyTitle);
-
-                categoriesSpinner = fragmentManager.getFragments().get(currentFragmentIndex).getView().findViewById(R.id.createCategories);
-                executionTypeSpinner = fragmentManager.getFragments().get(currentFragmentIndex).getView().findViewById(R.id.createExecutionType);
-                category = categoriesSpinner.getSelectedItem().toString();
-                execution = executionTypeSpinner.getSelectedItem().toString();
-                System.out.println("Kategorie: " + category);
-                System.out.println("Durchführung: " + execution);
-                break;
-
-            case 2:
-                textInputEditTextContactMail = fragmentManager.getFragments().get(currentFragmentIndex).getView().findViewById(R.id.inputContact1);
-                textInputEditTextContactZoom = fragmentManager.getFragments().get(currentFragmentIndex).getView().findViewById(R.id.inputContact2);
-                textInputEditTextContactSkype = fragmentManager.getFragments().get(currentFragmentIndex).getView().findViewById(R.id.inputContact3);
-                textInputEditTextContactDiscord = fragmentManager.getFragments().get(currentFragmentIndex).getView().findViewById(R.id.inputContact4);
-                textInputEditTextContactOthers = fragmentManager.getFragments().get(currentFragmentIndex).getView().findViewById(R.id.inputContact5);
-
-                contactMail = Objects.requireNonNull(textInputEditTextContactMail.getText()).toString();
-                contactPhone = Objects.requireNonNull(textInputEditTextContactZoom.getText()).toString();
-                contactSkype = Objects.requireNonNull(textInputEditTextContactSkype.getText()).toString();
-                contactDiscord = Objects.requireNonNull(textInputEditTextContactDiscord.getText()).toString();
-                contactOthers = Objects.requireNonNull(textInputEditTextContactOthers.getText()).toString();
-                break;
-
-            case 3:
-                textInputEditTextDesc = fragmentManager.getFragments().get(currentFragmentIndex).getView().findViewById(R.id.inputFieldStudyDesc);
-                studyDesc = Objects.requireNonNull(textInputEditTextDesc.getText()).toString();
-                System.out.println(studyDesc);
-                break;
-
-            case 4:
-                if (execution.equals(getString(R.string.remoteString))) {
-                    // GET REMOTE STUFF HERE
-                    location = "";
-                    street = "";
-                    room = "";
-                    textInputEditTextPlatform = fragmentManager.getFragments().get(currentFragmentIndex).getView().findViewById(R.id.inputFieldPlatform);
-                    textInputEditTextOptionalPlatform = fragmentManager.getFragments().get(currentFragmentIndex).getView().findViewById(R.id.inputFieldPlatformOptional);
-                    platform = Objects.requireNonNull(textInputEditTextPlatform.getText()).toString();
-                    optionalPlatform = Objects.requireNonNull(textInputEditTextOptionalPlatform.getText()).toString();
-                }
-                if (execution.equals((getString(R.string.presenceString)))) {
-                    // GET PRESENCE STUFF HERE
-                    platform = "";
-                    optionalPlatform = "";
-
-                    textInputEditTextLocation = fragmentManager.getFragments().get(currentFragmentIndex).getView().findViewById(R.id.inputFieldLocation);
-                    textInputEditTextStreet = fragmentManager.getFragments().get(currentFragmentIndex).getView().findViewById(R.id.inputFieldStreet);
-                    textInputEditTextRoom = fragmentManager.getFragments().get(currentFragmentIndex).getView().findViewById(R.id.inputFieldRoom);
-
-                    location = Objects.requireNonNull(textInputEditTextLocation.getText()).toString();
-                    street = Objects.requireNonNull(textInputEditTextStreet.getText()).toString();
-                    room = Objects.requireNonNull(textInputEditTextRoom.getText()).toString();
-                }
-                break;
-            case 5:
-                listViewDates = fragmentManager.getFragments().get(currentFragmentIndex).getView().findViewById(R.id.createDatelist);
-                for (int i = 0; i < listViewDates.getAdapter().getCount(); i++) {
-                    System.out.println(listViewDates.getAdapter().getItem(i));
-                    System.out.println(listViewDates.getAdapter().getCount());
-                    dates.add(listViewDates.getAdapter().getItem(i).toString());
-                }
-                break;
-        }
-    }
-
-     */
-
-    /*
-    private Bundle createBundle(int page) {
-        Bundle bundle = new Bundle();
-        switch (page) {
-            case 1:
-                bundle.putString("title", studyTitle);
-                bundle.putString("vp", VP);
-                bundle.putString("category", category);
-                bundle.putString("exe", execution);
-                break;
-            case 2:
-                bundle.putString("contact", mainActivity.uniqueID); //mainActivity.createUserId(this);
-                bundle.putString("contact2", contactPhone);
-                bundle.putString("contact3", contactSkype);
-                bundle.putString("contact4", contactDiscord);
-                bundle.putString("contact5", contactOthers);
-                break;
-            case 3:
-                bundle.putString("desc", studyDesc);
-                break;
-            case 4:
-                if (execution.equals(getString(R.string.remoteString))) {
-                    bundle.putString("platform", platform);
-                    bundle.putString("platform2", optionalPlatform);
-
-                }
-                if (execution.equals((getString(R.string.presenceString)))) {
-                    bundle.putString("location", location);
-                    bundle.putString("street", street);
-                    bundle.putString("room", room);
-                }
-                break;
-            case 5:
-                bundle.putStringArrayList("dates", dates);
-                break;
-            case 6:
-                prepareData();
-                bundle.putString("title", studyTitle);
-                bundle.putString("vp", VP);
-                bundle.putString("category", category);
-                bundle.putString("exe", execution);
-                bundle.putString("location", locationViewString);
-                break;
-            case 7:
-                bundle.putString("desc", studyDesc);
-                bundle.putString("contact", contactViewString);
-                break;
-            case 8:
-                bundle.putStringArrayList("dates", dates);
-                break;
-            default:
-                break;
-        }
-        return bundle;
-    }
-    */
-
-    /*
-    private void prepareData() {
-        contactViewString = "\n";
-        contactViewString += "Email-adresese: " + contactMail;
-        if (!contactPhone.isEmpty()) {
-            contactViewString += "\nHandynummer: " + contactPhone;
-        }
-        if (!contactSkype.isEmpty()) {
-            contactViewString += "\nSkype: " + contactSkype;
-        }
-        if (!contactDiscord.isEmpty()) {
-            contactViewString += "\nDiscord: " + contactDiscord;
-        }
-        if (!contactOthers.isEmpty()) {
-            contactViewString += "\nSonstige: " + contactOthers;
-        }
-
-        locationViewString = "\n";
-        if (!location.isEmpty()) {
-            locationViewString = location + "\n" + street + "\n" + room;
-        } else {
-            locationViewString += platform;
-            if (!optionalPlatform.isEmpty()) {
-                locationViewString += " & " + optionalPlatform;
-            }
-        }
-    }
-
-     */
-
     private boolean mandatoryCheck(int page) {
         switch (page) {
             case 1:
@@ -876,31 +649,6 @@ public class CreateStudyFragment extends Fragment {
                     createStudyFragment_StepOne.executionType.performClick();
                     break;
                 }
-                /*
-                if (!studyTitle.isEmpty() && !category.equals("Studienkategorie*") && !execution.equals("Durchführungsart*")) {
-                    System.out.println(studyTitle);
-                    return true;
-                }
-                if (studyTitle.isEmpty()) {
-                    textInputEditTextTitle.setError("Titel darf nicht leer sein");
-                    textInputEditTextTitle.requestFocus();
-                    break;
-                }
-                if (category.equals("Studienkategorie*")) {
-                    categoriesSpinner.setFocusable(true);
-                    categoriesSpinner.setFocusableInTouchMode(true);
-                    categoriesSpinner.requestFocus();
-                    categoriesSpinner.performClick();
-                    break;
-                }
-                if (execution.equals("Durchführungsart*")) {
-                    executionTypeSpinner.setFocusable(true);
-                    executionTypeSpinner.setFocusableInTouchMode(true);
-                    executionTypeSpinner.requestFocus();
-                    executionTypeSpinner.performClick();
-                    break;
-                }
-                 */
                 break;
             case 2:
                 if (createStudyViewModel.studyCreationProcessData.get("contact") != null) {
@@ -908,10 +656,6 @@ public class CreateStudyFragment extends Fragment {
                 }
                 createStudyFragment_StepTwo.textInputEditTextContactMail.setError("Email-Kontakt muss angegeben werden");
                 createStudyFragment_StepTwo.textInputEditTextContactMail.requestFocus();
-                /*
-                textInputEditTextContactMail.setError("Email-Kontakt muss angegeben werden");
-                textInputEditTextContactMail.requestFocus();
-                 */
                 break;
             case 3:
                 if (createStudyViewModel.studyCreationProcessData.get("description") != null) {
@@ -938,22 +682,6 @@ public class CreateStudyFragment extends Fragment {
                             .setError("Primärplattform muss angegeben werden");
                     createStudyFragment_StepFour_Remote.textInputEditTextPlatform.requestFocus();
                 }
-                /*
-                if (!location.isEmpty()) {
-                    return true;
-                }
-                if (execution.equals("Präsenz")) {
-                    textInputEditTextLocation.setError("Ort der Studie muss angegeben werden");
-                    textInputEditTextLocation.requestFocus();
-                }
-                if (!platform.isEmpty()) {
-                    return true;
-                }
-                if (execution.equals("Remote")) {
-                    textInputEditTextPlatform.setError("Primärplattform muss angegeben werden");
-                    textInputEditTextPlatform.requestFocus();
-                }
-                 */
                 break;
             default:
                 return false;
@@ -962,7 +690,7 @@ public class CreateStudyFragment extends Fragment {
     }
 
     private void reNavigateToCreateStudyFragment() {
-        navController.navigate(R.id.action_global_createStudyFragment);
+        navControllerMain.navigate(R.id.action_global_createStudyFragment);
     }
 
     public void playAnimation() {
