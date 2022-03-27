@@ -3,6 +3,7 @@ package com.example.vpmanager.views.studyCreatorDetails;
 import android.content.res.ColorStateList;
 import android.os.Bundle;
 
+import com.example.vpmanager.PA_ExpandableListDataPump;
 import com.example.vpmanager.R;
 import com.example.vpmanager.viewmodels.StudyCreatorViewModel;
 import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton;
@@ -41,7 +42,7 @@ public class StudyCreatorDetailsFragment extends Fragment {
     private TextView remoteData;
     private TextView localData;
 
-    private boolean studyStateIsClosed;
+    private boolean studyIsClosed;
 
     ExtendedFloatingActionButton editButton, changeStudyStateButton;
 
@@ -54,8 +55,6 @@ public class StudyCreatorDetailsFragment extends Fragment {
     public StudyCreatorDetailsFragment() {
         // Required empty public constructor
     }
-
-
 
     public static StudyCreatorDetailsFragment newInstance(String param1, String param2) {
         StudyCreatorDetailsFragment fragment = new StudyCreatorDetailsFragment();
@@ -95,9 +94,7 @@ public class StudyCreatorDetailsFragment extends Fragment {
         studyViewModel = new ViewModelProvider(requireActivity()).get(StudyCreatorViewModel.class);
         studyViewModel.studyCreatorDetailsFragment = this;
         studyViewModel.prepareRepo();
-
         /**Study State aus Datenbank abfragen und Button entsprechend färben*/
-        studyStateIsClosed = false;
     }
 
     private void initDetailViews(View view) {
@@ -122,22 +119,22 @@ public class StudyCreatorDetailsFragment extends Fragment {
         changeStudyStateButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(studyStateIsClosed)
+                studyIsClosed = !studyIsClosed;
+                if(!studyIsClosed)
                 {
                     changeStudyStateButton.setText("Studie abschließen");
                     changeStudyStateButton.setStrokeColor(ColorStateList.valueOf(getContext().getResources().getColor(R.color.heatherred_dark)));
                     changeStudyStateButton.setBackgroundTintList(ColorStateList.valueOf(getContext().getResources().getColor(R.color.heatherred_Main)));
                     changeStudyStateButton.setIcon(getContext().getResources().getDrawable(R.drawable.ic_baseline_close_24));
-                    studyStateIsClosed = false;
                 }
                 else
                 {
                     changeStudyStateButton.setText("Studie Fortführen");
                     changeStudyStateButton.setStrokeColor(ColorStateList.valueOf(getContext().getResources().getColor(R.color.green_dark)));
                     changeStudyStateButton.setBackgroundTintList(ColorStateList.valueOf(getContext().getResources().getColor(R.color.green_Main)));
-                    changeStudyStateButton.setIcon(getContext().getResources().getDrawable(R.drawable.ic_baseline_check_24));
-                    studyStateIsClosed = true;
+                    changeStudyStateButton.setIcon(getContext().getResources().getDrawable(R.drawable.ic_baseline_refresh_24));
                 }
+                PA_ExpandableListDataPump.setStudyState(currentStudyId, studyIsClosed);
             }
         });
     }
@@ -160,7 +157,32 @@ public class StudyCreatorDetailsFragment extends Fragment {
                     studyViewModel.getStudyDetails().getStreet() + "\t\t" + studyViewModel.getStudyDetails().getRoom();
             localData.setText(locationString);
         }
+        PA_ExpandableListDataPump.getDateState(currentStudyId, new PA_ExpandableListDataPump.FirestoreCallbackDateState() {
+            @Override
+            public void onCallback(boolean participated) {
+                studyIsClosed = participated;
+                setStudyStateButton();
+            }
+        });
+    }
 
+
+    private void setStudyStateButton()
+    {
+        if(!studyIsClosed)
+        {
+            changeStudyStateButton.setText("Studie abschließen");
+            changeStudyStateButton.setStrokeColor(ColorStateList.valueOf(getContext().getResources().getColor(R.color.heatherred_dark)));
+            changeStudyStateButton.setBackgroundTintList(ColorStateList.valueOf(getContext().getResources().getColor(R.color.heatherred_Main)));
+            changeStudyStateButton.setIcon(getContext().getResources().getDrawable(R.drawable.ic_baseline_close_24));
+        }
+        else
+        {
+            changeStudyStateButton.setText("Studie Fortführen");
+            changeStudyStateButton.setStrokeColor(ColorStateList.valueOf(getContext().getResources().getColor(R.color.green_dark)));
+            changeStudyStateButton.setBackgroundTintList(ColorStateList.valueOf(getContext().getResources().getColor(R.color.green_Main)));
+            changeStudyStateButton.setIcon(getContext().getResources().getDrawable(R.drawable.ic_baseline_refresh_24));
+        }
     }
 }
 
