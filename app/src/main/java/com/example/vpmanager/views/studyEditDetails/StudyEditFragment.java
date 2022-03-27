@@ -1,4 +1,4 @@
-package com.example.vpmanager.views;
+package com.example.vpmanager.views.studyEditDetails;
 
 import static com.example.vpmanager.PA_ExpandableListDataPump.DB_DATES_LIST;
 import static com.example.vpmanager.PA_ExpandableListDataPump.DB_STUDIES_LIST;
@@ -17,9 +17,14 @@ import android.widget.Spinner;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
+import androidx.viewpager.widget.ViewPager;
 
 import com.example.vpmanager.PA_ExpandableListDataPump;
 import com.example.vpmanager.R;
+import com.example.vpmanager.adapter.viewPagerAdapter;
+import com.example.vpmanager.views.mainActivity;
+import com.example.vpmanager.views.studyDetails.StudyFragment;
+import com.google.android.material.tabs.TabLayout;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -27,9 +32,15 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
-public class editStudyFragment extends Fragment {
+public class StudyEditFragment extends Fragment {
 
-    NavController navController;
+    private NavController navController;
+
+    private ViewPager viewPager;
+    private TabLayout tabLayout;
+
+    private StudyEditDetailsFragment studyEditDetailsFragment;
+    private StudyEditDatesFragment studyEditDatesFragment;
 
     String currentStudyId;
     String currentUserId;
@@ -41,7 +52,6 @@ public class editStudyFragment extends Fragment {
     Spinner execution;
     EditText location;
     EditText description;
-   // EditText dates;
     EditText contact;
 
     Button saveButton;
@@ -50,7 +60,7 @@ public class editStudyFragment extends Fragment {
     //Parameter:
     //Return values:
     //Sets the current fragment for the activity
-    public editStudyFragment() {
+    public StudyEditFragment() {
     }
 
     @Override
@@ -59,23 +69,37 @@ public class editStudyFragment extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.fragment_edit_study, container, false);
         getRequiredInfos();
 
-        return inflater.inflate(R.layout.fragment_edit_study, container, false);
+        viewPager = (ViewPager) view.findViewById(R.id.view_pager_edit_study);
+        tabLayout = (TabLayout) view.findViewById(R.id.tab_layout_edit_study);
+
+        studyEditDetailsFragment = new StudyEditDetailsFragment();
+        studyEditDatesFragment = new StudyEditDatesFragment();
+
+        tabLayout.setupWithViewPager(viewPager);
+
+        viewPagerAdapter viewPagerAdapter = new viewPagerAdapter(getParentFragmentManager(), 0);
+        viewPagerAdapter.addFragment(studyEditDetailsFragment, "Details");
+        viewPagerAdapter.addFragment(studyEditDatesFragment, "Termine");
+        viewPager.setAdapter(viewPagerAdapter);
+
+        return view;
     }
 
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
         navController = Navigation.findNavController(view);
-        setupView(view);
-        loadData();
+        super.onViewCreated(view, savedInstanceState);
+
+        //TODO: wie im "StudyFragment" müssen diese methoden in die einzelnen Fragments ausgelagert werden
+        //setupView(view);
+        //loadData();
     }
 
     private void getRequiredInfos() {
-        //Get the studyId early
         currentStudyId = getArguments().getString("studyId");
         currentUserId = mainActivity.createUserId(getActivity());
     }
@@ -83,6 +107,7 @@ public class editStudyFragment extends Fragment {
     //Parameter:
     //Return values:
     //Connects the code with the view and sets Listener for Saving
+    /*
     private void setupView(View view) {
         title = view.findViewById(R.id.edit_study_title);
         name = view.findViewById(R.id.edit_study_name);
@@ -127,10 +152,13 @@ public class editStudyFragment extends Fragment {
         });
     }
 
+     */
+
 
     //Parameter:
     //Return values: Map with all inputs from Edittexts
     //Loads data in a Map for the Database
+    /*
     private Map<String, Object> createDataMap() {
         Map<String, Object> dataMap = new HashMap<>();
         dataMap.put("category", categories.getSelectedItem());
@@ -152,9 +180,12 @@ public class editStudyFragment extends Fragment {
         return dataMap;
     }
 
+     */
+
     //Parameter:
     //Return values:
     //Loads data recieved from the database into the edittexts
+    /*
     private void loadData() {
         studyDateIds = new ArrayList<>();
         getAllStudies(() -> {
@@ -203,6 +234,8 @@ public class editStudyFragment extends Fragment {
             }
         });
     }
+
+     */
 
 
     private void saveDataToDatabase(Map<String, Object> data) {
