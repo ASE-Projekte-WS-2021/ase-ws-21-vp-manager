@@ -364,6 +364,7 @@ public class homeFragment extends Fragment {
         matrikelNumber = mNumber;
         maxVpCount = Float.parseFloat(vps);
 
+        navController.navigate(R.id.action_global_homeFragment);
         PA_ExpandableListDataPump.saveVPandMatrikelnumber(vps, mNumber);
     }
 }

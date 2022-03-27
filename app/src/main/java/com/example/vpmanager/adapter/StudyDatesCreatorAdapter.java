@@ -85,13 +85,6 @@ public class StudyDatesCreatorAdapter extends RecyclerView.Adapter<RecyclerView.
             participated = false;
             notParticipated = false;
 
-           /* stateLayout.addOnButtonCheckedListener(new MaterialButtonToggleGroup.OnButtonCheckedListener() {
-                @Override
-                public void onButtonChecked(MaterialButtonToggleGroup group, int checkedId, boolean isChecked) {
-                    System.out.println(checkedId + " " + isChecked);
-                }
-            });
-*/
             participatedButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {

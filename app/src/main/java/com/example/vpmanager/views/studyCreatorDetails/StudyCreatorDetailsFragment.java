@@ -1,9 +1,11 @@
 package com.example.vpmanager.views.studyCreatorDetails;
 
+import android.content.res.ColorStateList;
 import android.os.Bundle;
 
 import com.example.vpmanager.R;
 import com.example.vpmanager.viewmodels.StudyCreatorViewModel;
+import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -15,7 +17,6 @@ import androidx.navigation.Navigation;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 
@@ -40,7 +41,9 @@ public class StudyCreatorDetailsFragment extends Fragment {
     private TextView remoteData;
     private TextView localData;
 
-    ImageView editButton;
+    private boolean studyStateIsClosed;
+
+    ExtendedFloatingActionButton editButton, changeStudyStateButton;
 
     NavController navController;
 
@@ -93,6 +96,8 @@ public class StudyCreatorDetailsFragment extends Fragment {
         studyViewModel.studyCreatorDetailsFragment = this;
         studyViewModel.prepareRepo();
 
+        /**Study State aus Datenbank abfragen und Button entsprechend färben*/
+        studyStateIsClosed = false;
     }
 
     private void initDetailViews(View view) {
@@ -106,11 +111,34 @@ public class StudyCreatorDetailsFragment extends Fragment {
         //Textview for further studyType data (depending on type)
         remoteData = view.findViewById(R.id.creator_remoteStudyStudyFragment);
         localData = view.findViewById(R.id.creator_localStudyStudyFragment);
+        changeStudyStateButton = view.findViewById(R.id.creator_changeStudyStateButton);
 
         editButton.setOnClickListener(v -> {
             Bundle args = new Bundle();
             args.putString("studyId", currentStudyId);
             navController.navigate(R.id.action_studyCreatorFragment_to_editStudyFragment, args);
+        });
+
+        changeStudyStateButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(studyStateIsClosed)
+                {
+                    changeStudyStateButton.setText("Studie abschließen");
+                    changeStudyStateButton.setStrokeColor(ColorStateList.valueOf(getContext().getResources().getColor(R.color.heatherred_dark)));
+                    changeStudyStateButton.setBackgroundTintList(ColorStateList.valueOf(getContext().getResources().getColor(R.color.heatherred_Main)));
+                    changeStudyStateButton.setIcon(getContext().getResources().getDrawable(R.drawable.ic_baseline_close_24));
+                    studyStateIsClosed = false;
+                }
+                else
+                {
+                    changeStudyStateButton.setText("Studie Fortführen");
+                    changeStudyStateButton.setStrokeColor(ColorStateList.valueOf(getContext().getResources().getColor(R.color.green_dark)));
+                    changeStudyStateButton.setBackgroundTintList(ColorStateList.valueOf(getContext().getResources().getColor(R.color.green_Main)));
+                    changeStudyStateButton.setIcon(getContext().getResources().getDrawable(R.drawable.ic_baseline_check_24));
+                    studyStateIsClosed = true;
+                }
+            }
         });
     }
 
