@@ -57,11 +57,19 @@
 
 
 <LinearLayout
-    android:layout_width="wrap_content"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:id="@+id/dateStateLayout"
-    android:layout_gravity="center_horizontal"
-    android:layout_marginTop="10dp">
+    android:layout_marginTop="10dp"
+    android:orientation="horizontal"
+    android:paddingStart="15dp">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:text="Teilnahmestatus ändern: "
+        android:gravity="center"/>
+
 
     <androidx.cardview.widget.CardView
         android:layout_width="wrap_content"
@@ -92,32 +100,7 @@
     </androidx.cardview.widget.CardView>
 
 
-    <androidx.cardview.widget.CardView
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        app:cardCornerRadius="10dp"
-        app:cardBackgroundColor="@color/grey"
-        android:id="@+id/dateCreatorBorderCard_notParticipated"
-        android:layout_marginHorizontal="5dp">
 
-        <androidx.cardview.widget.CardView
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            app:cardCornerRadius="10dp"
-            app:cardBackgroundColor="@color/white"
-            android:layout_margin="2dp">
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:text="Nicht Teilgenommen"
-                android:id="@+id/dateNotParticipatedButton"
-                android:textColor="@color/grey"
-                android:textStyle="bold"
-                android:textSize="16sp"
-                android:layout_margin="5dp"
-                />
-        </androidx.cardview.widget.CardView>
-    </androidx.cardview.widget.CardView>
 </LinearLayout>
 
 

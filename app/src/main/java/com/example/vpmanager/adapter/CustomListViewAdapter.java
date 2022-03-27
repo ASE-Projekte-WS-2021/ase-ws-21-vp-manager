@@ -65,7 +65,7 @@ public class CustomListViewAdapter extends BaseAdapter {
                 StudyObjectPa object = null;
 
                 switch (key) {
-                    case "Vergangene Studien":
+                    case "Teilgenommene Studien":
                         object = new StudyObjectPa(values[0], values[1], values[3], values[2], R.color.pieChartParticipation);
                         break;
                     case "Geplante Studien":
@@ -143,7 +143,7 @@ public class CustomListViewAdapter extends BaseAdapter {
                     if (PA_ExpandableListDataPump.navigateToStudyCreatorFragment(uniqueID, study.getStudyId())) {
                         navController.navigate(R.id.action_ownStudyFragment_to_studyCreatorFragment, args);
                     } else {
-                        navController.navigate(R.id.action_ownStudyFragment_to_studyCreatorFragment, args);
+                        navController.navigate(R.id.action_ownStudyFragment_to_studyFragment, args);
                     }
                 }
             });

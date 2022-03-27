@@ -12,6 +12,7 @@ import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.vpmanager.PA_ExpandableListDataPump;
 import com.example.vpmanager.R;
 import com.example.vpmanager.models.DateModel;
 
@@ -44,6 +45,9 @@ public class StudyDatesCreatorAdapter extends RecyclerView.Adapter<RecyclerView.
         //other textViews can be filled with data here
         ((CustomViewHolder) holder).dateDate.setText(mStudyDates.get(position).getDate());
         ((CustomViewHolder) holder).dateUserId.setText(mStudyDates.get(position).getUserId());
+        ((CustomViewHolder) holder).participated = mStudyDates.get(position).getParticipation();
+
+        ((CustomViewHolder) holder).setParticipationButtons(((CustomViewHolder) holder).participated);
 
         if( ((CustomViewHolder) holder).dateUserId.getText().toString().isEmpty())
         {  ((CustomViewHolder) holder).stateLayout.setVisibility(View.GONE);
@@ -63,10 +67,10 @@ public class StudyDatesCreatorAdapter extends RecyclerView.Adapter<RecyclerView.
         TextView dateUserId;
         LinearLayout stateLayout;
 
-        TextView participatedButton, notParticipatedButton;
-        CardView border_participated, border_not_participated;
+        TextView participatedButton;
+        CardView border_participated;
 
-        private boolean participated, notParticipated;
+        private boolean participated;
 
         public CustomViewHolder(@NonNull View itemView, Context context) {
             super(itemView);
@@ -75,54 +79,42 @@ public class StudyDatesCreatorAdapter extends RecyclerView.Adapter<RecyclerView.
             dateUserId = itemView.findViewById(R.id.dateCreatorItemUserId);
             stateLayout = itemView.findViewById(R.id.dateStateLayout);
             participatedButton = itemView.findViewById(R.id.dateParticipatedButton);
-            notParticipatedButton = itemView.findViewById(R.id.dateNotParticipatedButton);
             border_participated = itemView.findViewById(R.id.dateCreatorBorderCard_participated);
-            border_not_participated = itemView.findViewById(R.id.dateCreatorBorderCard_notParticipated);
-
-            participated = false;
-            notParticipated = false;
 
             participatedButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     /** Push to database **/
-                    notParticipated = false;
                     participated = !participated;
-                    if(participated)
-                    {
-                        border_participated.setCardBackgroundColor(context.getResources().getColor(R.color.green_dark));
-                        participatedButton.setTextColor(context.getResources().getColor(R.color.green_dark));
-                        border_not_participated.setCardBackgroundColor(context.getResources().getColor(R.color.grey));
-                        notParticipatedButton.setTextColor(context.getResources().getColor(R.color.grey));
-                    }
-                    else
-                    {
-                        border_participated.setCardBackgroundColor(context.getResources().getColor(R.color.grey));
-                        participatedButton.setTextColor(context.getResources().getColor(R.color.grey));
-                    }
-                }
-            });
 
-            notParticipatedButton.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    /** Push to database**/
-                    notParticipated = !notParticipated;
-                    participated = false;
-                    if(notParticipated)
-                    {
-                        border_participated.setCardBackgroundColor(context.getResources().getColor(R.color.grey));
-                        participatedButton.setTextColor(context.getResources().getColor(R.color.grey));
-                        border_not_participated.setCardBackgroundColor(context.getResources().getColor(R.color.heatherred_dark));
-                        notParticipatedButton.setTextColor(context.getResources().getColor(R.color.heatherred_dark));
+                    if (participated) {
+                        participatedButton.setTextColor(context.getResources().getColor(R.color.green_dark));
+                        participatedButton.setText("Teilgenommen");
+                        border_participated.setCardBackgroundColor(context.getResources().getColor(R.color.green_dark));
+                    } else {
+                        participatedButton.setTextColor(context.getResources().getColor(R.color.heatherred_dark));
+                        participatedButton.setText("Nicht Teilgenommen");
+                        border_participated.setCardBackgroundColor(context.getResources().getColor(R.color.heatherred_dark));
                     }
-                    else
-                    {
-                        border_not_participated.setCardBackgroundColor(context.getResources().getColor(R.color.grey));
-                        notParticipatedButton.setTextColor(context.getResources().getColor(R.color.grey));
-                    }
+                    PA_ExpandableListDataPump.setDateState(mStudyDates.get(getAdapterPosition()).getDateId(), participated);
                 }
             });
+        }
+        public void setParticipationButtons(boolean participation)
+        {
+            if(participation)
+            {
+                border_participated.setCardBackgroundColor(context.getResources().getColor(R.color.green_dark));
+                participatedButton.setText("Teilgenommen");
+                participatedButton.setTextColor(context.getResources().getColor(R.color.green_dark));
+
+            }
+            else
+            {
+                border_participated.setCardBackgroundColor(context.getResources().getColor(R.color.heatherred_dark));
+                participatedButton.setTextColor(context.getResources().getColor(R.color.heatherred_dark));
+                participatedButton.setText("Nicht Teilgenommen");
+            }
         }
 
         @Override
