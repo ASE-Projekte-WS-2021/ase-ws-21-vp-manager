@@ -92,6 +92,9 @@
         <action
             android:id="@+id/action_ownStudyFragment_to_studyCreatorFragment"
             app:destination="@id/studyCreatorFragment" />
+        <action
+            android:id="@+id/action_ownStudyFragment_to_studyFragment"
+            app:destination="@id/studyFragment" />
     </fragment>
     <fragment
         android:id="@+id/studyFragment"

@@ -47,6 +47,7 @@ public class CreateStudyViewModel extends ViewModel implements CreateStudyListen
                 newDate.put("userId", null);
                 newDate.put("date", datesCreationProcessData.get(i));
                 newDate.put("selected", false);
+                newDate.put("participated", false);
 
                 dateIds.add(dateId);
                 //Repo call

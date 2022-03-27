@@ -133,7 +133,8 @@ public class StudyRepository {
                                                 document.getString("id"),      //id of the date
                                                 document.getString("date"),    //the date itself
                                                 document.getString("studyId"), //id of corresponding study
-                                                document.getString("userId"))  //id of user who selected the date
+                                                document.getString("userId"),  //id of user who selected the date
+                                                document.getBoolean("participated"))
                                 );
                             }
                             studyDatesListener.onStudyDatesReady(datesArrayList);
@@ -161,7 +162,8 @@ public class StudyRepository {
                                                 document.getString("id"),      //id of the date
                                                 document.getString("date"),    //the date itself
                                                 document.getString("studyId"), //id of corresponding study
-                                                document.getString("userId"))  //id of user who selected the date
+                                                document.getString("userId"),  //id of user who selected the date
+                                                document.getBoolean("participated"))
                                 );
                             }
                             studyDatesListener.onStudyDatesReady(datesArrayList);
