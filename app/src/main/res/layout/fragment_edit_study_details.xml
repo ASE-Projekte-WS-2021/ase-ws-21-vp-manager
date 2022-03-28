@@ -20,20 +20,7 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <!--<EditText
-                android:id="@+id/edit_study_title"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textAlignment="center"
-                android:textSize="35sp" />
 
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="3dp"
-                android:layout_marginLeft="20dp"
-                android:layout_marginTop="2dp"
-                android:layout_marginRight="20dp"
-                android:background="@color/black" />-->
 
             <com.google.android.material.card.MaterialCardView
                 android:id="@+id/cart_category"
@@ -146,6 +133,7 @@
                 android:layout_marginStart="20dp"
                 android:layout_marginTop="5dp"
                 android:layout_marginEnd="20dp"
+
                 android:hint="Raum"
                 android:textColorHint="@color/heatherred_Main"
                 app:boxStrokeColor="@color/black"
@@ -160,6 +148,12 @@
 
             </com.google.android.material.textfield.TextInputLayout>
 
+
+
+
+          <!--  by using a 3rd Field for platform only 3 fields would be needed for
+            location AND platform, setting the text depending on the input-->
+
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/cart_platform_one"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
@@ -169,6 +163,7 @@
                 android:layout_marginStart="20dp"
                 android:layout_marginTop="25dp"
                 android:layout_marginEnd="20dp"
+
                 android:hint="Plattform"
                 android:textColorHint="@color/heatherred_Main"
                 app:boxStrokeColor="@color/black"
@@ -264,7 +259,6 @@
                 android:layout_marginStart="20dp"
                 android:layout_marginTop="5dp"
                 android:layout_marginEnd="20dp"
-                android:layout_marginBottom="20dp"
                 android:hint="VP-Stunden"
                 android:textColorHint="@color/heatherred_Main"
                 app:boxStrokeColor="@color/black"
@@ -398,150 +392,7 @@
 
 
 
-            <!--<com.google.android.material.card.MaterialCardView
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="1.2"
-                android:layout_marginRight="30dp"
-                android:layout_marginLeft="30dp"
-                android:layout_marginTop="5dp">
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="5dp"
-                    android:text="Versuchspersonenstunden"/>
 
-                <EditText
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/edit_study_vp"
-                    android:textSize="20sp"
-                    android:layout_gravity="center"
-                    android:layout_marginStart="10dp">
-                </EditText>
-            </com.google.android.material.card.MaterialCardView>-->
-
-
-            <!--<com.google.android.material.card.MaterialCardView
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="1.2"
-
-                android:layout_marginRight="30dp"
-                android:layout_marginLeft="30dp"
-                android:layout_marginTop="5dp">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="5dp"
-                    android:text="Ort/Plattform"/>
-
-                <EditText
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/edit_study_location"
-                    android:textSize="20sp"
-                    android:layout_gravity="center"
-                    android:layout_marginStart="10dp">
-                </EditText>
-            </com.google.android.material.card.MaterialCardView>-->
-
-
-            <!--<View
-                android:layout_width="match_parent"
-                android:layout_height="3dp"
-                android:layout_marginLeft="20dp"
-                android:layout_marginTop="5dp"
-                android:layout_marginRight="20dp"
-                android:background="@color/black" />-->
-
-            <!--<com.google.android.material.card.MaterialCardView
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="3"
-
-                android:layout_marginRight="30dp"
-                android:layout_marginLeft="30dp"
-                android:layout_marginTop="5dp">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="5dp"
-                    android:text="Studienbeschreibung"/>
-
-                <EditText
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/edit_study_description"
-                    android:textSize="20sp"
-                    android:gravity="top"
-                    android:layout_marginStart="10dp"
-                    android:layout_marginTop="5dp">
-                </EditText>
-            </com.google.android.material.card.MaterialCardView>-->
-
-            <!--<com.google.android.material.card.MaterialCardView
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="1.2"
-
-                android:layout_marginRight="30dp"
-                android:layout_marginLeft="30dp"
-                android:layout_marginTop="5dp">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="5dp"
-                    android:text="Kontaktmöglichkeit"/>
-
-                <EditText
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/edit_study_contact"
-                    android:textSize="20sp"
-                    android:layout_marginStart="10dp">
-                </EditText>
-            </com.google.android.material.card.MaterialCardView>-->
-
-
-            <!--<View
-                android:layout_width="match_parent"
-                android:layout_height="3dp"
-                android:layout_marginLeft="20dp"
-                android:layout_marginTop="2dp"
-                android:layout_marginRight="20dp"
-                android:background="@color/black" />-->
-
-            <!--
-                        <com.google.android.material.card.MaterialCardView
-                            android:layout_width="match_parent"
-                            android:layout_height="0dp"
-                            android:layout_weight="2"
-
-                            android:layout_marginRight="30dp"
-                            android:layout_marginLeft="30dp"
-                            android:layout_marginTop="20dp">
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginLeft="5dp"
-                                android:text="Termine"/>
-                            <EditText
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:id="@+id/edit_study_dates"
-                                android:textSize="20sp"
-                                android:layout_gravity="top"
-                                android:layout_marginTop="10dp"
-                                android:layout_marginLeft="15dp"
-                                android:layout_marginRight="15dp">
-                            </EditText>
-
-                        </com.google.android.material.card.MaterialCardView>
             -->
             <Button
                 android:id="@+id/edit_saving_button"
