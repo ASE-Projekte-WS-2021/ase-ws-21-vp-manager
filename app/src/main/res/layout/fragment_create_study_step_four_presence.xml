@@ -16,7 +16,7 @@
 
 
         <TextView
-            android:id="@+id/pageTitle"
+            android:id="@+id/create_stepFourPresence_pageTitle"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="0.7"
@@ -63,7 +63,7 @@
                 android:id="@+id/inputFieldLocation"
                 style="@style/You.EditText.Style"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"></com.google.android.material.textfield.TextInputEditText>
+                android:layout_height="match_parent"/>
 
         </com.google.android.material.textfield.TextInputLayout>
 

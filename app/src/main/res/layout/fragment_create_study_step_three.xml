@@ -16,7 +16,7 @@
 
 
         <TextView
-            android:id="@+id/pageTitle"
+            android:id="@+id/create_stepThree_pageTitle"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="0.7"
