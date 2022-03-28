@@ -21,13 +21,12 @@
             android:orientation="vertical">
 
 
-
             <com.google.android.material.card.MaterialCardView
                 android:id="@+id/cart_category"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="30dp"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="20dp"
                 android:layout_marginEnd="30dp">
 
 
@@ -50,7 +49,7 @@
                 <Spinner
                     android:id="@+id/edit_study_execution"
                     android:layout_width="match_parent"
-                    android:layout_height="40dp"
+                    android:layout_height="wrap_content"
                     android:popupBackground="@color/green_Main" />
 
             </com.google.android.material.card.MaterialCardView>
@@ -389,7 +388,6 @@
                     android:layout_height="match_parent" />
 
             </com.google.android.material.textfield.TextInputLayout>
-
 
 
 
