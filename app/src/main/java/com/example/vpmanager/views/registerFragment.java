@@ -102,11 +102,11 @@ public class registerFragment extends Fragment {
     //Return values:
     //Handles account creation if the and provides feedback if the task was successful
     private void createUser() {
-        String email = emailEdittext.getText().toString();
-        String password = passwordEditText.getText().toString();
-        String confirmPassword = passwordConfirmEditText.getText().toString();
-        String matNr = matnrEditText.getText().toString();
-        String neededVP = vpEditText.getText().toString();
+        String email = emailEdittext.getText().toString().trim();
+        String password = passwordEditText.getText().toString().trim();
+        String confirmPassword = passwordConfirmEditText.getText().toString().trim();
+        String matNr = matnrEditText.getText().toString().trim();
+        String neededVP = vpEditText.getText().toString().trim();
         if(TextUtils.isEmpty(neededVP)){
             neededVP = "15";
         }
