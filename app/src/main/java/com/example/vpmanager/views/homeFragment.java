@@ -120,6 +120,12 @@ public class homeFragment extends Fragment {
     //checks if the user is currently logged in. If not sends him to login screen
     private void userLoggedIn(){
         FirebaseUser user = firebaseAuth.getCurrentUser();
+        firebaseAuth.addAuthStateListener(new FirebaseAuth.AuthStateListener() {
+            @Override
+            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
+
+            }
+        });
         if(user == null) {
             navController.navigate(R.id.action_global_nestedGraphLoginRegistration);
         }
