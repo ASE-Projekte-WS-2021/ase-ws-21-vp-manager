@@ -118,8 +118,9 @@ public class loginFragment extends Fragment {
     //Return values:
     //Handles login if the and provides feedback if the task was successful
     private void loginUser() {
-        String email = emailEdittext.getText().toString();
-        String password = passwordEditText.getText().toString();
+        String email = emailEdittext.getText().toString().trim();
+        String password = passwordEditText.getText().toString().trim();
+        email.trim();
         if (TextUtils.isEmpty(email)) {
             emailEdittext.setError("Email kann nicht leer sein");
             emailEdittext.requestFocus();
