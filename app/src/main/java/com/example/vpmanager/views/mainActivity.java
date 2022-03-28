@@ -118,9 +118,7 @@ public class mainActivity extends AppCompatActivity implements DrawerController 
             @Override
             public boolean onMenuItemClick(MenuItem menuItem) {
                 firebaseAuth.signOut();
-
                 navController.navigate(R.id.action_global_nestedGraphLoginRegistration);
-
                 Log.d("mainActivity", "menuItem" + navigationViewMain.getMenu().getItem(4).toString());
                 Log.d("mainActivity", "additional listener on logout was active!");
                 return false;
