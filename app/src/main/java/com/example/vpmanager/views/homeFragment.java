@@ -20,6 +20,7 @@ import androidx.navigation.Navigation;
 import com.example.vpmanager.PA_ExpandableListDataPump;
 import com.example.vpmanager.R;
 import com.example.vpmanager.adapter.CustomListViewAdapterAppointments;
+import com.example.vpmanager.models.StudyObjectPa;
 import com.google.android.flexbox.FlexboxLayout;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -29,8 +30,12 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.text.Format;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
@@ -112,8 +117,6 @@ public class homeFragment extends Fragment {
                 }));
         });
     }
-
-
 
     //Parameter:
     //Return values:
@@ -300,7 +303,7 @@ public class homeFragment extends Fragment {
         HashMap<String, String> getStudyIdByName = new HashMap<>();
         if (dates != null) {
 
-            HashMap<String, String> sortingMap = new HashMap<>();
+            HashMap<String, String> dateNameList = new HashMap<>();
 
             for (String[] listEntry : dates) {
                 String name = listEntry[0];
@@ -309,22 +312,24 @@ public class homeFragment extends Fragment {
 
                 if(date != null && name != null)
                 {
-                    sortingMap.put(date, name);
+                    dateNameList.put(date, name);
                     getStudyIdByName.put(name, studyID);
                 }
             }
 
+            dateNameList = sortList(dateNameList);
+
             int studyDisplayCount = 2;
 
-             if(sortingMap.size() < 3)
+            if(dateNameList.size() < 3)
             {
                 disableAllAppointmentsButton();
                 studyDisplayCount = 3;
             }
-             /** Liste erst invertieren, dann kürzen => letztes Ergebnis in textView anzeigen  **/
-            for (String key : sortingMap.keySet()) {
+
+            for (String key : dateNameList.keySet()) {
                 if (upComingAppointments.size() < studyDisplayCount) {
-                    upComingAppointments.add(sortingMap.get(key) + "\t\t" + key);
+                    upComingAppointments.add(dateNameList.get(key) + "\t\t" + key);
                 }
             }
             Collections.reverse(upComingAppointments);
@@ -373,5 +378,53 @@ public class homeFragment extends Fragment {
 
         navController.navigate(R.id.action_global_homeFragment);
         PA_ExpandableListDataPump.saveVPandMatrikelnumber(vps, mNumber);
+    }
+
+    private HashMap<String, String> sortList(HashMap<String, String> toSort)
+    {
+        HashMap<String, String> list = new HashMap<>();
+
+        String[][] dateList = new String[list.size()][2];
+        int position = 0;
+        for(String key: toSort.keySet())
+        {
+            dateList[position][0] = key;
+            dateList[position][1] = toSort.get(key);
+            position++;
+        }
+
+        for (int i = 0; i < dateList.length; i++) {
+            for (int k = 0; k < dateList.length - 1; k++) {
+
+                String date1 = dateList[k][0].substring(dateList[k][0].indexOf(",") + 2);
+                String date2 = dateList[k + 1][0].substring(dateList[k + 1][0].indexOf(",") + 2);
+
+                date1 = date1.replaceAll("um", "");
+                date1 = date1.replaceAll("Uhr", "");
+                date2 = date2.replaceAll("um", "");
+                date2 = date2.replaceAll("Uhr", "");
+
+                Format format = new SimpleDateFormat("dd.MM.yyyy hh:mm");
+                try {
+
+                    Date d1_Date = (Date) format.parseObject(date1);
+                    Date d2_Date = (Date) format.parseObject(date2);
+
+                    if (d2_Date.before(d1_Date)) {
+                        String[] tempDate = dateList[k];
+                        dateList[k] = dateList[k + 1];
+                        dateList[k + 1] = tempDate;
+                    }
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+        list.clear();
+        for(String[] date: dateList) {
+            list.put(date[0], date[1]);
+            return list;
+        }
+        return list;
     }
 }
