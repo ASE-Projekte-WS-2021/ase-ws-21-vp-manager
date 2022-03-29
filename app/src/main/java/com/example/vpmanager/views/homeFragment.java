@@ -189,7 +189,7 @@ public class homeFragment extends Fragment {
                 plannedVP += studyVPS;
             }
         }
-        List<String> passedVpList = PA_ExpandableListDataPump.EXPANDABLE_LIST_DETAIL.get("Vergangene Studien");
+        List<String> passedVpList = PA_ExpandableListDataPump.EXPANDABLE_LIST_DETAIL.get("Teilgenommene Studien");
         if (passedVpList != null) {
             for (int i = 0; i < passedVpList.size(); i++) {
                 String vps = passedVpList.get(i).split(";")[1];
