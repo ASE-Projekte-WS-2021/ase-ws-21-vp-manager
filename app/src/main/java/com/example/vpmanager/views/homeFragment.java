@@ -20,7 +20,6 @@ import androidx.navigation.Navigation;
 import com.example.vpmanager.PA_ExpandableListDataPump;
 import com.example.vpmanager.R;
 import com.example.vpmanager.adapter.CustomListViewAdapterAppointments;
-import com.example.vpmanager.models.StudyObjectPa;
 import com.google.android.flexbox.FlexboxLayout;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -34,7 +33,6 @@ import java.text.Format;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -332,7 +330,7 @@ public class homeFragment extends Fragment {
                     upComingAppointments.add(dateNameList.get(key) + "\t\t" + key);
                 }
             }
-            Collections.reverse(upComingAppointments);
+            //Collections.reverse(upComingAppointments);
             nextDatesList.setAdapter(new CustomListViewAdapterAppointments(this.getContext(), this.getActivity(), navController, upComingAppointments, getStudyIdByName, "homeFragment"));
         }
     }
