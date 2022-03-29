@@ -150,13 +150,14 @@ public class homeFragment extends Fragment {
         registerMatrikelnumberLayout = view.findViewById(R.id.homeRegisterVPLayout);
 
 
+        progressBar.setOnClickListener(v -> {
+            CustomAlertDialog dialog = new CustomAlertDialog(homeFragment.this, "", "");
+            dialog.show();
+        });
 
-        registerMatrikelnummer.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                CustomAlertDialog dialog = new CustomAlertDialog(homeFragment.this, "", "");
-                dialog.show();
-            }
+        registerMatrikelnummer.setOnClickListener(v -> {
+            CustomAlertDialog dialog = new CustomAlertDialog(homeFragment.this, "", "");
+            dialog.show();
         });
         findStudyButton.setOnClickListener(v -> navController.navigate(R.id.action_homeFragment_to_findStudyFragment));
         appointmentsButton.setOnClickListener(v -> navController.navigate(R.id.action_homeFragment_to_upcomingAppointmentsFragment));
