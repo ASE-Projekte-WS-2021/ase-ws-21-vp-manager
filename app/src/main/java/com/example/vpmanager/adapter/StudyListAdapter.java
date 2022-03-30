@@ -47,6 +47,7 @@ public class StudyListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
+
         ((CustomViewHolder) holder).studyTitle.setText(mStudyMetaInfos.get(position).getName());
         ((CustomViewHolder) holder).studyVps.setText(mStudyMetaInfos.get(position).getVps());
         ((CustomViewHolder) holder).studyCat.setText(mStudyMetaInfos.get(position).getCategory());
@@ -85,11 +86,15 @@ public class StudyListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
             studyCat = itemView.findViewById(R.id.textviewCat);
             studyCat.setAnimation(animation);
 
-            locationIcon = itemView.findViewById(R.id.locationSymbolStudyFragment);
-            locationIcon.setAnimation(animation);
 
-            locationIcon = itemView.findViewById(R.id.remoteSymbolStudyFragment);
-            remoteIcon.setAnimation(animation);
+            locationIcon = itemView.findViewById(R.id.localSymbolStudyFragment);
+            if(locationIcon.getVisibility()==View.VISIBLE) {
+                locationIcon.setAnimation(animation);
+            }
+            remoteIcon = itemView.findViewById(R.id.remoteSymbolStudyFragment);
+            if(remoteIcon.getVisibility()==View.VISIBLE) {
+                remoteIcon.setAnimation(animation);
+            }
 
 
 
@@ -112,8 +117,10 @@ public class StudyListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
         public void setIcon(String type) {
             if(type.equals("Präsenz")){
                 locationIcon.setVisibility(View.VISIBLE);
+                locationIcon.setAnimation(animation);
             } else{
                 remoteIcon.setVisibility(View.VISIBLE);
+                remoteIcon.setAnimation(animation);
         }
         }
 
