@@ -10,7 +10,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
@@ -30,7 +29,6 @@ import com.example.vpmanager.viewmodels.StudyEditViewModel;
 import com.google.android.material.textfield.TextInputEditText;
 
 import java.util.ArrayList;
-import java.util.Objects;
 
 public class StudyEditDetailsFragment extends Fragment {
 
@@ -127,20 +125,6 @@ public class StudyEditDetailsFragment extends Fragment {
         dropdownListExecutionType.add("Präsenz");
         arrayAdapterExecutionType = new ArrayAdapter<>(getActivity(), R.layout.material_dropdown_item, dropdownListExecutionType);
         executionType.setAdapter(arrayAdapterExecutionType);
-        /*
-        categories = view.findViewById(R.id.edit_study_category);
-        ArrayAdapter<CharSequence> categoryAdapter = ArrayAdapter.createFromResource(getActivity(),
-                R.array.createCategoryList, android.R.layout.simple_spinner_item);
-        categoryAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        categories.setAdapter(categoryAdapter);
-
-
-        execution = view.findViewById(R.id.edit_study_execution);
-        ArrayAdapter<CharSequence> executionTypeAdapter = ArrayAdapter.createFromResource(getActivity(),
-                R.array.createExecutionTypeList, android.R.layout.simple_spinner_item);
-        executionTypeAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        execution.setAdapter(executionTypeAdapter);
-         */
 
         contactMail = view.findViewById(R.id.edit_study_contact_mail);
         contactPhone = view.findViewById(R.id.edit_study_contact_phone);
@@ -183,22 +167,6 @@ public class StudyEditDetailsFragment extends Fragment {
                 }
             }
         });
-
-        /*
-        executionType.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                if (executionType.getText().toString().equals("Remote")) {
-                    presenceLayout.setVisibility(View.GONE);
-                    remoteLayout.setVisibility(View.VISIBLE);
-                } else if (executionType.getText().toString().equals("Presence")) {
-                    remoteLayout.setVisibility(View.GONE);
-                    presenceLayout.setVisibility(View.VISIBLE);
-                }
-            }
-        });
-
-         */
 
         saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -359,120 +327,4 @@ public class StudyEditDetailsFragment extends Fragment {
             room.setText(studyEditViewModel.studyEditProcessData.get("room").toString());
         }
     }
-
-    //Parameter:
-    //Return values: Map with all inputs from Edittexts
-    //Loads data in a Map for the Database
-    /*
-    private Map<String, Object> createDataMap() {
-        Map<String, Object> dataMap = new HashMap<>();
-        dataMap.put("category", categories.getSelectedItem());
-        dataMap.put("contact", contact.getText());
-        //dataMap.put("dates", studyDateIds);
-        dataMap.put("description", description.getText());
-        dataMap.put("executionType", execution.getSelectedItem());
-        dataMap.put("name", title.getText());
-
-        if (execution.getSelectedItem().equals("Remote"))
-            dataMap.put("platform", location.getText());
-        else if (execution.getSelectedItem().equals("Präsenz")) {
-            String[] address = location.getText().toString().split("\n");
-            dataMap.put("location", address[0]);
-            dataMap.put("street", address[1]);
-            dataMap.put("room", address[2]);
-        }
-
-        return dataMap;
-    }
-
-     */
-
-    //Parameter:
-    //Return values:
-    //Loads data recieved from the database into the edittexts
-    /*
-    private void loadData() {
-        studyDateIds = new ArrayList<>();
-        getAllStudies(() -> {
-            for (Map<String, Object> map : DB_STUDIES_LIST) {
-                if (Objects.requireNonNull(map.get("id")).toString().equals(currentStudyIdEdit)) {
-
-                    loadSpinnerData(Objects.requireNonNull(map.get("category")).toString(), Objects.requireNonNull(map.get("executionType")).toString());
-                    title.setText(Objects.requireNonNull(map.get("name")).toString());
-                    //name.setText(Objects.requireNonNull(map.get("name")).toString());
-                    vph.setText(Objects.requireNonNull(map.get("vps")).toString());
-
-                    description.setText(Objects.requireNonNull(map.get("description")).toString());
-
-                    contact.setText(Objects.requireNonNull(map.get("contact")).toString());
-                    //dates.setText(Objects.requireNonNull(map.get("id")).toString());
-
-                    if (execution.getSelectedItem().equals("Remote")) {
-                        location.setText(Objects.requireNonNull(map.get("platform")).toString());
-                    } else {
-                        if (map.get("location") != null) {
-                            String locationString = Objects.requireNonNull(map.get("location")).toString() + "\n "
-                                    + Objects.requireNonNull(map.get("street")).toString() + "\n "
-                                    + Objects.requireNonNull(map.get("room")).toString();
-
-                            location.setText(locationString);
-                        }
-                    }
-
-                    StringBuilder dateList = new StringBuilder();
-
-                    getAllDates(finished -> {
-                        if (finished) {
-                            for (Map<String, Object> dateMap : DB_DATES_LIST) {
-                                if (dateMap != null && Objects.requireNonNull(dateMap.get("studyId")).toString().equals(currentStudyIdEdit)) {
-                                    dateList.append(Objects.requireNonNull(dateMap.get("date")).toString()).append("\n");
-                                    System.out.println("Pog: " +dateMap.get("id"));
-                                    if (dateMap.get("id") != null) {
-                                        studyDateIds.add(Objects.requireNonNull(dateMap.get("id")).toString());
-                                    }
-                                }
-                            }
-                        }
-                    });
-                    //  dates.setText(dateList);
-                }
-            }
-        });
-    }
-     */
-
-    /*
-    private void saveDataToDatabase(Map<String, Object> data) {
-        PA_ExpandableListDataPump.updateStudyInDataBase(data, currentStudyIdEdit);
-    }
-     */
-
-    /*
-    private void loadSpinnerData(String categoryType, String executionType) {
-
-        if(categoryType != null){
-            if(categoryType.equals("VR")){
-                categories.setSelection(1);
-            }
-            if(categoryType.equals("AR")){
-                categories.setSelection(2);
-            }
-            if(categoryType.equals("Diary Study")){
-                categories.setSelection(3);
-            }
-            if(categoryType.equals("Sonstige")){
-                categories.setSelection(4);
-            }
-            if(executionType != null) {
-                if (executionType.equals("Remote")) {
-                    execution.setSelection(1);
-                }
-                if (executionType.equals("Präsenz")) {
-                    execution.setSelection(2);
-                }
-            }
-        }
-    }
-     */
-
 }

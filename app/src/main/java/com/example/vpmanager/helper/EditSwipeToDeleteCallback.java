@@ -105,14 +105,11 @@ public class EditSwipeToDeleteCallback extends ItemTouchHelper.SimpleCallback {
                 icon.draw(c);
             }
 
-            Log.d("itemviewWidth", ":" + itemView.getWidth());
         } else { // view is unSwiped (dX = 0 ??)
             background.setBounds(0, 0, 0, 0);
             icon.setBounds(0, 0, 0, 0);
         }
 
-        //background.draw(c);
-        //icon.draw(c);
         super.onChildDraw(c, recyclerView, viewHolder, dX, dY, actionState, isCurrentlyActive);
     }
 }

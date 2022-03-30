@@ -1,7 +1,6 @@
 package com.example.vpmanager.adapter;
 
 import android.content.Context;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -29,7 +28,6 @@ public class EditSwipeableDatesAdapter extends RecyclerView.Adapter<RecyclerView
         mContext = context;
         editDatesList = studyDates;
         mFragmentView = fragmentView;
-        Log.d("EditSwipeableDatesAd...", "constructor was called");
     }
 
     @NonNull

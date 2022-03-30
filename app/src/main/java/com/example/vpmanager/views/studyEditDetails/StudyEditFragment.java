@@ -18,7 +18,6 @@ import com.google.android.material.tabs.TabLayout;
 
 public class StudyEditFragment extends Fragment {
 
-    //done
     public static String currentStudyIdEdit;
     public static String currentUserIdEdit;
 
@@ -29,21 +28,6 @@ public class StudyEditFragment extends Fragment {
 
     private StudyEditDetailsFragment studyEditDetailsFragment;
     private StudyEditDatesFragment studyEditDatesFragment;
-    //done
-
-    /*
-    EditText title;
-    EditText name;
-    EditText vp;
-    Spinner categories;
-    Spinner execution;
-    EditText location;
-    EditText description;
-    EditText contact;
-
-    Button saveButton;
-    List<String> studyDateIds;
-     */
 
     public StudyEditFragment() {
     }

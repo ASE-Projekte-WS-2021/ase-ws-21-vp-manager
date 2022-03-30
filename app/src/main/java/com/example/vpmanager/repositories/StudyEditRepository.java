@@ -11,7 +11,6 @@ import com.example.vpmanager.interfaces.StudyDatesListener;
 import com.example.vpmanager.interfaces.StudyUpdatedListener;
 import com.example.vpmanager.models.DateModel;
 import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -22,7 +21,6 @@ import com.google.firebase.firestore.SetOptions;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Objects;
 
 public class StudyEditRepository {
 
@@ -55,7 +53,7 @@ public class StudyEditRepository {
         loadStudyEditDetails(currentStudyIdEdit);
     }
 
-    public void getStudyEditDates(String currentStudyIdEdit){
+    public void getStudyEditDates(String currentStudyIdEdit) {
         loadStudyEditDates(currentStudyIdEdit);
     }
 
@@ -98,7 +96,7 @@ public class StudyEditRepository {
         });
     }
 
-    private void loadStudyEditDates(String currentStudyIdEdit){
+    private void loadStudyEditDates(String currentStudyIdEdit) {
         db = FirebaseFirestore.getInstance();
         CollectionReference datesRef = db.collection("dates");
         studyEditDatesArrayList.clear();
@@ -128,7 +126,7 @@ public class StudyEditRepository {
     }
 
     //no callback yet. only if the study is updated completely
-    public void updateDates(Map<String, Object> specificDate, String specificDateId){
+    public void updateDates(Map<String, Object> specificDate, String specificDateId) {
         db = FirebaseFirestore.getInstance();
         db.collection("dates").document(specificDateId)
                 .set(specificDate, SetOptions.merge())
@@ -136,9 +134,7 @@ public class StudyEditRepository {
                 .addOnFailureListener(e -> Log.w(TAG, "Error writing/updating document", e));
     }
 
-    public void updateStudy(Map<String, Object> updatedStudyMap, String idOfUpdatedStudy){
-        Log.d("updateStudy", "Map: " + updatedStudyMap.toString());
-        Log.d("updateStudy", "studyId: " + idOfUpdatedStudy);
+    public void updateStudy(Map<String, Object> updatedStudyMap, String idOfUpdatedStudy) {
         db = FirebaseFirestore.getInstance();
         db.collection("studies").document(idOfUpdatedStudy)
                 .set(updatedStudyMap)
@@ -147,8 +143,7 @@ public class StudyEditRepository {
                 .addOnFailureListener(e -> Log.w(TAG, "Error updating study document", e));
     }
 
-
-    public void deleteDate(String dateId){
+    public void deleteDate(String dateId) {
         db = FirebaseFirestore.getInstance();
         db.collection("dates").document(dateId)
                 .delete()

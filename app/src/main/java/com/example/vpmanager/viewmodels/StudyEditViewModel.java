@@ -2,8 +2,6 @@ package com.example.vpmanager.viewmodels;
 
 import android.util.Log;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.lifecycle.ViewModel;
 
 import com.example.vpmanager.interfaces.EditStudyDetailsListener;
@@ -15,14 +13,8 @@ import com.example.vpmanager.views.mainActivity;
 import com.example.vpmanager.views.studyEditDetails.StudyEditDatesFragment;
 import com.example.vpmanager.views.studyEditDetails.StudyEditDetailsFragment;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
 import java.util.HashMap;
-import java.util.Iterator;
-import java.util.List;
-import java.util.ListIterator;
 import java.util.Map;
 import java.util.UUID;
 
@@ -52,8 +44,6 @@ public class StudyEditViewModel extends ViewModel implements EditStudyDetailsLis
 
     public void updateStudyAndDates() {
 
-
-        Log.d("updateStudyAndDates", ": " + studyEditProcessData);
         //studyId is already in the map and can be reused
         //the creator isn't loaded in the first place so is is added here
         studyEditProcessData.put("creator", mainActivity.uniqueID);
@@ -98,21 +88,19 @@ public class StudyEditViewModel extends ViewModel implements EditStudyDetailsLis
                 localDateMap.put("date", datesEditProcessDataObjects.get(i).getDate());
 
                 if (datesEditProcessDataObjects.get(i).getSelected()) {
-                    //wenn jemand den termin gewählt hatte, kann ich das true wieder setzen oder einfach auslassen
+                    //if someone selected the date, true can be set or nothing should happen
                     //localDateMap.put("selected", true);
                 } else {
-                    //wenn keiner den termin gewählt hat oder er neu ist, muss ich false setzen!!!
+                    //set true if no one selected this date
                     localDateMap.put("selected", false);
                 }
 
                 dateIds.add(datesEditProcessDataObjects.get(i).getDateId());
 
-                //die, in der größe variable, map wird ans repo übergeben und das setzt oder updated den jeweiligen termin!
                 mStudyEditRepo.updateDates(localDateMap, localDateId);
             }
-            //the previous list of dateIds needs to be removed!?
+            //remove the previous list of dateIds ?
             studyEditProcessData.remove("dates");
-            //the new list of dateIds needs to be saved in the study
 
             studyEditProcessData.put("dates", dateIds);
         }
@@ -121,7 +109,6 @@ public class StudyEditViewModel extends ViewModel implements EditStudyDetailsLis
 
         String studyId = studyEditProcessData.get("id").toString();
         mStudyEditRepo.updateStudy(studyEditProcessData, studyId);
-
     }
 
     private void updateStudyFieldsWithInput() {
@@ -131,33 +118,6 @@ public class StudyEditViewModel extends ViewModel implements EditStudyDetailsLis
         studyEditProcessData.put("executionType", studyEditDetailsFragment.executionType.getText().toString());
 
         studyEditProcessData.put("contact", studyEditDetailsFragment.contactMail.getText().toString());
-
-        //studyEditDetailsFragment.contactPhone.toString().isEmpty()
-        Log.d("updateStudyFields", "value phone: " + studyEditDetailsFragment.contactPhone.getText());
-        Log.d("updateStudyFields", "value phone: " + studyEditDetailsFragment.contactPhone.toString());
-
-        /*
-        if (studyEditDetailsFragment.contactPhone.toString().isEmpty()) { //studyEditDetailsFragment.contactPhone.getText() != null
-            studyEditProcessData.put("contact2", studyEditDetailsFragment.contactPhone.getText().toString());
-        } else {
-            studyEditProcessData.put("contact2", "t");
-        }
-        if (studyEditDetailsFragment.contactSkype.toString().isEmpty()) {
-            studyEditProcessData.put("contact3", studyEditDetailsFragment.contactSkype.getText().toString());
-        } else {
-            studyEditProcessData.put("contact3", "t");
-        }
-        if (studyEditDetailsFragment.contactDiscord.toString().isEmpty()) {
-            studyEditProcessData.put("contact4", studyEditDetailsFragment.contactDiscord.getText().toString());
-        } else {
-            studyEditProcessData.put("contact4", "t");
-        }
-        if (studyEditDetailsFragment.contactOther.toString().isEmpty()) {
-            studyEditProcessData.put("contact5", studyEditDetailsFragment.contactOther.getText().toString());
-        } else {
-            studyEditProcessData.put("contact5", "t");
-        }
-         */
 
         studyEditProcessData.put("contact2", studyEditDetailsFragment.contactPhone.getText().toString());
         studyEditProcessData.put("contact3", studyEditDetailsFragment.contactSkype.getText().toString());
@@ -216,9 +176,6 @@ public class StudyEditViewModel extends ViewModel implements EditStudyDetailsLis
             idsOfAllInitialDates.add(datesArrayList.get(i).getDateId());
         }
         Log.d("onStudyDatesReady", "dateIds: " + idsOfAllInitialDates);
-
-        Log.d("datesReady 1", ": " + datesEditProcessDataObjects.toString());
-        //studyEditDatesFragment.notifyDatesObjectListChanged();
         studyEditDatesFragment.setupRecyclerView();
     }
 
