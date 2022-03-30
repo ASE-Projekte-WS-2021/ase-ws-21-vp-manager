@@ -94,7 +94,8 @@ public class SelfcreatedStudiesFragment extends Fragment implements StudyListAda
                             ownStudyIdNameVpCat.get(i).get(0), //add Id
                             ownStudyIdNameVpCat.get(i).get(1), //add Name
                             ownStudyIdNameVpCat.get(i).get(2) + " " + "VP-Stunden", //add vps
-                            ownStudyIdNameVpCat.get(i).get(3)) //add category
+                            ownStudyIdNameVpCat.get(i).get(3), //add category
+                            ownStudyIdNameVpCat.get(i).get(4)) //add study type
             );
         }
         if (!ownStudyIdNameVpCat.isEmpty()) {
@@ -136,6 +137,7 @@ public class SelfcreatedStudiesFragment extends Fragment implements StudyListAda
                                 idNameVph.add(1, document.getString("name"));
                                 idNameVph.add(2, document.getString("vps"));
                                 idNameVph.add(3, document.getString("category"));
+                                idNameVph.add(3, document.getString("executionType"));
                                 ownStudyIdNameVpCat.add(idNameVph);
                             }
                             firestoreCallback.onCallback(); //ownStudyIdNameVpCat

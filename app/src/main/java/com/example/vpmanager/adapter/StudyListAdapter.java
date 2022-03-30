@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -26,6 +27,7 @@ public class StudyListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
     private OnStudyItemClickListener mOnStudyItemClickListener;
     //maybe cancel animation?
     private Animation animation;
+
 
     public StudyListAdapter(Context context, ArrayList<StudyMetaInfoModel> studyMetaInfos,
                             OnStudyItemClickListener onStudyItemClickListener) {
@@ -48,6 +50,7 @@ public class StudyListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
         ((CustomViewHolder) holder).studyTitle.setText(mStudyMetaInfos.get(position).getName());
         ((CustomViewHolder) holder).studyVps.setText(mStudyMetaInfos.get(position).getVps());
         ((CustomViewHolder) holder).studyCat.setText(mStudyMetaInfos.get(position).getCategory());
+        ((CustomViewHolder)holder).setIcon(mStudyMetaInfos.get(position).getType());
     }
 
     @Override
@@ -58,6 +61,8 @@ public class StudyListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
     private class CustomViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         TextView studyTitle, studyVps, studyCat, studyTag;
+        String studyType;
+        ImageView locationIcon, remoteIcon;
         View separator;
         LinearLayout studyItemParentLayout;
         OnStudyItemClickListener onStudyItemClickListener;
@@ -80,6 +85,14 @@ public class StudyListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
             studyCat = itemView.findViewById(R.id.textviewCat);
             studyCat.setAnimation(animation);
 
+            locationIcon = itemView.findViewById(R.id.locationSymbolStudyFragment);
+            locationIcon.setAnimation(animation);
+
+            locationIcon = itemView.findViewById(R.id.remoteSymbolStudyFragment);
+            remoteIcon.setAnimation(animation);
+
+
+
             /*separator = itemView.findViewById(R.id.separator);
             separator.setAnimation(animation);*/
 
@@ -95,9 +108,23 @@ public class StudyListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
             Log.d("StudyListAdapter", "studyId that was clicked:" + studyId);
             onStudyItemClickListener.onStudyClick(studyId);
         }
+
+        public void setIcon(String type) {
+            if(type.equals("Präsenz")){
+                locationIcon.setVisibility(View.VISIBLE);
+            } else{
+                remoteIcon.setVisibility(View.VISIBLE);
+        }
+        }
+
+
+
     }
 
     public interface OnStudyItemClickListener {
         void onStudyClick(String studyId);
     }
+
+
 }
+
