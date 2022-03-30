@@ -11,6 +11,7 @@ import com.example.vpmanager.interfaces.StudyDatesListener;
 import com.example.vpmanager.interfaces.StudyUpdatedListener;
 import com.example.vpmanager.models.DateModel;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -142,5 +143,13 @@ public class StudyEditRepository {
                 .addOnSuccessListener(aVoid -> studyUpdatedListener.onStudyUpdated(),
                         aVoid -> Log.d(TAG, "Update study successful!"))
                 .addOnFailureListener(e -> Log.w(TAG, "Error updating study document", e));
+    }
+
+    public void deleteDate(String dateId){
+        db = FirebaseFirestore.getInstance();
+        db.collection("dates").document(dateId)
+                .delete()
+                .addOnSuccessListener(aVoid -> Log.d(TAG, "Deleted study successful!"))
+                .addOnFailureListener(e -> Log.w(TAG, "Error deleting study document", e));
     }
 }

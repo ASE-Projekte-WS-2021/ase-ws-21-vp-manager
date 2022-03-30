@@ -50,6 +50,7 @@ public class StudyEditDatesFragment extends Fragment {
     private RecyclerView studyEditDatesRecyclerView;
     //private SwipeableDatesAdapter studyEditSwipeableDatesAdapter;
     private EditSwipeableDatesAdapter editSwipeableDatesAdapter;
+    //private LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
 
     //the complete date+time strings are stored here and passed to the adapter
     //only this list is adjusted with the swipeToDeletes and adds by the fab.
@@ -99,6 +100,7 @@ public class StudyEditDatesFragment extends Fragment {
         }
          */
         editSwipeableDatesAdapter.notifyDataSetChanged();
+        //studyEditDatesRecyclerView.setLayoutManager(linearLayoutManager);
     }
 
     private void setupView(View view){
@@ -114,10 +116,10 @@ public class StudyEditDatesFragment extends Fragment {
     }
 
     private void setupRecyclerView(View view) {
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(requireActivity());
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
 
         Log.d("StudyEditDatesFragment", "datesEditProcessDataObjects: " + studyEditViewModel.datesEditProcessDataObjects);
-        editSwipeableDatesAdapter = new EditSwipeableDatesAdapter(requireActivity(), studyEditViewModel.datesEditProcessDataObjects, view);
+        editSwipeableDatesAdapter = new EditSwipeableDatesAdapter(getContext(), studyEditViewModel.datesEditProcessDataObjects, view);
         studyEditDatesRecyclerView.setAdapter(editSwipeableDatesAdapter);
         studyEditDatesRecyclerView.setLayoutManager(linearLayoutManager);
 
@@ -175,7 +177,6 @@ public class StudyEditDatesFragment extends Fragment {
         if (hourOfDay < 10) {
             hours = "0" + hourOfDay;
         }
-        //Log.d("addDatetoList", "before add new" + datesArrayList);
 
         String newDate = date_time + hours + ":" + minutes + " Uhr";
         //datesArrayList.add(newDate);
@@ -184,7 +185,6 @@ public class StudyEditDatesFragment extends Fragment {
         studyEditViewModel.addNewDateToList(newDate, currentStudyIdEdit);
 
         //editSwipeableDatesAdapter.notifyDataSetChanged();
-        //Log.d("addDatetoList", "after notity" + datesArrayList);
     }
 
 }

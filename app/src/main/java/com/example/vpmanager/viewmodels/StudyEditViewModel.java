@@ -24,6 +24,8 @@ public class StudyEditViewModel extends ViewModel implements EditStudyDetailsLis
     public Map<String, Object> studyEditProcessData = new HashMap<>();
     public ArrayList<DateModel> datesEditProcessDataObjects = new ArrayList<>();
 
+    public ArrayList<String> idsOfAllInitialDates = new ArrayList<>();
+
     public StudyEditDetailsFragment studyEditDetailsFragment;
     public StudyEditDatesFragment studyEditDatesFragment;
 
@@ -46,6 +48,19 @@ public class StudyEditViewModel extends ViewModel implements EditStudyDetailsLis
         //the creator isn't loaded in the first place so is is added here
         studyEditProcessData.put("creator", mainActivity.uniqueID);
 
+        //these two for-loops manage the deletion of dates in the db, that were in the db in the
+        //beginning but got deleted in the edit process
+        ArrayList<String> idsOfTheProcessData = new ArrayList<>();
+        for (int i = 0; i < datesEditProcessDataObjects.size(); i++){
+            idsOfTheProcessData.add(datesEditProcessDataObjects.get(i).getDateId());
+        }
+        for (int i = 0; i < idsOfAllInitialDates.size(); i++){
+            String currentDateIdOfAllInitialIds = idsOfAllInitialDates.get(i);
+            if (!idsOfTheProcessData.contains(currentDateIdOfAllInitialIds)){
+                mStudyEditRepo.deleteDate(currentDateIdOfAllInitialIds);
+            }
+        }
+
         //if no dates were loaded or added, nothing needs to be saved and added to the study
         if (!datesEditProcessDataObjects.isEmpty()) {
             //local list of all dateIds to pass to the studyMap
@@ -63,10 +78,10 @@ public class StudyEditViewModel extends ViewModel implements EditStudyDetailsLis
                 //if another user already selected this date --> keep his/her id
                 //this if statement is necessary because getUserId() might throw a nullPointer
                 if (datesEditProcessDataObjects.get(i).getUserId() != null) {
-                    //wenn sich jemand eingetragen hat will ich mit dem feld nix machen!!!!!!!!
+                    //if someone selected the date, we don't want to do anything
                     //localDateMap.put("userId", datesEditProcessDataObjects.get(i).getUserId());
                 } else {
-                    //wenn sich keiner eingetragen hat bzw. der termin neu ist, möchte ich null (neu) setzen!!!!!!!
+                    //if no one selected the date or it is new, we want to set selected as null
                     localDateMap.put("userId", null);
                 }
 
@@ -115,12 +130,18 @@ public class StudyEditViewModel extends ViewModel implements EditStudyDetailsLis
         Log.d("studyReady", ": " + studyEditProcessData.toString());
     }
 
+    //called when the editFragment is opened
     @Override
     public void onStudyDatesReady(ArrayList<DateModel> datesArrayList) {
         datesEditProcessDataObjects = datesArrayList;
+        //all initial dates need to be saved in a list!!!
+        for (int i = 0; i < datesArrayList.size(); i++){
+            idsOfAllInitialDates.add(datesArrayList.get(i).getDateId());
+        }
+        Log.d("onStudyDatesReady", "dateIds: " + idsOfAllInitialDates);
+
         Log.d("datesReady 1", ": " + datesEditProcessDataObjects.toString());
         studyEditDatesFragment.notifyDatesObjectListChanged();
-        //the dates fragment loads the dates when needed
     }
 
     @Override
