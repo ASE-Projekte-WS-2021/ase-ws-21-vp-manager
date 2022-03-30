@@ -15,11 +15,6 @@
         app:destination="@id/nestedGraphLoginRegistration"
         app:popUpTo="@id/nestedGraphLoginRegistration"
         app:popUpToInclusive="true" />
-    <action
-        android:id="@+id/action_global_createStudyFragment"
-        app:destination="@id/createStudyFragment"
-        app:popUpTo="@id/createStudyFragment"
-        app:popUpToInclusive="true"/>
     <fragment
         android:id="@+id/homeFragment"
         android:name="com.example.vpmanager.views.homeFragment"
@@ -92,6 +87,9 @@
         <action
             android:id="@+id/action_ownStudyFragment_to_studyCreatorFragment"
             app:destination="@id/studyCreatorFragment" />
+        <action
+            android:id="@+id/action_ownStudyFragment_to_studyFragment"
+            app:destination="@id/studyFragment" />
     </fragment>
     <fragment
         android:id="@+id/studyFragment"

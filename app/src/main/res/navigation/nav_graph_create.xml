@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph_create"
+    app:startDestination="@id/createStudyFragment_Base">
+
+    <action
+        android:id="@+id/action_global_createStudyFragment_Base"
+        app:destination="@id/createStudyFragment_Base"
+        app:popUpTo="@id/createStudyFragment_Base"
+        app:popUpToInclusive="true" />
+
+    <fragment
+        android:id="@+id/createStudyFragment_Base"
+        android:name="com.example.vpmanager.views.createStudy.createStudyFragment_Base"
+        android:label="fragment_create_study_base"
+        tools:layout="@layout/fragment_create_study_base">
+        <action
+            android:id="@+id/action_createStudyFragment_Base_to_createStudyFragment_StepOne"
+            app:destination="@id/createStudyFragment_StepOne"
+            app:enterAnim="@anim/enter_from_right"
+            app:exitAnim="@anim/exit_to_left" />
+    </fragment>
+    <fragment
+        android:id="@+id/createStudyFragment_StepOne"
+        android:name="com.example.vpmanager.views.createStudy.createStudyFragment_StepOne"
+        android:label="fragment_create_study_step_one"
+        tools:layout="@layout/fragment_create_study_step_one">
+        <action
+            android:id="@+id/action_createStudyFragment_StepOne_to_createStudyFragment_Base"
+            app:destination="@id/createStudyFragment_Base"
+            app:enterAnim="@anim/enter_from_left"
+            app:exitAnim="@anim/exit_to_right" />
+        <action
+            android:id="@+id/action_createStudyFragment_StepOne_to_createStudyFragment_StepTwo"
+            app:destination="@id/createStudyFragment_StepTwo"
+            app:enterAnim="@anim/enter_from_right"
+            app:exitAnim="@anim/exit_to_left" />
+    </fragment>
+    <fragment
+        android:id="@+id/createStudyFragment_StepTwo"
+        android:name="com.example.vpmanager.views.createStudy.createStudyFragment_StepTwo"
+        android:label="fragment_create_study_step_two"
+        tools:layout="@layout/fragment_create_study_step_two">
+        <action
+            android:id="@+id/action_createStudyFragment_StepTwo_to_createStudyFragment_StepOne"
+            app:destination="@id/createStudyFragment_StepOne"
+            app:enterAnim="@anim/enter_from_left"
+            app:exitAnim="@anim/exit_to_right" />
+        <action
+            android:id="@+id/action_createStudyFragment_StepTwo_to_createStudyFragment_StepThree"
+            app:destination="@id/createStudyFragment_StepThree"
+            app:enterAnim="@anim/enter_from_right"
+            app:exitAnim="@anim/exit_to_left" />
+    </fragment>
+    <fragment
+        android:id="@+id/createStudyFragment_StepThree"
+        android:name="com.example.vpmanager.views.createStudy.createStudyFragment_StepThree"
+        android:label="fragment_create_study_step_three"
+        tools:layout="@layout/fragment_create_study_step_three">
+        <action
+            android:id="@+id/action_createStudyFragment_StepThree_to_createStudyFragment_StepTwo"
+            app:destination="@id/createStudyFragment_StepTwo"
+            app:enterAnim="@anim/enter_from_left"
+            app:exitAnim="@anim/exit_to_right" />
+        <action
+            android:id="@+id/action_createStudyFragment_StepThree_to_createStudyFragment_StepFour_Remote"
+            app:destination="@id/createStudyFragment_StepFour_Remote"
+            app:enterAnim="@anim/enter_from_right"
+            app:exitAnim="@anim/exit_to_left" />
+        <action
+            android:id="@+id/action_createStudyFragment_StepThree_to_createStudyFragment_StepFour_Presence"
+            app:destination="@id/createStudyFragment_StepFour_Presence"
+            app:enterAnim="@anim/enter_from_right"
+            app:exitAnim="@anim/exit_to_left" />
+    </fragment>
+    <fragment
+        android:id="@+id/createStudyFragment_StepFour_Presence"
+        android:name="com.example.vpmanager.views.createStudy.createStudyFragment_StepFour_Presence"
+        android:label="createStudyFragment_StepFour_Presence"
+        tools:layout="@layout/fragment_create_study_step_four_presence">
+        <action
+            android:id="@+id/action_createStudyFragment_StepFour_Presence_to_createStudyFragment_StepThree"
+            app:destination="@id/createStudyFragment_StepThree"
+            app:enterAnim="@anim/enter_from_left"
+            app:exitAnim="@anim/exit_to_right" />
+        <action
+            android:id="@+id/action_createStudyFragment_StepFour_Presence_to_createStudyFragment_StepFive"
+            app:destination="@id/createStudyFragment_StepFive"
+            app:enterAnim="@anim/enter_from_right"
+            app:exitAnim="@anim/exit_to_left" />
+    </fragment>
+    <fragment
+        android:id="@+id/createStudyFragment_StepFour_Remote"
+        android:name="com.example.vpmanager.views.createStudy.createStudyFragment_StepFour_Remote"
+        android:label="fragment_create_study_step_four_remote"
+        tools:layout="@layout/fragment_create_study_step_four_remote">
+        <action
+            android:id="@+id/action_createStudyFragment_StepFour_Remote_to_createStudyFragment_StepThree"
+            app:destination="@id/createStudyFragment_StepThree"
+            app:enterAnim="@anim/enter_from_left"
+            app:exitAnim="@anim/exit_to_right" />
+        <action
+            android:id="@+id/action_createStudyFragment_StepFour_Remote_to_createStudyFragment_StepFive"
+            app:destination="@id/createStudyFragment_StepFive"
+            app:enterAnim="@anim/enter_from_right"
+            app:exitAnim="@anim/exit_to_left" />
+    </fragment>
+    <fragment
+        android:id="@+id/createStudyFragment_StepFive"
+        android:name="com.example.vpmanager.views.createStudy.createStudyFragment_StepFive"
+        android:label="fragment_create_study_step_five"
+        tools:layout="@layout/fragment_create_study_step_five">
+        <action
+            android:id="@+id/action_createStudyFragment_StepFive_to_createStudyFragment_StepFour_Presence"
+            app:destination="@id/createStudyFragment_StepFour_Presence"
+            app:enterAnim="@anim/enter_from_left"
+            app:exitAnim="@anim/exit_to_right" />
+        <action
+            android:id="@+id/action_createStudyFragment_StepFive_to_createStudyFragment_StepFour_Remote"
+            app:destination="@id/createStudyFragment_StepFour_Remote"
+            app:enterAnim="@anim/enter_from_left"
+            app:exitAnim="@anim/exit_to_right" />
+        <action
+            android:id="@+id/action_createStudyFragment_StepFive_to_createStudyFragment_finalStep"
+            app:destination="@id/createStudyFragment_finalStep"
+            app:enterAnim="@anim/enter_from_right"
+            app:exitAnim="@anim/exit_to_left" />
+    </fragment>
+    <fragment
+        android:id="@+id/createStudyFragment_finalStep"
+        android:name="com.example.vpmanager.views.createStudy.createStudyFragment_finalStep"
+        android:label="fragment_create_study_final_step"
+        tools:layout="@layout/fragment_create_study_final_step">
+        <action
+            android:id="@+id/action_createStudyFragment_finalStep_to_createStudyFragment_StepFive"
+            app:destination="@id/createStudyFragment_StepFive"
+            app:enterAnim="@anim/enter_from_left"
+            app:exitAnim="@anim/exit_to_right" />
+        <action
+            android:id="@+id/action_createStudyFragment_finalStep_to_createStudyFragment_finalStep_two"
+            app:destination="@id/createStudyFragment_finalStep_two"
+            app:enterAnim="@anim/enter_from_right"
+            app:exitAnim="@anim/exit_to_left" />
+    </fragment>
+    <fragment
+        android:id="@+id/createStudyFragment_finalStep_two"
+        android:name="com.example.vpmanager.views.createStudy.createStudyFragment_finalStep_two"
+        android:label="fragment_create_study_final_step_two"
+        tools:layout="@layout/fragment_create_study_final_step_two">
+        <action
+            android:id="@+id/action_createStudyFragment_finalStep_two_to_createStudyFragment_finalStep"
+            app:destination="@id/createStudyFragment_finalStep"
+            app:enterAnim="@anim/enter_from_left"
+            app:exitAnim="@anim/exit_to_right" />
+        <action
+            android:id="@+id/action_createStudyFragment_finalStep_two_to_createStudyFragment_finalStep_three"
+            app:destination="@id/createStudyFragment_finalStep_three"
+            app:enterAnim="@anim/enter_from_right"
+            app:exitAnim="@anim/exit_to_left" />
+    </fragment>
+    <fragment
+        android:id="@+id/createStudyFragment_finalStep_three"
+        android:name="com.example.vpmanager.views.createStudy.createStudyFragment_finalStep_three"
+        android:label="fragment_create_study_final_step_three"
+        tools:layout="@layout/fragment_create_study_final_step_three">
+        <action
+            android:id="@+id/action_createStudyFragment_finalStep_three_to_createStudyFragment_finalStep_two"
+            app:destination="@id/createStudyFragment_finalStep_two"
+            app:enterAnim="@anim/enter_from_left"
+            app:exitAnim="@anim/exit_to_right" />
+    </fragment>
+</navigation>

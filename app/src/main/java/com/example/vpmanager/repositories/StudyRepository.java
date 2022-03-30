@@ -6,6 +6,7 @@ import android.util.Log;
 
 import androidx.annotation.NonNull;
 
+import com.example.vpmanager.PA_ExpandableListDataPump;
 import com.example.vpmanager.interfaces.SelectDateListener;
 import com.example.vpmanager.interfaces.UnselectDateListener;
 import com.example.vpmanager.interfaces.StudyDatesListener;
@@ -134,7 +135,9 @@ public class StudyRepository {
                                                 document.getString("date"),    //the date itself
                                                 document.getString("studyId"), //id of corresponding study
                                                 document.getString("userId"),  //id of user who selected the date
-                                                document.getBoolean("selected")) //boolean if selected or not
+                                                document.getBoolean("selected"), //boolean if selected or not
+                                                document.getBoolean("participated"))
+
                                 );
                             }
                             studyDatesListener.onStudyDatesReady(datesArrayList);
@@ -163,7 +166,8 @@ public class StudyRepository {
                                                 document.getString("date"),    //the date itself
                                                 document.getString("studyId"), //id of corresponding study
                                                 document.getString("userId"),  //id of user who selected the date
-                                                document.getBoolean("selected"))
+                                                document.getBoolean("selected"),
+                                                document.getBoolean("participated"))
                                 );
                             }
                             studyDatesListener.onStudyDatesReady(datesArrayList);
@@ -220,11 +224,20 @@ public class StudyRepository {
     }
 
     public void unselectDate(String dateId) {
-        db = FirebaseFirestore.getInstance();
-        db.collection("dates").document(dateId)
-                .update("selected", false, "userId", null)
-                .addOnSuccessListener(aVoid -> unselectDateListener.onDateUnselected(),
-                        aVoid -> Log.d(TAG, "DocumentSnapshot successfully updated!"))
-                .addOnFailureListener(e -> Log.w(TAG, "Error updating document", e));
+
+        PA_ExpandableListDataPump.getDateState(dateId, new PA_ExpandableListDataPump.FirestoreCallbackDateState() {
+            @Override
+            public void onCallback(boolean participated) {
+                if(!participated)
+                {
+                    db = FirebaseFirestore.getInstance();
+                    db.collection("dates").document(dateId)
+                            .update("selected", false, "userId", null, "participated", false)
+                            .addOnSuccessListener(aVoid -> unselectDateListener.onDateUnselected(),
+                                    aVoid -> Log.d(TAG, "DocumentSnapshot successfully updated!"))
+                            .addOnFailureListener(e -> Log.w(TAG, "Error updating document", e));
+                }
+            }
+        });
     }
 }

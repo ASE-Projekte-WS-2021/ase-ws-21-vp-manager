@@ -358,25 +358,38 @@
                 android:layout_marginTop="-5dp"
                 android:background="@color/color_two" />
 -->
-            <com.google.android.material.floatingactionbutton.FloatingActionButton
+            <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
                 android:id="@+id/creator_editOwnStudyButton"
                 android:layout_width="233dp"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/sepEight"
                 android:layout_centerHorizontal="true"
-                android:layout_marginTop="17dp"
-                android:layout_marginBottom="17dp"
-                android:backgroundTint="@color/green_light"
-                android:src="@drawable/ic_baseline_edit_note_24"
+                android:layout_marginTop="28dp"
+                android:layout_marginBottom="10dp"
+                android:backgroundTint="@color/green_Main"
+                android:text="Studie bearbeiten"
+                app:icon="@drawable/ic_baseline_edit_note_24"
                 app:borderWidth="3dp"
-                app:elevation="4dp" />
+                app:elevation="4dp"
+                app:strokeColor="@color/green_dark"
+                app:strokeWidth="3dp"/>
 
-
-
+            <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+                android:id="@+id/creator_changeStudyStateButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/creator_editOwnStudyButton"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="20dp"
+                android:backgroundTint="@color/heatherred_Main"
+                android:text="Studie Abschließen"
+                app:strokeColor="@color/heatherred_dark"
+                app:strokeWidth="3dp"
+                app:elevation="4dp"
+                app:icon="@drawable/ic_baseline_close_24" />
 
         </RelativeLayout>
-
-
 
 
     </ScrollView>

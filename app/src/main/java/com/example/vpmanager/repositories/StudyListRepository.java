@@ -68,7 +68,9 @@ public class StudyListRepository {
                             studyIdNameVpCat.get(i).get(0), //add Id
                             studyIdNameVpCat.get(i).get(1), //add Name
                             studyIdNameVpCat.get(i).get(2) + " " + "VP-Stunden", //add vps
-                            studyIdNameVpCat.get(i).get(3)) //add category
+                            studyIdNameVpCat.get(i).get(3), //add category
+                            studyIdNameVpCat.get(i).get(4)) //add study type
+
             );
         }
         Log.d("StudyListRepository", "setStudyMetaInfo end");
@@ -96,12 +98,15 @@ public class StudyListRepository {
                         if (task.isSuccessful()) {
                             for (QueryDocumentSnapshot document : task.getResult()) {
                                 //local ArrayList is stored in the big ArrayList for each existing study
-                                ArrayList<String> idNameVphCat = new ArrayList<>();
-                                idNameVphCat.add(0, document.getString("id"));
-                                idNameVphCat.add(1, document.getString("name"));
-                                idNameVphCat.add(2, document.getString("vps"));
-                                idNameVphCat.add(3, document.getString("category"));
-                                studyIdNameVpCat.add(idNameVphCat);
+                                if (!document.getBoolean("studyStateClosed")) {
+                                    ArrayList<String> idNameVphCat = new ArrayList<>();
+                                    idNameVphCat.add(0, document.getString("id"));
+                                    idNameVphCat.add(1, document.getString("name"));
+                                    idNameVphCat.add(2, document.getString("vps"));
+                                    idNameVphCat.add(3, document.getString("category"));
+                                    idNameVphCat.add(4, document.getString("executionType"));
+                                    studyIdNameVpCat.add(idNameVphCat);
+                                }
                             }
                             setStudyMetaInfo();
                             studyMetaDataListener.onStudyMetaDataReady(studyMetaInfosArrayList);

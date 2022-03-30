@@ -140,6 +140,7 @@ public class PA_ExpandableListDataPump extends Activity {
 
         List<String> ownStudies = new ArrayList<>();
         List<String> passedStudies = new ArrayList<>();
+        List<String> completedStudies = new ArrayList<>();
 
         for (String id : datesMap.keySet()) {
             HashMap<String, String> dateEntry = datesMap.get(id);
@@ -147,7 +148,7 @@ public class PA_ExpandableListDataPump extends Activity {
                 String dateString = dateEntry.get("date");
                 String selected = dateEntry.get("selected");
                 String userId = dateEntry.get("userId");
-
+                boolean participated = Boolean.parseBoolean(dateEntry.get("participated"));
                 String StudyId = dateEntry.get("studyId");
 
                 if (Boolean.parseBoolean(selected) && userId != null) {
@@ -156,10 +157,17 @@ public class PA_ExpandableListDataPump extends Activity {
                         if (study != null) {
                             String studyNameString = study.get("name");
                             String studyVPSString = study.get("vps");
+                            boolean studyIsClosed = Boolean.parseBoolean(study.get("studyStateClosed"));
 
-                            if(isDateInPast(dateString))
+                            if(participated)
                             {
-                                passedStudies.add(studyNameString + ";" + studyVPSString + ";" + dateString + ";" + StudyId);
+                                if(studyIsClosed)
+                                {
+                                    completedStudies.add(studyNameString + ";" + studyVPSString + ";" + dateString + ";" + StudyId);
+                                }
+                                else {
+                                    passedStudies.add(studyNameString + ";" + studyVPSString + ";" + dateString + ";" + StudyId);
+                                }
                             }
                             else
                                 ownStudies.add(studyNameString + ";" + studyVPSString + ";" + dateString + ";" + StudyId);
@@ -168,8 +176,8 @@ public class PA_ExpandableListDataPump extends Activity {
                 }
             }
         }
-        EXPANDABLE_LIST_DETAIL.put("Abgeschlossene Studien", new ArrayList<>());
-        EXPANDABLE_LIST_DETAIL.put("Vergangene Studien", passedStudies);
+        EXPANDABLE_LIST_DETAIL.put("Abgeschlossene Studien",completedStudies);
+        EXPANDABLE_LIST_DETAIL.put("Teilgenommene Studien", passedStudies); //=> teilgenommene Studien
         EXPANDABLE_LIST_DETAIL.put("Geplante Studien", ownStudies);
     }
 
@@ -466,6 +474,77 @@ public class PA_ExpandableListDataPump extends Activity {
 
     }
 
+    //Parameters: count of the vp, matrikelnumber of user
+    //Return Values
+    //updates the date Object with the boolean if the user participated
+    public static void setDateState(String dateId, boolean participated)
+    {
+        Map<String, Object> updateData = new TreeMap<>();
+        updateData.put("id", dateId);
+        updateData.put("participated", participated);
+
+        db.collection("dates").document(dateId)
+                .update(updateData)
+                .addOnSuccessListener(aVoid -> System.out.println("DocumentSnapshot successfully updated!"))
+                .addOnFailureListener(e ->System.out.println("Error updating document"));
+
+    }
+
+    public static void getDateState(String dateId, FirestoreCallbackDateState firestoreCallbackDateState)
+    {
+        db = FirebaseFirestore.getInstance();
+        CollectionReference usersRef = db.collection("dates");
+        usersRef.whereEqualTo("id", dateId).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                if (task.isSuccessful()) {
+                    boolean participated = false;
+
+                    for (QueryDocumentSnapshot document : task.getResult()) {
+                        participated = document.getBoolean("participated");
+                    }
+                    firestoreCallbackDateState.onCallback(participated);
+                }
+            }
+        }).addOnFailureListener(e -> firestoreCallbackDateState.onCallback(false));
+    }
+
+
+    //Parameters: studyId, boolean
+    //Return Values
+    //updates the study Object with the boolean if the study has been closed
+    public static void setStudyState(String studyId, boolean closed)
+    {
+        Map<String, Object> updateData = new TreeMap<>();
+        updateData.put("id", studyId);
+        updateData.put("studyStateClosed", closed);
+
+        db.collection("studies").document(studyId)
+                .update(updateData)
+                .addOnSuccessListener(aVoid -> System.out.println("DocumentSnapshot successfully updated!"))
+                .addOnFailureListener(e ->System.out.println("Error updating document"));
+
+    }
+
+    public static void getStudyState(String dateId, FirestoreCallbackStudyState firestoreCallbackStudyState)
+    {
+        db = FirebaseFirestore.getInstance();
+        CollectionReference usersRef = db.collection("dates");
+        usersRef.whereEqualTo("id", dateId).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                if (task.isSuccessful()) {
+                    boolean studyIsClosed = false;
+
+                    for (QueryDocumentSnapshot document : task.getResult()) {
+                        studyIsClosed = document.getBoolean("participated");
+                    }
+                    firestoreCallbackStudyState.onCallback(studyIsClosed);
+                }
+            }
+        }).addOnFailureListener(e -> firestoreCallbackStudyState.onCallback(false));
+    }
+
 
 
 
@@ -480,5 +559,15 @@ public class PA_ExpandableListDataPump extends Activity {
     public interface FirestoreCallbackUser
     {
         void onCallback(String vps, String matrikelNumber);
+    }
+
+    public interface FirestoreCallbackDateState
+    {
+        void onCallback(boolean participated);
+    }
+
+    public interface FirestoreCallbackStudyState
+    {
+        void onCallback(boolean participated);
     }
 }

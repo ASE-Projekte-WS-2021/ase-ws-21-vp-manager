@@ -1,6 +1,7 @@
 package com.example.vpmanager.views;
 
 import android.os.Bundle;
+import android.os.Handler;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -102,11 +103,11 @@ public class registerFragment extends Fragment {
     //Return values:
     //Handles account creation if the and provides feedback if the task was successful
     private void createUser() {
-        String email = emailEdittext.getText().toString();
-        String password = passwordEditText.getText().toString();
-        String confirmPassword = passwordConfirmEditText.getText().toString();
-        String matNr = matnrEditText.getText().toString();
-        String neededVP = vpEditText.getText().toString();
+        String email = emailEdittext.getText().toString().trim();
+        String password = passwordEditText.getText().toString().trim();
+        String confirmPassword = passwordConfirmEditText.getText().toString().trim();
+        String matNr = matnrEditText.getText().toString().trim();
+        String neededVP = vpEditText.getText().toString().trim();
         if(TextUtils.isEmpty(neededVP)){
             neededVP = "15";
         }
@@ -130,7 +131,15 @@ public class registerFragment extends Fragment {
                             public void onComplete(@NonNull Task<Void> task) {
                                 if (task.isSuccessful()) {
                                     registerNewUser(email, matNr, finalNeededVP);
+                                    firebaseAuth.signOut();
                                     Toast.makeText(getActivity(), "Registierung erfolgreich, bitte überprüfe deine Email-Postfach", Toast.LENGTH_SHORT).show();
+                                    Handler handler = new Handler();
+                                    handler.postDelayed(new Runnable() {
+                                        @Override
+                                        public void run() {
+                                            navController.navigate(R.id.action_registerFragment_to_loginFragment);
+                                        }
+                                    },1000);
                                 } else {
                                     Toast.makeText(getActivity(), "Registierung fehlgeschlagen: " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
                                 }

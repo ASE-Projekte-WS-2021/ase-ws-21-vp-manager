@@ -50,6 +50,7 @@ public class FindStudyFragment extends Fragment implements StudyListAdapter.OnSt
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         navController = Navigation.findNavController(view);
+        Log.d("findStudy" , "backstack" + getFragmentManager().getBackStackEntryCount());
         super.onViewCreated(view, savedInstanceState);
     }
 

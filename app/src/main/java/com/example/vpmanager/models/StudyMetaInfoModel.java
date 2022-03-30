@@ -2,16 +2,17 @@ package com.example.vpmanager.models;
 
 public class StudyMetaInfoModel {
 
-    private String id, name, vps, category;
+    private String id, name, vps, category, type;
 
-    public StudyMetaInfoModel(String id, String name, String vps, String category) {
+    public StudyMetaInfoModel(String id, String name, String vps, String category, String type) {
         this.id = id;
         this.name = name;
         this.vps = vps;
         this.category = category;
+        this.type = type;
     }
 
-    public StudyMetaInfoModel() {
+    public StudyMetaInfoModel(String s, String s1, String s2, String s3, String s4, String s5) {
     }
 
     public String getId() {
@@ -43,6 +44,12 @@ public class StudyMetaInfoModel {
     }
 
     public void setCategory(String category) {
-        this.category = category;
+        this.category = category; }
+
+    public String getType() {
+        return type;
     }
+
+    public void setType(String type) {
+        this.type = type; }
 }
