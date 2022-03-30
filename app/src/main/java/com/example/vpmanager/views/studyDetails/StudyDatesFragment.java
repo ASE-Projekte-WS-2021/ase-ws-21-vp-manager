@@ -15,6 +15,7 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -87,6 +88,7 @@ public class StudyDatesFragment extends Fragment implements StudyDatesAdapter.On
         View view = inflater.inflate(R.layout.fragment_study_dates, container, false);
         prepareComponents();
         initViews(view);
+        Log.d("StudyDates", "viewModelInstance" + studyViewModel.toString());
         studyViewModel.fetchStudyDates(currentStudyId, currentUserId);
         return view;
     }
