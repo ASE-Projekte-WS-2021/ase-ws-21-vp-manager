@@ -1,67 +1,276 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="?android:windowBackground"
     tools:context=".views.studyEditDetails.StudyEditDetailsFragment">
 
-
     <ScrollView
         android:id="@+id/fragment_edit_study_scrollView"
-        android:background="@color/white"
         android:layout_width="match_parent"
-        android:fillViewport="true"
-        android:layout_height="match_parent" >
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        android:fillViewport="true">
 
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-
-            <com.google.android.material.card.MaterialCardView
-                android:id="@+id/cart_category"
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/edit_study_textInputLayout_title"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="30dp"
+                android:layout_marginStart="20dp"
                 android:layout_marginTop="20dp"
-                android:layout_marginEnd="30dp">
+                android:layout_marginEnd="20dp"
+                android:hint="Titel"
+                android:textColorHint="@color/heatherred_Main"
+                app:boxStrokeColor="@color/black"
+                app:boxStrokeWidthFocused="2dp"
+                app:hintTextColor="@color/heatherred_Main">
 
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/edit_study_title"
+                    style="@style/You.EditText.Style"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
 
-                <Spinner
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/edit_study_textInputLayout_vph"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/edit_study_textInputLayout_title"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="20dp"
+                android:hint="VP-Stunden"
+                android:textColorHint="@color/heatherred_Main"
+                app:boxStrokeColor="@color/black"
+                app:boxStrokeWidthFocused="2dp"
+                app:hintTextColor="@color/heatherred_Main">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/edit_study_vph"
+                    style="@style/You.EditText.Style"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:inputType="numberDecimal" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/edit_study_dropDown_category"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/edit_study_textInputLayout_vph"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="20dp"
+                android:hint="Studienkategorie"
+                android:textColorHint="@color/heatherred_Main"
+                app:boxBackgroundColor="@color/white"
+                app:boxStrokeColor="@color/black"
+                app:boxStrokeWidthFocused="2dp"
+                app:hintTextColor="@color/heatherred_Main">
+
+                <AutoCompleteTextView
                     android:id="@+id/edit_study_category"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:popupBackground="@color/green_Main" />
-            </com.google.android.material.card.MaterialCardView>
+                    android:inputType="none" />
 
-            <com.google.android.material.card.MaterialCardView
-                android:id="@+id/cart_type"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/cart_category"
-                android:layout_marginStart="30dp"
-                android:layout_marginTop="5dp"
-                android:layout_marginEnd="30dp">
-
-                <Spinner
-                    android:id="@+id/edit_study_execution"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:popupBackground="@color/green_Main" />
-
-            </com.google.android.material.card.MaterialCardView>
+            </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/cart_description"
+                android:id="@+id/edit_study_dropDown_executionType"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/edit_study_dropDown_category"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="20dp"
+                android:hint="Durchführungsart"
+                android:textColorHint="@color/heatherred_Main"
+                app:boxBackgroundColor="@color/white"
+                app:boxStrokeColor="@color/black"
+                app:boxStrokeWidthFocused="2dp"
+                app:hintTextColor="@color/heatherred_Main">
+
+                <AutoCompleteTextView
+                    android:id="@+id/edit_study_executionType"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="none" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <!--
+            <RelativeLayout
+                android:id="@+id/spinner_category_layout"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                android:layout_marginTop="20dp">
+
+                <Spinner
+                    android:id="@+id/edit_study_category_spinner"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:popupBackground="@color/green_Main" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/spinner_execution_layout"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_below="@+id/spinner_category_layout"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                android:layout_marginTop="5dp">
+
+                <Spinner
+                    android:id="@+id/edit_study_execution_spinner"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:popupBackground="@color/green_Main" />
+            </RelativeLayout>
+            -->
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/edit_study_textInputLayout_contact_mail"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/edit_study_dropDown_executionType"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="20dp"
+                android:hint="Kontakt - Mail"
+                android:textColorHint="@color/heatherred_Main"
+                app:boxStrokeColor="@color/black"
+                app:boxStrokeWidthFocused="2dp"
+                app:hintTextColor="@color/heatherred_Main">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/edit_study_contact_mail"
+                    style="@style/You.EditText.Style"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/edit_study_textInputLayout_contact_phone"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/edit_study_textInputLayout_contact_mail"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="20dp"
+                android:hint="Kontakt - Tel.-Nr."
+                android:textColorHint="@color/heatherred_Main"
+                app:boxStrokeColor="@color/black"
+                app:boxStrokeWidthFocused="2dp"
+                app:hintTextColor="@color/heatherred_Main">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/edit_study_contact_phone"
+                    style="@style/You.EditText.Style"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:inputType="number" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/edit_study_textInputLayout_contact_skype"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/edit_study_textInputLayout_contact_phone"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="20dp"
+                android:hint="Kontakt - Skype"
+                android:textColorHint="@color/heatherred_Main"
+                app:boxStrokeColor="@color/black"
+                app:boxStrokeWidthFocused="2dp"
+                app:hintTextColor="@color/heatherred_Main">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/edit_study_contact_skype"
+                    style="@style/You.EditText.Style"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/edit_study_textInputLayout_contact_discord"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/edit_study_textInputLayout_contact_skype"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="20dp"
+                android:hint="Kontakt - Discord"
+                android:textColorHint="@color/heatherred_Main"
+                app:boxStrokeColor="@color/black"
+                app:boxStrokeWidthFocused="2dp"
+                app:hintTextColor="@color/heatherred_Main">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/edit_study_contact_discord"
+                    style="@style/You.EditText.Style"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/edit_study_textInputLayout_contact_other"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/edit_study_textInputLayout_contact_discord"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="20dp"
+                android:hint="Kontakt - Andere"
+                android:textColorHint="@color/heatherred_Main"
+                app:boxStrokeColor="@color/black"
+                app:boxStrokeWidthFocused="2dp"
+                app:hintTextColor="@color/heatherred_Main">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/edit_study_contact_others"
+                    style="@style/You.EditText.Style"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/edit_study_textInputLayout_description"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="140dp"
-                android:layout_below="@+id/cart_type"
+                android:layout_below="@+id/edit_study_textInputLayout_contact_other"
                 android:layout_marginStart="20dp"
-                android:layout_marginTop="25dp"
+                android:layout_marginTop="20dp"
                 android:layout_marginEnd="20dp"
                 android:hint="Studienbeschreibung"
                 android:textColorHint="@color/heatherred_Main"
@@ -78,13 +287,13 @@
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/cart_location"
+                android:id="@+id/edit_study_textInputLayout_location"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/cart_description"
+                android:layout_below="@id/edit_study_textInputLayout_description"
                 android:layout_marginStart="20dp"
-                android:layout_marginTop="25dp"
+                android:layout_marginTop="20dp"
                 android:layout_marginEnd="20dp"
                 android:hint="Ort"
                 android:textColorHint="@color/heatherred_Main"
@@ -101,13 +310,13 @@
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/cart_street"
+                android:id="@+id/edit_study_textInputLayout_street"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/cart_location"
+                android:layout_below="@+id/edit_study_textInputLayout_location"
                 android:layout_marginStart="20dp"
-                android:layout_marginTop="5dp"
+                android:layout_marginTop="10dp"
                 android:layout_marginEnd="20dp"
                 android:hint="Straße"
                 android:textColorHint="@color/heatherred_Main"
@@ -124,15 +333,14 @@
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/cart_room"
+                android:id="@+id/edit_study_textInputLayout_room"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/cart_street"
+                android:layout_below="@+id/edit_study_textInputLayout_street"
                 android:layout_marginStart="20dp"
-                android:layout_marginTop="5dp"
+                android:layout_marginTop="10dp"
                 android:layout_marginEnd="20dp"
-
                 android:hint="Raum"
                 android:textColorHint="@color/heatherred_Main"
                 app:boxStrokeColor="@color/black"
@@ -147,23 +355,16 @@
 
             </com.google.android.material.textfield.TextInputLayout>
 
-
-
-
-          <!--  by using a 3rd Field for platform only 3 fields would be needed for
-            location AND platform, setting the text depending on the input-->
-
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/cart_platform_one"
+                android:id="@+id/edit_study_textInputLayout_platform_one"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/cart_room"
+                android:layout_below="@+id/edit_study_textInputLayout_room"
                 android:layout_marginStart="20dp"
-                android:layout_marginTop="25dp"
+                android:layout_marginTop="20dp"
                 android:layout_marginEnd="20dp"
-
-                android:hint="Plattform"
+                android:hint="Plattform 1"
                 android:textColorHint="@color/heatherred_Main"
                 app:boxStrokeColor="@color/black"
                 app:boxStrokeWidthFocused="2dp"
@@ -178,15 +379,15 @@
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/cart_platform_two"
+                android:id="@+id/edit_study_textInputLayout_platform_two"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/cart_platform_one"
+                android:layout_below="@+id/edit_study_textInputLayout_platform_one"
                 android:layout_marginStart="20dp"
-                android:layout_marginTop="5dp"
+                android:layout_marginTop="10dp"
                 android:layout_marginEnd="20dp"
-                android:hint="Alternative Plattform"
+                android:hint="Plattform 2"
                 android:textColorHint="@color/heatherred_Main"
                 app:boxStrokeColor="@color/black"
                 app:boxStrokeWidthFocused="2dp"
@@ -200,212 +401,19 @@
 
             </com.google.android.material.textfield.TextInputLayout>
 
-
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/cart_title"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/cart_platform_two"
-                android:layout_marginStart="20dp"
-                android:layout_marginTop="25dp"
-                android:layout_marginEnd="20dp"
-                android:hint="Titel"
-                android:textColorHint="@color/heatherred_Main"
-                app:boxStrokeColor="@color/black"
-                app:boxStrokeWidthFocused="2dp"
-                app:hintTextColor="@color/heatherred_Main">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/edit_study_title"
-                    style="@style/You.EditText.Style"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent" />
-
-            </com.google.android.material.textfield.TextInputLayout>
-
-
-            <!--<com.google.android.material.card.MaterialCardView
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="1.2"
-
-                android:layout_marginRight="30dp"
-                android:layout_marginLeft="30dp"
-                android:layout_marginTop="5dp">
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="5dp"
-                    android:text="Name der Studie"/>
-
-                <EditText
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/edit_study_title"
-                    android:textSize="20sp"
-                    android:layout_gravity="center"
-                    android:layout_marginStart="10dp">
-                </EditText>
-            </com.google.android.material.card.MaterialCardView>-->
-
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/cart_vp"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/cart_title"
-                android:layout_marginStart="20dp"
-                android:layout_marginTop="5dp"
-                android:layout_marginEnd="20dp"
-                android:hint="VP-Stunden"
-                android:textColorHint="@color/heatherred_Main"
-                app:boxStrokeColor="@color/black"
-                app:boxStrokeWidthFocused="2dp"
-                app:hintTextColor="@color/heatherred_Main">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/edit_study_vp"
-                    style="@style/You.EditText.Style"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent" />
-
-            </com.google.android.material.textfield.TextInputLayout>
-
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/cart_contact"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/cart_vp"
-                android:layout_marginStart="20dp"
-                android:layout_marginTop="25dp"
-                android:layout_marginEnd="20dp"
-                android:hint="Kontakt - Mail"
-                android:textColorHint="@color/heatherred_Main"
-                app:boxStrokeColor="@color/black"
-                app:boxStrokeWidthFocused="2dp"
-                app:hintTextColor="@color/heatherred_Main">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/edit_study_contact"
-                    style="@style/You.EditText.Style"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent" />
-
-            </com.google.android.material.textfield.TextInputLayout>
-
-
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/cart_phone"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/cart_contact"
-                android:layout_marginStart="20dp"
-                android:layout_marginTop="5dp"
-                android:layout_marginEnd="20dp"
-                android:hint="Kontakt - Tel.-Nr."
-                android:textColorHint="@color/heatherred_Main"
-                app:boxStrokeColor="@color/black"
-                app:boxStrokeWidthFocused="2dp"
-                app:hintTextColor="@color/heatherred_Main">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/edit_study_phone"
-                    style="@style/You.EditText.Style"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent" />
-
-            </com.google.android.material.textfield.TextInputLayout>
-
-
-            <com.google.android.material.textfield.TextInputLayout
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/cart_skype"
-                android:layout_below="@+id/cart_phone"
-                android:layout_marginStart="20dp"
-                android:layout_marginTop="5dp"
-                android:layout_marginEnd="20dp"
-                android:hint="Kontakt - Skype"
-                android:textColorHint="@color/heatherred_Main"
-                app:boxStrokeColor="@color/black"
-                app:boxStrokeWidthFocused="2dp"
-                app:hintTextColor="@color/heatherred_Main">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/edit_study_skype"
-                    style="@style/You.EditText.Style"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent" />
-
-            </com.google.android.material.textfield.TextInputLayout>
-
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/cart_discord"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/cart_skype"
-                android:layout_marginStart="20dp"
-                android:layout_marginTop="5dp"
-                android:layout_marginEnd="20dp"
-                android:hint="Kontakt - Discord"
-                android:textColorHint="@color/heatherred_Main"
-                app:boxStrokeColor="@color/black"
-                app:boxStrokeWidthFocused="2dp"
-                app:hintTextColor="@color/heatherred_Main">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/edit_study_discord"
-                    style="@style/You.EditText.Style"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent" />
-
-            </com.google.android.material.textfield.TextInputLayout>
-
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/cart_others"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/cart_discord"
-                android:layout_marginStart="20dp"
-                android:layout_marginTop="5dp"
-                android:layout_marginEnd="20dp"
-                android:hint="Kontakt - Weitere"
-                android:textColorHint="@color/heatherred_Main"
-                app:boxStrokeColor="@color/black"
-                app:boxStrokeWidthFocused="2dp"
-                app:hintTextColor="@color/heatherred_Main">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/edit_study_others"
-                    style="@style/You.EditText.Style"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent" />
-
-            </com.google.android.material.textfield.TextInputLayout>
-
-
-
-            -->
-
             <Button
-                android:id="@+id/edit_saving_button"
+                android:id="@+id/edit_study_saving_button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/cart_others"
+                android:layout_below="@+id/edit_study_textInputLayout_platform_two"
                 android:layout_centerHorizontal="true"
                 android:layout_margin="20dp"
                 android:layout_marginStart="15dp"
                 android:layout_marginEnd="15dp"
                 android:layout_marginBottom="15dp"
                 android:text="Save Study" />
-        </RelativeLayout>
 
+        </RelativeLayout>
 
     </ScrollView>
 
