@@ -135,7 +135,9 @@ public class StudyRepository {
                                                 document.getString("date"),    //the date itself
                                                 document.getString("studyId"), //id of corresponding study
                                                 document.getString("userId"),  //id of user who selected the date
+                                                document.getBoolean("selected"), //boolean if selected or not
                                                 document.getBoolean("participated"))
+
                                 );
                             }
                             studyDatesListener.onStudyDatesReady(datesArrayList);
@@ -164,6 +166,7 @@ public class StudyRepository {
                                                 document.getString("date"),    //the date itself
                                                 document.getString("studyId"), //id of corresponding study
                                                 document.getString("userId"),  //id of user who selected the date
+                                                document.getBoolean("selected"),
                                                 document.getBoolean("participated"))
                                 );
                             }

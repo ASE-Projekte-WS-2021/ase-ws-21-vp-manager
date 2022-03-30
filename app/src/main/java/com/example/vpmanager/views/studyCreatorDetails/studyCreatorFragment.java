@@ -16,6 +16,7 @@ import androidx.viewpager.widget.ViewPager;
 
 import com.example.vpmanager.R;
 import com.example.vpmanager.views.mainActivity;
+import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.tabs.TabLayout;
 
 import java.util.ArrayList;
@@ -68,11 +69,17 @@ public class studyCreatorFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         navController = Navigation.findNavController(view);
         super.onViewCreated(view, savedInstanceState);
+        Boolean fromEditFragment = getArguments().getBoolean("fromEditFragment");
+        if (fromEditFragment){
+            Snackbar snackbar = Snackbar.make(view, "Studie geupdated", Snackbar.LENGTH_SHORT);
+            snackbar.show();
+        }
     }
 
     private void getRequiredInfos() {
-        currentStudyId = getArguments().getString("studyId");
         currentUserId = mainActivity.createUserId(getActivity());
+        currentStudyId = getArguments().getString("studyId");
+
     }
 
 

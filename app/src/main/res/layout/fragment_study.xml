@@ -9,7 +9,7 @@
     tools:context=".views.studyDetails.StudyFragment">
 
     <com.google.android.material.tabs.TabLayout
-        android:id="@+id/tab_layout"
+        android:id="@+id/tab_layout_study_details"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:tabIndicatorColor="@color/green_Main"
@@ -19,7 +19,7 @@
     </com.google.android.material.tabs.TabLayout>
 
     <androidx.viewpager.widget.ViewPager
-        android:id="@+id/view_pager"
+        android:id="@+id/view_pager_study_details"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 

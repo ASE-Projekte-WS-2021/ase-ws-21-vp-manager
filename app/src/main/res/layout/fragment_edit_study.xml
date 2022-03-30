@@ -1,11 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="?android:windowBackground">
+    android:orientation="vertical"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context=".views.studyEditDetails.StudyEditFragment">
 
+    <com.google.android.material.tabs.TabLayout
+        android:id="@+id/tab_layout_edit_study"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:tabIndicatorColor="@color/green_Main"
+        app:tabRippleColor="@color/green_light"
+        app:tabSelectedTextColor="@color/green_Main">
 
+    </com.google.android.material.tabs.TabLayout>
+
+    <androidx.viewpager.widget.ViewPager
+        android:id="@+id/view_pager_edit_study"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+    <!--
     <ScrollView
         android:id="@+id/fragment_edit_study_scrollView"
         android:background="@color/green_light"
@@ -39,10 +57,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="1.2"
-
                 android:layout_marginRight="30dp"
                 android:layout_marginLeft="30dp"
                 android:layout_marginTop="5dp">
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -211,7 +229,6 @@
                 android:layout_marginRight="20dp"
                 android:background="@color/black" />
 
-<!--
             <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
@@ -238,7 +255,7 @@
                 </EditText>
 
             </com.google.android.material.card.MaterialCardView>
--->
+
             <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -250,5 +267,6 @@
 
 
     </ScrollView>
+    -->
 
-</FrameLayout>
+</LinearLayout>
