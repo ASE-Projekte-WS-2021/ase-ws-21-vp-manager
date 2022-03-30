@@ -60,7 +60,7 @@ public class DateModel {
         this.selected = selected;
     }
 
-    public boolean getParticipation() {return participated;}
+    public boolean getParticipation() { return participated; }
 
     public void setParticipation(boolean participated) { this.participated = participated;}
 

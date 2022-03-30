@@ -149,7 +149,7 @@ public class StudyEditViewModel extends ViewModel implements EditStudyDetailsLis
     public void addNewDateToList(String newDate, String studyId) {
         Log.d("StudyEditViewModel", "addNewDateToList: before" + datesEditProcessDataObjects.toString());
         DateModel newDateObject = new DateModel(
-                getNewId(), newDate, studyId, mainActivity.uniqueID, false
+                getNewId(), newDate, studyId, mainActivity.uniqueID, false, false
         );
         datesEditProcessDataObjects.add(newDateObject);
         Log.d("StudyEditViewModel", "addNewDateToList: after" + datesEditProcessDataObjects.toString());

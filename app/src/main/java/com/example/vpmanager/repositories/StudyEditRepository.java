@@ -114,7 +114,8 @@ public class StudyEditRepository {
                                                 document.getString("date"),    //the date itself
                                                 document.getString("studyId"), //id of corresponding study
                                                 document.getString("userId"),  //id of user who selected the date
-                                                document.getBoolean("selected")) //boolean if selected or not
+                                                document.getBoolean("selected"), //boolean if selected or not
+                                                document.getBoolean("participated")) //boolean if participated or not
                                 );
                             }
                             editStudyDatesListener.onStudyDatesReady(studyEditDatesArrayList);
