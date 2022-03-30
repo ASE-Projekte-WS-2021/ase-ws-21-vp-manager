@@ -137,6 +137,7 @@ public class StudyEditRepository {
     }
 
     public void updateStudy(Map<String, Object> updatedStudyMap, String idOfUpdatedStudy){
+        Log.d("updateStudy", "Map: " + updatedStudyMap.toString());
         db = FirebaseFirestore.getInstance();
         db.collection("studies").document(idOfUpdatedStudy)
                 .set(updatedStudyMap)

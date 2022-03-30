@@ -44,6 +44,9 @@ public class StudyEditViewModel extends ViewModel implements EditStudyDetailsLis
 
     public void updateStudyAndDates(){
 
+        //TODO: some Fields must not be empty
+        checkMandatoryFields();
+        Log.d("updateStudyAndDates", ": " + studyEditProcessData);
         //studyId is already in the map and can be reused
         //the creator isn't loaded in the first place so is is added here
         studyEditProcessData.put("creator", mainActivity.uniqueID);
@@ -105,8 +108,49 @@ public class StudyEditViewModel extends ViewModel implements EditStudyDetailsLis
             //the new list of dateIds needs to be saved in the study
             studyEditProcessData.put("dates", dateIds);
         }
+
+        updateStudyFieldsWithInput();
+
         String studyId = studyEditProcessData.get("id").toString();
         mStudyEditRepo.updateStudy(studyEditProcessData, studyId);
+    }
+
+    private void checkMandatoryFields(){
+
+    }
+
+    private void updateStudyFieldsWithInput(){
+        studyEditProcessData.put("name", studyEditDetailsFragment.title.getText());
+        studyEditProcessData.put("vps", studyEditDetailsFragment.vph.getText());
+        studyEditProcessData.put("category", studyEditDetailsFragment.categories.getText().toString());
+        studyEditProcessData.put("executionType", studyEditDetailsFragment.executionType.getText().toString());
+
+        studyEditProcessData.put("contact", studyEditDetailsFragment.contactMail.getText());
+        studyEditProcessData.put("contact2", studyEditDetailsFragment.contactPhone.getText());
+        studyEditProcessData.put("contact3", studyEditDetailsFragment.contactSkype.getText());
+        studyEditProcessData.put("contact4", studyEditDetailsFragment.contactDiscord.getText());
+        studyEditProcessData.put("contact5", studyEditDetailsFragment.contactOther.getText());
+
+        studyEditProcessData.put("description", studyEditDetailsFragment.description.getText());
+
+        if (studyEditDetailsFragment.executionType.getText().toString().equals("Remote")){
+            studyEditProcessData.put("platform", studyEditDetailsFragment.platformOne.getText());
+            studyEditProcessData.put("platform2", studyEditDetailsFragment.platformTwo.getText());
+
+            //the data not needed is deleted from the map. Later when the changed study is stored in the db,
+            //unset fields are overwritten
+            studyEditProcessData.remove("location");
+            studyEditProcessData.remove("street");
+            studyEditProcessData.remove("room");
+        }
+        if (studyEditDetailsFragment.executionType.getText().toString().equals("Präsenz")){
+            studyEditProcessData.put("location", studyEditDetailsFragment.location.getText());
+            studyEditProcessData.put("street", studyEditDetailsFragment.street.getText());
+            studyEditProcessData.put("room", studyEditDetailsFragment.room.getText());
+
+            studyEditProcessData.remove("platform");
+            studyEditProcessData.remove("platform2");
+        }
     }
 
     public void addNewDateToList(String newDate, String studyId){
@@ -141,11 +185,12 @@ public class StudyEditViewModel extends ViewModel implements EditStudyDetailsLis
         Log.d("onStudyDatesReady", "dateIds: " + idsOfAllInitialDates);
 
         Log.d("datesReady 1", ": " + datesEditProcessDataObjects.toString());
-        studyEditDatesFragment.notifyDatesObjectListChanged();
+        //studyEditDatesFragment.notifyDatesObjectListChanged();
+        studyEditDatesFragment.setupRecyclerView();
     }
 
     @Override
     public void onStudyUpdated() {
-        studyEditDetailsFragment.navigateToCreatorDetailsView();
+        //studyEditDetailsFragment.navigateToCreatorDetailsView();
     }
 }

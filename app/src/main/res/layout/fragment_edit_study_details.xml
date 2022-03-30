@@ -19,13 +19,24 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
+            <Button
+                android:id="@+id/edit_study_saving_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_margin="20dp"
+                android:layout_marginStart="15dp"
+                android:layout_marginEnd="15dp"
+                android:layout_marginBottom="15dp"
+                android:text="Save Study" />
+
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/edit_study_textInputLayout_title"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_below="@+id/edit_study_saving_button"
                 android:layout_marginStart="20dp"
-                android:layout_marginTop="20dp"
                 android:layout_marginEnd="20dp"
                 android:hint="Titel"
                 android:textColorHint="@color/heatherred_Main"
@@ -286,133 +297,146 @@
 
             </com.google.android.material.textfield.TextInputLayout>
 
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/edit_study_textInputLayout_location"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            <RelativeLayout
+                android:id="@+id/edit_study_presence_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/edit_study_textInputLayout_description"
-                android:layout_marginStart="20dp"
-                android:layout_marginTop="20dp"
-                android:layout_marginEnd="20dp"
-                android:hint="Ort"
-                android:textColorHint="@color/heatherred_Main"
-                app:boxStrokeColor="@color/black"
-                app:boxStrokeWidthFocused="2dp"
-                app:hintTextColor="@color/heatherred_Main">
+                android:layout_below="@+id/edit_study_textInputLayout_description"
+                android:visibility="gone">
 
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/edit_study_location"
-                    style="@style/You.EditText.Style"
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/edit_study_textInputLayout_location"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent" />
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginEnd="20dp"
+                    android:hint="Ort"
+                    android:textColorHint="@color/heatherred_Main"
+                    app:boxStrokeColor="@color/black"
+                    app:boxStrokeWidthFocused="2dp"
+                    app:hintTextColor="@color/heatherred_Main">
 
-            </com.google.android.material.textfield.TextInputLayout>
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/edit_study_location"
+                        style="@style/You.EditText.Style"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent" />
 
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/edit_study_textInputLayout_street"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/edit_study_textInputLayout_street"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/edit_study_textInputLayout_location"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginEnd="20dp"
+                    android:hint="Straße"
+                    android:textColorHint="@color/heatherred_Main"
+                    app:boxStrokeColor="@color/black"
+                    app:boxStrokeWidthFocused="2dp"
+                    app:hintTextColor="@color/heatherred_Main">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/edit_study_street"
+                        style="@style/You.EditText.Style"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/edit_study_textInputLayout_room"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/edit_study_textInputLayout_street"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginEnd="20dp"
+                    android:layout_marginBottom="20dp"
+                    android:hint="Raum"
+                    android:textColorHint="@color/heatherred_Main"
+                    app:boxStrokeColor="@color/black"
+                    app:boxStrokeWidthFocused="2dp"
+                    app:hintTextColor="@color/heatherred_Main">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/edit_study_room"
+                        style="@style/You.EditText.Style"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/edit_study_remote_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/edit_study_textInputLayout_location"
-                android:layout_marginStart="20dp"
-                android:layout_marginTop="10dp"
-                android:layout_marginEnd="20dp"
-                android:hint="Straße"
-                android:textColorHint="@color/heatherred_Main"
-                app:boxStrokeColor="@color/black"
-                app:boxStrokeWidthFocused="2dp"
-                app:hintTextColor="@color/heatherred_Main">
+                android:layout_below="@+id/edit_study_textInputLayout_description"
+                android:visibility="visible">
 
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/edit_study_street"
-                    style="@style/You.EditText.Style"
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/edit_study_textInputLayout_platform_one"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent" />
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginEnd="20dp"
+                    android:hint="Plattform 1"
+                    android:textColorHint="@color/heatherred_Main"
+                    app:boxStrokeColor="@color/black"
+                    app:boxStrokeWidthFocused="2dp"
+                    app:hintTextColor="@color/heatherred_Main">
 
-            </com.google.android.material.textfield.TextInputLayout>
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/edit_study_platform_one"
+                        style="@style/You.EditText.Style"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent" />
 
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/edit_study_textInputLayout_room"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/edit_study_textInputLayout_platform_two"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/edit_study_textInputLayout_platform_one"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginEnd="20dp"
+                    android:layout_marginBottom="20dp"
+                    android:hint="Plattform 2"
+                    android:textColorHint="@color/heatherred_Main"
+                    app:boxStrokeColor="@color/black"
+                    app:boxStrokeWidthFocused="2dp"
+                    app:hintTextColor="@color/heatherred_Main">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/edit_study_platform_two"
+                        style="@style/You.EditText.Style"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+            </RelativeLayout>
+
+            <com.airbnb.lottie.LottieAnimationView
+                android:id="@+id/animationViewEdit"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/edit_study_textInputLayout_street"
-                android:layout_marginStart="20dp"
-                android:layout_marginTop="10dp"
-                android:layout_marginEnd="20dp"
-                android:hint="Raum"
-                android:textColorHint="@color/heatherred_Main"
-                app:boxStrokeColor="@color/black"
-                app:boxStrokeWidthFocused="2dp"
-                app:hintTextColor="@color/heatherred_Main">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/edit_study_room"
-                    style="@style/You.EditText.Style"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent" />
-
-            </com.google.android.material.textfield.TextInputLayout>
-
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/edit_study_textInputLayout_platform_one"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/edit_study_textInputLayout_room"
-                android:layout_marginStart="20dp"
-                android:layout_marginTop="20dp"
-                android:layout_marginEnd="20dp"
-                android:hint="Plattform 1"
-                android:textColorHint="@color/heatherred_Main"
-                app:boxStrokeColor="@color/black"
-                app:boxStrokeWidthFocused="2dp"
-                app:hintTextColor="@color/heatherred_Main">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/edit_study_platform_one"
-                    style="@style/You.EditText.Style"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent" />
-
-            </com.google.android.material.textfield.TextInputLayout>
-
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/edit_study_textInputLayout_platform_two"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/edit_study_textInputLayout_platform_one"
-                android:layout_marginStart="20dp"
-                android:layout_marginTop="10dp"
-                android:layout_marginEnd="20dp"
-                android:hint="Plattform 2"
-                android:textColorHint="@color/heatherred_Main"
-                app:boxStrokeColor="@color/black"
-                app:boxStrokeWidthFocused="2dp"
-                app:hintTextColor="@color/heatherred_Main">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/edit_study_platform_two"
-                    style="@style/You.EditText.Style"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent" />
-
-            </com.google.android.material.textfield.TextInputLayout>
-
-            <Button
-                android:id="@+id/edit_study_saving_button"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/edit_study_textInputLayout_platform_two"
-                android:layout_centerHorizontal="true"
-                android:layout_margin="20dp"
-                android:layout_marginStart="15dp"
-                android:layout_marginEnd="15dp"
-                android:layout_marginBottom="15dp"
-                android:text="Save Study" />
-
+                android:layout_height="match_parent"
+                android:background="@color/black"
+                android:visibility="invisible"
+                app:lottie_url="https://assets5.lottiefiles.com/packages/lf20_nwuqqxfv.json" />
         </RelativeLayout>
 
     </ScrollView>

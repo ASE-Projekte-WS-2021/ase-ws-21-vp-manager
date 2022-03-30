@@ -1,14 +1,20 @@
 package com.example.vpmanager.views.studyEditDetails;
 
+import android.animation.Animator;
+import android.animation.AnimatorListenerAdapter;
 import android.annotation.SuppressLint;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
+import android.widget.RelativeLayout;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -18,6 +24,7 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 
+import com.airbnb.lottie.LottieAnimationView;
 import com.example.vpmanager.R;
 import com.example.vpmanager.viewmodels.StudyEditViewModel;
 import com.google.android.material.textfield.TextInputEditText;
@@ -31,31 +38,35 @@ public class StudyEditDetailsFragment extends Fragment {
     private StudyEditViewModel studyEditViewModel;
     private NavController navController;
 
-    public static TextInputEditText title;
-    public static TextInputEditText vph;
+    public TextInputEditText title;
+    public TextInputEditText vph;
     @SuppressLint("StaticFieldLeak")
-    public static AutoCompleteTextView categories;
+    public AutoCompleteTextView categories;
     @SuppressLint("StaticFieldLeak")
-    public static AutoCompleteTextView executionType;
+    public AutoCompleteTextView executionType;
 
-    private TextInputEditText contactMail;
-    private TextInputEditText contactPhone;
-    private TextInputEditText contactSkype;
-    private TextInputEditText contactDiscord;
-    private TextInputEditText contactOther;
+    public TextInputEditText contactMail;
+    public TextInputEditText contactPhone;
+    public TextInputEditText contactSkype;
+    public TextInputEditText contactDiscord;
+    public TextInputEditText contactOther;
 
-    private TextInputEditText description;
+    public TextInputEditText description;
 
-    private TextInputEditText platformOne;
-    private TextInputEditText platformTwo;
+    public RelativeLayout remoteLayout;
+    public RelativeLayout presenceLayout;
 
-    private TextInputEditText location;
-    private TextInputEditText street;
-    private TextInputEditText room;
+    public TextInputEditText platformOne;
+    public TextInputEditText platformTwo;
+
+    public TextInputEditText location;
+    public TextInputEditText street;
+    public TextInputEditText room;
 
     private Button saveButton;
+    private LottieAnimationView doneAnimation;
 
-    public StudyEditDetailsFragment(){
+    public StudyEditDetailsFragment() {
     }
 
     @Override
@@ -101,7 +112,8 @@ public class StudyEditDetailsFragment extends Fragment {
         ArrayAdapter<String> arrayAdapterCategories, arrayAdapterExecutionType;
 
         categories = view.findViewById(R.id.edit_study_category);
-        dropdownListCategories = new ArrayList<>();;
+        dropdownListCategories = new ArrayList<>();
+        ;
         dropdownListCategories.add("VR");
         dropdownListCategories.add("AR");
         dropdownListCategories.add("Diary Study");
@@ -138,6 +150,9 @@ public class StudyEditDetailsFragment extends Fragment {
 
         description = view.findViewById(R.id.edit_study_description);
 
+        remoteLayout = view.findViewById(R.id.edit_study_remote_layout);
+        presenceLayout = view.findViewById(R.id.edit_study_presence_layout);
+
         location = view.findViewById(R.id.edit_study_location);
         street = view.findViewById(R.id.edit_study_street);
         room = view.findViewById(R.id.edit_study_room);
@@ -147,32 +162,93 @@ public class StudyEditDetailsFragment extends Fragment {
 
         saveButton = view.findViewById(R.id.edit_study_saving_button);
 
+        executionType.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                Log.d("editable", ": " + editable.toString());
+                if (editable.toString().equals("Remote")){
+                    presenceLayout.setVisibility(View.GONE);
+                    remoteLayout.setVisibility(View.VISIBLE);
+                } else {
+                    remoteLayout.setVisibility(View.GONE);
+                    presenceLayout.setVisibility(View.VISIBLE);
+                }
+            }
+        });
+
+        /*
+        executionType.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                if (executionType.getText().toString().equals("Remote")) {
+                    presenceLayout.setVisibility(View.GONE);
+                    remoteLayout.setVisibility(View.VISIBLE);
+                } else if (executionType.getText().toString().equals("Presence")) {
+                    remoteLayout.setVisibility(View.GONE);
+                    presenceLayout.setVisibility(View.VISIBLE);
+                }
+            }
+        });
+
+         */
+
         saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                //animation starts, study is updated and when animation ends the user is navigates to creatorDetailsView
+                playAnimation();
                 studyEditViewModel.updateStudyAndDates();
             }
         });
+
+        doneAnimation = view.findViewById(R.id.animationViewEdit);
+
+        doneAnimation.addAnimatorListener(
+                new AnimatorListenerAdapter() {
+                    @Override
+                    public void onAnimationEnd(Animator animation) {
+                        super.onAnimationEnd(animation);
+                        navigateToCreatorDetailsView();
+                    }
+                }
+        );
     }
 
-    public void navigateToCreatorDetailsView(){
+    private void playAnimation() {
+        doneAnimation.setVisibility(LottieAnimationView.VISIBLE);
+        doneAnimation.setProgress(0);
+        doneAnimation.pauseAnimation();
+        doneAnimation.playAnimation();
+    }
+
+
+    private void navigateToCreatorDetailsView(){
         Bundle args = new Bundle();
         args.putString("studyId", currentStudyIdEdit);
         args.putBoolean("fromEditFragment", true);
         navController.navigate(R.id.action_editStudyFragment_to_studyCreatorFragment, args);
     }
 
-    public void setDetails(){
+
+    public void setDetails() {
 
         Log.d("DetailsFragment", "setDetails: " + studyEditViewModel.studyEditProcessData.toString());
         //title, vph, category, executionType
-        if (studyEditViewModel.studyEditProcessData.get("name") != null){
+        if (studyEditViewModel.studyEditProcessData.get("name") != null) {
             title.setText(studyEditViewModel.studyEditProcessData.get("name").toString());
         }
-        if (studyEditViewModel.studyEditProcessData.get("vps") != null){
+        if (studyEditViewModel.studyEditProcessData.get("vps") != null) {
             vph.setText(studyEditViewModel.studyEditProcessData.get("vps").toString());
         }
-        if (studyEditViewModel.studyEditProcessData.get("category") != null){
+        if (studyEditViewModel.studyEditProcessData.get("category") != null) {
             String cat = studyEditViewModel.studyEditProcessData.get("category").toString();
             if (cat.equals("VR")) {
                 categories.setText("VR", false);
@@ -197,47 +273,59 @@ public class StudyEditDetailsFragment extends Fragment {
             }
         }
 
+
         //contacts
         //mail is never null (mandatory mail)
-        if (studyEditViewModel.studyEditProcessData.get("contact") != null){
+        if (studyEditViewModel.studyEditProcessData.get("contact") != null) {
             contactMail.setText(studyEditViewModel.studyEditProcessData.get("contact").toString());
             contactMail.setFocusable(false);
             contactMail.setTextColor(ContextCompat.getColor(getActivity(), R.color.pieChartRemaining));
         }
-        if (studyEditViewModel.studyEditProcessData.get("contact2") != null){
+        if (studyEditViewModel.studyEditProcessData.get("contact2") != null) {
             contactPhone.setText(studyEditViewModel.studyEditProcessData.get("contact2").toString());
         }
-        if (studyEditViewModel.studyEditProcessData.get("contact3") != null){
+        if (studyEditViewModel.studyEditProcessData.get("contact3") != null) {
             contactSkype.setText(studyEditViewModel.studyEditProcessData.get("contact3").toString());
         }
-        if (studyEditViewModel.studyEditProcessData.get("contact4") != null){
+        if (studyEditViewModel.studyEditProcessData.get("contact4") != null) {
             contactDiscord.setText(studyEditViewModel.studyEditProcessData.get("contact4").toString());
         }
-        if (studyEditViewModel.studyEditProcessData.get("contact5") != null){
+        if (studyEditViewModel.studyEditProcessData.get("contact5") != null) {
             contactOther.setText(studyEditViewModel.studyEditProcessData.get("contact5").toString());
         }
 
         //description
-        if (studyEditViewModel.studyEditProcessData.get("description") != null){
+        if (studyEditViewModel.studyEditProcessData.get("description") != null) {
             description.setText(studyEditViewModel.studyEditProcessData.get("description").toString());
         }
 
+        if (studyEditViewModel.studyEditProcessData.get("executionType").equals("Remote")) {
+
+            presenceLayout.setVisibility(View.GONE);
+            remoteLayout.setVisibility(View.VISIBLE);
+
+        } else if (studyEditViewModel.studyEditProcessData.get("executionType").equals("Präsenz")) {
+
+            remoteLayout.setVisibility(View.GONE);
+            presenceLayout.setVisibility(View.VISIBLE);
+        }
+
         //platformOne, platformTwo
-        if (studyEditViewModel.studyEditProcessData.get("platform") != null){
+        if (studyEditViewModel.studyEditProcessData.get("platform") != null) {
             platformOne.setText(studyEditViewModel.studyEditProcessData.get("platform").toString());
         }
-        if (studyEditViewModel.studyEditProcessData.get("platform2") != null){
+        if (studyEditViewModel.studyEditProcessData.get("platform2") != null) {
             platformTwo.setText(studyEditViewModel.studyEditProcessData.get("platform2").toString());
         }
 
         //location, street, room
-        if (studyEditViewModel.studyEditProcessData.get("location") != null){
+        if (studyEditViewModel.studyEditProcessData.get("location") != null) {
             location.setText(studyEditViewModel.studyEditProcessData.get("location").toString());
         }
-        if (studyEditViewModel.studyEditProcessData.get("street") != null){
+        if (studyEditViewModel.studyEditProcessData.get("street") != null) {
             street.setText(studyEditViewModel.studyEditProcessData.get("street").toString());
         }
-        if (studyEditViewModel.studyEditProcessData.get("room") != null){
+        if (studyEditViewModel.studyEditProcessData.get("room") != null) {
             room.setText(studyEditViewModel.studyEditProcessData.get("room").toString());
         }
     }

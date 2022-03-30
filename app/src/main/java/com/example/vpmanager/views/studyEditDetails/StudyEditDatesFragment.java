@@ -50,12 +50,7 @@ public class StudyEditDatesFragment extends Fragment {
     private RecyclerView studyEditDatesRecyclerView;
     //private SwipeableDatesAdapter studyEditSwipeableDatesAdapter;
     private EditSwipeableDatesAdapter editSwipeableDatesAdapter;
-    //private LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
-
-    //the complete date+time strings are stored here and passed to the adapter
-    //only this list is adjusted with the swipeToDeletes and adds by the fab.
-    //The list in the viewModel needs be changed too!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-    //private ArrayList<String> datesArrayList = new ArrayList<>();
+    private View currentView;
 
     public StudyEditDatesFragment(){
     }
@@ -71,6 +66,7 @@ public class StudyEditDatesFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_edit_study_dates, container, false);
         prepareComponents();
         setupView(view);
+        currentView = view;
         return view;
     }
 
@@ -105,7 +101,7 @@ public class StudyEditDatesFragment extends Fragment {
 
     private void setupView(View view){
         studyEditDatesRecyclerView = view.findViewById(R.id.editStudyDatesRecyclerView);
-        setupRecyclerView(view);
+        //setupRecyclerView(view);
         FloatingActionButton editFab = view.findViewById(R.id.fab_edit_dates);
         editFab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -115,11 +111,11 @@ public class StudyEditDatesFragment extends Fragment {
         });
     }
 
-    private void setupRecyclerView(View view) {
+    public void setupRecyclerView() {
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
 
         Log.d("StudyEditDatesFragment", "datesEditProcessDataObjects: " + studyEditViewModel.datesEditProcessDataObjects);
-        editSwipeableDatesAdapter = new EditSwipeableDatesAdapter(getContext(), studyEditViewModel.datesEditProcessDataObjects, view);
+        editSwipeableDatesAdapter = new EditSwipeableDatesAdapter(getContext(), studyEditViewModel.datesEditProcessDataObjects, currentView);
         studyEditDatesRecyclerView.setAdapter(editSwipeableDatesAdapter);
         studyEditDatesRecyclerView.setLayoutManager(linearLayoutManager);
 
