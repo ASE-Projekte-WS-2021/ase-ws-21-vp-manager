@@ -68,7 +68,9 @@ public class StudyListRepository {
                             studyIdNameVpCat.get(i).get(0), //add Id
                             studyIdNameVpCat.get(i).get(1), //add Name
                             studyIdNameVpCat.get(i).get(2) + " " + "VP-Stunden", //add vps
-                            studyIdNameVpCat.get(i).get(3)) //add category
+                            studyIdNameVpCat.get(i).get(3), //add category
+                            studyIdNameVpCat.get(i).get(4)) //add study type
+
             );
         }
         Log.d("StudyListRepository", "setStudyMetaInfo end");
@@ -102,6 +104,7 @@ public class StudyListRepository {
                                     idNameVphCat.add(1, document.getString("name"));
                                     idNameVphCat.add(2, document.getString("vps"));
                                     idNameVphCat.add(3, document.getString("category"));
+                                    idNameVphCat.add(4, document.getString("executionType"));
                                     studyIdNameVpCat.add(idNameVphCat);
                                 }
                             }

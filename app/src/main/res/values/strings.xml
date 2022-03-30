@@ -35,13 +35,13 @@
     <string name="remoteString">Remote</string>
     <string name="presenceString">Präsenz</string>
 
-    <string name="createOfferedVP">Angebotene VP</string>
-    <string name="createStudyTitleHint">Titel*</string>
+    <string name="createOfferedVP">Angebotene VP-Stunden</string>
+    <string name="createStudyTitleHint">Titel der Studie</string>
     <string name="createStudyTitle">Titel</string>
     <string name="createStudyExe">Durchführungsart</string>
     <string name="createStudyContact">Kontaktmöglichkeit</string>
     <string name="fragment_create_study_pageOneTitle">Basisinformationen</string>
-    <string name="fragment_create_study_pageBaseDesc">Geben Sie in den folgenden Schritten alle relevanten Informationen zu Ihrer Studie an. Optionale Angaben werden als solche gekennzeichnet (*). \n\n Potenziell Teilnehmer können ihren Eintrag anschließend im Reiter \"Studie finden\" einsehen.</string>
+    <string name="fragment_create_study_pageBaseDesc">Geben Sie in den folgenden Schritten alle relevanten Informationen zu Ihrer Studie an. \n\n Bevor Sie diese am Ende veröffentlichen, können Sie Ihre Eingaben noch einmal überprüfen und Änderungen vornehmen. \n\n Potenzielle Teilnehmer finden Ihren Eintrag anschließend im Reiter \"Studie finden\" und können sich dort für einen Termin eintragen.</string>
     <string name="fragment_create_study_desc_page_one">Unter folgendem Namen wird anschließend ein Eintrag in der Studienliste erstellt.</string>
     <string name="fragment_create_study_desc_page_two">Hier können sie genauere Details zum Studienablauf und konreten Inhalten bereitstellen.</string>
     <string name="fragment_create_study_pageBaseTitle">Willkommen</string>
@@ -69,7 +69,7 @@
 
 
     <string-array name="createCategoryList">
-        <item>Studienkategorie*</item>
+        <item>Studienkategorie</item>
         <item>VR</item>
         <item>AR</item>
         <item>Diary Study</item>
@@ -77,7 +77,7 @@
     </string-array>
 
     <string-array name="createExecutionTypeList">
-        <item>Durchführungsart*</item>
+        <item>Durchführungsart</item>
         <item>Remote</item>
         <item>Präsenz</item>
     </string-array>

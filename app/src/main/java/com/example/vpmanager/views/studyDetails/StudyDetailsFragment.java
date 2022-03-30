@@ -8,6 +8,7 @@ import com.example.vpmanager.viewmodels.StudyViewModel;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,15 +16,17 @@ import android.widget.TextView;
 
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link StudyDetailsFragment#newInstance} factory method to
+ * Use the {@link StudyDetailsFragment#//newInstance} factory method to
  * create an instance of this fragment.
  */
 public class StudyDetailsFragment extends Fragment {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
+    /*
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
+     */
 
     private StudyViewModel studyViewModel;
 
@@ -40,8 +43,10 @@ public class StudyDetailsFragment extends Fragment {
     private TextView localData;
 
     // TODO: Rename and change types of parameters
+    /*
     private String mParam1;
     private String mParam2;
+     */
 
     public StudyDetailsFragment() {
         // Required empty public constructor
@@ -51,11 +56,12 @@ public class StudyDetailsFragment extends Fragment {
      * Use this factory method to create a new instance of
      * this fragment using the provided parameters.
      *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
+     * @param //param1 Parameter 1.
+     * @param //param2 Parameter 2.
      * @return A new instance of fragment studyDetails.
      */
     // TODO: Rename and change types and number of parameters
+    /*
     public static StudyDetailsFragment newInstance(String param1, String param2) {
         StudyDetailsFragment fragment = new StudyDetailsFragment();
         Bundle args = new Bundle();
@@ -64,14 +70,17 @@ public class StudyDetailsFragment extends Fragment {
         fragment.setArguments(args);
         return fragment;
     }
+     */
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        /*
         if (getArguments() != null) {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+         */
     }
 
     @Override
@@ -79,6 +88,7 @@ public class StudyDetailsFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_study_details, container, false);
         prepareComponents();
         initDetailViews(view);
+        Log.d("StudyDetails", "viewModelInstance" + studyViewModel.toString());
         studyViewModel.fetchStudyDetails(currentStudyId);
         return view;
     }

@@ -2,6 +2,7 @@ package com.example.vpmanager.views.createStudy;
 
 import android.os.Bundle;
 
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
@@ -9,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.vpmanager.R;
+import com.example.vpmanager.views.mainActivity;
 import com.google.android.material.textfield.TextInputEditText;
 
 public class createStudyFragment_StepTwo extends Fragment {
@@ -47,8 +49,9 @@ public class createStudyFragment_StepTwo extends Fragment {
     //Connects the code with the view
     private void setupView(View view){
         textInputEditTextContactMail = view.findViewById(R.id.inputContact1);
-        //textInputEditTextContactMail.setFocusable(false);
-        //textInputEditTextContactMail.setTextColor(ContextCompat.getColor(getActivity(), R.color.pieChartRemaining));
+        textInputEditTextContactMail.setText(mainActivity.uniqueID);
+        textInputEditTextContactMail.setFocusable(false);
+        textInputEditTextContactMail.setTextColor(ContextCompat.getColor(getActivity(), R.color.pieChartRemaining));
 
         textInputEditTextContactPhone = view.findViewById(R.id.inputContact2);
         textInputEditTextContactSkype = view.findViewById(R.id.inputContact3);
@@ -60,10 +63,12 @@ public class createStudyFragment_StepTwo extends Fragment {
     //Return values:
     //Loads data recieved from the activity into the inputfields
     private void loadData() {
+        /*
         if (CreateStudyFragment.createStudyViewModel.studyCreationProcessData.get("contact") != null){
             textInputEditTextContactMail.setText(
                     CreateStudyFragment.createStudyViewModel.studyCreationProcessData.get("contact").toString());
         }
+         */
         if (CreateStudyFragment.createStudyViewModel.studyCreationProcessData.get("contact2") != null){
             textInputEditTextContactPhone.setText(
                     CreateStudyFragment.createStudyViewModel.studyCreationProcessData.get("contact2").toString());

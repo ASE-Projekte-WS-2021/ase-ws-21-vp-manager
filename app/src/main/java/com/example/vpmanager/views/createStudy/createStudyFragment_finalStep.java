@@ -102,7 +102,7 @@ public class createStudyFragment_finalStep extends Fragment {
 
             locationTextView.setText(locationTxT);
 
-        } else {
+        } else if (CreateStudyFragment.createStudyViewModel.studyCreationProcessData.get("platform") != null) {
             String platformTxT = getString(R.string.fragment_create_study_pageFourTitleTwo) + ": " + "\n";
 
             //if primary platform is not null it is always added
