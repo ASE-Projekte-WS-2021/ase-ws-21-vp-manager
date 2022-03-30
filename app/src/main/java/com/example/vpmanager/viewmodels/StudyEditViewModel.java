@@ -2,6 +2,8 @@ package com.example.vpmanager.viewmodels;
 
 import android.util.Log;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.lifecycle.ViewModel;
 
 import com.example.vpmanager.interfaces.EditStudyDetailsListener;
@@ -13,8 +15,14 @@ import com.example.vpmanager.views.mainActivity;
 import com.example.vpmanager.views.studyEditDetails.StudyEditDatesFragment;
 import com.example.vpmanager.views.studyEditDetails.StudyEditDetailsFragment;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
 import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
+import java.util.ListIterator;
 import java.util.Map;
 import java.util.UUID;
 
@@ -31,7 +39,7 @@ public class StudyEditViewModel extends ViewModel implements EditStudyDetailsLis
 
     private StudyEditRepository mStudyEditRepo;
 
-    public void prepareRepo(){
+    public void prepareRepo() {
         mStudyEditRepo = StudyEditRepository.getInstance();
         //Instance is the same but different data can be retrieved!
         mStudyEditRepo.setFirestoreCallback(this, this, this);
@@ -42,10 +50,9 @@ public class StudyEditViewModel extends ViewModel implements EditStudyDetailsLis
         mStudyEditRepo.getStudyEditDates(currentStudyIdEdit);
     }
 
-    public void updateStudyAndDates(){
+    public void updateStudyAndDates() {
 
-        //TODO: some Fields must not be empty
-        checkMandatoryFields();
+
         Log.d("updateStudyAndDates", ": " + studyEditProcessData);
         //studyId is already in the map and can be reused
         //the creator isn't loaded in the first place so is is added here
@@ -54,12 +61,12 @@ public class StudyEditViewModel extends ViewModel implements EditStudyDetailsLis
         //these two for-loops manage the deletion of dates in the db, that were in the db in the
         //beginning but got deleted in the edit process
         ArrayList<String> idsOfTheProcessData = new ArrayList<>();
-        for (int i = 0; i < datesEditProcessDataObjects.size(); i++){
+        for (int i = 0; i < datesEditProcessDataObjects.size(); i++) {
             idsOfTheProcessData.add(datesEditProcessDataObjects.get(i).getDateId());
         }
-        for (int i = 0; i < idsOfAllInitialDates.size(); i++){
+        for (int i = 0; i < idsOfAllInitialDates.size(); i++) {
             String currentDateIdOfAllInitialIds = idsOfAllInitialDates.get(i);
-            if (!idsOfTheProcessData.contains(currentDateIdOfAllInitialIds)){
+            if (!idsOfTheProcessData.contains(currentDateIdOfAllInitialIds)) {
                 mStudyEditRepo.deleteDate(currentDateIdOfAllInitialIds);
             }
         }
@@ -90,7 +97,7 @@ public class StudyEditViewModel extends ViewModel implements EditStudyDetailsLis
 
                 localDateMap.put("date", datesEditProcessDataObjects.get(i).getDate());
 
-                if (datesEditProcessDataObjects.get(i).getSelected()){
+                if (datesEditProcessDataObjects.get(i).getSelected()) {
                     //wenn jemand den termin gewählt hatte, kann ich das true wieder setzen oder einfach auslassen
                     //localDateMap.put("selected", true);
                 } else {
@@ -106,6 +113,7 @@ public class StudyEditViewModel extends ViewModel implements EditStudyDetailsLis
             //the previous list of dateIds needs to be removed!?
             studyEditProcessData.remove("dates");
             //the new list of dateIds needs to be saved in the study
+
             studyEditProcessData.put("dates", dateIds);
         }
 
@@ -113,29 +121,54 @@ public class StudyEditViewModel extends ViewModel implements EditStudyDetailsLis
 
         String studyId = studyEditProcessData.get("id").toString();
         mStudyEditRepo.updateStudy(studyEditProcessData, studyId);
-    }
-
-    private void checkMandatoryFields(){
 
     }
 
-    private void updateStudyFieldsWithInput(){
-        studyEditProcessData.put("name", studyEditDetailsFragment.title.getText());
-        studyEditProcessData.put("vps", studyEditDetailsFragment.vph.getText());
+    private void updateStudyFieldsWithInput() {
+        studyEditProcessData.put("name", studyEditDetailsFragment.title.getText().toString());
+        studyEditProcessData.put("vps", studyEditDetailsFragment.vph.getText().toString());
         studyEditProcessData.put("category", studyEditDetailsFragment.categories.getText().toString());
         studyEditProcessData.put("executionType", studyEditDetailsFragment.executionType.getText().toString());
 
-        studyEditProcessData.put("contact", studyEditDetailsFragment.contactMail.getText());
-        studyEditProcessData.put("contact2", studyEditDetailsFragment.contactPhone.getText());
-        studyEditProcessData.put("contact3", studyEditDetailsFragment.contactSkype.getText());
-        studyEditProcessData.put("contact4", studyEditDetailsFragment.contactDiscord.getText());
-        studyEditProcessData.put("contact5", studyEditDetailsFragment.contactOther.getText());
+        studyEditProcessData.put("contact", studyEditDetailsFragment.contactMail.getText().toString());
 
-        studyEditProcessData.put("description", studyEditDetailsFragment.description.getText());
+        //studyEditDetailsFragment.contactPhone.toString().isEmpty()
+        Log.d("updateStudyFields", "value phone: " + studyEditDetailsFragment.contactPhone.getText());
+        Log.d("updateStudyFields", "value phone: " + studyEditDetailsFragment.contactPhone.toString());
 
-        if (studyEditDetailsFragment.executionType.getText().toString().equals("Remote")){
-            studyEditProcessData.put("platform", studyEditDetailsFragment.platformOne.getText());
-            studyEditProcessData.put("platform2", studyEditDetailsFragment.platformTwo.getText());
+        /*
+        if (studyEditDetailsFragment.contactPhone.toString().isEmpty()) { //studyEditDetailsFragment.contactPhone.getText() != null
+            studyEditProcessData.put("contact2", studyEditDetailsFragment.contactPhone.getText().toString());
+        } else {
+            studyEditProcessData.put("contact2", "t");
+        }
+        if (studyEditDetailsFragment.contactSkype.toString().isEmpty()) {
+            studyEditProcessData.put("contact3", studyEditDetailsFragment.contactSkype.getText().toString());
+        } else {
+            studyEditProcessData.put("contact3", "t");
+        }
+        if (studyEditDetailsFragment.contactDiscord.toString().isEmpty()) {
+            studyEditProcessData.put("contact4", studyEditDetailsFragment.contactDiscord.getText().toString());
+        } else {
+            studyEditProcessData.put("contact4", "t");
+        }
+        if (studyEditDetailsFragment.contactOther.toString().isEmpty()) {
+            studyEditProcessData.put("contact5", studyEditDetailsFragment.contactOther.getText().toString());
+        } else {
+            studyEditProcessData.put("contact5", "t");
+        }
+         */
+
+        studyEditProcessData.put("contact2", studyEditDetailsFragment.contactPhone.getText().toString());
+        studyEditProcessData.put("contact3", studyEditDetailsFragment.contactSkype.getText().toString());
+        studyEditProcessData.put("contact4", studyEditDetailsFragment.contactDiscord.getText().toString());
+        studyEditProcessData.put("contact5", studyEditDetailsFragment.contactOther.getText().toString());
+
+        studyEditProcessData.put("description", studyEditDetailsFragment.description.getText().toString());
+
+        if (studyEditDetailsFragment.executionType.getText().toString().equals("Remote")) {
+            studyEditProcessData.put("platform", studyEditDetailsFragment.platformOne.getText().toString());
+            studyEditProcessData.put("platform2", studyEditDetailsFragment.platformTwo.getText().toString());
 
             //the data not needed is deleted from the map. Later when the changed study is stored in the db,
             //unset fields are overwritten
@@ -143,17 +176,17 @@ public class StudyEditViewModel extends ViewModel implements EditStudyDetailsLis
             studyEditProcessData.remove("street");
             studyEditProcessData.remove("room");
         }
-        if (studyEditDetailsFragment.executionType.getText().toString().equals("Präsenz")){
-            studyEditProcessData.put("location", studyEditDetailsFragment.location.getText());
-            studyEditProcessData.put("street", studyEditDetailsFragment.street.getText());
-            studyEditProcessData.put("room", studyEditDetailsFragment.room.getText());
+        if (studyEditDetailsFragment.executionType.getText().toString().equals("Präsenz")) {
+            studyEditProcessData.put("location", studyEditDetailsFragment.location.getText().toString());
+            studyEditProcessData.put("street", studyEditDetailsFragment.street.getText().toString());
+            studyEditProcessData.put("room", studyEditDetailsFragment.room.getText().toString());
 
             studyEditProcessData.remove("platform");
             studyEditProcessData.remove("platform2");
         }
     }
 
-    public void addNewDateToList(String newDate, String studyId){
+    public void addNewDateToList(String newDate, String studyId) {
         Log.d("StudyEditViewModel", "addNewDateToList: before" + datesEditProcessDataObjects.toString());
         DateModel newDateObject = new DateModel(
                 getNewId(), newDate, studyId, mainActivity.uniqueID, false
@@ -179,7 +212,7 @@ public class StudyEditViewModel extends ViewModel implements EditStudyDetailsLis
     public void onStudyDatesReady(ArrayList<DateModel> datesArrayList) {
         datesEditProcessDataObjects = datesArrayList;
         //all initial dates need to be saved in a list!!!
-        for (int i = 0; i < datesArrayList.size(); i++){
+        for (int i = 0; i < datesArrayList.size(); i++) {
             idsOfAllInitialDates.add(datesArrayList.get(i).getDateId());
         }
         Log.d("onStudyDatesReady", "dateIds: " + idsOfAllInitialDates);

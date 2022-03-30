@@ -203,9 +203,11 @@ public class StudyEditDetailsFragment extends Fragment {
         saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //animation starts, study is updated and when animation ends the user is navigates to creatorDetailsView
-                playAnimation();
-                studyEditViewModel.updateStudyAndDates();
+
+                if (checkMandatoryFields()){
+                    playAnimation();
+                    studyEditViewModel.updateStudyAndDates();
+                }
             }
         });
 
@@ -220,6 +222,34 @@ public class StudyEditDetailsFragment extends Fragment {
                     }
                 }
         );
+    }
+
+    private Boolean checkMandatoryFields() {
+
+        if (title.getText().toString().isEmpty()){
+            title.setError("Titel darf nicht leer sein!");
+            return false;
+        }
+        if (contactMail.getText().toString().isEmpty()){
+            contactMail.setError("Meil darf nicht leer sein!");
+            return false;
+        }
+        if (description.getText().toString().isEmpty()){
+            description.setError("Beschreibung darf nicht leer sein!");
+            return false;
+        }
+        if (executionType.getText().toString().equals("Remote")) {
+            if (platformOne.getText().toString().isEmpty()){
+                platformOne.setError("Es muss eine Platform angegeben werden!");
+                return false;
+            }
+        }else {
+            if (location.getText().toString().isEmpty()){
+                location.setError("Es muss ein Ort angegeben werden!");
+                return false;
+            }
+        }
+        return true;
     }
 
     private void playAnimation() {

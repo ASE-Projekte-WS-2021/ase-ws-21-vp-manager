@@ -138,6 +138,7 @@ public class StudyEditRepository {
 
     public void updateStudy(Map<String, Object> updatedStudyMap, String idOfUpdatedStudy){
         Log.d("updateStudy", "Map: " + updatedStudyMap.toString());
+        Log.d("updateStudy", "studyId: " + idOfUpdatedStudy);
         db = FirebaseFirestore.getInstance();
         db.collection("studies").document(idOfUpdatedStudy)
                 .set(updatedStudyMap)
@@ -145,6 +146,7 @@ public class StudyEditRepository {
                         aVoid -> Log.d(TAG, "Update study successful!"))
                 .addOnFailureListener(e -> Log.w(TAG, "Error updating study document", e));
     }
+
 
     public void deleteDate(String dateId){
         db = FirebaseFirestore.getInstance();
