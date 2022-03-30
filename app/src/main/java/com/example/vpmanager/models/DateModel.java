@@ -3,12 +3,14 @@ package com.example.vpmanager.models;
 public class DateModel {
 
     private String dateId, date, studyId, userId;
+    private Boolean selected;
 
-    public DateModel(String dateId, String date, String studyId, String userId) {
+    public DateModel(String dateId, String date, String studyId, String userId, Boolean selected) {
         this.dateId = dateId;
         this.date = date;
         this.studyId = studyId;
         this.userId = userId;
+        this.selected = selected;
     }
 
     public DateModel(){
@@ -31,6 +33,10 @@ public class DateModel {
         return userId;
     }
 
+    public Boolean getSelected(){
+        return selected;
+    }
+
     public void setDateId(String dateId) {
         this.dateId = dateId;
     }
@@ -45,5 +51,9 @@ public class DateModel {
 
     public void setUserId(String userId) {
         this.userId = userId;
+    }
+
+    public void setSelected(Boolean selected){
+        this.selected = selected;
     }
 }
