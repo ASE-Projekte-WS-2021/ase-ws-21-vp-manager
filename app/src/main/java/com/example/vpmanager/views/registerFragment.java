@@ -1,5 +1,6 @@
 package com.example.vpmanager.views;
 
+import android.app.Dialog;
 import android.os.Bundle;
 import android.os.Handler;
 import android.text.TextUtils;
@@ -7,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -24,6 +26,9 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 
 
+// Custom Dialog Src: https://github.com/subhojitdp/Custom-Dialog
+
+
 public class registerFragment extends Fragment {
 
     private TextInputEditText emailEdittext;
@@ -33,6 +38,7 @@ public class registerFragment extends Fragment {
     private TextInputEditText vpEditText;
     private Button registerButton;
     private TextView toLoginTextView;
+    private ImageView infoButton;
 
     private FirebaseAuth firebaseAuth;
     private NavController navController;
@@ -65,6 +71,7 @@ public class registerFragment extends Fragment {
         ((mainActivity)getActivity()).setDrawerLocked();
         navController = Navigation.findNavController(view);
         setOnClickListeners();
+
     }
 
 
@@ -79,6 +86,7 @@ public class registerFragment extends Fragment {
         registerButton = view.findViewById(R.id.register_button);
         toLoginTextView = view.findViewById(R.id.already_have_an_account_clickable);
         passwordConfirmEditText = view.findViewById(R.id.confirm_login_password_input);
+        infoButton = view.findViewById(R.id.register_informationButton);
     }
 
     //Parameter:
@@ -92,6 +100,33 @@ public class registerFragment extends Fragment {
         toLoginTextView.setOnClickListener(view -> {
             navController.navigate(R.id.action_registerFragment_to_loginFragment);
         });
+        
+        infoButton.setOnClickListener(view -> {
+            showToolTip();
+        });
+    }
+
+    private void showToolTip() {
+        Dialog dialog = new Dialog(getActivity(), R.style.DialogStyle);
+        dialog.setContentView(R.layout.info_dialog);
+
+        dialog.getWindow().setBackgroundDrawableResource(R.drawable.bg_window);
+
+        ImageView btnClose = dialog.findViewById(R.id.btn_close);
+
+        btnClose.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialog.dismiss();
+            }
+        });
+
+        TextView title = dialog.findViewById(R.id.info_title);
+        TextView desc = dialog.findViewById(R.id.info_desc);
+        title.setText(getString(R.string.register_info_title));
+        desc.setText(getString(R.string.register_info_desc));
+
+        dialog.show();
     }
 
     private void registerNewUser(String email, String matNr, String neededVP) {

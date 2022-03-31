@@ -124,6 +124,8 @@
     <string name="login_no_account_clickable"><font color='#01C6DB'>Account erstellen.</font></string>
     <string name="already_have_an_account">Sie haben bereits einen Account?</string>
     <string name="already_have_an_account_clickable"><font color='#01C6DB'>Login</font></string>
+    <string name="register_info_title">Optionale Angaben</string>
+    <string name="register_info_desc">Durch die Angabe der eigenen Matrikelnummer können die vom Lehrstuhl offiziell verbuchten Versuchspersonstunden angezeigt werden. \nDurch Angabe der benötigten VPs können die bereits gesammeleten in Relation gestellt werden.</string>
 
     <!-- Study Dteails Tags -->
     <string name="descTag">Beschreibung</string>
@@ -132,6 +134,9 @@
     <string name="conTag">Kontakt</string>
     <string name="typeTag">Studientyp</string>
     <string name="locTag">Ort / plattform</string>
+
+
+
 
 </resources>
 
