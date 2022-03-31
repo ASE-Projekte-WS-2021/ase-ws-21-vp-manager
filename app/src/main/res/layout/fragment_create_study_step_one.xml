@@ -44,6 +44,7 @@
                 android:layout_marginTop="20dp"
                 android:layout_marginRight="20dp"
                 android:hint="@string/createStudyTitleHint"
+                android:maxLength="34"
                 android:textColorHint="@color/heatherred_Main"
                 app:boxStrokeColor="@color/black"
                 app:boxStrokeWidthFocused="2dp"
