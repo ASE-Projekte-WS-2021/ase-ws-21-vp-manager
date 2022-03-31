@@ -121,6 +121,11 @@ public class registerFragment extends Fragment {
             }
         });
 
+        TextView title = dialog.findViewById(R.id.info_title);
+        TextView desc = dialog.findViewById(R.id.info_desc);
+        title.setText(getString(R.string.register_info_title));
+        desc.setText(getString(R.string.register_info_desc));
+
         dialog.show();
     }
 
