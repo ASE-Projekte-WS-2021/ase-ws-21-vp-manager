@@ -108,7 +108,7 @@ public class loginFragment extends Fragment {
             firebaseAuth.sendPasswordResetEmail(email).addOnSuccessListener(new OnSuccessListener<Void>() {
                 @Override
                 public void onSuccess(Void unused) {
-                    Toast.makeText(getActivity(), "Bitte überpürfen Sie ihr Email-Postfach", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getActivity(), "Bitte überpürfen Sie ihr Email-Postfach", Toast.LENGTH_LONG).show();
                 }
             });
         }
