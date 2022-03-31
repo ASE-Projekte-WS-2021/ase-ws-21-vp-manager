@@ -167,7 +167,7 @@ public class registerFragment extends Fragment {
                                 if (task.isSuccessful()) {
                                     registerNewUser(email, matNr, finalNeededVP);
                                     firebaseAuth.signOut();
-                                    Toast.makeText(getActivity(), "Registierung erfolgreich, bitte überprüfe deine Email-Postfach", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(getActivity(), "Registierung erfolgreich, bitte überprüfe deine Email-Postfach", Toast.LENGTH_LONG).show();
                                     Handler handler = new Handler();
                                     handler.postDelayed(new Runnable() {
                                         @Override
@@ -176,15 +176,28 @@ public class registerFragment extends Fragment {
                                         }
                                     },1000);
                                 } else {
-                                    Toast.makeText(getActivity(), "Registierung fehlgeschlagen: " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(getActivity(), "Registierung fehlgeschlagen: " + task.getException().getMessage(), Toast.LENGTH_LONG).show();
                                 }
                             }
                         });
                     } else {
-                        Toast.makeText(getActivity(), "Registierung fehlgeschlagen: " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getActivity(), "Registierung fehlgeschlagen: " + translateError(task.getException().getMessage()), Toast.LENGTH_LONG).show();
                     }
                 }
             });
         }
+    }
+
+    private String translateError(String error){
+        String translatedError = "";
+        if(error.startsWith("The email address is already in use"))
+        {
+            translatedError = "Die Email-Adresse wird bereits von einem anderen Account verwendet";
+        }
+        if(error.startsWith("The email address is badly")){
+            translatedError = "Keine gültige Email-Adresse";
+        }
+        return translatedError;
+
     }
 }

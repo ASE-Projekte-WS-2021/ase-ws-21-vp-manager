@@ -108,7 +108,7 @@ public class loginFragment extends Fragment {
             firebaseAuth.sendPasswordResetEmail(email).addOnSuccessListener(new OnSuccessListener<Void>() {
                 @Override
                 public void onSuccess(Void unused) {
-                    Toast.makeText(getActivity(), "Bitte über Sie ihr Email-Postfach", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getActivity(), "Bitte überpürfen Sie ihr Email-Postfach", Toast.LENGTH_SHORT).show();
                 }
             });
         }
@@ -142,15 +142,32 @@ public class loginFragment extends Fragment {
                                 navController.navigate(R.id.action_global_homeFragment);
                             } else {
                                 firebaseAuth.signOut();
-                                Toast.makeText(getActivity(), "Bitte verifiziere Sie zuerst Ihre Email Adresse", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(getActivity(), "Bitte verifiziere Sie zuerst Ihre Email Adresse", Toast.LENGTH_LONG).show();
                             }
                         }
                     } else {
-                        Toast.makeText(getActivity(), "Anmeldung fehlgeschlagen: " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                        System.out.println(task.getException().getMessage());
+                        Toast.makeText(getActivity(), "Anmeldung fehlgeschlagen: " + translateError(task.getException().getMessage()), Toast.LENGTH_LONG).show();
                     }
                 }
             });
         }
+
+    }
+
+    private String translateError(String error){
+        String translatedError = "";
+        if(error.startsWith("The password is invalid"))
+        {
+            translatedError = "Falsches Passwort oder es gibt keinen Account mit dieser Email-Adresse";
+        }
+        if(error.startsWith("The email address")){
+            translatedError = "Keine gültige Email-Adresse";
+        }
+        if(error.startsWith("We have blocked all requests from this device due to unusual activity. Try again later")){
+            translatedError = "Anmeldung wurde temporär blockiert aufgrund vieler fehlgeschlagenen Anmeldungsversuche";
+        }
+        return translatedError;
 
     }
 }
