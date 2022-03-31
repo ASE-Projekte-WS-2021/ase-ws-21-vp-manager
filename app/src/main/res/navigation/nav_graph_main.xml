@@ -103,7 +103,8 @@
     <fragment
         android:id="@+id/studyCreatorFragment"
         android:name="com.example.vpmanager.views.studyCreatorDetails.studyCreatorFragment"
-        android:label="Studiendetails">
+        android:label="Studiendetails"
+        tools:layout="@layout/fragment_creator_study">
         <argument
             android:name="study_id"
             app:argType="string" />
@@ -112,10 +113,13 @@
             app:destination="@id/editStudyFragment"
             app:popUpTo="@id/editStudyFragment"
             app:popUpToInclusive="true" />
+        <argument
+            android:name="fromEditFragment"
+            app:argType="boolean" />
     </fragment>
     <fragment
         android:id="@+id/editStudyFragment"
-        android:name="com.example.vpmanager.views.editStudyFragment"
+        android:name="com.example.vpmanager.views.studyEditDetails.StudyEditFragment"
         android:label="Studieneditor">
         <argument
             android:name="study_id"
@@ -151,7 +155,8 @@
     <fragment
         android:id="@+id/createStudyFragment"
         android:name="com.example.vpmanager.views.createStudy.CreateStudyFragment"
-        android:label="Studien erstellen" />
+        android:label="Studien erstellen"
+        tools:layout="@layout/fragment_create_study"/>
     <fragment
         android:id="@+id/upcomingAppointmentsFragment"
         android:name="com.example.vpmanager.views.UpcomingAppointmentsFragment"
