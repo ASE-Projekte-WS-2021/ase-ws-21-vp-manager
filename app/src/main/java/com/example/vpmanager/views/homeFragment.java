@@ -382,7 +382,7 @@ public class homeFragment extends Fragment {
     {
         HashMap<String, String> list = new HashMap<>();
 
-        String[][] dateList = new String[list.size()][2];
+        String[][] dateList = new String[toSort.size()][2];
         int position = 0;
         for(String key: toSort.keySet())
         {
@@ -421,7 +421,6 @@ public class homeFragment extends Fragment {
         list.clear();
         for(String[] date: dateList) {
             list.put(date[0], date[1]);
-            return list;
         }
         return list;
     }
