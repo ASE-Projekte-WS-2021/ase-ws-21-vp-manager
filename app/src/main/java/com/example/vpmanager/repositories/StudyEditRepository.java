@@ -84,7 +84,7 @@ public class StudyEditRepository {
                             studyEditDetailsMap.put("location", document.getString("location"));
                             studyEditDetailsMap.put("street", document.getString("street"));
                             studyEditDetailsMap.put("room", document.getString("room"));
-                            studyEditDetailsMap.put("studyStateClosed", document.getBoolean("studyStateClosed"));
+                            studyEditDetailsMap.put("studyStateClosed", (Boolean) document.getBoolean("studyStateClosed"));
                         } else {
                             Log.d("loadStudyEditDetails", "Error: the document does not exist!");
                         }
