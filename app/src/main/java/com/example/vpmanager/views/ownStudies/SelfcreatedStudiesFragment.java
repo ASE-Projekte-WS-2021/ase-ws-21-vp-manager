@@ -1,4 +1,4 @@
-package com.example.vpmanager.views;
+package com.example.vpmanager.views.ownStudies;
 
 import android.os.Bundle;
 import android.util.Log;
@@ -18,6 +18,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.vpmanager.R;
 import com.example.vpmanager.adapter.StudyListAdapter;
 import com.example.vpmanager.models.StudyMetaInfoModel;
+import com.example.vpmanager.views.mainActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.CollectionReference;
@@ -152,7 +153,7 @@ public class SelfcreatedStudiesFragment extends Fragment implements StudyListAda
     @Override
     public void onStudyClick(String studyId) {
         Bundle args = new Bundle();
-        Log.d("ownStudyFragment", "onStudyClick - studyId:" + studyId);
+        Log.d("OwnStudyFragment", "onStudyClick - studyId:" + studyId);
         args.putString("studyId", studyId);
         navController.navigate(R.id.action_ownStudyFragment_to_studyCreatorFragment, args);
     }

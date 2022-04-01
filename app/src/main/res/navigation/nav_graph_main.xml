@@ -81,7 +81,7 @@
         -->
     <fragment
         android:id="@+id/ownStudyFragment"
-        android:name="com.example.vpmanager.views.ownStudyFragment"
+        android:name="com.example.vpmanager.views.ownStudies.OwnStudyFragment"
         android:label="Eigene Studien"
         tools:layout="@layout/fragment_own_study">
         <action
