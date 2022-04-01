@@ -20,11 +20,10 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 
-import com.example.vpmanager.PA_ExpandableListDataPump;
 import com.example.vpmanager.R;
 import com.example.vpmanager.adapter.CustomListViewAdapter;
 import com.example.vpmanager.models.StudyObjectPa;
-import com.example.vpmanager.viewmodels.OwnStudyViewModel;
+import com.example.vpmanager.viewmodels.PersonalAccountViewModel;
 
 import java.text.Format;
 import java.text.ParseException;
@@ -32,11 +31,10 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
-import java.util.List;
 
 public class PersonalAccountFragment extends Fragment {
 
-    private OwnStudyViewModel ownStudyViewModel;
+    private PersonalAccountViewModel personalAccountViewModel;
     private NavController navController;
 
     //done
@@ -83,7 +81,7 @@ public class PersonalAccountFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_personal_account, container, false);
         prepareViewModel();
         setupView(view);
-        ownStudyViewModel.getDatesStudiesVpsAndMatrikelNumberFromDb();
+        personalAccountViewModel.getDatesStudiesVpsAndMatrikelNumberFromDb();
         return view;
     }
 
@@ -95,9 +93,9 @@ public class PersonalAccountFragment extends Fragment {
 
     private void prepareViewModel() {
         //ParentFragment (OwnStudyFragment) should be viewModelStoreOwner
-        ownStudyViewModel = new ViewModelProvider(getParentFragment()).get(OwnStudyViewModel.class);
-        ownStudyViewModel.personalAccountFragment = this;
-        ownStudyViewModel.prepareRepo();
+        personalAccountViewModel = new ViewModelProvider(getParentFragment()).get(PersonalAccountViewModel.class);
+        personalAccountViewModel.personalAccountFragment = this;
+        personalAccountViewModel.prepareRepo();
     }
 
     //Parameter: view is passed to setup view
@@ -302,16 +300,16 @@ public class PersonalAccountFragment extends Fragment {
     //Return values:
     //Setup clickListeners for all clickable objects
     private void setupClickListener() {
-        sortAlphabetically.setOnClickListener(v -> ownStudyViewModel.filterListViewTextTags("names")); //sortAlphabeticallyActive,
-        sortAppointments.setOnClickListener(v -> ownStudyViewModel.filterListViewTextTags("dates")); //sortAppointmentsActive,
-        sortVpCount.setOnClickListener(v -> ownStudyViewModel.filterListViewTextTags("vps")); //sortVpCountActive,
+        sortAlphabetically.setOnClickListener(v -> personalAccountViewModel.filterListViewTextTags("names")); //sortAlphabeticallyActive,
+        sortAppointments.setOnClickListener(v -> personalAccountViewModel.filterListViewTextTags("dates")); //sortAppointmentsActive,
+        sortVpCount.setOnClickListener(v -> personalAccountViewModel.filterListViewTextTags("vps")); //sortVpCountActive,
 
         removeCompleted.setOnCheckedChangeListener((buttonView, isChecked) ->
-                ownStudyViewModel.filterListViewColorTags(isChecked, R.color.pieChartSafe));
+                personalAccountViewModel.filterListViewColorTags(isChecked, R.color.pieChartSafe));
         removePlanned.setOnCheckedChangeListener((buttonView, isChecked) ->
-                ownStudyViewModel.filterListViewColorTags(isChecked, R.color.pieChartPlanned));
+                personalAccountViewModel.filterListViewColorTags(isChecked, R.color.pieChartPlanned));
         removeParticipated.setOnCheckedChangeListener((buttonView, isChecked) ->
-                ownStudyViewModel.filterListViewColorTags(isChecked, R.color.pieChartParticipation));
+                personalAccountViewModel.filterListViewColorTags(isChecked, R.color.pieChartParticipation));
     }
 
     //moved to viewModel

@@ -33,7 +33,7 @@
         android:background="@color/color_two" />
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerViewOwnStudyFragment"
+        android:id="@+id/recyclerViewOwnStudies"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginTop="70dp"
