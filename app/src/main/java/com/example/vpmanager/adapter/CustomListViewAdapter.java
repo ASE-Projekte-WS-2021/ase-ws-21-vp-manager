@@ -25,7 +25,7 @@ public class CustomListViewAdapter extends BaseAdapter {
 
     private LayoutInflater inflater;
     public ArrayList<StudyObjectPa> objects;
-    private Activity activity;
+    //private Activity activity;
     private NavController navController;
 
 
@@ -37,20 +37,20 @@ public class CustomListViewAdapter extends BaseAdapter {
 
     }
 
-    public CustomListViewAdapter(Context context, Activity activity, NavController nav) {
+    public CustomListViewAdapter(Context context,  NavController nav) { //Activity activity,
         super();
         inflater = LayoutInflater.from(context);
         navController = nav;
         this.objects = transformLists();
-        this.activity = activity;
+        //this.activity = activity;
     }
 
-    public CustomListViewAdapter(Context context, Activity activity, NavController nav, ArrayList<StudyObjectPa> list) {
+    public CustomListViewAdapter(Context context,  NavController nav, ArrayList<StudyObjectPa> list) { //Activity activity,
         super();
         inflater = LayoutInflater.from(context);
         navController = nav;
         this.objects = list;
-        this.activity = activity;
+        //this.activity = activity;
     }
 
     private ArrayList<StudyObjectPa> transformLists() {

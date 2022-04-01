@@ -1,4 +1,4 @@
-package com.example.vpmanager.views;
+package com.example.vpmanager.views.ownStudies;
 
 import android.graphics.Color;
 import android.os.Bundle;
@@ -16,6 +16,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 
@@ -23,6 +24,7 @@ import com.example.vpmanager.PA_ExpandableListDataPump;
 import com.example.vpmanager.R;
 import com.example.vpmanager.adapter.CustomListViewAdapter;
 import com.example.vpmanager.models.StudyObjectPa;
+import com.example.vpmanager.viewmodels.OwnStudyViewModel;
 
 import java.text.Format;
 import java.text.ParseException;
@@ -32,31 +34,42 @@ import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
-public class personalAccountFragment extends Fragment {
+public class PersonalAccountFragment extends Fragment {
 
-    private ListView listView;
+    private OwnStudyViewModel ownStudyViewModel;
+    private NavController navController;
+
+    //done
+    private LinearLayout customProgressBar;
+    private View completedView, plannedView, participatedView, restView;
+    private TextView completed, participated, planned, remaining;
+
+    //Images and one text view (VP) for sorting
     private ImageView sortAlphabetically, sortAppointments;
-
-    private static String martikelNumber;
-
-    private TextView planned, participated, completed, remaining, sortVpCount;
+    private TextView sortVpCount;
+    //ToggleButtons for filtering
     private ToggleButton removeCompleted, removePlanned, removeParticipated;
 
 
-    private View completedView, plannedView, participatedView, restView;
-    private LinearLayout  customProgressBar;
+    //ListView that contains the sorted and filtered list of a date x study combination
+    private ListView listView;
 
-    private boolean sortAlphabeticallyActive, sortAppointmentsActive, sortVpCountActive, sortAlphabeticallyInvert, sortAppointmentsInvert, sortVpCountInvert;
+    //booleans to indicate the sorting --> three variants + inverted
+    /*
+    private boolean sortAlphabeticallyActive, sortAppointmentsActive, sortVpCountActive,
+            sortAlphabeticallyInvert, sortAppointmentsInvert, sortVpCountInvert;
+     */
 
-    private double plannedVP, completedVP, participatedVP;
+    // Doubles to show the specific vph in the progressbar legend
+    //private double plannedVP, completedVP, participatedVP;
+    // float to calculate the shares of the individual vps
+    //private float sumVPs;
 
-    private NavController navController;
-    private String jsonString;
+    //private String jsonString;
+    //private static String martikelNumber;
 
-    private float sumVPs;
 
-    public personalAccountFragment() {
-
+    public PersonalAccountFragment() {
     }
 
     @Override
@@ -68,20 +81,30 @@ public class personalAccountFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_personal_account, container, false);
-        loadData(view);
+        prepareViewModel();
+        setupView(view);
+        ownStudyViewModel.getDatesStudiesVpsAndMatrikelNumberFromDb();
         return view;
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
         navController = Navigation.findNavController(view);
+        super.onViewCreated(view, savedInstanceState);
+    }
+
+    private void prepareViewModel() {
+        //ParentFragment (OwnStudyFragment) should be viewModelStoreOwner
+        ownStudyViewModel = new ViewModelProvider(getParentFragment()).get(OwnStudyViewModel.class);
+        ownStudyViewModel.personalAccountFragment = this;
+        ownStudyViewModel.prepareRepo();
     }
 
     //Parameter: view is passed to setup view
     //Return values:
     //calls to database to get all the relevant data for this fragment
-    private void loadData(View view) {
+    /*
+    private void loadData() {
 
         PA_ExpandableListDataPump.getAllDates(new PA_ExpandableListDataPump.FirestoreCallbackDates() {
             @Override
@@ -101,7 +124,9 @@ public class personalAccountFragment extends Fragment {
                                         martikelNumber = "";
                                     }
                                     PA_ExpandableListDataPump.createListEntries();
-                                    setupView(view);
+
+
+                                    setData();
                                     setupClickListener();
                                     sortAlphabeticallyActive = false;
                                     sortAppointmentsActive = false;
@@ -116,31 +141,38 @@ public class personalAccountFragment extends Fragment {
             }
         });
     }
+     */
 
     //Parameter:
     //Return values:
     //Setting the view components and readint the content Lists for the piechart values
     private void setupView(View view) {
-
-        removeCompleted = view.findViewById(R.id.pa_remove_completed);
-        removePlanned = view.findViewById(R.id.pa_remove_planned);
-        removeParticipated = view.findViewById(R.id.pa_remove_participation);
-        sortAlphabetically = view.findViewById(R.id.pa_sort_alphabetical);
-        sortAppointments = view.findViewById(R.id.pa_sort_date);
-        sortVpCount = view.findViewById(R.id.pa_sort_vp);
-        listView = view.findViewById(R.id.pa_fragment_listView);
-        planned = view.findViewById(R.id.pa_planned_progressBar);
-        participated = view.findViewById(R.id.pa_participated_progressBar);
-        completed = view.findViewById(R.id.pa_completed_progressBar);
-        remaining = view.findViewById(R.id.pa_remaining_progressBar);
-
         customProgressBar = view.findViewById(R.id.customProgressBar);
         completedView = view.findViewById(R.id.progress_section_completed);
         plannedView = view.findViewById(R.id.progress_section_planned);
         participatedView = view.findViewById(R.id.progress_section_participated);
         restView = view.findViewById(R.id.progress_section_rest);
 
-        listView.setAdapter(new CustomListViewAdapter(this.getContext(), this.getActivity(), navController));
+        completed = view.findViewById(R.id.pa_completed_progressBar);
+        participated = view.findViewById(R.id.pa_participated_progressBar);
+        planned = view.findViewById(R.id.pa_planned_progressBar);
+        remaining = view.findViewById(R.id.pa_remaining_progressBar);
+
+        sortAlphabetically = view.findViewById(R.id.pa_sort_alphabetical);
+        sortAppointments = view.findViewById(R.id.pa_sort_date);
+        sortVpCount = view.findViewById(R.id.pa_sort_vp);
+
+        removeCompleted = view.findViewById(R.id.pa_remove_completed);
+        removePlanned = view.findViewById(R.id.pa_remove_planned);
+        removeParticipated = view.findViewById(R.id.pa_remove_participation);
+
+        listView = view.findViewById(R.id.pa_fragment_listView);
+    }
+
+    /*
+    private void setData(){
+
+        listView.setAdapter(new CustomListViewAdapter(this.getContext(), navController)); //this.getActivity(),
 
         plannedVP = 0;
         completedVP = 0;
@@ -179,32 +211,14 @@ public class personalAccountFragment extends Fragment {
         }
         setProgressBarData(completedVP, participatedVP, plannedVP);
     }
-
-
-    //Parameter:
-    //Return values:
-    //Setup clicklisteners for all clickable objects
-    private void setupClickListener() {
-
-        removeCompleted.setOnCheckedChangeListener((buttonView, isChecked) -> filterListViewColorTags(isChecked, R.color.pieChartSafe));
-        removePlanned.setOnCheckedChangeListener((buttonView, isChecked) -> filterListViewColorTags(isChecked, R.color.pieChartPlanned));
-        removeParticipated.setOnCheckedChangeListener((buttonView, isChecked) -> filterListViewColorTags(isChecked, R.color.pieChartParticipation));
-
-        sortAlphabetically.setOnClickListener(v -> filterListViewTextTags(sortAlphabeticallyActive, "names"));
-        sortAppointments.setOnClickListener(v -> filterListViewTextTags(sortAppointmentsActive, "dates"));
-        sortVpCount.setOnClickListener(v -> filterListViewTextTags(sortVpCountActive, "vps"));
-
-    }
-
-    //Parameter: boolean input to switch between app as source and web
-    //Return values:
-    //resets the piechart depending on switch position to get the new source and displaying them
-
+     */
 
     //Parameter: Input are double values to determine the size of the progressbar slices
     //Return values:
     //Converts the inputs into percentage and adds slices to progressbar
+    /*
     private void setProgressBarData(double completedVP, double participationVP, double plannedVP) {
+
         int max = (int) (sumVPs * 100);
         int scaledCompletedVP = (int) completedVP * 100;
         int scaledParticipationVP = (int) participationVP * 100;
@@ -254,9 +268,55 @@ public class personalAccountFragment extends Fragment {
         );
         restView.setLayoutParams(param);
     }
+     */
 
+    public void setProgressBarStrings(String completedString, String participatedString, String plannedString,
+                                      String remainingString, float weightSum) {
+        completed.setText(completedString);
+        participated.setText(participatedString);
+        planned.setText(plannedString);
+        remaining.setText(remainingString);
+        customProgressBar.setWeightSum(weightSum);
+    }
 
-    private void filterListViewTextTags(boolean active, String type) {
+    public void setProgressBarParts(LinearLayout.LayoutParams completedParams, LinearLayout.LayoutParams participatedParams,
+                                    LinearLayout.LayoutParams plannedParams, LinearLayout.LayoutParams restParams) {
+        completedView.setLayoutParams(completedParams);
+        participatedView.setLayoutParams(participatedParams);
+        plannedView.setLayoutParams(plannedParams);
+        restView.setLayoutParams(restParams);
+
+        listView.setAdapter(new CustomListViewAdapter(this.getContext(), navController)); //this.getActivity(),
+        /*
+        sortAlphabeticallyActive = false;
+        sortAppointmentsActive = false;
+        sortVpCountActive = false;
+        sortAlphabeticallyInvert = false;
+        sortAppointmentsInvert = false;
+        sortVpCountInvert = false;
+         */
+        setupClickListener();
+    }
+
+    //Parameter:
+    //Return values:
+    //Setup clickListeners for all clickable objects
+    private void setupClickListener() {
+        sortAlphabetically.setOnClickListener(v -> ownStudyViewModel.filterListViewTextTags("names")); //sortAlphabeticallyActive,
+        sortAppointments.setOnClickListener(v -> ownStudyViewModel.filterListViewTextTags("dates")); //sortAppointmentsActive,
+        sortVpCount.setOnClickListener(v -> ownStudyViewModel.filterListViewTextTags("vps")); //sortVpCountActive,
+
+        removeCompleted.setOnCheckedChangeListener((buttonView, isChecked) ->
+                ownStudyViewModel.filterListViewColorTags(isChecked, R.color.pieChartSafe));
+        removePlanned.setOnCheckedChangeListener((buttonView, isChecked) ->
+                ownStudyViewModel.filterListViewColorTags(isChecked, R.color.pieChartPlanned));
+        removeParticipated.setOnCheckedChangeListener((buttonView, isChecked) ->
+                ownStudyViewModel.filterListViewColorTags(isChecked, R.color.pieChartParticipation));
+    }
+
+    //moved to viewModel
+    /*
+    private void filterListViewTextTags(String type) { //boolean active,
         switch (type) {
             case "names":
                 if (!sortAlphabeticallyInvert && !sortAlphabeticallyActive) {
@@ -269,10 +329,11 @@ public class personalAccountFragment extends Fragment {
                     sortAlphabeticallyInvert = false;
                     sortAlphabeticallyActive = false;
                 }
-                if (sortAlphabeticallyActive)
+                if (sortAlphabeticallyActive) {
                     sortAlphabetically.setBackgroundColor(Color.LTGRAY);
-                else
+                } else {
                     sortAlphabetically.setBackgroundColor(Color.WHITE);
+                }
                 if (sortAppointmentsActive) {
                     sortAppointmentsActive = false;
                     sortAppointments.setBackgroundColor(Color.WHITE);
@@ -295,11 +356,11 @@ public class personalAccountFragment extends Fragment {
                     sortAppointmentsInvert = false;
                     sortAppointmentsActive = false;
                 }
-                if (sortAppointmentsActive)
+                if (sortAppointmentsActive) {
                     sortAppointments.setBackgroundColor(Color.LTGRAY);
-                else
+                } else {
                     sortAppointments.setBackgroundColor(Color.WHITE);
-
+                }
                 if (sortVpCountActive) {
                     sortVpCount.setBackgroundColor(Color.WHITE);
                     sortVpCountActive = false;
@@ -312,7 +373,6 @@ public class personalAccountFragment extends Fragment {
                 sortVpCountInvert = false;
                 break;
             case "vps":
-
                 if (!sortVpCountInvert && !sortVpCountActive) {
                     sortVpCountInvert = false;
                     sortVpCountActive = !active;
@@ -323,10 +383,11 @@ public class personalAccountFragment extends Fragment {
                     sortVpCountInvert = false;
                     sortVpCountActive = false;
                 }
-                if (sortVpCountActive)
+                if (sortVpCountActive) {
                     sortVpCount.setBackgroundColor(Color.LTGRAY);
-                else
+                } else {
                     sortVpCount.setBackgroundColor(Color.WHITE);
+                }
                 if (sortAlphabeticallyActive) {
                     sortAlphabeticallyActive = false;
                     sortAlphabetically.setBackgroundColor(Color.WHITE);
@@ -343,46 +404,127 @@ public class personalAccountFragment extends Fragment {
         }
         filterListViewTextContent();
     }
+     */
 
+    public void setAlphabeticallyToggle(String identifier, Boolean alphaActive) {
+        if (identifier.equals("names")) {
+            if (alphaActive) {
+                sortAlphabetically.setBackgroundColor(Color.LTGRAY);
+            } else {
+                sortAlphabetically.setBackgroundColor(Color.WHITE);
+            }
+        } else if (identifier.equals("dates")) {
+            if (alphaActive) {
+                sortAlphabetically.setBackgroundColor(Color.WHITE);
+            }
+        } else if (identifier.equals("vps")) {
+            if (alphaActive) {
+                sortAlphabetically.setBackgroundColor(Color.WHITE);
+            }
+        }
+    }
+
+    public void setAppointmentsToggle(String identifier, Boolean appointActive) {
+        if (identifier.equals("names")) {
+            if (appointActive) {
+                sortAppointments.setBackgroundColor(Color.WHITE);
+            }
+        } else if (identifier.equals("dates")) {
+            if (appointActive) {
+                sortAppointments.setBackgroundColor(Color.LTGRAY);
+            } else {
+                sortAppointments.setBackgroundColor(Color.WHITE);
+            }
+        } else if (identifier.equals("vps")) {
+            if (appointActive) {
+                sortAppointments.setBackgroundColor(Color.WHITE);
+            }
+        }
+    }
+
+    public void setVpToggle(String identifier, Boolean vpActive) {
+        if (identifier.equals("names")) {
+            if (vpActive) {
+                sortVpCount.setBackgroundColor(Color.WHITE);
+            }
+        } else if (identifier.equals("dates")) {
+            if (vpActive) {
+                sortVpCount.setBackgroundColor(Color.WHITE);
+            }
+        } else if (identifier.equals("vps")) {
+            if (vpActive) {
+                sortVpCount.setBackgroundColor(Color.LTGRAY);
+            } else {
+                sortVpCount.setBackgroundColor(Color.WHITE);
+            }
+        }
+    }
+
+    public NavController getNavController(){
+        return navController;
+    }
+
+    //returns the current set adapter of the list
+    public CustomListViewAdapter getCurrentAdapter(){
+        return (CustomListViewAdapter) listView.getAdapter();
+    }
+
+    public Boolean getColorToggleState(String identifier){
+        if (identifier.equals("completed")){
+            return !removeCompleted.isChecked();
+        } else if (identifier.equals("participated")){
+            return !removeParticipated.isChecked();
+        } else { //if (identifier.equals("planned"))
+            return !removePlanned.isChecked();
+        }
+    }
+
+    public void setNewListViewAdapter(CustomListViewAdapter adapter) {
+        //clearing the previous might not be necessary
+        /*
+        CustomListViewAdapter currentAdapter = (CustomListViewAdapter) listView.getAdapter();
+        currentAdapter.getObjects().clear();
+        currentAdapter.notifyDataSetChanged();
+         */
+        listView.setAdapter(adapter);
+        adapter.notifyDataSetChanged();
+    }
+
+    //moved to viewModel
+    /*
     private void filterListViewTextContent() {
         CustomListViewAdapter adapter;
 
         if (sortAlphabeticallyActive) {
-            adapter = new CustomListViewAdapter(this.getContext(), this.getActivity(), navController, sortByName(sortAlphabeticallyInvert));
+            adapter = new CustomListViewAdapter(this.getContext(), navController, sortByName(sortAlphabeticallyInvert)); //this.getActivity(),
         } else if (sortAppointmentsActive) {
-            adapter = new CustomListViewAdapter(this.getContext(), this.getActivity(), navController, sortByDate(sortAppointmentsInvert));
+            adapter = new CustomListViewAdapter(this.getContext(), navController, sortByDate(sortAppointmentsInvert)); //this.getActivity(),
         } else if (sortVpCountActive) {
-            adapter = new CustomListViewAdapter(this.getContext(), this.getActivity(), navController, sortByVPS(sortVpCountInvert));
+            adapter = new CustomListViewAdapter(this.getContext(), navController, sortByVPS(sortVpCountInvert)); //this.getActivity(),
         } else {
-            adapter = new CustomListViewAdapter(this.getContext(), this.getActivity(), navController);
+            adapter = new CustomListViewAdapter(this.getContext(), navController); //this.getActivity(),
         }
 
         setNewListViewAdapter(adapter);
 
         System.out.println("sortlist" + adapter.getObjects());
 
-
-        if (!removeCompleted.isChecked())
+        if (!removeCompleted.isChecked()) {
             filterListViewColorTags(false, R.color.pieChartSafe);
-        if (!removeParticipated.isChecked())
+        }
+        if (!removeParticipated.isChecked()) {
             filterListViewColorTags(false, R.color.pieChartParticipation);
-        if (!removePlanned.isChecked())
+        }
+        if (!removePlanned.isChecked()) {
             filterListViewColorTags(false, R.color.pieChartPlanned);
+        }
     }
-
-    private void setNewListViewAdapter(CustomListViewAdapter adapter) {
-        CustomListViewAdapter currentAdapter = (CustomListViewAdapter) listView.getAdapter();
-        currentAdapter.getObjects().clear();
-        currentAdapter.notifyDataSetChanged();
-
-        listView.setAdapter(adapter);
-
-        adapter.notifyDataSetChanged();
-    }
-
+     */
+    //moved to viewModel
+    /*
     private void filterListViewColorTags(boolean state, int color) {
         if (state) {
-            CustomListViewAdapter adapter = new CustomListViewAdapter(this.getContext(), this.getActivity(), navController);
+            CustomListViewAdapter adapter = new CustomListViewAdapter(this.getContext(), navController); //this.getActivity(),
             listView.setAdapter(adapter);
             if (!removePlanned.isChecked())
                 filterListViewColorTags(removePlanned.isChecked(), R.color.pieChartPlanned);
@@ -397,10 +539,10 @@ public class personalAccountFragment extends Fragment {
                 filterListViewTextTags(false, "dates");
             if (sortVpCountActive)
                 filterListViewTextTags(false, "vps");
+
         } else {
             CustomListViewAdapter adapter = (CustomListViewAdapter) listView.getAdapter();
             List<StudyObjectPa> removeList = new ArrayList<>();
-
 
             for (StudyObjectPa object : adapter.getObjects()) {
                 if (listView != null && object != null) {
@@ -421,9 +563,9 @@ public class personalAccountFragment extends Fragment {
             System.out.println(adapter.getObjects());
         }
     }
-
-    private ArrayList<StudyObjectPa> sortByName(boolean invert)
-    {
+     */
+    //moved to viewModel
+    private ArrayList<StudyObjectPa> sortByName(boolean invert) {
         CustomListViewAdapter adapter = (CustomListViewAdapter) listView.getAdapter();
         ArrayList<StudyObjectPa> list = new ArrayList<>();
         for (int i = 0; i < adapter.getObjects().size(); i++) {
@@ -453,12 +595,12 @@ public class personalAccountFragment extends Fragment {
             list.add(ob);
         }
         System.out.println("list after clear" + list.size());
-        if (!invert)
+        if (!invert) {
             Collections.reverse(list);
-
+        }
         return list;
     }
-
+    //moved to viewModel
     private ArrayList<StudyObjectPa> sortByDate(boolean invert) {
         CustomListViewAdapter adapter = (CustomListViewAdapter) listView.getAdapter();
         ArrayList<StudyObjectPa> list = new ArrayList<>();
@@ -501,16 +643,16 @@ public class personalAccountFragment extends Fragment {
             }
         }
         list.clear();
-        for(StudyObjectPa ob: studyList) {
+        for (StudyObjectPa ob : studyList) {
             list.add(ob);
         }
 
-        if (!invert)
+        if (!invert) {
             Collections.reverse(list);
-
+        }
         return list;
     }
-
+    //moved to viewModel
     private ArrayList<StudyObjectPa> sortByVPS(boolean invert) {
         CustomListViewAdapter adapter = (CustomListViewAdapter) listView.getAdapter();
         ArrayList<StudyObjectPa> list = new ArrayList<>();
@@ -535,22 +677,13 @@ public class personalAccountFragment extends Fragment {
             }
         }
         list.clear();
-        for(StudyObjectPa ob: studyList) {
+        for (StudyObjectPa ob : studyList) {
             list.add(ob);
         }
 
-        if (!invert)
+        if (!invert) {
             Collections.reverse(list);
-
+        }
         return list;
     }
 }
-
-
-
-
-
-
-
-
-
