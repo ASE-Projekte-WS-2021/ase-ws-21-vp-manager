@@ -170,9 +170,23 @@ public class createStudyFragment_StepFive extends Fragment {
             hours = "0" + hourOfDay;
         }
         Log.d("addDatetoList", "before add new" + dates);
-        dates.add(date_time + hours + ":" + minutes + " Uhr");
+        String currentDate = date_time + hours + ":" + minutes + " Uhr";
+        if (!isDuplicate(currentDate)) {
+            dates.add(currentDate);
+        } else {
+
+        }
         //datePickerAdapter.notifyDataSetChanged();
         swipeableDatesAdapter.notifyDataSetChanged();
         Log.d("addDatetoList", "after notity" + dates);
+    }
+
+    private boolean isDuplicate(String currentDate) {
+        for (int i = 0; i < dates.size(); i++) {
+            if (dates.get(i).equals(currentDate)) {
+                return true;
+            }
+        }
+        return false;
     }
 }
