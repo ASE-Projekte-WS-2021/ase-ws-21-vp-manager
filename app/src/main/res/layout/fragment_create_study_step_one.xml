@@ -131,7 +131,6 @@
                     app:hintTextColor="@color/heatherred_Main">
 
                     <AutoCompleteTextView
-                        style="@style/You.EditText.Style"
                         android:id="@+id/create_stepOne_textView_category"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -157,7 +156,6 @@
                     app:hintTextColor="@color/heatherred_Main">
 
                     <AutoCompleteTextView
-                        style="@style/You.EditText.Style"
                         android:id="@+id/create_stepOne_textView_executionType"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"

@@ -1,131 +1,211 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".views.createStudy.createStudyFragment_finalStep"
-    android:background="?android:windowBackground">
+    android:background="?android:windowBackground"
+    tools:context=".views.createStudy.createStudyFragment_finalStep">
 
-
-    <LinearLayout
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:weightSum="6">
+        android:layout_height="match_parent">
 
-        <TextView
-            android:id="@+id/create_finalSTep_pageTitle"
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="0.7"
-            android:text="@string/fragment_create_study_pageFinalTitle"
-            android:textAlignment="center"
-            android:textSize="35sp" />
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="0.05"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp"
-            android:layout_marginBottom="20dp"
-            android:background="@color/black" />
-
-        <com.google.android.material.textview.MaterialTextView
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:layout_marginRight="30dp"
-            android:layout_marginLeft="30dp"
-            android:layout_marginTop="10dp"
-            android:padding="10dp"
-            android:id="@+id/confirmTitle"
-            android:textSize="15sp"
-            android:fontFamily="@font/maven_pro"
-            android:textStyle="bold"
-            android:textColor="@color/heatherred_Main"
-            android:gravity="top"
-            android:background="@drawable/border">
-        </com.google.android.material.textview.MaterialTextView>
+            android:layout_height="match_parent">
 
 
-        <com.google.android.material.textview.MaterialTextView
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:fontFamily="@font/maven_pro"
-            android:layout_marginRight="30dp"
-            android:layout_marginLeft="30dp"
-            android:layout_marginTop="10dp"
-            android:padding="10dp"
-            android:id="@+id/confirmVP"
-            android:textSize="15sp"
-            android:textStyle="bold"
-            android:textColor="@color/heatherred_Main"
-            android:gravity="top"
-            android:background="@drawable/border">
+            <TextView
+                android:id="@+id/create_finalStepOne_pageTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/fragment_create_study_pageFinalTitle"
+                android:textAlignment="center"
+                android:textSize="35sp" />
+
+            <View
+                android:id="@+id/create_finalStepOne_separator"
+                android:layout_width="match_parent"
+                android:layout_height="3dp"
+                android:layout_below="@+id/create_finalStepOne_pageTitle"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginRight="20dp"
+                android:background="@color/black" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_below="@+id/create_finalStepOne_separator">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true">
 
 
-        </com.google.android.material.textview.MaterialTextView>
-
-        <com.google.android.material.textview.MaterialTextView
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:layout_marginRight="30dp"
-            android:layout_marginLeft="30dp"
-            android:layout_marginTop="10dp"
-            android:padding="10dp"
-            android:fontFamily="@font/maven_pro"
-            android:id="@+id/confirmCategory"
-            android:textSize="15sp"
-            android:textStyle="bold"
-            android:textColor="@color/heatherred_Main"
-            android:gravity="top"
-            android:background="@drawable/border">
+                    <TextView
+                        android:id="@+id/Tag"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp"
+                        android:fontFamily="@font/allerta_stencil"
+                        android:gravity="center"
+                        android:text="@string/titleTag"
+                        android:textColor="@color/black"
+                        android:textSize="15sp"
+                        android:textStyle="bold" />
 
 
-        </com.google.android.material.textview.MaterialTextView>
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/confirmTitle"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/Tag"
+                        android:layout_marginLeft="30dp"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginRight="30dp"
+                        android:background="@drawable/border"
+                        android:fontFamily="@font/maven_pro"
+                        android:gravity="top"
+                        android:padding="10dp"
+                        android:textColor="@color/heatherred_Main"
+                        android:textSize="15sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/Tag2"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/confirmTitle"
+                        android:layout_marginTop="20dp"
+                        android:fontFamily="@font/allerta_stencil"
+                        android:gravity="center"
+                        android:text="@string/vpTag"
+                        android:textColor="@color/black"
+                        android:textSize="15sp"
+                        android:textStyle="bold" />
 
 
-        <com.google.android.material.textview.MaterialTextView
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:fontFamily="@font/maven_pro"
-            android:layout_marginRight="30dp"
-            android:layout_marginLeft="30dp"
-            android:layout_marginTop="10dp"
-            android:padding="10dp"
-            android:id="@+id/confirmExecution"
-            android:textSize="15sp"
-            android:textStyle="bold"
-            android:textColor="@color/heatherred_Main"
-            android:gravity="top"
-            android:background="@drawable/border">
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/confirmVP"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/Tag2"
+                        android:layout_marginLeft="30dp"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginRight="30dp"
+                        android:background="@drawable/border"
+                        android:fontFamily="@font/maven_pro"
+                        android:gravity="top"
+                        android:padding="10dp"
+                        android:textColor="@color/heatherred_Main"
+                        android:textSize="15sp"
+                        android:textStyle="bold">
+
+                    </com.google.android.material.textview.MaterialTextView>
+
+                    <TextView
+                        android:id="@+id/Tag3"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/confirmVP"
+                        android:layout_marginTop="20dp"
+                        android:fontFamily="@font/allerta_stencil"
+                        android:gravity="center"
+                        android:text="@string/catTag"
+                        android:textColor="@color/black"
+                        android:textSize="15sp"
+                        android:textStyle="bold" />
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/confirmCategory"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/Tag3"
+                        android:layout_marginLeft="30dp"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginRight="30dp"
+                        android:background="@drawable/border"
+                        android:fontFamily="@font/maven_pro"
+                        android:gravity="top"
+                        android:padding="10dp"
+                        android:textColor="@color/heatherred_Main"
+                        android:textSize="15sp"
+                        android:textStyle="bold">
 
 
-        </com.google.android.material.textview.MaterialTextView>
+                    </com.google.android.material.textview.MaterialTextView>
 
 
-        <com.google.android.material.textview.MaterialTextView
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:fontFamily="@font/maven_pro"
-            android:layout_marginRight="30dp"
-            android:layout_marginLeft="30dp"
-            android:layout_marginTop="10dp"
-            android:padding="10dp"
-            android:id="@+id/confirmLocation"
-            android:textSize="15sp"
-            android:textStyle="bold"
-            android:textColor="@color/heatherred_Main"
-            android:gravity="top"
-            android:background="@drawable/border">
-        </com.google.android.material.textview.MaterialTextView>
+                    <TextView
+                        android:id="@+id/Tag4"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/confirmCategory"
+                        android:layout_marginTop="20dp"
+                        android:fontFamily="@font/allerta_stencil"
+                        android:gravity="center"
+                        android:text="@string/typeTag"
+                        android:textColor="@color/black"
+                        android:textSize="15sp"
+                        android:textStyle="bold" />
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/confirmExecution"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/Tag4"
+                        android:layout_marginLeft="30dp"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginRight="30dp"
+                        android:background="@drawable/border"
+                        android:fontFamily="@font/maven_pro"
+                        android:gravity="top"
+                        android:padding="10dp"
+                        android:textColor="@color/heatherred_Main"
+                        android:textSize="15sp"
+                        android:textStyle="bold">
+
+                    </com.google.android.material.textview.MaterialTextView>
+
+                    <TextView
+                        android:id="@+id/Tag5"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/confirmExecution"
+                        android:layout_marginTop="20dp"
+                        android:fontFamily="@font/allerta_stencil"
+                        android:gravity="center"
+                        android:text="@string/locTag"
+                        android:textColor="@color/black"
+                        android:textSize="15sp"
+                        android:textStyle="bold" />
 
 
-    </LinearLayout>
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/confirmLocation"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/Tag5"
+                        android:layout_marginLeft="30dp"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginRight="30dp"
+                        android:background="@drawable/border"
+                        android:fontFamily="@font/maven_pro"
+                        android:gravity="top"
+                        android:padding="10dp"
+                        android:textColor="@color/heatherred_Main"
+                        android:textSize="15sp"
+                        android:textStyle="bold" />
 
-</FrameLayout>
+                </RelativeLayout>
+
+            </RelativeLayout>
+
+        </RelativeLayout>
+    </ScrollView>
+
+</RelativeLayout>
