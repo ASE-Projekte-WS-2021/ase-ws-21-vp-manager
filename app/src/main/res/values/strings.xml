@@ -127,13 +127,15 @@
     <string name="register_info_title">Optionale Angaben</string>
     <string name="register_info_desc">Durch die Angabe der eigenen Matrikelnummer können die vom Lehrstuhl offiziell verbuchten Versuchspersonstunden angezeigt werden. \nDurch Angabe der benötigten VPs können die bereits gesammeleten in Relation gestellt werden.</string>
 
-    <!-- Study Dteails Tags -->
+    <!-- Study Details Tags -->
+
+    <string name="titleTag">Titel</string>
     <string name="descTag">Beschreibung</string>
     <string name="vpTag">VP-Stunden</string>
     <string name="catTag">Kategorie</string>
     <string name="conTag">Kontakt</string>
     <string name="typeTag">Studientyp</string>
-    <string name="locTag">Ort / plattform</string>
+    <string name="locTag">Ort / Plattform</string>
 
 
 
