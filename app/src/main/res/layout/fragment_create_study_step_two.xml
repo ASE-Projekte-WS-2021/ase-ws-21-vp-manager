@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -9,29 +8,32 @@
     android:background="?android:windowBackground"
     tools:context=".views.createStudy.createStudyFragment_StepTwo">
 
-
-    <LinearLayout
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:weightSum="7">
+        android:layout_height="match_parent">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
 
         <TextView
             android:id="@+id/create_stepTwo_pageTitle"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="0.94"
-            android:text="@string/fragment_create_study_pageOneContactTitle"
+            android:layout_height="wrap_content"
             android:textAlignment="center"
-            android:textSize="35sp" />
+            android:textSize="35sp"
+            android:text="@string/fragment_create_study_pageOneContactTitle"
+             />
 
         <View
+            android:id="@+id/create_stepTwo_separator"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
+            android:layout_height="3dp"
+            android:layout_below="@+id/create_stepTwo_pageTitle"
             android:layout_marginLeft="20dp"
+            android:layout_marginTop="5dp"
             android:layout_marginRight="20dp"
-            android:layout_weight="0.06"
             android:background="@color/black" />
 
         <!--        <TextView
@@ -44,128 +46,145 @@
                     android:textAlignment="center"
                     android:textSize="20sp" />-->
 
-
-        <com.google.android.material.textfield.TextInputLayout
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_marginLeft="20dp"
-            android:layout_marginTop="20dp"
-            android:layout_marginRight="20dp"
-            android:layout_weight="1.2"
-            android:hint="@string/fragment_create_study_pageOneContact_Hint_Contact"
-            android:textColorHint="@color/heatherred_Main"
-            app:boxStrokeColor="@color/black"
-            app:boxStrokeWidthFocused="2dp"
-            app:hintTextColor="@color/heatherred_Main">
-
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/inputContact1"
-                style="@style/You.EditText.Style"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent" />
-
-        </com.google.android.material.textfield.TextInputLayout>
-
-
-        <com.google.android.material.textfield.TextInputLayout
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_marginLeft="20dp"
-            android:layout_marginTop="20dp"
-            android:layout_marginRight="20dp"
-            android:layout_weight="1.2"
-            android:hint="@string/fragment_create_study_pageOneContact_Hint_Contact2"
-            android:textColorHint="@color/heatherred_Main"
-            app:boxStrokeColor="@color/black"
-            app:boxStrokeWidthFocused="2dp"
-            app:hintTextColor="@color/heatherred_Main">
-
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/inputContact2"
-                style="@style/You.EditText.Style"
+            <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:inputType="number"/>
+                android:layout_below="@+id/create_stepTwo_separator">
 
-        </com.google.android.material.textfield.TextInputLayout>
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true">
 
-
-        <com.google.android.material.textfield.TextInputLayout
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_marginLeft="20dp"
-            android:layout_marginTop="20dp"
-            android:layout_marginRight="20dp"
-            android:layout_weight="1.2"
-            android:hint="@string/fragment_create_study_pageOneContact_Hint_Contact3"
-            android:textColorHint="@color/heatherred_Main"
-            app:boxStrokeColor="@color/black"
-            app:boxStrokeWidthFocused="2dp"
-            app:hintTextColor="@color/heatherred_Main">
-
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/inputContact3"
-                style="@style/You.EditText.Style"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent" />
-
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <com.google.android.material.textfield.TextInputLayout
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_marginLeft="20dp"
-            android:layout_marginTop="20dp"
-            android:layout_marginRight="20dp"
-            android:layout_weight="1.2"
-            android:hint="@string/fragment_create_study_pageOneContact_Hint_Contact4"
-            android:textColorHint="@color/heatherred_Main"
-            app:boxStrokeColor="@color/black"
-            app:boxStrokeWidthFocused="2dp"
-            app:hintTextColor="@color/heatherred_Main">
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/create_stepTwo_mailInputLayout"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginRight="20dp"
+                        android:hint="@string/fragment_create_study_pageOneContact_Hint_Contact"
+                        android:textColorHint="@color/heatherred_Main"
+                        app:boxStrokeColor="@color/black"
+                        app:boxStrokeWidthFocused="2dp"
+                        app:hintTextColor="@color/heatherred_Main">
 
 
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/inputContact4"
-                style="@style/You.EditText.Style"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent" />
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/inputContact1"
+                            style="@style/You.EditText.Style"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent" />
 
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <com.google.android.material.textfield.TextInputLayout
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_marginLeft="20dp"
-            android:layout_marginTop="20dp"
-            android:layout_marginRight="20dp"
-            android:layout_weight="1.2"
-            android:hint="@string/fragment_create_study_pageOneContact_Hint_Contact5"
-            android:textColorHint="@color/heatherred_Main"
-            app:boxStrokeColor="@color/black"
-            app:boxStrokeWidthFocused="2dp"
-            app:hintTextColor="@color/heatherred_Main">
+                    </com.google.android.material.textfield.TextInputLayout>
 
 
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/inputContact5"
-                style="@style/You.EditText.Style"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginTop="20dp" />
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/create_stepTwo_phoneInputLayout"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/create_stepTwo_mailInputLayout"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginRight="20dp"
+                        android:hint="@string/fragment_create_study_pageOneContact_Hint_Contact2"
+                        android:textColorHint="@color/heatherred_Main"
+                        app:boxStrokeColor="@color/black"
+                        app:boxStrokeWidthFocused="2dp"
+                        app:hintTextColor="@color/heatherred_Main">
 
-        </com.google.android.material.textfield.TextInputLayout>
 
-    </LinearLayout>
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/inputContact2"
+                            style="@style/You.EditText.Style"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:inputType="number" />
+
+                    </com.google.android.material.textfield.TextInputLayout>
 
 
-</FrameLayout>
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/create_stepTwo_skypeInputLayout"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/create_stepTwo_phoneInputLayout"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginRight="20dp"
+                        android:hint="@string/fragment_create_study_pageOneContact_Hint_Contact3"
+                        android:textColorHint="@color/heatherred_Main"
+                        app:boxStrokeColor="@color/black"
+                        app:boxStrokeWidthFocused="2dp"
+                        app:hintTextColor="@color/heatherred_Main">
+
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/inputContact3"
+                            style="@style/You.EditText.Style"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent" />
+
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/create_stepTwo_discInputLayout"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/create_stepTwo_skypeInputLayout"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginRight="20dp"
+                        android:hint="@string/fragment_create_study_pageOneContact_Hint_Contact4"
+                        android:textColorHint="@color/heatherred_Main"
+                        app:boxStrokeColor="@color/black"
+                        app:boxStrokeWidthFocused="2dp"
+                        app:hintTextColor="@color/heatherred_Main">
+
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/inputContact4"
+                            style="@style/You.EditText.Style"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent" />
+
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/create_stepTwp_othersInputLayout"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/create_stepTwo_discInputLayout"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginRight="20dp"
+                        android:hint="@string/fragment_create_study_pageOneContact_Hint_Contact5"
+                        android:textColorHint="@color/heatherred_Main"
+                        app:boxStrokeColor="@color/black"
+                        app:boxStrokeWidthFocused="2dp"
+                        app:hintTextColor="@color/heatherred_Main">
+
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/inputContact5"
+                            style="@style/You.EditText.Style"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginTop="20dp" />
+
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                </RelativeLayout>
+
+            </RelativeLayout>
+
+        </RelativeLayout>
+    </ScrollView>
+
+</RelativeLayout>
 
