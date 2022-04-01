@@ -1,35 +1,49 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".views.createStudy.createStudyFragment_finalStep_two"
-    android:background="?android:windowBackground">
+    android:background="?android:windowBackground"
+    tools:context=".views.createStudy.createStudyFragment_StepOne">
 
-
-    <LinearLayout
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:weightSum="6">
+        android:layout_height="match_parent">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
         <TextView
             android:id="@+id/create_finalStepTwo_pageTitle"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
+            android:layout_height="wrap_content"
             android:text="@string/fragment_create_study_pageFinalTitle"
             android:layout_weight="0.7"
             android:textAlignment="center"
             android:textSize="35sp" />
 
         <View
+            android:id="@+id/create_finalStepTwo_separator"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="0.05"
+            android:layout_height="3dp"
+            android:layout_below="@+id/create_finalStepTwo_pageTitle"
             android:layout_marginLeft="20dp"
             android:layout_marginTop="5dp"
             android:layout_marginRight="20dp"
-            android:background="@color/black" />
+            android:background="@color/black"/>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_below="@+id/create_finalStepTwo_separator">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true">
 
         <com.google.android.material.textview.MaterialTextView
             android:layout_width="match_parent"
@@ -67,6 +81,11 @@
         </com.google.android.material.textview.MaterialTextView>
 
 
-    </LinearLayout>
+                </RelativeLayout>
 
-</FrameLayout>
+            </RelativeLayout>
+
+        </RelativeLayout>
+    </ScrollView>
+
+</RelativeLayout>

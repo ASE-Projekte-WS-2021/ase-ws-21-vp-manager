@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -7,28 +7,30 @@
     android:background="?android:windowBackground"
     tools:context=".views.createStudy.createStudyFragment_StepFour_Remote">
 
-    <LinearLayout
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:weightSum="6">
+        android:layout_height="match_parent">
 
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
         <TextView
             android:id="@+id/create_stepFourRemote_pageTitle"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="0.7"
+            android:layout_height="wrap_content"
             android:text="@string/fragment_create_study_pageFourTitleTwo"
             android:textAlignment="center"
             android:textSize="35sp" />
 
         <View
+            android:id="@+id/create_stepFour_remote_separator"
+            android:layout_below="@+id/create_stepFourRemote_pageTitle"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
+            android:layout_height="3dp"
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
-            android:layout_weight="0.05"
+            android:layout_marginTop="5dp"
             android:background="@color/black" />
 
         <!-- <TextView
@@ -43,15 +45,24 @@
              android:layout_marginTop="30dp"
              android:text="@string/fragment_create_study_desc_page_four_remote" />-->
 
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_below="@+id/create_stepFour_remote_separator">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true">
 
         <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/create_stepFour_platformOne_InputLayout"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
+            android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
             android:layout_marginTop="20dp"
             android:layout_marginRight="20dp"
-            android:layout_weight="1.4"
             android:hint="@string/createPlatformHint"
             android:textColorHint="@color/heatherred_Main"
             app:boxStrokeColor="@color/black"
@@ -70,12 +81,13 @@
 
         <com.google.android.material.textfield.TextInputLayout
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:id="@+id/create_stepFour_platformTwo_InputLayout"
+            android:layout_below="@+id/create_stepFour_platformOne_InputLayout"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
+            android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
             android:layout_marginTop="20dp"
             android:layout_marginRight="20dp"
-            android:layout_weight="1.4"
             android:hint="@string/createPlatformHint2"
             android:textColorHint="@color/heatherred_Main"
             app:boxStrokeColor="@color/black"
@@ -91,7 +103,11 @@
 
         </com.google.android.material.textfield.TextInputLayout>
 
-    </LinearLayout>
+                </RelativeLayout>
 
+            </RelativeLayout>
 
-</FrameLayout>
+        </RelativeLayout>
+    </ScrollView>
+
+</RelativeLayout>
