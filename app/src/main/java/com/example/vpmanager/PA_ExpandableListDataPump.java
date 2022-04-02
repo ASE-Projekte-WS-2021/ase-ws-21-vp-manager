@@ -4,9 +4,11 @@ import static android.content.ContentValues.TAG;
 import static com.example.vpmanager.views.mainActivity.uniqueID;
 
 import android.app.Activity;
+import android.os.Bundle;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
+import androidx.navigation.NavController;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -404,26 +406,46 @@ public class PA_ExpandableListDataPump extends Activity {
     //Parameters: identifier of user, identifier of study
     //Return Values
     //checks if a given user is the creator of a given study
-    public static boolean navigateToStudyCreatorFragment(String currentUserId, String currentStudyId) {
+    public static void navigateToStudyCreatorFragment(String currentUserId, String currentStudyId, String source, NavController navController) {
 
-        if (DB_STUDIES_LIST.size() <= 0) {
-            Thread t = new Thread(() -> getAllStudies(() -> {
-            }));
-            t.start();
+        db = FirebaseFirestore.getInstance();
+        studiesRef = db.collection("studies");
+        studiesRef.whereEqualTo("id", currentStudyId).get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            Bundle args = new Bundle();
+                            args.putString("studyId", currentStudyId);
 
-            try {
-                t.join();
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-        }
-        for (Map<String, Object> map : DB_STUDIES_LIST) {
-            if (Objects.requireNonNull(map.get("creator")).toString().equals(currentUserId) &&
-                    Objects.requireNonNull(map.get("id")).toString().equals(currentStudyId)) {
-                return true;
-            }
-        }
-        return false;
+                            for (QueryDocumentSnapshot document : task.getResult()) {
+                                if (Objects.requireNonNull(document.getString("creator")).equals(currentUserId)) {
+
+                                    if (source.equals("HomeFragment"))
+                                        navController.navigate(R.id.action_homeFragment_to_studyCreatorFragment, args);
+                                    if (source.equals("FindStudyFragment"))
+                                        navController.navigate(R.id.action_findStudyFragment_to_studyCreatorFragment, args);
+                                    if (source.equals("UpcomingAppointmentsFragment"))
+                                        navController.navigate(R.id.action_upcomingAppointmentsFragment_to_studyCreatorFragment, args);
+                                    if (source.equals("OwnStudyFragment"))
+                                        navController.navigate(R.id.action_ownStudyFragment_to_studyCreatorFragment, args);
+
+                                } else {
+
+                                    if (source.equals("HomeFragment"))
+                                        navController.navigate(R.id.action_homeFragment_to_studyFragment, args);
+                                    if (source.equals("FindStudyFragment"))
+                                        navController.navigate(R.id.action_findStudyFragment_to_studyFragment, args);
+                                    if (source.equals("UpcomingAppointmentsFragment"))
+                                        navController.navigate(R.id.action_upcomingAppointmentsFragment_to_studyFragment, args);
+                                    if (source.equals("OwnStudyFragment"))
+                                        navController.navigate(R.id.action_ownStudyFragment_to_studyFragment, args);
+
+                                }
+                            }
+                        }
+                    }
+                });
     }
 
     //Parameters
