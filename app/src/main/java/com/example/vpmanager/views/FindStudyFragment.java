@@ -79,13 +79,6 @@ public class FindStudyFragment extends Fragment implements StudyListAdapter.OnSt
     //Navigates to the more detailed view of a study
     @Override
     public void onStudyClick(String studyId) {
-        Bundle args = new Bundle();
-        Log.d("FindStudyFragment", "onStudyClick - studyId:" + studyId);
-        args.putString("studyId", studyId);
-        if (PA_ExpandableListDataPump.navigateToStudyCreatorFragment(uniqueID, studyId)) {
-            navController.navigate(R.id.action_findStudyFragment_to_studyCreatorFragment, args);
-        } else {
-            navController.navigate(R.id.action_findStudyFragment_to_studyFragment, args);
-        }
+        PA_ExpandableListDataPump.navigateToStudyCreatorFragment(uniqueID, studyId, "FindStudyFragment", navController);
     }
 }

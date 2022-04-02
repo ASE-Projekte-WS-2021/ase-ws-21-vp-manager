@@ -3,7 +3,6 @@ package com.example.vpmanager.adapter;
 import static com.example.vpmanager.views.mainActivity.uniqueID;
 
 import android.content.Context;
-import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -95,41 +94,14 @@ public class CustomListViewAdapterAppointments extends BaseAdapter {
 
             holder.titleTextView = titleView;
             holder.dateTextView = dateView;
-            switch(sourceFragment) {
-                case "HomeFragment":
 
-                    convertView.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            Bundle args = new Bundle();
-                            StudyObjectPa study = objects.get(position);
-                            args.putString("studyId", study.getStudyId());
-                            if (PA_ExpandableListDataPump.navigateToStudyCreatorFragment(uniqueID, study.getStudyId())) {
-                                navController.navigate(R.id.action_homeFragment_to_studyCreatorFragment, args);
-                            } else {
-                                navController.navigate(R.id.action_homeFragment_to_studyFragment, args);
-                            }
-                        }
-                    });
-                    break;
-                case "UpcomingAppointmentsFragment":
-
-                    convertView.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            Bundle args = new Bundle();
-                            StudyObjectPa study = objects.get(position);
-                            args.putString("studyId", study.getStudyId());
-                            if (PA_ExpandableListDataPump.navigateToStudyCreatorFragment(uniqueID, study.getStudyId())) {
-                                navController.navigate(R.id.action_upcomingAppointmentsFragment_to_studyCreatorFragment, args);
-                            } else {
-                                navController.navigate(R.id.action_upcomingAppointmentsFragment_to_studyFragment, args);
-                            }
-                        }
-                    });
-                    break;
-
-            }
+            convertView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    StudyObjectPa study = objects.get(position);
+                    PA_ExpandableListDataPump.navigateToStudyCreatorFragment(uniqueID, study.getStudyId(), sourceFragment, navController);
+                }
+            });
         }
         return convertView;
     }
