@@ -45,7 +45,7 @@ public class StudyDatesCreatorAdapter extends RecyclerView.Adapter<RecyclerView.
         //other textViews can be filled with data here
         ((CustomViewHolder) holder).dateDate.setText(mStudyDates.get(position).getDate());
         ((CustomViewHolder) holder).dateUserId.setText(mStudyDates.get(position).getUserId());
-        //((CustomViewHolder) holder).participated = mStudyDates.get(position).getParticipation();
+        ((CustomViewHolder) holder).participated = mStudyDates.get(position).getParticipation();
 
         ((CustomViewHolder) holder).setParticipationButtons(((CustomViewHolder) holder).participated);
 
