@@ -176,7 +176,7 @@ public class createStudyFragment_StepFive extends Fragment {
         }
         Log.d("addDatetoList", "before add new" + dates);
         String currentDate = date_time + hours + ":" + minutes + " Uhr";
-        if (isDuplicate(currentDate)) {
+        if (!isDuplicate(currentDate)) {
             dates.add(currentDate);
             swipeableDatesAdapter.notifyDataSetChanged();
             Log.d("addDatetoList", "after notity" + dates);
