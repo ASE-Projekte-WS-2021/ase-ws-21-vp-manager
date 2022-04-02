@@ -70,9 +70,14 @@
 
     <string-array name="createCategoryList">
         <item>Studienkategorie</item>
-        <item>VR</item>
-        <item>AR</item>
-        <item>Diary Study</item>
+        <item>Feldstudie</item>
+        <item>Fokusgruppe</item>
+        <item>Fragebogen</item>
+        <item>Gamingstudie</item>
+        <item>Interview</item>
+        <item>Laborstudien</item>
+        <item>Tagebuchstudie</item>
+        <item>Usability/UXstudie</item>
         <item>Sonstige</item>
     </string-array>
 
