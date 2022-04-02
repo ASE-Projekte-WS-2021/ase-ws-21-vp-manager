@@ -94,7 +94,7 @@ public class StudyCreatorDetailsFragment extends Fragment {
         studyViewModel = new ViewModelProvider(requireActivity()).get(StudyCreatorViewModel.class);
         studyViewModel.studyCreatorDetailsFragment = this;
         studyViewModel.prepareRepo();
-        /**Study State aus Datenbank abfragen und Button entsprechend färben*/
+
     }
 
     private void initDetailViews(View view) {
@@ -125,14 +125,14 @@ public class StudyCreatorDetailsFragment extends Fragment {
                     changeStudyStateButton.setText("Studie abschließen");
                     changeStudyStateButton.setStrokeColor(ColorStateList.valueOf(getContext().getResources().getColor(R.color.heatherred_dark)));
                     changeStudyStateButton.setBackgroundTintList(ColorStateList.valueOf(getContext().getResources().getColor(R.color.heatherred_Main)));
-                    changeStudyStateButton.setIcon(getContext().getResources().getDrawable(R.drawable.ic_baseline_close_24));
+                    changeStudyStateButton.setIcon(getResources().getDrawable(R.drawable.ic_baseline_close_24));
                 }
                 else
                 {
                     changeStudyStateButton.setText("Studie Fortführen");
                     changeStudyStateButton.setStrokeColor(ColorStateList.valueOf(getContext().getResources().getColor(R.color.green_dark)));
                     changeStudyStateButton.setBackgroundTintList(ColorStateList.valueOf(getContext().getResources().getColor(R.color.green_Main)));
-                    changeStudyStateButton.setIcon(getContext().getResources().getDrawable(R.drawable.ic_baseline_refresh_24));
+                    changeStudyStateButton.setIcon(getResources().getDrawable(R.drawable.ic_baseline_refresh_24));
                 }
                 PA_ExpandableListDataPump.setStudyState(currentStudyId, studyIsClosed);
             }
@@ -157,6 +157,7 @@ public class StudyCreatorDetailsFragment extends Fragment {
                     studyViewModel.getStudyDetails().getStreet() + "\t\t" + studyViewModel.getStudyDetails().getRoom();
             localData.setText(locationString);
         }
+    /*
         PA_ExpandableListDataPump.getDateState(currentStudyId, new PA_ExpandableListDataPump.FirestoreCallbackDateState() {
             @Override
             public void onCallback(boolean participated) {
@@ -164,6 +165,10 @@ public class StudyCreatorDetailsFragment extends Fragment {
                 setStudyStateButton();
             }
         });
+        */
+
+        studyIsClosed = studyViewModel.getStudyDetails().getStudyState();
+        setStudyStateButton();
     }
 
 

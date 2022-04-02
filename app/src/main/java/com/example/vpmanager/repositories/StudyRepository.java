@@ -100,6 +100,7 @@ public class StudyRepository {
                             studyDetailObject.setLocation(document.getString("location"));
                             studyDetailObject.setStreet(document.getString("street"));
                             studyDetailObject.setRoom(document.getString("room"));
+                            studyDetailObject.setStudyState(document.getBoolean("studyStateClosed"));
                         } else {
                             Log.d("loadStudyDetails", "Error: the document does not exist!");
                         }
