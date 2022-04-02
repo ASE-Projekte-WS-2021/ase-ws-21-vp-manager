@@ -142,6 +142,16 @@
     <string name="typeTag">Studientyp</string>
     <string name="locTag">Ort / Plattform</string>
 
+    <!-- Edit Study -->
+
+    <string name="studyCloseWarning">Sind sie sicher das Sie die Studie abschließen wollen?</string>
+    <string name="studyOpenWarning">Sind sie sicher das Sie die Studie wieder öffnen wollen?</string>
+    <string name="changeStudyStateAbort">Abbrechen</string>
+    <string name="changeStudyStateContinue">Fortfahren</string>
+    <string name="changeStudyStateTitleClose">Studie abschließen</string>
+    <string name="changeStudyStateTitleOpen">Studie wieder öffnen</string>
+
+
 
 
 

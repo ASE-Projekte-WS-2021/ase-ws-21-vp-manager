@@ -1,5 +1,6 @@
 package com.example.vpmanager.views.studyCreatorDetails;
 
+import android.app.Dialog;
 import android.content.res.ColorStateList;
 import android.os.Bundle;
 
@@ -18,6 +19,9 @@ import androidx.navigation.Navigation;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 
@@ -119,6 +123,45 @@ public class StudyCreatorDetailsFragment extends Fragment {
         changeStudyStateButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+               showCloseStudyWarning();
+            }
+        });
+    }
+
+    private void showCloseStudyWarning(){
+        Dialog dialog = new Dialog(getActivity(), R.style.DialogStyle);
+        dialog.setContentView(R.layout.duplicate_dialog);
+
+        dialog.getWindow().setBackgroundDrawableResource(R.drawable.bg_window);
+
+        ImageView btnClose = dialog.findViewById(R.id.btn_close);
+        TextView warningTitle = dialog.findViewById(R.id.info_title);
+        Button addAnywaysButton = dialog.findViewById(R.id.addAnyways);
+        Button abortButton = dialog.findViewById(R.id.abort);
+        TextView warningText = dialog.findViewById(R.id.duplicate_desc);
+        CheckBox doNotShowAgainCheck = dialog.findViewById(R.id.doNotShowAgainCheckBox);
+        doNotShowAgainCheck.setVisibility(View.GONE);
+        addAnywaysButton.setText(getString(R.string.changeStudyStateContinue));
+        abortButton.setText(getString(R.string.changeStudyStateAbort));
+        if(!studyIsClosed) {
+            warningTitle.setText(getString(R.string.changeStudyStateTitleClose));
+            warningText.setText(getString(R.string.studyCloseWarning));
+
+        } else {
+            warningTitle.setText(getString(R.string.changeStudyStateTitleOpen));
+            warningText.setText(getString(R.string.studyOpenWarning));
+        }
+
+        btnClose.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialog.dismiss();
+            }
+        });
+
+        addAnywaysButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
                 studyIsClosed = !studyIsClosed;
                 if(!studyIsClosed)
                 {
@@ -129,14 +172,26 @@ public class StudyCreatorDetailsFragment extends Fragment {
                 }
                 else
                 {
-                    changeStudyStateButton.setText("Studie Fortführen");
+                    changeStudyStateButton.setText("Studie fortführen");
                     changeStudyStateButton.setStrokeColor(ColorStateList.valueOf(getContext().getResources().getColor(R.color.green_dark)));
                     changeStudyStateButton.setBackgroundTintList(ColorStateList.valueOf(getContext().getResources().getColor(R.color.green_Main)));
                     changeStudyStateButton.setIcon(getResources().getDrawable(R.drawable.ic_baseline_refresh_24));
                 }
                 PA_ExpandableListDataPump.setStudyState(currentStudyId, studyIsClosed);
+                dialog.dismiss();
+
             }
         });
+
+        abortButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });
+
+
+        dialog.show();
     }
 
     public void setStudyDetails() {
