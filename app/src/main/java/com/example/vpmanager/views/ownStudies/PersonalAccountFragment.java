@@ -484,6 +484,7 @@ public class PersonalAccountFragment extends Fragment {
         currentAdapter.getObjects().clear();
         currentAdapter.notifyDataSetChanged();
          */
+        System.out.println("adapter: " + adapter);
         listView.setAdapter(adapter);
         adapter.notifyDataSetChanged();
     }
