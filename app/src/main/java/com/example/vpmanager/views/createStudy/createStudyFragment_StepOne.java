@@ -83,10 +83,9 @@ public class createStudyFragment_StepOne extends Fragment {
         autoCompleteTextViewCategory = view.findViewById(R.id.create_stepOne_textView_category);
         dropdownListCategories = new ArrayList<>();
         //dropdownListCategories.add("Studienkategorie");
-        dropdownListCategories.add("VR");
-        dropdownListCategories.add("AR");
-        dropdownListCategories.add("Diary Study");
-        dropdownListCategories.add("Sonstige");
+        for(int i = 1; i < getResources().getStringArray(R.array.createCategoryList).length; i++){
+            dropdownListCategories.add(getResources().getStringArray(R.array.createCategoryList)[i]);
+        }
         arrayAdapterCategories = new ArrayAdapter<>(getActivity(), R.layout.material_dropdown_item, dropdownListCategories);
         autoCompleteTextViewCategory.setAdapter(arrayAdapterCategories);
 
@@ -113,17 +112,37 @@ public class createStudyFragment_StepOne extends Fragment {
         }
         if (CreateStudyFragment.createStudyViewModel.studyCreationProcessData.get("category") != null){
             String cat = CreateStudyFragment.createStudyViewModel.studyCreationProcessData.get("category").toString();
-            if (cat.equals("VR")) {
+            if (cat.equals("Feldstudie")) {
                 //categories.setSelection(1);
-                autoCompleteTextViewCategory.setText("VR", false);
+                autoCompleteTextViewCategory.setText("Feldstudie", false);
             }
-            if (cat.equals("AR")) {
+            if (cat.equals("Fokusgruppe")) {
                 //categories.setSelection(2);
-                autoCompleteTextViewCategory.setText("AR", false);
+                autoCompleteTextViewCategory.setText("Fokusgruppe", false);
             }
-            if (cat.equals("Diary Study")) {
+            if (cat.equals("Fragebogen")) {
                 //categories.setSelection(3);
-                autoCompleteTextViewCategory.setText("Diary Study", false);
+                autoCompleteTextViewCategory.setText("Fragebogen", false);
+            }
+            if (cat.equals("Gamingstudie")) {
+                //categories.setSelection(4);
+                autoCompleteTextViewCategory.setText("Gamingstudie", false);
+            }
+            if (cat.equals("Interview")) {
+                //categories.setSelection(4);
+                autoCompleteTextViewCategory.setText("Interview", false);
+            }
+            if (cat.equals("Laborstudien")) {
+                //categories.setSelection(4);
+                autoCompleteTextViewCategory.setText("Laborstudien", false);
+            }
+            if (cat.equals("Tagebuchstudie")) {
+                //categories.setSelection(4);
+                autoCompleteTextViewCategory.setText("Tagebuchstudie", false);
+            }
+            if (cat.equals("Usability/UXstudie")) {
+                //categories.setSelection(4);
+                autoCompleteTextViewCategory.setText("Usability/UXstudie", false);
             }
             if (cat.equals("Sonstige")) {
                 //categories.setSelection(4);
