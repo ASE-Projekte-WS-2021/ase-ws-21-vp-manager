@@ -178,6 +178,9 @@ public class PersonalAccountViewModel extends ViewModel implements GetAllDatesLi
         expandableListDetail.put("Teilgenommene Studien", passedStudies); //=> teilgenommene Studien
         expandableListDetail.put("Geplante Studien", ownStudies);
 
+        personalAccountFragment.setNewListViewAdapter(new CustomListViewAdapter(personalAccountFragment.getContext(),
+                personalAccountFragment.getNavController(), expandableListDetail));
+
         calculateProgressBarData();
     }
 
@@ -374,7 +377,7 @@ public class PersonalAccountViewModel extends ViewModel implements GetAllDatesLi
                     personalAccountFragment.getNavController(), sortByVPS(sortVpCountInvert)); //this.getActivity(),
         } else {
             adapter = new CustomListViewAdapter(personalAccountFragment.getContext(),
-                    personalAccountFragment.getNavController()); //this.getActivity(),
+                    personalAccountFragment.getNavController(), expandableListDetail); //this.getActivity(),
         }
 
         personalAccountFragment.setNewListViewAdapter(adapter);
@@ -394,7 +397,7 @@ public class PersonalAccountViewModel extends ViewModel implements GetAllDatesLi
     public void filterListViewColorTags(boolean state, int color) {
         if (state) {
             CustomListViewAdapter adapter = new CustomListViewAdapter(personalAccountFragment.getContext(),
-                    personalAccountFragment.getNavController()); //this.getActivity(),
+                    personalAccountFragment.getNavController(), expandableListDetail); //this.getActivity(),
             personalAccountFragment.setNewListViewAdapter(adapter);
 
             if (personalAccountFragment.getColorToggleState("planned")){

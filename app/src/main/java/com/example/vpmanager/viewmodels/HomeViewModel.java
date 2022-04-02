@@ -92,9 +92,9 @@ public class HomeViewModel extends ViewModel implements GetAllDatesListener, Get
             matrikelNumberHome = "";
         }
         //copy lists from repo
-        dbDatesListHome.clear();
+        //dbDatesListHome.clear();
         dbDatesListHome = datesListHome;
-        dbStudiesListHome.clear();
+        //dbStudiesListHome.clear();
         dbStudiesListHome = studiesListHome;
         createListEntriesHome();
     }

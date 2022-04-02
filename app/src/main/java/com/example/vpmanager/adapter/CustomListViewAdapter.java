@@ -37,11 +37,11 @@ public class CustomListViewAdapter extends BaseAdapter {
 
     }
 
-    public CustomListViewAdapter(Context context,  NavController nav) { //Activity activity,
+    public CustomListViewAdapter(Context context,  NavController nav, HashMap<String, List<String>> list) { //Activity activity,
         super();
         inflater = LayoutInflater.from(context);
         navController = nav;
-        this.objects = transformLists();
+        this.objects = transformLists(list);
         //this.activity = activity;
     }
 
@@ -53,9 +53,9 @@ public class CustomListViewAdapter extends BaseAdapter {
         //this.activity = activity;
     }
 
-    private ArrayList<StudyObjectPa> transformLists() {
+    private ArrayList<StudyObjectPa> transformLists(HashMap<String, List<String>> hashMapList) {
         ArrayList<StudyObjectPa> list = new ArrayList<>();
-        HashMap<String, List<String>> dataList = PA_ExpandableListDataPump.EXPANDABLE_LIST_DETAIL;
+        HashMap<String, List<String>> dataList = hashMapList;
 
         for (String key : dataList.keySet()) {
             List<String> tempList = dataList.get(key);

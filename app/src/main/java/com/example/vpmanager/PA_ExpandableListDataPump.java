@@ -407,11 +407,12 @@ public class PA_ExpandableListDataPump extends Activity {
     public static boolean navigateToStudyCreatorFragment(String currentUserId, String currentStudyId) {
 
         if (DB_STUDIES_LIST.size() <= 0) {
-            new Thread(() -> getAllStudies(() -> {
-            })).start();
+            Thread t = new Thread(() -> getAllStudies(() -> {
+            }));
+            t.start();
 
             try {
-                Thread.sleep(5000);
+                t.join();
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }

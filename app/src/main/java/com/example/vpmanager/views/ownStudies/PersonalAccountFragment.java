@@ -284,7 +284,7 @@ public class PersonalAccountFragment extends Fragment {
         plannedView.setLayoutParams(plannedParams);
         restView.setLayoutParams(restParams);
 
-        listView.setAdapter(new CustomListViewAdapter(this.getContext(), navController)); //this.getActivity(),
+        //listView.setAdapter(new CustomListViewAdapter(this.getContext(), navController)); //this.getActivity(),
         /*
         sortAlphabeticallyActive = false;
         sortAppointmentsActive = false;
