@@ -18,7 +18,6 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.DatePicker;
 import android.widget.ImageView;
-import android.widget.TextView;
 import android.widget.TimePicker;
 
 import com.example.vpmanager.R;
@@ -177,12 +176,17 @@ public class createStudyFragment_StepFive extends Fragment {
         }
         Log.d("addDatetoList", "before add new" + dates);
         String currentDate = date_time + hours + ":" + minutes + " Uhr";
-        if (!isDuplicate(currentDate)) {
+        if (isDuplicate(currentDate)) {
             dates.add(currentDate);
             swipeableDatesAdapter.notifyDataSetChanged();
             Log.d("addDatetoList", "after notity" + dates);
         } else {
-            showToolTip(currentDate);
+            if (!doNotShowDuplicateWarning) {
+                showToolTip(currentDate);
+            } else {
+                dates.add(currentDate);
+                swipeableDatesAdapter.notifyDataSetChanged();
+            }
         }
     }
 
@@ -202,22 +206,24 @@ public class createStudyFragment_StepFive extends Fragment {
         dialog.getWindow().setBackgroundDrawableResource(R.drawable.bg_window);
 
         ImageView btnClose = dialog.findViewById(R.id.btn_close);
-
-        btnClose.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                dialog.dismiss();
-            }
-        });
-
         Button addAnywaysButton = dialog.findViewById(R.id.addAnyways);
         Button abortButton = dialog.findViewById(R.id.abort);
         CheckBox doNotShowAgainCheck = dialog.findViewById(R.id.doNotShowAgainCheckBox);
 
+        btnClose.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (doNotShowAgainCheck.isChecked()) {
+                    doNotShowDuplicateWarning = true;
+                }
+                dialog.dismiss();
+            }
+        });
+
         addAnywaysButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(doNotShowAgainCheck.isChecked()){
+                if (doNotShowAgainCheck.isChecked()) {
                     doNotShowDuplicateWarning = true;
                 }
                 dates.add(currentDate);
@@ -230,7 +236,7 @@ public class createStudyFragment_StepFive extends Fragment {
         abortButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(doNotShowAgainCheck.isChecked()){
+                if (doNotShowAgainCheck.isChecked()) {
                     doNotShowDuplicateWarning = true;
                 }
                 dialog.dismiss();
