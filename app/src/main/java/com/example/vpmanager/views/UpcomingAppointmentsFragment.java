@@ -9,12 +9,14 @@ import android.widget.ListView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 
 import com.example.vpmanager.PA_ExpandableListDataPump;
 import com.example.vpmanager.R;
 import com.example.vpmanager.adapter.CustomListViewAdapterAppointments;
+import com.example.vpmanager.viewmodels.UpcomingAppointViewModel;
 import com.google.firebase.auth.FirebaseAuth;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -23,47 +25,52 @@ import java.util.List;
 
 public class UpcomingAppointmentsFragment extends Fragment {
 
+    private UpcomingAppointViewModel mViewModel;
     private NavController navController;
-    FirebaseAuth firebaseAuth;
-
     private ListView arrivingDatesList;
-
-    private HashMap<String, String> getStudyIdByName = new HashMap<>();
+    //private HashMap<String, String> getStudyIdByName = new HashMap<>();
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        firebaseAuth = FirebaseAuth.getInstance();
     }
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_upcoming_appointments, container, false);
+        prepareViewModel();
         initHomeFragmentComponents(view);
-
+        mViewModel.getAllDatesAndStudies();
+        //setUpDateList();
         return view;
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
         navController = Navigation.findNavController(view);
-        setUpDateList();
+        super.onViewCreated(view, savedInstanceState);
     }
 
+    private void prepareViewModel(){
+        //the fragment is viewModelStoreOwner
+        mViewModel = new ViewModelProvider(this).get(UpcomingAppointViewModel.class);
+        mViewModel.upcomingAppointmentsFragment = this;
+        mViewModel.prepareRepo();
+    }
 
     //Parameter: the fragment view
     //Return Values:
     //connects the view components with their ids
     private void initHomeFragmentComponents(View view) {
         arrivingDatesList = view.findViewById(R.id.listViewOwnArrivingStudyFragment);
-
     }
 
     //Parameter:
     //Return Values:
     //gets necessary data from database converts it into a list
+    //setUpDateList
+    /*
     private void setUpDateList() {
         final List<String[]>[] arrivingDates = new List[]{null};
 
@@ -84,11 +91,23 @@ public class UpcomingAppointmentsFragment extends Fragment {
             }
         });
     }
+     */
+
+    public void setListViewAdapter(CustomListViewAdapterAppointments adapter) {
+        arrivingDatesList.setAdapter(adapter);
+        adapter.notifyDataSetChanged();
+    }
+
+    public NavController getNavController() {
+        return navController;
+    }
 
     //Parameter: data list from database call
     //Return Values:
     //converts and sorts the data. calls listview adapter to set up list entries
-    private  void finishSetupList(List <String[]> dates){
+    //finishSetupList
+    /*
+    private void finishSetupList(List <String[]> dates){
 
         if (dates != null) {
 
@@ -112,9 +131,9 @@ public class UpcomingAppointmentsFragment extends Fragment {
                 listEntries.add(sortingMap.get(key) + "\t\t" + key);
             }
             Collections.reverse(listEntries);
-             arrivingDatesList.setAdapter(new CustomListViewAdapterAppointments(this.getContext(), this.getActivity(), navController, listEntries, getStudyIdByName, "UpcomingAppointmentsFragment"));
+            arrivingDatesList.setAdapter(new CustomListViewAdapterAppointments(this.getContext(), navController, listEntries, getStudyIdByName, "UpcomingAppointmentsFragment"));
         }
     }
-
+     */
 
 }
