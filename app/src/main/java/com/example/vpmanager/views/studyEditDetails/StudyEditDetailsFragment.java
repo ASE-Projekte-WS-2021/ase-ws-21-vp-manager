@@ -111,11 +111,10 @@ public class StudyEditDetailsFragment extends Fragment {
 
         categories = view.findViewById(R.id.edit_study_category);
         dropdownListCategories = new ArrayList<>();
-        ;
-        dropdownListCategories.add("VR");
-        dropdownListCategories.add("AR");
-        dropdownListCategories.add("Diary Study");
-        dropdownListCategories.add("Sonstige");
+
+        for(int i = 1; i < getResources().getStringArray(R.array.createCategoryList).length; i++){
+            dropdownListCategories.add(getResources().getStringArray(R.array.createCategoryList)[i]);
+        }
         arrayAdapterCategories = new ArrayAdapter<>(getActivity(), R.layout.material_dropdown_item, dropdownListCategories);
         categories.setAdapter(arrayAdapterCategories);
 
@@ -248,16 +247,40 @@ public class StudyEditDetailsFragment extends Fragment {
         }
         if (studyEditViewModel.studyEditProcessData.get("category") != null) {
             String cat = studyEditViewModel.studyEditProcessData.get("category").toString();
-            if (cat.equals("VR")) {
-                categories.setText("VR", false);
+            if (cat.equals("Feldstudie")) {
+                //categories.setSelection(1);
+                categories.setText("Feldstudie", false);
             }
-            if (cat.equals("AR")) {
-                categories.setText("AR", false);
+            if (cat.equals("Fokusgruppe")) {
+                //categories.setSelection(2);
+                categories.setText("Fokusgruppe", false);
             }
-            if (cat.equals("Diary Study")) {
-                categories.setText("Diary Study", false);
+            if (cat.equals("Fragebogen")) {
+                //categories.setSelection(3);
+                categories.setText("Fragebogen", false);
+            }
+            if (cat.equals("Gamingstudie")) {
+                //categories.setSelection(4);
+                categories.setText("Gamingstudie", false);
+            }
+            if (cat.equals("Interview")) {
+                //categories.setSelection(4);
+                categories.setText("Interview", false);
+            }
+            if (cat.equals("Laborstudien")) {
+                //categories.setSelection(4);
+                categories.setText("Laborstudien", false);
+            }
+            if (cat.equals("Tagebuchstudie")) {
+                //categories.setSelection(4);
+                categories.setText("Tagebuchstudie", false);
+            }
+            if (cat.equals("Usability/UXstudie")) {
+                //categories.setSelection(4);
+                categories.setText("Usability/UXstudie", false);
             }
             if (cat.equals("Sonstige")) {
+                //categories.setSelection(4);
                 categories.setText("Sonstige", false);
             }
         }

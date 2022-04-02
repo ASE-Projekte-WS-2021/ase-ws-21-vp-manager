@@ -3,16 +3,16 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/test_item"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:padding="10dp">
+    android:layout_height="wrap_content">
 
     <androidx.cardview.widget.CardView
         android:id="@+id/card_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:elevation="5dp"
-        app:cardCornerRadius="10dp"
-        app:cardMaxElevation="5dp">
+        app:cardCornerRadius="20dp"
+        app:cardMaxElevation="5dp"
+        android:layout_margin="10dp">
         <!--android:layout_height="80dp"-->
 
         <LinearLayout
@@ -26,13 +26,13 @@
             <TextView
                 android:id="@+id/textviewName"
                 android:layout_width="match_parent"
-                android:layout_height="26dp"
+                android:layout_height="wrap_content"
                 android:layout_gravity="left"
                 android:layout_marginTop="4dp"
                 android:layout_marginBottom="13dp"
                 android:fontFamily="@font/google_sans_medium"
                 android:textColor="@color/white_header"
-                android:textSize="21dp"
+                android:textSize="21sp"
                 android:textStyle="bold" />
 
             <TextView
@@ -43,7 +43,7 @@
                 android:fontFamily="@font/google_sans_medium"
                 android:gravity="left"
                 android:textColor="@color/white"
-                android:textSize="17dp" />
+                android:textSize="17sp" />
 
 
             <ImageView
@@ -74,7 +74,7 @@
                 android:layout_marginStart= "100dp"
                 android:fontFamily="@font/google_sans_medium"
                 android:textColor="@color/white"
-                android:textSize="17dp" />
+                android:textSize="17sp" />
             <TextView
                 android:id="@+id/textviewTag"
                 android:text="Studientyp: "
@@ -85,7 +85,7 @@
                 android:layout_marginBottom="2dp"
                 android:fontFamily="@font/google_sans_medium"
                 android:textColor="@color/white"
-                android:textSize="17dp" />
+                android:textSize="17sp" />
 
 
 

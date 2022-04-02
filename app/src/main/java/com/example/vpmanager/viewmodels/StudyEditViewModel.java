@@ -95,6 +95,12 @@ public class StudyEditViewModel extends ViewModel implements EditStudyDetailsLis
                     localDateMap.put("selected", false);
                 }
 
+                if (datesEditProcessDataObjects.get(i).getParticipation()) {
+                } else {
+                    localDateMap.put("participated", false);
+
+                }
+
                 dateIds.add(datesEditProcessDataObjects.get(i).getDateId());
 
                 mStudyEditRepo.updateDates(localDateMap, localDateId);

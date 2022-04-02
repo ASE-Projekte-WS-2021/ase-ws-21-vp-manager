@@ -8,13 +8,14 @@ public class StudyDetailModel {
 
     private String remotePlatformOne, remotePlatformTwo;
     private String location, street, room;
+    private boolean studyState;
 
 
     public StudyDetailModel(String id, String name, String description, String vps,
                             String contactOne, String contactTwo, String contactThree, String contactFour, String contactFive,
                             String category, String executionType,
                             String remotePlatformOne, String remotePlatformTwo,
-                            String location, String street, String room) {
+                            String location, String street, String room, boolean studyState) {
         this.id = id;
         this.name = name;
         this.description = description;
@@ -35,6 +36,7 @@ public class StudyDetailModel {
         this.location = location;
         this.street = street;
         this.room = room;
+        this.studyState = studyState;
     }
 
     public StudyDetailModel(){
@@ -107,6 +109,10 @@ public class StudyDetailModel {
         return room;
     }
 
+    public boolean getStudyState() {
+        return studyState;
+    }
+
     public void setId(String id) {
         this.id = id;
     }
@@ -172,4 +178,9 @@ public class StudyDetailModel {
     public void setRoom(String room) {
         this.room = room;
     }
+
+    public void setStudyState(boolean studyState) {
+        this.studyState = studyState;
+    }
+
 }

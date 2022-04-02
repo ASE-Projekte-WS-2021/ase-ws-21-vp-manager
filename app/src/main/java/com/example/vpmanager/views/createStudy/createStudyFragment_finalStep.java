@@ -58,28 +58,28 @@ public class createStudyFragment_finalStep extends Fragment {
     //Loads data recieved from the activity into the textfields
     private void loadData() {
         if (CreateStudyFragment.createStudyViewModel.studyCreationProcessData.get("name") != null){
-            String title = "Titel:" + "\n" + CreateStudyFragment.createStudyViewModel.studyCreationProcessData
+            String title = CreateStudyFragment.createStudyViewModel.studyCreationProcessData
                     .get("name").toString();
             titleTextView.setText(title);
         }
         if (CreateStudyFragment.createStudyViewModel.studyCreationProcessData.get("vps") != null){
-            String vps = "VP-Stunden:" + "\n" + CreateStudyFragment.createStudyViewModel.studyCreationProcessData
+            String vps =  CreateStudyFragment.createStudyViewModel.studyCreationProcessData
                     .get("vps").toString();
                     vpTextView.setText(vps);
         }
         if (CreateStudyFragment.createStudyViewModel.studyCreationProcessData.get("category") != null){
-            String category = "Kategorie:" + "\n" + CreateStudyFragment.createStudyViewModel.studyCreationProcessData
+            String category = CreateStudyFragment.createStudyViewModel.studyCreationProcessData
                     .get("category").toString();
             categoryTextView.setText(category);
         }
         if (CreateStudyFragment.createStudyViewModel.studyCreationProcessData.get("executionType") != null){
-            String executionType = "Art der Durchführung:" + "\n" + CreateStudyFragment.createStudyViewModel
+            String executionType =  CreateStudyFragment.createStudyViewModel
                     .studyCreationProcessData.get("executionType").toString();
             executionTextView.setText(executionType);
         }
 
         if (CreateStudyFragment.createStudyViewModel.studyCreationProcessData.get("location") != null){
-            String locationTxT = getString(R.string.fragment_create_study_pageFourTitle) + ": " + "\n";
+            String locationTxT = "";
 
             //if location is not null it is always added
             String location = CreateStudyFragment.createStudyViewModel.studyCreationProcessData
@@ -103,7 +103,7 @@ public class createStudyFragment_finalStep extends Fragment {
             locationTextView.setText(locationTxT);
 
         } else if (CreateStudyFragment.createStudyViewModel.studyCreationProcessData.get("platform") != null) {
-            String platformTxT = getString(R.string.fragment_create_study_pageFourTitleTwo) + ": " + "\n";
+            String platformTxT = "";
 
             //if primary platform is not null it is always added
             String platform = CreateStudyFragment.createStudyViewModel.studyCreationProcessData

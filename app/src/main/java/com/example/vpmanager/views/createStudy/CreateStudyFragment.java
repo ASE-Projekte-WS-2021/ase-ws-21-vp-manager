@@ -156,7 +156,7 @@ public class CreateStudyFragment extends Fragment {
                     @Override
                     public void onAnimationEnd(Animator animation) {
                         super.onAnimationEnd(animation);
-                        Log.d("animEnd", "before navigating to homeFragment"
+                        Log.d("animEnd", "before navigating to HomeFragment"
                                 + navControllerCreate.getBackQueue().toString());
                         Log.d("animEnd", "items on stack" + navControllerCreate.getBackQueue().getSize());
                         reNavigateToCreateStudyFragment();

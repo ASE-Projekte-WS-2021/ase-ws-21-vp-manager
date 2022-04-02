@@ -13,7 +13,7 @@ import androidx.navigation.Navigation;
 import androidx.viewpager.widget.ViewPager;
 
 import com.example.vpmanager.R;
-import com.example.vpmanager.adapter.viewPagerAdapter;
+import com.example.vpmanager.adapter.ViewPagerAdapter;
 import com.example.vpmanager.views.mainActivity;
 import com.google.android.material.tabs.TabLayout;
 
@@ -53,7 +53,7 @@ public class StudyFragment extends Fragment {
 
         tabLayout.setupWithViewPager(viewPager);
 
-        viewPagerAdapter viewPagerAdapter = new viewPagerAdapter(getParentFragmentManager(), 0);
+        ViewPagerAdapter viewPagerAdapter = new ViewPagerAdapter(getParentFragmentManager(), 0);
         viewPagerAdapter.addFragment(detailsFragment, "Details");
         viewPagerAdapter.addFragment(datesFragment, "Termine");
         viewPager.setAdapter(viewPagerAdapter);
@@ -74,12 +74,12 @@ public class StudyFragment extends Fragment {
     }
 
     /*
-    private class viewPagerAdapter extends FragmentStatePagerAdapter {
+    private class ViewPagerAdapter extends FragmentStatePagerAdapter {
 
         private List<Fragment> fragments = new ArrayList<>();
         private List<String> fragmentNames = new ArrayList<>();
 
-        public viewPagerAdapter(@NonNull FragmentManager fm, int behavior) {
+        public ViewPagerAdapter(@NonNull FragmentManager fm, int behavior) {
             super(fm, behavior);
         }
 
@@ -107,6 +107,4 @@ public class StudyFragment extends Fragment {
     }
 
      */
-
-
 }

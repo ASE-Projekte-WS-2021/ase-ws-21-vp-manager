@@ -52,16 +52,16 @@ public class createStudyFragment_finalStep_two extends Fragment {
     //Loads data recieved from the activity into the textfields
     private void loadData() {
         if (CreateStudyFragment.createStudyViewModel.studyCreationProcessData.get("description") != null){
-            String desc = "Beschreibung:" + "\n" + CreateStudyFragment.createStudyViewModel.studyCreationProcessData
+            String desc =  CreateStudyFragment.createStudyViewModel.studyCreationProcessData
                     .get("description").toString();
             descriptionTextView.setText(desc);
         }
 
-        String contactTxT = "Kontakt:"; // + "\n"
+        String contactTxT = ""; // + "\n"
         if (CreateStudyFragment.createStudyViewModel.studyCreationProcessData.get("contact") != null){
             String contactMail = CreateStudyFragment.createStudyViewModel.studyCreationProcessData
                     .get("contact").toString();
-            contactTxT += "\n" + "Mail: " + contactMail;
+            contactTxT += contactMail;
         }
         if (CreateStudyFragment.createStudyViewModel.studyCreationProcessData.get("contact2") != null){
             String contactPhone = CreateStudyFragment.createStudyViewModel.studyCreationProcessData

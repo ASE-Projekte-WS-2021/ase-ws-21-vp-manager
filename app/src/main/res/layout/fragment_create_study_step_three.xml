@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -7,30 +8,31 @@
     android:background="?android:windowBackground"
     tools:context=".views.createStudy.createStudyFragment_StepThree">
 
-
-    <LinearLayout
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:weightSum="6">
+        android:layout_height="match_parent">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
 
         <TextView
             android:id="@+id/create_stepThree_pageTitle"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="0.7"
+            android:layout_height="wrap_content"
             android:text="@string/createStudyDesc"
             android:textAlignment="center"
             android:textSize="35sp" />
 
         <View
+            android:id="@+id/create_stepThree_separator"
+            android:layout_below="@+id/create_stepThree_pageTitle"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
+            android:layout_height="3dp"
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
-            android:layout_marginBottom="30dp"
-            android:layout_weight="0.05"
+            android:layout_marginTop="5dp"
             android:background="@color/black" />
 
         <!--<TextView
@@ -46,13 +48,23 @@
             android:text="@string/fragment_create_study_desc_page_two" />-->
 
 
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_below="@+id/create_stepThree_separator">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true">
+
         <com.google.android.material.textfield.TextInputLayout
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
+            android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
-            android:layout_weight="5.25"
+            android:layout_marginTop="20dp"
             android:hint="@string/createStudyDesc"
             android:textColorHint="@color/heatherred_Main"
             app:boxStrokeColor="@color/black"
@@ -67,12 +79,15 @@
                 android:layout_height="match_parent"
                 android:gravity="top"
                 android:inputType="textMultiLine"
-                android:lines="15" />
+                android:lines="25" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
+                </RelativeLayout>
 
-    </LinearLayout>
+            </RelativeLayout>
 
+        </RelativeLayout>
+    </ScrollView>
 
-</FrameLayout>
+</RelativeLayout>

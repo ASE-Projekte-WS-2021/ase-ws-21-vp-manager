@@ -13,6 +13,8 @@
         android:orientation="vertical"
         android:weightSum="6">
 
+<!--       title lineView has to be set higher-->
+
         <TextView
             android:id="@+id/create_finalStepThree_pageTitle"
             android:layout_width="match_parent"

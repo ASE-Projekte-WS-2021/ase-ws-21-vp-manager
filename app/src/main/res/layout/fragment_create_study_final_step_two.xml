@@ -1,72 +1,113 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".views.createStudy.createStudyFragment_finalStep_two"
-    android:background="?android:windowBackground">
+    android:background="?android:windowBackground"
+    tools:context=".views.createStudy.createStudyFragment_StepOne">
 
-
-    <LinearLayout
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:weightSum="6">
+        android:layout_height="match_parent">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
         <TextView
             android:id="@+id/create_finalStepTwo_pageTitle"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
+            android:layout_height="wrap_content"
             android:text="@string/fragment_create_study_pageFinalTitle"
-            android:layout_weight="0.7"
             android:textAlignment="center"
             android:textSize="35sp" />
 
         <View
+            android:id="@+id/create_finalStepTwo_separator"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="0.05"
+            android:layout_height="3dp"
+            android:layout_below="@+id/create_finalStepTwo_pageTitle"
             android:layout_marginLeft="20dp"
             android:layout_marginTop="5dp"
             android:layout_marginRight="20dp"
-            android:background="@color/black" />
+            android:background="@color/black"/>
 
-        <com.google.android.material.textview.MaterialTextView
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="3"
-            android:layout_marginRight="30dp"
-            android:layout_marginLeft="30dp"
-            android:layout_marginTop="10dp"
-            android:padding="10dp"
-            android:id="@+id/confirmDesc"
-            android:textSize="15sp"
-            android:fontFamily="@font/maven_pro"
-            android:textStyle="bold"
-            android:textColor="@color/heatherred_Main"
-            android:gravity="top"
-            android:background="@drawable/border">
-        </com.google.android.material.textview.MaterialTextView>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_below="@+id/create_finalStepTwo_separator">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true">
+
+                    <TextView
+                        android:id="@+id/Tag6"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp"
+                        android:fontFamily="@font/allerta_stencil"
+                        android:gravity="center"
+                        android:text="@string/descTag"
+                        android:textColor="@color/black"
+                        android:textSize="15sp"
+                        android:textStyle="bold" />
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/confirmDesc"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/Tag6"
+                        android:layout_marginLeft="30dp"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginRight="30dp"
+                        android:background="@drawable/border"
+                        android:fontFamily="@font/maven_pro"
+                        android:gravity="top"
+                        android:padding="10dp"
+                        android:textColor="@color/heatherred_Main"
+                        android:textSize="15sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/Tag7"
+                        android:layout_below="@+id/confirmDesc"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp"
+                        android:fontFamily="@font/allerta_stencil"
+                        android:gravity="center"
+                        android:text="@string/conTag"
+                        android:textColor="@color/black"
+                        android:textSize="15sp"
+                        android:textStyle="bold" />
 
 
-        <com.google.android.material.textview.MaterialTextView
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="2"
-            android:layout_marginRight="30dp"
-            android:layout_marginLeft="30dp"
-            android:layout_marginTop="10dp"
-            android:padding="10dp"
-            android:id="@+id/confirmContact"
-            android:textSize="15sp"
-            android:fontFamily="@font/maven_pro"
-            android:textStyle="bold"
-            android:textColor="@color/heatherred_Main"
-            android:gravity="top"
-            android:background="@drawable/border">
-        </com.google.android.material.textview.MaterialTextView>
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/confirmContact"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/Tag7"
+                        android:layout_marginLeft="30dp"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginRight="30dp"
+                        android:background="@drawable/border"
+                        android:fontFamily="@font/maven_pro"
+                        android:gravity="top"
+                        android:padding="10dp"
+                        android:textColor="@color/heatherred_Main"
+                        android:textSize="15sp"
+                        android:textStyle="bold" />
 
 
-    </LinearLayout>
+                </RelativeLayout>
 
-</FrameLayout>
+            </RelativeLayout>
+
+        </RelativeLayout>
+    </ScrollView>
+
+</RelativeLayout>

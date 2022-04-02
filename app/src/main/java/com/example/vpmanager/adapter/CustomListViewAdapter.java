@@ -2,7 +2,6 @@ package com.example.vpmanager.adapter;
 
 import static com.example.vpmanager.views.mainActivity.uniqueID;
 
-import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -25,7 +24,7 @@ public class CustomListViewAdapter extends BaseAdapter {
 
     private LayoutInflater inflater;
     public ArrayList<StudyObjectPa> objects;
-    private Activity activity;
+    //private Activity activity;
     private NavController navController;
 
 
@@ -37,25 +36,25 @@ public class CustomListViewAdapter extends BaseAdapter {
 
     }
 
-    public CustomListViewAdapter(Context context, Activity activity, NavController nav) {
+    public CustomListViewAdapter(Context context,  NavController nav, HashMap<String, List<String>> list) { //Activity activity,
         super();
         inflater = LayoutInflater.from(context);
         navController = nav;
-        this.objects = transformLists();
-        this.activity = activity;
+        this.objects = transformLists(list);
+        //this.activity = activity;
     }
 
-    public CustomListViewAdapter(Context context, Activity activity, NavController nav, ArrayList<StudyObjectPa> list) {
+    public CustomListViewAdapter(Context context,  NavController nav, ArrayList<StudyObjectPa> list) { //Activity activity,
         super();
         inflater = LayoutInflater.from(context);
         navController = nav;
         this.objects = list;
-        this.activity = activity;
+        //this.activity = activity;
     }
 
-    private ArrayList<StudyObjectPa> transformLists() {
+    private ArrayList<StudyObjectPa> transformLists(HashMap<String, List<String>> hashMapList) {
         ArrayList<StudyObjectPa> list = new ArrayList<>();
-        HashMap<String, List<String>> dataList = PA_ExpandableListDataPump.EXPANDABLE_LIST_DETAIL;
+        HashMap<String, List<String>> dataList = hashMapList;
 
         for (String key : dataList.keySet()) {
             List<String> tempList = dataList.get(key);
@@ -140,13 +139,8 @@ public class CustomListViewAdapter extends BaseAdapter {
                     Bundle args = new Bundle();
                     StudyObjectPa study = objects.get(position);
                     args.putString("studyId", study.getStudyId());
-                    if (PA_ExpandableListDataPump.navigateToStudyCreatorFragment(uniqueID, study.getStudyId())) {
-                        navController.navigate(R.id.action_ownStudyFragment_to_studyCreatorFragment, args);
-                    } else {
-                        navController.navigate(R.id.action_ownStudyFragment_to_studyFragment, args);
-                    }
-                }
-            });
+                    PA_ExpandableListDataPump.navigateToStudyCreatorFragment(uniqueID, study.getStudyId(), "OwnStudyFragment", navController);
+                }});
         }
         return convertView;
     }

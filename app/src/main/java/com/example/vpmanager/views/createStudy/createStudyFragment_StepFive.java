@@ -1,6 +1,7 @@
 package com.example.vpmanager.views.createStudy;
 
 import android.app.DatePickerDialog;
+import android.app.Dialog;
 import android.app.TimePickerDialog;
 import android.os.Bundle;
 
@@ -13,7 +14,10 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.DatePicker;
+import android.widget.ImageView;
 import android.widget.TimePicker;
 
 import com.example.vpmanager.R;
@@ -36,6 +40,7 @@ public class createStudyFragment_StepFive extends Fragment {
     private int mHour;
     private int mMinute;
     private String date_time = "";
+    private boolean doNotShowDuplicateWarning = false;
 
     //private ListView dateList;
     //private ArrayAdapter<String> datePickerAdapter;
@@ -170,9 +175,77 @@ public class createStudyFragment_StepFive extends Fragment {
             hours = "0" + hourOfDay;
         }
         Log.d("addDatetoList", "before add new" + dates);
-        dates.add(date_time + hours + ":" + minutes + " Uhr");
-        //datePickerAdapter.notifyDataSetChanged();
-        swipeableDatesAdapter.notifyDataSetChanged();
-        Log.d("addDatetoList", "after notity" + dates);
+        String currentDate = date_time + hours + ":" + minutes + " Uhr";
+        if (!isDuplicate(currentDate)) {
+            dates.add(currentDate);
+            swipeableDatesAdapter.notifyDataSetChanged();
+            Log.d("addDatetoList", "after notity" + dates);
+        } else {
+            if (!doNotShowDuplicateWarning) {
+                showToolTip(currentDate);
+            } else {
+                dates.add(currentDate);
+                swipeableDatesAdapter.notifyDataSetChanged();
+            }
+        }
     }
+
+    private boolean isDuplicate(String currentDate) {
+        for (int i = 0; i < dates.size(); i++) {
+            if (dates.get(i).equals(currentDate)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private void showToolTip(String currentDate) {
+        Dialog dialog = new Dialog(getActivity(), R.style.DialogStyle);
+        dialog.setContentView(R.layout.duplicate_dialog);
+
+        dialog.getWindow().setBackgroundDrawableResource(R.drawable.bg_window);
+
+        ImageView btnClose = dialog.findViewById(R.id.btn_close);
+        Button addAnywaysButton = dialog.findViewById(R.id.addAnyways);
+        Button abortButton = dialog.findViewById(R.id.abort);
+        CheckBox doNotShowAgainCheck = dialog.findViewById(R.id.doNotShowAgainCheckBox);
+
+        btnClose.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (doNotShowAgainCheck.isChecked()) {
+                    doNotShowDuplicateWarning = true;
+                }
+                dialog.dismiss();
+            }
+        });
+
+        addAnywaysButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (doNotShowAgainCheck.isChecked()) {
+                    doNotShowDuplicateWarning = true;
+                }
+                dates.add(currentDate);
+                swipeableDatesAdapter.notifyDataSetChanged();
+                dialog.dismiss();
+
+            }
+        });
+
+        abortButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (doNotShowAgainCheck.isChecked()) {
+                    doNotShowDuplicateWarning = true;
+                }
+                dialog.dismiss();
+            }
+        });
+
+
+        dialog.show();
+    }
+
+
 }
