@@ -12,7 +12,7 @@ import androidx.navigation.Navigation;
 import androidx.viewpager.widget.ViewPager;
 
 import com.example.vpmanager.R;
-import com.example.vpmanager.adapter.viewPagerAdapter;
+import com.example.vpmanager.adapter.ViewPagerAdapter;
 import com.example.vpmanager.views.mainActivity;
 import com.google.android.material.tabs.TabLayout;
 
@@ -50,7 +50,7 @@ public class StudyEditFragment extends Fragment {
 
         tabLayoutEdit.setupWithViewPager(viewPagerEdit);
 
-        viewPagerAdapter viewPagerAdapter = new viewPagerAdapter(getParentFragmentManager(), 0);
+        ViewPagerAdapter viewPagerAdapter = new ViewPagerAdapter(getParentFragmentManager(), 0);
         viewPagerAdapter.addFragment(studyEditDetailsFragment, "Details");
         viewPagerAdapter.addFragment(studyEditDatesFragment, "Termine");
         viewPagerEdit.setAdapter(viewPagerAdapter);

@@ -1,4 +1,4 @@
-package com.example.vpmanager.views;
+package com.example.vpmanager.views.ownStudies;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -8,67 +8,78 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentStatePagerAdapter;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.viewpager.widget.ViewPager;
 
 import com.example.vpmanager.R;
+import com.example.vpmanager.adapter.ViewPagerAdapter;
 import com.google.android.material.tabs.TabLayout;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 
-import java.util.ArrayList;
-import java.util.List;
-
-public class ownStudyFragment extends Fragment {
+public class OwnStudyFragment extends Fragment {
 
     private NavController navController;
-    FirebaseAuth firebaseAuth;
-
 
     private ViewPager viewPager;
-    private ViewPagerAdapter viewPagerAdapter;
+    private TabLayout tabLayout;
 
-    public ownStudyFragment() {
+    private PersonalAccountFragment personalAccountFragment;
+    private SelfcreatedStudiesFragment selfcreatedStudiesFragment;
+
+    public OwnStudyFragment() {
     }
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        firebaseAuth = FirebaseAuth.getInstance();
     }
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_own_study, container, false);
+        View view = inflater.inflate(R.layout.fragment_own_study, container, false);
+
+        viewPager = view.findViewById(R.id.view_pager_ownStudies);
+        tabLayout = view.findViewById(R.id.tab_layout_ownStudies);
+        personalAccountFragment = new PersonalAccountFragment();
+        selfcreatedStudiesFragment = new SelfcreatedStudiesFragment();
+        tabLayout.setupWithViewPager(viewPager);
+
+        //childFragmentManager is needed to load tabs this way. Instead of parentFragmentManager()
+        ViewPagerAdapter viewPagerAdapter = new ViewPagerAdapter(getChildFragmentManager(), 0);
+
+        viewPagerAdapter.addFragment(personalAccountFragment, "Mein VP-Status"); //Teilnahmen
+        viewPagerAdapter.addFragment(selfcreatedStudiesFragment, "Meine Studien"); //Veranstaltungen
+        viewPager.setAdapter(viewPagerAdapter);
+
+        return view;
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         navController = Navigation.findNavController(view);
-        createTabs(view);
+        //createTabs(view);
     }
 
+    /*
     @Override
     public void onStart()
     {
         super.onStart();
-        userLoggedIn();
     }
+     */
 
     //Parameter: current view to find components
     //Return values:
     //sets up the tablayout and adds and adapter for the content
+    /*
     private void createTabs(View view) {
 
         viewPager = view.findViewById(R.id.view_pager_ownStudies);
-        TabLayout tabLayout = view.findViewById(R.id.tab_layout_ownStudies);
+        tabLayout = view.findViewById(R.id.tab_layout_ownStudies);
 
-        com.example.vpmanager.views.personalAccountFragment personalAccountFragment = new personalAccountFragment();
+        PersonalAccountFragment personalAccountFragment = new PersonalAccountFragment();
         SelfcreatedStudiesFragment studies = new SelfcreatedStudiesFragment();
 
         tabLayout.addTab(tabLayout.newTab().setText("Teilnahmen"));
@@ -102,19 +113,12 @@ public class ownStudyFragment extends Fragment {
         System.out.println("Tab Count: " + tabLayout.getTabCount());
     }
 
-    //Parameter:
-    //Return values:
-    //checks if the user is currently logged in. If not sends him to login screen
-    private void userLoggedIn(){
-        FirebaseUser user = firebaseAuth.getCurrentUser();
-        if(user == null) {
-            navController.navigate(R.id.action_global_nestedGraphLoginRegistration);
-        }
-    }
+     */
 
     //Parameter:
     //Return values:
     //defining adapter class for the tabLayout
+    /*
     private static class ViewPagerAdapter extends FragmentStatePagerAdapter
     {
         private final List<Fragment> fragments = new ArrayList<>();
@@ -146,4 +150,6 @@ public class ownStudyFragment extends Fragment {
             return fragmentNames.get(position);
         }
     }
+
+     */
 }

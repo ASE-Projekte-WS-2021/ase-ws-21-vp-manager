@@ -1,4 +1,4 @@
-package com.example.vpmanager.views;
+package com.example.vpmanager.views.ownStudies;
 
 import android.os.Bundle;
 import android.util.Log;
@@ -10,6 +10,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -17,32 +18,22 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.vpmanager.R;
 import com.example.vpmanager.adapter.StudyListAdapter;
-import com.example.vpmanager.models.StudyMetaInfoModel;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.firestore.CollectionReference;
-import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.QueryDocumentSnapshot;
-import com.google.firebase.firestore.QuerySnapshot;
-
-import java.util.ArrayList;
+import com.example.vpmanager.viewmodels.OwnStudyViewModel;
 
 public class SelfcreatedStudiesFragment extends Fragment implements StudyListAdapter.OnStudyItemClickListener {
 
     private NavController navController;
     private RecyclerView ownStudiesList;
-    private StudyListAdapter ownStudyListAdapter;
-    private ArrayList<StudyMetaInfoModel> ownStudiesModelArray;
-
     private TextView noOwnStudies;
+    private OwnStudyViewModel ownStudyViewModel;
+
+    /*
+    private ArrayList<StudyMetaInfoModel> ownStudiesModelArray;
     private ArrayList<ArrayList<String>> ownStudyIdNameVpCat;
 
     private FirebaseFirestore db;
     private CollectionReference studiesRef;
-
-    //private ArrayList<String> studyNamesAndVps;
-    //private ArrayList<String> studyIds;
-    //private ListView studyList;
+     */
 
     public SelfcreatedStudiesFragment() {
     }
@@ -56,6 +47,10 @@ public class SelfcreatedStudiesFragment extends Fragment implements StudyListAda
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_selfcreated_study, container, false);
+        prepareViewModelAndView(view);
+        ownStudyViewModel.prepareRepo();
+        ownStudyViewModel.fetchOwnStudyMetaData();
+        /*
         setupListView(new FirestoreCallback() {
             @Override
             public void onCallback() { //ArrayList<ArrayList<String>> arrayList
@@ -63,6 +58,7 @@ public class SelfcreatedStudiesFragment extends Fragment implements StudyListAda
                 Log.d("OwnStudies", ownStudyIdNameVpCat.toString());
             }
         });
+         */
         return view;
     }
 
@@ -72,14 +68,20 @@ public class SelfcreatedStudiesFragment extends Fragment implements StudyListAda
         super.onViewCreated(view, savedInstanceState);
     }
 
+    private void prepareViewModelAndView(View view) {
+        ownStudiesList = view.findViewById(R.id.recyclerViewOwnStudies);
+        noOwnStudies = view.findViewById(R.id.ownStudiesInfoText);
+        ownStudyViewModel = new ViewModelProvider(getParentFragment()).get(OwnStudyViewModel.class);
+        ownStudyViewModel.selfcreatedStudiesFragment = this;
+    }
+
     //Parameter: the fragment view
     //Return Values:
     //loads all retrieved studies in the list view
+    /*
     private void loadOwnStudiesData(View view) {
         //studyList = view.findViewById(R.id.listViewOwnStudyFragment);
-        noOwnStudies = view.findViewById(R.id.ownStudiesInfoText);
 
-        ownStudiesList = view.findViewById(R.id.recyclerViewOwnStudyFragment);
         ownStudiesModelArray = new ArrayList<>();
         //studyNamesAndVps = new ArrayList<>();
         //studyIds = new ArrayList<>();
@@ -110,14 +112,25 @@ public class SelfcreatedStudiesFragment extends Fragment implements StudyListAda
         ownStudiesList.setAdapter(ownStudyListAdapter);
         ownStudiesList.setLayoutManager(linearLayoutManager);
     }
+     */
 
-    public interface FirestoreCallback {
-        void onCallback(); //ArrayList<ArrayList<String>> arrayList
+    public void connectOwnStudyListAdapter() {
+        if (!ownStudyViewModel.getOwnStudyMetaInfo().isEmpty()) {
+            noOwnStudies.setVisibility(View.GONE);
+        } else {
+            noOwnStudies.setVisibility(View.VISIBLE);
+        }
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(requireActivity());
+        StudyListAdapter studyListAdapter = new StudyListAdapter(getContext(), ownStudyViewModel.getOwnStudyMetaInfo(),
+                this);
+        ownStudiesList.setAdapter(studyListAdapter);
+        ownStudiesList.setLayoutManager(linearLayoutManager);
     }
 
     //Parameter: callback
     //Return Values:
     //gets all studies the user created
+    /*
     private void setupListView(FirestoreCallback firestoreCallback) {
 
         String currentUserId = mainActivity.uniqueID;
@@ -145,6 +158,7 @@ public class SelfcreatedStudiesFragment extends Fragment implements StudyListAda
                     }
                 });
     }
+     */
 
     //Parameter: the id of the ownStudy that was clicked on
     //Return Values:
@@ -152,7 +166,7 @@ public class SelfcreatedStudiesFragment extends Fragment implements StudyListAda
     @Override
     public void onStudyClick(String studyId) {
         Bundle args = new Bundle();
-        Log.d("ownStudyFragment", "onStudyClick - studyId:" + studyId);
+        Log.d("OwnStudyFragment", "onStudyClick - studyId:" + studyId);
         args.putString("studyId", studyId);
         navController.navigate(R.id.action_ownStudyFragment_to_studyCreatorFragment, args);
     }

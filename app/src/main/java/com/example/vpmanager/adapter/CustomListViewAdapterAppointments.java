@@ -2,7 +2,6 @@ package com.example.vpmanager.adapter;
 
 import static com.example.vpmanager.views.mainActivity.uniqueID;
 
-import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -24,7 +23,7 @@ public class CustomListViewAdapterAppointments extends BaseAdapter {
 
     private LayoutInflater inflater;
     private ArrayList<StudyObjectPa> objects;
-    private Activity activity;
+    //private Activity activity;
     NavController navController;
     private String sourceFragment;
 
@@ -34,12 +33,13 @@ public class CustomListViewAdapterAppointments extends BaseAdapter {
 
     }
 
-    public CustomListViewAdapterAppointments(Context context, Activity activity, NavController nav, ArrayList<String> list, HashMap<String, String> getStudyIdByName, String source) {
+    // Activity activity,
+    public CustomListViewAdapterAppointments(Context context,NavController nav, ArrayList<String> list, HashMap<String, String> getStudyIdByName, String source) {
         super();
         inflater = LayoutInflater.from(context);
         navController = nav;
         this.objects = transformUpcomingAppointments(list, getStudyIdByName);
-        this.activity = activity;
+        //this.activity = activity;
         sourceFragment = source;
     }
 
@@ -96,7 +96,7 @@ public class CustomListViewAdapterAppointments extends BaseAdapter {
             holder.titleTextView = titleView;
             holder.dateTextView = dateView;
             switch(sourceFragment) {
-                case "homeFragment":
+                case "HomeFragment":
 
                     convertView.setOnClickListener(new View.OnClickListener() {
                         @Override

@@ -14,53 +14,40 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 
-import com.example.vpmanager.PA_ExpandableListDataPump;
 import com.example.vpmanager.R;
 import com.example.vpmanager.adapter.CustomListViewAdapterAppointments;
+import com.example.vpmanager.viewmodels.HomeViewModel;
 import com.google.android.flexbox.FlexboxLayout;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.URL;
-import java.text.Format;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
+public class HomeFragment extends Fragment {
 
-public class homeFragment extends Fragment {
-
+    private FirebaseAuth firebaseAuth;
     private NavController navController;
+    private HomeViewModel homeViewModel;
 
-    FirebaseAuth firebaseAuth;
-
-    private String jsonString, matrikelNumber;
-    private ArrayList<String> upComingAppointments; 
-    private float maxVpCount;
+    /*
+    private String jsonString; im viewModel
+    private ArrayList<String> upComingAppointments;
+    private String matrikelNumber; im viewModel
+    private float maxVpCount; im viewModel (sumVpsHome)
+     */
 
     private ListView nextDatesList;
-
     private ProgressBar progressBar;
     private TextView progressHint, missingVpsText, plannedCompletionDate, collectedVPText;
     private Button appointmentsButton, findStudyButton, registerMatrikelnummer;
 
-    private LinearLayout progressBarLayout, appointmentLayout, defaultLayout, registerMatrikelnumberLayout;
+    private LinearLayout progressBarLayout, defaultLayout, appointmentLayout, registerMatrikelnumberLayout;
     private ScrollView appointmentScrollView;
-
     private FlexboxLayout flexLayout;
 
-    private double plannedVP, completedVP, participatedVP;
-
-    public homeFragment() {
+    public HomeFragment() {
     }
 
     @Override
@@ -73,26 +60,86 @@ public class homeFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_home, container, false);
-        loadData(view);
+        prepareViewModel();
+        setupView(view);
+        homeViewModel.getDatesStudiesVpsAndMatrikelNumberFromDb();
         return view;
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
         navController = Navigation.findNavController(view);
+        super.onViewCreated(view, savedInstanceState);
     }
 
     @Override
-    public void onStart()
-    {
+    public void onStart() {
         super.onStart();
         userLoggedIn();
+    }
+
+    //Parameter:
+    //Return values:
+    //checks if the user is currently logged in. If not sends him to login screen
+    private void userLoggedIn() {
+        FirebaseUser user = firebaseAuth.getCurrentUser();
+        firebaseAuth.addAuthStateListener(new FirebaseAuth.AuthStateListener() {
+            @Override
+            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
+
+            }
+        });
+        if (user == null) {
+            navController.navigate(R.id.action_global_nestedGraphLoginRegistration);
+        }
+    }
+
+    private void prepareViewModel() {
+        //mainActivity is viewModelStoreOwner
+        homeViewModel = new ViewModelProvider(this).get(HomeViewModel.class);
+        homeViewModel.homeFragment = this;
+        homeViewModel.prepareRepo();
+    }
+
+    private void setupView(View view) {
+        progressBar = view.findViewById(R.id.homeOverViewProgressBar);
+        progressHint = view.findViewById(R.id.homeProgressHint);
+        nextDatesList = view.findViewById(R.id.homeAppointmentList);
+        appointmentsButton = view.findViewById(R.id.homeAllAppointmetsButton);
+        progressBarLayout = view.findViewById(R.id.homeBookedVpLayout);
+        appointmentScrollView = view.findViewById(R.id.homeScrollview);
+        appointmentLayout = view.findViewById(R.id.homeAppointmentLayout);
+        missingVpsText = view.findViewById(R.id.homeMissingVpsText);
+        findStudyButton = view.findViewById(R.id.homeFindStudyButton);
+        collectedVPText = view.findViewById(R.id.homePlannedCompletionVps);
+        plannedCompletionDate = view.findViewById(R.id.homePlannedCompletionDate);
+        defaultLayout = view.findViewById(R.id.defaultLayoutForNewUsers);
+        flexLayout = view.findViewById(R.id.homeFlexLayout);
+        findStudyButton = view.findViewById(R.id.homeFindStudyButton);
+        registerMatrikelnummer = view.findViewById(R.id.homeRegisterMatrikelnummer);
+        registerMatrikelnumberLayout = view.findViewById(R.id.homeRegisterVPLayout);
+        setClickListener();
+    }
+
+    private void setClickListener() {
+        progressBar.setOnClickListener(v -> {
+            CustomAlertDialog dialog = new CustomAlertDialog(HomeFragment.this, "", "");
+            dialog.show();
+        });
+
+        registerMatrikelnummer.setOnClickListener(v -> {
+            CustomAlertDialog dialog = new CustomAlertDialog(HomeFragment.this, "", "");
+            dialog.show();
+        });
+        findStudyButton.setOnClickListener(v -> navController.navigate(R.id.action_homeFragment_to_findStudyFragment));
+        appointmentsButton.setOnClickListener(v -> navController.navigate(R.id.action_homeFragment_to_upcomingAppointmentsFragment));
     }
 
     //Parameter: view is passed to setup view
     //Return values:
     //calls to database to get all the relevant data for this fragment
+    //loadData
+    /*
     private void loadData(View view) {
 
         PA_ExpandableListDataPump.getAllDates(finished -> {
@@ -105,33 +152,20 @@ public class homeFragment extends Fragment {
                         maxVpCount = 15;
                         matrikelNumber = "";
                     }
-                    upComingAppointments = new ArrayList<>();
-                    PA_ExpandableListDataPump.createListEntries();
-                    setupViewElements(view);
-                    setupProgressBar();
-                    setUpDateList();
-                    setTextsForOverView();
-                    setLastAppointmentText();
+                    //upComingAppointments = new ArrayList<>();
+                    //PA_ExpandableListDataPump.createListEntries(); done in viewModel
+                    //setupViewElements(view); done
+                    //setupProgressBar(); done in viewModel
+                    //setUpDateList(); done in viewModel
+                    //setTextsForOverView(); done in viewModel
+                    //setLastAppointmentText(); done in viewModel
                 }));
         });
     }
+     */
 
-    //Parameter:
-    //Return values:
-    //checks if the user is currently logged in. If not sends him to login screen
-    private void userLoggedIn(){
-        FirebaseUser user = firebaseAuth.getCurrentUser();
-        firebaseAuth.addAuthStateListener(new FirebaseAuth.AuthStateListener() {
-            @Override
-            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
-
-            }
-        });
-        if(user == null) {
-            navController.navigate(R.id.action_global_nestedGraphLoginRegistration);
-        }
-    }
-
+    //setupViewElements
+    /*
     private void setupViewElements(View view) {
         progressBar = view.findViewById(R.id.homeOverViewProgressBar);
         progressHint = view.findViewById(R.id.homeProgressHint);
@@ -152,18 +186,21 @@ public class homeFragment extends Fragment {
 
 
         progressBar.setOnClickListener(v -> {
-            CustomAlertDialog dialog = new CustomAlertDialog(homeFragment.this, "", "");
+            CustomAlertDialog dialog = new CustomAlertDialog(HomeFragment.this, "", "");
             dialog.show();
         });
 
         registerMatrikelnummer.setOnClickListener(v -> {
-            CustomAlertDialog dialog = new CustomAlertDialog(homeFragment.this, "", "");
+            CustomAlertDialog dialog = new CustomAlertDialog(HomeFragment.this, "", "");
             dialog.show();
         });
         findStudyButton.setOnClickListener(v -> navController.navigate(R.id.action_homeFragment_to_findStudyFragment));
         appointmentsButton.setOnClickListener(v -> navController.navigate(R.id.action_homeFragment_to_upcomingAppointmentsFragment));
     }
+     */
 
+    //setTextsForOverView
+    /*
     private void setTextsForOverView() {
 
         completedVP = 0;
@@ -213,7 +250,10 @@ public class homeFragment extends Fragment {
             missingVpsText.setText("" + missingVPS);
         }
     }
+     */
 
+    //setupProgressBar
+    /*
     private void setupProgressBar() {
 
         progressBar.setMax((int) maxVpCount *100);
@@ -256,8 +296,20 @@ public class homeFragment extends Fragment {
             hideProgressBar();
         }
     }
+     */
 
-    private void hideProgressBar() {
+    public void setProgressBarMaximum(int maximum) {
+        progressBar.setMax(maximum);
+    }
+
+    public void setProgressBarProgress(int progress, String text) {
+        progressBar.setProgress(progress);
+        progressHint.setText(text);
+        progressBar.setVisibility(View.VISIBLE);
+        progressBar.showContextMenu();
+    }
+
+    public void hideProgressBar() {
         progressBarLayout.setVisibility(View.GONE);
         registerMatrikelnumberLayout.setVisibility(View.VISIBLE);
     }
@@ -265,13 +317,15 @@ public class homeFragment extends Fragment {
     //Parameter:
     //Return values:
     //Creates and calls a getRequest to get the saved number of vps from the universities website. saves the count in a string
+    //createGetRequest
+    /*
     private void createGetRequest() throws IOException {
         HttpURLConnection urlConnection = null;
         URL url = new URL("https://vp.software-engineering.education/" + matrikelNumber + "/vps");
         urlConnection = (HttpURLConnection) url.openConnection();
         urlConnection.setRequestMethod("GET");
-        urlConnection.setReadTimeout(10000 /* milliseconds */);
-        urlConnection.setConnectTimeout(15000 /* milliseconds */);
+        urlConnection.setReadTimeout(10000); //milliseconds
+        urlConnection.setConnectTimeout(15000); //milliseconds
         urlConnection.setDoOutput(true);
         urlConnection.connect();
 
@@ -286,19 +340,27 @@ public class homeFragment extends Fragment {
 
         jsonString = sb.toString();
     }
+     */
 
-
+    //setUpDateList
+    /*
     private void setUpDateList() {
         final List<String[]>[] arrivingDates = new List[]{null};
         arrivingDates[0] = PA_ExpandableListDataPump.getAllArrivingDates();
         finishSetupList(arrivingDates[0]);
     }
+     */
 
     //Parameter: data list from database call
     //Return Values:
     //converts and sorts the data. calls listview adapter to set up list entries
+    //finishSetupList
+    /*
     private  void finishSetupList(List <String[]> dates){
         HashMap<String, String> getStudyIdByName = new HashMap<>();
+
+        ArrayList<String> upComingAppointments = new ArrayList<>();
+
         if (dates != null) {
 
             HashMap<String, String> dateNameList = new HashMap<>();
@@ -331,11 +393,29 @@ public class homeFragment extends Fragment {
                 }
             }
             //Collections.reverse(upComingAppointments);
-            nextDatesList.setAdapter(new CustomListViewAdapterAppointments(this.getContext(), this.getActivity(), navController, upComingAppointments, getStudyIdByName, "homeFragment"));
+            nextDatesList.setAdapter(new CustomListViewAdapterAppointments(this.getContext(), navController, upComingAppointments, getStudyIdByName, "HomeFragment"));
         }
     }
+     */
 
-    private void disableAllAppointmentsButton() {
+    public void setListViewAdapter(CustomListViewAdapterAppointments adapter) {
+        nextDatesList.setAdapter(adapter);
+    }
+
+    public NavController getNavController() {
+        return navController;
+    }
+
+    public void setMissingAndCollectedVpText(String missing, String collected) {
+        missingVpsText.setText(missing);
+        collectedVPText.setText(collected);
+    }
+
+    public void setPlannedCompletionDate(String completionDate){
+        plannedCompletionDate.setText(completionDate);
+    }
+
+    public void disableAllAppointmentsButton() {
         LinearLayout.LayoutParams param = new LinearLayout.LayoutParams(
                 LinearLayout.LayoutParams.MATCH_PARENT,
                 0,
@@ -348,44 +428,47 @@ public class homeFragment extends Fragment {
         );
         appointmentScrollView.setLayoutParams(scrollViewParam);
         appointmentsButton.setLayoutParams(param);
+
         appointmentLayout.removeView(appointmentsButton);
         appointmentsButton.setVisibility(View.INVISIBLE);
         appointmentsButton.setClickable(false);
     }
 
-
-    private void setLastAppointmentText()
-    {
-        String date = PA_ExpandableListDataPump.getLastParticipationDate();
-        if(date == null)
-        {
-            loadDefaultorEmptyVersion();
-        }
-        else
-            plannedCompletionDate.setText(date);
-    }
-
-    private void loadDefaultorEmptyVersion() {
+    public void loadDefaultorEmptyVersion() {
         defaultLayout.setVisibility(View.VISIBLE);
         flexLayout.setVisibility(View.GONE);
     }
 
-    public void closeDialog(String vps, String mNumber) {
-        matrikelNumber = mNumber;
-        maxVpCount = Float.parseFloat(vps);
+    //setLastAppointmentText
+    /*
+    private void setLastAppointmentText() {
 
+        String date = PA_ExpandableListDataPump.getLastParticipationDate();
+        if (date == null) {
+            loadDefaultorEmptyVersion();
+        } else {
+            plannedCompletionDate.setText(date);
+        }
+        //String date = PA_ExpandableListDataPump.getLastParticipationDate();
+    }
+     */
+
+    public void closeDialog(String vps, String mNumber) {
+        //maxVpCount = Float.parseFloat(vps);
+        //matrikelNumber = mNumber;
+        homeViewModel.saveVpAndMatrikelNumber(vps, mNumber);
         navController.navigate(R.id.action_global_homeFragment);
-        PA_ExpandableListDataPump.saveVPandMatrikelnumber(vps, mNumber);
+        //PA_ExpandableListDataPump.saveVPandMatrikelnumber(vps, mNumber);
     }
 
-    private HashMap<String, String> sortList(HashMap<String, String> toSort)
-    {
+    //sortList
+    /*
+    private HashMap<String, String> sortList(HashMap<String, String> toSort) {
         HashMap<String, String> list = new HashMap<>();
 
         String[][] dateList = new String[toSort.size()][2];
         int position = 0;
-        for(String key: toSort.keySet())
-        {
+        for(String key: toSort.keySet()) {
             dateList[position][0] = key;
             dateList[position][1] = toSort.get(key);
             position++;
@@ -424,4 +507,5 @@ public class homeFragment extends Fragment {
         }
         return list;
     }
+     */
 }

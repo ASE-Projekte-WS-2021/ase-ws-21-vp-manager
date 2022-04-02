@@ -8,20 +8,21 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.vpmanager.R;
+import com.example.vpmanager.views.ownStudies.PersonalAccountFragment;
 
 public class CustomAlertReminder extends Dialog implements View.OnClickListener {
 
-        public personalAccountFragment fragment;
+        public PersonalAccountFragment fragment;
         public Dialog d;
         public Button yes;
         private TextView text;
 
 
-        public CustomAlertReminder(personalAccountFragment a) {
+        public CustomAlertReminder(PersonalAccountFragment a) {
                 super(a.getContext());
                 fragment = a;
         }
-        public CustomAlertReminder(personalAccountFragment a, String alerText) {
+        public CustomAlertReminder(PersonalAccountFragment a, String alerText) {
                 super(a.getContext());
 
                 fragment = a;
