@@ -3,11 +3,9 @@ package com.example.vpmanager.viewmodels;
 import static com.example.vpmanager.views.mainActivity.uniqueID;
 
 import android.util.Log;
-import android.view.View;
 
 import androidx.lifecycle.ViewModel;
 
-import com.example.vpmanager.PA_ExpandableListDataPump;
 import com.example.vpmanager.adapter.CustomListViewAdapterAppointments;
 import com.example.vpmanager.interfaces.GetAllDatesListener;
 import com.example.vpmanager.interfaces.GetAllStudiesListener;

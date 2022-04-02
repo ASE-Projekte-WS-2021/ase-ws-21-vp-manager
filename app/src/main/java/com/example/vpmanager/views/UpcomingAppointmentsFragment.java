@@ -13,15 +13,9 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 
-import com.example.vpmanager.PA_ExpandableListDataPump;
 import com.example.vpmanager.R;
 import com.example.vpmanager.adapter.CustomListViewAdapterAppointments;
 import com.example.vpmanager.viewmodels.UpcomingAppointViewModel;
-import com.google.firebase.auth.FirebaseAuth;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.List;
 
 public class UpcomingAppointmentsFragment extends Fragment {
 

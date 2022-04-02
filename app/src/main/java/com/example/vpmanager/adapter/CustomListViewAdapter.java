@@ -2,7 +2,6 @@ package com.example.vpmanager.adapter;
 
 import static com.example.vpmanager.views.mainActivity.uniqueID;
 
-import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
