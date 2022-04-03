@@ -20,6 +20,7 @@ public class AccessDatabase {
 
     //HomeActivity --------------------------------------------------------------------------------!
     //Adds a new user (installation of the app) to the database, if it doesn't already exist
+    /*
     public void createNewUser(String deviceId, String matNr, String neededVP) {
         db = FirebaseFirestore.getInstance();
         //A DocumentReference refers to a document location
@@ -41,6 +42,8 @@ public class AccessDatabase {
         }).addOnSuccessListener(aVoid -> Log.d(TAG, "Transaction success!"
         )).addOnFailureListener(e -> Log.w(TAG, "Transaction failure.", e));
     }
+
+     */
 
     //CreateStudyActivity -------------------------------------------------------------------------!
 

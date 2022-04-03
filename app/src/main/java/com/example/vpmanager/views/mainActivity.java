@@ -20,7 +20,6 @@ import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
-
 public class mainActivity extends AppCompatActivity implements DrawerController {
 
     public DrawerLayout drawerLayoutMain;

@@ -8,12 +8,15 @@ import androidx.annotation.NonNull;
 
 import com.example.vpmanager.interfaces.FirebaseAuthCreateListener;
 import com.example.vpmanager.interfaces.FirebaseAuthEmailListener;
+import com.example.vpmanager.interfaces.FirebaseAuthResetListener;
 import com.example.vpmanager.interfaces.LoginListener;
 import com.example.vpmanager.interfaces.RegisterListener;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -33,6 +36,7 @@ public class LoginRegisterRepository {
     private RegisterListener registerListener;
     private FirebaseAuthCreateListener firebaseAuthCreateListener;
     private FirebaseAuthEmailListener firebaseAuthEmailListener;
+    private FirebaseAuthResetListener firebaseAuthResetListener;
 
     public static LoginRegisterRepository getInstance() {
         if (instance == null) {
@@ -41,12 +45,14 @@ public class LoginRegisterRepository {
         return instance;
     }
 
-    public void setFirestoreCallback(LoginListener loginListener, RegisterListener registerListener, FirebaseAuthCreateListener
-            firebaseAuthCreateListener, FirebaseAuthEmailListener firebaseAuthEmailListener) {
+    public void setFirestoreCallback(LoginListener loginListener, RegisterListener registerListener,
+                                     FirebaseAuthCreateListener firebaseAuthCreateListener, FirebaseAuthEmailListener
+                                             firebaseAuthEmailListener, FirebaseAuthResetListener firebaseAuthResetListener) {
         this.loginListener = loginListener;
         this.registerListener = registerListener;
         this.firebaseAuthCreateListener = firebaseAuthCreateListener;
         this.firebaseAuthEmailListener = firebaseAuthEmailListener;
+        this.firebaseAuthResetListener = firebaseAuthResetListener;
     }
 
     public void registerNewUser(String email, String password) {
@@ -102,5 +108,38 @@ public class LoginRegisterRepository {
         }).addOnSuccessListener(aVoid -> registerListener.onRegisterFinished(),
                 aVoid -> Log.d(TAG, "Transaction success!"
                 )).addOnFailureListener(e -> Log.w(TAG, "Transaction failure.", e));
+    }
+
+    public void sendResetEmail(String email) {
+
+        firebaseAuth.sendPasswordResetEmail(email).addOnSuccessListener(new OnSuccessListener<Void>() {
+            @Override
+            public void onSuccess(Void unused) {
+                firebaseAuthResetListener.onResetEmailSent();
+            }
+        });
+    }
+
+    public void loginUser(String email, String password) {
+        firebaseAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+            @Override
+            public void onComplete(@NonNull Task<AuthResult> task) {
+                if (task.isSuccessful()) {
+                    FirebaseUser user = firebaseAuth.getCurrentUser();
+                    if (user != null) {
+                        if (user.isEmailVerified()) {
+                            loginListener.createUserInMainActivity(email);
+                        } else {
+                            firebaseAuth.signOut();
+                            String localErrorMessage = "Bitte verifiziere Sie zuerst Ihre Email Adresse";
+                            loginListener.onLoginFailed(localErrorMessage);
+                        }
+                    }
+                } else {
+                    String localErrorMessage = task.getException().getMessage();
+                    loginListener.onLoginFailed(localErrorMessage);
+                }
+            }
+        });
     }
 }

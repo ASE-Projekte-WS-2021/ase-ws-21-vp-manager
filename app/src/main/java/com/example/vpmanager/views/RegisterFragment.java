@@ -38,9 +38,7 @@ public class RegisterFragment extends Fragment {
     private ImageView infoButton;
 
     private LoginRegisterViewModel mViewModel;
-    private FirebaseAuth firebaseAuth;
     private NavController navController;
-    private AccessDatabase accessDatabase;
 
     private String eMail, matNr, finalNeededVP;
 
@@ -51,7 +49,6 @@ public class RegisterFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        firebaseAuth = FirebaseAuth.getInstance();
     }
 
     @Override
@@ -67,7 +64,6 @@ public class RegisterFragment extends Fragment {
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         navController = Navigation.findNavController(view);
-        accessDatabase = new AccessDatabase();
         ((mainActivity) getActivity()).setDrawerLocked();
     }
 

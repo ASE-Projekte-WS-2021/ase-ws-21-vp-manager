@@ -1,5 +1,6 @@
 package com.example.vpmanager.interfaces;
 
 public interface LoginListener {
-    void onLoginFinished();
+    void onLoginFailed(String errorMessage);
+    void createUserInMainActivity(String email);
 }
