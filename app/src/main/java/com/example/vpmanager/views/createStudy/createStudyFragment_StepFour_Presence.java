@@ -16,6 +16,7 @@ public class createStudyFragment_StepFour_Presence extends Fragment {
     public static TextInputEditText textInputEditTextStreet;
     public static TextInputEditText textInputEditTextRoom;
 
+
     //Parameter:
     //Return values:
     //Sets the current fragment for the activity
@@ -51,7 +52,7 @@ public class createStudyFragment_StepFour_Presence extends Fragment {
 
     //Parameter:
     //Return values:
-    //Loads data recieved from the activity into the inputfields
+    //Loads data received from the activity into the inputfields
     private void loadData() {
         if (CreateStudyFragment.createStudyViewModel.studyCreationProcessData.get("location") != null) {
             textInputEditTextLocation.setText(
