@@ -23,7 +23,7 @@ import java.util.ArrayList;
 public class StudyListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     private Context mContext;
-    private ArrayList<StudyMetaInfoModel> mStudyMetaInfos;
+    public ArrayList<StudyMetaInfoModel> mStudyMetaInfos;
     private OnStudyItemClickListener mOnStudyItemClickListener;
     //maybe cancel animation?
     private Animation animation;
@@ -49,6 +49,13 @@ public class StudyListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
 
         ((CustomViewHolder) holder).studyTitle.setText(mStudyMetaInfos.get(position).getName());
+
+        if( mStudyMetaInfos.get(position).getVps() != null && mStudyMetaInfos.get(position).getVps().contains("null"))
+            mStudyMetaInfos.get(position).setVps("0 VP-Stunden");
+
+        if(mStudyMetaInfos.get(position).getVps() != null && !mStudyMetaInfos.get(position).getVps().contains("VP-Stunden"))
+            mStudyMetaInfos.get(position).setVps(mStudyMetaInfos.get(position).getVps() + " VP-Stunden");
+
         ((CustomViewHolder) holder).studyVps.setText(mStudyMetaInfos.get(position).getVps());
         ((CustomViewHolder) holder).studyCat.setText(mStudyMetaInfos.get(position).getCategory());
         ((CustomViewHolder)holder).setIcon(mStudyMetaInfos.get(position).getType());
@@ -62,9 +69,7 @@ public class StudyListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
     private class CustomViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         TextView studyTitle, studyVps, studyCat, studyTag;
-        String studyType;
         ImageView locationIcon, remoteIcon;
-        View separator;
         LinearLayout studyItemParentLayout;
         OnStudyItemClickListener onStudyItemClickListener;
 
