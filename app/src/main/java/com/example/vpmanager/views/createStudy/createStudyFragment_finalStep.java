@@ -22,7 +22,7 @@ public class createStudyFragment_finalStep extends Fragment {
 
     //Parameter:
     //Return values:
-    //Class constructor; sets the current fragment for the activity
+    //Sets the current fragment for the activity
     public createStudyFragment_finalStep() {
         CreateStudyFragment.currentFragment = 6;
     }
