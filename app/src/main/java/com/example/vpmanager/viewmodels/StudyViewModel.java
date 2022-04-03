@@ -56,7 +56,7 @@ public class StudyViewModel extends ViewModel implements StudyDetailsListener, S
     }
 
     public ArrayList<DateModel> getStudyDates() {
-        return mStudyDates;
+        return removeExpiredDates(mStudyDates);
     }
 
     public ArrayList<String> getUserIdsOfDates() {
@@ -110,8 +110,14 @@ public class StudyViewModel extends ViewModel implements StudyDetailsListener, S
         studyDatesFragment.reloadDates();
     }
 
-    private ArrayList<DateModel> removeExpiredDates()
+    private ArrayList<DateModel> removeExpiredDates(ArrayList<DateModel> list)
     {
-        return null;
+        ArrayList<DateModel> dateList = new ArrayList<>();
+
+        for (DateModel date: list) {
+            if(!DateModel.isDateInPast(date))
+                dateList.add(date);
+        }
+        return dateList;
     }
 }
