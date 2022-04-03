@@ -5,7 +5,10 @@ import java.text.Format;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class DateModel {
 
@@ -110,6 +113,42 @@ public class DateModel {
             list.add(dm);
         }
         return list;
+    }
+
+    public static boolean isDateInPast(DateModel date) {
+
+        Calendar c = Calendar.getInstance();
+        int day = c.get(Calendar.DAY_OF_MONTH);
+        int month = c.get(Calendar.MONTH);
+        int year = c.get(Calendar.YEAR);
+        String currentDate = day + "." + (month + 1) + "." + year;
+        //
+        Date currentTime = Calendar.getInstance().getTime();
+
+        Pattern pattern = Pattern.compile("\\d\\d:\\d\\d:\\d\\d");
+        Matcher matcher = pattern.matcher(currentTime.toString());
+        if (matcher.find()) {
+            currentDate += " " + matcher.group(0);
+            currentDate = currentDate.substring(0, currentDate.lastIndexOf(":"));
+        }
+
+        String testDate = date.getDate().substring(date.getDate().indexOf(",") + 2);
+        testDate = testDate.replaceAll("um", "");
+        testDate = testDate.replaceAll("Uhr", "");
+
+        Format format = new SimpleDateFormat("dd.MM.yyyy hh:mm");
+        try {
+
+            Date c_Date = (Date) format.parseObject(currentDate);
+            Date t_Date = (Date) format.parseObject(testDate);
+
+            if (t_Date.before(c_Date)) {
+                return true;
+            }
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return false;
     }
 
 }
