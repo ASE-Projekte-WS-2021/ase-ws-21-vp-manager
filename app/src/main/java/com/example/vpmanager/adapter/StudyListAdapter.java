@@ -23,7 +23,7 @@ import java.util.ArrayList;
 public class StudyListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     private Context mContext;
-    private ArrayList<StudyMetaInfoModel> mStudyMetaInfos;
+    public ArrayList<StudyMetaInfoModel> mStudyMetaInfos;
     private OnStudyItemClickListener mOnStudyItemClickListener;
     //maybe cancel animation?
     private Animation animation;
