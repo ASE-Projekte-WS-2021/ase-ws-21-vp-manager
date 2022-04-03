@@ -10,6 +10,8 @@ import android.view.ViewGroup;
 
 import com.example.vpmanager.R;
 import com.google.android.material.textfield.TextInputEditText;
+import com.example.vpmanager.views.mainActivity;
+
 
 public class createStudyFragment_StepFour_Remote extends Fragment {
 
@@ -30,6 +32,7 @@ public class createStudyFragment_StepFour_Remote extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        mainActivity.currentFragment = "createStepFourRemote";
         return inflater.inflate(R.layout.fragment_create_study_step_four_remote, container, false);
     }
 

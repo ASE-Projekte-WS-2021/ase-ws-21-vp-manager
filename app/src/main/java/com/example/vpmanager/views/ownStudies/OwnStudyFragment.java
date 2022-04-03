@@ -14,6 +14,7 @@ import androidx.viewpager.widget.ViewPager;
 
 import com.example.vpmanager.R;
 import com.example.vpmanager.adapter.ViewPagerAdapter;
+import com.example.vpmanager.views.mainActivity;
 import com.google.android.material.tabs.TabLayout;
 
 public class OwnStudyFragment extends Fragment {
@@ -44,6 +45,7 @@ public class OwnStudyFragment extends Fragment {
         personalAccountFragment = new PersonalAccountFragment();
         selfcreatedStudiesFragment = new SelfcreatedStudiesFragment();
         tabLayout.setupWithViewPager(viewPager);
+        mainActivity.currentFragment = "ownStudyFragment";
 
         //childFragmentManager is needed to load tabs this way. Instead of parentFragmentManager()
         ViewPagerAdapter viewPagerAdapter = new ViewPagerAdapter(getChildFragmentManager(), 0);

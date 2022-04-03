@@ -29,6 +29,7 @@ public class mainActivity extends AppCompatActivity implements DrawerController 
     public DrawerLayout drawerLayoutMain;
     private NavController navController;
     public static NavController staticNavController;
+    public static String currentFragment = "";
     private NavigationView navigationViewMain;
     private NavHostFragment navHostFragment;
     private FirebaseAuth firebaseAuth;
@@ -224,7 +225,65 @@ public class mainActivity extends AppCompatActivity implements DrawerController 
     }
 
     private void showInfoText() {
-
+       switch (currentFragment){
+           case "home":
+               System.out.println("HOME");
+               break;
+           case "findStudy":
+               System.out.println("FIND");
+               break;
+           case "login":
+               System.out.println("login");
+               break;
+           case "register":
+               System.out.println("register");
+               break;
+           case "upcomingAppointments":
+               System.out.println("upcomingAppointments");
+               break;
+           case "editFragment":
+               System.out.println("editFragment");
+               break;
+           case "studyFragment":
+               System.out.println("studyFragment");
+               break;
+           case "studyCreatorFragment":
+               System.out.println("studyCreatorFragment");
+               break;
+           case "ownStudyFragment":
+               System.out.println("ownStudyFragment");
+               break;
+           case "createBase":
+               System.out.println("createBase");
+               break;
+           case "createStepOne":
+               System.out.println("createStepOne");
+               break;
+           case "createStepTwo":
+               System.out.println("createStepTwo");
+               break;
+           case "createStepThree":
+               System.out.println("createStepThree");
+               break;
+           case "createStepFourRemote":
+               System.out.println("createStepFourRemote");
+               break;
+           case "createStepFourPresence":
+               System.out.println("createStepFourPresence");
+               break;
+           case "createStepFive":
+               System.out.println("createStepFive");
+               break;
+           case "createFinalStep":
+               System.out.println("createFinalStep");
+               break;
+           case "createFinalStepTwo":
+               System.out.println("createFinalStepTwo");
+               break;
+           case "createFinalStepThree":
+               System.out.println("createFinalStepThree");
+               break;
+       }
     }
 
     @Override

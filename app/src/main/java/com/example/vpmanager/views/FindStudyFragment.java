@@ -44,6 +44,7 @@ public class FindStudyFragment extends Fragment implements StudyListAdapter.OnSt
         initViewComponents(view);
         //starting point to get the data
         findStudyViewModel.fetchStudyMetaData();
+        mainActivity.currentFragment = "findStudy";
         return view;
     }
 

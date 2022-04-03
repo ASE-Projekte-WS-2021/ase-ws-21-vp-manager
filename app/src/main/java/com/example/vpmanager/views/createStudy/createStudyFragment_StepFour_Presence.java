@@ -9,6 +9,8 @@ import androidx.fragment.app.Fragment;
 
 import com.example.vpmanager.R;
 import com.google.android.material.textfield.TextInputEditText;
+import com.example.vpmanager.views.mainActivity;
+
 
 public class createStudyFragment_StepFour_Presence extends Fragment {
 
@@ -30,6 +32,7 @@ public class createStudyFragment_StepFour_Presence extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        mainActivity.currentFragment = "createStepFourPresence";
         return inflater.inflate(R.layout.fragment_create_study_step_four_presence, container, false);
     }
 

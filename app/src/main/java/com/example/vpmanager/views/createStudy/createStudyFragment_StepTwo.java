@@ -13,6 +13,7 @@ import com.example.vpmanager.R;
 import com.example.vpmanager.views.mainActivity;
 import com.google.android.material.textfield.TextInputEditText;
 
+
 public class createStudyFragment_StepTwo extends Fragment {
 
     public static TextInputEditText textInputEditTextContactMail;
@@ -35,6 +36,7 @@ public class createStudyFragment_StepTwo extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        mainActivity.currentFragment = "createStepTwo";
         return inflater.inflate(R.layout.fragment_create_study_step_two, container, false);
     }
 

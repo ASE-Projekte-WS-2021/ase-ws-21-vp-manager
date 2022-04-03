@@ -11,6 +11,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import com.example.vpmanager.R;
+import com.example.vpmanager.views.mainActivity;
 
 import java.util.ArrayList;
 
@@ -36,6 +37,7 @@ public class createStudyFragment_finalStep_three extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        mainActivity.currentFragment = "createFinalStepThree";
         return inflater.inflate(R.layout.fragment_create_study_final_step_three, container, false);
     }
 
