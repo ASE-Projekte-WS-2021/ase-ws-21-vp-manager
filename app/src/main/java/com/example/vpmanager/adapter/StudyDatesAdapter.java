@@ -24,7 +24,7 @@ public class StudyDatesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
 
     public StudyDatesAdapter(Context context, ArrayList<DateModel> studyDates, OnDateClickListener onDateClickListener) {
         mContext = context;
-        mStudyDates = studyDates;
+        mStudyDates = DateModel.sortByDate(studyDates);
         mOnDateClickListener = onDateClickListener;
         Log.d("StudyDatesAdapter", "constructor was called");
     }

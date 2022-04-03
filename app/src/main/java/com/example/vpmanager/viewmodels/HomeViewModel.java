@@ -10,6 +10,7 @@ import com.example.vpmanager.adapter.CustomListViewAdapterAppointments;
 import com.example.vpmanager.interfaces.GetAllDatesListener;
 import com.example.vpmanager.interfaces.GetAllStudiesListener;
 import com.example.vpmanager.interfaces.GetVpAndMatNrListener;
+import com.example.vpmanager.models.DateModel;
 import com.example.vpmanager.repositories.HomeRepository;
 import com.example.vpmanager.views.HomeFragment;
 
@@ -19,6 +20,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -428,18 +430,18 @@ public class HomeViewModel extends ViewModel implements GetAllDatesListener, Get
                 }
             }
 
-            dateNameList = sortList(dateNameList);
+            ArrayList<String> tempList = sortList(dateNameList);
 
             int studyDisplayCount = 2;
 
-            if (dateNameList.size() < 3) {
+            if (tempList.size() < 3) {
                 homeFragment.disableAllAppointmentsButton();
                 studyDisplayCount = 3;
             }
 
-            for (String key : dateNameList.keySet()) {
+            for (String date : tempList) {
                 if (upComingAppointments.size() < studyDisplayCount) {
-                    upComingAppointments.add(dateNameList.get(key) + "\t\t" + key);
+                    upComingAppointments.add(date);
                 }
             }
             //Collections.reverse(upComingAppointments);
@@ -547,8 +549,8 @@ public class HomeViewModel extends ViewModel implements GetAllDatesListener, Get
         return false;
     }
 
-    private HashMap<String, String> sortList(HashMap<String, String> toSort) {
-        HashMap<String, String> list = new HashMap<>();
+    private ArrayList<String> sortList(HashMap<String, String> toSort) {
+        ArrayList<String> list = new ArrayList<>();
 
         String[][] dateList = new String[toSort.size()][2];
         int position = 0;
@@ -587,8 +589,9 @@ public class HomeViewModel extends ViewModel implements GetAllDatesListener, Get
         }
         list.clear();
         for (String[] date : dateList) {
-            list.put(date[0], date[1]);
+            list.add(date[1] + "\t\t" + date[0]);
         }
+
         return list;
     }
 
