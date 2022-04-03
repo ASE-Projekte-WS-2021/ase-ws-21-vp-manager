@@ -14,7 +14,6 @@ import com.example.vpmanager.models.DateModel;
 import com.google.android.material.snackbar.Snackbar;
 
 import java.util.ArrayList;
-import java.util.Date;
 
 public class EditSwipeableDatesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 

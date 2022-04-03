@@ -11,15 +11,12 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.vpmanager.R;
-import com.example.vpmanager.models.DateModel;
-import com.example.vpmanager.models.StudyObjectPa;
 import com.google.android.material.snackbar.Snackbar;
 
 import java.text.Format;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Date;
 
 public class SwipeableDatesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {

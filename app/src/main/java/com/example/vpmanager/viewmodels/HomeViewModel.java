@@ -10,7 +10,6 @@ import com.example.vpmanager.adapter.CustomListViewAdapterAppointments;
 import com.example.vpmanager.interfaces.GetAllDatesListener;
 import com.example.vpmanager.interfaces.GetAllStudiesListener;
 import com.example.vpmanager.interfaces.GetVpAndMatNrListener;
-import com.example.vpmanager.models.DateModel;
 import com.example.vpmanager.repositories.HomeRepository;
 import com.example.vpmanager.views.HomeFragment;
 
@@ -20,7 +19,6 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;

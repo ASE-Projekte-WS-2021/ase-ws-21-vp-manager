@@ -109,4 +109,9 @@ public class StudyViewModel extends ViewModel implements StudyDetailsListener, S
         }
         studyDatesFragment.reloadDates();
     }
+
+    private ArrayList<DateModel> removeExpiredDates()
+    {
+        return null;
+    }
 }

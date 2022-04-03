@@ -1,12 +1,10 @@
 package com.example.vpmanager.models;
 
-import com.example.vpmanager.adapter.CustomListViewAdapter;
 
 import java.text.Format;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Date;
 
 public class DateModel {
