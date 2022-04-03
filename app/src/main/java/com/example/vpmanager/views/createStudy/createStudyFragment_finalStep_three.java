@@ -17,7 +17,7 @@ import java.util.ArrayList;
 public class createStudyFragment_finalStep_three extends Fragment {
 
 
-    //A recyclerView with custom item layout can be used here too. The code is already present in the project
+    //A recyclerView with custom item layout can be used here too.
     private ListView dateList;
     private ArrayAdapter<String> dateListAdapter;
     private ArrayList<String> currentDatesInProcess = new ArrayList<>();

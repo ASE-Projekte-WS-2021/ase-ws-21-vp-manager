@@ -16,6 +16,9 @@ public class CreateStudyRepository {
     private CreateStudyListener createStudyListener;
 
 
+    //Parameter:
+    //Return values: CreateStudyRepository
+    //returns instance of the CreateStudyRepository
     public static CreateStudyRepository getInstance() {
         if (instance == null) {
             instance = new CreateStudyRepository();
