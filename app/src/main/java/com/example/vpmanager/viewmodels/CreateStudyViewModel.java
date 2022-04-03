@@ -14,6 +14,7 @@ import java.util.UUID;
 
 public class CreateStudyViewModel extends ViewModel implements CreateStudyListener {
 
+
     //For storing data during the creation process
     public Map<String, Object> studyCreationProcessData = new HashMap<>();
     public ArrayList<String> datesCreationProcessData = new ArrayList<>();
@@ -21,14 +22,23 @@ public class CreateStudyViewModel extends ViewModel implements CreateStudyListen
     private CreateStudyRepository mCreationRepo;
     public CreateStudyFragment createStudyFragment;
 
-    public void prepareRepo(){
+
+
+    //Parameter:
+    //Return values:
+    //Prepare the createStudy repository; ViewModel is set as the listener for the callback
+    public void prepareRepo() {
         mCreationRepo = CreateStudyRepository.getInstance();
-        //ViewModel is set as the listener for the callback
         mCreationRepo.setFirestoreCallback(this);
     }
 
-    public void saveStudyInDb(){
-        //before saving the study, a new ID and the CREATOR needs to be added to the map
+
+    //Parameter:
+    //Return values:
+    //save study data in database
+    //Before saving the study a new ID and the CREATOR needs to be added to the map
+    public void saveStudyInDb() {
+
         String studyId = getNewId();
         studyCreationProcessData.put("id", studyId);
         studyCreationProcessData.put("creator", mainActivity.uniqueID);
@@ -60,18 +70,16 @@ public class CreateStudyViewModel extends ViewModel implements CreateStudyListen
         mCreationRepo.createNewStudy(studyCreationProcessData, studyId);
     }
 
+
+    //Parameter:
+    //Return values: String
+    //Get study ID
     private String getNewId() {
         return UUID.randomUUID().toString();
     }
 
     @Override
     public void onStudyCreated(Boolean created) {
-        /*
-        if (created){
-            createStudyFragment.playAnimation();
-        }else{
-            createStudyFragment.showSnackBar();
-        }
-         */
     }
+
 }
