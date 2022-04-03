@@ -29,19 +29,21 @@ import com.google.android.material.chip.Chip;
 import com.google.android.material.chip.ChipGroup;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class FindStudyFragment extends Fragment implements StudyListAdapter.OnStudyItemClickListener {
 
     private NavController navController;
     private RecyclerView studyList;
-    private LinearLayout categoryExpander, typeExpander;
-    private ImageView categoryIcon, typeIcon;
+    private LinearLayout categoryExpander, typeExpander, sortVP;
+    private ImageView categoryIcon, typeIcon, sortImageIcon;
     private ChipGroup categoryChips, typeChips;
     private Chip fieldStudy, focusGroup, questionnaire, interview, usability, labStudy, gaming, diaryStudy, others, remote, local;
     private StudyListAdapter studyListAdapter;
     private FindStudyViewModel findStudyViewModel;
 
     private boolean fieldStudyActive, focusGroupActive, questionnaireActive, interviewActive, usabilityActive, labStudyActive, gamingActive, diaryStudyActive, othersActive, remoteActive, localActive;
+    private boolean  sortVPActive, sortVpInvert;
 
     public FindStudyFragment() {
     }
@@ -97,6 +99,9 @@ public class FindStudyFragment extends Fragment implements StudyListAdapter.OnSt
 
         categoryIcon = view.findViewById(R.id.findStudyCategoryIcon);
 
+        sortImageIcon = view.findViewById(R.id.findStudy_sort_VP_Icon);
+        sortVP = view.findViewById(R.id.findStudy_sort_vp);
+
         //mainActivity is currently viewModel owner
         findStudyViewModel = new ViewModelProvider(requireActivity()).get(FindStudyViewModel.class);
         findStudyViewModel.findStudyFragment = this;
@@ -111,6 +116,10 @@ public class FindStudyFragment extends Fragment implements StudyListAdapter.OnSt
         othersActive = false;
         localActive = false;
         remoteActive = false;
+
+
+        sortVPActive = false;
+        sortVpInvert = false;
     }
 
     private void setupClickListener()
@@ -259,8 +268,6 @@ public class FindStudyFragment extends Fragment implements StudyListAdapter.OnSt
             applyCategoryFilterToList();
         });
 
-
-
         local.setOnClickListener(v -> {
             localActive = !localActive;
             local.setChecked(localActive);
@@ -289,6 +296,68 @@ public class FindStudyFragment extends Fragment implements StudyListAdapter.OnSt
         });
 
 
+        sortVP.setOnClickListener(v -> {
+            if(sortVPActive && sortVpInvert)
+            {
+                sortVPActive = false;
+                sortVpInvert = false;
+                connectStudyListAdapter();
+                applyCategoryFilterToList();
+                sortImageIcon.setVisibility(View.GONE);
+            }
+            else if(sortVPActive && !sortVpInvert)
+            {
+                sortVpInvert = true;
+                sortByVPS(sortVpInvert);
+                sortImageIcon.setVisibility(View.VISIBLE);
+                sortImageIcon.setImageResource(R.drawable.ic_baseline_south_24);
+            }
+            else
+            {
+                sortVPActive = true;
+                sortByVPS(sortVpInvert);
+                sortImageIcon.setVisibility(View.VISIBLE);
+                sortImageIcon.setImageResource(R.drawable.ic_baseline_north_24);
+            }
+        });
+    }
+
+    private void sortByVPS(boolean invert) {
+        ArrayList<StudyMetaInfoModel> currentList = studyListAdapter.mStudyMetaInfos;
+        ArrayList<StudyMetaInfoModel> list = new ArrayList<>();
+
+        StudyMetaInfoModel[] studyMetaList = new StudyMetaInfoModel[currentList.size()];
+        for (int i = 0; i < currentList.size(); i++) {
+            studyMetaList[i] = currentList.get(i);
+        }
+
+        for (int i = 0; i < studyMetaList.length; i++) {
+            for (int k = 0; k < studyMetaList.length - 1; k++) {
+                String vps1 = studyMetaList[k].getVps().replace(" VP-Stunden","");
+                String vps2 = studyMetaList[k+1].getVps().replace(" VP-Stunden","");
+                if(vps1.trim().equals("null") ||vps1.trim().equals(""))
+                    {   vps1 = "0"; }
+                if(vps2.trim().equals("null") ||vps2.trim().equals(""))
+                    {   vps2 = "0"; }
+                if (Float.parseFloat(vps1) < Float.parseFloat(vps2)) {
+                    StudyMetaInfoModel tempStudy = studyMetaList[k];
+                    studyMetaList[k] = studyMetaList[k + 1];
+                    studyMetaList[k + 1] = tempStudy;
+                }
+            }
+        }
+        for (StudyMetaInfoModel ob : studyMetaList) {
+            list.add(ob);
+        }
+
+        if (!invert) {
+            Collections.reverse(list);
+        }
+
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(requireActivity());
+        studyListAdapter = new StudyListAdapter(requireActivity(), list, this);
+        studyList.setAdapter(studyListAdapter);
+        studyList.setLayoutManager(linearLayoutManager);
     }
 
 
@@ -344,11 +413,16 @@ public class FindStudyFragment extends Fragment implements StudyListAdapter.OnSt
             }
         }
         list = applyTypeFilterToList(list);
+
+        if(sortVPActive)
+            sortByVPS(sortVpInvert);
+
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(requireActivity());
         studyListAdapter = new StudyListAdapter(requireActivity(), list, this);
         studyList.setAdapter(studyListAdapter);
         studyList.setLayoutManager(linearLayoutManager);
     }
+
 
     private ArrayList<StudyMetaInfoModel> applyTypeFilterToList(ArrayList<StudyMetaInfoModel> list) {
 
