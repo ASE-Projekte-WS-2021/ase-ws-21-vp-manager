@@ -428,18 +428,18 @@ public class HomeViewModel extends ViewModel implements GetAllDatesListener, Get
                 }
             }
 
-            dateNameList = sortList(dateNameList);
+            ArrayList<String> tempList = sortList(dateNameList);
 
             int studyDisplayCount = 2;
 
-            if (dateNameList.size() < 3) {
+            if (tempList.size() < 3) {
                 homeFragment.disableAllAppointmentsButton();
                 studyDisplayCount = 3;
             }
 
-            for (String key : dateNameList.keySet()) {
+            for (String date : tempList) {
                 if (upComingAppointments.size() < studyDisplayCount) {
-                    upComingAppointments.add(dateNameList.get(key) + "\t\t" + key);
+                    upComingAppointments.add(date);
                 }
             }
             //Collections.reverse(upComingAppointments);
@@ -547,8 +547,8 @@ public class HomeViewModel extends ViewModel implements GetAllDatesListener, Get
         return false;
     }
 
-    private HashMap<String, String> sortList(HashMap<String, String> toSort) {
-        HashMap<String, String> list = new HashMap<>();
+    private ArrayList<String> sortList(HashMap<String, String> toSort) {
+        ArrayList<String> list = new ArrayList<>();
 
         String[][] dateList = new String[toSort.size()][2];
         int position = 0;
@@ -587,8 +587,9 @@ public class HomeViewModel extends ViewModel implements GetAllDatesListener, Get
         }
         list.clear();
         for (String[] date : dateList) {
-            list.put(date[0], date[1]);
+            list.add(date[1] + "\t\t" + date[0]);
         }
+
         return list;
     }
 
