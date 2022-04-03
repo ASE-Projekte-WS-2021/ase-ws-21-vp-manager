@@ -21,18 +21,14 @@ public class createStudyFragment_StepOne extends Fragment {
     public static TextInputEditText textInputEditTextTitle;
     public static TextInputEditText textInputEditTextVP;
 
-    //public static Spinner categories;
-    //public static Spinner executionType;
-
     @SuppressLint("StaticFieldLeak")
     public static AutoCompleteTextView autoCompleteTextViewCategory;
     @SuppressLint("StaticFieldLeak")
     public static AutoCompleteTextView autoCompleteTextViewExecutionType;
 
-    public static String currentCat;
-
     private ArrayList<String> dropdownListCategories, dropdownListExecutionType;
     private ArrayAdapter<String> arrayAdapterCategories, arrayAdapterExecutionType;
+
 
     //Parameter:
     //Return values:
@@ -57,6 +53,7 @@ public class createStudyFragment_StepOne extends Fragment {
         loadData();
     }
 
+
     //Parameter:
     //Return values:
     //Connects the code with the view
@@ -65,25 +62,10 @@ public class createStudyFragment_StepOne extends Fragment {
         textInputEditTextTitle = view.findViewById(R.id.inputFieldTitle);
         textInputEditTextVP = view.findViewById(R.id.inputFieldVP);
 
-        /*
-        categories = view.findViewById(R.id.create_stepOne_spinnerCategories);
-        ArrayAdapter<CharSequence> categoryAdapter = ArrayAdapter.createFromResource(getActivity(),
-                R.array.createCategoryList, android.R.layout.simple_spinner_item);
-        categoryAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        categories.setAdapter(categoryAdapter);
-
-
-        executionType = view.findViewById(R.id.create_stepOne_spinnerExecutionType);
-        ArrayAdapter<CharSequence> executionTypeAdapter = ArrayAdapter.createFromResource(getActivity(),
-                R.array.createExecutionTypeList, android.R.layout.simple_spinner_item);
-        executionTypeAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        executionType.setAdapter(executionTypeAdapter);
-         */
-
         autoCompleteTextViewCategory = view.findViewById(R.id.create_stepOne_textView_category);
         dropdownListCategories = new ArrayList<>();
-        //dropdownListCategories.add("Studienkategorie");
-        for(int i = 1; i < getResources().getStringArray(R.array.createCategoryList).length; i++){
+
+        for (int i = 1; i < getResources().getStringArray(R.array.createCategoryList).length; i++) {
             dropdownListCategories.add(getResources().getStringArray(R.array.createCategoryList)[i]);
         }
         arrayAdapterCategories = new ArrayAdapter<>(getActivity(), R.layout.material_dropdown_item, dropdownListCategories);
@@ -91,7 +73,6 @@ public class createStudyFragment_StepOne extends Fragment {
 
         autoCompleteTextViewExecutionType = view.findViewById(R.id.create_stepOne_textView_executionType);
         dropdownListExecutionType = new ArrayList<>();
-        //dropdownListExecutionType.add("Durchführungsart");
         dropdownListExecutionType.add("Remote");
         dropdownListExecutionType.add("Präsenz");
         arrayAdapterExecutionType = new ArrayAdapter<>(getActivity(), R.layout.material_dropdown_item, dropdownListExecutionType);
@@ -104,13 +85,13 @@ public class createStudyFragment_StepOne extends Fragment {
     //Loads data recieved from the activity into the inputfields
     private void loadData() {
 
-        if (CreateStudyFragment.createStudyViewModel.studyCreationProcessData.get("name") != null){
+        if (CreateStudyFragment.createStudyViewModel.studyCreationProcessData.get("name") != null) {
             textInputEditTextTitle.setText(CreateStudyFragment.createStudyViewModel.studyCreationProcessData.get("name").toString());
         }
-        if (CreateStudyFragment.createStudyViewModel.studyCreationProcessData.get("vps") != null){
+        if (CreateStudyFragment.createStudyViewModel.studyCreationProcessData.get("vps") != null) {
             textInputEditTextVP.setText(CreateStudyFragment.createStudyViewModel.studyCreationProcessData.get("vps").toString());
         }
-        if (CreateStudyFragment.createStudyViewModel.studyCreationProcessData.get("category") != null){
+        if (CreateStudyFragment.createStudyViewModel.studyCreationProcessData.get("category") != null) {
             String cat = CreateStudyFragment.createStudyViewModel.studyCreationProcessData.get("category").toString();
             if (cat.equals("Feldstudie")) {
                 //categories.setSelection(1);
@@ -160,32 +141,6 @@ public class createStudyFragment_StepOne extends Fragment {
                 autoCompleteTextViewExecutionType.setText("Präsenz", false);
             }
         }
-        /*
-        Bundle bundle = getArguments();
-        if(bundle != null){
-            textInputEditTextTitle.setText(bundle.getString("title"));
-            textInputEditTextVP.setText(bundle.getString("vp"));
 
-            if(bundle.getString("category").equals("VR")){
-                categories.setSelection(1);
-            }
-            if(bundle.getString("category").equals("AR")){
-                categories.setSelection(2);
-            }
-            if(bundle.getString("category").equals("Diary Study")){
-                categories.setSelection(3);
-            }
-            if(bundle.getString("category").equals("Sonstige")){
-                categories.setSelection(4);
-            }
-
-            if(bundle.getString("exe").equals("Remote")){
-                executionType.setSelection(1);
-            }
-            if(bundle.getString("exe").equals("Präsenz")){
-                executionType.setSelection(2);
-            }
-        }
-         */
     }
 }

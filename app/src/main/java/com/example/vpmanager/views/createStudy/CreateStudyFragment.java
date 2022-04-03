@@ -39,7 +39,7 @@ public class CreateStudyFragment extends Fragment {
     private LottieAnimationView doneAnimation;
 
 
-    // class constructor
+    //Class constructor
     public CreateStudyFragment() {
     }
 

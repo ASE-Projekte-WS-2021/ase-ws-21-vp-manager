@@ -1,13 +1,10 @@
 package com.example.vpmanager.views.createStudy;
 
 import android.os.Bundle;
-
 import androidx.fragment.app.Fragment;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
 import com.example.vpmanager.R;
 import com.google.android.material.textfield.TextInputEditText;
 
@@ -42,7 +39,7 @@ public class createStudyFragment_StepFour_Remote extends Fragment {
     //Parameter:
     //Return values:
     //Connects the code with the view
-    private void setupView(View view){
+    private void setupView(View view) {
         textInputEditTextPlatform = view.findViewById(R.id.inputFieldPlatform);
         textInputEditTextOptionalPlatform = view.findViewById(R.id.inputFieldPlatformOptional);
     }
@@ -60,12 +57,5 @@ public class createStudyFragment_StepFour_Remote extends Fragment {
             textInputEditTextOptionalPlatform.setText(
                     CreateStudyFragment.createStudyViewModel.studyCreationProcessData.get("platform2").toString());
         }
-        /*
-        Bundle bundle = getArguments();
-        if(bundle != null){
-            textInputEditTextPlatform.setText(bundle.getString("platform"));
-            textInputEditTextOptionalPlatform.setText(bundle.getString("platform2"));
-        }
-         */
     }
 }

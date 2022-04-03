@@ -42,7 +42,7 @@ public class createStudyFragment_StepFour_Presence extends Fragment {
     //Parameter:
     //Return values:
     //Connects the code with the view
-    private void setupView(View view){
+    private void setupView(View view) {
         textInputEditTextLocation = view.findViewById(R.id.inputFieldLocation);
         textInputEditTextStreet = view.findViewById(R.id.inputFieldStreet);
         textInputEditTextRoom = view.findViewById(R.id.inputFieldRoom);
@@ -65,13 +65,6 @@ public class createStudyFragment_StepFour_Presence extends Fragment {
             textInputEditTextRoom.setText(
                     CreateStudyFragment.createStudyViewModel.studyCreationProcessData.get("room").toString());
         }
-        /*
-        Bundle bundle = getArguments();
-        if(bundle != null){
-            textInputEditTextLocation.setText(bundle.getString("location"));
-            textInputEditTextStreet.setText(bundle.getString("street"));
-            textInputEditTextRoom.setText(bundle.getString("room"));
-        }
-         */
+
     }
 }
