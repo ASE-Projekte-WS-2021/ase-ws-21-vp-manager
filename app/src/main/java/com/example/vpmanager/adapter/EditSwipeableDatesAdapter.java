@@ -29,6 +29,13 @@ public class EditSwipeableDatesAdapter extends RecyclerView.Adapter<RecyclerView
         mContext = context;
         editDatesList = DateModel.sortByDate(studyDates);
         mFragmentView = fragmentView;
+        this.registerAdapterDataObserver(new RecyclerView.AdapterDataObserver() {
+            @Override
+            public void onChanged() {
+                super.onChanged();
+                editDatesList = DateModel.sortByDate(studyDates);
+            }
+        });
     }
 
     @NonNull

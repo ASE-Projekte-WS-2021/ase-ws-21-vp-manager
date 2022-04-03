@@ -11,6 +11,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.vpmanager.R;
+import com.example.vpmanager.models.DateModel;
 import com.example.vpmanager.models.StudyObjectPa;
 import com.google.android.material.snackbar.Snackbar;
 
@@ -33,9 +34,16 @@ public class SwipeableDatesAdapter extends RecyclerView.Adapter<RecyclerView.Vie
 
     public SwipeableDatesAdapter(Context context, ArrayList<String> studyDates, View fragmentView) {
         mContext = context;
-        preselectedDates = sortByDate(studyDates);
+        preselectedDates = studyDates;
         mFragmentView = fragmentView;
         Log.d("SwipeableDatesAdapter", "constructor was called");
+        this.registerAdapterDataObserver(new RecyclerView.AdapterDataObserver() {
+            @Override
+            public void onChanged() {
+                super.onChanged();
+                preselectedDates = sortByDate(studyDates);
+            }
+        });
     }
 
     @NonNull
