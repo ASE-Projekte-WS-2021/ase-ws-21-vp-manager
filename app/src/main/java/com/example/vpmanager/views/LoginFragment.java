@@ -25,7 +25,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
 
-public class loginFragment extends Fragment {
+public class LoginFragment extends Fragment {
 
     private TextInputEditText emailEdittext;
     private TextInputEditText passwordEditText;
@@ -37,7 +37,7 @@ public class loginFragment extends Fragment {
     private NavController navController;
 
 
-    public loginFragment() {
+    public LoginFragment() {
         // Required empty public constructor
     }
 
