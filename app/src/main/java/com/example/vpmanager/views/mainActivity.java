@@ -4,8 +4,11 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.navigation.NavController;
@@ -165,6 +168,8 @@ public class mainActivity extends AppCompatActivity implements DrawerController 
         return NavigationUI.navigateUp(navController, appBarConfiguration) || super.onSupportNavigateUp();
     }
 
+
+
     //Parameter: context
     //Return values: uniqueID
     //Generates an unique id for every installation of the app.
@@ -204,8 +209,26 @@ public class mainActivity extends AppCompatActivity implements DrawerController 
     }
 
     @Override
-    public void onBackPressed() {
+    public boolean onCreateOptionsMenu(Menu menu){
+        MenuInflater menuInflater = getMenuInflater();
+        menuInflater.inflate(R.menu.app_bar_menu, menu);
+        return true;
+    }
 
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item){
+        if(item.getItemId() == R.id.pageInfoIcon){
+            showInfoText();
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    private void showInfoText() {
+
+    }
+
+    @Override
+    public void onBackPressed() {
         if (drawerLayoutMain.isOpen())
         {
             drawerLayoutMain.close();
