@@ -117,9 +117,11 @@ public class StudyListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
         public void setIcon(String type) {
             if (type.equals("Präsenz")) {
                 locationIcon.setVisibility(View.VISIBLE);
+                remoteIcon.setVisibility(View.INVISIBLE);
                 locationIcon.setAnimation(animation);
             } else {
                 remoteIcon.setVisibility(View.VISIBLE);
+                locationIcon.setVisibility(View.INVISIBLE);
                 remoteIcon.setAnimation(animation);
             }
         }
