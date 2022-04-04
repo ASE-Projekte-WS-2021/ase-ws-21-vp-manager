@@ -11,11 +11,15 @@ public class StudyDetailModel {
     private boolean studyState;
 
 
+    //Parameter: id, name, description, vps, contactOne,...
+    //Return values:
+    //Sets variables
     public StudyDetailModel(String id, String name, String description, String vps,
                             String contactOne, String contactTwo, String contactThree, String contactFour, String contactFive,
                             String category, String executionType,
                             String remotePlatformOne, String remotePlatformTwo,
                             String location, String street, String room, boolean studyState) {
+
         this.id = id;
         this.name = name;
         this.description = description;
@@ -39,7 +43,7 @@ public class StudyDetailModel {
         this.studyState = studyState;
     }
 
-    public StudyDetailModel(){
+    public StudyDetailModel() {
 
     }
 
