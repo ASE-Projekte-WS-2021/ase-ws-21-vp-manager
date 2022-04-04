@@ -93,6 +93,25 @@
     <!---findStudyActivity-->
     <string name="entryListHeader">Aktuelles Studienangebot</string>
     <string name="vpHours">VP-Stunden</string>
+    <string name="studyTypeText">Studientyp: </string>
+    <string name="findStudyHeader">Ausgeschriebene Studien</string>
+    <string name="sortStudyText">Sortieren nach: </string>
+    <string name="vpText">VPS</string>
+    <string name="categoryText">Kategorien</string>
+    <string name="executionText">Durchführung</string>
+    <string name="remoteText">Remote</string>
+    <string name="localText">Präsenz</string>
+    <string name="fieldStudyText">Feldstudie</string>
+    <string name="focusGroupText">Fokusgruppe</string>
+    <string name="questionnaireText">Fragebogen</string>
+    <string name="interviewText">Interview</string>
+    <string name="usabilityText">Usability/UX</string>
+    <string name="labStudyText">Laborstudie</string>
+    <string name="diaryStudyText">Tagebuchstudie</string>
+    <string name="gamingText">Gamingstudie</string>
+    <string name="othersText">Sonstige</string>
+
+
 
     <!---studyActivity-->
     <string name="studyViewHeader">Detailansicht - Studie</string>
