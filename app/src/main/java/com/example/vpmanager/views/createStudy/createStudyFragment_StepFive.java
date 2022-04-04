@@ -52,7 +52,7 @@ public class createStudyFragment_StepFive extends Fragment {
 
     //Parameter:
     //Return values:
-    //Class constructor; sets the current fragment for the activity
+    //Sets the current fragment for the activity
     public createStudyFragment_StepFive() {
         CreateStudyFragment.currentFragment = Config.createFragmentFive;
     }
