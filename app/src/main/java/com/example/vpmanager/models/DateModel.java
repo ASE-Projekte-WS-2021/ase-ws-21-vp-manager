@@ -18,7 +18,7 @@ public class DateModel {
 
     //Parameter: dateId, date, studyId, userId, selected, participated
     //Return values:
-    //Sets variablese
+    //Sets variables
     public DateModel(String dateId, String date, String studyId, String userId, Boolean selected, Boolean participated) {
 
         this.dateId = dateId;
