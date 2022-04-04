@@ -168,6 +168,6 @@ public class loginFragment extends Fragment {
             translatedError = "Anmeldung wurde temporär blockiert aufgrund vieler fehlgeschlagenen Anmeldungsversuche";
         }
         return translatedError;
-
     }
+
 }

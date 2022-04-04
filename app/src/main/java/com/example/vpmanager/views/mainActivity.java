@@ -1,5 +1,6 @@
 package com.example.vpmanager.views;
 
+import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -129,7 +130,7 @@ public class mainActivity extends AppCompatActivity implements DrawerController 
             @Override
             public boolean onMenuItemClick(MenuItem menuItem) {
                 firebaseAuth.signOut();
-                navController.navigate(R.id.action_global_nestedGraphLoginRegistration);
+                navController.navigate(R.id.action_global_loginFragment);
                 Log.d("mainActivity", "menuItem" + navigationViewMain.getMenu().getItem(4).toString());
                 Log.d("mainActivity", "additional listener on logout was active!");
                 return false;
@@ -261,7 +262,7 @@ public class mainActivity extends AppCompatActivity implements DrawerController 
                 }
             }
         } else {
-            staticNavController.navigate(R.id.action_global_nestedGraphLoginRegistration);
+            staticNavController.navigate(R.id.action_global_loginFragment);
         }
         return uniqueID;
     }
@@ -400,58 +401,63 @@ public class mainActivity extends AppCompatActivity implements DrawerController 
         if (drawerLayoutMain.isOpen()) {
             drawerLayoutMain.close();
         } else {
-            if (currentFragment.equals("createBase") || currentFragment.equals("createStepOne") || currentFragment.equals("createStepTwo")
-                    || currentFragment.equals("createStepThree") || currentFragment.equals("createStepFourRemote") || currentFragment.equals("createStepFourPresence")
-                    || currentFragment.equals("createStepFive") || currentFragment.equals("createFinalStep") || currentFragment.equals("createFinalStepTwo") ||
-                    currentFragment.equals("createFinalStepThree") || currentFragment.equals("editFragment")) {
-                if (userStay) {
-                    Dialog dialog = new Dialog(this, R.style.DialogStyle);
-                    dialog.setContentView(R.layout.duplicate_dialog);
-                    dialog.getWindow().setBackgroundDrawableResource(R.drawable.bg_window);
-                    ImageView btnClose = dialog.findViewById(R.id.btn_close);
-                    btnClose.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View view) {
-                            dialog.dismiss();
-                        }
-                    });
-                    TextView title = dialog.findViewById(R.id.info_title);
-                    TextView desc = dialog.findViewById(R.id.duplicate_desc);
-                    CheckBox box = dialog.findViewById(R.id.doNotShowAgainCheckBox);
-                    box.setVisibility(View.GONE);
-                    Button stay = dialog.findViewById(R.id.abort);
-                    Button leave = dialog.findViewById(R.id.addAnyways);
-                    ImageView icon = dialog.findViewById(R.id.img_icon);
-                    icon.setImageDrawable(getDrawable(R.drawable.ic_baseline_warning_24));
+            if (currentFragment.equals("login")) {
+                System.exit(0);
 
-                    title.setText("Achtung!");
-                    desc.setText("Wenn Sie diesen Bereich verlassen gehen Ihre Änderungen verloren! Wollen Sie trotzdem verlassen?");
-                    stay.setText("Abbrechen");
-                    leave.setText("Verlassen");
-                    dialog.show();
+            } else {
+                if (currentFragment.equals("createBase") || currentFragment.equals("createStepOne") || currentFragment.equals("createStepTwo")
+                        || currentFragment.equals("createStepThree") || currentFragment.equals("createStepFourRemote") || currentFragment.equals("createStepFourPresence")
+                        || currentFragment.equals("createStepFive") || currentFragment.equals("createFinalStep") || currentFragment.equals("createFinalStepTwo") ||
+                        currentFragment.equals("createFinalStepThree") || currentFragment.equals("editFragment")) {
+                    if (userStay) {
+                        Dialog dialog = new Dialog(this, R.style.DialogStyle);
+                        dialog.setContentView(R.layout.duplicate_dialog);
+                        dialog.getWindow().setBackgroundDrawableResource(R.drawable.bg_window);
+                        ImageView btnClose = dialog.findViewById(R.id.btn_close);
+                        btnClose.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                                dialog.dismiss();
+                            }
+                        });
+                        TextView title = dialog.findViewById(R.id.info_title);
+                        TextView desc = dialog.findViewById(R.id.duplicate_desc);
+                        CheckBox box = dialog.findViewById(R.id.doNotShowAgainCheckBox);
+                        box.setVisibility(View.GONE);
+                        Button stay = dialog.findViewById(R.id.abort);
+                        Button leave = dialog.findViewById(R.id.addAnyways);
+                        ImageView icon = dialog.findViewById(R.id.img_icon);
+                        icon.setImageDrawable(getDrawable(R.drawable.ic_baseline_warning_24));
 
-                    stay.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            dialog.dismiss();
-                        }
-                    });
+                        title.setText("Achtung!");
+                        desc.setText("Wenn Sie diesen Bereich verlassen gehen Ihre Änderungen verloren! Wollen Sie trotzdem verlassen?");
+                        stay.setText("Abbrechen");
+                        leave.setText("Verlassen");
+                        dialog.show();
 
-                    leave.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            userStay = false;
-                            dialog.dismiss();
-                            onBackPressed();
-                        }
-                    });
+                        stay.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                dialog.dismiss();
+                            }
+                        });
 
+                        leave.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                userStay = false;
+                                dialog.dismiss();
+                                onBackPressed();
+                            }
+                        });
+
+                    } else {
+                        userStay = true;
+                        super.onBackPressed();
+                    }
                 } else {
-                    userStay = true;
                     super.onBackPressed();
                 }
-            } else {
-                super.onBackPressed();
             }
         }
     }
