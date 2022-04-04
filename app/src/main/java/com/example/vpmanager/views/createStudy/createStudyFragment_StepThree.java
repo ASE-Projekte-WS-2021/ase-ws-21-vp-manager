@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.vpmanager.Config;
 import com.example.vpmanager.R;
 import com.google.android.material.textfield.TextInputEditText;
 import com.example.vpmanager.views.mainActivity;
@@ -21,7 +22,7 @@ public class createStudyFragment_StepThree extends Fragment {
     //Parameter:
     //Return values:
     //Sets the current fragment for the activity
-    public createStudyFragment_StepThree() { CreateStudyFragment.currentFragment = 3; }
+    public createStudyFragment_StepThree() { CreateStudyFragment.currentFragment = Config.createFragmentThree; }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {

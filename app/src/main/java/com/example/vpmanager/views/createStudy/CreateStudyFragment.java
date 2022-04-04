@@ -17,6 +17,7 @@ import androidx.navigation.Navigation;
 import androidx.navigation.fragment.NavHostFragment;
 
 import com.airbnb.lottie.LottieAnimationView;
+import com.example.vpmanager.Config;
 import com.example.vpmanager.R;
 import com.example.vpmanager.viewmodels.CreateStudyViewModel;
 import com.kofigyan.stateprogressbar.StateProgressBar;
@@ -26,7 +27,7 @@ public class CreateStudyFragment extends Fragment {
 
 
     public static CreateStudyViewModel createStudyViewModel;
-    public static int currentFragment = 0;
+    public static int currentFragment = Config.createFragmentBase;
 
     private NavController navControllerMain;
     private NavHostFragment navHostFragmentCreate;
@@ -35,7 +36,12 @@ public class CreateStudyFragment extends Fragment {
     private Button backBtn;
     private Button nextBtn;
     private StateProgressBar stateProgressBar;
-    private String[] progressBarDescriptionData = {"Basis", "Beschreibung", "Ort", "Termine", "Bestätigen"};
+    private String stepOne = getString(R.string.progressbar_one);
+    private String stepTwo = getString(R.string.progressbar_two);
+    private String stepThree = getString(R.string.progressbar_three);
+    private String stepFour = getString(R.string.progressbar_four);
+    private String stepFive = getString(R.string.progressbar_five);
+    private String[] progressBarDescriptionData = {stepOne, stepTwo, stepThree, stepFour, stepFive};
     private LottieAnimationView doneAnimation;
 
 
@@ -118,7 +124,6 @@ public class CreateStudyFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 nextButton();
-                //viewPager.setCurrentItem(viewPager.getCurrentItem()+1);
             }
         });
         backBtn.setOnClickListener(new View.OnClickListener() {
@@ -347,13 +352,13 @@ public class CreateStudyFragment extends Fragment {
 
         String category = createStudyFragment_StepOne.autoCompleteTextViewCategory.getText().toString();
 
-        if (!category.isEmpty()) { //!category.equals("Studienkategorie")
+        if (!category.isEmpty()) {
             createStudyViewModel.studyCreationProcessData.put("category", category);
         }
 
         String executionType = createStudyFragment_StepOne.autoCompleteTextViewExecutionType.getText().toString();
 
-        if (!executionType.isEmpty()) { //!executionType.equals("Durchführungsart")
+        if (!executionType.isEmpty()) { 
             createStudyViewModel.studyCreationProcessData.put("executionType", executionType);
         }
 
@@ -460,7 +465,7 @@ public class CreateStudyFragment extends Fragment {
                     return true;
                 }
                 if (createStudyViewModel.studyCreationProcessData.get("name") == null) {
-                    createStudyFragment_StepOne.textInputEditTextTitle.setError("Titel darf nicht leer sein");
+                    createStudyFragment_StepOne.textInputEditTextTitle.setError(getString(R.string.titleError));
                     createStudyFragment_StepOne.textInputEditTextTitle.requestFocus();
 
                     break;
@@ -484,14 +489,14 @@ public class CreateStudyFragment extends Fragment {
                 if (createStudyViewModel.studyCreationProcessData.get("contact") != null) {
                     return true;
                 }
-                createStudyFragment_StepTwo.textInputEditTextContactMail.setError("Email-Kontakt muss angegeben werden");
+                createStudyFragment_StepTwo.textInputEditTextContactMail.setError(getString(R.string.mailError));
                 createStudyFragment_StepTwo.textInputEditTextContactMail.requestFocus();
                 break;
             case 3:
                 if (createStudyViewModel.studyCreationProcessData.get("description") != null) {
                     return true;
                 }
-                createStudyFragment_StepThree.textInputEditTextDesc.setError("Studienbeschreibung darf nicht leer sein");
+                createStudyFragment_StepThree.textInputEditTextDesc.setError(getString(R.string.descriptionError));
                 createStudyFragment_StepThree.textInputEditTextDesc.requestFocus();
                 break;
             case 4:
@@ -501,7 +506,7 @@ public class CreateStudyFragment extends Fragment {
                 String executionType = createStudyViewModel.studyCreationProcessData.get("executionType").toString();
                 if (executionType.equals(getString(R.string.presenceString))) {
                     createStudyFragment_StepFour_Presence.textInputEditTextLocation
-                            .setError("Ort der Studie muss angegeben werden");
+                            .setError(getString(R.string.locationError));
                     createStudyFragment_StepFour_Presence.textInputEditTextLocation.requestFocus();
                 }
                 if (createStudyViewModel.studyCreationProcessData.get("platform") != null) {
@@ -509,7 +514,7 @@ public class CreateStudyFragment extends Fragment {
                 }
                 if (executionType.equals(getString(R.string.remoteString))) {
                     createStudyFragment_StepFour_Remote.textInputEditTextPlatform
-                            .setError("Primärplattform muss angegeben werden");
+                            .setError(getString(R.string.platformError));
                     createStudyFragment_StepFour_Remote.textInputEditTextPlatform.requestFocus();
                 }
                 break;

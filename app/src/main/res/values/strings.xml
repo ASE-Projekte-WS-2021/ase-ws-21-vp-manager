@@ -67,6 +67,12 @@
     <string name="fragment_create_study_base_create">Erstellen</string>
     <string name="fragment_create_study_finalPage_title_three">Terminbestätigung</string>
 
+    <string name="progressbar_one">Basis</string>
+    <string name="progressbar_two">Beschreibung</string>
+    <string name="progressbar_three">Ort</string>
+    <string name="progressbar_four">Termine</string>
+    <string name="progressbar_five">Bestätigen</string>
+
 
     <string-array name="createCategoryList">
         <item>Studienkategorie</item>
@@ -93,6 +99,23 @@
     <!---findStudyActivity-->
     <string name="entryListHeader">Aktuelles Studienangebot</string>
     <string name="vpHours">VP-Stunden</string>
+    <string name="studyTypeText">Studientyp: </string>
+    <string name="findStudyHeader">Ausgeschriebene Studien</string>
+    <string name="sortStudyText">Sortieren nach: </string>
+    <string name="vpText">VPS</string>
+    <string name="categoryText">Kategorien</string>
+    <string name="executionText">Durchführung</string>
+    <string name="fieldStudyText">Feldstudie</string>
+    <string name="focusGroupText">Fokusgruppe</string>
+    <string name="questionnaireText">Fragebogen</string>
+    <string name="interviewText">Interview</string>
+    <string name="usabilityText">Usability/UX</string>
+    <string name="labStudyText">Laborstudie</string>
+    <string name="diaryStudyText">Tagebuchstudie</string>
+    <string name="gamingText">Gamingstudie</string>
+    <string name="othersText">Sonstige</string>
+
+
 
     <!---studyActivity-->
     <string name="studyViewHeader">Detailansicht - Studie</string>
@@ -151,6 +174,16 @@
     <string name="changeStudyStateTitleClose">Studie abschließen</string>
     <string name="changeStudyStateTitleOpen">Studie wieder öffnen</string>
 
+
+    <!---Error Texts-->
+
+    <string name="titleError">Titel darf nicht leer sein</string>
+    <string name="descriptionError">Studienbeschreibung darf nicht leer sein</string>
+    <string name="locationError">Ort der Studie muss angegeben werden</string>
+    <string name="platformError">Primärplattform muss angegeben werden</string>
+    <string name="mailError">Email-Kontakt muss angegeben werden</string>
+
+
     <!-- Info Titles -->
     <string name="infoPaMainTitle">Dashboard</string>
     <string name="infoLoginTitle">Anmeldung</string>
@@ -195,7 +228,6 @@
 
     <string name="infoPaUpcoming">Alle ihre zukünftig anstehenden Termine werden hier angezeigt.</string>
     <string name="infoFindStudies">Hier finden sie alle Studien, an denen sie aktuell teilnehmen können. \n\n Weitere Informationen und die Anmeldung für freie Termine finden sie in der Detailansicht.</string>
-
 
 </resources>
 

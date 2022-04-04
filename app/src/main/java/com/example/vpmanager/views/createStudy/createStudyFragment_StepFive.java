@@ -19,6 +19,7 @@ import android.widget.DatePicker;
 import android.widget.ImageView;
 import android.widget.TimePicker;
 
+import com.example.vpmanager.Config;
 import com.example.vpmanager.R;
 import com.example.vpmanager.adapter.SwipeableDatesAdapter;
 import com.example.vpmanager.helper.SwipeToDeleteCallback;
@@ -53,7 +54,7 @@ public class createStudyFragment_StepFive extends Fragment {
     //Return values:
     //Class constructor; sets the current fragment for the activity
     public createStudyFragment_StepFive() {
-        CreateStudyFragment.currentFragment = 5;
+        CreateStudyFragment.currentFragment = Config.createFragmentFive;
     }
 
     @Override
@@ -77,9 +78,7 @@ public class createStudyFragment_StepFive extends Fragment {
     //Return values:
     //Connects the code with the view
     private void setupView(View view) {
-        //dateList = view.findViewById(R.id.createDatelist);
         dateListRecycler = view.findViewById(R.id.createDateRecyclerView);
-        //loadData();
         setupDatePicker(view);
         FloatingActionButton fab = view.findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -96,9 +95,7 @@ public class createStudyFragment_StepFive extends Fragment {
     //Sets an adapter for the Listview
     private void setupDatePicker(View view) {
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(requireActivity());
-        //datePickerAdapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_1, dates);
         swipeableDatesAdapter = new SwipeableDatesAdapter(requireActivity(), dates, view);
-        //dateList.setAdapter(datePickerAdapter);
         dateListRecycler.setAdapter(swipeableDatesAdapter);
         dateListRecycler.setLayoutManager(linearLayoutManager);
         ItemTouchHelper itemTouchHelper = new ItemTouchHelper(new SwipeToDeleteCallback(swipeableDatesAdapter));

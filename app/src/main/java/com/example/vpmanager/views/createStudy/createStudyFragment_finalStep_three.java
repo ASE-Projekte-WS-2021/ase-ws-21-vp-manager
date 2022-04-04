@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
+import com.example.vpmanager.Config;
 import com.example.vpmanager.R;
 import com.example.vpmanager.views.mainActivity;
 
@@ -28,7 +29,7 @@ public class createStudyFragment_finalStep_three extends Fragment {
     //Return values:
     //Sets the current fragment for the activity
     public createStudyFragment_finalStep_three() {
-        CreateStudyFragment.currentFragment = 8;
+        CreateStudyFragment.currentFragment = Config.createFragmentEight;
     }
 
     @Override

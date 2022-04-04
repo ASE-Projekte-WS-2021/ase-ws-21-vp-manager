@@ -11,6 +11,7 @@ import android.widget.TextView;
 import com.example.vpmanager.views.mainActivity;
 
 
+import com.example.vpmanager.Config;
 import com.example.vpmanager.R;
 
 public class createStudyFragment_finalStep extends Fragment {
@@ -26,7 +27,7 @@ public class createStudyFragment_finalStep extends Fragment {
     //Return values:
     //Sets the current fragment for the activity
     public createStudyFragment_finalStep() {
-        CreateStudyFragment.currentFragment = 6;
+        CreateStudyFragment.currentFragment = Config.createFragmentSix;
     }
 
     @Override
