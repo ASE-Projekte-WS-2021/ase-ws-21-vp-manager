@@ -119,7 +119,11 @@ public class StudyEditViewModel extends ViewModel implements EditStudyDetailsLis
 
     private void updateStudyFieldsWithInput() {
         studyEditProcessData.put("name", studyEditDetailsFragment.title.getText().toString());
-        studyEditProcessData.put("vps", studyEditDetailsFragment.vph.getText().toString());
+        if(!studyEditDetailsFragment.vph.getText().toString().isEmpty()) {
+            studyEditProcessData.put("vps", studyEditDetailsFragment.vph.getText().toString());
+        } else {
+            studyEditProcessData.put("vps", "0");
+        }
         studyEditProcessData.put("category", studyEditDetailsFragment.categories.getText().toString());
         studyEditProcessData.put("executionType", studyEditDetailsFragment.executionType.getText().toString());
 

@@ -53,7 +53,7 @@ public class loginFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-
+        mainActivity.currentFragment = "login";
         return inflater.inflate(R.layout.fragment_login, container, false);
     }
 

@@ -14,6 +14,7 @@ import android.widget.AutoCompleteTextView;
 import com.example.vpmanager.Config;
 import com.example.vpmanager.R;
 import com.google.android.material.textfield.TextInputEditText;
+import com.example.vpmanager.views.mainActivity;
 
 import java.util.ArrayList;
 
@@ -45,6 +46,7 @@ public class createStudyFragment_StepOne extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        mainActivity.currentFragment = "createStepOne";
         return inflater.inflate(R.layout.fragment_create_study_step_one, container, false);
     }
 

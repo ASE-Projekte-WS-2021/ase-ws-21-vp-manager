@@ -174,6 +174,7 @@
     <string name="changeStudyStateTitleClose">Studie abschließen</string>
     <string name="changeStudyStateTitleOpen">Studie wieder öffnen</string>
 
+
     <!---Error Texts-->
 
     <string name="titleError">Titel darf nicht leer sein</string>
@@ -181,6 +182,7 @@
     <string name="locationError">Ort der Studie muss angegeben werden</string>
     <string name="platformError">Primärplattform muss angegeben werden</string>
     <string name="mailError">Email-Kontakt muss angegeben werden</string>
+
 
     <!-- Info Titles -->
     <string name="infoPaMainTitle">Dashboard</string>
@@ -226,16 +228,6 @@
 
     <string name="infoPaUpcoming">Alle ihre zukünftig anstehenden Termine werden hier angezeigt.</string>
     <string name="infoFindStudies">Hier finden sie alle Studien, an denen sie aktuell teilnehmen können. \n\n Weitere Informationen und die Anmeldung für freie Termine finden sie in der Detailansicht.</string>
-
-
-
-
-
-
-
-
-
-
 
 </resources>
 
