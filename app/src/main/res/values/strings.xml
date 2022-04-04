@@ -182,6 +182,52 @@
     <string name="platformError">Primärplattform muss angegeben werden</string>
     <string name="mailError">Email-Kontakt muss angegeben werden</string>
 
+    <!-- Info Titles -->
+    <string name="infoPaMainTitle">Dashboard</string>
+    <string name="infoLoginTitle">Anmeldung</string>
+    <string name="infoCreateStartTitle">Studie erstellen</string>
+    <string name="infoCreateBaseTitle">Metadaten</string>
+    <string name="infoCreateContactTitle">Kontaktangabe</string>
+    <string name="infoCreateDescTitle">Studienbeschreibung</string>
+    <string name="infoCreatePlatformTitle">Plattformen</string>
+    <string name="infoCreateLocationTitle">Ortangaben</string>
+    <string name="infoCreateDatesTitle">Termine</string>
+    <string name="infoCreateConfirmDetailsTitle">Eingabebestätigung</string>
+    <string name="infoCreateConfirmDatesTitle">Terminbestätigung</string>
+    <string name="infoEditFragmentTitle">Studie bearbeiten</string>
+    <string name="infoStudyDetailsTitle">Studie einsehen</string>
+    <string name="infoCreatorStudyDetailsTitle">Eigene Studie einsehen</string>
+    <string name="infoOwnStudiesTitle">Eigene Studie</string>
+    <string name="infoFindStudyTitle">Studie finden</string>
+    <string name="infoPAUpcomingTitle">Anstehende Termine</string>
+
+
+    <!-- Info Messages -->
+    <string name="infoLogin">Zur Verwendung des VP Managers benötigen Sie einen individuellen Nutzeraccounnt. \n\n Geben Sie hier wenn möglich Ihre universitäre E-Mail-Adresse an.</string>
+    <string name="infoPaMain">Sehen sie hier den aktuellen Stand ihrer VP-Stunden ein. Zusätzlich finden Sie alle zukünftigen Termine für Ihre anstehenden Studien und Teilnahmen.</string>
+
+    <string name="infoCreateStart">Geben sie in den folgenden Schritten alle relevanen Informationen zu ihrer Studie an. \n\n Potenzielle Teilnehmer können diese anschließend über den Reiter "Studie finden" einsehen und sich für ihre angegebenen Termine eintragen. </string>
+    <string name="infoCreateBase">Metadaten zu ihrer Studie. \n\n Diese sind auch außerhalb der Detailansicht in der Studienliste sichtbar.</string>
+    <string name="infoCreateContact">Geben sie hier an, wie potenzielle Teilnehmer sie für inhaltliche oder oragnisatorische Fragen alternativ erreichen können</string>
+    <string name="infoCreateDescription">Hier können sie weitere Details zu Ablauf, Inhalt, Dauer oder Teilnahmevoraussetzungen ihrer Studie angeben</string>
+    <string name="infoCreatePlatform">. Hier kommunizieren sie während der Studie mit ihren Teilnehmern. Die angegebenen Dienste sollten kein Ausschlusskriterium bei der Studienauswahl sein, geben sie also gerne eine alternative Plattform an.</string>
+    <string name="infoCreateLocation">Geben sie hier die Adresse des Austragungsortes an. \n\n Achten sie auf die korrekten Bezeichner für universitäre Räume und Labore</string>
+    <string name="infoCreateDates">Geben sie hier freie Termine für ihre Studie an. \n\n Bereits vergebene Termine können anschließend im Reiter "Eigene Studien" eingesehen werden.</string>
+
+    <string name="infoCreateConfirmDetails">Bevor sie ihre Studie veröffentlichen, überprüfen sie hier bitte ihre Angaben.</string>
+    <string name="infoCreateConfirmDates">Folgende Termine stehen potenziellen Studienteilnehmern zur Verfügung.</string>
+    <string name="infoOwnAttendances">Sehen sie hier ihre Studienteilnahmen und den aktuellen Fortschritt ihres VP_Kontos ein.</string>
+
+
+    <string name="infoStudyDetails">Hier können sie alle verfügbaren Informationen zur Studie einsehen. \n\n Wenn sie an einer Teilnahme interessiert sind, schreiben sie sich im "Termine"-Tab für ein passendes Zeitfenster ein.</string>
+    <string name="infoStudyCreatorDetails">Hier können sie die angegebenen Informationen und Termine ihrer Studie einsehen und bearbeiten. \n\n Mit "Studie abschließen" können bereits beendete Studien aus der öffentlichen Liste entfernt werden.</string>
+    <string name="infoEditStudy">Hier können sie nachträglich Studieninformationen und Termine ändern / ergänzen.</string>
+    <string name="infoOwnStudies">Sehen sie hier ihre Studienteilnahmen und den aktuellen Fortschritt ihres VP-Kontos ein. \n\n im "Meine Studien"-Tab können sie ihre eigenen Studien einsehen und bearbeiten.</string>
+
+    <string name="infoPaUpcoming">Alle ihre zukünftig anstehenden Termine werden hier angezeigt.</string>
+    <string name="infoFindStudies">Hier finden sie alle Studien, an denen sie aktuell teilnehmen können. \n\n Weitere Informationen und die Anmeldung für freie Termine finden sie in der Detailansicht.</string>
+
+
 
 
 
