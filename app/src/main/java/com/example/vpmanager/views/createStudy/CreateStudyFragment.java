@@ -88,6 +88,7 @@ public class CreateStudyFragment extends Fragment {
 
         createStudyViewModel.studyCreationProcessData.clear();
         createStudyViewModel.datesCreationProcessData.clear();
+        createStudyFragment_StepFive.dates.clear();
 
         backBtn = view.findViewById(R.id.backButton);
         nextBtn = view.findViewById(R.id.nextButton);
