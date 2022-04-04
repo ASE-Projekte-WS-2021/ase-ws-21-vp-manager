@@ -12,11 +12,11 @@ import java.util.ArrayList;
 
 public class FindStudyViewModel extends ViewModel implements StudyListRepository.StudyMetaDataListener {
 
-    //not best practise in my opinion
-    public FindStudyFragment findStudyFragment;
 
+    public FindStudyFragment findStudyFragment;
     private ArrayList<StudyMetaInfoModel> mStudyMetaInfo;
     private StudyListRepository mStudyListRepo;
+
 
     //Parameter:
     //Return Values:
