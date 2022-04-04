@@ -3,7 +3,6 @@ package com.example.vpmanager.repositories;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
-
 import com.example.vpmanager.models.StudyMetaInfoModel;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -12,8 +11,8 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
-
 import java.util.ArrayList;
+
 
 //Singleton pattern
 public class StudyListRepository {
@@ -21,18 +20,14 @@ public class StudyListRepository {
     private static StudyListRepository instance;
     private FirebaseFirestore db;
     private CollectionReference studiesRef;
-
     private ArrayList<StudyMetaInfoModel> studyMetaInfosArrayList = new ArrayList<>();
 
-    //This array gets filled first after the db call. Contains four infos about a study. Can be dropped in the future
+    //This array gets filled first after the db call. Contains four infos about a study.
     private ArrayList<ArrayList<String>> studyIdNameVpCat;
 
     private StudyMetaDataListener studyMetaDataListener;
 
-    //Sets the viewModel as the listener for the callback
-    public void setFirestoreCallback(StudyMetaDataListener studyMetaDataListener) {
-        this.studyMetaDataListener = studyMetaDataListener;
-    }
+
 
     //Parameter:
     //Return Values: instance of the repository class
@@ -40,27 +35,36 @@ public class StudyListRepository {
     public static StudyListRepository getInstance() {
         if (instance == null) {
             instance = new StudyListRepository();
-            Log.d("StudyListRepository", "instance was null and a new one was created");
         }
         return instance;
     }
 
+
+    //Parameter:
+    //Return values:
+    //Firestore callback; set studyMetaListener
+    public void setFirestoreCallback(StudyMetaDataListener studyMetaDataListener) {
+        this.studyMetaDataListener = studyMetaDataListener;
+    }
+
+
     //Parameter:
     //Return Values:
     //This method gets called when new data about all studies is needed (every time the fragment is opened)
-    public void getStudyMetaInfo() { //ArrayList<StudyMetaInfoModel>
+    public void getStudyMetaInfo() {
         getStudyInfosFromDB();
-        //return studyMetaInfosArrayList;
     }
+
 
     //Parameter:
     //Return Values:
     //This method has access to the already filled nested arrayList.
     //Stores the study meta infos in studyMetaInfoModel objects and adds them to another ArrayList
     private void setStudyMetaInfo() {
-        Log.d("StudyListRepository", "setStudyMetaInfo start");
-        //THE LIST NEEDS TO BE CLEARED BEFORE, BECAUSE THE REPO-INSTANCE IS THE SAME AND IT ISN'T CREATED NEW!
+
+        //list needs to be cleared before, repo-instance is the same and not newly created
         studyMetaInfosArrayList.clear();
+
         //new data is stored in the list
         for (int i = 0; i < studyIdNameVpCat.size(); i++) {
             studyMetaInfosArrayList.add(
@@ -73,18 +77,21 @@ public class StudyListRepository {
 
             );
         }
-        Log.d("StudyListRepository", "setStudyMetaInfo end");
     }
 
+
+    //Parameter:
+    //Return values:
+    //interface to get studyMetaInfos Arraylist
     public interface StudyMetaDataListener {
         void onStudyMetaDataReady(ArrayList<StudyMetaInfoModel> studyMetaInfosArrayList);
     }
+
 
     //Parameter:
     //Return Values:
     //method with the actual db call
     private void getStudyInfosFromDB() {
-        Log.d("StudyListRepository", "getStudyInfosFromDB start");
         db = FirebaseFirestore.getInstance();
         studiesRef = db.collection("studies");
         studyIdNameVpCat = new ArrayList<>();
