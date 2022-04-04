@@ -1,6 +1,5 @@
 package com.example.vpmanager.viewmodels;
 
-import android.util.Log;
 
 import androidx.lifecycle.ViewModel;
 
@@ -32,7 +31,6 @@ public class FindStudyViewModel extends ViewModel implements StudyListRepository
     //Return Values: an arrayList containing StudyMetaInfoModel-objects of all currently existing studies
     //Returns the filled arrayList of study data
     public ArrayList<StudyMetaInfoModel> getStudyMetaInfo() {
-        Log.d("FindStudyViewModel", "getStudyMetaInfo start + end (returns an ArrayList of StudyInfoModels)");
         return mStudyMetaInfo;
     }
 
