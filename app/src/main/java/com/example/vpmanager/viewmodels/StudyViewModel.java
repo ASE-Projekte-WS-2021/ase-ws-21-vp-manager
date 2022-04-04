@@ -28,11 +28,16 @@ public class StudyViewModel extends ViewModel implements StudyDetailsListener, S
 
     private StudyRepository mStudyRepo;
 
+
+    //Parameter:
+    //Return values:
+    //Gets instance of the study repository and sets the FirestoreCallback
     public void prepareRepo() {
         mStudyRepo = StudyRepository.getInstance();
-        //Instance is the same but different data can be retrieved!
+        //Instance is the same but different data can be retrieved
         mStudyRepo.setFirestoreCallback(this, this, this, this);
     }
+
 
     public void fetchStudyDetails(String currentStudyId) {
         mStudyRepo.getStudyDetails(currentStudyId);
@@ -102,7 +107,7 @@ public class StudyViewModel extends ViewModel implements StudyDetailsListener, S
 
     @Override
     public void onDateSelected(Boolean updated) {
-        if (updated){
+        if (updated) {
             studyDatesFragment.showSnackBarSelectionSuccessful();
         } else {
             studyDatesFragment.showSnackBarSelectionUnsuccessful();
@@ -110,12 +115,15 @@ public class StudyViewModel extends ViewModel implements StudyDetailsListener, S
         studyDatesFragment.reloadDates();
     }
 
-    private ArrayList<DateModel> removeExpiredDates(ArrayList<DateModel> list)
-    {
+
+    //Parameter: list
+    //Return values: ArrayList<DateModel>
+    //Removes the expired dates from the list view
+    private ArrayList<DateModel> removeExpiredDates(ArrayList<DateModel> list) {
         ArrayList<DateModel> dateList = new ArrayList<>();
 
-        for (DateModel date: list) {
-            if(!DateModel.isDateInPast(date))
+        for (DateModel date : list) {
+            if (!DateModel.isDateInPast(date))
                 dateList.add(date);
         }
         return dateList;
