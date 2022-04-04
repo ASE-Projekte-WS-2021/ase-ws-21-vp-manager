@@ -28,8 +28,8 @@
     <string name="createAlertLocation">Durchführungsort</string>
     <string name="createAlertOptionalBase">Sind Sie sicher das Sie ohne folgende Angaben fortfahren wollen:</string>
     <string name="createAlertVP">VP-Stunden</string>
-    <string name="createAlertRoom">Raum</string>
-    <string name="createAlertStreet">Straße</string>
+    <string name="createAlertRoom">Raum*</string>
+    <string name="createAlertStreet">Adresse*</string>
     <string name="createAlertPlatform">Plattform</string>
     <string name="createAlertDates">Termine</string>
     <string name="remoteString">Remote</string>
@@ -56,7 +56,7 @@
     <string name="fragment_create_study_desc_page_four_remote">Präferierte Streaming-Dienste für die Remote Ausführung, wie Zoom, Skype oder Discord können hier hinterlegt werden.</string>
     <string name="fragment_create_study_desc_page_four_presence">Unter folgender Adresse soll die Studie durchgeführt werden:</string>
     <string name="fragment_create_study_desc_page_three">Ordnen Sie hier Ihre Studie einer der thematischen Kategorien zu. \n\n Die Durchführungsart bezieht sich auf den lokalen Kontext (Remote / Präsenz).</string>
-    <string name="fragment_create_study_pageFourTitle">Ort / Adresse</string>
+    <string name="fragment_create_study_pageFourTitle">Ortsangaben</string>
     <string name="fragment_create_study_pageFourTitleTwo">Plattform</string>
     <string name="fragment_create_study_pageFiveTitle">Termine</string>
     <string name="fragment_create_study_desc_page_five">Wählen sie hier Termine aus, an denen sich potenzielle Teilnehmer für ihre Studie einschreiben können.</string>
@@ -150,6 +150,7 @@
     <string name="changeStudyStateContinue">Fortfahren</string>
     <string name="changeStudyStateTitleClose">Studie abschließen</string>
     <string name="changeStudyStateTitleOpen">Studie wieder öffnen</string>
+
 
 
 

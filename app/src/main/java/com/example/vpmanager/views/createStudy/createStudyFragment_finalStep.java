@@ -19,6 +19,7 @@ public class createStudyFragment_finalStep extends Fragment {
     private TextView executionTextView;
     private TextView locationTextView;
 
+
     //Parameter:
     //Return values:
     //Sets the current fragment for the activity
@@ -42,10 +43,11 @@ public class createStudyFragment_finalStep extends Fragment {
         loadData();
     }
 
+
     //Parameter:
     //Return values:
     //Connects the code with the view
-    private void setupView(View view){
+    private void setupView(View view) {
         titleTextView = view.findViewById(R.id.confirmTitle);
         vpTextView = view.findViewById(R.id.confirmVP);
         categoryTextView = view.findViewById(R.id.confirmCategory);
@@ -53,32 +55,33 @@ public class createStudyFragment_finalStep extends Fragment {
         locationTextView = view.findViewById(R.id.confirmLocation);
     }
 
+
     //Parameter:
     //Return values:
-    //Loads data recieved from the activity into the textfields
+    //Loads data received from the activity into the textfields
     private void loadData() {
-        if (CreateStudyFragment.createStudyViewModel.studyCreationProcessData.get("name") != null){
+        if (CreateStudyFragment.createStudyViewModel.studyCreationProcessData.get("name") != null) {
             String title = CreateStudyFragment.createStudyViewModel.studyCreationProcessData
                     .get("name").toString();
             titleTextView.setText(title);
         }
-        if (CreateStudyFragment.createStudyViewModel.studyCreationProcessData.get("vps") != null){
-            String vps =  CreateStudyFragment.createStudyViewModel.studyCreationProcessData
+        if (CreateStudyFragment.createStudyViewModel.studyCreationProcessData.get("vps") != null) {
+            String vps = CreateStudyFragment.createStudyViewModel.studyCreationProcessData
                     .get("vps").toString();
-                    vpTextView.setText(vps);
+            vpTextView.setText(vps);
         }
-        if (CreateStudyFragment.createStudyViewModel.studyCreationProcessData.get("category") != null){
+        if (CreateStudyFragment.createStudyViewModel.studyCreationProcessData.get("category") != null) {
             String category = CreateStudyFragment.createStudyViewModel.studyCreationProcessData
                     .get("category").toString();
             categoryTextView.setText(category);
         }
-        if (CreateStudyFragment.createStudyViewModel.studyCreationProcessData.get("executionType") != null){
-            String executionType =  CreateStudyFragment.createStudyViewModel
+        if (CreateStudyFragment.createStudyViewModel.studyCreationProcessData.get("executionType") != null) {
+            String executionType = CreateStudyFragment.createStudyViewModel
                     .studyCreationProcessData.get("executionType").toString();
             executionTextView.setText(executionType);
         }
 
-        if (CreateStudyFragment.createStudyViewModel.studyCreationProcessData.get("location") != null){
+        if (CreateStudyFragment.createStudyViewModel.studyCreationProcessData.get("location") != null) {
             String locationTxT = "";
 
             //if location is not null it is always added
@@ -87,14 +90,14 @@ public class createStudyFragment_finalStep extends Fragment {
             locationTxT += location;
 
             //if street exists, add street to string
-            if (CreateStudyFragment.createStudyViewModel.studyCreationProcessData.get("street") != null){
+            if (CreateStudyFragment.createStudyViewModel.studyCreationProcessData.get("street") != null) {
                 String street = CreateStudyFragment.createStudyViewModel.studyCreationProcessData
                         .get("street").toString();
                 locationTxT += "\n" + street;
             }
 
             //if room exists, add room to string
-            if (CreateStudyFragment.createStudyViewModel.studyCreationProcessData.get("room") != null){
+            if (CreateStudyFragment.createStudyViewModel.studyCreationProcessData.get("room") != null) {
                 String room = CreateStudyFragment.createStudyViewModel.studyCreationProcessData
                         .get("room").toString();
                 locationTxT += "\n" + room;
@@ -111,7 +114,7 @@ public class createStudyFragment_finalStep extends Fragment {
             platformTxT += platform;
 
             //if secondary platform is not null, add secondary platform to string
-            if (CreateStudyFragment.createStudyViewModel.studyCreationProcessData.get("platform2") != null){
+            if (CreateStudyFragment.createStudyViewModel.studyCreationProcessData.get("platform2") != null) {
                 String platform2 = CreateStudyFragment.createStudyViewModel.studyCreationProcessData
                         .get("platform2").toString();
                 platformTxT += "\n" + platform2;
@@ -119,21 +122,6 @@ public class createStudyFragment_finalStep extends Fragment {
 
             locationTextView.setText(platformTxT);
         }
-        /*
-        Bundle bundle = getArguments();
-        System.out.println(bundle);
-        if(bundle != null){
-            String titleTxt = getString(R.string.createStudyTitle) + ": " + bundle.getString("title");
-            String vpTxT = getString(R.string.createOfferedVP) + ": " + bundle.getString("vp");
-            String categoryTxT = getString(R.string.fragment_create_study_pageThreeTitle) + ": " + bundle.getString("category");
-            String executionTxT = getString(R.string.createStudyExe) + ": " + bundle.getString("exe");
-            String locationTxT = getString(R.string.fragment_create_study_pageFourTitle) + ": " + bundle.getString("location");
-            titleTextView.setText(titleTxt);
-            vpTextView.setText(vpTxT);
-            categoryTextView.setText(categoryTxT);
-            executionTextView.setText(executionTxT);
-            locationTextView.setText(locationTxT);
-        }
-         */
+
     }
 }
