@@ -340,6 +340,8 @@ public class CreateStudyFragment extends Fragment {
         String vps = createStudyFragment_StepOne.textInputEditTextVP.getText().toString();
         if (!vps.isEmpty()) {
             createStudyViewModel.studyCreationProcessData.put("vps", vps);
+        } else {
+            createStudyViewModel.studyCreationProcessData.put("vps", "0");
         }
 
         String category = createStudyFragment_StepOne.autoCompleteTextViewCategory.getText().toString();
