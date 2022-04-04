@@ -15,6 +15,10 @@ public class DateModel {
     private String dateId, date, studyId, userId;
     private Boolean selected, participated;
 
+
+    //Parameter: dateId, date, studyId, userId, selected, participated
+    //Return values:
+    //Sets variablese
     public DateModel(String dateId, String date, String studyId, String userId, Boolean selected, Boolean participated) {
 
         this.dateId = dateId;
@@ -26,8 +30,8 @@ public class DateModel {
 
     }
 
-    public DateModel(){
 
+    public DateModel() {
     }
 
     public String getDateId() {
@@ -46,7 +50,7 @@ public class DateModel {
         return userId;
     }
 
-    public Boolean getSelected(){
+    public Boolean getSelected() {
         return selected;
     }
 
@@ -66,14 +70,22 @@ public class DateModel {
         this.userId = userId;
     }
 
-    public void setSelected(Boolean selected){
+    public void setSelected(Boolean selected) {
         this.selected = selected;
     }
 
-    public boolean getParticipation() { return participated; }
+    public boolean getParticipation() {
+        return participated;
+    }
 
-    public void setParticipation(boolean participated) { this.participated = participated;}
+    public void setParticipation(boolean participated) {
+        this.participated = participated;
+    }
 
+
+    //Parameter: toSort
+    //Return values: ArrayList<DateModel>
+    //Sorts the date items chronologically
     public static ArrayList<DateModel> sortByDate(ArrayList<DateModel> toSort) {
         ArrayList<DateModel> list = new ArrayList<>();
 
@@ -115,6 +127,10 @@ public class DateModel {
         return list;
     }
 
+
+    //Parameter: date
+    //Return values: boolean
+    //Checks if chosen date is in the past
     public static boolean isDateInPast(DateModel date) {
 
         Calendar c = Calendar.getInstance();
