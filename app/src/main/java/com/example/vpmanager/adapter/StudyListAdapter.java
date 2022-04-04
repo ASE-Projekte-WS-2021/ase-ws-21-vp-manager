@@ -31,7 +31,7 @@ public class StudyListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
 
     //Parameter: context, studyMetaInfos, onStudyItemCLickListener
     //Return values:
-    //Class constructor; sets variables
+    //Sets variables
     public StudyListAdapter(Context context, ArrayList<StudyMetaInfoModel> studyMetaInfos,
                             OnStudyItemClickListener onStudyItemClickListener) {
         mContext = context;
