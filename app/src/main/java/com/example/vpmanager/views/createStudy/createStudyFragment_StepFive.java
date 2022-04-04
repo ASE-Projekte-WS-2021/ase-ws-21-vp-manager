@@ -29,6 +29,8 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
+import com.example.vpmanager.views.mainActivity;
+
 
 public class createStudyFragment_StepFive extends Fragment {
 
@@ -61,6 +63,7 @@ public class createStudyFragment_StepFive extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        mainActivity.currentFragment = "createStepFive";
         return inflater.inflate(R.layout.fragment_create_study_step_five, container, false);
     }
 

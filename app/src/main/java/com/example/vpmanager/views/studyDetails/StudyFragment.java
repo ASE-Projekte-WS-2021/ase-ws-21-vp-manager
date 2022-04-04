@@ -52,6 +52,7 @@ public class StudyFragment extends Fragment {
         datesFragment = new StudyDatesFragment();
 
         tabLayout.setupWithViewPager(viewPager);
+        mainActivity.currentFragment = "studyFragment";
 
         ViewPagerAdapter viewPagerAdapter = new ViewPagerAdapter(getParentFragmentManager(), 0);
         viewPagerAdapter.addFragment(detailsFragment, "Details");

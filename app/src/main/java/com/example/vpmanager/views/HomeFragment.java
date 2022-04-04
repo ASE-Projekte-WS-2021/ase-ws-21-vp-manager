@@ -63,6 +63,7 @@ public class HomeFragment extends Fragment {
         prepareViewModel();
         setupView(view);
         homeViewModel.getDatesStudiesVpsAndMatrikelNumberFromDb();
+        mainActivity.currentFragment = "home";
         return view;
     }
 

@@ -8,6 +8,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import com.example.vpmanager.views.mainActivity;
+
 
 import com.example.vpmanager.R;
 
@@ -34,6 +36,7 @@ public class createStudyFragment_finalStep extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        mainActivity.currentFragment = "createFinalStep";
         return inflater.inflate(R.layout.fragment_create_study_final_step, container, false);
     }
 

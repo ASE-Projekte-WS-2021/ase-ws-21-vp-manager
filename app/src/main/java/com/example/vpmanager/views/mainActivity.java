@@ -1,11 +1,18 @@
 package com.example.vpmanager.views;
 
+import android.app.Dialog;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.ImageView;
+import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.navigation.NavController;
@@ -26,6 +33,7 @@ public class mainActivity extends AppCompatActivity implements DrawerController 
     public DrawerLayout drawerLayoutMain;
     private NavController navController;
     public static NavController staticNavController;
+    public static String currentFragment = "";
     private NavigationView navigationViewMain;
     private NavHostFragment navHostFragment;
     private FirebaseAuth firebaseAuth;
@@ -165,6 +173,8 @@ public class mainActivity extends AppCompatActivity implements DrawerController 
         return NavigationUI.navigateUp(navController, appBarConfiguration) || super.onSupportNavigateUp();
     }
 
+
+
     //Parameter: context
     //Return values: uniqueID
     //Generates an unique id for every installation of the app.
@@ -204,8 +214,124 @@ public class mainActivity extends AppCompatActivity implements DrawerController 
     }
 
     @Override
-    public void onBackPressed() {
+    public boolean onCreateOptionsMenu(Menu menu){
+        MenuInflater menuInflater = getMenuInflater();
+        menuInflater.inflate(R.menu.app_bar_menu, menu);
+        return true;
+    }
 
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item){
+        if(item.getItemId() == R.id.pageInfoIcon){
+            showInfoText();
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    private void showInfoText() {
+        Dialog dialog = new Dialog(this, R.style.DialogStyle);
+        dialog.setContentView(R.layout.info_dialog);
+
+        dialog.getWindow().setBackgroundDrawableResource(R.drawable.bg_window);
+
+        ImageView btnClose = dialog.findViewById(R.id.btn_close);
+
+        btnClose.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialog.dismiss();
+            }
+        });
+
+        TextView title = dialog.findViewById(R.id.info_title);
+        TextView desc = dialog.findViewById(R.id.info_desc);
+
+       switch (currentFragment){
+           case "home":
+               title.setText(getString(R.string.infoPaMainTitle));
+               desc.setText(getString(R.string.infoPaMain));
+               break;
+           case "findStudy":
+               title.setText(getString(R.string.infoFindStudyTitle));
+               desc.setText(getString(R.string.infoFindStudies));
+               break;
+           case "login":
+               title.setText(getString(R.string.infoLoginTitle));
+               desc.setText(getString(R.string.infoLogin));
+               break;
+           case "register":
+               title.setText(getString(R.string.register_info_title));
+               desc.setText(getString(R.string.register_info_desc));
+               break;
+           case "upcomingAppointments":
+               title.setText(getString(R.string.infoPAUpcomingTitle));
+               desc.setText(getString(R.string.infoPaUpcoming));
+               break;
+           case "editFragment":
+               title.setText(getString(R.string.infoEditFragmentTitle));
+               desc.setText(getString(R.string.infoEditStudy));
+               break;
+           case "studyFragment":
+               title.setText(getString(R.string.infoStudyDetailsTitle));
+               desc.setText(getString(R.string.infoStudyDetails));
+               break;
+           case "studyCreatorFragment":
+               title.setText(getString(R.string.infoCreatorStudyDetailsTitle));
+               desc.setText(getString(R.string.infoStudyCreatorDetails));
+               break;
+           case "ownStudyFragment":
+               title.setText(getString(R.string.infoOwnStudiesTitle));
+               desc.setText(getString(R.string.infoOwnStudies));
+               break;
+           case "createBase":
+               title.setText(getString(R.string.infoCreateStartTitle));
+               desc.setText(getString(R.string.infoCreateStart));
+               break;
+           case "createStepOne":
+               title.setText(getString(R.string.infoCreateBaseTitle));
+               desc.setText(getString(R.string.infoCreateBase));
+               break;
+           case "createStepTwo":
+               title.setText(getString(R.string.infoCreateContactTitle));
+               desc.setText(getString(R.string.infoCreateContact));
+               break;
+           case "createStepThree":
+               title.setText(getString(R.string.infoCreateDescTitle));
+               desc.setText(getString(R.string.infoCreateDescription));
+               break;
+           case "createStepFourRemote":
+               title.setText(getString(R.string.infoCreatePlatformTitle));
+               desc.setText(getString(R.string.infoCreatePlatform));
+               break;
+           case "createStepFourPresence":
+               title.setText(getString(R.string.infoCreateLocationTitle));
+               desc.setText(getString(R.string.infoCreateLocation));
+               break;
+           case "createStepFive":
+               title.setText(getString(R.string.infoCreateDatesTitle));
+               desc.setText(getString(R.string.infoCreateDates));
+               break;
+           case "createFinalStep":
+               title.setText(getString(R.string.infoCreateConfirmDetailsTitle));
+               desc.setText(getString(R.string.infoCreateConfirmDetails));
+               break;
+           case "createFinalStepTwo":
+               title.setText(getString(R.string.infoCreateConfirmDetailsTitle));
+               desc.setText(getString(R.string.infoCreateConfirmDetails));
+               break;
+           case "createFinalStepThree":
+               title.setText(getString(R.string.infoCreateConfirmDatesTitle));
+               desc.setText(getString(R.string.infoCreateConfirmDates));
+               break;
+           default:
+               break;
+       }
+        dialog.show();
+
+    }
+
+    @Override
+    public void onBackPressed() {
         if (drawerLayoutMain.isOpen())
         {
             drawerLayoutMain.close();

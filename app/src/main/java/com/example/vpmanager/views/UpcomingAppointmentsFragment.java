@@ -36,6 +36,7 @@ public class UpcomingAppointmentsFragment extends Fragment {
         prepareViewModel();
         initHomeFragmentComponents(view);
         mViewModel.getAllDatesAndStudies();
+        mainActivity.currentFragment = "upcomingAppointments";
         //setUpDateList();
         return view;
     }

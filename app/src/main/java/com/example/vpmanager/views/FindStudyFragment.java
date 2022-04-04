@@ -61,6 +61,7 @@ public class FindStudyFragment extends Fragment implements StudyListAdapter.OnSt
         setupClickListener();
         //starting point to get the data
         findStudyViewModel.fetchStudyMetaData();
+        mainActivity.currentFragment = "findStudy";
         return view;
     }
 
