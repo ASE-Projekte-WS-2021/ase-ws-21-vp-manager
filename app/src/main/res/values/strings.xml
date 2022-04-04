@@ -184,6 +184,13 @@
     <string name="mailError">Email-Kontakt muss angegeben werden</string>
 
 
+    <!---Confirm Texts-->
+
+    <string name="participated">Teilgenommen</string>
+    <string name="notParticipated">Nicht Teilgenommen</string>
+
+
+
     <!-- Info Titles -->
     <string name="infoPaMainTitle">Dashboard</string>
     <string name="infoLoginTitle">Anmeldung</string>
