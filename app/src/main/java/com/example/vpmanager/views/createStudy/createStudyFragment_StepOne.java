@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 
+import com.example.vpmanager.Config;
 import com.example.vpmanager.R;
 import com.google.android.material.textfield.TextInputEditText;
 
@@ -34,7 +35,7 @@ public class createStudyFragment_StepOne extends Fragment {
     //Return values:
     //Sets the current fragment for the activity
     public createStudyFragment_StepOne() {
-        CreateStudyFragment.currentFragment = 1;
+        CreateStudyFragment.currentFragment = Config.createFragmentOne;
     }
 
     @Override
@@ -93,50 +94,50 @@ public class createStudyFragment_StepOne extends Fragment {
         }
         if (CreateStudyFragment.createStudyViewModel.studyCreationProcessData.get("category") != null) {
             String cat = CreateStudyFragment.createStudyViewModel.studyCreationProcessData.get("category").toString();
-            if (cat.equals("Feldstudie")) {
+            if (cat.equals(getString(R.string.fieldStudyText))) {
                 //categories.setSelection(1);
                 autoCompleteTextViewCategory.setText("Feldstudie", false);
             }
-            if (cat.equals("Fokusgruppe")) {
+            if (cat.equals(getString(R.string.focusGroupText))) {
                 //categories.setSelection(2);
                 autoCompleteTextViewCategory.setText("Fokusgruppe", false);
             }
-            if (cat.equals("Fragebogen")) {
+            if (cat.equals(getString(R.string.questionnaireText))) {
                 //categories.setSelection(3);
                 autoCompleteTextViewCategory.setText("Fragebogen", false);
             }
-            if (cat.equals("Gamingstudie")) {
+            if (cat.equals(getString(R.string.gamingText))) {
                 //categories.setSelection(4);
                 autoCompleteTextViewCategory.setText("Gamingstudie", false);
             }
-            if (cat.equals("Interview")) {
+            if (cat.equals(getString(R.string.interviewText))) {
                 //categories.setSelection(4);
                 autoCompleteTextViewCategory.setText("Interview", false);
             }
-            if (cat.equals("Laborstudien")) {
+            if (cat.equals(getString(R.string.labStudyText))) {
                 //categories.setSelection(4);
                 autoCompleteTextViewCategory.setText("Laborstudien", false);
             }
-            if (cat.equals("Tagebuchstudie")) {
+            if (cat.equals(getString(R.string.diaryStudyText))) {
                 //categories.setSelection(4);
                 autoCompleteTextViewCategory.setText("Tagebuchstudie", false);
             }
-            if (cat.equals("Usability/UXstudie")) {
+            if (cat.equals(getString(R.string.usabilityText))) {
                 //categories.setSelection(4);
                 autoCompleteTextViewCategory.setText("Usability/UXstudie", false);
             }
-            if (cat.equals("Sonstige")) {
+            if (cat.equals(getString(R.string.othersText))) {
                 //categories.setSelection(4);
                 autoCompleteTextViewCategory.setText("Sonstige", false);
             }
         }
         if (CreateStudyFragment.createStudyViewModel.studyCreationProcessData.get("executionType") != null) {
             String exe = CreateStudyFragment.createStudyViewModel.studyCreationProcessData.get("executionType").toString();
-            if (exe.equals("Remote")) {
+            if (exe.equals(getString(R.string.remoteString))) {
                 //executionType.setSelection(1);
                 autoCompleteTextViewExecutionType.setText("Remote", false);
             }
-            if (exe.equals("Präsenz")) {
+            if (exe.equals(getString(R.string.presenceString))) {
                 //executionType.setSelection(2);
                 autoCompleteTextViewExecutionType.setText("Präsenz", false);
             }

@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.vpmanager.Config;
 import com.example.vpmanager.R;
 import com.example.vpmanager.views.mainActivity;
 import com.google.android.material.textfield.TextInputEditText;
@@ -25,7 +26,7 @@ public class createStudyFragment_StepTwo extends Fragment {
     //Return values:
     //Sets the current fragment for the activity
     public createStudyFragment_StepTwo() {
-        CreateStudyFragment.currentFragment = 2;
+        CreateStudyFragment.currentFragment = Config.createFragmentTwo;
     }
 
     @Override

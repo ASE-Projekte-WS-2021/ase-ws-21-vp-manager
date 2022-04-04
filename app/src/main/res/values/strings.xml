@@ -67,6 +67,12 @@
     <string name="fragment_create_study_base_create">Erstellen</string>
     <string name="fragment_create_study_finalPage_title_three">Terminbestätigung</string>
 
+    <string name="progressbar_one">Basis</string>
+    <string name="progressbar_two">Beschreibung</string>
+    <string name="progressbar_three">Ort</string>
+    <string name="progressbar_four">Termine</string>
+    <string name="progressbar_five">Bestätigen</string>
+
 
     <string-array name="createCategoryList">
         <item>Studienkategorie</item>
@@ -99,8 +105,6 @@
     <string name="vpText">VPS</string>
     <string name="categoryText">Kategorien</string>
     <string name="executionText">Durchführung</string>
-    <string name="remoteText">Remote</string>
-    <string name="localText">Präsenz</string>
     <string name="fieldStudyText">Feldstudie</string>
     <string name="focusGroupText">Fokusgruppe</string>
     <string name="questionnaireText">Fragebogen</string>
@@ -169,6 +173,19 @@
     <string name="changeStudyStateContinue">Fortfahren</string>
     <string name="changeStudyStateTitleClose">Studie abschließen</string>
     <string name="changeStudyStateTitleOpen">Studie wieder öffnen</string>
+
+    <!---Error Texts-->
+
+    <string name="titleError">Titel darf nicht leer sein</string>
+    <string name="descriptionError">Studienbeschreibung darf nicht leer sein</string>
+    <string name="locationError">Ort der Studie muss angegeben werden</string>
+    <string name="platformError">Primärplattform muss angegeben werden</string>
+    <string name="mailError">Email-Kontakt muss angegeben werden</string>
+
+
+
+
+
 
 
 

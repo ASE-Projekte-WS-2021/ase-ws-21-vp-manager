@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 
 import androidx.fragment.app.Fragment;
 
+import com.example.vpmanager.Config;
 import com.example.vpmanager.R;
 import com.google.android.material.textfield.TextInputEditText;
 
@@ -21,7 +22,7 @@ public class createStudyFragment_StepFour_Presence extends Fragment {
     //Return values:
     //Sets the current fragment for the activity
     public createStudyFragment_StepFour_Presence() {
-        CreateStudyFragment.currentFragment = 4;
+        CreateStudyFragment.currentFragment = Config.createFragmentFour;
     }
 
     @Override
