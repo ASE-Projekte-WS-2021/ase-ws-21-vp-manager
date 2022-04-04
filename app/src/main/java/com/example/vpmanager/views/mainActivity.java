@@ -252,8 +252,8 @@ public class mainActivity extends AppCompatActivity implements DrawerController 
                desc.setText(getString(R.string.infoPaMain));
                break;
            case "findStudy":
-               //title.setText(getString(R.string.fin));
-               //desc.setText(getString(R.string.register_info_desc));
+               title.setText(getString(R.string.infoFindStudyTitle));
+               desc.setText(getString(R.string.infoFindStudies));
                break;
            case "login":
                title.setText(getString(R.string.infoLoginTitle));
@@ -264,8 +264,8 @@ public class mainActivity extends AppCompatActivity implements DrawerController 
                desc.setText(getString(R.string.register_info_desc));
                break;
            case "upcomingAppointments":
-               //title.setText(getString(R.string.));
-               //desc.setText(getString(R.string.register_info_desc));
+               title.setText(getString(R.string.infoPAUpcomingTitle));
+               desc.setText(getString(R.string.infoPaUpcoming));
                break;
            case "editFragment":
                title.setText(getString(R.string.infoEditFragmentTitle));

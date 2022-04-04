@@ -167,6 +167,8 @@
     <string name="infoStudyDetailsTitle">Studie einsehen</string>
     <string name="infoCreatorStudyDetailsTitle">Eigene Studie einsehen</string>
     <string name="infoOwnStudiesTitle">Eigene Studie</string>
+    <string name="infoFindStudyTitle">Studie finden</string>
+    <string name="infoPAUpcomingTitle">Anstehende Termine</string>
 
 
     <!-- Info Messages -->
@@ -191,6 +193,8 @@
     <string name="infoEditStudy">Hier können sie nachträglich Studieninformationen und Termine ändern / ergänzen.</string>
     <string name="infoOwnStudies">Sehen sie hier ihre Studienteilnahmen und den aktuellen Fortschritt ihres VP-Kontos ein. \n\n im "Meine Studien"-Tab können sie ihre eigenen Studien einsehen und bearbeiten.</string>
 
+    <string name="infoPaUpcoming">Alle ihre zukünftig anstehenden Termine werden hier angezeigt.</string>
+    <string name="infoFindStudies">Hier finden sie alle Studien, an denen sie aktuell teilnehmen können. \n\n Weitere Informationen und die Anmeldung für freie Termine finden sie in der Detailansicht.</string>
 
 </resources>
 
