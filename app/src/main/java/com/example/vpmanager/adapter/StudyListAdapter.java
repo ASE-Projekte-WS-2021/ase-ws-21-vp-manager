@@ -19,22 +19,24 @@ import com.example.vpmanager.models.StudyMetaInfoModel;
 
 import java.util.ArrayList;
 
+
 //this adapter adapts the individual recyclerView layouts to the recyclerView container
 public class StudyListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     private Context mContext;
     public ArrayList<StudyMetaInfoModel> mStudyMetaInfos;
     private OnStudyItemClickListener mOnStudyItemClickListener;
-    //maybe cancel animation?
     private Animation animation;
 
 
+    //Parameter: context, studyMetaInfos, onStudyItemCLickListener
+    //Return values:
+    //Class constructor; sets variables
     public StudyListAdapter(Context context, ArrayList<StudyMetaInfoModel> studyMetaInfos,
                             OnStudyItemClickListener onStudyItemClickListener) {
         mContext = context;
         mStudyMetaInfos = studyMetaInfos;
         mOnStudyItemClickListener = onStudyItemClickListener;
-        Log.d("StudyListAdapter", "constructor was called");
     }
 
     @NonNull
@@ -50,15 +52,15 @@ public class StudyListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
 
         ((CustomViewHolder) holder).studyTitle.setText(mStudyMetaInfos.get(position).getName());
 
-        if( mStudyMetaInfos.get(position).getVps() != null && mStudyMetaInfos.get(position).getVps().contains("null"))
+        if (mStudyMetaInfos.get(position).getVps() != null && mStudyMetaInfos.get(position).getVps().contains("null"))
             mStudyMetaInfos.get(position).setVps("0 VP-Stunden");
 
-        if(mStudyMetaInfos.get(position).getVps() != null && !mStudyMetaInfos.get(position).getVps().contains("VP-Stunden"))
+        if (mStudyMetaInfos.get(position).getVps() != null && !mStudyMetaInfos.get(position).getVps().contains("VP-Stunden"))
             mStudyMetaInfos.get(position).setVps(mStudyMetaInfos.get(position).getVps() + " VP-Stunden");
 
         ((CustomViewHolder) holder).studyVps.setText(mStudyMetaInfos.get(position).getVps());
         ((CustomViewHolder) holder).studyCat.setText(mStudyMetaInfos.get(position).getCategory());
-        ((CustomViewHolder)holder).setIcon(mStudyMetaInfos.get(position).getType());
+        ((CustomViewHolder) holder).setIcon(mStudyMetaInfos.get(position).getType());
     }
 
     @Override
@@ -93,21 +95,15 @@ public class StudyListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
 
 
             locationIcon = itemView.findViewById(R.id.localSymbolStudyFragment);
-            if(locationIcon.getVisibility()==View.VISIBLE) {
+            if (locationIcon.getVisibility() == View.VISIBLE) {
                 locationIcon.setAnimation(animation);
             }
             remoteIcon = itemView.findViewById(R.id.remoteSymbolStudyFragment);
-            if(remoteIcon.getVisibility()==View.VISIBLE) {
+            if (remoteIcon.getVisibility() == View.VISIBLE) {
                 remoteIcon.setAnimation(animation);
             }
 
-
-
-            /*separator = itemView.findViewById(R.id.separator);
-            separator.setAnimation(animation);*/
-
             studyItemParentLayout = itemView.findViewById(R.id.ll_item);
-
             studyItemParentLayout.setOnClickListener(this);
         }
 
@@ -115,24 +111,26 @@ public class StudyListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
         public void onClick(View view) {
             //Get the id of the item that was clicked
             String studyId = mStudyMetaInfos.get(getAdapterPosition()).getId();
-            Log.d("StudyListAdapter", "studyId that was clicked:" + studyId);
             onStudyItemClickListener.onStudyClick(studyId);
         }
 
+
         public void setIcon(String type) {
-            if(type.equals("Präsenz")){
+            if (type.equals("Präsenz")) {
                 locationIcon.setVisibility(View.VISIBLE);
                 locationIcon.setAnimation(animation);
-            } else{
+            } else {
                 remoteIcon.setVisibility(View.VISIBLE);
                 remoteIcon.setAnimation(animation);
+            }
         }
-        }
-
 
 
     }
 
+    //Parameter:
+    //Return values:
+    //interface to get studyId
     public interface OnStudyItemClickListener {
         void onStudyClick(String studyId);
     }
