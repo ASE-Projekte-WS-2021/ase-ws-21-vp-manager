@@ -146,7 +146,7 @@
 
     <fragment
         android:id="@+id/loginFragment"
-        android:name="com.example.vpmanager.views.loginFragment"
+        android:name="com.example.vpmanager.views.LoginFragment"
         android:label="Login"
         tools:layout="@layout/fragment_login">
         <action
@@ -155,7 +155,7 @@
     </fragment>
     <fragment
         android:id="@+id/registerFragment"
-        android:name="com.example.vpmanager.views.registerFragment"
+        android:name="com.example.vpmanager.views.RegisterFragment"
         android:label="Registrieren"
         tools:layout="@layout/fragment_register">
         <action

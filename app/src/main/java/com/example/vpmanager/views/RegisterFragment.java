@@ -12,68 +12,68 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 
 import com.example.vpmanager.AccessDatabase;
 import com.example.vpmanager.R;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
+import com.example.vpmanager.viewmodels.LoginRegisterViewModel;
 import com.google.android.material.textfield.TextInputEditText;
-import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
-
 
 // Custom Dialog Src: https://github.com/subhojitdp/Custom-Dialog
 
-
-public class registerFragment extends Fragment {
+public class RegisterFragment extends Fragment {
 
     private TextInputEditText emailEdittext;
     private TextInputEditText passwordEditText;
     private TextInputEditText passwordConfirmEditText;
     private TextInputEditText matnrEditText;
     private TextInputEditText vpEditText;
+
     private Button registerButton;
     private TextView toLoginTextView;
     private ImageView infoButton;
 
-    private FirebaseAuth firebaseAuth;
+    private LoginRegisterViewModel mViewModel;
     private NavController navController;
-    private AccessDatabase accessDatabase;
 
-    public registerFragment() {
-        // Required empty public constructor
+    private String eMail, matNr, finalNeededVP;
+
+    public RegisterFragment() {
+
     }
-
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        firebaseAuth = FirebaseAuth.getInstance();
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         mainActivity.currentFragment = "register";
-        return inflater.inflate(R.layout.fragment_register, container, false);
+        View view = inflater.inflate(R.layout.fragment_register, container, false);
+        prepareViewModel();
+        setupView(view);
+        //register process starts when user clicks
+        setOnClickListeners();
+        return view;
     }
 
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
-        setupView(view);
-        accessDatabase = new AccessDatabase();
-        ((mainActivity)getActivity()).setDrawerLocked();
         navController = Navigation.findNavController(view);
-        setOnClickListeners();
-
+        ((mainActivity) getActivity()).setDrawerLocked();
     }
 
+    private void prepareViewModel() {
+        //mainActivity should be viewModelStoreOwner
+        mViewModel = new ViewModelProvider(requireActivity()).get(LoginRegisterViewModel.class);
+        mViewModel.registerFragment = this;
+        mViewModel.prepareRepo();
+    }
 
     //Parameter:
     //Return values:
@@ -96,11 +96,9 @@ public class registerFragment extends Fragment {
         registerButton.setOnClickListener(view -> {
             createUser();
         });
-
         toLoginTextView.setOnClickListener(view -> {
             navController.navigate(R.id.action_registerFragment_to_loginFragment);
         });
-        
         infoButton.setOnClickListener(view -> {
             showToolTip();
         });
@@ -129,24 +127,19 @@ public class registerFragment extends Fragment {
         dialog.show();
     }
 
-    private void registerNewUser(String email, String matNr, String neededVP) {
-        accessDatabase.createNewUser(email, matNr, neededVP);
-    }
-
-
     //Parameter:
     //Return values:
     //Handles account creation if the and provides feedback if the task was successful
     private void createUser() {
-        String email = emailEdittext.getText().toString().trim();
+        eMail = emailEdittext.getText().toString().trim();
         String password = passwordEditText.getText().toString().trim();
         String confirmPassword = passwordConfirmEditText.getText().toString().trim();
-        String matNr = matnrEditText.getText().toString().trim();
+        matNr = matnrEditText.getText().toString().trim();
         String neededVP = vpEditText.getText().toString().trim();
-        if(TextUtils.isEmpty(neededVP)){
+        if (TextUtils.isEmpty(neededVP)) {
             neededVP = "15";
         }
-        if (TextUtils.isEmpty(email)) {
+        if (TextUtils.isEmpty(eMail)) {
             emailEdittext.setError("Email kann nicht leer sein");
             emailEdittext.requestFocus();
         } else if (TextUtils.isEmpty(password)) {
@@ -156,17 +149,24 @@ public class registerFragment extends Fragment {
             passwordConfirmEditText.setError("Passwörter müssen übereinstimmen");
             passwordConfirmEditText.requestFocus();
         } else {
-            String finalNeededVP = neededVP;
-            firebaseAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+            finalNeededVP = neededVP;
+
+            //start of register chain
+            mViewModel.registerNewUser(eMail, password);
+
+            /*
+            firebaseAuth.createUserWithEmailAndPassword(eMail, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                 @Override
                 public void onComplete(@NonNull Task<AuthResult> task) {
                     if (task.isSuccessful()) {
+
                         firebaseAuth.getCurrentUser().sendEmailVerification().addOnCompleteListener(new OnCompleteListener<Void>() {
                             @Override
                             public void onComplete(@NonNull Task<Void> task) {
                                 if (task.isSuccessful()) {
-                                    registerNewUser(email, matNr, finalNeededVP);
-                                    firebaseAuth.signOut();
+
+                                    //registerNewUser(eMail, matNr, finalNeededVP);
+                                    //firebaseAuth.signOut();
                                     Toast.makeText(getActivity(), "Registierung erfolgreich, bitte überprüfe deine Email-Postfach", Toast.LENGTH_LONG).show();
                                     Handler handler = new Handler();
                                     handler.postDelayed(new Runnable() {
@@ -185,19 +185,34 @@ public class registerFragment extends Fragment {
                     }
                 }
             });
+
+             */
         }
     }
 
-    private String translateError(String error){
-        String translatedError = "";
-        if(error.startsWith("The email address is already in use"))
-        {
-            translatedError = "Die Email-Adresse wird bereits von einem anderen Account verwendet";
-        }
-        if(error.startsWith("The email address is badly")){
-            translatedError = "Keine gültige Email-Adresse";
-        }
-        return translatedError;
-
+    public void saveUserInDb() {
+        mViewModel.saveUserInDb(eMail, matNr, finalNeededVP);
     }
+
+    public void showToast(String errorText) {
+        Toast.makeText(requireActivity(), errorText, Toast.LENGTH_LONG).show();
+    }
+
+    public void navigateToLogin() {
+        String toastString = "Registierung erfolgreich, bitte überprüfe deine Email-Postfach";
+        showToast(toastString);
+        Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                navController.navigate(R.id.action_registerFragment_to_loginFragment);
+            }
+        }, 1000);
+    }
+
+    /*
+    private void registerNewUser(String email, String matNr, String neededVP) {
+        accessDatabase.createNewUser(email, matNr, neededVP);
+    }
+     */
 }
