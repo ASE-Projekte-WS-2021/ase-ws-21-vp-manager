@@ -35,6 +35,7 @@ public class studyCreatorFragment extends Fragment {
     private StudyCreatorDetailsFragment detailsFragment;
     private StudyCreatorDatesFragment datesFragment;
 
+
     public studyCreatorFragment() {
     }
 
@@ -71,12 +72,16 @@ public class studyCreatorFragment extends Fragment {
         navController = Navigation.findNavController(view);
         super.onViewCreated(view, savedInstanceState);
         Boolean fromEditFragment = getArguments().getBoolean("fromEditFragment");
-        if (fromEditFragment){
+        if (fromEditFragment) {
             Snackbar snackbar = Snackbar.make(view, "Studie geupdated", Snackbar.LENGTH_SHORT);
             snackbar.show();
         }
     }
 
+
+    //Parameter:
+    //Return values:
+    //Sets the current user ID and study ID
     private void getRequiredInfos() {
         currentUserId = mainActivity.createUserId(getActivity());
         currentStudyId = getArguments().getString("studyId");
@@ -84,6 +89,7 @@ public class studyCreatorFragment extends Fragment {
     }
 
 
+    //viewPagerAdapter class for swiping between tab fragments
     private class viewPagerAdapter extends FragmentStatePagerAdapter {
 
         private List<Fragment> fragments = new ArrayList<>();
