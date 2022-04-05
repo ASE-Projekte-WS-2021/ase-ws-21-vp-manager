@@ -8,6 +8,7 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
@@ -43,10 +44,10 @@ public class HomeFragment extends Fragment {
     private TextView progressHint, missingVpsText, plannedCompletionDate, collectedVPText;
     private Button appointmentsButton, findStudyButton, registerMatrikelnummer;
 
-    private LinearLayout progressBarLayout, defaultLayout, appointmentLayout, registerMatrikelnumberLayout;
+    private LinearLayout progressBarLayout, defaultLayout,registerMatrikelnumberLayout;
     private ScrollView appointmentScrollView;
     private FlexboxLayout flexLayout;
-
+    private RelativeLayout appointmentLayout;
     public HomeFragment() {
     }
 

@@ -206,7 +206,7 @@
 
     <!-- Info Messages -->
     <string name="infoLogin">Zur Verwendung des VP Managers benötigen Sie einen individuellen Nutzeraccounnt. \n\n Geben Sie hier wenn möglich Ihre universitäre E-Mail-Adresse an.</string>
-    <string name="infoPaMain">Sehen sie hier den aktuellen Stand ihrer VP-Stunden ein. Zusätzlich finden Sie alle zukünftigen Termine für Ihre anstehenden Studien und Teilnahmen.</string>
+    <string name="infoPaMain">Sehen sie hier den aktuellen Stand ihrer VP-Stunden ein. Zusätzlich finden Sie zukünftige Termine für Ihre anstehenden Studien und Teilnahmen.</string>
 
     <string name="infoCreateStart">Geben sie in den folgenden Schritten alle relevanen Informationen zu ihrer Studie an. \n\n Potenzielle Teilnehmer können diese anschließend über den Reiter "Studie finden" einsehen und sich für ihre angegebenen Termine eintragen. </string>
     <string name="infoCreateBase">Metadaten zu ihrer Studie. \n\n Diese sind auch außerhalb der Detailansicht in der Studienliste sichtbar.</string>
