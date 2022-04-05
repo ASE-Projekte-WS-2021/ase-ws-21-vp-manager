@@ -2,8 +2,8 @@ package com.example.vpmanager.views;
 
 import android.os.Bundle;
 
-import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 
@@ -16,55 +16,52 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.vpmanager.R;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.gms.tasks.Task;
+import com.example.vpmanager.viewmodels.LoginRegisterViewModel;
 import com.google.android.material.textfield.TextInputEditText;
-import com.google.firebase.auth.AuthResult;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 
-
-public class loginFragment extends Fragment {
+public class LoginFragment extends Fragment {
 
     private TextInputEditText emailEdittext;
     private TextInputEditText passwordEditText;
     private Button forgotPasswordButton;
     private Button loginButton;
     private TextView registerView;
-
-    private FirebaseAuth firebaseAuth;
+    //private FirebaseAuth firebaseAuth;
     private NavController navController;
+    private LoginRegisterViewModel mViewModel;
 
+    public LoginFragment() {
 
-    public loginFragment() {
-        // Required empty public constructor
     }
-
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        firebaseAuth = FirebaseAuth.getInstance();
+        //firebaseAuth = FirebaseAuth.getInstance();
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
+        View view = inflater.inflate(R.layout.fragment_login, container, false);
         mainActivity.currentFragment = "login";
-        return inflater.inflate(R.layout.fragment_login, container, false);
+        prepareViewModel();
+        setupView(view);
+        setOnClickListeners();
+        return view;
     }
 
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
-        setupView(view);
-        ((mainActivity) getActivity()).setDrawerLocked();
         navController = Navigation.findNavController(view);
-        setOnClickListeners();
+        ((mainActivity) getActivity()).setDrawerLocked();
     }
 
+    private void prepareViewModel() {
+        mViewModel = new ViewModelProvider(requireActivity()).get(LoginRegisterViewModel.class);
+        mViewModel.loginFragment = this;
+        mViewModel.prepareRepo();
+    }
 
     //Parameter:
     //Return values:
@@ -105,12 +102,15 @@ public class loginFragment extends Fragment {
             emailEdittext.setError("Bitte Email-Adresse angeben um Passwort zurückzusetzen");
             emailEdittext.requestFocus();
         } else {
+            mViewModel.resetPassword(email);
+            /*
             firebaseAuth.sendPasswordResetEmail(email).addOnSuccessListener(new OnSuccessListener<Void>() {
                 @Override
                 public void onSuccess(Void unused) {
                     Toast.makeText(getActivity(), "Bitte überpürfen Sie ihr Email-Postfach", Toast.LENGTH_LONG).show();
                 }
             });
+             */
         }
     }
 
@@ -128,13 +128,15 @@ public class loginFragment extends Fragment {
             passwordEditText.setError("Passwort kann nicht leer sein");
             passwordEditText.requestFocus();
         } else {
+            mViewModel.login(email, password);
+            /*
             firebaseAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                 @Override
                 public void onComplete(@NonNull Task<AuthResult> task) {
                     if (task.isSuccessful()) {
                         FirebaseUser user = firebaseAuth.getCurrentUser();
                         if (user != null) {
-                            System.out.println(user.isEmailVerified());
+                            //System.out.println(user.isEmailVerified());
                             if (user.isEmailVerified()) {
                                 mainActivity.uniqueID = email;
                                 mainActivity.createUserId(getActivity());
@@ -151,10 +153,22 @@ public class loginFragment extends Fragment {
                     }
                 }
             });
+             */
         }
-
+    }
+    //successful login
+    public void createUserInMainActivity(String email) {
+        mainActivity.uniqueID = email;
+        mainActivity.createUserId(getActivity());
+        ((mainActivity) getActivity()).setDrawerUnlocked();
+        navController.navigate(R.id.action_global_homeFragment);
     }
 
+    public void showToast(String errorText) {
+        Toast.makeText(requireActivity(), errorText, Toast.LENGTH_LONG).show();
+    }
+
+    /*
     private String translateError(String error){
         String translatedError = "";
         if(error.startsWith("The password is invalid"))
@@ -168,6 +182,8 @@ public class loginFragment extends Fragment {
             translatedError = "Anmeldung wurde temporär blockiert aufgrund vieler fehlgeschlagenen Anmeldungsversuche";
         }
         return translatedError;
+
     }
 
+     */
 }

@@ -1,25 +1,13 @@
 package com.example.vpmanager;
 
-import static android.content.ContentValues.TAG;
-
-import android.util.Log;
-
-import androidx.annotation.NonNull;
-
-import com.google.firebase.firestore.DocumentReference;
-import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.FirebaseFirestoreException;
-import com.google.firebase.firestore.Transaction;
-
-import java.util.HashMap;
-import java.util.Map;
 
 public class AccessDatabase {
     FirebaseFirestore db;
 
     //HomeActivity --------------------------------------------------------------------------------!
     //Adds a new user (installation of the app) to the database, if it doesn't already exist
+    /*
     public void createNewUser(String deviceId, String matNr, String neededVP) {
         db = FirebaseFirestore.getInstance();
         //A DocumentReference refers to a document location
@@ -41,6 +29,8 @@ public class AccessDatabase {
         }).addOnSuccessListener(aVoid -> Log.d(TAG, "Transaction success!"
         )).addOnFailureListener(e -> Log.w(TAG, "Transaction failure.", e));
     }
+
+     */
 
     //CreateStudyActivity -------------------------------------------------------------------------!
 
