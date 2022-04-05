@@ -126,6 +126,9 @@
     <string name="dropDateView">Sie haben sich bereits für einen Termin eingetragen. (für Abmeldung hier kilcken)</string>
     <string name="dropDateQuestion">Möchten Sie sich für diesen Termin wieder austragen?</string>
     <string name="selectDateQuestion">Möchten Sie sich für diesen Termin eintragen?</string>
+    <string name="ownStudyStatusTab">Mein VP-Status</string>
+    <string name="ownStudyTab">Meine Studien</string>
+
 
     <!--General-->
     <string name="yes">Ja</string>
