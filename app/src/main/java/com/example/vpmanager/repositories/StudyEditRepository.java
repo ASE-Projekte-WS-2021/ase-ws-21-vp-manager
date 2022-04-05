@@ -34,6 +34,10 @@ public class StudyEditRepository {
     private StudyDatesListener editStudyDatesListener;
     private StudyUpdatedListener studyUpdatedListener;
 
+
+    //Parameter:
+    //Return values: StudyEditRepository
+    //Creates an instance of the repo and returns always the same one
     public static StudyEditRepository getInstance() {
         if (instance == null) {
             instance = new StudyEditRepository();
@@ -41,6 +45,9 @@ public class StudyEditRepository {
         return instance;
     }
 
+    //Parameter: editStudyDetailsListener, editStudyDatesListener,studyUpdatedListener
+    //Return values:
+    //Firestore callback; set Listeners
     public void setFirestoreCallback(EditStudyDetailsListener editStudyDetailsListener,
                                      StudyDatesListener editStudyDatesListener,
                                      StudyUpdatedListener studyUpdatedListener) {
@@ -48,6 +55,7 @@ public class StudyEditRepository {
         this.editStudyDatesListener = editStudyDatesListener;
         this.studyUpdatedListener = studyUpdatedListener;
     }
+
 
     public void getStudyEditDetails(String currentStudyIdEdit) {
         loadStudyEditDetails(currentStudyIdEdit);
@@ -57,6 +65,10 @@ public class StudyEditRepository {
         loadStudyEditDates(currentStudyIdEdit);
     }
 
+
+    //Parameter: currentStudyIdEdit
+    //Return values:
+    //Loads all study detail values from database
     private void loadStudyEditDetails(String currentStudyIdEdit) {
         db = FirebaseFirestore.getInstance();
         CollectionReference studyDocRef = db.collection("studies");
@@ -97,6 +109,10 @@ public class StudyEditRepository {
         });
     }
 
+
+    //Parameter: currentStudyIdEdit
+    //Return values:
+    //Loads all study date values from database
     private void loadStudyEditDates(String currentStudyIdEdit) {
         db = FirebaseFirestore.getInstance();
         CollectionReference datesRef = db.collection("dates");
@@ -127,7 +143,9 @@ public class StudyEditRepository {
                 });
     }
 
-    //no callback yet. only if the study is updated completely
+    //Parameter: specificDate, specificDateId
+    //Return values:
+    //Updates dates in database; no callback yet: only if the study is updated completely
     public void updateDates(Map<String, Object> specificDate, String specificDateId) {
         db = FirebaseFirestore.getInstance();
         db.collection("dates").document(specificDateId)
@@ -136,6 +154,9 @@ public class StudyEditRepository {
                 .addOnFailureListener(e -> Log.w(TAG, "Error writing/updating document", e));
     }
 
+    //Parameter: updatedStudyMap, idOfUpdatedStudy
+    //Return values:
+    //Updates studies in database
     public void updateStudy(Map<String, Object> updatedStudyMap, String idOfUpdatedStudy) {
         db = FirebaseFirestore.getInstance();
         db.collection("studies").document(idOfUpdatedStudy)
@@ -145,6 +166,10 @@ public class StudyEditRepository {
                 .addOnFailureListener(e -> Log.w(TAG, "Error updating study document", e));
     }
 
+
+    //Parameter: dateId
+    //Return values:
+    //Deletes data from database
     public void deleteDate(String dateId) {
         db = FirebaseFirestore.getInstance();
         db.collection("dates").document(dateId)
