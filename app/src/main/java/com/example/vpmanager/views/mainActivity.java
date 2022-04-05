@@ -117,13 +117,12 @@ public class mainActivity extends AppCompatActivity implements DrawerController 
             @Override
             public boolean onMenuItemClick(MenuItem menuItem) {
                 firebaseAuth.signOut();
-                navController.navigate(R.id.action_global_nestedGraphLoginRegistration);
+                navController.navigate(R.id.action_global_loginFragment);
                 Log.d("mainActivity", "menuItem" + navigationViewMain.getMenu().getItem(4).toString());
                 Log.d("mainActivity", "additional listener on logout was active!");
                 return false;
             }
         });
-
         /*
         navigationViewMain.getMenu().getItem(1).setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
             @Override
@@ -160,7 +159,6 @@ public class mainActivity extends AppCompatActivity implements DrawerController 
     //allows NavigationUI to support proper up navigation (in the Action Bar)
     @Override
     public boolean onSupportNavigateUp() {
-      
         return NavigationUI.navigateUp(navController, appBarConfiguration) || super.onSupportNavigateUp();
     }
 
@@ -185,7 +183,7 @@ public class mainActivity extends AppCompatActivity implements DrawerController 
                 }
             }
         } else {
-            staticNavController.navigate(R.id.action_global_nestedGraphLoginRegistration);
+            staticNavController.navigate(R.id.action_global_loginFragment);
         }
         return uniqueID;
     }

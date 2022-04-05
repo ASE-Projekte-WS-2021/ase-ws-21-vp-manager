@@ -90,7 +90,7 @@ public class HomeFragment extends Fragment {
             }
         });
         if (user == null) {
-            navController.navigate(R.id.action_global_nestedGraphLoginRegistration);
+            navController.navigate(R.id.action_global_loginFragment);
         }
     }
 
