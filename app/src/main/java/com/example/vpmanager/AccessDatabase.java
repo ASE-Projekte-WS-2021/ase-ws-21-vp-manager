@@ -1,19 +1,6 @@
 package com.example.vpmanager;
 
-import static android.content.ContentValues.TAG;
-
-import android.util.Log;
-
-import androidx.annotation.NonNull;
-
-import com.google.firebase.firestore.DocumentReference;
-import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.FirebaseFirestoreException;
-import com.google.firebase.firestore.Transaction;
-
-import java.util.HashMap;
-import java.util.Map;
 
 public class AccessDatabase {
     FirebaseFirestore db;

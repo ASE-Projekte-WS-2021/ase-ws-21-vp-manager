@@ -17,11 +17,9 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 
-import com.example.vpmanager.AccessDatabase;
 import com.example.vpmanager.R;
 import com.example.vpmanager.viewmodels.LoginRegisterViewModel;
 import com.google.android.material.textfield.TextInputEditText;
-import com.google.firebase.auth.FirebaseAuth;
 
 // Custom Dialog Src: https://github.com/subhojitdp/Custom-Dialog
 
