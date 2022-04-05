@@ -77,7 +77,7 @@ public class StudyRepository {
         this.selectDateListener = selectDateListener;
     }
 
-    //Parameter:
+    //Parameter: studyDetailsListener, studyDatesListener
     //Return values:
     //Firestore callback; set studyDates and studyDetails Listener
     public void setFirestoreCallback(StudyDetailsListener studyDetailsListener, StudyDatesListener studyDatesListener) {

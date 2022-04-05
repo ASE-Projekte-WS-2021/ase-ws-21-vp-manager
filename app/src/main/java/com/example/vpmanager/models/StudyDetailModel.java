@@ -5,7 +5,6 @@ public class StudyDetailModel {
     private String id, name, description, vps;
     private String contactOne, contactTwo, contactThree, contactFour, contactFive;
     private String category, executionType;
-
     private String remotePlatformOne, remotePlatformTwo;
     private String location, street, room;
     private boolean studyState;
