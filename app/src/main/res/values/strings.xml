@@ -181,6 +181,7 @@
     <string name="vpTag">VP-Stunden</string>
     <string name="catTag">Kategorie</string>
     <string name="conTag">Kontakt</string>
+    <string name="locTag">Durchführungsort</string>
     <string name="typeTag">Studientyp</string>
 
     <string name="catHint">Studienkategorie</string>
