@@ -17,7 +17,7 @@
             android:layout_marginStart="25dp"
             android:layout_marginTop="20dp"
             android:layout_marginEnd="25dp"
-            android:text="Ausgeschriebene Studien"
+            android:text="Selbsterstellte Studien"
             android:fontFamily="@font/google_sans_medium"
             android:textSize="23sp"
             android:textStyle="bold" />
@@ -258,6 +258,7 @@
             android:background="@color/color_two" />
 
     </LinearLayout>
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerViewFindStudyFragment"
         android:layout_width="match_parent"

@@ -36,4 +36,8 @@ public class StudyObjectPa {
     public int getColor() {
         return color;
     }
+
+    public void setVps(String s) {
+        this.vps = s;
+    }
 }
