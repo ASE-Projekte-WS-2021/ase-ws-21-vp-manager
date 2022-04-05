@@ -121,7 +121,7 @@ public class StudyListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
 
         //Parameter: type
         //Return values:
-        //Sets the icon depending the study type
+        //Sets the icon depending on the study type
         public void setIcon(String type) {
             if (type.equals("Präsenz")) {
                 locationIcon.setVisibility(View.VISIBLE);

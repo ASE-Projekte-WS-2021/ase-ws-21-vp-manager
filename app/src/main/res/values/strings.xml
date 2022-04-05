@@ -182,6 +182,7 @@
     <string name="locationError">Ort der Studie muss angegeben werden</string>
     <string name="platformError">Primärplattform muss angegeben werden</string>
     <string name="mailError">Email-Kontakt muss angegeben werden</string>
+    <string name="selectDateError">Dieser Termin ist nicht mehr verfügbar!</string>
 
 
     <!---Confirm Texts-->
