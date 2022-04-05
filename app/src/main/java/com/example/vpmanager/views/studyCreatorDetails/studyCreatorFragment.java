@@ -61,6 +61,7 @@ public class studyCreatorFragment extends Fragment {
         viewPagerAdapter.addFragment(detailsFragment, "Details");
         viewPagerAdapter.addFragment(datesFragment, "Termine");
         viewPager.setAdapter(viewPagerAdapter);
+        mainActivity.currentFragment = "studyCreatorFragment";
 
         return view;
     }

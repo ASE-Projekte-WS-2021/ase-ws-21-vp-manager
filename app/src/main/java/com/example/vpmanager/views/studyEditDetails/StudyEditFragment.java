@@ -49,6 +49,7 @@ public class StudyEditFragment extends Fragment {
         studyEditDatesFragment = new StudyEditDatesFragment();
 
         tabLayoutEdit.setupWithViewPager(viewPagerEdit);
+        mainActivity.currentFragment = "editFragment";
 
         ViewPagerAdapter viewPagerAdapter = new ViewPagerAdapter(getParentFragmentManager(), 0);
         viewPagerAdapter.addFragment(studyEditDetailsFragment, "Details");

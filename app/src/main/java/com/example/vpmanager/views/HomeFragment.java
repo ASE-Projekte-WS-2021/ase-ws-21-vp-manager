@@ -63,6 +63,7 @@ public class HomeFragment extends Fragment {
         prepareViewModel();
         setupView(view);
         homeViewModel.getDatesStudiesVpsAndMatrikelNumberFromDb();
+        mainActivity.currentFragment = "home";
         return view;
     }
 
@@ -90,7 +91,7 @@ public class HomeFragment extends Fragment {
             }
         });
         if (user == null) {
-            navController.navigate(R.id.action_global_nestedGraphLoginRegistration);
+            navController.navigate(R.id.action_global_loginFragment);
         }
     }
 
@@ -411,7 +412,7 @@ public class HomeFragment extends Fragment {
         collectedVPText.setText(collected);
     }
 
-    public void setPlannedCompletionDate(String completionDate){
+    public void setPlannedCompletionDate(String completionDate) {
         plannedCompletionDate.setText(completionDate);
     }
 

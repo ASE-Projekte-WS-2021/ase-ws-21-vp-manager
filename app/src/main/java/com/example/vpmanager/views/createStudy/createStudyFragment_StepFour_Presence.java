@@ -7,8 +7,11 @@ import android.view.ViewGroup;
 
 import androidx.fragment.app.Fragment;
 
+import com.example.vpmanager.Config;
 import com.example.vpmanager.R;
 import com.google.android.material.textfield.TextInputEditText;
+import com.example.vpmanager.views.mainActivity;
+
 
 public class createStudyFragment_StepFour_Presence extends Fragment {
 
@@ -16,11 +19,12 @@ public class createStudyFragment_StepFour_Presence extends Fragment {
     public static TextInputEditText textInputEditTextStreet;
     public static TextInputEditText textInputEditTextRoom;
 
+
     //Parameter:
     //Return values:
     //Sets the current fragment for the activity
     public createStudyFragment_StepFour_Presence() {
-        CreateStudyFragment.currentFragment = 4;
+        CreateStudyFragment.currentFragment = Config.createFragmentFour;
     }
 
     @Override
@@ -30,6 +34,7 @@ public class createStudyFragment_StepFour_Presence extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        mainActivity.currentFragment = "createStepFourPresence";
         return inflater.inflate(R.layout.fragment_create_study_step_four_presence, container, false);
     }
 
@@ -42,7 +47,7 @@ public class createStudyFragment_StepFour_Presence extends Fragment {
     //Parameter:
     //Return values:
     //Connects the code with the view
-    private void setupView(View view){
+    private void setupView(View view) {
         textInputEditTextLocation = view.findViewById(R.id.inputFieldLocation);
         textInputEditTextStreet = view.findViewById(R.id.inputFieldStreet);
         textInputEditTextRoom = view.findViewById(R.id.inputFieldRoom);
@@ -51,7 +56,7 @@ public class createStudyFragment_StepFour_Presence extends Fragment {
 
     //Parameter:
     //Return values:
-    //Loads data recieved from the activity into the inputfields
+    //Loads data received from the activity into the inputfields
     private void loadData() {
         if (CreateStudyFragment.createStudyViewModel.studyCreationProcessData.get("location") != null) {
             textInputEditTextLocation.setText(
@@ -65,13 +70,6 @@ public class createStudyFragment_StepFour_Presence extends Fragment {
             textInputEditTextRoom.setText(
                     CreateStudyFragment.createStudyViewModel.studyCreationProcessData.get("room").toString());
         }
-        /*
-        Bundle bundle = getArguments();
-        if(bundle != null){
-            textInputEditTextLocation.setText(bundle.getString("location"));
-            textInputEditTextStreet.setText(bundle.getString("street"));
-            textInputEditTextRoom.setText(bundle.getString("room"));
-        }
-         */
+
     }
 }

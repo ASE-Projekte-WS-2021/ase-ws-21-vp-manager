@@ -8,19 +8,21 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.vpmanager.Config;
 import com.example.vpmanager.R;
 import com.google.android.material.textfield.TextInputEditText;
+import com.example.vpmanager.views.mainActivity;
+
 
 public class createStudyFragment_StepThree extends Fragment {
 
     public static TextInputEditText textInputEditTextDesc;
 
+
     //Parameter:
     //Return values:
     //Sets the current fragment for the activity
-    public createStudyFragment_StepThree() {
-        CreateStudyFragment.currentFragment = 3;
-    }
+    public createStudyFragment_StepThree() { CreateStudyFragment.currentFragment = Config.createFragmentThree; }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -29,6 +31,7 @@ public class createStudyFragment_StepThree extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        mainActivity.currentFragment = "createStepThree";
         return inflater.inflate(R.layout.fragment_create_study_step_three, container, false);
     }
 
@@ -54,11 +57,5 @@ public class createStudyFragment_StepThree extends Fragment {
             textInputEditTextDesc.setText(
                     CreateStudyFragment.createStudyViewModel.studyCreationProcessData.get("description").toString());
         }
-        /*
-        Bundle bundle = getArguments();
-        if(bundle != null){
-            textInputEditTextDesc.setText(bundle.getString("desc"));
-        }
-         */
     }
 }

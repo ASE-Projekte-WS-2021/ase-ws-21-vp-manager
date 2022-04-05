@@ -4,13 +4,11 @@ import static com.example.vpmanager.views.mainActivity.uniqueID;
 
 import android.content.res.ColorStateList;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
@@ -41,10 +39,11 @@ public class FindStudyFragment extends Fragment implements StudyListAdapter.OnSt
     private Chip fieldStudy, focusGroup, questionnaire, interview, usability, labStudy, gaming, diaryStudy, others, remote, local;
     private StudyListAdapter studyListAdapter;
     private FindStudyViewModel findStudyViewModel;
-
     private boolean fieldStudyActive, focusGroupActive, questionnaireActive, interviewActive, usabilityActive, labStudyActive, gamingActive, diaryStudyActive, othersActive, remoteActive, localActive;
-    private boolean  sortVPActive, sortVpInvert;
+    private boolean sortVPActive, sortVpInvert;
 
+
+    //class constructor
     public FindStudyFragment() {
     }
 
@@ -61,15 +60,16 @@ public class FindStudyFragment extends Fragment implements StudyListAdapter.OnSt
         setupClickListener();
         //starting point to get the data
         findStudyViewModel.fetchStudyMetaData();
+        mainActivity.currentFragment = "findStudy";
         return view;
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         navController = Navigation.findNavController(view);
-        Log.d("findStudy" , "backstack" + getFragmentManager().getBackStackEntryCount());
         super.onViewCreated(view, savedInstanceState);
     }
+
 
     //Parameter: the fragment view
     //Return Values:
@@ -122,18 +122,18 @@ public class FindStudyFragment extends Fragment implements StudyListAdapter.OnSt
         sortVpInvert = false;
     }
 
-    private void setupClickListener()
-    {
+
+    //Parameter:
+    //Return Values:
+    //Sets up the ClickListeners for the fragment view
+    private void setupClickListener() {
         categoryExpander.setOnClickListener(v -> {
-            if(categoryChips.getVisibility() == View.GONE)
-            {
+            if (categoryChips.getVisibility() == View.GONE) {
                 categoryIcon.setImageResource(R.drawable.ic_baseline_expand_less_24);
                 categoryChips.setVisibility(View.VISIBLE);
                 typeIcon.setImageResource(R.drawable.ic_baseline_expand_more_24);
                 typeChips.setVisibility(View.GONE);
-            }
-            else if(categoryChips.getVisibility() == View.VISIBLE)
-            {
+            } else if (categoryChips.getVisibility() == View.VISIBLE) {
                 categoryIcon.setImageResource(R.drawable.ic_baseline_expand_more_24);
                 categoryChips.setVisibility(View.GONE);
             }
@@ -153,12 +153,9 @@ public class FindStudyFragment extends Fragment implements StudyListAdapter.OnSt
         fieldStudy.setOnClickListener(v -> {
             fieldStudyActive = !fieldStudyActive;
             fieldStudy.setChecked(fieldStudyActive);
-            if(fieldStudyActive)
-            {
+            if (fieldStudyActive) {
                 fieldStudy.setChipBackgroundColor(ColorStateList.valueOf(getResources().getColor(R.color.green_Main)));
-            }
-            else
-            {
+            } else {
                 fieldStudy.setChipBackgroundColor(ColorStateList.valueOf(getResources().getColor(R.color.heatherred_Main)));
             }
             applyCategoryFilterToList();
@@ -166,12 +163,9 @@ public class FindStudyFragment extends Fragment implements StudyListAdapter.OnSt
         focusGroup.setOnClickListener(v -> {
             focusGroupActive = !focusGroupActive;
             focusGroup.setChecked(focusGroupActive);
-            if(focusGroupActive)
-            {
+            if (focusGroupActive) {
                 focusGroup.setChipBackgroundColor(ColorStateList.valueOf(getResources().getColor(R.color.green_Main)));
-            }
-            else
-            {
+            } else {
                 focusGroup.setChipBackgroundColor(ColorStateList.valueOf(getResources().getColor(R.color.heatherred_Main)));
             }
             applyCategoryFilterToList();
@@ -179,12 +173,9 @@ public class FindStudyFragment extends Fragment implements StudyListAdapter.OnSt
         questionnaire.setOnClickListener(v -> {
             questionnaireActive = !questionnaireActive;
             questionnaire.setChecked(questionnaireActive);
-            if(questionnaireActive)
-            {
+            if (questionnaireActive) {
                 questionnaire.setChipBackgroundColor(ColorStateList.valueOf(getResources().getColor(R.color.green_Main)));
-            }
-            else
-            {
+            } else {
                 questionnaire.setChipBackgroundColor(ColorStateList.valueOf(getResources().getColor(R.color.heatherred_Main)));
             }
             applyCategoryFilterToList();
@@ -192,12 +183,9 @@ public class FindStudyFragment extends Fragment implements StudyListAdapter.OnSt
         interview.setOnClickListener(v -> {
             interviewActive = !interviewActive;
             interview.setChecked(interviewActive);
-            if(interviewActive)
-            {
+            if (interviewActive) {
                 interview.setChipBackgroundColor(ColorStateList.valueOf(getResources().getColor(R.color.green_Main)));
-            }
-            else
-            {
+            } else {
                 interview.setChipBackgroundColor(ColorStateList.valueOf(getResources().getColor(R.color.heatherred_Main)));
             }
             applyCategoryFilterToList();
@@ -205,12 +193,9 @@ public class FindStudyFragment extends Fragment implements StudyListAdapter.OnSt
         usability.setOnClickListener(v -> {
             usabilityActive = !usabilityActive;
             usability.setChecked(usabilityActive);
-            if(usabilityActive)
-            {
+            if (usabilityActive) {
                 usability.setChipBackgroundColor(ColorStateList.valueOf(getResources().getColor(R.color.green_Main)));
-            }
-            else
-            {
+            } else {
                 usability.setChipBackgroundColor(ColorStateList.valueOf(getResources().getColor(R.color.heatherred_Main)));
             }
             applyCategoryFilterToList();
@@ -218,12 +203,9 @@ public class FindStudyFragment extends Fragment implements StudyListAdapter.OnSt
         labStudy.setOnClickListener(v -> {
             labStudyActive = !labStudyActive;
             labStudy.setChecked(labStudyActive);
-            if(labStudyActive)
-            {
+            if (labStudyActive) {
                 labStudy.setChipBackgroundColor(ColorStateList.valueOf(getResources().getColor(R.color.green_Main)));
-            }
-            else
-            {
+            } else {
                 labStudy.setChipBackgroundColor(ColorStateList.valueOf(getResources().getColor(R.color.heatherred_Main)));
             }
             applyCategoryFilterToList();
@@ -231,12 +213,9 @@ public class FindStudyFragment extends Fragment implements StudyListAdapter.OnSt
         gaming.setOnClickListener(v -> {
             gamingActive = !gamingActive;
             gaming.setChecked(gamingActive);
-            if(gamingActive)
-            {
+            if (gamingActive) {
                 gaming.setChipBackgroundColor(ColorStateList.valueOf(getResources().getColor(R.color.green_Main)));
-            }
-            else
-            {
+            } else {
                 gaming.setChipBackgroundColor(ColorStateList.valueOf(getResources().getColor(R.color.heatherred_Main)));
             }
             applyCategoryFilterToList();
@@ -244,12 +223,9 @@ public class FindStudyFragment extends Fragment implements StudyListAdapter.OnSt
         diaryStudy.setOnClickListener(v -> {
             diaryStudyActive = !diaryStudyActive;
             diaryStudy.setChecked(diaryStudyActive);
-            if(diaryStudyActive)
-            {
+            if (diaryStudyActive) {
                 diaryStudy.setChipBackgroundColor(ColorStateList.valueOf(getResources().getColor(R.color.green_Main)));
-            }
-            else
-            {
+            } else {
                 diaryStudy.setChipBackgroundColor(ColorStateList.valueOf(getResources().getColor(R.color.heatherred_Main)));
             }
             applyCategoryFilterToList();
@@ -257,12 +233,9 @@ public class FindStudyFragment extends Fragment implements StudyListAdapter.OnSt
         others.setOnClickListener(v -> {
             othersActive = !othersActive;
             others.setChecked(othersActive);
-            if(othersActive)
-            {
+            if (othersActive) {
                 others.setChipBackgroundColor(ColorStateList.valueOf(getResources().getColor(R.color.green_Main)));
-            }
-            else
-            {
+            } else {
                 others.setChipBackgroundColor(ColorStateList.valueOf(getResources().getColor(R.color.heatherred_Main)));
             }
             applyCategoryFilterToList();
@@ -271,12 +244,9 @@ public class FindStudyFragment extends Fragment implements StudyListAdapter.OnSt
         local.setOnClickListener(v -> {
             localActive = !localActive;
             local.setChecked(localActive);
-            if(localActive)
-            {
+            if (localActive) {
                 local.setChipBackgroundColor(ColorStateList.valueOf(getResources().getColor(R.color.green_Main)));
-            }
-            else
-            {
+            } else {
                 local.setChipBackgroundColor(ColorStateList.valueOf(getResources().getColor(R.color.heatherred_Main)));
             }
             applyCategoryFilterToList();
@@ -284,12 +254,9 @@ public class FindStudyFragment extends Fragment implements StudyListAdapter.OnSt
         remote.setOnClickListener(v -> {
             remoteActive = !remoteActive;
             remote.setChecked(remoteActive);
-            if(remoteActive)
-            {
+            if (remoteActive) {
                 remote.setChipBackgroundColor(ColorStateList.valueOf(getResources().getColor(R.color.green_Main)));
-            }
-            else
-            {
+            } else {
                 remote.setChipBackgroundColor(ColorStateList.valueOf(getResources().getColor(R.color.heatherred_Main)));
             }
             applyCategoryFilterToList();
@@ -297,23 +264,18 @@ public class FindStudyFragment extends Fragment implements StudyListAdapter.OnSt
 
 
         sortVP.setOnClickListener(v -> {
-            if(sortVPActive && sortVpInvert)
-            {
+            if (sortVPActive && sortVpInvert) {
                 sortVPActive = false;
                 sortVpInvert = false;
                 connectStudyListAdapter();
                 applyCategoryFilterToList();
                 sortImageIcon.setVisibility(View.GONE);
-            }
-            else if(sortVPActive && !sortVpInvert)
-            {
+            } else if (sortVPActive && !sortVpInvert) {
                 sortVpInvert = true;
                 sortByVPS(sortVpInvert);
                 sortImageIcon.setVisibility(View.VISIBLE);
                 sortImageIcon.setImageResource(R.drawable.ic_baseline_south_24);
-            }
-            else
-            {
+            } else {
                 sortVPActive = true;
                 sortByVPS(sortVpInvert);
                 sortImageIcon.setVisibility(View.VISIBLE);
@@ -322,6 +284,10 @@ public class FindStudyFragment extends Fragment implements StudyListAdapter.OnSt
         });
     }
 
+
+    //Parameter: invert
+    //Return Values:
+    //Sorts the list according to vp value
     private void sortByVPS(boolean invert) {
         ArrayList<StudyMetaInfoModel> currentList = studyListAdapter.mStudyMetaInfos;
         ArrayList<StudyMetaInfoModel> list = new ArrayList<>();
@@ -333,12 +299,14 @@ public class FindStudyFragment extends Fragment implements StudyListAdapter.OnSt
 
         for (int i = 0; i < studyMetaList.length; i++) {
             for (int k = 0; k < studyMetaList.length - 1; k++) {
-                String vps1 = studyMetaList[k].getVps().replace(" VP-Stunden","");
-                String vps2 = studyMetaList[k+1].getVps().replace(" VP-Stunden","");
-                if(vps1.trim().equals("null") ||vps1.trim().equals(""))
-                    {   vps1 = "0"; }
-                if(vps2.trim().equals("null") ||vps2.trim().equals(""))
-                    {   vps2 = "0"; }
+                String vps1 = studyMetaList[k].getVps().replace(" VP-Stunden", "");
+                String vps2 = studyMetaList[k + 1].getVps().replace(" VP-Stunden", "");
+                if (vps1.trim().equals("null") || vps1.trim().equals("")) {
+                    vps1 = "0";
+                }
+                if (vps2.trim().equals("null") || vps2.trim().equals("")) {
+                    vps2 = "0";
+                }
                 if (Float.parseFloat(vps1) < Float.parseFloat(vps2)) {
                     StudyMetaInfoModel tempStudy = studyMetaList[k];
                     studyMetaList[k] = studyMetaList[k + 1];
@@ -361,9 +329,12 @@ public class FindStudyFragment extends Fragment implements StudyListAdapter.OnSt
     }
 
 
+    //Parameter:
+    //Return Values:
+    //adds the category filters above the ListView
     private void applyCategoryFilterToList() {
         ArrayList<StudyMetaInfoModel> list = new ArrayList<>();
-        for (StudyMetaInfoModel info: findStudyViewModel.getStudyMetaInfo()) {
+        for (StudyMetaInfoModel info : findStudyViewModel.getStudyMetaInfo()) {
             if (!fieldStudyActive && !focusGroupActive && !questionnaireActive && !interviewActive &&
                     !usabilityActive && !labStudyActive && !gamingActive && !diaryStudyActive && !othersActive) {
                 list.add(info);
@@ -414,7 +385,7 @@ public class FindStudyFragment extends Fragment implements StudyListAdapter.OnSt
         }
         list = applyTypeFilterToList(list);
 
-        if(sortVPActive)
+        if (sortVPActive)
             sortByVPS(sortVpInvert);
 
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(requireActivity());
@@ -424,26 +395,23 @@ public class FindStudyFragment extends Fragment implements StudyListAdapter.OnSt
     }
 
 
+    //Parameter: list
+    //Return Values: ArrayList<StudyMetaInfoModel>
+    //applies the filters to the study ArrayList and returns the new list
     private ArrayList<StudyMetaInfoModel> applyTypeFilterToList(ArrayList<StudyMetaInfoModel> list) {
 
         ArrayList<StudyMetaInfoModel> newList = new ArrayList<>();
         for (StudyMetaInfoModel info : list) {
             if (!remoteActive && !localActive) {
                 newList.add(info);
-            }
-            else
-            {
-                if(remoteActive)
-                {
-                    if(info.getType().equals("Remote"))
-                    {
+            } else {
+                if (remoteActive) {
+                    if (info.getType().equals("Remote")) {
                         newList.add(info);
                     }
                 }
-                if(localActive)
-                {
-                    if(info.getType().equals("Präsenz"))
-                    {
+                if (localActive) {
+                    if (info.getType().equals("Präsenz")) {
                         newList.add(info);
                     }
                 }
@@ -451,6 +419,7 @@ public class FindStudyFragment extends Fragment implements StudyListAdapter.OnSt
         }
         return newList;
     }
+
 
     //Parameter:
     //Return Values:

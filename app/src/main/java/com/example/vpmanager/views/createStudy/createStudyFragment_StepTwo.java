@@ -9,9 +9,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.vpmanager.Config;
 import com.example.vpmanager.R;
 import com.example.vpmanager.views.mainActivity;
 import com.google.android.material.textfield.TextInputEditText;
+
 
 public class createStudyFragment_StepTwo extends Fragment {
 
@@ -25,7 +27,7 @@ public class createStudyFragment_StepTwo extends Fragment {
     //Return values:
     //Sets the current fragment for the activity
     public createStudyFragment_StepTwo() {
-        CreateStudyFragment.currentFragment = 2;
+        CreateStudyFragment.currentFragment = Config.createFragmentTwo;
     }
 
     @Override
@@ -35,6 +37,7 @@ public class createStudyFragment_StepTwo extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        mainActivity.currentFragment = "createStepTwo";
         return inflater.inflate(R.layout.fragment_create_study_step_two, container, false);
     }
 
@@ -47,7 +50,7 @@ public class createStudyFragment_StepTwo extends Fragment {
     //Parameter:
     //Return values:
     //Connects the code with the view
-    private void setupView(View view){
+    private void setupView(View view) {
         textInputEditTextContactMail = view.findViewById(R.id.inputContact1);
         textInputEditTextContactMail.setText(mainActivity.uniqueID);
         textInputEditTextContactMail.setFocusable(false);
@@ -61,39 +64,24 @@ public class createStudyFragment_StepTwo extends Fragment {
 
     //Parameter:
     //Return values:
-    //Loads data recieved from the activity into the inputfields
+    //Loads data received from the activity into the inputfields
     private void loadData() {
-        /*
-        if (CreateStudyFragment.createStudyViewModel.studyCreationProcessData.get("contact") != null){
-            textInputEditTextContactMail.setText(
-                    CreateStudyFragment.createStudyViewModel.studyCreationProcessData.get("contact").toString());
-        }
-         */
-        if (CreateStudyFragment.createStudyViewModel.studyCreationProcessData.get("contact2") != null){
+
+        if (CreateStudyFragment.createStudyViewModel.studyCreationProcessData.get("contact2") != null) {
             textInputEditTextContactPhone.setText(
                     CreateStudyFragment.createStudyViewModel.studyCreationProcessData.get("contact2").toString());
         }
-        if (CreateStudyFragment.createStudyViewModel.studyCreationProcessData.get("contact3") != null){
+        if (CreateStudyFragment.createStudyViewModel.studyCreationProcessData.get("contact3") != null) {
             textInputEditTextContactSkype.setText(
                     CreateStudyFragment.createStudyViewModel.studyCreationProcessData.get("contact3").toString());
         }
-        if (CreateStudyFragment.createStudyViewModel.studyCreationProcessData.get("contact4") != null){
+        if (CreateStudyFragment.createStudyViewModel.studyCreationProcessData.get("contact4") != null) {
             textInputEditTextContactDiscord.setText(
                     CreateStudyFragment.createStudyViewModel.studyCreationProcessData.get("contact4").toString());
         }
-        if (CreateStudyFragment.createStudyViewModel.studyCreationProcessData.get("contact5") != null){
+        if (CreateStudyFragment.createStudyViewModel.studyCreationProcessData.get("contact5") != null) {
             textInputEditTextContactOthers.setText(
                     CreateStudyFragment.createStudyViewModel.studyCreationProcessData.get("contact5").toString());
         }
-        /*
-        Bundle bundle = getArguments();
-        if(bundle != null){
-            textInputEditTextContactMail.setText(bundle.getString("contact"));
-            textInputEditTextContactPhone.setText(bundle.getString("contact2"));
-            textInputEditTextContactSkype.setText(bundle.getString("contact3"));
-            textInputEditTextContactDiscord.setText(bundle.getString("contact4"));
-            textInputEditTextContactOthers.setText(bundle.getString("contact5"));
-        }
-         */
     }
 }

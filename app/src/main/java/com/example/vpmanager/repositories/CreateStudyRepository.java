@@ -13,9 +13,12 @@ public class CreateStudyRepository {
 
     private static CreateStudyRepository instance;
     private FirebaseFirestore db;
-
     private CreateStudyListener createStudyListener;
 
+
+    //Parameter:
+    //Return values: CreateStudyRepository
+    //returns instance of the CreateStudyRepository
     public static CreateStudyRepository getInstance() {
         if (instance == null) {
             instance = new CreateStudyRepository();
@@ -23,12 +26,19 @@ public class CreateStudyRepository {
         return instance;
     }
 
+
+    //Parameter:
+    //Return values:
+    //Firestore callback; set createStudyListener
     public void setFirestoreCallback(CreateStudyListener createStudyListener) {
         this.createStudyListener = createStudyListener;
     }
 
+
+    //Parameter: newStudy, studyId
+    //Return values:
     //is called at the very end and requires all dates to be created!
-    public void createNewStudy(Map<String, Object> newStudy, String studyId){
+    public void createNewStudy(Map<String, Object> newStudy, String studyId) {
         db = FirebaseFirestore.getInstance();
         db.collection("studies").document(studyId)
                 .set(newStudy)
@@ -38,8 +48,10 @@ public class CreateStudyRepository {
                         e -> Log.w(TAG, "Error writing document", e));
     }
 
-    //is called several times before "createNewStudy" because a study needs all dateIds!
-    public void createNewDate(Map<String, Object> newDate, String dateId){
+    //Parameter: newDate, studyId
+    //Return values:
+    //is called several times before "createNewStudy" because a study needs all dateIds
+    public void createNewDate(Map<String, Object> newDate, String dateId) {
         db = FirebaseFirestore.getInstance();
         db.collection("dates").document(dateId)
                 .set(newDate)

@@ -10,7 +10,6 @@ import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,6 +19,7 @@ import android.widget.DatePicker;
 import android.widget.ImageView;
 import android.widget.TimePicker;
 
+import com.example.vpmanager.Config;
 import com.example.vpmanager.R;
 import com.example.vpmanager.adapter.SwipeableDatesAdapter;
 import com.example.vpmanager.helper.SwipeToDeleteCallback;
@@ -30,6 +30,8 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
+import com.example.vpmanager.views.mainActivity;
+
 
 public class createStudyFragment_StepFive extends Fragment {
 
@@ -37,13 +39,10 @@ public class createStudyFragment_StepFive extends Fragment {
     private int mMonth;
     private int mDay;
     private String weekDay = "";
+    private String date_time = "";
     private int mHour;
     private int mMinute;
-    private String date_time = "";
     private boolean doNotShowDuplicateWarning = false;
-
-    //private ListView dateList;
-    //private ArrayAdapter<String> datePickerAdapter;
     private RecyclerView dateListRecycler;
     private SwipeableDatesAdapter swipeableDatesAdapter;
 
@@ -53,9 +52,9 @@ public class createStudyFragment_StepFive extends Fragment {
 
     //Parameter:
     //Return values:
-    //Sets the current fragment for the activity
+    //Class constructor; sets the current fragment for the activity
     public createStudyFragment_StepFive() {
-        CreateStudyFragment.currentFragment = 5;
+        CreateStudyFragment.currentFragment = Config.createFragmentFive;
     }
 
     @Override
@@ -65,6 +64,7 @@ public class createStudyFragment_StepFive extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        mainActivity.currentFragment = "createStepFive";
         return inflater.inflate(R.layout.fragment_create_study_step_five, container, false);
     }
 
@@ -73,13 +73,12 @@ public class createStudyFragment_StepFive extends Fragment {
         setupView(view);
     }
 
+
     //Parameter:
     //Return values:
     //Connects the code with the view
     private void setupView(View view) {
-        //dateList = view.findViewById(R.id.createDatelist);
         dateListRecycler = view.findViewById(R.id.createDateRecyclerView);
-        //loadData();
         setupDatePicker(view);
         FloatingActionButton fab = view.findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -90,30 +89,19 @@ public class createStudyFragment_StepFive extends Fragment {
         });
     }
 
-    //Parameter:
-    //Return values:
-    //Loads data received from the activity into the listview
-    private void loadData() {
-        Bundle bundle = getArguments();
-        System.out.println(bundle);
-        if (bundle != null) {
-            //dates = bundle.getStringArrayList("dates");
-        }
-    }
 
     //Parameter:
     //Return values:
     //Sets an adapter for the Listview
     private void setupDatePicker(View view) {
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(requireActivity());
-        //datePickerAdapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_1, dates);
         swipeableDatesAdapter = new SwipeableDatesAdapter(requireActivity(), dates, view);
-        //dateList.setAdapter(datePickerAdapter);
         dateListRecycler.setAdapter(swipeableDatesAdapter);
         dateListRecycler.setLayoutManager(linearLayoutManager);
         ItemTouchHelper itemTouchHelper = new ItemTouchHelper(new SwipeToDeleteCallback(swipeableDatesAdapter));
         itemTouchHelper.attachToRecyclerView(dateListRecycler);
     }
+
 
     //Parameter:
     //Return values:
@@ -162,6 +150,7 @@ public class createStudyFragment_StepFive extends Fragment {
         timePickerDialog.show();
     }
 
+
     //Parameter: hoursOfDay, minute
     //Return values:
     //Adds the created date and time to the list and transforms them into a uniform pattern
@@ -174,12 +163,10 @@ public class createStudyFragment_StepFive extends Fragment {
         if (hourOfDay < 10) {
             hours = "0" + hourOfDay;
         }
-        Log.d("addDatetoList", "before add new" + dates);
         String currentDate = date_time + hours + ":" + minutes + " Uhr";
         if (!isDuplicate(currentDate)) {
             dates.add(currentDate);
             swipeableDatesAdapter.notifyDataSetChanged();
-            Log.d("addDatetoList", "after notity" + dates);
         } else {
             if (!doNotShowDuplicateWarning) {
                 showToolTip(currentDate);
@@ -190,6 +177,10 @@ public class createStudyFragment_StepFive extends Fragment {
         }
     }
 
+
+    //Parameter: currentDate
+    //Return values: boolean
+    //Check for duplicates in date ArrayList
     private boolean isDuplicate(String currentDate) {
         for (int i = 0; i < dates.size(); i++) {
             if (dates.get(i).equals(currentDate)) {
@@ -199,6 +190,10 @@ public class createStudyFragment_StepFive extends Fragment {
         return false;
     }
 
+
+    //Parameter: currentDate
+    //Return values: boolean
+    //Sets tooltip view and dialog for current fragment
     private void showToolTip(String currentDate) {
         Dialog dialog = new Dialog(getActivity(), R.style.DialogStyle);
         dialog.setContentView(R.layout.duplicate_dialog);
@@ -242,7 +237,6 @@ public class createStudyFragment_StepFive extends Fragment {
                 dialog.dismiss();
             }
         });
-
 
         dialog.show();
     }

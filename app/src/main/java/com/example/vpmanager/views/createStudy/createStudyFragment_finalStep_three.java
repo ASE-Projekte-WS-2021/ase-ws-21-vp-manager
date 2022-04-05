@@ -10,13 +10,16 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
+import com.example.vpmanager.Config;
 import com.example.vpmanager.R;
+import com.example.vpmanager.views.mainActivity;
 
 import java.util.ArrayList;
 
 public class createStudyFragment_finalStep_three extends Fragment {
 
-    //A recyclerView with custom item layout can be used here too. The code is already present in the project
+
+    //A recyclerView with custom item layout can be used here too.
     private ListView dateList;
     private ArrayAdapter<String> dateListAdapter;
     private ArrayList<String> currentDatesInProcess = new ArrayList<>();
@@ -26,7 +29,7 @@ public class createStudyFragment_finalStep_three extends Fragment {
     //Return values:
     //Sets the current fragment for the activity
     public createStudyFragment_finalStep_three() {
-        CreateStudyFragment.currentFragment = 8;
+        CreateStudyFragment.currentFragment = Config.createFragmentEight;
     }
 
     @Override
@@ -36,6 +39,7 @@ public class createStudyFragment_finalStep_three extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        mainActivity.currentFragment = "createFinalStepThree";
         return inflater.inflate(R.layout.fragment_create_study_final_step_three, container, false);
     }
 
@@ -45,33 +49,24 @@ public class createStudyFragment_finalStep_three extends Fragment {
         loadData();
     }
 
-    //Parameter:
-    //Return values:
-    //Connects the code with the view
-    private void setupView(View view){
-        dateList = view.findViewById(R.id.confirmDates);
-    }
 
     //Parameter:
     //Return values:
-    //Loads data recieved from the activity into the listview
+    //Connects the code with the view
+    private void setupView(View view) {
+        dateList = view.findViewById(R.id.confirmDates);
+    }
+
+
+    //Parameter:
+    //Return values:
+    //Loads data received from the activity into the listview
     private void loadData() {
-        if (!CreateStudyFragment.createStudyViewModel.datesCreationProcessData.isEmpty()){
+        if (!CreateStudyFragment.createStudyViewModel.datesCreationProcessData.isEmpty()) {
             currentDatesInProcess = CreateStudyFragment.createStudyViewModel.datesCreationProcessData;
             dateListAdapter = new ArrayAdapter<String>(requireActivity(), android.R.layout.simple_list_item_1,
                     currentDatesInProcess);
             dateList.setAdapter(dateListAdapter);
         }
-        /*
-        Bundle bundle = getArguments();
-        System.out.println(bundle);
-        if (bundle != null) {
-            datePickerAdapter = new ArrayAdapter<String>(getActivity(),
-                    android.R.layout.simple_list_item_1,
-                    bundle.getStringArrayList("dates"));
-            dateList.setAdapter(datePickerAdapter);
-        }
-        datePickerAdapter.notifyDataSetChanged();
-         */
     }
 }

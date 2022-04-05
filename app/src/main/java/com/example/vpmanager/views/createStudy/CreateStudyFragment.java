@@ -3,7 +3,6 @@ package com.example.vpmanager.views.createStudy;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,33 +17,35 @@ import androidx.navigation.Navigation;
 import androidx.navigation.fragment.NavHostFragment;
 
 import com.airbnb.lottie.LottieAnimationView;
+import com.example.vpmanager.Config;
 import com.example.vpmanager.R;
 import com.example.vpmanager.viewmodels.CreateStudyViewModel;
 import com.kofigyan.stateprogressbar.StateProgressBar;
 
+
 public class CreateStudyFragment extends Fragment {
 
-    private NavController navControllerMain;
-    public static CreateStudyViewModel createStudyViewModel;
 
-    //private FragmentManager fragmentManager;
+    public static CreateStudyViewModel createStudyViewModel;
+    public static int currentFragment = Config.createFragmentBase;
+
+    private NavController navControllerMain;
     private NavHostFragment navHostFragmentCreate;
     private NavController navControllerCreate;
 
     private Button backBtn;
     private Button nextBtn;
-    public static int currentFragment = 0;
-
     private StateProgressBar stateProgressBar;
-    private String[] progressBarDescriptionData = {"Basis", "Beschreibung", "Ort", "Termine", "Bestätigen"};
+    private String stepOne;
+    private String stepTwo;
+    private String stepThree;
+    private String stepFour;
+    private String stepFive;
+    private String[] progressBarDescriptionData;
     private LottieAnimationView doneAnimation;
 
-    //NEW
-    //private static final int NUM_PAGES = 9;
-    //private ViewPager2 viewPager;
-    //private FragmentStateAdapter pagerAdapter;
-    //NEW
 
+    //Class constructor
     public CreateStudyFragment() {
     }
 
@@ -70,31 +71,38 @@ public class CreateStudyFragment extends Fragment {
         navControllerCreate.navigate(R.id.action_global_createStudyFragment_Base);
     }
 
-    private void setupNavigation(){
-        //getChildFragmentManager is important!
+
+    //Parameter:
+    //Return values:
+    //Set up navigation for the the create study activity
+    private void setupNavigation() {
         navHostFragmentCreate = (NavHostFragment) getChildFragmentManager().findFragmentById(R.id.nav_host_fragment_create);
         assert navHostFragmentCreate != null;
         navControllerCreate = navHostFragmentCreate.getNavController();
-
     }
 
+
+    //Parameter: View
+    //Return values:
+    //Sets views  for current fragment; loads the  layout elements from associated resource files
     private void setupView(View view) {
 
-        //Fragment needs to be owner. If not the data in the input fields will stay!!!!!!
+        stepOne = getString(R.string.progressbar_one);
+        stepTwo = getString(R.string.progressbar_two);
+        stepThree = getString(R.string.progressbar_three);
+        stepFour = getString(R.string.progressbar_four);
+        stepFive = getString(R.string.progressbar_five);
+        progressBarDescriptionData = new String[]{stepOne, stepTwo, stepThree, stepFour, stepFive};
+
+        //Fragment needs to be owner. Otherwise the data in the input fields will stay!
         createStudyViewModel = new ViewModelProvider(CreateStudyFragment.this).get(CreateStudyViewModel.class);
         createStudyViewModel.prepareRepo();
         createStudyViewModel.createStudyFragment = this;
 
         createStudyViewModel.studyCreationProcessData.clear();
         createStudyViewModel.datesCreationProcessData.clear();
+        createStudyFragment_StepFive.dates.clear();
 
-        //NEW
-        //viewPager = view.findViewById(R.id.viewPager_create_study);
-        //pagerAdapter = new ScreenSlidePagerAdapter(this);
-        //viewPager.setAdapter(pagerAdapter);
-        //NEW
-
-        //fragmentManager = getParentFragmentManager(); //instead of getSupportFragmentManager
         backBtn = view.findViewById(R.id.backButton);
         nextBtn = view.findViewById(R.id.nextButton);
 
@@ -105,61 +113,17 @@ public class CreateStudyFragment extends Fragment {
         doneAnimation = view.findViewById(R.id.animationView);
     }
 
-    /*
-    private static class ScreenSlidePagerAdapter extends FragmentStateAdapter {
 
-        public ScreenSlidePagerAdapter(Fragment fragment) {
-            super(fragment);
-        }
-
-        private String type = "local";
-        @NonNull
-        @Override
-        public Fragment createFragment(int position) {
-            //return new createStudyFragment_Base();
-            switch (position) {
-                case 0:
-                    return new createStudyFragment_Base();
-                case 1:
-                    return new createStudyFragment_StepOne();
-                case 2:
-                    return new createStudyFragment_StepTwo();
-                case 3:
-                    return new createStudyFragment_StepThree();
-                case 4:
-                    if (type.equals("remote")){
-                        return new createStudyFragment_StepFour_Remote();
-                    } else {
-                        return new createStudyFragment_StepFour_Presence();
-                    }
-                case 5:
-                    return new createStudyFragment_StepFive();
-                case 6:
-                    return new createStudyFragment_finalStep();
-                case 7:
-                    return new createStudyFragment_finalStep_two();
-                default:
-                    return new createStudyFragment_finalStep_three();
-            }
-        }
-
-        @Override
-        public int getItemCount() {
-            return NUM_PAGES;
-        }
-    }
-     */
-
+    //Parameter:
+    //Return values:
+    //Sets listeners for animations and buttons
     private void setupListeners() {
         doneAnimation.addAnimatorListener(
                 new AnimatorListenerAdapter() {
                     @Override
                     public void onAnimationEnd(Animator animation) {
                         super.onAnimationEnd(animation);
-                        Log.d("animEnd", "before navigating to HomeFragment"
-                                + navControllerCreate.getBackQueue().toString());
-                        Log.d("animEnd", "items on stack" + navControllerCreate.getBackQueue().getSize());
-                        reNavigateToCreateStudyFragment();
+                        reNavigateToHomeStudyFragment();
                     }
                 }
         );
@@ -167,7 +131,6 @@ public class CreateStudyFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 nextButton();
-                //viewPager.setCurrentItem(viewPager.getCurrentItem()+1);
             }
         });
         backBtn.setOnClickListener(new View.OnClickListener() {
@@ -178,221 +141,102 @@ public class CreateStudyFragment extends Fragment {
         });
     }
 
+
+    //Parameter:
+    //Return values:
+    //Sets navigation for button leading to next fragment
     private void nextButton() {
         switch (currentFragment) {
             case 0:
-                System.out.println("currentFragment case0 " + currentFragment);
                 createStudyFragment_StepOne createStudyFragment_stepOne = new createStudyFragment_StepOne();
                 stateProgressBar.setVisibility(View.VISIBLE);
                 stateProgressBar.setCurrentStateNumber(StateProgressBar.StateNumber.ONE);
 
-                Log.d("next case0", navControllerCreate.getBackQueue().toString());
-
                 navControllerCreate.navigate(R.id.action_createStudyFragment_Base_to_createStudyFragment_StepOne);
-                /*
-                fragmentManager
-                        .beginTransaction()
-                        .setCustomAnimations(R.anim.enter_from_right, R.anim.exit_to_left,
-                                R.anim.enter_from_left, R.anim.exit_to_right)
-                        .replace(R.id.nav_host_fragment_create, createStudyFragment_stepOne, null)
-                        //.addToBackStack(null)
-                        .setReorderingAllowed(true)
-                        .commit();
-                 */
+
                 break;
             case 1:
-                System.out.println("currentFragment case1 " + currentFragment);
-                System.out.println("case1 before saveData" + createStudyViewModel.studyCreationProcessData.toString());
                 saveDataInViewModelStepOne();
-                System.out.println("case1 after saveData" + createStudyViewModel.studyCreationProcessData.toString());
-                System.out.println("case1 dates: " + createStudyViewModel.datesCreationProcessData.toString());
+
                 if (mandatoryCheck(currentFragment)) {
                     createStudyFragment_StepTwo createStudyFragment_stepTwo = new createStudyFragment_StepTwo();
                     stateProgressBar.setCurrentStateNumber(StateProgressBar.StateNumber.ONE);
 
-                    Log.d("next case1", navControllerCreate.getBackQueue().toString());
-
                     navControllerCreate.navigate(R.id.action_createStudyFragment_StepOne_to_createStudyFragment_StepTwo);
-                    /*
-                    fragmentManager
-                            .beginTransaction()
-                            .setCustomAnimations(R.anim.enter_from_right, R.anim.exit_to_left,
-                                    R.anim.enter_from_left, R.anim.exit_to_right)
-                            .replace(R.id.nav_host_fragment_create, createStudyFragment_stepTwo, null)
-                            //.addToBackStack(null)
-                            .setReorderingAllowed(true)
-                            .commit();
-                     */
+
                 }
                 break;
             case 2:
-                System.out.println("currentFragment case2" + currentFragment);
-                System.out.println("case2 before saveData" + createStudyViewModel.studyCreationProcessData.toString());
                 saveDataInViewModelStepTwo();
-                System.out.println("case2 after saveData" + createStudyViewModel.studyCreationProcessData.toString());
                 if (mandatoryCheck(currentFragment)) {
                     createStudyFragment_StepThree createStudyFragment_stepThree = new createStudyFragment_StepThree();
                     stateProgressBar.setCurrentStateNumber(StateProgressBar.StateNumber.TWO);
 
-                    Log.d("next case2", navControllerCreate.getBackQueue().toString());
-
                     navControllerCreate.navigate(R.id.action_createStudyFragment_StepTwo_to_createStudyFragment_StepThree);
-                    /*
-                    fragmentManager
-                            .beginTransaction()
-                            .setCustomAnimations(R.anim.enter_from_right, R.anim.exit_to_left,
-                                    R.anim.enter_from_left, R.anim.exit_to_right)
-                            .replace(R.id.nav_host_fragment_create, createStudyFragment_stepThree, null)
-                            //.addToBackStack(null)
-                            .setReorderingAllowed(true)
-                            .commit();
-                     */
+
                 }
                 break;
             case 3:
-                System.out.println("currentFragment case3" + currentFragment);
-                System.out.println("case3 before saveData" + createStudyViewModel.studyCreationProcessData.toString());
                 saveDataInViewModelStepThree();
-                System.out.println("case3 after saveData" + createStudyViewModel.studyCreationProcessData.toString());
                 if (mandatoryCheck(currentFragment)) {
                     stateProgressBar.setCurrentStateNumber(StateProgressBar.StateNumber.THREE);
                     String executionType = createStudyViewModel.studyCreationProcessData.get("executionType").toString();
-                    Log.d("executionType", "is: " + executionType);
+
                     if (executionType.equals(getString(R.string.remoteString))) {
                         createStudyFragment_StepFour_Remote createStudyFragment_stepFour_remote = new createStudyFragment_StepFour_Remote();
 
-                        Log.d("next case3", navControllerCreate.getBackQueue().toString());
-
                         navControllerCreate.navigate(R.id.action_createStudyFragment_StepThree_to_createStudyFragment_StepFour_Remote);
-                        /*
-                        fragmentManager
-                                .beginTransaction()
-                                .setCustomAnimations(R.anim.enter_from_right, R.anim.exit_to_left,
-                                        R.anim.enter_from_left, R.anim.exit_to_right)
-                                .replace(R.id.nav_host_fragment_create, createStudyFragment_stepFour_remote, null)
-                                //.addToBackStack(null)
-                                .setReorderingAllowed(true)
-                                .commit();
-                         */
+
                     } else {
                         createStudyFragment_StepFour_Presence createStudyFragment_stepFour_presence = new createStudyFragment_StepFour_Presence();
 
-                        Log.d("next case3", navControllerCreate.getBackQueue().toString());
-
                         navControllerCreate.navigate(R.id.action_createStudyFragment_StepThree_to_createStudyFragment_StepFour_Presence);
-                        /*
-                        fragmentManager
-                                .beginTransaction()
-                                .setCustomAnimations(R.anim.enter_from_right, R.anim.exit_to_left,
-                                        R.anim.enter_from_left, R.anim.exit_to_right)
-                                .replace(R.id.nav_host_fragment_create, createStudyFragment_stepFour_presence, null)
-                                //.addToBackStack(null)
-                                .setReorderingAllowed(true)
-                                .commit();
-                         */
+
                     }
                 }
                 break;
             case 4:
-                System.out.println("currentFragment case4" + currentFragment);
-                System.out.println("case4 before saveData" + createStudyViewModel.studyCreationProcessData.toString());
                 saveDataInViewModelStepFour();
-                System.out.println("case4 after saveData" + createStudyViewModel.studyCreationProcessData.toString());
                 if (mandatoryCheck(currentFragment)) {
                     createStudyFragment_StepFive createStudyFragment_stepFive = new createStudyFragment_StepFive();
                     stateProgressBar.setCurrentStateNumber(StateProgressBar.StateNumber.FOUR);
 
                     String executionType = createStudyViewModel.studyCreationProcessData.get("executionType").toString();
-                    if(executionType.equals(getString(R.string.remoteString))){
-
-                        Log.d("next case4", navControllerCreate.getBackQueue().toString());
+                    if (executionType.equals(getString(R.string.remoteString))) {
 
                         navControllerCreate.navigate(R.id.action_createStudyFragment_StepFour_Remote_to_createStudyFragment_StepFive);
-                    }else {
-
-                        Log.d("next case4", navControllerCreate.getBackQueue().toString());
+                    } else {
 
                         navControllerCreate.navigate(R.id.action_createStudyFragment_StepFour_Presence_to_createStudyFragment_StepFive);
+
                     }
-                    /*
-                    fragmentManager
-                            .beginTransaction()
-                            .setCustomAnimations(R.anim.enter_from_right, R.anim.exit_to_left,
-                                    R.anim.enter_from_left, R.anim.exit_to_right)
-                            .replace(R.id.nav_host_fragment_create, createStudyFragment_stepFive, null)
-                            //.addToBackStack(null)
-                            .setReorderingAllowed(true)
-                            .commit();
-                     */
                 }
                 break;
             case 5:
-                System.out.println("currentFragment case5" + currentFragment);
-                System.out.println("case5 before saveData" + createStudyViewModel.datesCreationProcessData.toString());
                 saveDataInViewModelStepFive();
-                System.out.println("case5 after saveData" + createStudyViewModel.datesCreationProcessData.toString());
                 createStudyFragment_finalStep createStudyFragment_finalStep = new createStudyFragment_finalStep();
                 stateProgressBar.setCurrentStateNumber(StateProgressBar.StateNumber.FIVE);
 
-                Log.d("next case5", navControllerCreate.getBackQueue().toString());
-
                 navControllerCreate.navigate(R.id.action_createStudyFragment_StepFive_to_createStudyFragment_finalStep);
-                /*
-                fragmentManager
-                        .beginTransaction()
-                        .setCustomAnimations(R.anim.enter_from_right, R.anim.exit_to_left,
-                                R.anim.enter_from_left, R.anim.exit_to_right)
-                        .replace(R.id.nav_host_fragment_create, createStudyFragment_finalStep, null)
-                        //.addToBackStack(null)
-                        .setReorderingAllowed(true)
-                        .commit();
-                 */
+
                 break;
             case 6:
-                System.out.println("currentFragment case6" + currentFragment);
                 createStudyFragment_finalStep_two createStudyFragment_finalStep_two = new createStudyFragment_finalStep_two();
                 stateProgressBar.setCurrentStateNumber(StateProgressBar.StateNumber.FIVE);
 
-                Log.d("next case6", navControllerCreate.getBackQueue().toString());
-
                 navControllerCreate.navigate(R.id.action_createStudyFragment_finalStep_to_createStudyFragment_finalStep_two);
-                /*
-                fragmentManager
-                        .beginTransaction()
-                        .setCustomAnimations(R.anim.enter_from_right, R.anim.exit_to_left,
-                                R.anim.enter_from_left, R.anim.exit_to_right)
-                        .replace(R.id.nav_host_fragment_create, createStudyFragment_finalStep_two, null)
-                        //.addToBackStack(null)
-                        .setReorderingAllowed(true)
-                        .commit();
-                 */
+
                 break;
             case 7:
-                System.out.println("currentFragment case7" + currentFragment);
                 createStudyFragment_finalStep_three createStudyFragment_finalStep_three = new createStudyFragment_finalStep_three();
                 stateProgressBar.setCurrentStateNumber(StateProgressBar.StateNumber.FIVE);
                 nextBtn.setText(getString(R.string.fragment_create_study_base_create));
                 nextBtn.setBackgroundColor(getResources().getColor(R.color.green_Main));
 
-                Log.d("next case7", navControllerCreate.getBackQueue().toString());
-
                 navControllerCreate.navigate(R.id.action_createStudyFragment_finalStep_two_to_createStudyFragment_finalStep_three);
-                /*
-                fragmentManager
-                        .beginTransaction()
-                        .setCustomAnimations(R.anim.enter_from_right, R.anim.exit_to_left,
-                                R.anim.enter_from_left, R.anim.exit_to_right)
-                        .replace(R.id.nav_host_fragment_create, createStudyFragment_finalStep_three, null)
-                        //.addToBackStack(null)
-                        .setReorderingAllowed(true)
-                        .commit();
-                 */
+
                 break;
             case 8:
-                System.out.println("currentFragment case8" + currentFragment);
-
-                Log.d("next case8", navControllerCreate.getBackQueue().toString());
-
                 createStudyViewModel.saveStudyInDb();
                 playAnimation();
                 break;
@@ -401,11 +245,12 @@ public class CreateStudyFragment extends Fragment {
         }
     }
 
+    //Parameter:
+    //Return values:
+    //Sets navigation for button leading to previous fragment
     private void backButton() {
         switch (currentFragment) {
             case 0:
-                Log.d("back case0", navControllerCreate.getBackQueue().toString());
-
                 navControllerMain.navigate(R.id.action_global_homeFragment);
                 break;
             case 1:
@@ -413,57 +258,25 @@ public class CreateStudyFragment extends Fragment {
                 stateProgressBar.setVisibility(View.INVISIBLE);
                 createStudyFragment_Base createStudyFragment_base = new createStudyFragment_Base();
 
-                Log.d("back case1", navControllerCreate.getBackQueue().toString());
-
                 navControllerCreate.navigate(R.id.action_createStudyFragment_StepOne_to_createStudyFragment_Base);
-                /*
-                fragmentManager
-                        .beginTransaction()
-                        .setCustomAnimations(R.anim.enter_from_left, R.anim.exit_to_right,
-                                R.anim.enter_from_right, R.anim.exit_to_left)
-                        .replace(R.id.nav_host_fragment_create, createStudyFragment_base, null)
-                        //.addToBackStack(null)
-                        .setReorderingAllowed(true)
-                        .commit();
-                 */
+
                 break;
             case 2:
                 saveDataInViewModelStepTwo();
                 stateProgressBar.setCurrentStateNumber(StateProgressBar.StateNumber.ONE);
                 createStudyFragment_StepOne createStudyFragment_stepOne = new createStudyFragment_StepOne();
 
-                Log.d("back case2", navControllerCreate.getBackQueue().toString());
 
                 navControllerCreate.navigate(R.id.action_createStudyFragment_StepTwo_to_createStudyFragment_StepOne);
-                /*
-                fragmentManager
-                        .beginTransaction()
-                        .setCustomAnimations(R.anim.enter_from_left, R.anim.exit_to_right,
-                                R.anim.enter_from_right, R.anim.exit_to_left)
-                        .replace(R.id.nav_host_fragment_create, createStudyFragment_stepOne, null)
-                        //.addToBackStack(null)
-                        .setReorderingAllowed(true)
-                        .commit();
-                 */
+
                 break;
             case 3:
                 saveDataInViewModelStepThree();
                 stateProgressBar.setCurrentStateNumber(StateProgressBar.StateNumber.ONE);
                 createStudyFragment_StepTwo createStudyFragment_stepTwo = new createStudyFragment_StepTwo();
 
-                Log.d("back case3", navControllerCreate.getBackQueue().toString());
-
                 navControllerCreate.navigate(R.id.action_createStudyFragment_StepThree_to_createStudyFragment_StepTwo);
-                /*
-                fragmentManager
-                        .beginTransaction()
-                        .setCustomAnimations(R.anim.enter_from_left, R.anim.exit_to_right,
-                                R.anim.enter_from_right, R.anim.exit_to_left)
-                        .replace(R.id.nav_host_fragment_create, createStudyFragment_stepTwo, null)
-                        //.addToBackStack(null)
-                        .setReorderingAllowed(true)
-                        .commit();
-                 */
+
                 break;
             case 4:
                 saveDataInViewModelStepFour();
@@ -471,102 +284,48 @@ public class CreateStudyFragment extends Fragment {
                 createStudyFragment_StepThree createStudyFragment_stepThree = new createStudyFragment_StepThree();
 
                 String executionTypeCase4 = createStudyViewModel.studyCreationProcessData.get("executionType").toString();
-                if (executionTypeCase4.equals(getString(R.string.remoteString))){
+                if (executionTypeCase4.equals(getString(R.string.remoteString))) {
 
-                    Log.d("back case4", navControllerCreate.getBackQueue().toString());
 
                     navControllerCreate.navigate(R.id.action_createStudyFragment_StepFour_Remote_to_createStudyFragment_StepThree);
                 } else {
 
-                    Log.d("back case4", navControllerCreate.getBackQueue().toString());
 
                     navControllerCreate.navigate(R.id.action_createStudyFragment_StepFour_Presence_to_createStudyFragment_StepThree);
                 }
-                /*
-                fragmentManager
-                        .beginTransaction()
-                        .setCustomAnimations(R.anim.enter_from_left, R.anim.exit_to_right,
-                                R.anim.enter_from_right, R.anim.exit_to_left)
-                        .replace(R.id.nav_host_fragment_create, createStudyFragment_stepThree, null)
-                        //.addToBackStack(null)
-                        .setReorderingAllowed(true)
-                        .commit();
-                 */
+
                 break;
             case 5:
                 saveDataInViewModelStepFive();
                 stateProgressBar.setCurrentStateNumber(StateProgressBar.StateNumber.THREE);
                 String executionTypeCase5 = createStudyViewModel.studyCreationProcessData.get("executionType").toString();
-                Log.d("executionType", "is: " + executionTypeCase5);
+
                 if (executionTypeCase5.equals(getString(R.string.remoteString))) {
                     createStudyFragment_StepFour_Remote createStudyFragment_stepFour_remote = new createStudyFragment_StepFour_Remote();
 
-                    Log.d("back case5", navControllerCreate.getBackQueue().toString());
-
                     navControllerCreate.navigate(R.id.action_createStudyFragment_StepFive_to_createStudyFragment_StepFour_Remote);
-                    /*
-                    fragmentManager
-                            .beginTransaction()
-                            .setCustomAnimations(R.anim.enter_from_left, R.anim.exit_to_right,
-                                    R.anim.enter_from_right, R.anim.exit_to_left)
-                            .replace(R.id.nav_host_fragment_create, createStudyFragment_stepFour_remote, null)
-                            //.addToBackStack(null)
-                            .setReorderingAllowed(true)
-                            .commit();
-                     */
+
                 } else {
                     createStudyFragment_StepFour_Presence createStudyFragment_stepFour_presence = new createStudyFragment_StepFour_Presence();
 
-                    Log.d("back case5", navControllerCreate.getBackQueue().toString());
-
                     navControllerCreate.navigate(R.id.action_createStudyFragment_StepFive_to_createStudyFragment_StepFour_Presence);
-                    /*
-                    fragmentManager
-                            .beginTransaction()
-                            .setCustomAnimations(R.anim.enter_from_left, R.anim.exit_to_right,
-                                    R.anim.enter_from_right, R.anim.exit_to_left)
-                            .replace(R.id.nav_host_fragment_create, createStudyFragment_stepFour_presence, null)
-                            //.addToBackStack(null)
-                            .setReorderingAllowed(true)
-                            .commit();
-                     */
+
                 }
+
                 break;
             case 6:
                 stateProgressBar.setCurrentStateNumber(StateProgressBar.StateNumber.FOUR);
                 createStudyFragment_StepFive createStudyFragment_stepFive = new createStudyFragment_StepFive();
 
-                Log.d("back case6", navControllerCreate.getBackQueue().toString());
-
                 navControllerCreate.navigate(R.id.action_createStudyFragment_finalStep_to_createStudyFragment_StepFive);
-                /*
-                fragmentManager
-                        .beginTransaction()
-                        .setCustomAnimations(R.anim.enter_from_left, R.anim.exit_to_right,
-                                R.anim.enter_from_right, R.anim.exit_to_left)
-                        .replace(R.id.nav_host_fragment_create, createStudyFragment_stepFive, null)
-                        //.addToBackStack(null)
-                        .setReorderingAllowed(true)
-                        .commit();
-                 */
+
                 break;
             case 7:
                 stateProgressBar.setCurrentStateNumber(StateProgressBar.StateNumber.FOUR);
                 createStudyFragment_finalStep createStudyFragment_finalStep = new createStudyFragment_finalStep();
 
-                Log.d("back case7", navControllerCreate.getBackQueue().toString());
-
                 navControllerCreate.navigate(R.id.action_createStudyFragment_finalStep_two_to_createStudyFragment_finalStep);
-                /*
-                fragmentManager
-                        .beginTransaction()
-                        .setCustomAnimations(R.anim.enter_from_left, R.anim.exit_to_right,
-                                R.anim.enter_from_right, R.anim.exit_to_left)
-                        .replace(R.id.nav_host_fragment_create, createStudyFragment_finalStep, null)
-                        //.addToBackStack(null)
-                        .setReorderingAllowed(true)
-                        .commit();
-                 */
+
                 break;
             case 8:
                 stateProgressBar.setCurrentStateNumber(StateProgressBar.StateNumber.FIVE);
@@ -574,25 +333,18 @@ public class CreateStudyFragment extends Fragment {
                 nextBtn.setText(getString(R.string.fragment_create_study_base_next));
                 nextBtn.setBackgroundColor(getResources().getColor(R.color.heatherred_Main));
 
-                Log.d("back case8", navControllerCreate.getBackQueue().toString());
-
                 navControllerCreate.navigate(R.id.action_createStudyFragment_finalStep_three_to_createStudyFragment_finalStep_two);
-                /*
-                fragmentManager
-                        .beginTransaction()
-                        .setCustomAnimations(R.anim.enter_from_left, R.anim.exit_to_right,
-                                R.anim.enter_from_right, R.anim.exit_to_left)
-                        .replace(R.id.nav_host_fragment_create, createStudyFragment_finalStep_two, null)
-                        //.addToBackStack(null)
-                        .setReorderingAllowed(true)
-                        .commit();
-                 */
+
                 break;
             default:
                 break;
         }
     }
 
+
+    //Parameter:
+    //Return values:
+    //Loads data from firebase and stores associated values in Strings, following methods do the same for the next fragments
     private void saveDataInViewModelStepOne() {
         String name = createStudyFragment_StepOne.textInputEditTextTitle.getText().toString();
         if (!name.isEmpty()) {
@@ -601,19 +353,19 @@ public class CreateStudyFragment extends Fragment {
         String vps = createStudyFragment_StepOne.textInputEditTextVP.getText().toString();
         if (!vps.isEmpty()) {
             createStudyViewModel.studyCreationProcessData.put("vps", vps);
+        } else {
+            createStudyViewModel.studyCreationProcessData.put("vps", "0");
         }
 
-        //String category = createStudyFragment_StepOne.categories.getSelectedItem().toString();
         String category = createStudyFragment_StepOne.autoCompleteTextViewCategory.getText().toString();
-        Log.d("saveDataInViewModel", "category: " + category);
-        if (!category.isEmpty()) { //!category.equals("Studienkategorie")
+
+        if (!category.isEmpty()) {
             createStudyViewModel.studyCreationProcessData.put("category", category);
         }
 
-        //String executionType = createStudyFragment_StepOne.executionType.getSelectedItem().toString();
         String executionType = createStudyFragment_StepOne.autoCompleteTextViewExecutionType.getText().toString();
-        Log.d("saveDataInViewModel", "executionType: " + executionType);
-        if (!executionType.isEmpty()) { //!executionType.equals("Durchführungsart")
+
+        if (!executionType.isEmpty()) { 
             createStudyViewModel.studyCreationProcessData.put("executionType", executionType);
         }
 
@@ -629,6 +381,10 @@ public class CreateStudyFragment extends Fragment {
         }
     }
 
+
+    //Parameter:
+    //Return values:
+    //Loads data from firebase and stores associated values in Strings
     private void saveDataInViewModelStepTwo() {
         String mail = createStudyFragment_StepTwo.textInputEditTextContactMail.getText().toString();
         if (!mail.isEmpty()) {
@@ -652,6 +408,9 @@ public class CreateStudyFragment extends Fragment {
         }
     }
 
+    //Parameter:
+    //Return values:
+    //Loads data from firebase stores associated value in String
     private void saveDataInViewModelStepThree() {
         String description = createStudyFragment_StepThree.textInputEditTextDesc.getText().toString();
         if (!description.isEmpty()) {
@@ -659,6 +418,10 @@ public class CreateStudyFragment extends Fragment {
         }
     }
 
+
+    //Parameter:
+    //Return values:
+    //Loads data from firebase and stores associated values in Strings
     private void saveDataInViewModelStepFour() {
         String executionType = createStudyViewModel.studyCreationProcessData.get("executionType").toString();
         if (executionType.equals(getString(R.string.remoteString))) {
@@ -686,12 +449,20 @@ public class CreateStudyFragment extends Fragment {
         }
     }
 
+
+    //Parameter:
+    //Return values:
+    //Stores date data in the ViewModel Arraylist
     private void saveDataInViewModelStepFive() {
         if (!createStudyFragment_StepFive.dates.isEmpty()) {
             createStudyViewModel.datesCreationProcessData = createStudyFragment_StepFive.dates;
         }
     }
 
+
+    //Parameter:
+    //Return values:
+    //Check if mandatory text fields in fragments are empty; sets error message if null
     private boolean mandatoryCheck(int page) {
         switch (page) {
             case 1:
@@ -701,8 +472,9 @@ public class CreateStudyFragment extends Fragment {
                     return true;
                 }
                 if (createStudyViewModel.studyCreationProcessData.get("name") == null) {
-                    createStudyFragment_StepOne.textInputEditTextTitle.setError("Titel darf nicht leer sein");
+                    createStudyFragment_StepOne.textInputEditTextTitle.setError(getString(R.string.titleError));
                     createStudyFragment_StepOne.textInputEditTextTitle.requestFocus();
+
                     break;
                 }
                 if (createStudyViewModel.studyCreationProcessData.get("category") == null) {
@@ -710,12 +482,6 @@ public class CreateStudyFragment extends Fragment {
                     createStudyFragment_StepOne.autoCompleteTextViewCategory.requestFocus();
                     createStudyFragment_StepOne.autoCompleteTextViewCategory.showDropDown();
 
-                    /*
-                    createStudyFragment_StepOne.categories.setFocusable(true);
-                    createStudyFragment_StepOne.categories.setFocusableInTouchMode(true);
-                    createStudyFragment_StepOne.categories.requestFocus();
-                    createStudyFragment_StepOne.categories.performClick();
-                     */
                     break;
                 }
                 if (createStudyViewModel.studyCreationProcessData.get("executionType") == null) {
@@ -723,12 +489,6 @@ public class CreateStudyFragment extends Fragment {
                     createStudyFragment_StepOne.autoCompleteTextViewExecutionType.requestFocus();
                     createStudyFragment_StepOne.autoCompleteTextViewExecutionType.showDropDown();
 
-                    /*
-                    createStudyFragment_StepOne.executionType.setFocusable(true);
-                    createStudyFragment_StepOne.executionType.setFocusableInTouchMode(true);
-                    createStudyFragment_StepOne.executionType.requestFocus();
-                    createStudyFragment_StepOne.executionType.performClick();
-                     */
                     break;
                 }
                 break;
@@ -736,14 +496,14 @@ public class CreateStudyFragment extends Fragment {
                 if (createStudyViewModel.studyCreationProcessData.get("contact") != null) {
                     return true;
                 }
-                createStudyFragment_StepTwo.textInputEditTextContactMail.setError("Email-Kontakt muss angegeben werden");
+                createStudyFragment_StepTwo.textInputEditTextContactMail.setError(getString(R.string.mailError));
                 createStudyFragment_StepTwo.textInputEditTextContactMail.requestFocus();
                 break;
             case 3:
                 if (createStudyViewModel.studyCreationProcessData.get("description") != null) {
                     return true;
                 }
-                createStudyFragment_StepThree.textInputEditTextDesc.setError("Studienbeschreibung darf nicht leer sein");
+                createStudyFragment_StepThree.textInputEditTextDesc.setError(getString(R.string.descriptionError));
                 createStudyFragment_StepThree.textInputEditTextDesc.requestFocus();
                 break;
             case 4:
@@ -753,7 +513,7 @@ public class CreateStudyFragment extends Fragment {
                 String executionType = createStudyViewModel.studyCreationProcessData.get("executionType").toString();
                 if (executionType.equals(getString(R.string.presenceString))) {
                     createStudyFragment_StepFour_Presence.textInputEditTextLocation
-                            .setError("Ort der Studie muss angegeben werden");
+                            .setError(getString(R.string.locationError));
                     createStudyFragment_StepFour_Presence.textInputEditTextLocation.requestFocus();
                 }
                 if (createStudyViewModel.studyCreationProcessData.get("platform") != null) {
@@ -761,7 +521,7 @@ public class CreateStudyFragment extends Fragment {
                 }
                 if (executionType.equals(getString(R.string.remoteString))) {
                     createStudyFragment_StepFour_Remote.textInputEditTextPlatform
-                            .setError("Primärplattform muss angegeben werden");
+                            .setError(getString(R.string.platformError));
                     createStudyFragment_StepFour_Remote.textInputEditTextPlatform.requestFocus();
                 }
                 break;
@@ -771,10 +531,18 @@ public class CreateStudyFragment extends Fragment {
         return false;
     }
 
-    private void reNavigateToCreateStudyFragment() {
+
+    //Parameter:
+    //Return values:
+    //Sets navigation to home fragment
+    private void reNavigateToHomeStudyFragment() {
         navControllerMain.navigate(R.id.action_global_homeFragment);
     }
 
+
+    //Parameter:
+    //Return values:
+    //Sets animation properties
     public void playAnimation() {
         doneAnimation.setVisibility(LottieAnimationView.VISIBLE);
         doneAnimation.setProgress(0);
@@ -782,8 +550,5 @@ public class CreateStudyFragment extends Fragment {
         doneAnimation.playAnimation();
     }
 
-    public void showSnackBar() {
-        //show snackBar
-    }
 
 }

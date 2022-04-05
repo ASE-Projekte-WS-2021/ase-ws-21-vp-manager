@@ -10,11 +10,6 @@
         app:destination="@id/homeFragment"
         app:popUpTo="@id/homeFragment"
         app:popUpToInclusive="true" />
-    <action
-        android:id="@+id/action_global_nestedGraphLoginRegistration"
-        app:destination="@id/nestedGraphLoginRegistration"
-        app:popUpTo="@id/nestedGraphLoginRegistration"
-        app:popUpToInclusive="true" />
     <fragment
         android:id="@+id/homeFragment"
         android:name="com.example.vpmanager.views.HomeFragment"
@@ -130,38 +125,17 @@
             app:popUpTo="@id/studyCreatorFragment"
             app:popUpToInclusive="true" />
     </fragment>
-    <navigation
-        android:id="@+id/nestedGraphLoginRegistration"
-        app:startDestination="@id/loginFragment">
-        <fragment
-            android:id="@+id/loginFragment"
-            android:name="com.example.vpmanager.views.loginFragment"
-            android:label="Login"
-            tools:layout="@layout/fragment_login">
-            <action
-                android:id="@+id/action_loginFragment_to_registerFragment"
-                app:destination="@id/registerFragment" />
-        </fragment>
-        <fragment
-            android:id="@+id/registerFragment"
-            android:name="com.example.vpmanager.views.registerFragment"
-            android:label="Registrieren"
-            tools:layout="@layout/fragment_register">
-            <action
-                android:id="@+id/action_registerFragment_to_loginFragment"
-                app:destination="@id/loginFragment" />
-        </fragment>
-    </navigation>
+
     <fragment
         android:id="@+id/createStudyFragment"
         android:name="com.example.vpmanager.views.createStudy.CreateStudyFragment"
         android:label="Studien erstellen"
-        tools:layout="@layout/fragment_create_study"/>
+        tools:layout="@layout/fragment_create_study" />
     <fragment
         android:id="@+id/upcomingAppointmentsFragment"
         android:name="com.example.vpmanager.views.UpcomingAppointmentsFragment"
         android:label="Termine"
-        tools:layout="@layout/fragment_upcoming_appointments" >
+        tools:layout="@layout/fragment_upcoming_appointments">
         <action
             android:id="@+id/action_upcomingAppointmentsFragment_to_studyFragment"
             app:destination="@id/studyFragment" />
@@ -169,5 +143,27 @@
             android:id="@+id/action_upcomingAppointmentsFragment_to_studyCreatorFragment"
             app:destination="@id/studyCreatorFragment" />
     </fragment>
+
+    <fragment
+        android:id="@+id/loginFragment"
+        android:name="com.example.vpmanager.views.LoginFragment"
+        android:label="Login"
+        tools:layout="@layout/fragment_login">
+        <action
+            android:id="@+id/action_loginFragment_to_registerFragment"
+            app:destination="@id/registerFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/registerFragment"
+        android:name="com.example.vpmanager.views.RegisterFragment"
+        android:label="Registrieren"
+        tools:layout="@layout/fragment_register">
+        <action
+            android:id="@+id/action_registerFragment_to_loginFragment"
+            app:destination="@id/loginFragment" />
+    </fragment>
+    <action
+        android:id="@+id/action_global_loginFragment"
+        app:destination="@id/loginFragment" />
 
 </navigation>
