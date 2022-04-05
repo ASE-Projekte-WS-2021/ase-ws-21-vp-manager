@@ -68,6 +68,7 @@ public class StudyListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
     }
 
 
+
     private class CustomViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         TextView studyTitle, studyVps, studyCat, studyTag;
