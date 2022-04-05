@@ -76,7 +76,7 @@ public class StudyCreatorDetailsFragment extends Fragment {
 
     //Parameter:
     //Return values:
-    //Sets the current study ID and  ViewModel
+    //Sets the current study ID and ViewModel
     private void prepareComponents() {
         currentStudyId = studyCreatorFragment.currentStudyId;
         studyViewModel = new ViewModelProvider(requireActivity()).get(StudyCreatorViewModel.class);
@@ -88,7 +88,7 @@ public class StudyCreatorDetailsFragment extends Fragment {
 
     //Parameter: view
     //Return values:
-    //Sets the views for the study details
+    //Initializes and sets the views for the study details; sets ClickListeners for Buttons
     private void initDetailViews(View view) {
         headerText = view.findViewById(R.id.creator_studyFragmentHeader);
         description = view.findViewById(R.id.creator_descriptionStudyFragment);

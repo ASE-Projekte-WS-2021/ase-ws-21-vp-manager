@@ -49,7 +49,7 @@ public class StudyCreatorDatesFragment extends Fragment {
 
     //Parameter:
     //Return values:
-    //Sets the current study ID and ViewModel
+    //Sets current study ID and the ViewModel
     private void prepareComponents() {
         currentStudyId = studyCreatorFragment.currentStudyId;
         studyViewModel = new ViewModelProvider(requireActivity()).get(StudyCreatorViewModel.class);

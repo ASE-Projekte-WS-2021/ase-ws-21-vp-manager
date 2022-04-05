@@ -129,6 +129,10 @@
     <string name="ownStudyStatusTab">Mein VP-Status</string>
     <string name="ownStudyTab">Meine Studien</string>
 
+    <string name="logInSuccessful">Erfolgreich angemeldet!</string>
+    <string name="logOutSuccessful">Erfolgreich abgemeldet!</string>
+    <string name="elementExpired">Termin ist nicht mehr verfügbar!</string>
+
 
     <!--General-->
     <string name="yes">Ja</string>
@@ -167,6 +171,7 @@
     <string name="conTag">Kontakt</string>
     <string name="typeTag">Studientyp</string>
     <string name="locTag">Ort / Plattform</string>
+
 
     <!-- Edit Study -->
 
