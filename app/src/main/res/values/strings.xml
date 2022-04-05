@@ -126,8 +126,9 @@
     <string name="dropDateView">Sie haben sich bereits für einen Termin eingetragen. (für Abmeldung hier kilcken)</string>
     <string name="dropDateQuestion">Möchten Sie sich für diesen Termin wieder austragen?</string>
     <string name="selectDateQuestion">Möchten Sie sich für diesen Termin eintragen?</string>
-    <string name="ownStudyStatusTab">Mein VP-Status</string>
-    <string name="ownStudyTab">Meine Studien</string>
+    <string name="studyViewTabOne">Details</string>
+    <string name="studyViewTabTwo">Termine</string>
+
 
     <string name="logInSuccessful">Erfolgreich angemeldet!</string>
     <string name="logOutSuccessful">Erfolgreich abgemeldet!</string>
@@ -150,6 +151,8 @@
     <string name="drawerDateFull">Datum - Wochentag - Uhrzeit</string>
     <string name="zeroOwnStudiesHeader">Bisher hast du noch keine Studien erstellt. Wähle im Menü den Reiter Studien erstellen um Studien zu erstellen!</string>
     <string name="ownStudiesHeader">Deine erstellten Studien</string>
+    <string name="ownStudyStatusTab">Mein VP-Status</string>
+    <string name="ownStudyTab">Meine Studien</string>
 
 
     <!---->
@@ -190,6 +193,7 @@
     <string name="changeStudyStateContinue">Fortfahren</string>
     <string name="changeStudyStateTitleClose">Studie abschließen</string>
     <string name="changeStudyStateTitleOpen">Studie wieder öffnen</string>
+
 
 
     <!---Error Texts-->

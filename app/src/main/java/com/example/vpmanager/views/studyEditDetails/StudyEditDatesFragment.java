@@ -72,7 +72,7 @@ public class StudyEditDatesFragment extends Fragment {
 
     //Parameter:
     //Return values:
-    //Sets current study ID and the View Model
+    //Sets study edit ID and the View Model
     private void prepareComponents() {
         currentStudyIdEdit = StudyEditFragment.currentStudyIdEdit;
         //should get the same viewModel as the Details fragment

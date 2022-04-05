@@ -9,7 +9,6 @@ import com.example.vpmanager.models.StudyDetailModel;
 import com.example.vpmanager.repositories.StudyRepository;
 import com.example.vpmanager.views.studyCreatorDetails.StudyCreatorDatesFragment;
 import com.example.vpmanager.views.studyCreatorDetails.StudyCreatorDetailsFragment;
-
 import java.util.ArrayList;
 
 public class StudyCreatorViewModel extends ViewModel implements StudyDetailsListener, StudyDatesListener {

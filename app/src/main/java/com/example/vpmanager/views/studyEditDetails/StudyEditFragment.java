@@ -52,8 +52,8 @@ public class StudyEditFragment extends Fragment {
         mainActivity.currentFragment = "editFragment";
 
         ViewPagerAdapter viewPagerAdapter = new ViewPagerAdapter(getParentFragmentManager(), 0);
-        viewPagerAdapter.addFragment(studyEditDetailsFragment, "Details");
-        viewPagerAdapter.addFragment(studyEditDatesFragment, "Termine");
+        viewPagerAdapter.addFragment(studyEditDetailsFragment, getString(R.string.studyViewTabOne));
+        viewPagerAdapter.addFragment(studyEditDatesFragment, getString(R.string.studyViewTabTwo));
         viewPagerEdit.setAdapter(viewPagerAdapter);
 
         return view;
@@ -63,9 +63,11 @@ public class StudyEditFragment extends Fragment {
     public void onViewCreated(View view, Bundle savedInstanceState) {
         navController = Navigation.findNavController(view);
         super.onViewCreated(view, savedInstanceState);
-        Log.d("EditParentFragment", "instance: " + this.toString());
     }
 
+    //Parameter:
+    //Return values:
+    //Sets the current user ID and study ID
     private void getRequiredInfos() {
         currentStudyIdEdit = getArguments().getString("studyId");
         currentUserIdEdit = mainActivity.createUserId(getActivity());

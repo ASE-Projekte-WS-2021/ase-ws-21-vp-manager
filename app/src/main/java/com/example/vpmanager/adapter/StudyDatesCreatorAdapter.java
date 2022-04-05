@@ -62,6 +62,8 @@ public class StudyDatesCreatorAdapter extends RecyclerView.Adapter<RecyclerView.
         return mStudyDates.size();
     }
 
+
+
     private class CustomViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         Context context;
@@ -78,7 +80,7 @@ public class StudyDatesCreatorAdapter extends RecyclerView.Adapter<RecyclerView.
 
         //Parameter: itemView, onStudyItemClickListener
         //Return values:
-        //Sets items for the CustomViewHolder
+        //Sets items and Listeners for the CustomViewHolder
         public CustomViewHolder(@NonNull View itemView, Context context) {
             super(itemView);
             this.context = context;
@@ -91,16 +93,16 @@ public class StudyDatesCreatorAdapter extends RecyclerView.Adapter<RecyclerView.
             participatedButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    /** Push to database **/
+
                     participated = !participated;
 
                     if (participated) {
                         participatedButton.setTextColor(context.getResources().getColor(R.color.green_dark));
-                        participatedButton.setText("Teilgenommen");
+                        participatedButton.setText(R.string.participated);
                         border_participated.setCardBackgroundColor(context.getResources().getColor(R.color.green_dark));
                     } else {
                         participatedButton.setTextColor(context.getResources().getColor(R.color.heatherred_dark));
-                        participatedButton.setText("Nicht Teilgenommen");
+                        participatedButton.setText(R.string.notParticipated);
                         border_participated.setCardBackgroundColor(context.getResources().getColor(R.color.heatherred_dark));
                     }
                     PA_ExpandableListDataPump.setDateState(mStudyDates.get(getAdapterPosition()).getDateId(), participated);
@@ -108,6 +110,10 @@ public class StudyDatesCreatorAdapter extends RecyclerView.Adapter<RecyclerView.
             });
         }
 
+
+        //Parameter: participation
+        //Return values:
+        //Checks participation status
         public void setParticipationButtons(boolean participation) {
             if (participation) {
                 border_participated.setCardBackgroundColor(context.getResources().getColor(R.color.green_dark));
@@ -117,7 +123,7 @@ public class StudyDatesCreatorAdapter extends RecyclerView.Adapter<RecyclerView.
             } else {
                 border_participated.setCardBackgroundColor(context.getResources().getColor(R.color.heatherred_dark));
                 participatedButton.setTextColor(context.getResources().getColor(R.color.heatherred_dark));
-                participatedButton.setText(R.string.participated);
+                participatedButton.setText(R.string.notParticipated);
             }
         }
 
