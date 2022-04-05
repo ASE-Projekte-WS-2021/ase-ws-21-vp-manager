@@ -27,7 +27,6 @@
                 android:textStyle="bold" />
 
 
-
             <View
                 android:id="@+id/creator_infoLine"
                 android:layout_width="wrap_content"
@@ -55,14 +54,6 @@
                 android:layout_marginBottom="-14dp"
                 app:elevation="4dp"
                 app:srcCompat="@drawable/ic_baseline_info_24" />
-
-            <!--<View
-                android:id="@+id/creator_infoLineRight"
-                android:layout_width="187dp"
-                android:layout_height="3dp"
-                android:layout_below="@id/creator_infoSymbolStudyFragment"
-                android:layout_alignParentRight="true"
-                android:background="@color/green_Main" />-->
 
 
             <TextView
@@ -198,7 +189,6 @@
                 android:weightSum="100" />
 
 
-
             <View
                 android:id="@+id/sepSix"
                 android:layout_width="match_parent"
@@ -207,11 +197,6 @@
                 android:layout_marginTop="7dp"
                 android:layout_marginBottom="15dp"
                 android:background="@color/color_two" />
-
-
-
-
-
 
 
             <View
@@ -224,15 +209,14 @@
                 android:background="@color/green_Main" />
 
 
-
             <View
                 android:id="@+id/whiteviewOne"
                 android:layout_width="37dp"
                 android:layout_height="37dp"
-                android:layout_marginTop="-25dp"
                 android:layout_below="@id/creator_locationSymbolStudyFragment"
                 android:layout_centerHorizontal="true"
-                android:background = "@color/white"/>
+                android:layout_marginTop="-25dp"
+                android:background="@color/white" />
 
             <ImageView
                 android:id="@+id/creator_locationSymbolStudyFragment"
@@ -332,32 +316,6 @@
                 android:background="@color/color_two" />
 
 
-
-
-            <!--<ImageView
-                android:id="@+id/creator_editOwnStudyButton"
-                android:layout_width="100dp"
-                android:layout_height="38dp"
-                android:layout_below="@id/sepEight"
-                android:layout_centerHorizontal="true"
-                app:srcCompat="@drawable/ic_baseline_edit_note_24_red" />-->
-
-            <!--<View
-                android:id="@+id/buttonSepOne"
-                android:layout_width="match_parent"
-                android:layout_height="3dp"
-                android:layout_below="@id/creator_editOwnStudyButton"
-                android:layout_marginTop="5dp"
-                android:background="@color/color_two" />
-
-            <View
-                android:id="@+id/buttonSepTwo"
-                android:layout_width="match_parent"
-                android:layout_height="3dp"
-                android:layout_below="@id/sepEight"
-                android:layout_marginTop="-5dp"
-                android:background="@color/color_two" />
--->
             <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
                 android:id="@+id/creator_editOwnStudyButton"
                 android:layout_width="233dp"
@@ -367,12 +325,12 @@
                 android:layout_marginTop="28dp"
                 android:layout_marginBottom="10dp"
                 android:backgroundTint="@color/green_Main"
-                android:text="Studie bearbeiten"
-                app:icon="@drawable/ic_baseline_edit_note_24"
+                android:text="@string/infoEditFragmentTitle"
                 app:borderWidth="3dp"
                 app:elevation="4dp"
+                app:icon="@drawable/ic_baseline_edit_note_24"
                 app:strokeColor="@color/green_dark"
-                app:strokeWidth="3dp"/>
+                app:strokeWidth="3dp" />
 
             <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
                 android:id="@+id/creator_changeStudyStateButton"
@@ -383,11 +341,11 @@
                 android:layout_marginTop="10dp"
                 android:layout_marginBottom="20dp"
                 android:backgroundTint="@color/heatherred_Main"
-                android:text="Studie Abschließen"
-                app:strokeColor="@color/heatherred_dark"
-                app:strokeWidth="3dp"
+                android:text="@string/changeStudyStateTitleClose"
                 app:elevation="4dp"
-                app:icon="@drawable/ic_baseline_close_24" />
+                app:icon="@drawable/ic_baseline_close_24"
+                app:strokeColor="@color/heatherred_dark"
+                app:strokeWidth="3dp" />
 
         </RelativeLayout>
 

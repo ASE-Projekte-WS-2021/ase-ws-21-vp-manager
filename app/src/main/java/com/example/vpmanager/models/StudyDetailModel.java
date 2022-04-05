@@ -43,7 +43,6 @@ public class StudyDetailModel {
     }
 
     public StudyDetailModel() {
-
     }
 
     public String getId() {

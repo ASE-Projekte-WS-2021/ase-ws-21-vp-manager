@@ -10,7 +10,7 @@
         android:layout_width="250dp"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
-        android:text="Bisher hast du noch keine Studien erstellt. Wähle im Menü den Reiter Studien erstellen um Studien zu erstellen!"
+        android:text="@string/zeroOwnStudiesHeader"
         android:textAlignment="center"
         android:visibility="gone" />
 
@@ -20,7 +20,7 @@
         android:layout_marginStart="25dp"
         android:layout_marginTop="20dp"
         android:layout_marginEnd="25dp"
-        android:text="Deine erstellten Studien"
+        android:text="@string/ownStudiesHeader"
         android:textSize="20sp"
         android:textStyle="bold" />
 
@@ -39,14 +39,5 @@
         android:layout_marginTop="70dp"
         android:dividerHeight="2dp" />
 
-    <!--
-    <ListView
-        android:id="@+id/listViewOwnStudyFragment"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="70dp"
-        android:layout_weight="1"
-        android:dividerHeight="2dp" />
-        -->
 
 </RelativeLayout>

@@ -143,7 +143,16 @@
     <string name="collectionPathDates">dates</string>
     <string name="findStudyCardDescText">Suche nach passenden Studien für deinen Uni-Alltag und sammle VP-Stunden!</string>
     <string name="createStudyCardDescText">Erstelle deine eigenen Studien und präsentiere sie der Ziegruppe!</string>
-    <!-- TODO: Remove or change this placeholder text -->
+
+
+    <!--PA-->
+    <string name="drawerDate">Datum</string>
+    <string name="drawerDateFull">Datum - Wochentag - Uhrzeit</string>
+    <string name="zeroOwnStudiesHeader">Bisher hast du noch keine Studien erstellt. Wähle im Menü den Reiter Studien erstellen um Studien zu erstellen!</string>
+    <string name="ownStudiesHeader">Deine erstellten Studien</string>
+
+
+    <!---->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
 

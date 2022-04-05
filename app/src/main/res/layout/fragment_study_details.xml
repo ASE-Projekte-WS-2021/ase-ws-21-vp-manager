@@ -5,11 +5,12 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-<!--    context-->
+    <!--    context-->
 
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -54,7 +55,6 @@
                 android:layout_marginBottom="-14dp"
                 android:elevation="4dp"
                 app:srcCompat="@drawable/ic_baseline_info_24" />
-
 
 
             <TextView
@@ -190,7 +190,6 @@
                 android:weightSum="100" />
 
 
-
             <View
                 android:id="@+id/sepSix"
                 android:layout_width="match_parent"
@@ -210,15 +209,14 @@
                 android:background="@color/green_Main" />
 
 
-
             <View
                 android:id="@+id/whiteviewOne"
                 android:layout_width="37dp"
                 android:layout_height="37dp"
-                android:layout_marginTop="-25dp"
                 android:layout_below="@id/locationSymbolStudyFragment"
                 android:layout_centerHorizontal="true"
-                android:background = "@color/white"/>
+                android:layout_marginTop="-25dp"
+                android:background="@color/white" />
 
             <ImageView
                 android:id="@+id/locationSymbolStudyFragment"
@@ -230,7 +228,6 @@
                 android:layout_marginBottom="-13dp"
                 android:elevation="4dp"
                 app:srcCompat="@drawable/ic_round_location_on_24" />
-
 
 
             <TextView
@@ -273,14 +270,14 @@
                 android:id="@+id/locationTag"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="3dp"
                 android:layout_below="@+id/sepSeven"
                 android:layout_marginStart="5dp"
+                android:layout_marginTop="3dp"
                 android:layout_marginEnd="35dp"
+                android:layout_marginBottom="5dp"
                 android:fontFamily="@font/maven_pro"
                 android:text="@string/locTag"
                 android:textColor="@color/tabs_grey"
-                android:layout_marginBottom="5dp"
                 android:textSize="15sp"
                 android:textStyle="bold"
                 android:weightSum="100" />
@@ -318,11 +315,6 @@
                 android:layout_marginTop="7dp"
                 android:layout_marginBottom="80dp"
                 android:background="@color/color_two" />
-
-
-
-
-
 
 
         </RelativeLayout>

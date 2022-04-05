@@ -36,12 +36,12 @@ public class CreateStudyFragment extends Fragment {
     private Button backBtn;
     private Button nextBtn;
     private StateProgressBar stateProgressBar;
-    private String stepOne = getString(R.string.progressbar_one);
-    private String stepTwo = getString(R.string.progressbar_two);
-    private String stepThree = getString(R.string.progressbar_three);
-    private String stepFour = getString(R.string.progressbar_four);
-    private String stepFive = getString(R.string.progressbar_five);
-    private String[] progressBarDescriptionData = {stepOne, stepTwo, stepThree, stepFour, stepFive};
+    private String stepOne;
+    private String stepTwo;
+    private String stepThree;
+    private String stepFour;
+    private String stepFive;
+    private String[] progressBarDescriptionData;
     private LottieAnimationView doneAnimation;
 
 
@@ -86,6 +86,13 @@ public class CreateStudyFragment extends Fragment {
     //Return values:
     //Sets views  for current fragment; loads the  layout elements from associated resource files
     private void setupView(View view) {
+
+        stepOne = getString(R.string.progressbar_one);
+        stepTwo = getString(R.string.progressbar_two);
+        stepThree = getString(R.string.progressbar_three);
+        stepFour = getString(R.string.progressbar_four);
+        stepFive = getString(R.string.progressbar_five);
+        progressBarDescriptionData = new String[]{stepOne, stepTwo, stepThree, stepFour, stepFive};
 
         //Fragment needs to be owner. Otherwise the data in the input fields will stay!
         createStudyViewModel = new ViewModelProvider(CreateStudyFragment.this).get(CreateStudyViewModel.class);
@@ -358,7 +365,7 @@ public class CreateStudyFragment extends Fragment {
 
         String executionType = createStudyFragment_StepOne.autoCompleteTextViewExecutionType.getText().toString();
 
-        if (!executionType.isEmpty()) { 
+        if (!executionType.isEmpty()) {
             createStudyViewModel.studyCreationProcessData.put("executionType", executionType);
         }
 
