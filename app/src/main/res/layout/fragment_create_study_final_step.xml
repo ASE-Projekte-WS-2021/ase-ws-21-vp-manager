@@ -179,7 +179,7 @@
                         android:layout_marginTop="20dp"
                         android:fontFamily="@font/allerta_stencil"
                         android:gravity="center"
-                        android:text="@string/infoCreateLocationTitle"
+                        android:text="@string/locTag"
                         android:textColor="@color/black"
                         android:textSize="15sp"
                         android:textStyle="bold" />
