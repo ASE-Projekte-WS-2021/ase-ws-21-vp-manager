@@ -209,6 +209,8 @@
     <string name="changeStudyStateTitleClose">Studie abschließen</string>
     <string name="changeStudyStateTitleOpen">Studie wieder öffnen</string>
     <string name="saveStudy">Studie speichern</string>
+    <string name="removeAppointmentAlert">1 Termin gelöscht</string>
+    <string name="cancelAction">Rückgängig</string>
 
 
 
