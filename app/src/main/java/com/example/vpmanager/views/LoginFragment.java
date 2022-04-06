@@ -113,10 +113,10 @@ public class LoginFragment extends Fragment {
         String password = passwordEditText.getText().toString().trim();
         email.trim();
         if (TextUtils.isEmpty(email)) {
-            emailEdittext.setError("Email kann nicht leer sein");
+            emailEdittext.setError(getString(R.string.noMailError));
             emailEdittext.requestFocus();
         } else if (TextUtils.isEmpty(password)) {
-            passwordEditText.setError("Passwort kann nicht leer sein");
+            passwordEditText.setError(getString(R.string.noPasswordError));
             passwordEditText.requestFocus();
         } else {
             mViewModel.login(email, password);
