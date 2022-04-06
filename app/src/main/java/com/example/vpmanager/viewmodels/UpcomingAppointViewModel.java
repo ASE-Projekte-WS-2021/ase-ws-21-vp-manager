@@ -6,6 +6,7 @@ import android.util.Log;
 
 import androidx.lifecycle.ViewModel;
 
+import com.example.vpmanager.Config;
 import com.example.vpmanager.adapter.CustomListViewAdapterAppointments;
 import com.example.vpmanager.interfaces.GetAllDatesListener;
 import com.example.vpmanager.interfaces.GetAllStudiesListener;
@@ -78,7 +79,11 @@ public class UpcomingAppointViewModel extends ViewModel implements GetAllDatesLi
         }
     }
 
-    private List<String[]> getAllArrivingDates() {   //static?
+
+    //Parameter:
+    //Return values: List<String[]>
+    //Loads the upcoming appointments and returns the created list
+    private List<String[]> getAllArrivingDates() {
         HashMap<String, String> studyIdList = new HashMap<>();
 
         List<String[]> arrivingDates = new ArrayList<>();
@@ -174,6 +179,10 @@ public class UpcomingAppointViewModel extends ViewModel implements GetAllDatesLi
         return sortList(arrivingDates);
     }
 
+
+    //Parameter: dates
+    //Return values:
+    //Finalizes the upcoming study list by filling the elements in the ArrayList with the associated entries
     private void finishSetupList(List<String[]> dates) {
 
         if (dates != null) {
@@ -195,15 +204,19 @@ public class UpcomingAppointViewModel extends ViewModel implements GetAllDatesLi
         }
     }
 
+
+    //Parameter: toSort
+    //Return values: List<String[]>
+    //Sorts the list by date
     private List<String[]> sortList(List<String[]> toSort) {
         List<String[]> list = new ArrayList<>();
 
         String[][] dateList = new String[toSort.size()][3];
         int position = 0;
         for (String[] ob : toSort) {
-            dateList[position][0] = ob[0];
-            dateList[position][1] = ob[1];
-            dateList[position][2] = ob[2];
+            dateList[position][Config.listEntryIndexZero] = ob[Config.listEntryIndexZero];
+            dateList[position][Config.listEntryIndexOne] = ob[Config.listEntryIndexOne];
+            dateList[position][Config.listEntryIndexTwo] = ob[Config.listEntryIndexTwo];
             position++;
         }
 
@@ -241,6 +254,10 @@ public class UpcomingAppointViewModel extends ViewModel implements GetAllDatesLi
         return list;
     }
 
+
+    //Parameter: date
+    //Return values: boolean
+    //Checks if date has expired
     private boolean isDateInPast(String date) { //static?
 
         Calendar c = Calendar.getInstance();
