@@ -16,6 +16,7 @@ public class CustomAlertDialog extends Dialog implements android.view.View.OnCli
         public Button yes, no;
         public EditText vps, matrikelnumber;
         public String vpString, matrikelString;
+        public View cancelView;
 
 
         public CustomAlertDialog(HomeFragment a , String vp, String martikelnumber ) {
@@ -33,12 +34,14 @@ public class CustomAlertDialog extends Dialog implements android.view.View.OnCli
                 super.onCreate(savedInstanceState);
                 requestWindowFeature(Window.FEATURE_NO_TITLE);
                 setContentView(R.layout.custom_dialog);
-                yes = (Button) findViewById(R.id.dialog_btn_yes);
-                no = (Button) findViewById(R.id.dialog_btn_no);
+                yes = (Button) findViewById(R.id.addAnyways);
+                no = (Button) findViewById(R.id.abort);
                 yes.setOnClickListener(this);
                 no.setOnClickListener(this);
                 vps = findViewById(R.id.dialog_input_vps);
                 matrikelnumber = findViewById(R.id.dialog_input_number);
+                cancelView = findViewById(R.id.btn_close);
+                cancelView.setOnClickListener(this);
 
                 vps.setText(vpString);
                 matrikelnumber.setText(matrikelString);
@@ -47,12 +50,18 @@ public class CustomAlertDialog extends Dialog implements android.view.View.OnCli
         @Override
         public void onClick(View v) {
                 switch (v.getId()) {
-                        case R.id.dialog_btn_yes:
+                        case R.id.addAnyways:
+                                if(vps.getText().toString().equals(""))
+                                {
+                                        vps.setText("15");
+                                }
                                 fragment.closeDialog(vps.getText().toString(), matrikelnumber.getText().toString());
                                 break;
-                        case R.id.dialog_btn_no:
+                        case R.id.abort:
                                 dismiss();
                                 break;
+                        case R.id.btn_close:
+                                dismiss();
                         default:
                                 break;
                 }

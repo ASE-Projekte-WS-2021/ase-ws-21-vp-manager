@@ -39,10 +39,12 @@ public class HomeViewModel extends ViewModel implements GetAllDatesListener, Get
     public HomeFragment homeFragment;
     private HomeRepository mHomeRepo;
 
-    private float sumVPsHome, collectedVPS;
-    private String matrikelNumberHome, jsonString;
+    private float collectedVPS;
+    private String jsonString;
     private double plannedVP, completedVP, participatedVP;
 
+    public String matrikelNumberHome;
+    public float sumVPsHome;
 
     //Parameter:
     //Return values:
