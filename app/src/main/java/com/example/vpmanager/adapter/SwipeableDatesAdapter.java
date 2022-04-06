@@ -1,7 +1,6 @@
 package com.example.vpmanager.adapter;
 
 import android.content.Context;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,18 +21,19 @@ import java.util.Date;
 public class SwipeableDatesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     public Context mContext;
-    private ArrayList<String> preselectedDates; //DateModel //only stringList not modelList!
-
-    //new with swipeToDelete
+    private ArrayList<String> preselectedDates;
     private String mRecentlyDeletedItem;
     private int mRecentlyDeletedItemPosition;
     private View mFragmentView;
 
+
+    //Parameter: context, studyDates, fragmentView
+    //Return values:
+    //Sets variables
     public SwipeableDatesAdapter(Context context, ArrayList<String> studyDates, View fragmentView) {
         mContext = context;
         preselectedDates = studyDates;
         mFragmentView = fragmentView;
-        Log.d("SwipeableDatesAdapter", "constructor was called");
         this.registerAdapterDataObserver(new RecyclerView.AdapterDataObserver() {
             @Override
             public void onChanged() {
@@ -63,6 +63,7 @@ public class SwipeableDatesAdapter extends RecyclerView.Adapter<RecyclerView.Vie
         return preselectedDates.size();
     }
 
+
     private class CustomViewHolder extends RecyclerView.ViewHolder {
 
         TextView dateDate;
@@ -76,7 +77,9 @@ public class SwipeableDatesAdapter extends RecyclerView.Adapter<RecyclerView.Vie
         }
     }
 
-    //new with swipeToDelete
+    //Parameter:
+    //Return values:
+    //Removes date item
     public void deleteItem(int position){
         mRecentlyDeletedItem = preselectedDates.get(position);
         mRecentlyDeletedItemPosition = position;
@@ -85,21 +88,29 @@ public class SwipeableDatesAdapter extends RecyclerView.Adapter<RecyclerView.Vie
         showUndoSnackBar();
     }
 
-    //new with swipeToDelete
+    //Parameter:
+    //Return values:
+    //Sets snack bar for cancelling appointments
     private void showUndoSnackBar(){
         View view = mFragmentView.findViewById(R.id.create_step_five_layout);
-        Snackbar snackbar = Snackbar.make(view, "1 Termin gelöscht",
+        Snackbar snackbar = Snackbar.make(view, R.string.removeAppointmentAlert,
                 Snackbar.LENGTH_LONG);
-        snackbar.setAction("Rückgängig", v -> undoDelete());
+        snackbar.setAction(R.string.cancelAction, v -> undoDelete());
         snackbar.show();
     }
 
-    //new with swipeToDelete
+    //Parameter:
+    //Return values:
+    //Manages deleted dates
     private void undoDelete(){
         preselectedDates.add(mRecentlyDeletedItemPosition, mRecentlyDeletedItem);
         notifyItemInserted(mRecentlyDeletedItemPosition);
     }
 
+
+    //Parameter: toSort
+    //Return values: ArrayList<String>
+    //Sorts the dates list chronologically
     private ArrayList<String> sortByDate(ArrayList<String> toSort) {
         ArrayList<String> list = new ArrayList<>();
 
