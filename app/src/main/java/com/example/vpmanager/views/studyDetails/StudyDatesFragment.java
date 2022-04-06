@@ -189,6 +189,11 @@ public class StudyDatesFragment extends Fragment implements StudyDatesAdapter.On
                 .setNegativeButton(getString(R.string.no), dialogClickListener).show();
     }
 
+    public void disAbleSignOutButton()
+    {
+        cancelDateBtn.setVisibility(View.GONE);
+    }
+
 
     //Parameter:
     //Return values:
