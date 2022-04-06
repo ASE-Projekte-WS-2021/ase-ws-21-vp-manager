@@ -38,6 +38,10 @@ public class LoginRegisterRepository {
     private FirebaseAuthEmailListener firebaseAuthEmailListener;
     private FirebaseAuthResetListener firebaseAuthResetListener;
 
+
+    //Parameter:
+    //Return values: LogInRegisterRepository
+    //Returns instance of the LogInRegisterRepository
     public static LoginRegisterRepository getInstance() {
         if (instance == null) {
             instance = new LoginRegisterRepository();
@@ -45,6 +49,10 @@ public class LoginRegisterRepository {
         return instance;
     }
 
+
+    //Parameter: associated Listeners
+    //Return values:
+    //Firestore callback; sets Listeners
     public void setFirestoreCallback(LoginListener loginListener, RegisterListener registerListener,
                                      FirebaseAuthCreateListener firebaseAuthCreateListener, FirebaseAuthEmailListener
                                              firebaseAuthEmailListener, FirebaseAuthResetListener firebaseAuthResetListener) {
