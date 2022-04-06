@@ -73,7 +73,7 @@ public class SelfcreatedStudiesFragment extends Fragment implements StudyListAda
 
     //Parameter: view
     //Return values:
-    //Sorts the list by date
+    //Sets all view elements and the View Model
     private void prepareViewModelAndView(View view) {
         ownStudiesList = view.findViewById(R.id.recyclerViewOwnStudies);
         noOwnStudies = view.findViewById(R.id.ownStudiesInfoText);
