@@ -43,7 +43,17 @@ letztere zu korrigieren oder zu ergänzen.
 Anmerkung: Die genannten Bereiche wurden primär den jeweiligen Teammitgliedern zugewiesen. Bei Überschneidungen wurde paarweise gearbeitet.
 
 
-## 
+## Bauen der App auf Basis des Repositorys
 
-- projekt klonen über versionskontrolle --> trust project --> app\build\intermediates\apk\debug --> 
-- `git clone https://github.com/ASE-Projekte-WS-2021/ase-ws-21-vp-manager`
+- Mit git: `git clone https://github.com/ASE-Projekte-WS-2021/ase-ws-21-vp-manager` und öffne den Ordner anschließend in Android Studio
+
+  oder
+
+- Mit Android Studio: Wähle "Get from VCS" und gib diesen Link ein: https://github.com/ASE-Projekte-WS-2021/ase-ws-21-vp-manager.git 
+
+  anschießend
+
+- Wähle "trust project" wenn es gefragt wird 
+- Wähle "sync gradle files" für den Fall das es nicht automatishc startet 
+- Wähle in Android Studio den Reiter "Build" > Build Bundle(s)/APK(s) > Build APK(s)
+- Die APK ist dann hier zu finden: app\build\intermediates\apk\debug
