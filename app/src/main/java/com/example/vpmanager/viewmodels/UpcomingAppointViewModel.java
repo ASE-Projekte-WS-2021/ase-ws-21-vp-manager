@@ -169,7 +169,7 @@ public class UpcomingAppointViewModel extends ViewModel implements GetAllDatesLi
                 arrivingDates.add(listEntry);
             }
         }
-        return arrivingDates;
+        return sortList(arrivingDates);
     }
 
     private void finishSetupList(List<String[]> dates) {
@@ -177,26 +177,66 @@ public class UpcomingAppointViewModel extends ViewModel implements GetAllDatesLi
         if (dates != null) {
 
             ArrayList<String> listEntries = new ArrayList<>();
-            HashMap<String, String> sortingMap = new HashMap<>();
             for (String[] listEntry : dates) {
                 String name = listEntry[0];
                 String date = listEntry[1];
                 String studyID = listEntry[2];
 
                 if (date != null && name != null) {
-                    sortingMap.put(date, name);
+                    listEntries.add(name + "\t\t" + date);
                     getStudyIdByName.put(name, studyID);
                 }
             }
-            for (String key : sortingMap.keySet()) {
-                listEntries.add(sortingMap.get(key) + "\t\t" + key);
-            }
-            Collections.reverse(listEntries);
-
             upcomingAppointmentsFragment.setListViewAdapter(new CustomListViewAdapterAppointments(
                     upcomingAppointmentsFragment.getContext(), upcomingAppointmentsFragment.getNavController(),
                     listEntries, getStudyIdByName, "UpcomingAppointmentsFragment"));
         }
+    }
+
+    private List<String[]> sortList(List<String[]> toSort) {
+        List<String[]> list = new ArrayList<>();
+
+        String[][] dateList = new String[toSort.size()][3];
+        int position = 0;
+        for (String[] ob : toSort) {
+            dateList[position][0] = ob[0];
+            dateList[position][1] = ob[1];
+            dateList[position][2] = ob[2];
+            position++;
+        }
+
+        for (int i = 0; i < dateList.length; i++) {
+            for (int k = 0; k < dateList.length - 1; k++) {
+
+                String date1 = dateList[k][1].substring(dateList[k][1].indexOf(",") + 2);
+                String date2 = dateList[k + 1][1].substring(dateList[k + 1][1].indexOf(",") + 2);
+
+                date1 = date1.replaceAll("um", "");
+                date1 = date1.replaceAll("Uhr", "");
+                date2 = date2.replaceAll("um", "");
+                date2 = date2.replaceAll("Uhr", "");
+
+                Format format = new SimpleDateFormat("dd.MM.yyyy hh:mm");
+                try {
+
+                    Date d1_Date = (Date) format.parseObject(date1);
+                    Date d2_Date = (Date) format.parseObject(date2);
+
+                    if (d2_Date.before(d1_Date)) {
+                        String[] tempDate = dateList[k];
+                        dateList[k] = dateList[k + 1];
+                        dateList[k + 1] = tempDate;
+                    }
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+        list.clear();
+        for (String[] date : dateList) {
+            list.add(date);
+        }
+        return list;
     }
 
     private boolean isDateInPast(String date) { //static?
