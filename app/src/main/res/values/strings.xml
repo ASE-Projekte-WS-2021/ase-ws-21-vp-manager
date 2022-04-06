@@ -194,8 +194,8 @@
     <string name="drawerDateFull">Datum - Wochentag - Uhrzeit</string>
     <string name="zeroOwnStudiesHeader">Bisher hast du noch keine Studien erstellt. Wähle im Menü den Reiter Studien erstellen um Studien zu erstellen!</string>
     <string name="ownStudiesHeader">Deine erstellten Studien</string>
-    <string name="ownStudyStatusTab">Mein VP-Status</string>
-    <string name="ownStudyTab">Meine Studien</string>
+    <string name="ownStudyStatusTab">Teilnahmen</string>
+    <string name="ownStudyTab">Eigene Studien</string>
 
 
     <!---->

@@ -23,6 +23,7 @@ public class StudyViewModel extends ViewModel implements StudyDetailsListener, S
     private StudyDetailModel mStudyDetails;
     private ArrayList<DateModel> mStudyDates;
     private ArrayList<String> userIdsOfDates = new ArrayList<>();
+
     private DateModel selectedDateObject;
 
     private StudyRepository mStudyRepo;
