@@ -26,7 +26,6 @@ public class LoginFragment extends Fragment {
     private Button forgotPasswordButton;
     private Button loginButton;
     private TextView registerView;
-    //private FirebaseAuth firebaseAuth;
     private NavController navController;
     private LoginRegisterViewModel mViewModel;
 
@@ -37,7 +36,6 @@ public class LoginFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //firebaseAuth = FirebaseAuth.getInstance();
     }
 
     @Override
@@ -103,14 +101,6 @@ public class LoginFragment extends Fragment {
             emailEdittext.requestFocus();
         } else {
             mViewModel.resetPassword(email);
-            /*
-            firebaseAuth.sendPasswordResetEmail(email).addOnSuccessListener(new OnSuccessListener<Void>() {
-                @Override
-                public void onSuccess(Void unused) {
-                    Toast.makeText(getActivity(), "Bitte überpürfen Sie ihr Email-Postfach", Toast.LENGTH_LONG).show();
-                }
-            });
-             */
         }
     }
 
@@ -129,33 +119,9 @@ public class LoginFragment extends Fragment {
             passwordEditText.requestFocus();
         } else {
             mViewModel.login(email, password);
-            /*
-            firebaseAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                @Override
-                public void onComplete(@NonNull Task<AuthResult> task) {
-                    if (task.isSuccessful()) {
-                        FirebaseUser user = firebaseAuth.getCurrentUser();
-                        if (user != null) {
-                            //System.out.println(user.isEmailVerified());
-                            if (user.isEmailVerified()) {
-                                mainActivity.uniqueID = email;
-                                mainActivity.createUserId(getActivity());
-                                ((mainActivity) getActivity()).setDrawerUnlocked();
-                                navController.navigate(R.id.action_global_homeFragment);
-                            } else {
-                                firebaseAuth.signOut();
-                                Toast.makeText(getActivity(), "Bitte verifiziere Sie zuerst Ihre Email Adresse", Toast.LENGTH_LONG).show();
-                            }
-                        }
-                    } else {
-                        System.out.println(task.getException().getMessage());
-                        Toast.makeText(getActivity(), "Anmeldung fehlgeschlagen: " + translateError(task.getException().getMessage()), Toast.LENGTH_LONG).show();
-                    }
-                }
-            });
-             */
         }
     }
+
     //successful login
     public void createUserInMainActivity(String email) {
         mainActivity.uniqueID = email;
@@ -168,22 +134,4 @@ public class LoginFragment extends Fragment {
         Toast.makeText(requireActivity(), errorText, Toast.LENGTH_LONG).show();
     }
 
-    /*
-    private String translateError(String error){
-        String translatedError = "";
-        if(error.startsWith("The password is invalid"))
-        {
-            translatedError = "Falsches Passwort oder es gibt keinen Account mit dieser Email-Adresse";
-        }
-        if(error.startsWith("The email address")){
-            translatedError = "Keine gültige Email-Adresse";
-        }
-        if(error.startsWith("We have blocked all requests from this device due to unusual activity. Try again later")){
-            translatedError = "Anmeldung wurde temporär blockiert aufgrund vieler fehlgeschlagenen Anmeldungsversuche";
-        }
-        return translatedError;
-
-    }
-
-     */
 }

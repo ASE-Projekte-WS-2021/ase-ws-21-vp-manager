@@ -584,7 +584,7 @@ public class HomeViewModel extends ViewModel implements GetAllDatesListener, Get
         int position = 0;
         for (String key : toSort.keySet()) {
             dateList[position][Config.listEntryIndexZero] = key;
-            dateList[position][Config.listEntryIndexTwo] = toSort.get(key);
+            dateList[position][Config.listEntryIndexOne] = toSort.get(key);
             position++;
         }
 

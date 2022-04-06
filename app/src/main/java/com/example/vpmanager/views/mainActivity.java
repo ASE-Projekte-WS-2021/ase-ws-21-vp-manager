@@ -135,51 +135,6 @@ public class mainActivity extends AppCompatActivity implements DrawerController 
                 return false;
             }
         });
-
-        /*
-        topAppBarMain.setNavigationOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(currentFragment.equals("createBase")){
-                    System.out.println("HUEHEUHEUHEUEHEUHEUHE");
-                }
-                else {
-                    drawerLayoutMain.open();
-                }
-            }
-        });
-        */
-
-
-        /*
-        navigationViewMain.getMenu().getItem(1).setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
-            @Override
-            public boolean onMenuItemClick(MenuItem menuItem) {
-                navController.navigate(R.id.action_global_findStudyFragment);
-                Log.d("menuItem", navigationViewMain.getMenu().getItem(1).toString());
-                Log.d("additionalListener", "find was active!");
-                return false;
-            }
-        });
-        navigationViewMain.getMenu().getItem(3).setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
-            @Override
-            public boolean onMenuItemClick(MenuItem menuItem) {
-                navController.navigate(R.id.action_global_personalAccountFragment);
-                Log.d("menuItem", navigationViewMain.getMenu().getItem(3).toString());
-                Log.d("additionalListener", "personal was active!");
-                return false;
-            }
-        });
-        navigationViewMain.getMenu().getItem(4).setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
-            @Override
-            public boolean onMenuItemClick(MenuItem menuItem) {
-                navController.navigate(R.id.action_global_ownStudyFragment);
-                Log.d("menuItem", navigationViewMain.getMenu().getItem(4).toString());
-                Log.d("additionalListener", "own was active!");
-                return false;
-            }
-        });
-         */
     }
 
     //Parameter:
