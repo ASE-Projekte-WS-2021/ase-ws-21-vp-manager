@@ -137,7 +137,7 @@ public class HomeFragment extends Fragment {
         });
 
         registerMatrikelnummer.setOnClickListener(v -> {
-            CustomAlertDialog dialog = new CustomAlertDialog(HomeFragment.this, "", "");
+            CustomAlertDialog dialog = new CustomAlertDialog(HomeFragment.this, Float.toString(homeViewModel.sumVPsHome), homeViewModel.matrikelNumberHome);
             dialog.show();
         });
         findStudyButton.setOnClickListener(v -> navController.navigate(R.id.action_homeFragment_to_findStudyFragment));
