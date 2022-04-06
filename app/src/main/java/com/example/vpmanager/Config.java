@@ -20,6 +20,8 @@ public class Config {
     public static int listEntryIndexTwo = 2;
     public static int listEntryIndexThree = 3;
 
+    public static int delayMills = 1000;
+
 
 
 

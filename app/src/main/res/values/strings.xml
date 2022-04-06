@@ -12,6 +12,10 @@
     <string name="pieSliceLabelRemaining">Remaining</string>
     <string name="personalAccount">Persönliche Übersicht</string>
 
+    <!---Login-->
+    <string name="successfulRegistration">Registierung erfolgreich, bitte überprüfe deine Email-Postfach</string>
+    <string name="neededVps">15</string>
+
 
 
     <!---Create Study-->
@@ -224,7 +228,10 @@
     <string name="platformError">Primärplattform muss angegeben werden</string>
     <string name="mailError">Email-Kontakt muss angegeben werden</string>
     <string name="selectDateError">Dieser Termin ist nicht mehr verfügbar!</string>
-    <string name="mailVerificationError">Bitte verifiziere Sie zuerst Ihre Email Adresse</string>
+    <string name="noMailError">Email Feld kann nicht leer sein"</string>
+    <string name="noPasswordError">Geben sie bitte ein Passwort an</string>
+    <string name="passwordsNotEqual">Passwörter müssen übereinstimmen</string>
+
 
 
     <!---Confirm Texts-->
