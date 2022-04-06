@@ -32,8 +32,11 @@ public class CustomListViewAdapterAppointments extends BaseAdapter {
 
     }
 
-    // Activity activity,
-    public CustomListViewAdapterAppointments(Context context,NavController nav, ArrayList<String> list, HashMap<String, String> getStudyIdByName, String source) {
+
+    //Parameter: context, nav, list, Hashmap<String, getStudyIdByName, source
+    //Return values:
+    //Sets the required adapter elements
+    public CustomListViewAdapterAppointments(Context context, NavController nav, ArrayList<String> list, HashMap<String, String> getStudyIdByName, String source) {
         super();
         inflater = LayoutInflater.from(context);
         navController = nav;
@@ -42,16 +45,19 @@ public class CustomListViewAdapterAppointments extends BaseAdapter {
         sourceFragment = source;
     }
 
+
+    //Parameter: list, Hashmap<String, getStudyIdByName
+    //Return values: ArrayList<StudyObjectPa>
+    //Fills the ArrayList for upcoming appointments
     private ArrayList<StudyObjectPa> transformUpcomingAppointments(ArrayList<String> list, HashMap<String, String> getStudyIdByName) {
         ArrayList<StudyObjectPa> returnList = new ArrayList<>();
 
-        for(int i = 0; i < list.size(); i++)
-        {
+        for (int i = 0; i < list.size(); i++) {
             String[] values = list.get(i).split("\t\t");//0 name 1 date
             String id = getStudyIdByName.get(values[0]);
             assert id != null;
-            if(!id.equals("")) {
-                StudyObjectPa object = new StudyObjectPa(values[0],null, id, values[1], 0);
+            if (!id.equals("")) {
+                StudyObjectPa object = new StudyObjectPa(values[0], null, id, values[1], 0);
 
                 returnList.add(object);
             }
