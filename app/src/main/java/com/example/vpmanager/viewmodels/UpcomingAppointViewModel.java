@@ -29,7 +29,6 @@ public class UpcomingAppointViewModel extends ViewModel implements GetAllDatesLi
 
     private List<Map<String, Object>> dbDatesListUpAppoint = new ArrayList<>();
     private List<Map<String, Object>> dbStudiesListUpAppoint = new ArrayList<>();
-
     private List<String[]>[] arrivingDates = new List[]{null};  //final?
 
     private HashMap<String, String> getStudyIdByName = new HashMap<>();
@@ -38,9 +37,13 @@ public class UpcomingAppointViewModel extends ViewModel implements GetAllDatesLi
     public UpcomingAppointmentsFragment upcomingAppointmentsFragment;
     private HomeRepository mHomeRepo;
 
+
+    //Parameter:
+    //Return values:
+    //Gets instance of the Home Repository and sets the FirestoreCallback
     public void prepareRepo() {
         mHomeRepo = HomeRepository.getInstance();
-        //Instance is the same but different data can be retrieved!
+        //Instance is the same but different data can be retrieved
         mHomeRepo.setFirestoreCallbackUpAppoint(this, this);
     }
 

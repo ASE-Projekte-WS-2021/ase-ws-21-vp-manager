@@ -31,9 +31,13 @@ public class StudyEditViewModel extends ViewModel implements EditStudyDetailsLis
 
     private StudyEditRepository mStudyEditRepo;
 
+
+    //Parameter:
+    //Return values:
+    //Gets instance of the Study Edit repository and sets the FirestoreCallback
     public void prepareRepo() {
         mStudyEditRepo = StudyEditRepository.getInstance();
-        //Instance is the same but different data can be retrieved!
+        //Instance is the same but different data can be retrieved
         mStudyEditRepo.setFirestoreCallback(this, this, this);
     }
 
