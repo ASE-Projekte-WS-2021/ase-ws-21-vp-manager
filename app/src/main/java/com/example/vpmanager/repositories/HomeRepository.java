@@ -37,6 +37,10 @@ public class HomeRepository {
     private GetAllStudiesListener getAllStudiesListener;
     private GetVpAndMatNrListener getVpAndMatNrListener;
 
+
+    //Parameter:
+    //Return values: HomeRepository
+    //Returns instance of the HomeRepository
     public static HomeRepository getInstance() {
         if (instance == null) {
             instance = new HomeRepository();
@@ -44,6 +48,9 @@ public class HomeRepository {
         return instance;
     }
 
+    //Parameter: associated Listeners
+    //Return values:
+    //Firestore callback; sets Listeners
     public void setFirestoreCallback(GetAllDatesListener getAllDatesListener,
                                      GetAllStudiesListener getAllStudiesListener, GetVpAndMatNrListener getVpAndMatNrListener) {
         this.getAllDatesListener = getAllDatesListener;
@@ -60,12 +67,18 @@ public class HomeRepository {
         return dbStudiesListHomeRepo;
     }
 
-    //for the upcoming appointments fragment
+    //Parameter: getAllDatesListener, getAllStudiesListener
+    //Return values:
+    //Callback for the upcoming appointments fragment
     public void setFirestoreCallbackUpAppoint(GetAllDatesListener getAllDatesListener, GetAllStudiesListener getAllStudiesListener) {
         this.getAllDatesListener = getAllDatesListener;
         this.getAllStudiesListener = getAllStudiesListener;
     }
 
+
+    //Parameter:
+    //Return values:
+    //Loads all date elements from the database
     public void getAllDatesFromDb() {
         db = FirebaseFirestore.getInstance();
         CollectionReference datesRef = db.collection("dates");
@@ -92,6 +105,10 @@ public class HomeRepository {
                 });
     }
 
+
+    //Parameter:
+    //Return values:
+    //Loads all studies from the database
     public void getAllStudiesFromDb() {
         db = FirebaseFirestore.getInstance();
         CollectionReference studiesRef = db.collection("studies");
@@ -118,6 +135,10 @@ public class HomeRepository {
                 });
     }
 
+
+    //Parameter:
+    //Return values:
+    //Receives VP values and matr. number from the database
     public void getVpAndMatrikelNumber() {
         db = FirebaseFirestore.getInstance();
         CollectionReference usersRef = db.collection("users");
@@ -137,7 +158,11 @@ public class HomeRepository {
         }).addOnFailureListener(e -> getVpAndMatNrListener.onAllDataReady("", "", dbDatesListHomeRepo, dbStudiesListHomeRepo));
     }
 
-    public void saveVpAndMatrikelNumber(String vp, String matrikelnumber) {  //static?
+
+    //Parameter: vp, matrikelnumber
+    //Return values:
+    //Saves the received database values in hashmap
+    public void saveVpAndMatrikelNumber(String vp, String matrikelnumber) {
         Map<String, Object> updateData = new TreeMap<>();
         updateData.put("deviceId", uniqueID);
         updateData.put("vps", vp);
@@ -149,6 +174,10 @@ public class HomeRepository {
                 .addOnFailureListener(e -> System.out.println("Error updating document"));
     }
 
+
+    //Parameter: matrikelnumber
+    //Return values:
+    //Creates the request to receive data from database
     public String createGetRequest(String matrikelNumber) throws IOException {
         HttpURLConnection urlConnection = null;
         URL url = new URL("https://vp.software-engineering.education/" + matrikelNumber + "/vps");

@@ -13,7 +13,14 @@ public class Config {
     public static int createFragmentSeven = 7;
     public static int createFragmentEight = 8;
 
-    //
+    public static int progressBarMultiplicator = 100;
+    public static int vpSum = 15;
+    public static int listEntryIndexZero = 0;
+    public static int listEntryIndexOne = 1;
+    public static int listEntryIndexTwo = 2;
+    public static int listEntryIndexThree = 3;
+
+
 
 
 

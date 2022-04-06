@@ -12,6 +12,11 @@
     <string name="pieSliceLabelRemaining">Remaining</string>
     <string name="personalAccount">Persönliche Übersicht</string>
 
+    <string name="pieSliceLabelParticipation">Participation</string>
+    <string name="pieSliceLabelPlanned">Planned</string>
+    <string name="pieSliceLabelRemaining">Remaining</string>
+    <string name="personalAccount">Persönliche Übersicht</string>
+
     <!---Create Study-->
     <string name="createStudyDesc">Studienbeschreibung</string>
     <string name="createAddDateButton">Termine hinzufügen</string>
