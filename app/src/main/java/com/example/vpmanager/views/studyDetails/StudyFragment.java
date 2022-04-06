@@ -55,8 +55,8 @@ public class StudyFragment extends Fragment {
         mainActivity.currentFragment = "studyFragment";
 
         ViewPagerAdapter viewPagerAdapter = new ViewPagerAdapter(getParentFragmentManager(), 0);
-        viewPagerAdapter.addFragment(detailsFragment, "Details");
-        viewPagerAdapter.addFragment(datesFragment, "Termine");
+        viewPagerAdapter.addFragment(detailsFragment, getString(R.string.studyViewTabOne));
+        viewPagerAdapter.addFragment(datesFragment, getString(R.string.studyViewTabTwo));
         viewPager.setAdapter(viewPagerAdapter);
 
         return view;
@@ -69,43 +69,12 @@ public class StudyFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
     }
 
+
+    //Parameter:
+    //Return values:
+    //Sets the current user ID and study ID
     private void getRequiredInfos() {
         currentStudyId = getArguments().getString("studyId");
         currentUserId = mainActivity.createUserId(getActivity());
     }
-
-    /*
-    private class ViewPagerAdapter extends FragmentStatePagerAdapter {
-
-        private List<Fragment> fragments = new ArrayList<>();
-        private List<String> fragmentNames = new ArrayList<>();
-
-        public ViewPagerAdapter(@NonNull FragmentManager fm, int behavior) {
-            super(fm, behavior);
-        }
-
-        public void addFragment(Fragment fragment, String title) {
-            fragments.add(fragment);
-            fragmentNames.add(title);
-        }
-
-        @NonNull
-        @Override
-        public Fragment getItem(int position) {
-            return fragments.get(position);
-        }
-
-        @Override
-        public int getCount() {
-            return fragments.size();
-        }
-
-        @Nullable
-        @Override
-        public CharSequence getPageTitle(int position) {
-            return fragmentNames.get(position);
-        }
-    }
-
-     */
 }

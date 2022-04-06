@@ -365,7 +365,7 @@ public class CreateStudyFragment extends Fragment {
 
         String executionType = createStudyFragment_StepOne.autoCompleteTextViewExecutionType.getText().toString();
 
-        if (!executionType.isEmpty()) { 
+        if (!executionType.isEmpty()) {
             createStudyViewModel.studyCreationProcessData.put("executionType", executionType);
         }
 

@@ -21,15 +21,20 @@ public class OwnStudyRepository {
 
     private static OwnStudyRepository instance;
     private FirebaseFirestore db;
-
     private ArrayList<StudyMetaInfoModel> ownStudiesMetaInfoArrayList = new ArrayList<>();
-
     private StudyMetaDataListener studyMetaDataListener;
 
+
+    //Parameter: studyMetaDataListener
+    //Return values:
+    //Firestore callback; set studyMetaDataListener
     public void setFirestoreCallback(StudyMetaDataListener studyMetaDataListener) {
         this.studyMetaDataListener = studyMetaDataListener;
     }
 
+    //Parameter:
+    //Return values: OwnStudyRepository
+    //Creates an instance of the repo and returns always the same one
     public static OwnStudyRepository getInstance() {
         if (instance == null) {
             instance = new OwnStudyRepository();
@@ -37,6 +42,10 @@ public class OwnStudyRepository {
         return instance;
     }
 
+
+    //Parameter:
+    //Return values:
+    //Retrieves study meta infos from database
     public void getOwnStudyMetaInfo() {
         String currentUserId = mainActivity.uniqueID;
         db = FirebaseFirestore.getInstance();
@@ -57,7 +66,6 @@ public class OwnStudyRepository {
                                         document.getString("executionType"))
                                 );
                             }
-                            Log.d("getOwnStudyMetaInfo", "all Studies: " + ownStudiesMetaInfoArrayList);
                             studyMetaDataListener.onStudyMetaDataReady(ownStudiesMetaInfoArrayList);
                         } else {
                             Log.d("getOwnStudyMetaInfo", "Error:" + task.getException());
@@ -67,7 +75,6 @@ public class OwnStudyRepository {
                 .addOnFailureListener(new OnFailureListener() {
                     @Override
                     public void onFailure(@NonNull Exception e) {
-                        Log.d("Error", "onFailure: " + e);
                     }
                 });
     }

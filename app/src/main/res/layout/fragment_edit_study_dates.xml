@@ -14,7 +14,7 @@
             android:id="@+id/edit_study_dates_pageTitle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Termine"
+            android:text="@string/progressbar_four"
             android:textAlignment="center"
             android:textSize="35sp" />
 
@@ -29,9 +29,9 @@
             android:background="@color/black" />
 
         <RelativeLayout
-            android:layout_below="@+id/edit_study_dates_separator"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:layout_below="@+id/edit_study_dates_separator">
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/editStudyDatesRecyclerView"

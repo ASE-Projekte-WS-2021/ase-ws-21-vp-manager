@@ -12,7 +12,7 @@
         android:layout_marginStart="15dp"
         android:layout_marginTop="15dp"
         android:layout_marginEnd="15dp"
-        android:text="Datum" />
+        android:text="@string/drawerDate" />
 
     <TextView
         android:id="@+id/dateItemLayoutProposal"
@@ -21,7 +21,7 @@
         android:layout_marginStart="15dp"
         android:layout_marginTop="5dp"
         android:layout_marginEnd="15dp"
-        android:text="Datum - Wochentag - Uhrzeit"
+        android:text="@string/drawerDateFull"
         android:textStyle="bold" />
 
 </LinearLayout>

@@ -133,46 +133,7 @@
             </RelativeLayout>
 
         </RelativeLayout>
-        <!--
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginStart="25dp"
-            android:layout_marginTop="12dp"
-            android:layout_marginEnd="20dp"
-            android:fontFamily="@font/maven_pro"
-            android:text="@string/dateListHeader"
-            android:textSize="23sp"
-            android:textStyle="bold" />
 
-        <ImageView
-            android:id="@+id/locationSymbolStudyFragment"
-            android:layout_width="91dp"
-            android:layout_height="31dp"
-            android:layout_gravity="right"
-            android:layout_marginTop="-30dp"
-            android:layout_marginEnd="80dp"
-            app:srcCompat="@drawable/ic_baseline_edit_calendar_24" />
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="3dp"
-            android:layout_marginLeft="20dp"
-            android:layout_marginTop="15dp"
-            android:layout_marginRight="20dp"
-            android:layout_marginBottom="15dp"
-            android:background="@color/green_dark" />
-
-        <ListView
-            android:id="@+id/listViewDatesStudyFragment"
-            android:layout_width="348dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="3dp"
-            android:divider="@color/color_two"
-            android:dividerHeight="1dp" />
-            -->
     </LinearLayout>
 
 </FrameLayout>

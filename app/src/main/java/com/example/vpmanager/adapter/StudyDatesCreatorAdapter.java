@@ -1,7 +1,6 @@
 package com.example.vpmanager.adapter;
 
 import android.content.Context;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,11 +23,15 @@ public class StudyDatesCreatorAdapter extends RecyclerView.Adapter<RecyclerView.
     private ArrayList<DateModel> mStudyDates;
     private OnDateClickListener mOnDateClickListener;
 
+
+
+    //Parameter: context, studyDates, onDareCLickListener
+    //Return values:
+    //Sets variables
     public StudyDatesCreatorAdapter(Context context, ArrayList<DateModel> studyDates, OnDateClickListener onDateClickListener) {
         mContext = context;
         mStudyDates = DateModel.sortByDate(studyDates);
         mOnDateClickListener = onDateClickListener;
-        Log.d("StudyDatesAdapter", "constructor was called");
     }
 
     @NonNull
@@ -49,8 +52,8 @@ public class StudyDatesCreatorAdapter extends RecyclerView.Adapter<RecyclerView.
 
         ((CustomViewHolder) holder).setParticipationButtons(((CustomViewHolder) holder).participated);
 
-        if( ((CustomViewHolder) holder).dateUserId.getText().toString().isEmpty())
-        {  ((CustomViewHolder) holder).stateLayout.setVisibility(View.GONE);
+        if (((CustomViewHolder) holder).dateUserId.getText().toString().isEmpty()) {
+            ((CustomViewHolder) holder).stateLayout.setVisibility(View.GONE);
         }
     }
 
@@ -58,6 +61,8 @@ public class StudyDatesCreatorAdapter extends RecyclerView.Adapter<RecyclerView.
     public int getItemCount() {
         return mStudyDates.size();
     }
+
+
 
     private class CustomViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
@@ -72,6 +77,10 @@ public class StudyDatesCreatorAdapter extends RecyclerView.Adapter<RecyclerView.
 
         private boolean participated;
 
+
+        //Parameter: itemView, onStudyItemClickListener
+        //Return values:
+        //Sets items and Listeners for the CustomViewHolder
         public CustomViewHolder(@NonNull View itemView, Context context) {
             super(itemView);
             this.context = context;
@@ -84,42 +93,42 @@ public class StudyDatesCreatorAdapter extends RecyclerView.Adapter<RecyclerView.
             participatedButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    /** Push to database **/
+
                     participated = !participated;
 
                     if (participated) {
                         participatedButton.setTextColor(context.getResources().getColor(R.color.green_dark));
-                        participatedButton.setText("Teilgenommen");
+                        participatedButton.setText(R.string.participated);
                         border_participated.setCardBackgroundColor(context.getResources().getColor(R.color.green_dark));
                     } else {
                         participatedButton.setTextColor(context.getResources().getColor(R.color.heatherred_dark));
-                        participatedButton.setText("Nicht Teilgenommen");
+                        participatedButton.setText(R.string.notParticipated);
                         border_participated.setCardBackgroundColor(context.getResources().getColor(R.color.heatherred_dark));
                     }
                     PA_ExpandableListDataPump.setDateState(mStudyDates.get(getAdapterPosition()).getDateId(), participated);
                 }
             });
         }
-        public void setParticipationButtons(boolean participation)
-        {
-            if(participation)
-            {
+
+
+        //Parameter: participation
+        //Return values:
+        //Checks participation status
+        public void setParticipationButtons(boolean participation) {
+            if (participation) {
                 border_participated.setCardBackgroundColor(context.getResources().getColor(R.color.green_dark));
-                participatedButton.setText("Teilgenommen");
+                participatedButton.setText(R.string.participated);
                 participatedButton.setTextColor(context.getResources().getColor(R.color.green_dark));
 
-            }
-            else
-            {
+            } else {
                 border_participated.setCardBackgroundColor(context.getResources().getColor(R.color.heatherred_dark));
                 participatedButton.setTextColor(context.getResources().getColor(R.color.heatherred_dark));
-                participatedButton.setText("Nicht Teilgenommen");
+                participatedButton.setText(R.string.notParticipated);
             }
         }
 
         @Override
         public void onClick(View view) {
-
         }
     }
 

@@ -27,10 +27,6 @@ import android.widget.TextView;
 
 public class StudyCreatorDetailsFragment extends Fragment {
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
 
     private StudyCreatorViewModel studyViewModel;
 
@@ -53,29 +49,13 @@ public class StudyCreatorDetailsFragment extends Fragment {
     NavController navController;
 
 
-    private String mParam1;
-    private String mParam2;
-
     public StudyCreatorDetailsFragment() {
         // Required empty public constructor
-    }
-
-    public static StudyCreatorDetailsFragment newInstance(String param1, String param2) {
-        StudyCreatorDetailsFragment fragment = new StudyCreatorDetailsFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
     }
 
     @Override
@@ -93,6 +73,10 @@ public class StudyCreatorDetailsFragment extends Fragment {
         navController = Navigation.findNavController(view);
     }
 
+
+    //Parameter:
+    //Return values:
+    //Sets the current study ID and ViewModel
     private void prepareComponents() {
         currentStudyId = studyCreatorFragment.currentStudyId;
         studyViewModel = new ViewModelProvider(requireActivity()).get(StudyCreatorViewModel.class);
@@ -101,6 +85,10 @@ public class StudyCreatorDetailsFragment extends Fragment {
 
     }
 
+
+    //Parameter: view
+    //Return values:
+    //Initializes and sets the views for the study details; sets ClickListeners for Buttons
     private void initDetailViews(View view) {
         headerText = view.findViewById(R.id.creator_studyFragmentHeader);
         description = view.findViewById(R.id.creator_descriptionStudyFragment);
@@ -109,6 +97,7 @@ public class StudyCreatorDetailsFragment extends Fragment {
         contactInfo = view.findViewById(R.id.creator_contactInformationStudyFragment);
         category = view.findViewById(R.id.creator_categoryStudyFragment);
         studyType = view.findViewById(R.id.creator_studyTypeStudyFragment);
+
         //Textview for further studyType data (depending on type)
         remoteData = view.findViewById(R.id.creator_remoteStudyStudyFragment);
         localData = view.findViewById(R.id.creator_localStudyStudyFragment);
@@ -123,12 +112,16 @@ public class StudyCreatorDetailsFragment extends Fragment {
         changeStudyStateButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-               showCloseStudyWarning();
+                showCloseStudyWarning();
             }
         });
     }
 
-    private void showCloseStudyWarning(){
+
+    //Parameter:
+    //Return values:
+    //Initializes button for closing finished studies; sets up alert messages
+    private void showCloseStudyWarning() {
         Dialog dialog = new Dialog(getActivity(), R.style.DialogStyle);
         dialog.setContentView(R.layout.duplicate_dialog);
 
@@ -141,11 +134,11 @@ public class StudyCreatorDetailsFragment extends Fragment {
         TextView warningText = dialog.findViewById(R.id.duplicate_desc);
         CheckBox doNotShowAgainCheck = dialog.findViewById(R.id.doNotShowAgainCheckBox);
         doNotShowAgainCheck.setVisibility(View.GONE);
-        addAnywaysButton.setText(getString(R.string.changeStudyStateContinue));
-        abortButton.setText(getString(R.string.changeStudyStateAbort));
-        if(!studyIsClosed) {
-            warningTitle.setText(getString(R.string.changeStudyStateTitleClose));
-            warningText.setText(getString(R.string.studyCloseWarning));
+        addAnywaysButton.setText(R.string.changeStudyStateContinue);
+        abortButton.setText(R.string.changeStudyStateAbort);
+        if (!studyIsClosed) {
+            warningTitle.setText(R.string.changeStudyStateTitleClose);
+            warningText.setText(R.string.studyCloseWarning);
 
         } else {
             warningTitle.setText(getString(R.string.changeStudyStateTitleOpen));
@@ -163,16 +156,13 @@ public class StudyCreatorDetailsFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 studyIsClosed = !studyIsClosed;
-                if(!studyIsClosed)
-                {
-                    changeStudyStateButton.setText("Studie abschließen");
+                if (!studyIsClosed) {
+                    changeStudyStateButton.setText(R.string.changeStudyStateTitleClose);
                     changeStudyStateButton.setStrokeColor(ColorStateList.valueOf(getContext().getResources().getColor(R.color.heatherred_dark)));
                     changeStudyStateButton.setBackgroundTintList(ColorStateList.valueOf(getContext().getResources().getColor(R.color.heatherred_Main)));
                     changeStudyStateButton.setIcon(getResources().getDrawable(R.drawable.ic_baseline_close_24));
-                }
-                else
-                {
-                    changeStudyStateButton.setText("Studie fortführen");
+                } else {
+                    changeStudyStateButton.setText(R.string.changeStudyStateTitleOpen);
                     changeStudyStateButton.setStrokeColor(ColorStateList.valueOf(getContext().getResources().getColor(R.color.green_dark)));
                     changeStudyStateButton.setBackgroundTintList(ColorStateList.valueOf(getContext().getResources().getColor(R.color.green_Main)));
                     changeStudyStateButton.setIcon(getResources().getDrawable(R.drawable.ic_baseline_refresh_24));
@@ -189,11 +179,13 @@ public class StudyCreatorDetailsFragment extends Fragment {
                 dialog.dismiss();
             }
         });
-
-
         dialog.show();
     }
 
+
+    //Parameter:
+    //Return values:
+    //Sets up the study detail textviews
     public void setStudyDetails() {
         //id could be accessed
         headerText.setText(studyViewModel.getStudyDetails().getName());
@@ -204,7 +196,7 @@ public class StudyCreatorDetailsFragment extends Fragment {
         //contactThree could be accessed
         category.setText(studyViewModel.getStudyDetails().getCategory());
         studyType.setText(studyViewModel.getStudyDetails().getExecutionType());
-        if (studyViewModel.getStudyDetails().getExecutionType().equals("Remote")) {
+        if (studyViewModel.getStudyDetails().getExecutionType().equals(R.string.remoteString)) {
             remoteData.setText(studyViewModel.getStudyDetails().getRemotePlatformOne());
             //remotePlatformTwo could be accessed
         } else {
@@ -212,33 +204,22 @@ public class StudyCreatorDetailsFragment extends Fragment {
                     studyViewModel.getStudyDetails().getStreet() + "\t\t" + studyViewModel.getStudyDetails().getRoom();
             localData.setText(locationString);
         }
-    /*
-        PA_ExpandableListDataPump.getDateState(currentStudyId, new PA_ExpandableListDataPump.FirestoreCallbackDateState() {
-            @Override
-            public void onCallback(boolean participated) {
-                studyIsClosed = participated;
-                setStudyStateButton();
-            }
-        });
-        */
 
         studyIsClosed = studyViewModel.getStudyDetails().getStudyState();
         setStudyStateButton();
     }
 
-
-    private void setStudyStateButton()
-    {
-        if(!studyIsClosed)
-        {
-            changeStudyStateButton.setText("Studie abschließen");
+    //Parameter:
+    //Return values:
+    //Sets the states for the close study button; study can be continued if chosen
+    private void setStudyStateButton() {
+        if (!studyIsClosed) {
+            changeStudyStateButton.setText(R.string.changeStudyStateTitleClose);
             changeStudyStateButton.setStrokeColor(ColorStateList.valueOf(getContext().getResources().getColor(R.color.heatherred_dark)));
             changeStudyStateButton.setBackgroundTintList(ColorStateList.valueOf(getContext().getResources().getColor(R.color.heatherred_Main)));
             changeStudyStateButton.setIcon(getContext().getResources().getDrawable(R.drawable.ic_baseline_close_24));
-        }
-        else
-        {
-            changeStudyStateButton.setText("Studie Fortführen");
+        } else {
+            changeStudyStateButton.setText(R.string.changeStudyStateTitleOpen);
             changeStudyStateButton.setStrokeColor(ColorStateList.valueOf(getContext().getResources().getColor(R.color.green_dark)));
             changeStudyStateButton.setBackgroundTintList(ColorStateList.valueOf(getContext().getResources().getColor(R.color.green_Main)));
             changeStudyStateButton.setIcon(getContext().getResources().getDrawable(R.drawable.ic_baseline_refresh_24));

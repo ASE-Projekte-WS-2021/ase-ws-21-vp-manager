@@ -42,6 +42,10 @@ public class StudyRepository {
     private UnselectDateListener unselectDateListener;
     private SelectDateListener selectDateListener;
 
+
+    //Parameter:
+    //Return Values: instance of the repository class
+    //Creates an instance of the repo and returns always the same one
     public static StudyRepository getInstance() {
         if (instance == null) {
             instance = new StudyRepository();
@@ -61,6 +65,9 @@ public class StudyRepository {
         loadAllStudyDates(currentStudyId);
     }
 
+
+    //Parameter: all listeners in fragment
+    //Return values:
     //Sets the viewModel as the listener for the callbacks
     public void setFirestoreCallback(StudyDetailsListener studyDetailsListener, StudyDatesListener studyDatesListener,
                                      UnselectDateListener unselectDateListener, SelectDateListener selectDateListener) {
@@ -70,11 +77,18 @@ public class StudyRepository {
         this.selectDateListener = selectDateListener;
     }
 
+    //Parameter: studyDetailsListener, studyDatesListener
+    //Return values:
+    //Firestore callback; set studyDates and studyDetails Listener
     public void setFirestoreCallback(StudyDetailsListener studyDetailsListener, StudyDatesListener studyDatesListener) {
         this.studyDetailsListener = studyDetailsListener;
         this.studyDatesListener = studyDatesListener;
     }
 
+
+    //Parameter: currentStudyId
+    //Return values:
+    //Sets values from database
     private void loadStudyDetails(String currentStudyId) {
         db = FirebaseFirestore.getInstance();
         CollectionReference studyDocRef = db.collection("studies");
@@ -84,7 +98,7 @@ public class StudyRepository {
             @Override
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
                 if (task.isSuccessful()) {
-                    for(QueryDocumentSnapshot document : task.getResult()) {
+                    for (QueryDocumentSnapshot document : task.getResult()) {
                         if (document != null) {
                             studyDetailObject.setId(document.getString("id"));
                             studyDetailObject.setName(document.getString("name"));
@@ -114,12 +128,16 @@ public class StudyRepository {
         });
     }
 
+
+    //Parameter: currentStudyId, currentUserId
+    //Return values:
+    //Sets selected date values from database
     private void loadStudyDates(String currentStudyId, String currentUserId) {
         db = FirebaseFirestore.getInstance();
         CollectionReference datesRef = db.collection("dates");
         datesArrayList.clear();
 
-        //All dates of one study are retrieved with this db call. Then, the results are filtered.
+
         datesRef.whereEqualTo("studyId", currentStudyId).get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
@@ -149,6 +167,10 @@ public class StudyRepository {
                 });
     }
 
+
+    //Parameter: currentStudyId
+    //Return values:
+    //Sets all date values from database
     private void loadAllStudyDates(String currentStudyId) {
         db = FirebaseFirestore.getInstance();
         CollectionReference datesRef = db.collection("dates");
@@ -179,6 +201,10 @@ public class StudyRepository {
                 });
     }
 
+
+    //Parameter: dateId, currentStudyId
+    //Return values:
+    //Method for selecting dates from list; checks availability
     public void selectDate(String dateId, String currentUserId) {
         db = FirebaseFirestore.getInstance();
         final DocumentReference specificDate = db.collection("dates").document(dateId);
@@ -190,10 +216,10 @@ public class StudyRepository {
                 DocumentSnapshot snapshot = transaction.get(specificDate);
                 boolean selected = snapshot.getBoolean("selected");
                 boolean updated = false;
-                if (!selected){
-                    transaction.update(specificDate, "selected", true, "userId", currentUserId );
+                if (!selected) {
+                    transaction.update(specificDate, "selected", true, "userId", currentUserId);
                     updated = true;
-                }else {
+                } else {
                     try {
                         throw new Exception("Dieser Termin ist nicht mehr verfügbar!");
                     } catch (Exception e) {
@@ -211,26 +237,20 @@ public class StudyRepository {
         }).addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception e) {
-                Log.w(TAG, "Error updating document", e);
                 selectDateListener.onDateSelected(false);
             }
         });
-        /*
-        db.collection("dates").document(dateId)
-                .update("selected", true, "userId", currentUserId)
-                .addOnSuccessListener(aVoid -> selectUnselectDateListener.onDateActionFinished(),
-                        aVoid -> Log.d(TAG, "DocumentSnapshot successfully updated!"))
-                .addOnFailureListener(e -> Log.w(TAG, "Error updating document", e));
-         */
     }
 
-    public void unselectDate(String dateId) {
 
+    //Parameter: dateId
+    //Return values:
+    //Method for cancelling selected appointments
+    public void unselectDate(String dateId) {
         PA_ExpandableListDataPump.getDateState(dateId, new PA_ExpandableListDataPump.FirestoreCallbackDateState() {
             @Override
             public void onCallback(boolean participated) {
-                if(!participated)
-                {
+                if (!participated) {
                     db = FirebaseFirestore.getInstance();
                     db.collection("dates").document(dateId)
                             .update("selected", false, "userId", null, "participated", false)

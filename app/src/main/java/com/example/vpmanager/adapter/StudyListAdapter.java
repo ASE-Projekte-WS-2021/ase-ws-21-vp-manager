@@ -67,6 +67,8 @@ public class StudyListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
         return mStudyMetaInfos.size();
     }
 
+
+
     private class CustomViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         TextView studyTitle, studyVps, studyCat, studyTag;
@@ -74,6 +76,10 @@ public class StudyListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
         LinearLayout studyItemParentLayout;
         OnStudyItemClickListener onStudyItemClickListener;
 
+
+        //Parameter: itemView, onStudyItemClickListener
+        //Return values:
+        //Sets items for the CustomViewHolder
         public CustomViewHolder(@NonNull View itemView, OnStudyItemClickListener onStudyItemClickListener) {
             super(itemView);
             this.onStudyItemClickListener = onStudyItemClickListener;
@@ -114,6 +120,9 @@ public class StudyListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
         }
 
 
+        //Parameter: type
+        //Return values:
+        //Sets the icon depending on the study type
         public void setIcon(String type) {
             if (type.equals("Präsenz")) {
                 locationIcon.setVisibility(View.VISIBLE);
@@ -128,6 +137,7 @@ public class StudyListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
 
 
     }
+
 
     //Parameter:
     //Return values:
