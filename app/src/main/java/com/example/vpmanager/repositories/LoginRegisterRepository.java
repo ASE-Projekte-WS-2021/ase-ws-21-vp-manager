@@ -154,7 +154,7 @@ public class LoginRegisterRepository {
                             loginListener.createUserInMainActivity(email);
                         } else {
                             firebaseAuth.signOut();
-                            String localErrorMessage = "Bitte verifiziere Sie zuerst Ihre Email Adresse";
+                            String localErrorMessage = "Bitte verifizieren Sie zuerst Ihre Email Adresse";
                             loginListener.onLoginFailed(localErrorMessage);
                         }
                     }

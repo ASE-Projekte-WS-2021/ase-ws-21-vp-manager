@@ -18,24 +18,24 @@ public class LoginRegisterViewModel extends ViewModel implements LoginListener, 
     public RegisterFragment registerFragment;
     private LoginRegisterRepository mRepo;
 
+
+    //Parameter:
+    //Return Values:
+    //Gets instance of the associated Repository and sets the Firestore Callback
     public void prepareRepo() {
         mRepo = LoginRegisterRepository.getInstance();
         //Instance is the same but different data can be retrieved!
         mRepo.setFirestoreCallback(this, this, this, this, this);
     }
 
-    public void registerNewUser(String email, String password) {
-        mRepo.registerNewUser(email, password);
-    }
 
-    //can be private
+    public void registerNewUser(String email, String password) { mRepo.registerNewUser(email, password); }
+
     private void sendVerificationEmail() {
         mRepo.sendVerificationEmail();
     }
 
-    public void saveUserInDb(String email, String matNr, String vph) {
-        mRepo.saveUserInDb(email, matNr, vph);
-    }
+    public void saveUserInDb(String email, String matNr, String vph) { mRepo.saveUserInDb(email, matNr, vph); }
 
     public void resetPassword(String email) {
         mRepo.sendResetEmail(email);
@@ -47,7 +47,7 @@ public class LoginRegisterViewModel extends ViewModel implements LoginListener, 
 
     @Override
     public void onLoginFailed(String errorMessage) {
-        if (errorMessage.startsWith("Bitte verifiziere Sie")) {
+        if (errorMessage.startsWith("Bitte verifizieren Sie")) {
             loginFragment.showToast(errorMessage);
         } else {
             String errorText = "Anmeldung fehlgeschlagen: " + translateErrorLogin(errorMessage);
@@ -89,7 +89,10 @@ public class LoginRegisterViewModel extends ViewModel implements LoginListener, 
         loginFragment.showToast(toastText);
     }
 
-    //helper to show an error message in german
+
+    //Parameter: error
+    //Return Values: String
+    //helper to show register error messages in german
     private String translateErrorRegister(String error) {
         String translatedError = "";
         if (error.startsWith("The email address is already in use")) {
@@ -101,6 +104,10 @@ public class LoginRegisterViewModel extends ViewModel implements LoginListener, 
         return translatedError;
     }
 
+
+    //Parameter: error
+    //Return Values: String
+    //helper to show login error messages in german
     private String translateErrorLogin(String error) {
         String translatedError = "";
         if (error.startsWith("The password is invalid")) {
