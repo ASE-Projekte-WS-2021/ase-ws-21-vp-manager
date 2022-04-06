@@ -433,7 +433,7 @@ public class HomeViewModel extends ViewModel implements GetAllDatesListener, Get
             int studyDisplayCount = 2;
 
             if (tempList.size() < 3) {
-                homeFragment.disableAllAppointmentsButton();
+                //homeFragment.disableAllAppointmentsButton();
                 studyDisplayCount = 3;
             }
 

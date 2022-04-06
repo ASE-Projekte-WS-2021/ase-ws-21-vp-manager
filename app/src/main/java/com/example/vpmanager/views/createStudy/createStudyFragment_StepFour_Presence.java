@@ -1,9 +1,14 @@
 package com.example.vpmanager.views.createStudy;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 
 import androidx.fragment.app.Fragment;
 
@@ -12,12 +17,21 @@ import com.example.vpmanager.R;
 import com.google.android.material.textfield.TextInputEditText;
 import com.example.vpmanager.views.mainActivity;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+
 
 public class createStudyFragment_StepFour_Presence extends Fragment {
 
     public static TextInputEditText textInputEditTextLocation;
     public static TextInputEditText textInputEditTextStreet;
     public static TextInputEditText textInputEditTextRoom;
+    @SuppressLint("StaticFieldLeak")
+    public static AutoCompleteTextView autoCompleteTextViewPreset;
+    private ArrayList<String> dropdownListPreset;
+    private ArrayAdapter<String> arrayAdapterPreset;
+
+
 
 
     //Parameter:
@@ -51,7 +65,41 @@ public class createStudyFragment_StepFour_Presence extends Fragment {
         textInputEditTextLocation = view.findViewById(R.id.inputFieldLocation);
         textInputEditTextStreet = view.findViewById(R.id.inputFieldStreet);
         textInputEditTextRoom = view.findViewById(R.id.inputFieldRoom);
+        autoCompleteTextViewPreset = view.findViewById(R.id.create_stepFour_local_Preset);
+        dropdownListPreset = new ArrayList<>();
+        dropdownListPreset.addAll(Arrays.asList(getResources().getStringArray(R.array.createPresetLabList)));
+        arrayAdapterPreset = new ArrayAdapter<>(getActivity(), R.layout.material_dropdown_item, dropdownListPreset);
+        autoCompleteTextViewPreset.setAdapter(arrayAdapterPreset);
+        presetOnChangeListener();
 
+    }
+
+
+    private void presetOnChangeListener(){
+        autoCompleteTextViewPreset.addTextChangedListener(new TextWatcher() {
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                for (int i = 0; i < getResources().getStringArray(R.array.createPresetLabList).length; i++) {
+                    if (s.toString().equals(getResources().getStringArray(R.array.createPresetLabList)[i])) {
+                        textInputEditTextLocation.setText(getResources().getStringArray(R.array.createPresetLocations)[i]);
+                        textInputEditTextStreet.setText(getResources().getStringArray(R.array.createPresetAddress)[i]);
+                        textInputEditTextRoom.setText(getResources().getStringArray(R.array.createPresetRooms)[i]);
+                        break;
+                    }
+                }
+            }
+        });
     }
 
     //Parameter:
