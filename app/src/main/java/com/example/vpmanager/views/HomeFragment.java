@@ -417,7 +417,9 @@ public class HomeFragment extends Fragment {
         plannedCompletionDate.setText(completionDate);
     }
 
+/*
     public void disableAllAppointmentsButton() {
+
         LinearLayout.LayoutParams param = new LinearLayout.LayoutParams(
                 LinearLayout.LayoutParams.MATCH_PARENT,
                 0,
@@ -435,6 +437,10 @@ public class HomeFragment extends Fragment {
         appointmentsButton.setVisibility(View.INVISIBLE);
         appointmentsButton.setClickable(false);
     }
+
+ */
+
+
 
     public void loadDefaultorEmptyVersion() {
         defaultLayout.setVisibility(View.VISIBLE);

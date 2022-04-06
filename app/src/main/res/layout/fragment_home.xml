@@ -53,10 +53,8 @@
                             android:layout_marginHorizontal="5dp"
                             android:text="Willkommen beim VP-Manager! \nHier können Sie Ihre Versuchspersonenstunden planen, Ihren aktuellen Fortschritt betrachten und selbst Studien erstellen."
                             android:textAlignment="center"
-                            android:textSize="16sp"></TextView>
-
+                            android:textSize="16sp" />
                     </LinearLayout>
-
 
                     <com.google.android.flexbox.FlexboxLayout
                         android:id="@+id/homeFlexLayout"
@@ -71,7 +69,7 @@
                             android:layout_height="wrap_content"
                             android:paddingStart="5dp"
                             android:text="Laut aktueller Planung des VP-Managers haben Sie zum"
-                            android:textSize="18sp"></TextView>
+                            android:textSize="18sp" />
 
                         <TextView
                             android:id="@+id/homePlannedCompletionDate"
@@ -80,7 +78,7 @@
                             android:paddingStart="5dp"
                             android:textColor="@color/heatherred_dark"
                             android:textSize="18sp"
-                            android:textStyle="italic"></TextView>
+                            android:textStyle="italic" />
 
                         <LinearLayout
                             android:layout_width="wrap_content"
@@ -111,7 +109,7 @@
                             android:layout_height="wrap_content"
                             android:paddingStart="5dp"
                             android:text="gesammelt."
-                            android:textSize="18sp"></TextView>
+                            android:textSize="18sp" />
 
                     </com.google.android.flexbox.FlexboxLayout>
 
