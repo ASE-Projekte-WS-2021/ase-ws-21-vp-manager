@@ -12,6 +12,24 @@
     <string name="pieSliceLabelRemaining">Remaining</string>
     <string name="personalAccount">Persönliche Übersicht</string>
 
+    <string name="overview">Übersicht</string>
+    <string name="welcome">Willkommen beim VP-Manager! \nHier können Sie Ihre Versuchspersonenstunden planen, Ihren aktuellen Fortschritt betrachten und selbst Studien erstellen.</string>
+    <string name="vpState">Laut aktueller Planung des VP-Managers haben Sie zum</string>
+    <string name="vps">VP-Stunden</string>
+    <string name="collected">gesammelt</string>
+    <string name="openVps">Es fehlen Ihnen noch</string>
+    <string name="vpsDot">VP-Stunden.</string>
+    <string name="findStudies">Jetzt Studien finden</string>
+    <string name="matNumberText">Klicken Sie hier um Ihre Matrikelnummer einzutragen und die aktuell im Lehrstuhl verbuchten Versuchspersonenstunden abzufragen.</string>
+    <string name="matNumberRequired">Matrikelnummer eingeben</string>
+    <string name="officialVps">Im Lehrstuhl bereits eingetragene VP-Stunden</string>
+    <string name="noVps">0/15</string>
+    <string name="nextAppointments">Nächste Termine</string>
+    <string name="allAppointments">Alle Termine ansehen</string>
+
+
+
+
     <!---Create Study-->
     <string name="createStudyDesc">Studienbeschreibung</string>
     <string name="createAddDateButton">Termine hinzufügen</string>
@@ -198,6 +216,9 @@
     <string name="already_have_an_account_clickable"><font color='#01C6DB'>Login</font></string>
     <string name="register_info_title">Optionale Angaben</string>
     <string name="register_info_desc">Durch die Angabe der eigenen Matrikelnummer können die vom Lehrstuhl offiziell verbuchten Versuchspersonstunden angezeigt werden. \nDurch Angabe der benötigten VPs können die bereits gesammeleten in Relation gestellt werden.</string>
+    <string name="successfulRegistration">Registierung erfolgreich, bitte überprüfe deine Email-Postfach</string>
+    <string name="neededVps">15</string>
+
 
     <!-- Study Details Tags -->
 
@@ -234,6 +255,8 @@
     <string name="changeStudyStateTitleClose">Studie abschließen</string>
     <string name="changeStudyStateTitleOpen">Studie wieder öffnen</string>
     <string name="saveStudy">Studie speichern</string>
+    <string name="removeAppointmentAlert">1 Termin gelöscht</string>
+    <string name="cancelAction">Rückgängig</string>
 
 
 
@@ -245,6 +268,10 @@
     <string name="platformError">Primärplattform muss angegeben werden</string>
     <string name="mailError">Email-Kontakt muss angegeben werden</string>
     <string name="selectDateError">Dieser Termin ist nicht mehr verfügbar!</string>
+    <string name="noMailError">Email Feld kann nicht leer sein"</string>
+    <string name="noPasswordError">Geben sie bitte ein Passwort an</string>
+    <string name="passwordsNotEqual">Passwörter müssen übereinstimmen</string>
+
 
 
     <!---Confirm Texts-->

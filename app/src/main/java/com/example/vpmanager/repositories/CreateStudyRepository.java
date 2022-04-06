@@ -18,7 +18,7 @@ public class CreateStudyRepository {
 
     //Parameter:
     //Return values: CreateStudyRepository
-    //returns instance of the CreateStudyRepository
+    //Returns instance of the CreateStudyRepository
     public static CreateStudyRepository getInstance() {
         if (instance == null) {
             instance = new CreateStudyRepository();
@@ -29,7 +29,7 @@ public class CreateStudyRepository {
 
     //Parameter:
     //Return values:
-    //Firestore callback; set createStudyListener
+    //Firestore callback; sets the createStudyListener
     public void setFirestoreCallback(CreateStudyListener createStudyListener) {
         this.createStudyListener = createStudyListener;
     }

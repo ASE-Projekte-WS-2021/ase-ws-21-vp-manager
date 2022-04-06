@@ -5,8 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".views.HomeFragment"
-    app:layout_behavior="@string/appbar_scrolling_view_behavior">
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context=".views.HomeFragment">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -35,7 +35,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_margin="10dp"
-                        android:text="Übersicht"
+                        android:text="@string/overview"
                         android:textSize="24sp"
                         android:textStyle="bold" />
 
@@ -51,9 +51,10 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginHorizontal="5dp"
-                            android:text="Willkommen beim VP-Manager! \nHier können Sie Ihre Versuchspersonenstunden planen, Ihren aktuellen Fortschritt betrachten und selbst Studien erstellen."
+                            android:text="@string/welcome"
                             android:textAlignment="center"
                             android:textSize="16sp" />
+
                     </LinearLayout>
 
                     <com.google.android.flexbox.FlexboxLayout
@@ -68,7 +69,9 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:paddingStart="5dp"
-                            android:text="Laut aktueller Planung des VP-Managers haben Sie zum"
+
+                            android:text="@string/vpState"
+
                             android:textSize="18sp" />
 
                         <TextView
@@ -98,7 +101,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:paddingStart="5dp"
-                                android:text="VP-Stunden"
+                                android:text="@string/vps"
                                 android:textColor="@color/heatherred_dark"
                                 android:textSize="18sp"
                                 android:textStyle="bold" />
@@ -108,7 +111,9 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:paddingStart="5dp"
-                            android:text="gesammelt."
+
+                            android:text="@string/collected"
+
                             android:textSize="18sp" />
 
                     </com.google.android.flexbox.FlexboxLayout>
@@ -129,7 +134,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="match_parent"
                                 android:paddingStart="10dp"
-                                android:text="Es fehlen Ihnen noch"
+                                android:text="@string/openVps"
                                 android:textSize="18sp" />
 
                             <TextView
@@ -142,7 +147,7 @@
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="match_parent"
-                                android:text="VP-Stunden."
+                                android:text="@string/vpsDot"
                                 android:textSize="18sp" />
 
                         </LinearLayout>
@@ -157,7 +162,7 @@
                                 android:id="@+id/homeFindStudyButton"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="Jetzt Studien finden"
+                                android:text="@string/findStudies"
                                 android:textStyle="italic" />
                         </LinearLayout>
                     </LinearLayout>
@@ -186,7 +191,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginHorizontal="5dp"
-                        android:text="Klicken Sie hier um Ihre Matrikelnummer einzutragen und die aktuell im Lehrstuhl verbuchten Versuchspersonenstunden abzufragen."
+                        android:text="@string/matNumberText"
                         android:textAlignment="center"
                         android:textSize="12sp" />
 
@@ -195,7 +200,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_horizontal"
-                        android:text="Matrikelnummer eingeben"
+                        android:text="@string/matNumberRequired"
                         android:textSize="11sp" />
 
                 </LinearLayout>
@@ -212,7 +217,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="10dp"
-                        android:text="Im Lehrstuhl bereits eingetragene VP-Stunden"
+                        android:text="@string/officialVps"
                         android:textAlignment="center" />
 
                     <androidx.cardview.widget.CardView
@@ -236,7 +241,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_horizontal"
-                        android:text="0/15" />
+                        android:text="@string/noVps" />
                 </LinearLayout>
 
             </androidx.cardview.widget.CardView>
@@ -250,23 +255,23 @@
                 android:orientation="vertical">
 
                 <TextView
+                    android:id="@+id/homeAppointmentText"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="10dp"
                     android:layout_marginBottom="10dp"
                     android:paddingHorizontal="5dp"
-                    android:text="Nächste Termine"
+                    android:text="@string/nextAppointments"
                     android:textSize="18sp"
-                    android:textStyle="bold"
-                    android:id="@+id/homeAppointmentText"/>
+                    android:textStyle="bold" />
 
-               <ScrollView
+                <ScrollView
                     android:id="@+id/homeScrollview"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:fillViewport="true"
-                   android:layout_below="@id/homeAppointmentText"
-                   android:layout_above="@id/homeAllAppointmetsButton">
+                    android:layout_above="@id/homeAllAppointmetsButton"
+                    android:layout_below="@id/homeAppointmentText"
+                    android:fillViewport="true">
 
                     <ListView
                         android:id="@+id/homeAppointmentList"
@@ -279,10 +284,10 @@
                     android:id="@+id/homeAllAppointmetsButton"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
                     android:layout_marginHorizontal="30dp"
                     android:layout_marginBottom="10dp"
-                    android:text="Alle Termine ansehen"
-                    android:layout_alignParentBottom="true"/>
+                    android:text="@string/allAppointments" />
             </RelativeLayout>
         </RelativeLayout>
     </ScrollView>

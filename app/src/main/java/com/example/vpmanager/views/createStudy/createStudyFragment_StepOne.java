@@ -85,7 +85,7 @@ public class createStudyFragment_StepOne extends Fragment {
 
     //Parameter:
     //Return values:
-    //Loads data recieved from the activity into the inputfields
+    //Loads data recieved from the activity into the input fields
     private void loadData() {
 
         if (CreateStudyFragment.createStudyViewModel.studyCreationProcessData.get("name") != null) {
@@ -97,50 +97,39 @@ public class createStudyFragment_StepOne extends Fragment {
         if (CreateStudyFragment.createStudyViewModel.studyCreationProcessData.get("category") != null) {
             String cat = CreateStudyFragment.createStudyViewModel.studyCreationProcessData.get("category").toString();
             if (cat.equals(getString(R.string.fieldStudyText))) {
-                //categories.setSelection(1);
                 autoCompleteTextViewCategory.setText(getString(R.string.fieldStudyText), false);
             }
             if (cat.equals(getString(R.string.focusGroupText))) {
-                //categories.setSelection(2);
                 autoCompleteTextViewCategory.setText(getString(R.string.focusGroupText), false);
             }
             if (cat.equals(getString(R.string.questionnaireText))) {
-                //categories.setSelection(3);
                 autoCompleteTextViewCategory.setText(getString(R.string.questionnaireText), false);
             }
             if (cat.equals(getString(R.string.gamingText))) {
-                //categories.setSelection(4);
                 autoCompleteTextViewCategory.setText(getString(R.string.gamingText), false);
             }
             if (cat.equals(getString(R.string.interviewText))) {
-                //categories.setSelection(4);
                 autoCompleteTextViewCategory.setText(getString(R.string.interviewText), false);
             }
             if (cat.equals(getString(R.string.labStudyText))) {
-                //categories.setSelection(4);
                 autoCompleteTextViewCategory.setText(getString(R.string.labStudyText), false);
             }
             if (cat.equals(getString(R.string.diaryStudyText))) {
-                //categories.setSelection(4);
                 autoCompleteTextViewCategory.setText(getString(R.string.diaryStudyText), false);
             }
             if (cat.equals(getString(R.string.usabilityText))) {
-                //categories.setSelection(4);
                 autoCompleteTextViewCategory.setText(getString(R.string.usabilityText), false);
             }
             if (cat.equals(getString(R.string.othersText))) {
-                //categories.setSelection(4);
                 autoCompleteTextViewCategory.setText(getString(R.string.othersText), false);
             }
         }
         if (CreateStudyFragment.createStudyViewModel.studyCreationProcessData.get("executionType") != null) {
             String exe = CreateStudyFragment.createStudyViewModel.studyCreationProcessData.get("executionType").toString();
             if (exe.equals(getString(R.string.remoteString))) {
-                //executionType.setSelection(1);
                 autoCompleteTextViewExecutionType.setText(getString(R.string.remoteString), false);
             }
             if (exe.equals(getString(R.string.presenceString))) {
-                //executionType.setSelection(2);
                 autoCompleteTextViewExecutionType.setText(getString(R.string.presenceString), false);
             }
         }

@@ -38,6 +38,10 @@ public class LoginRegisterRepository {
     private FirebaseAuthEmailListener firebaseAuthEmailListener;
     private FirebaseAuthResetListener firebaseAuthResetListener;
 
+
+    //Parameter:
+    //Return values: LogInRegisterRepository
+    //Returns instance of the LogInRegisterRepository
     public static LoginRegisterRepository getInstance() {
         if (instance == null) {
             instance = new LoginRegisterRepository();
@@ -45,6 +49,10 @@ public class LoginRegisterRepository {
         return instance;
     }
 
+
+    //Parameter: associated Listeners
+    //Return values:
+    //Firestore callback; sets Listeners
     public void setFirestoreCallback(LoginListener loginListener, RegisterListener registerListener,
                                      FirebaseAuthCreateListener firebaseAuthCreateListener, FirebaseAuthEmailListener
                                              firebaseAuthEmailListener, FirebaseAuthResetListener firebaseAuthResetListener) {
@@ -70,6 +78,10 @@ public class LoginRegisterRepository {
         });
     }
 
+
+    //Parameter:
+    //Return values:
+    //Uses firebaseAuthEmailListener to send a verification mail to user
     public void sendVerificationEmail() {
 
         firebaseAuth.getCurrentUser().sendEmailVerification().addOnCompleteListener(new OnCompleteListener<Void>() {
@@ -85,9 +97,13 @@ public class LoginRegisterRepository {
         });
     }
 
+
+    //Parameter: email, matNr, vph
+    //Return values:
+    //Saves existing user meta data (device id, marNr, vps) in the database
     public void saveUserInDb(String email, String matNr, String vph) {
         db = FirebaseFirestore.getInstance();
-        //deviceId is email now!
+        //email is used for deviceId
         final DocumentReference userDocRef = db.collection("users").document(email);
         db.runTransaction(new Transaction.Function<Void>() {
             @Override
@@ -100,7 +116,6 @@ public class LoginRegisterRepository {
                     user.put("vps", vph);
                     transaction.set(userDocRef, user);
 
-                    //maybe to early?
                     firebaseAuth.signOut();
                 }
                 return null;
@@ -110,6 +125,10 @@ public class LoginRegisterRepository {
                 )).addOnFailureListener(e -> Log.w(TAG, "Transaction failure.", e));
     }
 
+
+    //Parameter: email
+    //Return values:
+    //Sends a password reset mail to the user
     public void sendResetEmail(String email) {
 
         firebaseAuth.sendPasswordResetEmail(email).addOnSuccessListener(new OnSuccessListener<Void>() {
@@ -120,6 +139,10 @@ public class LoginRegisterRepository {
         });
     }
 
+
+    //Parameter: email, password
+    //Return values:
+    //Initializes the log in process, and sets error message when needed
     public void loginUser(String email, String password) {
         firebaseAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
             @Override

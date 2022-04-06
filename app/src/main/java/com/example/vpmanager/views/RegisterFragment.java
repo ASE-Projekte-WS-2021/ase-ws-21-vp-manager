@@ -17,6 +17,7 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 
+import com.example.vpmanager.Config;
 import com.example.vpmanager.R;
 import com.example.vpmanager.viewmodels.LoginRegisterViewModel;
 import com.google.android.material.textfield.TextInputEditText;
@@ -102,6 +103,9 @@ public class RegisterFragment extends Fragment {
         });
     }
 
+    //Parameter:
+    //Return values:
+    //Shows ToolTip PopUp; sets dialog properties
     private void showToolTip() {
         Dialog dialog = new Dialog(getActivity(), R.style.DialogStyle);
         dialog.setContentView(R.layout.info_dialog);
@@ -135,56 +139,22 @@ public class RegisterFragment extends Fragment {
         matNr = matnrEditText.getText().toString().trim();
         String neededVP = vpEditText.getText().toString().trim();
         if (TextUtils.isEmpty(neededVP)) {
-            neededVP = "15";
+            neededVP = getString(R.string.neededVps);
         }
         if (TextUtils.isEmpty(eMail)) {
-            emailEdittext.setError("Email kann nicht leer sein");
+            emailEdittext.setError(getString(R.string.noMailError));
             emailEdittext.requestFocus();
         } else if (TextUtils.isEmpty(password)) {
-            passwordEditText.setError("Passwort kann nicht leer sein");
+            passwordEditText.setError(getString(R.string.noPasswordError));
             passwordEditText.requestFocus();
         } else if (!password.equals(confirmPassword)) {
-            passwordConfirmEditText.setError("Passwörter müssen übereinstimmen");
+            passwordConfirmEditText.setError(getString(R.string.passwordsNotEqual));
             passwordConfirmEditText.requestFocus();
         } else {
             finalNeededVP = neededVP;
 
             //start of register chain
             mViewModel.registerNewUser(eMail, password);
-
-            /*
-            firebaseAuth.createUserWithEmailAndPassword(eMail, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                @Override
-                public void onComplete(@NonNull Task<AuthResult> task) {
-                    if (task.isSuccessful()) {
-
-                        firebaseAuth.getCurrentUser().sendEmailVerification().addOnCompleteListener(new OnCompleteListener<Void>() {
-                            @Override
-                            public void onComplete(@NonNull Task<Void> task) {
-                                if (task.isSuccessful()) {
-
-                                    //registerNewUser(eMail, matNr, finalNeededVP);
-                                    //firebaseAuth.signOut();
-                                    Toast.makeText(getActivity(), "Registierung erfolgreich, bitte überprüfe deine Email-Postfach", Toast.LENGTH_LONG).show();
-                                    Handler handler = new Handler();
-                                    handler.postDelayed(new Runnable() {
-                                        @Override
-                                        public void run() {
-                                            navController.navigate(R.id.action_registerFragment_to_loginFragment);
-                                        }
-                                    },1000);
-                                } else {
-                                    Toast.makeText(getActivity(), "Registierung fehlgeschlagen: " + task.getException().getMessage(), Toast.LENGTH_LONG).show();
-                                }
-                            }
-                        });
-                    } else {
-                        Toast.makeText(getActivity(), "Registierung fehlgeschlagen: " + translateError(task.getException().getMessage()), Toast.LENGTH_LONG).show();
-                    }
-                }
-            });
-
-             */
         }
     }
 
@@ -196,8 +166,12 @@ public class RegisterFragment extends Fragment {
         Toast.makeText(requireActivity(), errorText, Toast.LENGTH_LONG).show();
     }
 
+
+    //Parameter:
+    //Return values:
+    //Handles account creation if the and provides feedback if the task was successful
     public void navigateToLogin() {
-        String toastString = "Registierung erfolgreich, bitte überprüfe deine Email-Postfach";
+        String toastString = getString(R.string.successfulRegistration);
         showToast(toastString);
         Handler handler = new Handler();
         handler.postDelayed(new Runnable() {
@@ -205,12 +179,7 @@ public class RegisterFragment extends Fragment {
             public void run() {
                 navController.navigate(R.id.action_registerFragment_to_loginFragment);
             }
-        }, 1000);
+        }, Config.delayMills);
     }
 
-    /*
-    private void registerNewUser(String email, String matNr, String neededVP) {
-        accessDatabase.createNewUser(email, matNr, neededVP);
-    }
-     */
 }

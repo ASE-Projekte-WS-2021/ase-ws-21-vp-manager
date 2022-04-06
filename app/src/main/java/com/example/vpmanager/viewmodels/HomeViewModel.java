@@ -6,6 +6,7 @@ import android.util.Log;
 
 import androidx.lifecycle.ViewModel;
 
+import com.example.vpmanager.Config;
 import com.example.vpmanager.adapter.CustomListViewAdapterAppointments;
 import com.example.vpmanager.interfaces.GetAllDatesListener;
 import com.example.vpmanager.interfaces.GetAllStudiesListener;
@@ -42,9 +43,13 @@ public class HomeViewModel extends ViewModel implements GetAllDatesListener, Get
     private String matrikelNumberHome, jsonString;
     private double plannedVP, completedVP, participatedVP;
 
+
+    //Parameter:
+    //Return values:
+    //Gets instance of the homeRepository and sets Firestore Callback
     public void prepareRepo() {
         mHomeRepo = HomeRepository.getInstance();
-        //Instance is the same but different data can be retrieved!
+        //Instance is the same but different data can be retrieved
         mHomeRepo.setFirestoreCallback(this, this, this);
     }
 
@@ -86,23 +91,25 @@ public class HomeViewModel extends ViewModel implements GetAllDatesListener, Get
             sumVPsHome = Float.parseFloat(vpsHome);
             matrikelNumberHome = matNrHome;
         } else {
-            sumVPsHome = 15;
+            sumVPsHome = Config.vpSum;
             matrikelNumberHome = "";
         }
         //copy lists from repo
-        //dbDatesListHome.clear();
         dbDatesListHome = datesListHome;
-        //dbStudiesListHome.clear();
         dbStudiesListHome = studiesListHome;
         createListEntriesHome();
     }
 
+
+    //Parameter:
+    //Return values:
+    //Loads the list entries for the home fragment in HashMap
     private void createListEntriesHome() {
 
         HashMap<String, HashMap<String, String>> datesMap = new HashMap<>();
         HashMap<String, HashMap<String, String>> studiesMap = new HashMap<>();
 
-        //datesList is directly used from the repo! No such list in the viewModel!
+        //datesList is directly used from the repo
         for (Map<String, Object> map : dbDatesListHome) {
             String id = null;
             HashMap<String, String> tempMap = new HashMap<>();
@@ -122,7 +129,7 @@ public class HomeViewModel extends ViewModel implements GetAllDatesListener, Get
             }
         }
 
-        //studiesList is directly used from the repo! No such list in the viewModel!
+        //studiesList is directly used from the repo
         for (Map<String, Object> map : dbStudiesListHome) {
             String id = null;
             HashMap<String, String> tempMap = new HashMap<>();
@@ -177,18 +184,20 @@ public class HomeViewModel extends ViewModel implements GetAllDatesListener, Get
                 }
             }
         }
-        //maybe clear needed
-        //expandableListDetailHome.clear();
         expandableListDetailHome.put("Abgeschlossene Studien", completedStudies);
-        expandableListDetailHome.put("Teilgenommene Studien", passedStudies); //=> teilgenommene Studien
+        expandableListDetailHome.put("Teilgenommene Studien", passedStudies);
         expandableListDetailHome.put("Geplante Studien", ownStudies);
 
         setupProgressBar();
     }
 
+
+    //Parameter:
+    //Return values:
+    //Sets up the progress bar for the user specific data
     private void setupProgressBar() {
 
-        int maximum = (int) sumVPsHome * 100;
+        int maximum = (int) sumVPsHome * Config.progressBarMultiplicator;
         homeFragment.setProgressBarMaximum(maximum);
 
         //starts Thread to get infos from internet
@@ -210,26 +219,18 @@ public class HomeViewModel extends ViewModel implements GetAllDatesListener, Get
             }
 
             if (jsonString != null && !jsonString.isEmpty() && jsonString.contains("matriculationNumber")) {
-                System.out.println("JSON: " + jsonString);
                 String[] entries = jsonString.split(",");
                 if (entries.length == 3) {
-                    String VPS = entries[1].split(":")[1];
+                    String VPS = entries[Config.listEntryIndexOne].split(":")[Config.listEntryIndexOne];
                     float vpCount = Float.parseFloat(VPS);
                     String progressText = vpCount + "/" + (int) sumVPsHome;
                     if (vpCount > sumVPsHome) {
-                        int progress = (int) sumVPsHome * 100;
+                        int progress = (int) sumVPsHome * Config.progressBarMultiplicator;
                         homeFragment.setProgressBarProgress(progress, progressText);
-                        //progressBar.setProgress((int) sumVPsHome * 100);
                     } else {
-                        int progress = (int) vpCount * 100;
+                        int progress = (int) vpCount * Config.progressBarMultiplicator;
                         homeFragment.setProgressBarProgress(progress, progressText);
-                        //progressBar.setProgress((int) vpCount * 100);
                     }
-                    /*
-                    progressHint.setText(vpCount + "/" + (int) maxVpCount);
-                    progressBar.setVisibility(View.VISIBLE);
-                    progressBar.showContextMenu();
-                     */
                 }
             }
         } else {
@@ -239,12 +240,19 @@ public class HomeViewModel extends ViewModel implements GetAllDatesListener, Get
         setupDatesList();
     }
 
+
+    //Parameter:
+    //Return values:
+    //Sets up the list for user specific upcoming appointments
     private void setupDatesList() {
         final List<String[]>[] arrivingDates = new List[]{null};
-        arrivingDates[0] = getAllArrivingDates();
-        finishSetupList(arrivingDates[0]);
+        arrivingDates[Config.listEntryIndexZero] = getAllArrivingDates();
+        finishSetupList(arrivingDates[Config.listEntryIndexZero]);
     }
 
+    //Parameter:
+    //Return values: List<String[]>
+    //Receives all upcoming appointments
     private List<String[]> getAllArrivingDates() {
         HashMap<String, String> studyIdList = new HashMap<>();
 
@@ -330,10 +338,10 @@ public class HomeViewModel extends ViewModel implements GetAllDatesListener, Get
             }
 
             if (studyName != null) {
-                String[] listEntry = new String[3];
-                listEntry[0] = studyName;
-                listEntry[1] = date;
-                listEntry[2] = key;
+                String[] listEntry = new String[Config.listEntryIndexThree];
+                listEntry[Config.listEntryIndexZero] = studyName;
+                listEntry[Config.listEntryIndexOne] = date;
+                listEntry[Config.listEntryIndexTwo] = key;
 
                 arrivingDates.add(listEntry);
             }
@@ -341,7 +349,11 @@ public class HomeViewModel extends ViewModel implements GetAllDatesListener, Get
         return arrivingDates;
     }
 
-    private String getLastParticipationDate() {   //static?
+
+    //Parameter:
+    //Return values: List<String[]>
+    //Receives the date of the users last participation
+    private String getLastParticipationDate() {
         ArrayList<String> datesList = new ArrayList<>();
 
         for (Map<String, Object> map : dbDatesListHome) {
@@ -408,6 +420,10 @@ public class HomeViewModel extends ViewModel implements GetAllDatesListener, Get
         return null;
     }
 
+
+    //Parameter:
+    //Return values: List<String[]>
+    //Completes the list setup; finalizes values
     private void finishSetupList(List<String[]> dates) {
         HashMap<String, String> getStudyIdByName = new HashMap<>();
 
@@ -418,9 +434,9 @@ public class HomeViewModel extends ViewModel implements GetAllDatesListener, Get
             HashMap<String, String> dateNameList = new HashMap<>();
 
             for (String[] listEntry : dates) {
-                String name = listEntry[0];
-                String date = listEntry[1];
-                String studyID = listEntry[2];
+                String name = listEntry[Config.listEntryIndexZero];
+                String date = listEntry[Config.listEntryIndexOne];
+                String studyID = listEntry[Config.listEntryIndexTwo];
 
                 if (date != null && name != null) {
                     dateNameList.put(date, name);
@@ -442,7 +458,6 @@ public class HomeViewModel extends ViewModel implements GetAllDatesListener, Get
                     upComingAppointments.add(date);
                 }
             }
-            //Collections.reverse(upComingAppointments);
             homeFragment.setListViewAdapter(new CustomListViewAdapterAppointments(homeFragment.getContext(),
                     homeFragment.getNavController(), upComingAppointments, getStudyIdByName, "HomeFragment"));
 
@@ -450,6 +465,10 @@ public class HomeViewModel extends ViewModel implements GetAllDatesListener, Get
         setTextsForOverView();
     }
 
+
+    //Parameter:
+    //Return values:
+    //Sets the text for the view descriptions
     private void setTextsForOverView() {
 
         completedVP = 0;
@@ -459,7 +478,7 @@ public class HomeViewModel extends ViewModel implements GetAllDatesListener, Get
         List<String> savedList = expandableListDetailHome.get("Abgeschlossene Studien");
         if (savedList != null) {
             for (int i = 0; i < savedList.size(); i++) {
-                String vps = savedList.get(i).split(";")[1];
+                String vps = savedList.get(i).split(";")[Config.listEntryIndexOne];
                 double studyVPS = 0;
                 if (vps != null && !vps.equals(""))
                     studyVPS = Double.parseDouble(vps);
@@ -469,7 +488,7 @@ public class HomeViewModel extends ViewModel implements GetAllDatesListener, Get
         List<String> vpList = expandableListDetailHome.get("Geplante Studien");
         if (vpList != null) {
             for (int i = 0; i < vpList.size(); i++) {
-                String vps = vpList.get(i).split(";")[1];
+                String vps = vpList.get(i).split(";")[Config.listEntryIndexOne];
                 double studyVPS = 0;
                 if (vps != null && !vps.equals(""))
                     studyVPS = Double.parseDouble(vps);
@@ -479,7 +498,7 @@ public class HomeViewModel extends ViewModel implements GetAllDatesListener, Get
         List<String> passedVpList = expandableListDetailHome.get("Teilgenommene Studien");
         if (passedVpList != null) {
             for (int i = 0; i < passedVpList.size(); i++) {
-                String vps = passedVpList.get(i).split(";")[1];
+                String vps = passedVpList.get(i).split(";")[Config.listEntryIndexOne];
                 double studyVPS = 0;
                 if (vps != null && !vps.equals(""))
                     studyVPS = Double.parseDouble(vps);
@@ -488,7 +507,6 @@ public class HomeViewModel extends ViewModel implements GetAllDatesListener, Get
         }
 
         float collectedVPS = (float) (completedVP + participatedVP + plannedVP);
-        //collectedVPText.setText(Float.toString(collectedVPS));
 
         float missingVPS = (float) sumVPsHome - (float) (completedVP + participatedVP + plannedVP);
         String missing;
@@ -502,6 +520,10 @@ public class HomeViewModel extends ViewModel implements GetAllDatesListener, Get
         setLastAppointmentText();
     }
 
+
+    //Parameter:
+    //Return values:
+    //Sets the text for the last participated appointment
     private void setLastAppointmentText() {
         String date = getLastParticipationDate();
         if (date == null) {
@@ -511,6 +533,10 @@ public class HomeViewModel extends ViewModel implements GetAllDatesListener, Get
         }
     }
 
+
+    //Parameter: date
+    //Return values: boolean
+    //Checks if date has already expired
     private boolean isDateInPast(String date) { //static?
 
         Calendar c = Calendar.getInstance();
@@ -547,22 +573,26 @@ public class HomeViewModel extends ViewModel implements GetAllDatesListener, Get
         return false;
     }
 
+
+    //Parameter: HashMap<String, toSort
+    //Return values: ArrayList<String>
+    //Sorts the list elements chronologically
     private ArrayList<String> sortList(HashMap<String, String> toSort) {
         ArrayList<String> list = new ArrayList<>();
 
-        String[][] dateList = new String[toSort.size()][2];
+        String[][] dateList = new String[toSort.size()][Config.listEntryIndexTwo];
         int position = 0;
         for (String key : toSort.keySet()) {
-            dateList[position][0] = key;
-            dateList[position][1] = toSort.get(key);
+            dateList[position][Config.listEntryIndexZero] = key;
+            dateList[position][Config.listEntryIndexOne] = toSort.get(key);
             position++;
         }
 
         for (int i = 0; i < dateList.length; i++) {
             for (int k = 0; k < dateList.length - 1; k++) {
 
-                String date1 = dateList[k][0].substring(dateList[k][0].indexOf(",") + 2);
-                String date2 = dateList[k + 1][0].substring(dateList[k + 1][0].indexOf(",") + 2);
+                String date1 = dateList[k][Config.listEntryIndexZero].substring(dateList[k][0].indexOf(",") + 2);
+                String date2 = dateList[k + 1][Config.listEntryIndexZero].substring(dateList[k + 1][Config.listEntryIndexZero].indexOf(",") + 2);
 
                 date1 = date1.replaceAll("um", "");
                 date1 = date1.replaceAll("Uhr", "");
@@ -587,14 +617,17 @@ public class HomeViewModel extends ViewModel implements GetAllDatesListener, Get
         }
         list.clear();
         for (String[] date : dateList) {
-            list.add(date[1] + "\t\t" + date[0]);
+            list.add(date[Config.listEntryIndexOne] + "\t\t" + date[Config.listEntryIndexZero]);
         }
 
         return list;
     }
 
+
+    //Parameter: HashMap<String, toSort
+    //Return values: ArrayList<String>
+    //Saves the user associated VP data and matrikelnumber; updates the current data first and then saves to the database.
     public void saveVpAndMatrikelNumber(String vps, String mNumber) {
-        //update the current data first, then save to db.
         sumVPsHome = Float.parseFloat(vps);
         matrikelNumberHome = mNumber;
         mHomeRepo.saveVpAndMatrikelNumber(vps, mNumber);

@@ -24,6 +24,10 @@ public class EditSwipeableDatesAdapter extends RecyclerView.Adapter<RecyclerView
     private int mRecentlyDeletedDatePosition;
     private View mFragmentView;
 
+
+    //Parameter: context, studyDates, fragmentView
+    //Return values:
+    //Sets variables
     public EditSwipeableDatesAdapter(Context context, ArrayList<DateModel> studyDates, View fragmentView) {
         mContext = context;
         editDatesList = DateModel.sortByDate(studyDates);
@@ -58,6 +62,7 @@ public class EditSwipeableDatesAdapter extends RecyclerView.Adapter<RecyclerView
         return editDatesList.size();
     }
 
+
     private class CustomViewHolder extends RecyclerView.ViewHolder {
 
         TextView dateDate;
@@ -70,7 +75,11 @@ public class EditSwipeableDatesAdapter extends RecyclerView.Adapter<RecyclerView
         }
     }
 
-    public void deleteItem(int position){
+
+    //Parameter: position
+    //Return values:
+    //Deletes associated date item
+    public void deleteItem(int position) {
         mRecentlyDeletedDate = editDatesList.get(position);
         mRecentlyDeletedDatePosition = position;
         editDatesList.remove(position);
@@ -78,15 +87,23 @@ public class EditSwipeableDatesAdapter extends RecyclerView.Adapter<RecyclerView
         showUndoSnackBar();
     }
 
-    private void showUndoSnackBar(){
+
+    //Parameter:
+    //Return values:
+    //Sets snack bar for cancelling appointments
+    private void showUndoSnackBar() {
         View view = mFragmentView.findViewById(R.id.edit_study_dates_layout);
-        Snackbar snackbar = Snackbar.make(view, "1 Termin gelöscht",
+        Snackbar snackbar = Snackbar.make(view, R.string.removeAppointmentAlert,
                 Snackbar.LENGTH_LONG);
-        snackbar.setAction("Rückgängig", v -> undoDelete());
+        snackbar.setAction(R.string.cancelAction, v -> undoDelete());
         snackbar.show();
     }
 
-    private void undoDelete(){
+
+    //Parameter:
+    //Return values:
+    //Manages deleted dates
+    private void undoDelete() {
         editDatesList.add(mRecentlyDeletedDatePosition, mRecentlyDeletedDate);
         notifyItemInserted(mRecentlyDeletedDatePosition);
     }

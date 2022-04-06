@@ -5,6 +5,10 @@ public class StudyObjectPa {
     private String title, vps, studyId, date;
     private int color;
 
+
+    //Parameter: id, name, description, vps, contactOne,...
+    //Return values:
+    //Sets variables
     public StudyObjectPa(String _title, String _vps, String _studyId, String _date, int _color) {
         this.title = _title;
         this.vps = _vps;
@@ -14,7 +18,6 @@ public class StudyObjectPa {
     }
 
     public StudyObjectPa() {
-
     }
 
     public String getTitle() {
