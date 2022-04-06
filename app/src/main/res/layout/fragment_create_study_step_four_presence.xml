@@ -47,6 +47,29 @@
                     android:layout_centerInParent="true">
 
                     <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/presetLayoutStepFour"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginTop="30dp"
+                        android:layout_marginRight="20dp"
+                        android:hint="@string/create_study_stepFour_presetHint"
+                        android:textColorHint="@color/heatherred_Main"
+                        app:boxBackgroundColor="@color/white"
+                        app:boxStrokeColor="@color/black"
+                        app:boxStrokeWidthFocused="2dp"
+                        app:hintTextColor="@color/heatherred_Main">
+
+                        <AutoCompleteTextView
+                            android:id="@+id/create_stepFour_local_Preset"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:inputType="none" />
+
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <com.google.android.material.textfield.TextInputLayout
                         android:id="@+id/create_stepFour_locOne_InputLayout"
                         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                         android:layout_width="match_parent"
@@ -55,6 +78,7 @@
                         android:layout_marginTop="20dp"
                         android:layout_marginRight="20dp"
                         android:hint="@string/createLocationHint"
+                        android:layout_below="@+id/presetLayoutStepFour"
                         android:textColorHint="@color/heatherred_Main"
                         app:boxStrokeColor="@color/black"
                         app:boxStrokeWidthFocused="2dp"

@@ -111,6 +111,31 @@
         <item>Präsenz</item>
     </string-array>
 
+    <string-array name="createPresetLabList">
+        <item>Future Interaction Lab</item>
+        <item>Versuchsraum 4</item>
+        <item>Besprechungsraum TB</item>
+    </string-array>
+
+    <string-array name="createPresetLocations">
+        <item>Regensburg</item>
+        <item>Regensburg</item>
+        <item>Regensburg</item>
+    </string-array>
+
+    <string-array name="createPresetAddress">
+        <item>Universitätsstraße 31</item>
+        <item>Franz-Mayer-Straße 1</item>
+        <item>Franz-Mayer-Straße 1</item>
+    </string-array>
+
+
+    <string-array name="createPresetRooms">
+        <item>PT 3.0.27–28</item>
+        <item>TB VR4</item>
+        <item>TB 1.101</item>
+    </string-array>
+
     <!---Personal Account-->
     <string name="personalAccountTitle">Angemeldete Studien</string>
 
@@ -300,6 +325,7 @@
 
     <string name="infoPaUpcoming">Alle ihre zukünftig anstehenden Termine werden hier angezeigt.</string>
     <string name="infoFindStudies">Hier finden sie alle Studien, an denen sie aktuell teilnehmen können. \n\n Weitere Informationen und die Anmeldung für freie Termine finden sie in der Detailansicht.</string>
+    <string name="create_study_stepFour_presetHint">Vorlage auswählen</string>
 
 </resources>
 
