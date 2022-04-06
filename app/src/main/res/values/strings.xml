@@ -20,7 +20,7 @@
     <string name="openVps">Es fehlen Ihnen noch</string>
     <string name="vpsDot">VP-Stunden.</string>
     <string name="findStudies">Jetzt Studien finden</string>
-    <string name="matNumberText">Klicken Sie hier um Ihre Matrikelnummer einzutragen und die aktuell im Lehrstuhl verbuchten Versuchspersonenstunden abzufragen.</string>
+    <string name="matNumberText">Mithilfe Ihrer Matrikelnummer können die aktuell im Lehrstuhl verbuchten Versuchspersonenstunden angezeigt werden.</string>
     <string name="matNumberRequired">Matrikelnummer eingeben</string>
     <string name="officialVps">Im Lehrstuhl bereits eingetragene VP-Stunden</string>
     <string name="noVps">0/15</string>
