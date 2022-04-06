@@ -132,12 +132,12 @@ public class HomeFragment extends Fragment {
     //Set Listeners and alert dialogs
     private void setClickListener() {
         progressBar.setOnClickListener(v -> {
-            CustomAlertDialog dialog = new CustomAlertDialog(HomeFragment.this, "", "");
+            CustomAlertDialog dialog = new CustomAlertDialog(HomeFragment.this, Float.toString(homeViewModel.sumVPsHome), homeViewModel.matrikelNumberHome);
             dialog.show();
         });
 
         registerMatrikelnummer.setOnClickListener(v -> {
-            CustomAlertDialog dialog = new CustomAlertDialog(HomeFragment.this, Float.toString(homeViewModel.sumVPsHome), homeViewModel.matrikelNumberHome);
+            CustomAlertDialog dialog = new CustomAlertDialog(HomeFragment.this, "", "");
             dialog.show();
         });
         findStudyButton.setOnClickListener(v -> navController.navigate(R.id.action_homeFragment_to_findStudyFragment));

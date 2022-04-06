@@ -51,6 +51,10 @@ public class CustomAlertDialog extends Dialog implements android.view.View.OnCli
         public void onClick(View v) {
                 switch (v.getId()) {
                         case R.id.addAnyways:
+                                if(vps.getText().toString().equals(""))
+                                {
+                                        vps.setText("15");
+                                }
                                 fragment.closeDialog(vps.getText().toString(), matrikelnumber.getText().toString());
                                 break;
                         case R.id.abort:
