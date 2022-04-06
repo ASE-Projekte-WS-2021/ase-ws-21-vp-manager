@@ -147,7 +147,7 @@ public class HomeFragment extends Fragment {
 
     //Parameter: maximum
     //Return values:
-    //Set maximal progress bar size
+    //Set maximal progress bar value
     public void setProgressBarMaximum(int maximum) {
         progressBar.setMax(maximum);
     }
