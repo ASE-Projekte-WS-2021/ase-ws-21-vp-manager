@@ -1,1 +1,0 @@
-Der VP-Manager ist eine App, welche den Studierenden der Medieninformatik und Informationswissenschaft dabei unterstützen soll, die benötigten Versuchspersonenstunden für ihr Bachelorstudium zu sammeln.
