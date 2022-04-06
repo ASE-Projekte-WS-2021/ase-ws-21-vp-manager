@@ -1,4 +1,4 @@
-VP-Manager
+# VP-Manager
 
 Der VP-Manager unterstützt die Studierenden der Medieninformatik und Informationswissenschaft beim Sammeln von Versuchspersonen-Stunden und bei der Suche nach 
 Teilnehmer:innen für eigene Studien. Der eigene Account ist dabei an eine persönliche Mailadresse gebunden um die Nutzer eindeutig identifizieren zu können.
@@ -15,3 +15,35 @@ Nutzer beim Anlegen der eigenen Studie, damit das Ergebnis ein möglichst vollst
 
 Desweiteren können in der App Informationen zu allen Teilnahmen an fremden Studien und auch zu allen eigenen Studien eingesehen werden. Es besteht die Möglichkeit
 letztere zu korrigieren oder zu ergänzen.
+
+
+## Team
+
+### Kai Aslan ([@Mutigo](https://github.com/Mutigo))
+- Studien erstellen 
+- Login/Registrierung
+- Studien/Teilnahmestatus
+- Warnungen und Hinweise (Pop-ups)
+### Kilian Bogner ([@KilianBogner](https://github.com/KilianBogner))
+- Code-Architektur
+- Datenbank
+- Navigation
+- Studien bearbeiten
+### Sebastion Hahn ([@Basti](https://github.com/basti7))
+- Studien finden
+- Deteilansicht der Studien
+- Studien bearbeiten
+- Warnungen und Hinweise (Pop-ups)
+### Niklas Jahning ([@Tokimetakaari](https://github.com/Tokimetakaari))
+- Mein VP-Status
+- Meine Übersicht
+- Studien/Teilnahmestatus
+- Sortier- und Filterfunktionen
+
+Anmerkung: Die genannten Bereiche wurden primär den jeweiligen Teammitgliedern zugewiesen. Bei Überschneidungen wurde paarweise gearbeitet.
+
+
+## 
+
+- projekt klonen über versionskontrolle --> trust project --> app\build\intermediates\apk\debug --> 
+- `git clone https://github.com/ASE-Projekte-WS-2021/ase-ws-21-vp-manager`
