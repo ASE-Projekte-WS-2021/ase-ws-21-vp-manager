@@ -29,6 +29,7 @@ public class LoginFragment extends Fragment {
     private NavController navController;
     private LoginRegisterViewModel mViewModel;
 
+
     public LoginFragment() {
 
     }
@@ -122,6 +123,8 @@ public class LoginFragment extends Fragment {
         }
     }
 
+    //Parameter: email
+    //Return values:
     //successful login
     public void createUserInMainActivity(String email) {
         mainActivity.uniqueID = email;
