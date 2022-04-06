@@ -61,32 +61,7 @@ public class UpcomingAppointmentsFragment extends Fragment {
         arrivingDatesList = view.findViewById(R.id.listViewOwnArrivingStudyFragment);
     }
 
-    //Parameter:
-    //Return Values:
-    //gets necessary data from database converts it into a list
-    //setUpDateList
-    /*
-    private void setUpDateList() {
-        final List<String[]>[] arrivingDates = new List[]{null};
 
-        PA_ExpandableListDataPump.DB_DATES_LIST.clear();
-        PA_ExpandableListDataPump.DB_STUDIES_LIST.clear();
-
-        PA_ExpandableListDataPump.getAllDates(new PA_ExpandableListDataPump.FirestoreCallbackDates() {
-            @Override
-            public void onCallback(boolean finished) {
-                if (finished)
-                    PA_ExpandableListDataPump.getAllStudies(new PA_ExpandableListDataPump.FirestoreCallbackStudy() {
-                        @Override
-                        public void onCallback() {
-                            arrivingDates[0] = PA_ExpandableListDataPump.getAllArrivingDates();
-                            finishSetupList(arrivingDates[0]);
-                        }
-                    });
-            }
-        });
-    }
-     */
 
     public void setListViewAdapter(CustomListViewAdapterAppointments adapter) {
         arrivingDatesList.setAdapter(adapter);
