@@ -417,30 +417,12 @@ public class HomeFragment extends Fragment {
         plannedCompletionDate.setText(completionDate);
     }
 
-/*
+
     public void disableAllAppointmentsButton() {
-
-        LinearLayout.LayoutParams param = new LinearLayout.LayoutParams(
-                LinearLayout.LayoutParams.MATCH_PARENT,
-                0,
-                0f
-        );
-        LinearLayout.LayoutParams scrollViewParam = new LinearLayout.LayoutParams(
-                LinearLayout.LayoutParams.MATCH_PARENT,
-                0,
-                5f
-        );
-        appointmentScrollView.setLayoutParams(scrollViewParam);
-        appointmentsButton.setLayoutParams(param);
-
         appointmentLayout.removeView(appointmentsButton);
-        appointmentsButton.setVisibility(View.INVISIBLE);
+        appointmentsButton.setVisibility(View.GONE);
         appointmentsButton.setClickable(false);
     }
-
- */
-
-
 
     public void loadDefaultorEmptyVersion() {
         defaultLayout.setVisibility(View.VISIBLE);
