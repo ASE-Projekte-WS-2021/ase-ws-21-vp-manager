@@ -231,7 +231,6 @@
     <string name="register_info_desc">Durch die Angabe der eigenen Matrikelnummer können die vom Lehrstuhl offiziell verbuchten Versuchspersonstunden angezeigt werden. \nDurch Angabe der benötigten VPs können die bereits gesammeleten in Relation gestellt werden.</string>
     <string name="successfulRegistration">Registierung erfolgreich, bitte überprüfe deine Email-Postfach</string>
     <string name="neededVps">15</string>
-
     <string name="repeatPassword">Passwort wiederholen</string>
     <string name="matNumber"><font color='#01C6DB'>Matrikelnummer</font></string>
     <string name="neededVpText">Benötige VP</string>
@@ -256,10 +255,10 @@
     <string name="contactThreeHint">Kontakt - Skype</string>
     <string name="contactFourHint">Kontakt - Discord</string>
     <string name="contactFiveHint">Kontakt - Andere</string>
-    <string name="descriptionHint">Studienbeschreibung</string>
-    <string name="locHint">Ort</string>
-    <string name="streetHint">Adresse</string>
-    <string name="roomHint">Raum</string>
+    <string name="descriptionHint">Studienbeschreibung*</string>
+    <string name="locHint">Ort*</string>
+    <string name="streetHint">Adresse*</string>
+    <string name="roomHint">Raum*</string>
     <string name="platformOneHint">Plattform 1</string>
     <string name="platformTwoHint">Plattform 2</string>
 

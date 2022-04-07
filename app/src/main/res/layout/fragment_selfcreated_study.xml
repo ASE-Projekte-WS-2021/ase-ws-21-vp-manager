@@ -10,15 +10,15 @@
         android:layout_width="250dp"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
-        android:text="Bisher hast du noch keine Studien erstellt. Wähle im Menü den Reiter Studien erstellen um Studien zu erstellen!"
+        android:text="@string/zeroOwnStudiesHeader"
         android:textAlignment="center"
         android:visibility="gone" />
 
     <LinearLayout
+        android:id="@+id/ownStudyFirstSection"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:id="@+id/ownStudyFirstSection">
+        android:orientation="vertical">
 
         <TextView
             android:layout_width="match_parent"
@@ -26,8 +26,8 @@
             android:layout_marginStart="25dp"
             android:layout_marginTop="20dp"
             android:layout_marginEnd="25dp"
-            android:text="Ausgeschriebene Studien"
             android:fontFamily="@font/google_sans_medium"
+            android:text="@string/personalAccountTitle"
             android:textSize="23sp"
             android:textStyle="bold" />
 
@@ -43,118 +43,126 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
+
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
                 android:layout_gravity="left"
-                android:layout_marginStart="20dp">
+                android:layout_marginStart="20dp"
+                android:orientation="horizontal">
 
 
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">
+
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
-                        android:text="Sortieren nach: "
-                        android:textSize="14sp"
+                        android:layout_marginStart="5dp"
+                        android:layout_marginEnd="10dp"
                         android:gravity="center"
-                        android:textStyle="italic"
-                        android:layout_marginEnd="10dp"/>
+                        android:text="@string/sortStudyText"
+                        android:textSize="14sp"
+                        android:textStyle="italic" />
 
 
                     <LinearLayout
+                        android:id="@+id/ownStudy_sort_vp"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
-                        android:orientation="horizontal"
-                        android:id="@+id/ownStudy_sort_vp">
+                        android:orientation="horizontal">
+
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="match_parent"
                             android:gravity="center"
-                            android:text="VPS"
+                            android:text="@string/vpText"
                             android:textColor="@color/heatherred_dark"
                             android:textSize="20sp" />
+
                         <ImageView
                             android:id="@+id/ownStudy_sort_VP_Icon"
                             android:layout_width="wrap_content"
                             android:layout_height="match_parent"
-                            app:tint="@color/heatherred_dark"
                             android:layout_marginEnd="10dp"
-                            />
+                            app:tint="@color/heatherred_dark" />
                     </LinearLayout>
 
                 </LinearLayout>
 
             </LinearLayout>
+
             <View
                 android:layout_width="match_parent"
                 android:layout_height="3dp"
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="20dp"
                 android:background="@color/color_two" />
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="horizontal">
 
                 <LinearLayout
+                    android:id="@+id/ownStudyExpandCategory"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
                     android:layout_marginHorizontal="20dp"
-                    android:orientation="horizontal"
-                    android:id="@+id/ownStudyExpandCategory">
+                    android:orientation="horizontal">
+
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="5dp"
                         android:layout_gravity="center_vertical"
-                        android:text="Kategorien"
+                        android:layout_marginStart="5dp"
                         android:fontFamily="@font/google_sans_medium"
+                        android:text="@string/categoryText"
                         android:textSize="14sp"
                         android:textStyle="italic" />
 
                     <ImageView
-                        android:layout_width="wrap_content"
                         android:id="@+id/ownStudyCategoryIcon"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:src="@drawable/ic_baseline_expand_more_24"
                         android:layout_gravity="end"
-                        android:layout_marginHorizontal="10dp"/>
+                        android:layout_marginHorizontal="10dp"
+                        android:src="@drawable/ic_baseline_expand_more_24" />
                 </LinearLayout>
 
                 <View
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_weight="1"/>
+                    android:layout_weight="1" />
 
                 <LinearLayout
+                    android:id="@+id/ownStudyExpandType"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
                     android:layout_marginEnd="20dp"
-                    android:orientation="horizontal"
-                    android:id="@+id/ownStudyExpandType">
+                    android:orientation="horizontal">
+
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="5dp"
                         android:layout_gravity="center_vertical"
-                        android:text="Durchführung"
+                        android:layout_marginStart="5dp"
                         android:fontFamily="@font/google_sans_medium"
+                        android:text="@string/executionText"
                         android:textSize="14sp"
                         android:textStyle="italic" />
 
                     <ImageView
-                        android:layout_width="wrap_content"
                         android:id="@+id/ownStudyTypeIcon"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:src="@drawable/ic_baseline_expand_more_24"
                         android:layout_gravity="end"
-                        android:layout_marginHorizontal="10dp"/>
+                        android:layout_marginHorizontal="10dp"
+                        android:src="@drawable/ic_baseline_expand_more_24" />
                 </LinearLayout>
             </LinearLayout>
 
@@ -163,24 +171,24 @@
                 android:id="@+id/ownStudyType"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_gravity="end"
                 android:layout_marginHorizontal="20dp"
                 android:visibility="gone"
-                android:layout_gravity="end"
                 app:flexWrap="wrap">
 
                 <com.google.android.material.chip.Chip
                     android:id="@+id/ownStudyFilterRemote"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Remote"
-                    android:textSize="12sp"/>
+                    android:text="@string/remoteString"
+                    android:textSize="12sp" />
 
                 <com.google.android.material.chip.Chip
                     android:id="@+id/ownStudyFilterpresence"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Präsenz"
-                    android:textSize="12sp"/>
+                    android:text="@string/presenceString"
+                    android:textSize="12sp" />
 
             </com.google.android.material.chip.ChipGroup>
 
@@ -196,69 +204,69 @@
                     android:id="@+id/ownStudyFilterFieldStudy"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Feldstudie"
-                    android:textSize="12sp"/>
+                    android:text="@string/fieldStudyText"
+                    android:textSize="12sp" />
 
                 <com.google.android.material.chip.Chip
                     android:id="@+id/ownStudyFilterFocusGroup"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Fokusgruppe"
-                    android:textSize="12sp"/>
+                    android:text="@string/focusGroupText"
+                    android:textSize="12sp" />
 
                 <com.google.android.material.chip.Chip
                     android:id="@+id/ownStudyFilterQuestionnaire"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Fragebogen"
-                    android:textSize="12sp"/>
+                    android:text="@string/questionnaireText"
+                    android:textSize="12sp" />
 
                 <com.google.android.material.chip.Chip
                     android:id="@+id/ownStudyFilterInterview"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Interview"
-                    android:textSize="12sp"/>
+                    android:text="@string/interviewText"
+                    android:textSize="12sp" />
 
                 <com.google.android.material.chip.Chip
                     android:id="@+id/ownStudyFilterUeUx"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Usability/UX"
-                    android:textSize="12sp"
-                    />
+                    android:text="@string/usabilityText"
+                    android:textSize="12sp" />
 
                 <com.google.android.material.chip.Chip
                     android:id="@+id/ownStudyFilterLabStudy"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Laborstudie"
-                    android:textSize="12sp"/>
+                    android:text="@string/labStudyText"
+                    android:textSize="12sp" />
 
                 <com.google.android.material.chip.Chip
                     android:id="@+id/ownStudyFilterDiaryStudy"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Tagebuchstudie"
-                    android:textSize="12sp"/>
+                    android:text="@string/diaryStudyText"
+                    android:textSize="12sp" />
 
                 <com.google.android.material.chip.Chip
                     android:id="@+id/ownStudyFilterGaming"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Gamingstudie"
-                    android:textSize="12sp"/>
+                    android:text="@string/gamingText"
+                    android:textSize="12sp" />
 
                 <com.google.android.material.chip.Chip
                     android:id="@+id/ownStudyFilterOthers"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Sonstige"
-                    android:textSize="12sp"/>
+                    android:text="@string/othersText"
+                    android:textSize="12sp" />
 
             </com.google.android.material.chip.ChipGroup>
 
         </LinearLayout>
+
         <View
             android:layout_width="match_parent"
             android:layout_height="3dp"
@@ -276,14 +284,5 @@
         android:layout_below="@id/ownStudyFirstSection"
         android:dividerHeight="2dp" />
 
-    <!--
-    <ListView
-        android:id="@+id/listViewOwnStudyFragment"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="70dp"
-        android:layout_weight="1"
-        android:dividerHeight="2dp" />
-        -->
 
 </RelativeLayout>
