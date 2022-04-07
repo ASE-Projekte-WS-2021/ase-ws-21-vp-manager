@@ -305,20 +305,9 @@ public class PersonalAccountFragment extends Fragment {
     }
 
 
-    public Boolean getColorToggleState(String identifier) {
-        if (identifier.equals("completed")) {
-            return removeCompleted.isChecked();
-        } else if (identifier.equals("participated")) {
-            return removeParticipated.isChecked();
-        } else { //if (identifier.equals("planned"))
-            return removePlanned.isChecked();
-        }
-    }
-
-
     //Parameter: adapter
     //Return values:
-    //Sets new Adapter
+    //Sets the new Adapter
     public void setNewListViewAdapter(CustomStudyListAdapter adapter) {
 
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(requireActivity());
@@ -327,6 +316,11 @@ public class PersonalAccountFragment extends Fragment {
         adapter.notifyDataSetChanged();
     }
 
+
+    //Parameter:
+    //Return values:
+    //Applies color filter for finished, planned and participated studies
     public void applyColorFilter() {
-        personalAccountViewModel.filterListViewColorTags(removeCompletedActive, removePlannedActive, removeParticipatedActive); }
+        personalAccountViewModel.filterListViewColorTags(removeCompletedActive, removePlannedActive, removeParticipatedActive);
+    }
 }
