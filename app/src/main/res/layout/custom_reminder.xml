@@ -43,7 +43,7 @@
         android:layout_marginTop="10dp"
         android:layout_marginEnd="20dp"
         android:layout_marginStart="20dp"
-        android:text="Bitte erst Matrikelnummer eingeben und die benötigten VP bestätigen"
+        android:text= "@string/inputReminder"
         android:textColor="@android:color/white"
         android:textSize="15sp"
         android:textStyle="bold"
@@ -55,7 +55,7 @@
         android:layout_height="40dp"
             android:layout_margin="10dp"
         android:background="@android:color/white"
-        android:text="OK"
+        android:text="@string/ok"
         android:layout_gravity="center"
             android:gravity="center"
         android:textStyle="bold" />

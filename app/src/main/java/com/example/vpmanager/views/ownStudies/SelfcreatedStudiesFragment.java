@@ -433,7 +433,7 @@ public class SelfcreatedStudiesFragment extends Fragment implements StudyListAda
             noOwnStudies.setVisibility(View.VISIBLE);
         }
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(requireActivity());
-        StudyListAdapter studyListAdapter = new StudyListAdapter(getContext(), ownStudyViewModel.getOwnStudyMetaInfo(),
+        studyListAdapter = new StudyListAdapter(getContext(), ownStudyViewModel.getOwnStudyMetaInfo(),
                 this);
         ownStudiesList.setAdapter(studyListAdapter);
         ownStudiesList.setLayoutManager(linearLayoutManager);

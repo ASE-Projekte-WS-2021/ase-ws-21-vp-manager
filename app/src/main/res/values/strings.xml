@@ -193,6 +193,9 @@
     <string name="collectionPathDates">dates</string>
     <string name="findStudyCardDescText">Suche nach passenden Studien für deinen Uni-Alltag und sammle VP-Stunden!</string>
     <string name="createStudyCardDescText">Erstelle deine eigenen Studien und präsentiere sie der Ziegruppe!</string>
+    <string name="cancelView">Nicht mehr anzeigen</string>
+    <string name="add">Hinzufügen</string>
+
 
 
     <!--PA-->
@@ -202,6 +205,10 @@
     <string name="ownStudiesHeader">Deine erstellten Studien</string>
     <string name="ownStudyStatusTab">Mein VP-Status</string>
     <string name="ownStudyTab">Meine Studien</string>
+
+    <string name="inputReminder">Bitte erst Matrikelnummer eingeben und die benötigten VP bestätigen</string>
+    <string name="duplicateDate">Doppelter Termin</string>
+    <string name="addExistingDateWarning">Sie wollen einen bereits vorhandenen Termin erneut hinzufügen. \nWollen Sie in trotzdem fortfahren?</string>
 
 
     <!---->
@@ -281,7 +288,6 @@
 
 
     <!---Confirm Texts-->
-
     <string name="participated">Teilgenommen</string>
     <string name="notParticipated">Nicht Teilgenommen</string>
 

@@ -14,16 +14,5 @@
         android:text="VP Manager"
         android:textAppearance="?attr/textAppearanceHeadline6" />
 
-    <!--
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:layout_marginEnd="24dp"
-        android:layout_marginBottom="24dp"
-        android:text="Uni Mail Addresse"
-        android:textAppearance="?attr/textAppearanceBody2"
-        android:textColor="@color/material_on_surface_emphasis_medium" />
-        -->
 
 </LinearLayout>
