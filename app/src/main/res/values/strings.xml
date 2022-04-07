@@ -142,8 +142,21 @@
         <item>TB 1.101</item>
     </string-array>
 
+
+
     <!---Personal Account-->
     <string name="personalAccountTitle">Angemeldete Studien</string>
+    <string name="drawerDate">Datum</string>
+    <string name="drawerDateFull">Datum - Wochentag - Uhrzeit</string>
+    <string name="zeroOwnStudiesHeader">Bisher hast du noch keine Studien erstellt. Wähle im Menü den Reiter Studien erstellen um Studien zu erstellen!</string>
+    <string name="ownStudiesHeader">Deine erstellten Studien</string>
+    <string name="ownStudyStatusTab">Mein VP-Status</string>
+    <string name="ownStudyTab">Meine Studien</string>
+
+    <string name="inputReminder">Bitte erst Matrikelnummer eingeben und die benötigten VP bestätigen</string>
+    <string name="duplicateDate">Doppelter Termin</string>
+    <string name="addExistingDateWarning">Sie wollen einen bereits vorhandenen Termin erneut hinzufügen. \nWollen Sie in trotzdem fortfahren?</string>
+
 
     <!---findStudyActivity-->
     <string name="entryListHeader">Aktuelles Studienangebot</string>
@@ -198,19 +211,6 @@
 
 
 
-    <!--PA-->
-    <string name="drawerDate">Datum</string>
-    <string name="drawerDateFull">Datum - Wochentag - Uhrzeit</string>
-    <string name="zeroOwnStudiesHeader">Bisher hast du noch keine Studien erstellt. Wähle im Menü den Reiter Studien erstellen um Studien zu erstellen!</string>
-    <string name="ownStudiesHeader">Deine erstellten Studien</string>
-    <string name="ownStudyStatusTab">Mein VP-Status</string>
-    <string name="ownStudyTab">Meine Studien</string>
-
-    <string name="inputReminder">Bitte erst Matrikelnummer eingeben und die benötigten VP bestätigen</string>
-    <string name="duplicateDate">Doppelter Termin</string>
-    <string name="addExistingDateWarning">Sie wollen einen bereits vorhandenen Termin erneut hinzufügen. \nWollen Sie in trotzdem fortfahren?</string>
-
-
     <!---->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
@@ -231,6 +231,12 @@
     <string name="register_info_desc">Durch die Angabe der eigenen Matrikelnummer können die vom Lehrstuhl offiziell verbuchten Versuchspersonstunden angezeigt werden. \nDurch Angabe der benötigten VPs können die bereits gesammeleten in Relation gestellt werden.</string>
     <string name="successfulRegistration">Registierung erfolgreich, bitte überprüfe deine Email-Postfach</string>
     <string name="neededVps">15</string>
+
+    <string name="repeatPassword">Passwort wiederholen</string>
+    <string name="matNumber"><font color='#01C6DB'>Matrikelnummer</font></string>
+    <string name="neededVpText">Benötige VP</string>
+
+
 
 
     <!-- Study Details Tags -->
