@@ -31,7 +31,6 @@ public class LoginFragment extends Fragment {
 
 
     public LoginFragment() {
-
     }
 
     @Override

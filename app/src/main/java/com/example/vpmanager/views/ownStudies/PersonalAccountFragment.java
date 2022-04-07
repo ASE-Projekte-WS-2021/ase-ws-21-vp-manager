@@ -243,7 +243,7 @@ public class PersonalAccountFragment extends Fragment {
 
     //Parameter: identifier, appointActive, invert
     //Return values:
-    //Sets toggle view for sorting list alphabetically
+    //Sets toggle view for sorting list by date
     public void setAppointmentsToggle(String identifier, Boolean appointActive, Boolean invert) {
         if (identifier.equals("names")) {
             if (appointActive) {
@@ -268,6 +268,9 @@ public class PersonalAccountFragment extends Fragment {
         }
     }
 
+    //Parameter: identifier, vpActive, invert
+    //Return values:
+    //Sets toggle view for sorting list by vp value
     public void setVpToggle(String identifier, Boolean vpActive, Boolean invert) {
         if (identifier.equals("names")) {
             if (vpActive) {
@@ -301,6 +304,7 @@ public class PersonalAccountFragment extends Fragment {
         return (CustomStudyListAdapter) listView.getAdapter();
     }
 
+
     public Boolean getColorToggleState(String identifier) {
         if (identifier.equals("completed")) {
             return removeCompleted.isChecked();
@@ -311,6 +315,10 @@ public class PersonalAccountFragment extends Fragment {
         }
     }
 
+
+    //Parameter: adapter
+    //Return values:
+    //Sets new Adapter
     public void setNewListViewAdapter(CustomStudyListAdapter adapter) {
 
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(requireActivity());
@@ -320,6 +328,5 @@ public class PersonalAccountFragment extends Fragment {
     }
 
     public void applyColorFilter() {
-        personalAccountViewModel.filterListViewColorTags(removeCompletedActive, removePlannedActive, removeParticipatedActive);
-    }
+        personalAccountViewModel.filterListViewColorTags(removeCompletedActive, removePlannedActive, removeParticipatedActive); }
 }
