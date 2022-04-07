@@ -7,8 +7,8 @@
 
         <item
             android:id="@+id/homeFragment"
-            android:icon="@drawable/ic_baseline_person_24"
-            android:title="Persönliche Übersicht" />
+            android:icon="@drawable/ic_outline_dashboard_24"
+            android:title="Mein VP-Status" />
         <item
             android:id="@+id/findStudyFragment"
             android:icon="@drawable/ic_baseline_search_24"
@@ -20,7 +20,7 @@
         <item
             android:id="@+id/ownStudyFragment"
             android:icon="@drawable/ic_baseline_folder_24"
-            android:title="Eigene Studien" />
+            android:title="Meine Übersicht" />
     </group>
 
     <group

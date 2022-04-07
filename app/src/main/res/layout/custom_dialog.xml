@@ -1,128 +1,152 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_gravity="center_vertical"
-    android:layout_width="fill_parent"
-    android:layout_height="230dp"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical">
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
 
-    <androidx.cardview.widget.CardView
-        android:id="@+id/cardViewGraph"
-        android:layout_width="match_parent"
-        android:layout_height="230dp"
-        android:elevation="10dp"
-        app:cardBackgroundColor="@color/heatherred_dark">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
-
-            <TextView
-        android:id="@+id/txt_dia"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:layout_margin="10dp"
-        android:text="Eigene Matrikelnummer und Zahl der VP eingeben"
-        android:textColor="@android:color/white"
-        android:textSize="15sp"
-        android:textStyle="bold"/>
-
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="40dp"
-                android:text="Matrikelnummer"
-                android:textStyle="bold"
-                android:textColor="@color/white"
-                android:layout_marginStart="10dp"
-                android:textSize="15sp"/>
-            <View
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:layout_weight="1"
-                />
-            <EditText
-                android:id="@+id/dialog_input_number"
-                android:layout_width="200dp"
-                android:layout_height="40dp"
-                android:layout_margin="5dp"
-                android:background="@color/white"
-                android:layout_gravity="right"
-                android:padding="5dp"
-                android:inputType="number"/>
-
-        </LinearLayout>
-
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="40dp"
-                android:text="Benötigte VPS"
-                android:textStyle="bold"
-                android:textColor="@color/white"
-                android:layout_marginStart="10dp"
-                android:textSize="15sp"/>
-            <View
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:layout_weight="1"/>
-            <EditText
-                android:id="@+id/dialog_input_vps"
-                android:layout_width="200dp"
-                android:layout_height="40dp"
-                android:layout_margin="5dp"
-                android:background="@color/white"
-                android:layout_gravity="right"
-                android:padding="5dp"
-                android:inputType="numberDecimal"/>
-
-        </LinearLayout>
-
-
-    </LinearLayout>
-
-        </LinearLayout>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom"
-        android:orientation="horizontal">
-        <Button
-            android:id="@+id/dialog_btn_no"
-            android:layout_width="wrap_content"
-            android:layout_height="40dp"
-            android:text="Abbrechen"
-            android:background="@android:color/white"
-            android:textStyle="bold"/>
+        android:background="@drawable/bg_window">
 
         <View
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            />
-        <Button
-        android:id="@+id/dialog_btn_yes"
-        android:layout_width="wrap_content"
-        android:layout_height="40dp"
-        android:background="@android:color/white"
-        android:text="Speichern"
-        android:layout_gravity="right"
-        android:textStyle="bold" />
+            android:layout_width="40dp"
+            android:layout_height="60dp"
+            android:layout_alignParentEnd="true"
+            android:background="@drawable/ic_corner" />
 
-    </LinearLayout>
-    </androidx.cardview.widget.CardView>
-</LinearLayout>
+        <ImageView
+            android:id="@+id/btn_close"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="2dp"
+            android:layout_marginEnd="2dp"
+            android:src="@drawable/ic_clear" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/img_icon"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="12dp"
+                android:elevation="8dp"
+                android:src="@drawable/ic_baseline_info_24" />
+
+            <TextView
+                android:id="@+id/info_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:fontFamily="@font/google_sans_bold"
+                android:text="Matrikelnummer und VPS "
+                android:paddingStart="12dp"
+                android:paddingEnd="12dp"
+                android:textAlignment="center"
+                android:textColor="@color/black"
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/duplicate_desc"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:fontFamily="@font/google_sans_regular"
+                android:gravity="center_horizontal"
+                android:paddingStart="12dp"
+                android:paddingEnd="12dp"
+                android:paddingTop="20dp"
+                android:paddingBottom="10dp"
+                android:text="Sie können hier Ihre Matrikelnummer und die benötigten VPS eintragen."
+                android:textColor="@color/black" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+
+
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginRight="20dp"
+                        android:hint="Matrikelnummer"
+                        android:textColorHint="@color/white"
+                        app:boxStrokeColor="@color/white"
+                        app:boxStrokeWidthFocused="2dp"
+                        app:hintTextColor="@color/heatherred_Main">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/dialog_input_number"
+                            style="@style/You.EditText.Style"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:maxLength="34" />
+
+                    </com.google.android.material.textfield.TextInputLayout><com.google.android.material.textfield.TextInputLayout
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginRight="20dp"
+                        android:hint="Benötigte VPS"
+                        android:textColorHint="@color/white"
+                        app:boxStrokeColor="@color/white"
+                        app:boxStrokeWidthFocused="2dp"
+                        app:hintTextColor="@color/heatherred_Main">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/dialog_input_vps"
+                            style="@style/You.EditText.Style"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:maxLength="34" />
+
+                    </com.google.android.material.textfield.TextInputLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_horizontal"
+                android:layout_marginBottom="8dp"
+                android:layout_marginTop="12dp">
+
+                <Button
+                    android:id="@+id/abort"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Abbrechen"
+                    android:textColor="@color/white"
+                    android:backgroundTint="@color/heatherred_Main"/>
+
+                <Button
+                    android:id="@+id/addAnyways"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Hinzufügen"
+                    android:backgroundTint="@color/heatherred_Main"
+                    android:layout_marginStart="24dp"
+                    android:layout_marginLeft="24dp"
+                    android:textColor="@color/white"/>
+
+            </LinearLayout>
+
+        </LinearLayout>
+    </RelativeLayout>
+
+
+</RelativeLayout>

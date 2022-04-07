@@ -23,6 +23,7 @@ public class StudyViewModel extends ViewModel implements StudyDetailsListener, S
     private StudyDetailModel mStudyDetails;
     private ArrayList<DateModel> mStudyDates;
     private ArrayList<String> userIdsOfDates = new ArrayList<>();
+
     private DateModel selectedDateObject;
 
     private StudyRepository mStudyRepo;
@@ -77,6 +78,10 @@ public class StudyViewModel extends ViewModel implements StudyDetailsListener, S
             int position = userIdsOfDates.indexOf(currentUserId);
             selectedDateObject = new DateModel();
             selectedDateObject = mStudyDates.get(position);
+            if(selectedDateObject.getParticipation())
+            {
+                studyDatesFragment.disAbleSignOutButton();
+            }
         }
     }
 

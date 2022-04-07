@@ -39,10 +39,12 @@ public class HomeViewModel extends ViewModel implements GetAllDatesListener, Get
     public HomeFragment homeFragment;
     private HomeRepository mHomeRepo;
 
-    private float sumVPsHome;
-    private String matrikelNumberHome, jsonString;
+    private float collectedVPS;
+    private String jsonString;
     private double plannedVP, completedVP, participatedVP;
 
+    public String matrikelNumberHome;
+    public float sumVPsHome;
 
     //Parameter:
     //Return values:
@@ -374,7 +376,7 @@ public class HomeViewModel extends ViewModel implements GetAllDatesListener, Get
                     }
                 }
             }
-            if (saveDate && date != null && !isDateInPast(date)) {
+            if (saveDate && date != null ) {
                 datesList.add(date);
             }
         }
@@ -506,7 +508,7 @@ public class HomeViewModel extends ViewModel implements GetAllDatesListener, Get
             }
         }
 
-        float collectedVPS = (float) (completedVP + participatedVP + plannedVP);
+        collectedVPS = (float) (completedVP + participatedVP + plannedVP);
 
         float missingVPS = (float) sumVPsHome - (float) (completedVP + participatedVP + plannedVP);
         String missing;
@@ -526,7 +528,7 @@ public class HomeViewModel extends ViewModel implements GetAllDatesListener, Get
     //Sets the text for the last participated appointment
     private void setLastAppointmentText() {
         String date = getLastParticipationDate();
-        if (date == null) {
+        if (date == null && collectedVPS == 0 ) {
             homeFragment.loadDefaultorEmptyVersion();
         } else {
             homeFragment.setPlannedCompletionDate(date);

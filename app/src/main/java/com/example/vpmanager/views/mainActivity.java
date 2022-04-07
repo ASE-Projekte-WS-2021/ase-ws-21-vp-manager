@@ -39,6 +39,7 @@ public class mainActivity extends AppCompatActivity implements DrawerController 
     private NavHostFragment navHostFragment;
     private FirebaseAuth firebaseAuth;
     private boolean userStay = true;
+    private TextView drawerMail;
 
 
     private MaterialToolbar topAppBarMain;
@@ -57,6 +58,8 @@ public class mainActivity extends AppCompatActivity implements DrawerController 
         firebaseAuth = FirebaseAuth.getInstance();
     }
 
+
+
     //closes the navigation drawer when returning to mainActivity
     @Override
     protected void onResume() {
@@ -66,6 +69,11 @@ public class mainActivity extends AppCompatActivity implements DrawerController 
 
     private void setupUserId() {
         uniqueID = createUserId(this);
+
+        View view = navigationViewMain.getHeaderView(0);
+        drawerMail = view.findViewById(R.id.drawer_header_mail);
+        drawerMail.setText(uniqueID);
+
     }
 
     //Parameter:
@@ -81,6 +89,7 @@ public class mainActivity extends AppCompatActivity implements DrawerController 
 
         //this is the view with the drawer
         navigationViewMain = findViewById(R.id.navigationViewMain);
+
 
         //get the navController like this because the code line below isn't working
         navHostFragment = (NavHostFragment) getSupportFragmentManager().findFragmentById(R.id.nav_host_fragment_main);
