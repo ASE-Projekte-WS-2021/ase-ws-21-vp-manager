@@ -28,6 +28,12 @@
     <string name="allAppointments">Alle Termine ansehen</string>
 
 
+    <!---Navigation-->
+    <string name="warning">Achtung!</string>
+    <string name="leavePageWarning">Wenn Sie diesen Bereich verlassen gehen Ihre Änderungen verloren! Wollen Sie trotzdem verlassen?</string>
+    <string name="cancelNavigation">Abbrechen</string>
+    <string name="leavePage">"Verlassen"</string>
+
 
 
     <!---Create Study-->
