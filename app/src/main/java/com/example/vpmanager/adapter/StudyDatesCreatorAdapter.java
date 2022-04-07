@@ -90,23 +90,20 @@ public class StudyDatesCreatorAdapter extends RecyclerView.Adapter<RecyclerView.
             participatedButton = itemView.findViewById(R.id.dateParticipatedButton);
             border_participated = itemView.findViewById(R.id.dateCreatorBorderCard_participated);
 
-            participatedButton.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
+            participatedButton.setOnClickListener(v -> {
 
-                    participated = !participated;
+                participated = !participated;
 
-                    if (participated) {
-                        participatedButton.setTextColor(context.getResources().getColor(R.color.green_dark));
-                        participatedButton.setText(R.string.participated);
-                        border_participated.setCardBackgroundColor(context.getResources().getColor(R.color.green_dark));
-                    } else {
-                        participatedButton.setTextColor(context.getResources().getColor(R.color.heatherred_dark));
-                        participatedButton.setText(R.string.notParticipated);
-                        border_participated.setCardBackgroundColor(context.getResources().getColor(R.color.heatherred_dark));
-                    }
-                    PA_ExpandableListDataPump.setDateState(mStudyDates.get(getAdapterPosition()).getDateId(), participated);
+                if (participated) {
+                    participatedButton.setTextColor(context.getResources().getColor(R.color.green_dark));
+                    participatedButton.setText(R.string.participated);
+                    border_participated.setCardBackgroundColor(context.getResources().getColor(R.color.green_dark));
+                } else {
+                    participatedButton.setTextColor(context.getResources().getColor(R.color.heatherred_dark));
+                    participatedButton.setText(R.string.notParticipated);
+                    border_participated.setCardBackgroundColor(context.getResources().getColor(R.color.heatherred_dark));
                 }
+                PA_ExpandableListDataPump.setDateState(mStudyDates.get(getAdapterPosition()).getDateId(), participated);
             });
         }
 

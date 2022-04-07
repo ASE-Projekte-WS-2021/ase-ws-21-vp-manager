@@ -54,7 +54,6 @@ public class EditSwipeableDatesAdapter extends RecyclerView.Adapter<RecyclerView
 
         //other textViews can be filled with data here
         ((CustomViewHolder) holder).dateDate.setText(editDatesList.get(position).getDate());
-        //((CustomViewHolder) holder).dateOtherInfos.setText(editDatesList.get(position).getXYZ());
     }
 
     @Override

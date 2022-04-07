@@ -39,14 +39,12 @@ public class CustomStudyListAdapter extends RecyclerView.Adapter<RecyclerView.Vi
         mContext = context;
         mStudyMetaInfos = studyMetaInfos;
         this.navController = navController;
-        Log.d("StudyListAdapter", "constructor was called");
     }
 
     public CustomStudyListAdapter(Context context, NavController navController, HashMap<String, List<String>> studyMetaInfos) {
         mContext = context;
         mStudyMetaInfos = transformLists(studyMetaInfos);
         this.navController = navController;
-        Log.d("StudyListAdapter", "constructor was called");
     }
 
     private ArrayList<StudyObjectPa> transformLists(HashMap<String, List<String>> hashMapList) {
@@ -133,16 +131,11 @@ public class CustomStudyListAdapter extends RecyclerView.Adapter<RecyclerView.Vi
 
             studyItemParentLayout = itemView.findViewById(R.id.pa_item_card_parent);
 
-            studyItemParentLayout.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    String studyId = mStudyMetaInfos.get(getAdapterPosition()).getStudyId();
-                    PA_ExpandableListDataPump.navigateToStudyCreatorFragment(mainActivity.uniqueID, studyId, "OwnStudyFragment", navController);
-                }
+            studyItemParentLayout.setOnClickListener(v -> {
+                String studyId = mStudyMetaInfos.get(getAdapterPosition()).getStudyId();
+                PA_ExpandableListDataPump.navigateToStudyCreatorFragment(mainActivity.uniqueID, studyId, "OwnStudyFragment", navController);
             });
         }
     }
-
-
 }
 
