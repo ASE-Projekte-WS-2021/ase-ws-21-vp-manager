@@ -507,14 +507,26 @@ public class CreateStudyFragment extends Fragment {
                 createStudyFragment_StepThree.textInputEditTextDesc.requestFocus();
                 break;
             case 4:
-                if (createStudyViewModel.studyCreationProcessData.get("location") != null) {
+                if (createStudyViewModel.studyCreationProcessData.get("location") != null &&
+                        createStudyViewModel.studyCreationProcessData.get("street") != null &&
+                        createStudyViewModel.studyCreationProcessData.get("room") != null) {
                     return true;
                 }
                 String executionType = createStudyViewModel.studyCreationProcessData.get("executionType").toString();
                 if (executionType.equals(getString(R.string.presenceString))) {
                     createStudyFragment_StepFour_Presence.textInputEditTextLocation
                             .setError(getString(R.string.locationError));
-                    createStudyFragment_StepFour_Presence.textInputEditTextLocation.requestFocus();
+                    createStudyFragment_StepFour_Presence.textInputEditTextRoom
+                            .setError(getString(R.string.roomError));
+                    createStudyFragment_StepFour_Presence.textInputEditTextStreet
+                            .setError(getString(R.string.streetError));
+
+                    if(createStudyViewModel.studyCreationProcessData.get("location") == null)
+                        createStudyFragment_StepFour_Presence.textInputEditTextLocation.requestFocus();
+                    else if(createStudyViewModel.studyCreationProcessData.get("street") == null)
+                        createStudyFragment_StepFour_Presence.textInputEditTextStreet.requestFocus();
+                    else if(createStudyViewModel.studyCreationProcessData.get("room") == null)
+                        createStudyFragment_StepFour_Presence.textInputEditTextRoom.requestFocus();
                 }
                 if (createStudyViewModel.studyCreationProcessData.get("platform") != null) {
                     return true;

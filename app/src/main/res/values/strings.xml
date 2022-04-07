@@ -266,6 +266,8 @@
     <string name="titleError">Titel darf nicht leer sein</string>
     <string name="descriptionError">Studienbeschreibung darf nicht leer sein</string>
     <string name="locationError">Ort der Studie muss angegeben werden</string>
+    <string name="roomError">Raum der Studie muss angegeben werden</string>
+    <string name="streetError">Straße der Studie muss angegeben werden</string>
     <string name="platformError">Primärplattform muss angegeben werden</string>
     <string name="mailError">Email-Kontakt muss angegeben werden</string>
     <string name="selectDateError">Dieser Termin ist nicht mehr verfügbar!</string>
