@@ -81,10 +81,20 @@ public class EditSwipeableDatesAdapter extends RecyclerView.Adapter<RecyclerView
     //Deletes associated date item
     public void deleteItem(int position) {
         mRecentlyDeletedDate = editDatesList.get(position);
-        mRecentlyDeletedDatePosition = position;
-        editDatesList.remove(position);
-        notifyItemRemoved(position);
-        showUndoSnackBar();
+        if(mRecentlyDeletedDate.getSelected() && mRecentlyDeletedDate.getUserId() != null)
+        {
+            View view = mFragmentView.findViewById(R.id.edit_study_dates_layout);
+            Snackbar snackbar = Snackbar.make(view, R.string.removeAppointmentnotPossible,
+                    Snackbar.LENGTH_LONG);
+            snackbar.show();
+            notifyDataSetChanged();
+        }
+        else {
+            mRecentlyDeletedDatePosition = position;
+            editDatesList.remove(position);
+            notifyItemRemoved(position);
+            showUndoSnackBar();
+        }
     }
 
 
