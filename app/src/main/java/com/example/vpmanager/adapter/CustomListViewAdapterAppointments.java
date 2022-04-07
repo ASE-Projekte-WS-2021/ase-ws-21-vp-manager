@@ -22,9 +22,9 @@ public class CustomListViewAdapterAppointments extends BaseAdapter {
 
     private LayoutInflater inflater;
     private ArrayList<StudyObjectPa> objects;
-    //private Activity activity;
     NavController navController;
     private String sourceFragment;
+
 
     private class ViewHolder {
         TextView titleTextView;
@@ -41,7 +41,6 @@ public class CustomListViewAdapterAppointments extends BaseAdapter {
         inflater = LayoutInflater.from(context);
         navController = nav;
         this.objects = transformUpcomingAppointments(list, getStudyIdByName);
-        //this.activity = activity;
         sourceFragment = source;
     }
 

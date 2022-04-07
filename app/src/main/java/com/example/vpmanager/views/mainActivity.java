@@ -4,7 +4,6 @@ import android.app.Dialog;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -47,9 +46,7 @@ public class mainActivity extends AppCompatActivity implements DrawerController 
     private AppBarConfiguration appBarConfiguration;
 
     //logic to register a new user (app installation) if necessary
-
     public static String uniqueID = "";
-
     private static final String PREF_UNIQUE_ID = "PREF_UNIQUE_ID";
 
     @Override
@@ -71,21 +68,18 @@ public class mainActivity extends AppCompatActivity implements DrawerController 
     }
 
     private void setupUserId() {
-        System.out.println("before " + uniqueID);
         uniqueID = createUserId(this);
-        System.out.println("after " + uniqueID);
 
         View view = navigationViewMain.getHeaderView(0);
         drawerMail = view.findViewById(R.id.drawer_header_mail);
-        System.out.println(drawerMail);
         drawerMail.setText(uniqueID);
+
     }
 
     //Parameter:
     //Return Values:
     //sets up all navigation components of the app and connects the navigation graph
     private void setupNavigationView() {
-        Log.d("mainActivity", "setupNavigationView start");
         drawerLayoutMain = findViewById(R.id.drawerLayoutMain);
         topAppBarMain = findViewById(R.id.topAppBarMain);
 
@@ -116,21 +110,17 @@ public class mainActivity extends AppCompatActivity implements DrawerController 
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
         //NavigationUI.setupWithNavController(topAppBarMain, navController, appBarConfiguration);
 
-        //Workaround because the drawer isn't working properly
-        setWorkAround();
-        Log.d("mainActivity", "setupNavigationView end");
+        setDrawerListener();
     }
 
     //Parameter:
     //Return Values:
     //sets an additional listener on the drawer menu items because it didn't work properly (only the first is needed)
-    private void setWorkAround() {
+    private void setDrawerListener() {
         navigationViewMain.getMenu().getItem(0).setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(MenuItem menuItem) {
                 navController.navigate(R.id.action_global_homeFragment);
-                Log.d("mainActivity", "menuItem" + navigationViewMain.getMenu().getItem(0).toString());
-                Log.d("mainActivity", "additional listener on homeMenuItem was active!");
                 return false;
             }
         });
@@ -139,8 +129,7 @@ public class mainActivity extends AppCompatActivity implements DrawerController 
             public boolean onMenuItemClick(MenuItem menuItem) {
                 firebaseAuth.signOut();
                 navController.navigate(R.id.action_global_loginFragment);
-                Log.d("mainActivity", "menuItem" + navigationViewMain.getMenu().getItem(4).toString());
-                Log.d("mainActivity", "additional listener on logout was active!");
+
                 return false;
             }
         });
@@ -175,10 +164,10 @@ public class mainActivity extends AppCompatActivity implements DrawerController 
                 ImageView icon = dialog.findViewById(R.id.img_icon);
                 icon.setImageDrawable(getDrawable(R.drawable.ic_baseline_warning_24));
 
-                title.setText("Achtung!");
-                desc.setText("Wenn Sie diesen Bereich verlassen gehen Ihre Änderungen verloren! Wollen Sie trotzdem verlassen?");
-                stay.setText("Abbrechen");
-                leave.setText("Verlassen");
+                title.setText(R.string.warning);
+                desc.setText(R.string.leavePageWarning);
+                stay.setText(R.string.cancelNavigation);
+                leave.setText(R.string.leavePage);
                 dialog.show();
 
                 stay.setOnClickListener(new View.OnClickListener() {
@@ -210,7 +199,6 @@ public class mainActivity extends AppCompatActivity implements DrawerController 
     //Source: https://ssaurel.medium.com/how-to-retrieve-an-unique-id-to-identify-android-devices-6f99fd5369eb
     public synchronized static String createUserId(Context context) {
         FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
-        Log.d("mainActivity", "firebaseAuth: " + firebaseAuth);
         FirebaseUser user = firebaseAuth.getCurrentUser();
         if (user != null) {
             if (uniqueID == null || !uniqueID.equals(user.getEmail())) {
@@ -257,6 +245,10 @@ public class mainActivity extends AppCompatActivity implements DrawerController 
         return super.onOptionsItemSelected(item);
     }
 
+
+    //Parameter:
+    //Return values:
+    //Sets all info dialogs for the application; buttons are set on the top action bar of every page
     private void showInfoText() {
         Dialog dialog = new Dialog(this, R.style.DialogStyle);
         dialog.setContentView(R.layout.info_dialog);

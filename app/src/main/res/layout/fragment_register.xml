@@ -89,7 +89,7 @@
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Passwort wiederholen"
+                    android:hint="@string/repeatPassword"
                     app:boxStrokeColor="@color/black"
                     app:boxStrokeWidthFocused="2dp"
                     app:endIconMode="password_toggle"
@@ -103,7 +103,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:fontFamily="@font/google_sans_bold"
-                        android:hint="Passwort wiederholen"
+                        android:hint="@string/repeatPassword"
                         android:inputType="textPassword">
 
                     </com.google.android.material.textfield.TextInputEditText>
@@ -140,7 +140,7 @@
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Matrikelnummer"
+                    android:hint="@string/matNumber"
                     app:boxStrokeColor="@color/black"
                     app:boxStrokeWidthFocused="2dp"
                     app:endIconMode="clear_text"
@@ -153,7 +153,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:fontFamily="@font/google_sans_bold"
-                        android:hint="Matrikelnummer"
+                        android:hint="@string/matNumber"
                         android:inputType="text">
 
                     </com.google.android.material.textfield.TextInputEditText>
@@ -164,7 +164,7 @@
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Benötige VP"
+                    android:hint="@string/neededVpText"
                     app:boxStrokeColor="@color/black"
                     app:boxStrokeWidthFocused="2dp"
                     app:endIconMode="clear_text"
@@ -177,7 +177,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:fontFamily="@font/google_sans_bold"
-                        android:hint="Benötige VP"
+                        android:hint="@string/neededVpText"
                         android:inputType="text">
 
                     </com.google.android.material.textfield.TextInputEditText>

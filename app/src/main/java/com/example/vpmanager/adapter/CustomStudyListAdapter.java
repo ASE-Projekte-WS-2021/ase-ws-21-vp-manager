@@ -29,10 +29,12 @@ public class CustomStudyListAdapter extends RecyclerView.Adapter<RecyclerView.Vi
     private Context mContext;
     public ArrayList<StudyObjectPa> mStudyMetaInfos;
     private NavController navController;
-    //maybe cancel animation?
     private Animation animation;
 
 
+    //Parameter: context, navController, studyMetaInfos
+    //Return values:
+    //Sets the required adapter elements
     public CustomStudyListAdapter(Context context,NavController navController, ArrayList<StudyObjectPa> studyMetaInfos) {
         mContext = context;
         mStudyMetaInfos = studyMetaInfos;
@@ -109,6 +111,7 @@ public class CustomStudyListAdapter extends RecyclerView.Adapter<RecyclerView.Vi
         return mStudyMetaInfos.size();
     }
 
+
     private class CustomViewHolder extends RecyclerView.ViewHolder {
 
         TextView studyTitle, studyVps, studyDate;
@@ -117,7 +120,7 @@ public class CustomStudyListAdapter extends RecyclerView.Adapter<RecyclerView.Vi
 
         public CustomViewHolder(@NonNull View itemView) {
             super(itemView);
-            //Animation
+
             animation = AnimationUtils.loadAnimation(mContext, R.anim.animation);
 
             studyTitle = itemView.findViewById(R.id.listviewItemTitle);
@@ -127,10 +130,6 @@ public class CustomStudyListAdapter extends RecyclerView.Adapter<RecyclerView.Vi
             studyDate = itemView.findViewById(R.id.pa_date_view);
 
             colorView = itemView.findViewById(R.id.pa_listView_colorTag);
-
-
-            /*separator = itemView.findViewById(R.id.separator);
-            separator.setAnimation(animation);*/
 
             studyItemParentLayout = itemView.findViewById(R.id.pa_item_card_parent);
 

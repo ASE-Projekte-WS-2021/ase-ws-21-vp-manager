@@ -45,7 +45,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:fontFamily="@font/google_sans_bold"
-                android:text="Doppelter Termin"
+                android:text="@string/duplicateDate"
                 android:paddingStart="12dp"
                 android:paddingEnd="12dp"
                 android:textAlignment="center"
@@ -63,7 +63,7 @@
                 android:paddingEnd="12dp"
                 android:paddingTop="20dp"
                 android:paddingBottom="20dp"
-                android:text="Sie wollen einen bereits vorhandenen Termin erneut hinzufügen. \nWollen Sie in trotzdem fortfahren?"
+                android:text="@string/addExistingDateWarning"
                 android:textColor="@color/black" />
 
 
@@ -80,7 +80,7 @@
                     android:layout_height="wrap_content"
                     android:gravity="center"
                     android:textColorHint="@color/black"
-                    android:hint="Nicht mehr anzeigen"
+                    android:hint="@string/cancelView"
                     android:buttonTint="@color/heatherred_Main"/>
 
             </LinearLayout>
@@ -97,7 +97,7 @@
                     android:id="@+id/abort"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Abbrechen"
+                    android:text="@string/cancelNavigation"
                     android:textColor="@color/black"
                     android:backgroundTint="@color/heatherred_Main"/>
 
@@ -105,7 +105,7 @@
                     android:id="@+id/addAnyways"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Hinzufügen"
+                    android:text="@string/add"
                     android:backgroundTint="@color/heatherred_Main"
                     android:layout_marginStart="24dp"
                     android:layout_marginLeft="24dp"

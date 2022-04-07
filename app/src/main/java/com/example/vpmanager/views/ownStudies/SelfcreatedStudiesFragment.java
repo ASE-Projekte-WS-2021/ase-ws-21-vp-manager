@@ -43,7 +43,7 @@ public class SelfcreatedStudiesFragment extends Fragment implements StudyListAda
     private StudyListAdapter studyListAdapter;
 
     private boolean fieldStudyActive, focusGroupActive, questionnaireActive, interviewActive, usabilityActive, labStudyActive, gamingActive, diaryStudyActive, othersActive, remoteActive, localActive;
-    private boolean  sortVPActive, sortVpInvert;
+    private boolean sortVPActive, sortVpInvert;
 
     public SelfcreatedStudiesFragment() {
     }
@@ -70,6 +70,10 @@ public class SelfcreatedStudiesFragment extends Fragment implements StudyListAda
         super.onViewCreated(view, savedInstanceState);
     }
 
+
+    //Parameter: view
+    //Return values:
+    //Sets all view elements and the View Model
     private void prepareViewModelAndView(View view) {
         ownStudiesList = view.findViewById(R.id.recyclerViewOwnStudies);
         noOwnStudies = view.findViewById(R.id.ownStudiesInfoText);
@@ -120,18 +124,18 @@ public class SelfcreatedStudiesFragment extends Fragment implements StudyListAda
         sortVpInvert = false;
     }
 
-    private void setupClickListener()
-    {
+
+    //Parameter:
+    //Return values:
+    //Sets the ClickListeners and updates the study list filters
+    private void setupClickListener() {
         categoryExpander.setOnClickListener(v -> {
-            if(categoryChips.getVisibility() == View.GONE)
-            {
+            if (categoryChips.getVisibility() == View.GONE) {
                 categoryIcon.setImageResource(R.drawable.ic_baseline_expand_less_24);
                 categoryChips.setVisibility(View.VISIBLE);
                 typeIcon.setImageResource(R.drawable.ic_baseline_expand_more_24);
                 typeChips.setVisibility(View.GONE);
-            }
-            else if(categoryChips.getVisibility() == View.VISIBLE)
-            {
+            } else if (categoryChips.getVisibility() == View.VISIBLE) {
                 categoryIcon.setImageResource(R.drawable.ic_baseline_expand_more_24);
                 categoryChips.setVisibility(View.GONE);
             }
@@ -151,12 +155,9 @@ public class SelfcreatedStudiesFragment extends Fragment implements StudyListAda
         fieldStudy.setOnClickListener(v -> {
             fieldStudyActive = !fieldStudyActive;
             fieldStudy.setChecked(fieldStudyActive);
-            if(fieldStudyActive)
-            {
+            if (fieldStudyActive) {
                 fieldStudy.setChipBackgroundColor(ColorStateList.valueOf(getResources().getColor(R.color.green_Main)));
-            }
-            else
-            {
+            } else {
                 fieldStudy.setChipBackgroundColor(ColorStateList.valueOf(getResources().getColor(R.color.heatherred_Main)));
             }
             applyCategoryFilterToList();
@@ -164,12 +165,9 @@ public class SelfcreatedStudiesFragment extends Fragment implements StudyListAda
         focusGroup.setOnClickListener(v -> {
             focusGroupActive = !focusGroupActive;
             focusGroup.setChecked(focusGroupActive);
-            if(focusGroupActive)
-            {
+            if (focusGroupActive) {
                 focusGroup.setChipBackgroundColor(ColorStateList.valueOf(getResources().getColor(R.color.green_Main)));
-            }
-            else
-            {
+            } else {
                 focusGroup.setChipBackgroundColor(ColorStateList.valueOf(getResources().getColor(R.color.heatherred_Main)));
             }
             applyCategoryFilterToList();
@@ -177,12 +175,9 @@ public class SelfcreatedStudiesFragment extends Fragment implements StudyListAda
         questionnaire.setOnClickListener(v -> {
             questionnaireActive = !questionnaireActive;
             questionnaire.setChecked(questionnaireActive);
-            if(questionnaireActive)
-            {
+            if (questionnaireActive) {
                 questionnaire.setChipBackgroundColor(ColorStateList.valueOf(getResources().getColor(R.color.green_Main)));
-            }
-            else
-            {
+            } else {
                 questionnaire.setChipBackgroundColor(ColorStateList.valueOf(getResources().getColor(R.color.heatherred_Main)));
             }
             applyCategoryFilterToList();
@@ -190,12 +185,9 @@ public class SelfcreatedStudiesFragment extends Fragment implements StudyListAda
         interview.setOnClickListener(v -> {
             interviewActive = !interviewActive;
             interview.setChecked(interviewActive);
-            if(interviewActive)
-            {
+            if (interviewActive) {
                 interview.setChipBackgroundColor(ColorStateList.valueOf(getResources().getColor(R.color.green_Main)));
-            }
-            else
-            {
+            } else {
                 interview.setChipBackgroundColor(ColorStateList.valueOf(getResources().getColor(R.color.heatherred_Main)));
             }
             applyCategoryFilterToList();
@@ -203,12 +195,9 @@ public class SelfcreatedStudiesFragment extends Fragment implements StudyListAda
         usability.setOnClickListener(v -> {
             usabilityActive = !usabilityActive;
             usability.setChecked(usabilityActive);
-            if(usabilityActive)
-            {
+            if (usabilityActive) {
                 usability.setChipBackgroundColor(ColorStateList.valueOf(getResources().getColor(R.color.green_Main)));
-            }
-            else
-            {
+            } else {
                 usability.setChipBackgroundColor(ColorStateList.valueOf(getResources().getColor(R.color.heatherred_Main)));
             }
             applyCategoryFilterToList();
@@ -216,12 +205,9 @@ public class SelfcreatedStudiesFragment extends Fragment implements StudyListAda
         labStudy.setOnClickListener(v -> {
             labStudyActive = !labStudyActive;
             labStudy.setChecked(labStudyActive);
-            if(labStudyActive)
-            {
+            if (labStudyActive) {
                 labStudy.setChipBackgroundColor(ColorStateList.valueOf(getResources().getColor(R.color.green_Main)));
-            }
-            else
-            {
+            } else {
                 labStudy.setChipBackgroundColor(ColorStateList.valueOf(getResources().getColor(R.color.heatherred_Main)));
             }
             applyCategoryFilterToList();
@@ -229,12 +215,9 @@ public class SelfcreatedStudiesFragment extends Fragment implements StudyListAda
         gaming.setOnClickListener(v -> {
             gamingActive = !gamingActive;
             gaming.setChecked(gamingActive);
-            if(gamingActive)
-            {
+            if (gamingActive) {
                 gaming.setChipBackgroundColor(ColorStateList.valueOf(getResources().getColor(R.color.green_Main)));
-            }
-            else
-            {
+            } else {
                 gaming.setChipBackgroundColor(ColorStateList.valueOf(getResources().getColor(R.color.heatherred_Main)));
             }
             applyCategoryFilterToList();
@@ -242,12 +225,9 @@ public class SelfcreatedStudiesFragment extends Fragment implements StudyListAda
         diaryStudy.setOnClickListener(v -> {
             diaryStudyActive = !diaryStudyActive;
             diaryStudy.setChecked(diaryStudyActive);
-            if(diaryStudyActive)
-            {
+            if (diaryStudyActive) {
                 diaryStudy.setChipBackgroundColor(ColorStateList.valueOf(getResources().getColor(R.color.green_Main)));
-            }
-            else
-            {
+            } else {
                 diaryStudy.setChipBackgroundColor(ColorStateList.valueOf(getResources().getColor(R.color.heatherred_Main)));
             }
             applyCategoryFilterToList();
@@ -255,12 +235,9 @@ public class SelfcreatedStudiesFragment extends Fragment implements StudyListAda
         others.setOnClickListener(v -> {
             othersActive = !othersActive;
             others.setChecked(othersActive);
-            if(othersActive)
-            {
+            if (othersActive) {
                 others.setChipBackgroundColor(ColorStateList.valueOf(getResources().getColor(R.color.green_Main)));
-            }
-            else
-            {
+            } else {
                 others.setChipBackgroundColor(ColorStateList.valueOf(getResources().getColor(R.color.heatherred_Main)));
             }
             applyCategoryFilterToList();
@@ -269,12 +246,9 @@ public class SelfcreatedStudiesFragment extends Fragment implements StudyListAda
         local.setOnClickListener(v -> {
             localActive = !localActive;
             local.setChecked(localActive);
-            if(localActive)
-            {
+            if (localActive) {
                 local.setChipBackgroundColor(ColorStateList.valueOf(getResources().getColor(R.color.green_Main)));
-            }
-            else
-            {
+            } else {
                 local.setChipBackgroundColor(ColorStateList.valueOf(getResources().getColor(R.color.heatherred_Main)));
             }
             applyCategoryFilterToList();
@@ -282,12 +256,9 @@ public class SelfcreatedStudiesFragment extends Fragment implements StudyListAda
         remote.setOnClickListener(v -> {
             remoteActive = !remoteActive;
             remote.setChecked(remoteActive);
-            if(remoteActive)
-            {
+            if (remoteActive) {
                 remote.setChipBackgroundColor(ColorStateList.valueOf(getResources().getColor(R.color.green_Main)));
-            }
-            else
-            {
+            } else {
                 remote.setChipBackgroundColor(ColorStateList.valueOf(getResources().getColor(R.color.heatherred_Main)));
             }
             applyCategoryFilterToList();
@@ -295,23 +266,18 @@ public class SelfcreatedStudiesFragment extends Fragment implements StudyListAda
 
 
         sortVP.setOnClickListener(v -> {
-            if(sortVPActive && sortVpInvert)
-            {
+            if (sortVPActive && sortVpInvert) {
                 sortVPActive = false;
                 sortVpInvert = false;
                 connectOwnStudyListAdapter();
                 applyCategoryFilterToList();
                 sortImageIcon.setVisibility(View.GONE);
-            }
-            else if(sortVPActive && !sortVpInvert)
-            {
+            } else if (sortVPActive && !sortVpInvert) {
                 sortVpInvert = true;
                 sortByVPS(sortVpInvert);
                 sortImageIcon.setVisibility(View.VISIBLE);
                 sortImageIcon.setImageResource(R.drawable.ic_baseline_south_24);
-            }
-            else
-            {
+            } else {
                 sortVPActive = true;
                 sortByVPS(sortVpInvert);
                 sortImageIcon.setVisibility(View.VISIBLE);
@@ -320,6 +286,10 @@ public class SelfcreatedStudiesFragment extends Fragment implements StudyListAda
         });
     }
 
+
+    //Parameter: invert
+    //Return values: List<String[]>
+    //Sorts the list by vp values
     private void sortByVPS(boolean invert) {
         ArrayList<StudyMetaInfoModel> currentList = studyListAdapter.mStudyMetaInfos;
         ArrayList<StudyMetaInfoModel> list = new ArrayList<>();
@@ -331,12 +301,14 @@ public class SelfcreatedStudiesFragment extends Fragment implements StudyListAda
 
         for (int i = 0; i < studyMetaList.length; i++) {
             for (int k = 0; k < studyMetaList.length - 1; k++) {
-                String vps1 = studyMetaList[k].getVps().replace(" VP-Stunden","");
-                String vps2 = studyMetaList[k+1].getVps().replace(" VP-Stunden","");
-                if(vps1.trim().equals("null") ||vps1.trim().equals(""))
-                {   vps1 = "0"; }
-                if(vps2.trim().equals("null") ||vps2.trim().equals(""))
-                {   vps2 = "0"; }
+                String vps1 = studyMetaList[k].getVps().replace(" VP-Stunden", "");
+                String vps2 = studyMetaList[k + 1].getVps().replace(" VP-Stunden", "");
+                if (vps1.trim().equals("null") || vps1.trim().equals("")) {
+                    vps1 = "0";
+                }
+                if (vps2.trim().equals("null") || vps2.trim().equals("")) {
+                    vps2 = "0";
+                }
                 if (Float.parseFloat(vps1) < Float.parseFloat(vps2)) {
                     StudyMetaInfoModel tempStudy = studyMetaList[k];
                     studyMetaList[k] = studyMetaList[k + 1];
@@ -359,9 +331,12 @@ public class SelfcreatedStudiesFragment extends Fragment implements StudyListAda
     }
 
 
+    //Parameter:
+    //Return values:
+    //Adds the filters for different study categories
     private void applyCategoryFilterToList() {
         ArrayList<StudyMetaInfoModel> list = new ArrayList<>();
-        for (StudyMetaInfoModel info: ownStudyViewModel.getStudyMetaInfo()) {
+        for (StudyMetaInfoModel info : ownStudyViewModel.getStudyMetaInfo()) {
             if (!fieldStudyActive && !focusGroupActive && !questionnaireActive && !interviewActive &&
                     !usabilityActive && !labStudyActive && !gamingActive && !diaryStudyActive && !othersActive) {
                 list.add(info);
@@ -412,7 +387,7 @@ public class SelfcreatedStudiesFragment extends Fragment implements StudyListAda
         }
         list = applyTypeFilterToList(list);
 
-        if(sortVPActive)
+        if (sortVPActive)
             sortByVPS(sortVpInvert);
 
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(requireActivity());
@@ -422,26 +397,23 @@ public class SelfcreatedStudiesFragment extends Fragment implements StudyListAda
     }
 
 
+    //Parameter: list
+    //Return values: ArrayList<StudyMetaInfoModel>
+    //Fills ArrayList with items depending on the chosen study type, returns list
     private ArrayList<StudyMetaInfoModel> applyTypeFilterToList(ArrayList<StudyMetaInfoModel> list) {
 
         ArrayList<StudyMetaInfoModel> newList = new ArrayList<>();
         for (StudyMetaInfoModel info : list) {
             if (!remoteActive && !localActive) {
                 newList.add(info);
-            }
-            else
-            {
-                if(remoteActive)
-                {
-                    if(info.getType().equals("Remote"))
-                    {
+            } else {
+                if (remoteActive) {
+                    if (info.getType().equals("Remote")) {
                         newList.add(info);
                     }
                 }
-                if(localActive)
-                {
-                    if(info.getType().equals("Präsenz"))
-                    {
+                if (localActive) {
+                    if (info.getType().equals("Präsenz")) {
                         newList.add(info);
                     }
                 }
@@ -450,6 +422,10 @@ public class SelfcreatedStudiesFragment extends Fragment implements StudyListAda
         return newList;
     }
 
+
+    //Parameter:
+    //Return values:
+    //Sets the adapter for the own studies list
     public void connectOwnStudyListAdapter() {
         if (!ownStudyViewModel.getOwnStudyMetaInfo().isEmpty()) {
             noOwnStudies.setVisibility(View.GONE);
@@ -457,7 +433,7 @@ public class SelfcreatedStudiesFragment extends Fragment implements StudyListAda
             noOwnStudies.setVisibility(View.VISIBLE);
         }
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(requireActivity());
-        StudyListAdapter studyListAdapter = new StudyListAdapter(getContext(), ownStudyViewModel.getOwnStudyMetaInfo(),
+        studyListAdapter = new StudyListAdapter(getContext(), ownStudyViewModel.getOwnStudyMetaInfo(),
                 this);
         ownStudiesList.setAdapter(studyListAdapter);
         ownStudiesList.setLayoutManager(linearLayoutManager);

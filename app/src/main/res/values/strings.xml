@@ -28,6 +28,11 @@
     <string name="allAppointments">Alle Termine ansehen</string>
 
 
+    <!---Navigation-->
+    <string name="warning">Achtung!</string>
+    <string name="leavePageWarning">Wenn Sie diesen Bereich verlassen gehen Ihre Änderungen verloren! Wollen Sie trotzdem verlassen?</string>
+    <string name="cancelNavigation">Abbrechen</string>
+    <string name="leavePage">"Verlassen"</string>
 
 
     <!---Create Study-->
@@ -136,8 +141,25 @@
         <item>TB 1.101</item>
     </string-array>
 
+
     <!---Personal Account-->
     <string name="personalAccountTitle">Angemeldete Studien</string>
+    <string name="drawerDate">Datum</string>
+    <string name="drawerDateFull">Datum - Wochentag - Uhrzeit</string>
+    <string name="zeroOwnStudiesHeader">Bisher hast du noch keine Studien erstellt. Wähle im Menü den Reiter Studien erstellen um Studien zu erstellen!</string>
+    <string name="ownStudiesHeader">Deine erstellten Studien</string>
+    <string name="ownStudyStatusTab">Teilnahmen</string>
+    <string name="ownStudyTab">Eigene Studien</string>
+    <string name="dateTag">Termin:</string>
+    <string name="vpTextTag">VP-Stunden:</string>
+  
+     
+
+
+    <string name="inputReminder">Bitte erst Matrikelnummer eingeben und die benötigten VP bestätigen</string>
+    <string name="duplicateDate">Doppelter Termin</string>
+    <string name="addExistingDateWarning">Sie wollen einen bereits vorhandenen Termin erneut hinzufügen. \nWollen Sie in trotzdem fortfahren?</string>
+
 
     <!---findStudyActivity-->
     <string name="entryListHeader">Aktuelles Studienangebot</string>
@@ -157,7 +179,6 @@
     <string name="diaryStudyText">Tagebuchstudie</string>
     <string name="gamingText">Gamingstudie</string>
     <string name="othersText">Sonstige</string>
-
 
 
     <!---studyActivity-->
@@ -187,15 +208,8 @@
     <string name="collectionPathDates">dates</string>
     <string name="findStudyCardDescText">Suche nach passenden Studien für deinen Uni-Alltag und sammle VP-Stunden!</string>
     <string name="createStudyCardDescText">Erstelle deine eigenen Studien und präsentiere sie der Ziegruppe!</string>
-
-
-    <!--PA-->
-    <string name="drawerDate">Datum</string>
-    <string name="drawerDateFull">Datum - Wochentag - Uhrzeit</string>
-    <string name="zeroOwnStudiesHeader">Bisher hast du noch keine Studien erstellt. Wähle im Menü den Reiter Studien erstellen um Studien zu erstellen!</string>
-    <string name="ownStudiesHeader">Deine erstellten Studien</string>
-    <string name="ownStudyStatusTab">Teilnahmen</string>
-    <string name="ownStudyTab">Eigene Studien</string>
+    <string name="cancelView">Nicht mehr anzeigen</string>
+    <string name="add">Hinzufügen</string>
 
 
     <!---->
@@ -218,6 +232,9 @@
     <string name="register_info_desc">Durch die Angabe der eigenen Matrikelnummer können die vom Lehrstuhl offiziell verbuchten Versuchspersonstunden angezeigt werden. \nDurch Angabe der benötigten VPs können die bereits gesammeleten in Relation gestellt werden.</string>
     <string name="successfulRegistration">Registierung erfolgreich, bitte überprüfe deine Email-Postfach</string>
     <string name="neededVps">15</string>
+    <string name="repeatPassword">Passwort wiederholen</string>
+    <string name="matNumber"><font color='#01C6DB'>Matrikelnummer</font></string>
+    <string name="neededVpText">Benötige VP</string>
 
 
     <!-- Study Details Tags -->
@@ -237,13 +254,12 @@
     <string name="contactThreeHint">Kontakt - Skype</string>
     <string name="contactFourHint">Kontakt - Discord</string>
     <string name="contactFiveHint">Kontakt - Andere</string>
-    <string name="descriptionHint">Studienbeschreibung</string>
-    <string name="locHint">Ort</string>
-    <string name="streetHint">Adresse</string>
-    <string name="roomHint">Raum</string>
+    <string name="descriptionHint">Studienbeschreibung*</string>
+    <string name="locHint">Ort*</string>
+    <string name="streetHint">Adresse*</string>
+    <string name="roomHint">Raum*</string>
     <string name="platformOneHint">Plattform 1</string>
     <string name="platformTwoHint">Plattform 2</string>
-
 
 
     <!-- Edit Study -->
@@ -260,7 +276,6 @@
     <string name="cancelAction">Rückgängig</string>
 
 
-
     <!---Error Texts-->
 
     <string name="titleError">Titel darf nicht leer sein</string>
@@ -274,12 +289,9 @@
     <string name="passwordsNotEqual">Passwörter müssen übereinstimmen</string>
 
 
-
     <!---Confirm Texts-->
-
     <string name="participated">Teilgenommen</string>
     <string name="notParticipated">Nicht Teilgenommen</string>
-
 
 
     <!-- Info Titles -->

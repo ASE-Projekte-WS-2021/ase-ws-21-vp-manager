@@ -31,21 +31,32 @@ public class PersonalAccountRepository {
     private GetAllStudiesListener getAllStudiesListener;
     private GetVpAndMatNrListener getVpAndMatNrListener;
 
-    public static PersonalAccountRepository getInstance(){
+
+    //Parameter:
+    //Return Values: instance of the repository class
+    //Creates an instance of the repo and returns always the same one
+    public static PersonalAccountRepository getInstance() {
         if (instance == null) {
             instance = new PersonalAccountRepository();
         }
         return instance;
     }
 
+    //Parameter: all listeners in fragment
+    //Return values:
+    //Sets listeners for the callbacks
     public void setFirestoreCallback(GetAllDatesListener getAllDatesListener,
-                                     GetAllStudiesListener getAllStudiesListener, GetVpAndMatNrListener getVpAndMatNrListener){
+                                     GetAllStudiesListener getAllStudiesListener, GetVpAndMatNrListener getVpAndMatNrListener) {
         this.getAllDatesListener = getAllDatesListener;
         this.getAllStudiesListener = getAllStudiesListener;
         this.getVpAndMatNrListener = getVpAndMatNrListener;
     }
 
-    public void getAllDatesFromDb(){
+
+    //Parameter:
+    //Return values:
+    //Receives date elements from database
+    public void getAllDatesFromDb() {
         db = FirebaseFirestore.getInstance();
         CollectionReference datesRef = db.collection("dates");
         dbDatesList.clear();
@@ -71,7 +82,10 @@ public class PersonalAccountRepository {
                 });
     }
 
-    public void getAllStudiesFromDb(){
+    //Parameter:
+    //Return values:
+    //Receives study elements from database
+    public void getAllStudiesFromDb() {
         db = FirebaseFirestore.getInstance();
         CollectionReference studiesRef = db.collection("studies");
         dbStudiesList.clear();
@@ -83,7 +97,6 @@ public class PersonalAccountRepository {
                         if (task.isSuccessful()) {
                             for (QueryDocumentSnapshot document : task.getResult()) {
                                 dbStudiesList.add(document.getData());
-                                //createListEntries(); can be skipped here!
                             }
                             getAllStudiesListener.onAllStudiesReady(true);
                         }
@@ -97,7 +110,11 @@ public class PersonalAccountRepository {
                 });
     }
 
-    public void getVpAndMatrikelNumber(){
+
+    //Parameter:
+    //Return values:
+    //Receives vp values and the matriculation number from the database
+    public void getVpAndMatrikelNumber() {
         db = FirebaseFirestore.getInstance();
         CollectionReference usersRef = db.collection("users");
         //uniqueId from mainActivity can be used
@@ -105,7 +122,7 @@ public class PersonalAccountRepository {
             @Override
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
                 if (task.isSuccessful()) {
-                    String vps= "", matrikelNumber = "";
+                    String vps = "", matrikelNumber = "";
                     for (QueryDocumentSnapshot document : task.getResult()) {
                         vps = document.getString("vps");
                         matrikelNumber = document.getString("matrikelNumber");
