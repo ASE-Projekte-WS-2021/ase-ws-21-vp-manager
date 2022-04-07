@@ -256,6 +256,7 @@
     <string name="changeStudyStateTitleOpen">Studie wieder öffnen</string>
     <string name="saveStudy">Studie speichern</string>
     <string name="removeAppointmentAlert">1 Termin gelöscht</string>
+    <string name="removeAppointmentnotPossible">Belegte Termine können nicht entfernt werden.</string>
     <string name="cancelAction">Rückgängig</string>
 
 
