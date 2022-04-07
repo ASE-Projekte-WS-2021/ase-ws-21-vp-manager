@@ -66,12 +66,10 @@ public class EditSwipeableDatesAdapter extends RecyclerView.Adapter<RecyclerView
     private class CustomViewHolder extends RecyclerView.ViewHolder {
 
         TextView dateDate;
-        TextView dateOtherInfos;
 
         public CustomViewHolder(@NonNull View itemView) {
             super(itemView);
             dateDate = itemView.findViewById(R.id.dateItemDate);
-            dateOtherInfos = itemView.findViewById(R.id.dateItemLayoutProposal);
         }
     }
 

@@ -53,7 +53,6 @@ public class StudyDatesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
     private class CustomViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         TextView dateDate;
-        TextView dateOtherInfos;
         LinearLayout dateItemParentLayout;
         OnDateClickListener onDateClickListener;
 
@@ -62,7 +61,6 @@ public class StudyDatesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
             this.onDateClickListener = onDateClickListener;
 
             dateDate = itemView.findViewById(R.id.dateItemDate);
-            dateOtherInfos = itemView.findViewById(R.id.dateItemLayoutProposal);
 
             if (this.onDateClickListener != null) {
                 dateItemParentLayout = itemView.findViewById(R.id.dateItemParentLayout);
