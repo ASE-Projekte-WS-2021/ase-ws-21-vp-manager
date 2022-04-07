@@ -35,7 +35,6 @@
     <string name="leavePage">"Verlassen"</string>
 
 
-
     <!---Create Study-->
     <string name="createStudyDesc">Studienbeschreibung</string>
     <string name="createAddDateButton">Termine hinzufügen</string>
@@ -143,7 +142,6 @@
     </string-array>
 
 
-
     <!---Personal Account-->
     <string name="personalAccountTitle">Angemeldete Studien</string>
     <string name="drawerDate">Datum</string>
@@ -152,6 +150,9 @@
     <string name="ownStudiesHeader">Deine erstellten Studien</string>
     <string name="ownStudyStatusTab">Mein VP-Status</string>
     <string name="ownStudyTab">Meine Studien</string>
+    <string name="dateTag">Termin:</string>
+    <string name="vpTextTag">VP-Stunden:</string>
+
 
     <string name="inputReminder">Bitte erst Matrikelnummer eingeben und die benötigten VP bestätigen</string>
     <string name="duplicateDate">Doppelter Termin</string>
@@ -176,7 +177,6 @@
     <string name="diaryStudyText">Tagebuchstudie</string>
     <string name="gamingText">Gamingstudie</string>
     <string name="othersText">Sonstige</string>
-
 
 
     <!---studyActivity-->
@@ -210,7 +210,6 @@
     <string name="add">Hinzufügen</string>
 
 
-
     <!---->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
@@ -234,8 +233,6 @@
     <string name="repeatPassword">Passwort wiederholen</string>
     <string name="matNumber"><font color='#01C6DB'>Matrikelnummer</font></string>
     <string name="neededVpText">Benötige VP</string>
-
-
 
 
     <!-- Study Details Tags -->
@@ -263,7 +260,6 @@
     <string name="platformTwoHint">Plattform 2</string>
 
 
-
     <!-- Edit Study -->
 
     <string name="studyCloseWarning">Sind sie sicher das Sie die Studie abschließen wollen?</string>
@@ -275,7 +271,6 @@
     <string name="saveStudy">Studie speichern</string>
     <string name="removeAppointmentAlert">1 Termin gelöscht</string>
     <string name="cancelAction">Rückgängig</string>
-
 
 
     <!---Error Texts-->
@@ -291,11 +286,9 @@
     <string name="passwordsNotEqual">Passwörter müssen übereinstimmen</string>
 
 
-
     <!---Confirm Texts-->
     <string name="participated">Teilgenommen</string>
     <string name="notParticipated">Nicht Teilgenommen</string>
-
 
 
     <!-- Info Titles -->
