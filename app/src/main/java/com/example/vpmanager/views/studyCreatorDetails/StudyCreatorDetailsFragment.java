@@ -196,7 +196,7 @@ public class StudyCreatorDetailsFragment extends Fragment {
         //contactThree could be accessed
         category.setText(studyViewModel.getStudyDetails().getCategory());
         studyType.setText(studyViewModel.getStudyDetails().getExecutionType());
-        if (studyViewModel.getStudyDetails().getExecutionType().equals(R.string.remoteString)) {
+        if (studyViewModel.getStudyDetails().getExecutionType().equals(getString(R.string.remoteString))) {
             remoteData.setText(studyViewModel.getStudyDetails().getRemotePlatformOne());
             //remotePlatformTwo could be accessed
         } else {
