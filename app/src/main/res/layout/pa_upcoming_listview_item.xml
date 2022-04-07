@@ -45,7 +45,7 @@
                     android:layout_gravity="right"
                     android:layout_marginBottom="5dp"
                     android:gravity="right"
-                    android:text="Termin:"
+                    android:text="@string/dateTag"
                     android:textColor="@color/white" />
 
                 <View
