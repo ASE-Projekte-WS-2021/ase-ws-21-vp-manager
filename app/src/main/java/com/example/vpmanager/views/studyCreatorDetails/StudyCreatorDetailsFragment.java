@@ -199,6 +199,11 @@ public class StudyCreatorDetailsFragment extends Fragment {
         if (studyViewModel.getStudyDetails().getExecutionType().equals(getString(R.string.remoteString))) {
             remoteData.setText(studyViewModel.getStudyDetails().getRemotePlatformOne());
             //remotePlatformTwo could be accessed
+            if(studyViewModel.getStudyDetails().getRemotePlatformTwo() != null)
+            {
+                String platforms = remoteData.getText().toString()+ " & " + studyViewModel.getStudyDetails().getRemotePlatformTwo();
+                remoteData.setText(platforms);
+            }
         } else {
             String locationString = studyViewModel.getStudyDetails().getLocation() + "\t\t" +
                     studyViewModel.getStudyDetails().getStreet() + "\t\t" + studyViewModel.getStudyDetails().getRoom();

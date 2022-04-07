@@ -96,6 +96,11 @@ public class StudyDetailsFragment extends Fragment {
         studyType.setText(studyViewModel.getStudyDetails().getExecutionType());
         if (studyViewModel.getStudyDetails().getExecutionType().equals(getString(R.string.remoteString))) {
             remoteData.setText(studyViewModel.getStudyDetails().getRemotePlatformOne());
+            if(studyViewModel.getStudyDetails().getRemotePlatformTwo() != null)
+            {
+                String platforms = remoteData.getText().toString()+ " & " + studyViewModel.getStudyDetails().getRemotePlatformTwo();
+                remoteData.setText(platforms);
+            }
             //remotePlatformTwo could be accessed
         } else {
             String locationString = studyViewModel.getStudyDetails().getLocation() + "\t\t" +
