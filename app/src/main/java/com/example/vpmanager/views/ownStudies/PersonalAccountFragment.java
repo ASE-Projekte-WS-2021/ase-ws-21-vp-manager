@@ -31,7 +31,6 @@ public class PersonalAccountFragment extends Fragment {
     private PersonalAccountViewModel personalAccountViewModel;
     private NavController navController;
 
-    //done
     private LinearLayout customProgressBar, sortVpCount, sortAlphabetically, sortAppointments, sortExpanderButton, sortExpanderLayout, stateExpanderButton;
     private View completedView, plannedView, participatedView, restView;
     private TextView completed, participated, planned, remaining;
@@ -80,7 +79,7 @@ public class PersonalAccountFragment extends Fragment {
 
     //Parameter:
     //Return values:
-    //Setting the view components and readint the content Lists for the piechart values
+    //Setting the view components and reading the content Lists for the chart values
     private void setupView(View view) {
         customProgressBar = view.findViewById(R.id.customProgressBar);
         completedView = view.findViewById(R.id.progress_section_completed);
@@ -124,6 +123,10 @@ public class PersonalAccountFragment extends Fragment {
         removePlannedActive = true;
     }
 
+
+    //Parameter: completedString, participatedString, plannedString, remainingString,  weightSum
+    //Return values:
+    //Sets the progress bar texts
     public void setProgressBarStrings(String completedString, String participatedString, String plannedString,
                                       String remainingString, float weightSum) {
         completed.setText(completedString);
@@ -133,6 +136,10 @@ public class PersonalAccountFragment extends Fragment {
         customProgressBar.setWeightSum(weightSum);
     }
 
+
+    //Parameter: all Layoutparams
+    //Return values:
+    //Sets the progress bar views
     public void setProgressBarParts(LinearLayout.LayoutParams completedParams, LinearLayout.LayoutParams participatedParams,
                                     LinearLayout.LayoutParams plannedParams, LinearLayout.LayoutParams restParams) {
         completedView.setLayoutParams(completedParams);
@@ -143,31 +150,26 @@ public class PersonalAccountFragment extends Fragment {
         setupClickListener();
     }
 
+
     //Parameter:
     //Return values:
     //Setup clickListeners for all clickable objects
     private void setupClickListener() {
 
         sortExpanderButton.setOnClickListener(v -> {
-            if(sortExpanderLayout.getVisibility()== View.GONE)
-            {
+            if (sortExpanderLayout.getVisibility() == View.GONE) {
                 sortExpanderLayout.setVisibility(View.VISIBLE);
                 sortExpanderIcon.setImageResource(R.drawable.ic_baseline_expand_less_24);
-            }
-            else if(sortExpanderLayout.getVisibility() == View.VISIBLE)
-            {
+            } else if (sortExpanderLayout.getVisibility() == View.VISIBLE) {
                 sortExpanderLayout.setVisibility(View.GONE);
                 sortExpanderIcon.setImageResource(R.drawable.ic_baseline_expand_more_24);
             }
         });
         stateExpanderButton.setOnClickListener(v -> {
-            if(stateExpanderLayout.getVisibility() == View.GONE)
-            {
+            if (stateExpanderLayout.getVisibility() == View.GONE) {
                 stateExpanderLayout.setVisibility(View.VISIBLE);
                 statusExpanderIcon.setImageResource(R.drawable.ic_baseline_expand_less_24);
-            }
-            else if(stateExpanderLayout.getVisibility() == View.VISIBLE)
-            {
+            } else if (stateExpanderLayout.getVisibility() == View.VISIBLE) {
                 stateExpanderLayout.setVisibility(View.GONE);
                 statusExpanderIcon.setImageResource(R.drawable.ic_baseline_expand_more_24);
             }
@@ -182,34 +184,38 @@ public class PersonalAccountFragment extends Fragment {
             public void onClick(View v) {
                 removeCompletedActive = !removeCompleted.isSelected();
                 removeCompleted.setSelected(removeCompletedActive);
-                if(!removeCompletedActive)
+                if (!removeCompletedActive)
                     removeCompleted.setChipBackgroundColor(ColorStateList.valueOf(getResources().getColor(R.color.grey)));
                 else
                     removeCompleted.setChipBackgroundColor(ColorStateList.valueOf(getResources().getColor(R.color.pieChartSafe)));
-                personalAccountViewModel.filterListViewColorTags(removeCompletedActive,removePlannedActive, removeParticipatedActive);
+                personalAccountViewModel.filterListViewColorTags(removeCompletedActive, removePlannedActive, removeParticipatedActive);
             }
         });
 
         removePlanned.setOnClickListener(v -> {
             removePlannedActive = !removePlanned.isSelected();
             removePlanned.setSelected(removePlannedActive);
-            if(!removePlannedActive)
+            if (!removePlannedActive)
                 removePlanned.setChipBackgroundColor(ColorStateList.valueOf(getResources().getColor(R.color.grey)));
             else
                 removePlanned.setChipBackgroundColor(ColorStateList.valueOf(getResources().getColor(R.color.pieChartPlanned)));
-            personalAccountViewModel.filterListViewColorTags(removeCompletedActive,removePlannedActive, removeParticipatedActive);
+            personalAccountViewModel.filterListViewColorTags(removeCompletedActive, removePlannedActive, removeParticipatedActive);
         });
         removeParticipated.setOnClickListener(v -> {
             removeParticipatedActive = !removeParticipated.isSelected();
             removeParticipated.setSelected(removeParticipatedActive);
-            if(!removeParticipatedActive)
+            if (!removeParticipatedActive)
                 removeParticipated.setChipBackgroundColor(ColorStateList.valueOf(getResources().getColor(R.color.grey)));
             else
                 removeParticipated.setChipBackgroundColor(ColorStateList.valueOf(getResources().getColor(R.color.pieChartParticipation)));
-            personalAccountViewModel.filterListViewColorTags(removeCompletedActive,removePlannedActive, removeParticipatedActive);
+            personalAccountViewModel.filterListViewColorTags(removeCompletedActive, removePlannedActive, removeParticipatedActive);
         });
     }
 
+
+    //Parameter: identifier, alphaActive, invert
+    //Return values:
+    //Sets toggle view for sorting list alphabetically
     public void setAlphabeticallyToggle(String identifier, Boolean alphaActive, Boolean invert) {
         if (identifier.equals("names")) {
             if (alphaActive) {
@@ -234,6 +240,10 @@ public class PersonalAccountFragment extends Fragment {
         }
     }
 
+
+    //Parameter: identifier, appointActive, invert
+    //Return values:
+    //Sets toggle view for sorting list alphabetically
     public void setAppointmentsToggle(String identifier, Boolean appointActive, Boolean invert) {
         if (identifier.equals("names")) {
             if (appointActive) {
@@ -248,7 +258,7 @@ public class PersonalAccountFragment extends Fragment {
                     sortDateIcon.setVisibility(View.VISIBLE);
                     sortDateIcon.setImageResource(R.drawable.ic_baseline_south_24);
                 }
-            }else {
+            } else {
                 sortDateIcon.setVisibility(View.GONE);
             }
         } else if (identifier.equals("vps")) {
@@ -282,19 +292,19 @@ public class PersonalAccountFragment extends Fragment {
         }
     }
 
-    public NavController getNavController(){
+    public NavController getNavController() {
         return navController;
     }
 
     //returns the current set adapter of the list
-    public CustomStudyListAdapter getCurrentAdapter(){
+    public CustomStudyListAdapter getCurrentAdapter() {
         return (CustomStudyListAdapter) listView.getAdapter();
     }
 
-    public Boolean getColorToggleState(String identifier){
-        if (identifier.equals("completed")){
+    public Boolean getColorToggleState(String identifier) {
+        if (identifier.equals("completed")) {
             return removeCompleted.isChecked();
-        } else if (identifier.equals("participated")){
+        } else if (identifier.equals("participated")) {
             return removeParticipated.isChecked();
         } else { //if (identifier.equals("planned"))
             return removePlanned.isChecked();
@@ -310,6 +320,6 @@ public class PersonalAccountFragment extends Fragment {
     }
 
     public void applyColorFilter() {
-        personalAccountViewModel.filterListViewColorTags(removeCompletedActive,removePlannedActive, removeParticipatedActive);
+        personalAccountViewModel.filterListViewColorTags(removeCompletedActive, removePlannedActive, removeParticipatedActive);
     }
 }

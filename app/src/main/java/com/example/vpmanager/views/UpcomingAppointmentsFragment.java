@@ -22,7 +22,6 @@ public class UpcomingAppointmentsFragment extends Fragment {
     private UpcomingAppointViewModel mViewModel;
     private NavController navController;
     private ListView arrivingDatesList;
-    //private HashMap<String, String> getStudyIdByName = new HashMap<>();
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -37,7 +36,7 @@ public class UpcomingAppointmentsFragment extends Fragment {
         initHomeFragmentComponents(view);
         mViewModel.getAllDatesAndStudies();
         mainActivity.currentFragment = "upcomingAppointments";
-        //setUpDateList();
+
         return view;
     }
 
@@ -72,38 +71,5 @@ public class UpcomingAppointmentsFragment extends Fragment {
         return navController;
     }
 
-    //Parameter: data list from database call
-    //Return Values:
-    //converts and sorts the data. calls listview adapter to set up list entries
-    //finishSetupList
-    /*
-    private void finishSetupList(List <String[]> dates){
-
-        if (dates != null) {
-
-            ArrayList<String> listEntries = new ArrayList<>();
-
-            HashMap<String, String> sortingMap = new HashMap<>();
-
-            for (String[] listEntry : dates) {
-                String name = listEntry[0];
-                String date = listEntry[1];
-                String studyID = listEntry[2];
-
-                if(date != null && name != null)
-                {
-                    sortingMap.put(date, name);
-                    getStudyIdByName.put(name, studyID);
-                }
-            }
-
-            for (String key : sortingMap.keySet()) {
-                listEntries.add(sortingMap.get(key) + "\t\t" + key);
-            }
-            Collections.reverse(listEntries);
-            arrivingDatesList.setAdapter(new CustomListViewAdapterAppointments(this.getContext(), navController, listEntries, getStudyIdByName, "UpcomingAppointmentsFragment"));
-        }
-    }
-     */
 
 }
