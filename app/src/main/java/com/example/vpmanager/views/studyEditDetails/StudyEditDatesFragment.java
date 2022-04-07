@@ -6,8 +6,6 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.DatePicker;
-import android.widget.TimePicker;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -57,7 +55,7 @@ public class StudyEditDatesFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_edit_study_dates, container, false);
+        View view = inflater.inflate(R.layout.fragment_edit_study_appointments, container, false);
         prepareComponents();
         setupView(view);
         currentView = view;
@@ -95,12 +93,7 @@ public class StudyEditDatesFragment extends Fragment {
     private void setupView(View view) {
         studyEditDatesRecyclerView = view.findViewById(R.id.editStudyDatesRecyclerView);
         FloatingActionButton editFab = view.findViewById(R.id.fab_edit_dates);
-        editFab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                datePicker();
-            }
-        });
+        editFab.setOnClickListener(view1 -> datePicker());
     }
 
 
@@ -130,15 +123,12 @@ public class StudyEditDatesFragment extends Fragment {
         mDay = c.get(Calendar.DAY_OF_MONTH);
 
         DatePickerDialog datePickerDialog = new DatePickerDialog(getActivity(), R.style.my_dialog_theme,
-                new DatePickerDialog.OnDateSetListener() {
-                    @Override
-                    public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
-                        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("EEEE");
-                        Date date = new Date(year, monthOfYear, dayOfMonth - 1);
-                        weekDay = simpleDateFormat.format(date);
-                        date_time = weekDay + ", " + dayOfMonth + "." + (monthOfYear + 1) + "." + year + " um ";
-                        timePicker();
-                    }
+                (view, year, monthOfYear, dayOfMonth) -> {
+                    SimpleDateFormat simpleDateFormat = new SimpleDateFormat("EEEE");
+                    Date date = new Date(year, monthOfYear, dayOfMonth - 1);
+                    weekDay = simpleDateFormat.format(date);
+                    date_time = weekDay + ", " + dayOfMonth + "." + (monthOfYear + 1) + "." + year + " um ";
+                    timePicker();
                 }, mYear, mMonth, mDay);
         datePickerDialog.getDatePicker().setMinDate(System.currentTimeMillis() - 1000);
         datePickerDialog.show();
@@ -154,14 +144,11 @@ public class StudyEditDatesFragment extends Fragment {
         mMinute = c.get(Calendar.MINUTE);
 
         TimePickerDialog timePickerDialog = new TimePickerDialog(getActivity(), R.style.my_timepicker_theme,
-                new TimePickerDialog.OnTimeSetListener() {
-                    @Override
-                    public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
+                (view, hourOfDay, minute) -> {
 
-                        mHour = hourOfDay;
-                        mMinute = minute;
-                        addDateToList(hourOfDay, minute);
-                    }
+                    mHour = hourOfDay;
+                    mMinute = minute;
+                    addDateToList(hourOfDay, minute);
                 }, mHour, mMinute, true);
         timePickerDialog.show();
     }

@@ -29,13 +29,17 @@ public class LoginRegisterViewModel extends ViewModel implements LoginListener, 
     }
 
 
-    public void registerNewUser(String email, String password) { mRepo.registerNewUser(email, password); }
+    public void registerNewUser(String email, String password) {
+        mRepo.registerNewUser(email, password);
+    }
 
     private void sendVerificationEmail() {
         mRepo.sendVerificationEmail();
     }
 
-    public void saveUserInDb(String email, String matNr, String vph) { mRepo.saveUserInDb(email, matNr, vph); }
+    public void saveUserInDb(String email, String matNr, String vph) {
+        mRepo.saveUserInDb(email, matNr, vph);
+    }
 
     public void resetPassword(String email) {
         mRepo.sendResetEmail(email);

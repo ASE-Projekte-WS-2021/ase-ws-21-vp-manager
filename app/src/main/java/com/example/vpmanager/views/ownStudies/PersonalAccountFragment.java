@@ -102,7 +102,6 @@ public class PersonalAccountFragment extends Fragment {
 
         listView = view.findViewById(R.id.pa_fragment_listView);
 
-
         sortExpanderButton = view.findViewById(R.id.pa_sort_expanderButton);
         sortExpanderLayout = view.findViewById(R.id.pa_sort_expanderLayout);
         stateExpanderButton = view.findViewById(R.id.pa_status_expanderButton);
@@ -179,17 +178,14 @@ public class PersonalAccountFragment extends Fragment {
         sortAppointments.setOnClickListener(v -> personalAccountViewModel.filterListViewTextTags("dates")); //sortAppointmentsActive,
         sortVpCount.setOnClickListener(v -> personalAccountViewModel.filterListViewTextTags("vps")); //sortVpCountActive,
 
-        removeCompleted.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                removeCompletedActive = !removeCompleted.isSelected();
-                removeCompleted.setSelected(removeCompletedActive);
-                if (!removeCompletedActive)
-                    removeCompleted.setChipBackgroundColor(ColorStateList.valueOf(getResources().getColor(R.color.grey)));
-                else
-                    removeCompleted.setChipBackgroundColor(ColorStateList.valueOf(getResources().getColor(R.color.pieChartSafe)));
-                personalAccountViewModel.filterListViewColorTags(removeCompletedActive, removePlannedActive, removeParticipatedActive);
-            }
+        removeCompleted.setOnClickListener(v -> {
+            removeCompletedActive = !removeCompleted.isSelected();
+            removeCompleted.setSelected(removeCompletedActive);
+            if (!removeCompletedActive)
+                removeCompleted.setChipBackgroundColor(ColorStateList.valueOf(getResources().getColor(R.color.grey)));
+            else
+                removeCompleted.setChipBackgroundColor(ColorStateList.valueOf(getResources().getColor(R.color.pieChartSafe)));
+            personalAccountViewModel.filterListViewColorTags(removeCompletedActive, removePlannedActive, removeParticipatedActive);
         });
 
         removePlanned.setOnClickListener(v -> {

@@ -19,7 +19,7 @@
             android:background="?android:windowBackground"
             android:theme="@style/Theme.MaterialComponents.Light"
             app:cardCornerRadius="20dp"
-            tools:context=".views.createStudy.createStudyFragment_Base">
+            tools:context=".views.createStudy.CreateStudyFragment_Base">
 
 
             <androidx.fragment.app.FragmentContainerView

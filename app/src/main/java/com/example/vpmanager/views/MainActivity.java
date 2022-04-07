@@ -29,7 +29,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
 
-public class mainActivity extends AppCompatActivity implements DrawerController {
+public class MainActivity extends AppCompatActivity implements DrawerController {
 
     public DrawerLayout drawerLayoutMain;
     private NavController navController;
@@ -57,7 +57,6 @@ public class mainActivity extends AppCompatActivity implements DrawerController 
         setupUserId();
         firebaseAuth = FirebaseAuth.getInstance();
     }
-
 
 
     //closes the navigation drawer when returning to mainActivity
@@ -146,7 +145,7 @@ public class mainActivity extends AppCompatActivity implements DrawerController 
                     || currentFragment.equals("createStepFive") || currentFragment.equals("createFinalStep") || currentFragment.equals("createFinalStepTwo") ||
                     currentFragment.equals("createFinalStepThree") || currentFragment.equals("editFragment")) {
                 Dialog dialog = new Dialog(this, R.style.DialogStyle);
-                dialog.setContentView(R.layout.duplicate_dialog);
+                dialog.setContentView(R.layout.dialog_warning);
                 dialog.getWindow().setBackgroundDrawableResource(R.drawable.bg_window);
                 ImageView btnClose = dialog.findViewById(R.id.btn_close);
                 btnClose.setOnClickListener(new View.OnClickListener() {
@@ -170,20 +169,12 @@ public class mainActivity extends AppCompatActivity implements DrawerController 
                 leave.setText(R.string.leavePage);
                 dialog.show();
 
-                stay.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        dialog.dismiss();
-                    }
-                });
+                stay.setOnClickListener(v -> dialog.dismiss());
 
-                leave.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        userStay = false;
-                        dialog.dismiss();
-                        onSupportNavigateUp();
-                    }
+                leave.setOnClickListener(v -> {
+                    userStay = false;
+                    dialog.dismiss();
+                    onSupportNavigateUp();
                 });
                 return false;
             }
@@ -251,18 +242,13 @@ public class mainActivity extends AppCompatActivity implements DrawerController 
     //Sets all info dialogs for the application; buttons are set on the top action bar of every page
     private void showInfoText() {
         Dialog dialog = new Dialog(this, R.style.DialogStyle);
-        dialog.setContentView(R.layout.info_dialog);
+        dialog.setContentView(R.layout.dialog_info);
 
         dialog.getWindow().setBackgroundDrawableResource(R.drawable.bg_window);
 
         ImageView btnClose = dialog.findViewById(R.id.btn_close);
 
-        btnClose.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                dialog.dismiss();
-            }
-        });
+        btnClose.setOnClickListener(view -> dialog.dismiss());
 
         TextView title = dialog.findViewById(R.id.info_title);
         TextView desc = dialog.findViewById(R.id.info_desc);
@@ -366,15 +352,10 @@ public class mainActivity extends AppCompatActivity implements DrawerController 
                         currentFragment.equals("createFinalStepThree") || currentFragment.equals("editFragment")) {
                     if (userStay) {
                         Dialog dialog = new Dialog(this, R.style.DialogStyle);
-                        dialog.setContentView(R.layout.duplicate_dialog);
+                        dialog.setContentView(R.layout.dialog_warning);
                         dialog.getWindow().setBackgroundDrawableResource(R.drawable.bg_window);
                         ImageView btnClose = dialog.findViewById(R.id.btn_close);
-                        btnClose.setOnClickListener(new View.OnClickListener() {
-                            @Override
-                            public void onClick(View view) {
-                                dialog.dismiss();
-                            }
-                        });
+                        btnClose.setOnClickListener(view -> dialog.dismiss());
                         TextView title = dialog.findViewById(R.id.info_title);
                         TextView desc = dialog.findViewById(R.id.duplicate_desc);
                         CheckBox box = dialog.findViewById(R.id.doNotShowAgainCheckBox);
@@ -384,26 +365,18 @@ public class mainActivity extends AppCompatActivity implements DrawerController 
                         ImageView icon = dialog.findViewById(R.id.img_icon);
                         icon.setImageDrawable(getDrawable(R.drawable.ic_baseline_warning_24));
 
-                        title.setText("Achtung!");
-                        desc.setText("Wenn Sie diesen Bereich verlassen gehen Ihre Änderungen verloren! Wollen Sie trotzdem verlassen?");
-                        stay.setText("Abbrechen");
-                        leave.setText("Verlassen");
+                        title.setText(getString(R.string.warning));
+                        desc.setText(getString(R.string.leavePageWarning));
+                        stay.setText(getString(R.string.cancelNavigation));
+                        leave.setText(getString(R.string.leavePage));
                         dialog.show();
 
-                        stay.setOnClickListener(new View.OnClickListener() {
-                            @Override
-                            public void onClick(View v) {
-                                dialog.dismiss();
-                            }
-                        });
+                        stay.setOnClickListener(v -> dialog.dismiss());
 
-                        leave.setOnClickListener(new View.OnClickListener() {
-                            @Override
-                            public void onClick(View v) {
-                                userStay = false;
-                                dialog.dismiss();
-                                onBackPressed();
-                            }
+                        leave.setOnClickListener(v -> {
+                            userStay = false;
+                            dialog.dismiss();
+                            onBackPressed();
                         });
 
                     } else {

@@ -1,6 +1,6 @@
 package com.example.vpmanager.adapter;
 
-import static com.example.vpmanager.views.mainActivity.uniqueID;
+import static com.example.vpmanager.views.MainActivity.uniqueID;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -11,7 +11,7 @@ import android.widget.TextView;
 
 import androidx.navigation.NavController;
 
-import com.example.vpmanager.PA_ExpandableListDataPump;
+import com.example.vpmanager.helper.AccessDatabaseHelper;
 import com.example.vpmanager.R;
 import com.example.vpmanager.models.StudyObjectPa;
 
@@ -86,7 +86,7 @@ public class CustomListViewAdapterAppointments extends BaseAdapter {
         View colorView = null;
         if (convertView == null) {
             holder = new ViewHolder();
-            convertView = inflater.inflate(R.layout.pa_upcoming_listview_item, null); //NOT SURE
+            convertView = inflater.inflate(R.layout.item_pa_upcoming_listview, null); //NOT SURE
 
             titleView = convertView.findViewById(R.id.upcoming_listviewItemTitle);
 
@@ -104,7 +104,7 @@ public class CustomListViewAdapterAppointments extends BaseAdapter {
                 @Override
                 public void onClick(View v) {
                     StudyObjectPa study = objects.get(position);
-                    PA_ExpandableListDataPump.navigateToStudyCreatorFragment(uniqueID, study.getStudyId(), sourceFragment, navController);
+                    AccessDatabaseHelper.navigateToStudyCreatorFragment(uniqueID, study.getStudyId(), sourceFragment, navController);
                 }
             });
         }

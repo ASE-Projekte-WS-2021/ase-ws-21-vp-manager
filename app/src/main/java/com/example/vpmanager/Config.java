@@ -22,8 +22,7 @@ public class Config {
 
     public static int delayMills = 1000;
 
-
-
+    public static int timeout_Request = 15000;
 
 
 }

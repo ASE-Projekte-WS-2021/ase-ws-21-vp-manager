@@ -39,7 +39,7 @@ public class StudyCreatorDatesFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_creator_study_dates, container, false);
+        View view = inflater.inflate(R.layout.fragment_creator_study_appointments, container, false);
         prepareComponents();
         initViews(view);
         studyViewModel.fetchStudyDates(currentStudyId);
@@ -51,7 +51,7 @@ public class StudyCreatorDatesFragment extends Fragment {
     //Return values:
     //Sets current study ID and the ViewModel
     private void prepareComponents() {
-        currentStudyId = studyCreatorFragment.currentStudyId;
+        currentStudyId = StudyCreatorFragment.currentStudyId;
         studyViewModel = new ViewModelProvider(requireActivity()).get(StudyCreatorViewModel.class);
         studyViewModel.studyDatesFragment = this;
         studyViewModel.prepareRepo();

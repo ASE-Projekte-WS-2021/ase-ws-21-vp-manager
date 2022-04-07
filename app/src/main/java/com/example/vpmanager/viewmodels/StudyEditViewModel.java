@@ -8,7 +8,7 @@ import com.example.vpmanager.interfaces.StudyDatesListener;
 import com.example.vpmanager.interfaces.StudyUpdatedListener;
 import com.example.vpmanager.models.DateModel;
 import com.example.vpmanager.repositories.StudyEditRepository;
-import com.example.vpmanager.views.mainActivity;
+import com.example.vpmanager.views.MainActivity;
 import com.example.vpmanager.views.studyEditDetails.StudyEditDatesFragment;
 import com.example.vpmanager.views.studyEditDetails.StudyEditDetailsFragment;
 
@@ -54,7 +54,7 @@ public class StudyEditViewModel extends ViewModel implements EditStudyDetailsLis
 
         //studyId is already in the map and can be reused
         //the creator isn't loaded in the first place so it is added here
-        studyEditProcessData.put("creator", mainActivity.uniqueID);
+        studyEditProcessData.put("creator", MainActivity.uniqueID);
 
         /*these two for-loops manage the deletion of dates in the db, that were in the db in the
         beginning but got deleted in the edit process*/
@@ -172,7 +172,7 @@ public class StudyEditViewModel extends ViewModel implements EditStudyDetailsLis
     //Gets DateModel objects and adds new element
     public void addNewDateToList(String newDate, String studyId) {
         DateModel newDateObject = new DateModel(
-                getNewId(), newDate, studyId, mainActivity.uniqueID, false, false
+                getNewId(), newDate, studyId, MainActivity.uniqueID, false, false
         );
         datesEditProcessDataObjects.add(newDateObject);
         studyEditDatesFragment.notifyDatesObjectListChanged();

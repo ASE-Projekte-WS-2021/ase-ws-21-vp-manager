@@ -15,9 +15,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CheckBox;
-import android.widget.DatePicker;
 import android.widget.ImageView;
-import android.widget.TimePicker;
 
 import com.example.vpmanager.Config;
 import com.example.vpmanager.R;
@@ -30,10 +28,11 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
-import com.example.vpmanager.views.mainActivity;
+
+import com.example.vpmanager.views.MainActivity;
 
 
-public class createStudyFragment_StepFive extends Fragment {
+public class CreateStudyFragment_StepFive extends Fragment {
 
     private int mYear;
     private int mMonth;
@@ -53,7 +52,7 @@ public class createStudyFragment_StepFive extends Fragment {
     //Parameter:
     //Return values:
     //Sets the current fragment for the activity
-    public createStudyFragment_StepFive() {
+    public CreateStudyFragment_StepFive() {
         CreateStudyFragment.currentFragment = Config.createFragmentFive;
     }
 
@@ -64,7 +63,7 @@ public class createStudyFragment_StepFive extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        mainActivity.currentFragment = "createStepFive";
+        MainActivity.currentFragment = "createStepFive";
         return inflater.inflate(R.layout.fragment_create_study_step_five, container, false);
     }
 
@@ -114,15 +113,12 @@ public class createStudyFragment_StepFive extends Fragment {
         mDay = c.get(Calendar.DAY_OF_MONTH);
 
         DatePickerDialog datePickerDialog = new DatePickerDialog(getActivity(), R.style.my_dialog_theme,
-                new DatePickerDialog.OnDateSetListener() {
-                    @Override
-                    public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
-                        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("EEEE");
-                        Date date = new Date(year, monthOfYear, dayOfMonth - 1);
-                        weekDay = simpleDateFormat.format(date);
-                        date_time = weekDay + ", " + dayOfMonth + "." + (monthOfYear + 1) + "." + year + " um ";
-                        timePicker();
-                    }
+                (view, year, monthOfYear, dayOfMonth) -> {
+                    SimpleDateFormat simpleDateFormat = new SimpleDateFormat("EEEE");
+                    Date date = new Date(year, monthOfYear, dayOfMonth - 1);
+                    weekDay = simpleDateFormat.format(date);
+                    date_time = weekDay + ", " + dayOfMonth + "." + (monthOfYear + 1) + "." + year + " um ";
+                    timePicker();
                 }, mYear, mMonth, mDay);
         datePickerDialog.getDatePicker().setMinDate(System.currentTimeMillis() - 1000);
         datePickerDialog.show();
@@ -138,14 +134,11 @@ public class createStudyFragment_StepFive extends Fragment {
         mMinute = c.get(Calendar.MINUTE);
 
         TimePickerDialog timePickerDialog = new TimePickerDialog(getActivity(), R.style.my_timepicker_theme,
-                new TimePickerDialog.OnTimeSetListener() {
-                    @Override
-                    public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
+                (view, hourOfDay, minute) -> {
 
-                        mHour = hourOfDay;
-                        mMinute = minute;
-                        addDateToList(hourOfDay, minute);
-                    }
+                    mHour = hourOfDay;
+                    mMinute = minute;
+                    addDateToList(hourOfDay, minute);
                 }, mHour, mMinute, true);
         timePickerDialog.show();
     }
@@ -196,7 +189,7 @@ public class createStudyFragment_StepFive extends Fragment {
     //Sets tooltip view and dialog for current fragment
     private void showToolTip(String currentDate) {
         Dialog dialog = new Dialog(getActivity(), R.style.DialogStyle);
-        dialog.setContentView(R.layout.duplicate_dialog);
+        dialog.setContentView(R.layout.dialog_warning);
 
         dialog.getWindow().setBackgroundDrawableResource(R.drawable.bg_window);
 
@@ -205,37 +198,28 @@ public class createStudyFragment_StepFive extends Fragment {
         Button abortButton = dialog.findViewById(R.id.abort);
         CheckBox doNotShowAgainCheck = dialog.findViewById(R.id.doNotShowAgainCheckBox);
 
-        btnClose.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (doNotShowAgainCheck.isChecked()) {
-                    doNotShowDuplicateWarning = true;
-                }
-                dialog.dismiss();
+        btnClose.setOnClickListener(view -> {
+            if (doNotShowAgainCheck.isChecked()) {
+                doNotShowDuplicateWarning = true;
             }
+            dialog.dismiss();
         });
 
-        addAnywaysButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (doNotShowAgainCheck.isChecked()) {
-                    doNotShowDuplicateWarning = true;
-                }
-                dates.add(currentDate);
-                swipeableDatesAdapter.notifyDataSetChanged();
-                dialog.dismiss();
-
+        addAnywaysButton.setOnClickListener(v -> {
+            if (doNotShowAgainCheck.isChecked()) {
+                doNotShowDuplicateWarning = true;
             }
+            dates.add(currentDate);
+            swipeableDatesAdapter.notifyDataSetChanged();
+            dialog.dismiss();
+
         });
 
-        abortButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (doNotShowAgainCheck.isChecked()) {
-                    doNotShowDuplicateWarning = true;
-                }
-                dialog.dismiss();
+        abortButton.setOnClickListener(v -> {
+            if (doNotShowAgainCheck.isChecked()) {
+                doNotShowDuplicateWarning = true;
             }
+            dialog.dismiss();
         });
 
         dialog.show();

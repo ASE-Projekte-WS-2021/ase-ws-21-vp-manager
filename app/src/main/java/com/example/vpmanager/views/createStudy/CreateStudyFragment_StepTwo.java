@@ -11,11 +11,11 @@ import android.view.ViewGroup;
 
 import com.example.vpmanager.Config;
 import com.example.vpmanager.R;
-import com.example.vpmanager.views.mainActivity;
+import com.example.vpmanager.views.MainActivity;
 import com.google.android.material.textfield.TextInputEditText;
 
 
-public class createStudyFragment_StepTwo extends Fragment {
+public class CreateStudyFragment_StepTwo extends Fragment {
 
     public static TextInputEditText textInputEditTextContactMail;
     public static TextInputEditText textInputEditTextContactPhone;
@@ -26,7 +26,7 @@ public class createStudyFragment_StepTwo extends Fragment {
     //Parameter:
     //Return values:
     //Sets the current fragment for the activity
-    public createStudyFragment_StepTwo() {
+    public CreateStudyFragment_StepTwo() {
         CreateStudyFragment.currentFragment = Config.createFragmentTwo;
     }
 
@@ -37,7 +37,7 @@ public class createStudyFragment_StepTwo extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        mainActivity.currentFragment = "createStepTwo";
+        MainActivity.currentFragment = "createStepTwo";
         return inflater.inflate(R.layout.fragment_create_study_step_two, container, false);
     }
 
@@ -52,7 +52,7 @@ public class createStudyFragment_StepTwo extends Fragment {
     //Connects the code with the view
     private void setupView(View view) {
         textInputEditTextContactMail = view.findViewById(R.id.inputContact1);
-        textInputEditTextContactMail.setText(mainActivity.uniqueID);
+        textInputEditTextContactMail.setText(MainActivity.uniqueID);
         textInputEditTextContactMail.setFocusable(false);
         textInputEditTextContactMail.setTextColor(ContextCompat.getColor(getActivity(), R.color.pieChartRemaining));
 

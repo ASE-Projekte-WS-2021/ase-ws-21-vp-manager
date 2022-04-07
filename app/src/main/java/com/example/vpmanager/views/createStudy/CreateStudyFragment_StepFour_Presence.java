@@ -15,13 +15,13 @@ import androidx.fragment.app.Fragment;
 import com.example.vpmanager.Config;
 import com.example.vpmanager.R;
 import com.google.android.material.textfield.TextInputEditText;
-import com.example.vpmanager.views.mainActivity;
+import com.example.vpmanager.views.MainActivity;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 
 
-public class createStudyFragment_StepFour_Presence extends Fragment {
+public class CreateStudyFragment_StepFour_Presence extends Fragment {
 
     public static TextInputEditText textInputEditTextLocation;
     public static TextInputEditText textInputEditTextStreet;
@@ -32,12 +32,10 @@ public class createStudyFragment_StepFour_Presence extends Fragment {
     private ArrayAdapter<String> arrayAdapterPreset;
 
 
-
-
     //Parameter:
     //Return values:
     //Sets the current fragment for the activity
-    public createStudyFragment_StepFour_Presence() {
+    public CreateStudyFragment_StepFour_Presence() {
         CreateStudyFragment.currentFragment = Config.createFragmentFour;
     }
 
@@ -48,7 +46,7 @@ public class createStudyFragment_StepFour_Presence extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        mainActivity.currentFragment = "createStepFourPresence";
+        MainActivity.currentFragment = "createStepFourPresence";
         return inflater.inflate(R.layout.fragment_create_study_step_four_presence, container, false);
     }
 
@@ -68,14 +66,14 @@ public class createStudyFragment_StepFour_Presence extends Fragment {
         autoCompleteTextViewPreset = view.findViewById(R.id.create_stepFour_local_Preset);
         dropdownListPreset = new ArrayList<>();
         dropdownListPreset.addAll(Arrays.asList(getResources().getStringArray(R.array.createPresetLabList)));
-        arrayAdapterPreset = new ArrayAdapter<>(getActivity(), R.layout.material_dropdown_item, dropdownListPreset);
+        arrayAdapterPreset = new ArrayAdapter<>(getActivity(), R.layout.item_material_dropdown, dropdownListPreset);
         autoCompleteTextViewPreset.setAdapter(arrayAdapterPreset);
         presetOnChangeListener();
 
     }
 
 
-    private void presetOnChangeListener(){
+    private void presetOnChangeListener() {
         autoCompleteTextViewPreset.addTextChangedListener(new TextWatcher() {
 
             @Override

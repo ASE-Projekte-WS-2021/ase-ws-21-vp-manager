@@ -7,10 +7,57 @@
         <entry key="..\:/Users/nikla/StudioProjects/ase-ws-21-vp-manager/app/src/main/res/drawable/ic_launcher_background.xml" value="0.3828125" />
         <entry key="..\:/Users/nikla/StudioProjects/ase-ws-21-vp-manager/app/src/main/res/drawable/textline.xml" value="0.22135416666666666" />
         <entry key="..\:/Users/nikla/StudioProjects/ase-ws-21-vp-manager/app/src/main/res/layout/activity_home.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/nikla/StudioProjects/ase-ws-21-vp-manager/app/src/main/res/layout/activity_main.xml" value="0.11639492753623189" />
         <entry key="..\:/Users/nikla/StudioProjects/ase-ws-21-vp-manager/app/src/main/res/layout/activity_personal_account.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/nikla/StudioProjects/ase-ws-21-vp-manager/app/src/main/res/layout/custom_dialog.xml" value="0.1685185185185185" />
+        <entry key="..\:/Users/nikla/StudioProjects/ase-ws-21-vp-manager/app/src/main/res/layout/custom_reminder.xml" value="0.21467391304347827" />
+        <entry key="..\:/Users/nikla/StudioProjects/ase-ws-21-vp-manager/app/src/main/res/layout/date_creator_item.xml" value="0.14722222222222223" />
+        <entry key="..\:/Users/nikla/StudioProjects/ase-ws-21-vp-manager/app/src/main/res/layout/date_item.xml" value="0.17831813576494426" />
+        <entry key="..\:/Users/nikla/StudioProjects/ase-ws-21-vp-manager/app/src/main/res/layout/dialog_info.xml" value="0.18802083333333333" />
+        <entry key="..\:/Users/nikla/StudioProjects/ase-ws-21-vp-manager/app/src/main/res/layout/dialog_optional_user_data.xml" value="0.18802083333333333" />
+        <entry key="..\:/Users/nikla/StudioProjects/ase-ws-21-vp-manager/app/src/main/res/layout/dialog_warning.xml" value="0.18802083333333333" />
+        <entry key="..\:/Users/nikla/StudioProjects/ase-ws-21-vp-manager/app/src/main/res/layout/duplicate_dialog.xml" value="0.1707193515704154" />
         <entry key="..\:/Users/nikla/StudioProjects/ase-ws-21-vp-manager/app/src/main/res/layout/expandableListItem.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/nikla/StudioProjects/ase-ws-21-vp-manager/app/src/main/res/layout/expandable_list_group.xml" value="0.25" />
         <entry key="..\:/Users/nikla/StudioProjects/ase-ws-21-vp-manager/app/src/main/res/layout/expandable_list_item.xml" value="0.20520833333333333" />
+        <entry key="..\:/Users/nikla/StudioProjects/ase-ws-21-vp-manager/app/src/main/res/layout/fragment_create_study.xml" value="0.18802083333333333" />
+        <entry key="..\:/Users/nikla/StudioProjects/ase-ws-21-vp-manager/app/src/main/res/layout/fragment_create_study_base.xml" value="0.18802083333333333" />
+        <entry key="..\:/Users/nikla/StudioProjects/ase-ws-21-vp-manager/app/src/main/res/layout/fragment_create_study_step_five.xml" value="0.18802083333333333" />
+        <entry key="..\:/Users/nikla/StudioProjects/ase-ws-21-vp-manager/app/src/main/res/layout/fragment_create_study_step_four_presence.xml" value="0.18802083333333333" />
+        <entry key="..\:/Users/nikla/StudioProjects/ase-ws-21-vp-manager/app/src/main/res/layout/fragment_create_study_step_four_remote.xml" value="0.18802083333333333" />
+        <entry key="..\:/Users/nikla/StudioProjects/ase-ws-21-vp-manager/app/src/main/res/layout/fragment_create_study_step_one.xml" value="0.1707193515704154" />
+        <entry key="..\:/Users/nikla/StudioProjects/ase-ws-21-vp-manager/app/src/main/res/layout/fragment_create_study_step_three.xml" value="0.1685185185185185" />
+        <entry key="..\:/Users/nikla/StudioProjects/ase-ws-21-vp-manager/app/src/main/res/layout/fragment_create_study_step_two.xml" value="0.18802083333333333" />
+        <entry key="..\:/Users/nikla/StudioProjects/ase-ws-21-vp-manager/app/src/main/res/layout/fragment_creator_study.xml" value="0.1" />
+        <entry key="..\:/Users/nikla/StudioProjects/ase-ws-21-vp-manager/app/src/main/res/layout/fragment_creator_study_appointments.xml" value="0.18802083333333333" />
+        <entry key="..\:/Users/nikla/StudioProjects/ase-ws-21-vp-manager/app/src/main/res/layout/fragment_edit_study.xml" value="0.1" />
+        <entry key="..\:/Users/nikla/StudioProjects/ase-ws-21-vp-manager/app/src/main/res/layout/fragment_edit_study_appointments.xml" value="0.18802083333333333" />
+        <entry key="..\:/Users/nikla/StudioProjects/ase-ws-21-vp-manager/app/src/main/res/layout/fragment_find_study.xml" value="0.1" />
+        <entry key="..\:/Users/nikla/StudioProjects/ase-ws-21-vp-manager/app/src/main/res/layout/fragment_home.xml" value="0.11639492753623189" />
+        <entry key="..\:/Users/nikla/StudioProjects/ase-ws-21-vp-manager/app/src/main/res/layout/fragment_login.xml" value="0.18802083333333333" />
+        <entry key="..\:/Users/nikla/StudioProjects/ase-ws-21-vp-manager/app/src/main/res/layout/fragment_own_study.xml" value="0.1" />
+        <entry key="..\:/Users/nikla/StudioProjects/ase-ws-21-vp-manager/app/src/main/res/layout/fragment_personal_account.xml" value="0.17831813576494426" />
+        <entry key="..\:/Users/nikla/StudioProjects/ase-ws-21-vp-manager/app/src/main/res/layout/fragment_register.xml" value="0.18802083333333333" />
+        <entry key="..\:/Users/nikla/StudioProjects/ase-ws-21-vp-manager/app/src/main/res/layout/fragment_selfcreated_study.xml" value="0.25" />
+        <entry key="..\:/Users/nikla/StudioProjects/ase-ws-21-vp-manager/app/src/main/res/layout/fragment_study.xml" value="0.1" />
+        <entry key="..\:/Users/nikla/StudioProjects/ase-ws-21-vp-manager/app/src/main/res/layout/fragment_study_appointments.xml" value="0.18802083333333333" />
+        <entry key="..\:/Users/nikla/StudioProjects/ase-ws-21-vp-manager/app/src/main/res/layout/fragment_study_creator_details.xml" value="0.1" />
+        <entry key="..\:/Users/nikla/StudioProjects/ase-ws-21-vp-manager/app/src/main/res/layout/fragment_study_dates.xml" value="0.17831813576494426" />
+        <entry key="..\:/Users/nikla/StudioProjects/ase-ws-21-vp-manager/app/src/main/res/layout/fragment_study_details.xml" value="0.25" />
+        <entry key="..\:/Users/nikla/StudioProjects/ase-ws-21-vp-manager/app/src/main/res/layout/fragment_upcoming_appointments.xml" value="0.18802083333333333" />
+        <entry key="..\:/Users/nikla/StudioProjects/ase-ws-21-vp-manager/app/src/main/res/layout/header_navigation_drawer.xml" value="0.1" />
+        <entry key="..\:/Users/nikla/StudioProjects/ase-ws-21-vp-manager/app/src/main/res/layout/item_appointment.xml" value="0.18802083333333333" />
+        <entry key="..\:/Users/nikla/StudioProjects/ase-ws-21-vp-manager/app/src/main/res/layout/item_appointment_creator.xml" value="0.18802083333333333" />
+        <entry key="..\:/Users/nikla/StudioProjects/ase-ws-21-vp-manager/app/src/main/res/layout/item_material_dropdown.xml" value="0.18802083333333333" />
+        <entry key="..\:/Users/nikla/StudioProjects/ase-ws-21-vp-manager/app/src/main/res/layout/pa_listview_item.xml" value="0.17831813576494426" />
+        <entry key="..\:/Users/nikla/StudioProjects/ase-ws-21-vp-manager/app/src/main/res/layout/pa_upcoming_listview_item.xml" value="0.17831813576494426" />
+        <entry key="..\:/Users/nikla/StudioProjects/ase-ws-21-vp-manager/app/src/main/res/layout/study_details_new.xml" value="0.21467391304347827" />
+        <entry key="..\:/Users/nikla/StudioProjects/ase-ws-21-vp-manager/app/src/main/res/layout/studylist_cart.xml" value="0.14722222222222223" />
+        <entry key="..\:/Users/nikla/StudioProjects/ase-ws-21-vp-manager/app/src/main/res/layout/studylist_cart_ar.xml" value="0.17831813576494426" />
+        <entry key="..\:/Users/nikla/StudioProjects/ase-ws-21-vp-manager/app/src/main/res/layout/studylist_cart_ds.xml" value="0.17831813576494426" />
+        <entry key="..\:/Users/nikla/StudioProjects/ase-ws-21-vp-manager/app/src/main/res/layout/studylist_cart_vr.xml" value="0.17831813576494426" />
+        <entry key="..\:/Users/nikla/StudioProjects/ase-ws-21-vp-manager/app/src/main/res/menu/app_bar_menu.xml" value="0.35104166666666664" />
+        <entry key="..\:/Users/nikla/StudioProjects/ase-ws-21-vp-manager/app/src/main/res/menu/navigation_drawer.xml" value="0.1" />
         <entry key="..\:/Users/stron/AndroidStudioProjects/ase-ws-21-vp-manager/app/src/main/res/layout/activity_create_study.xml" value="0.2695035460992908" />
         <entry key="..\:/Users/stron/AndroidStudioProjects/ase-ws-21-vp-manager/app/src/main/res/layout/activity_create_study_base.xml" value="0.33" />
         <entry key="..\:/Users/stron/AndroidStudioProjects/ase-ws-21-vp-manager/app/src/main/res/layout/activity_home.xml" value="0.2695035460992908" />

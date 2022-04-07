@@ -59,7 +59,7 @@ public class HomeFragment extends Fragment {
         prepareViewModel();
         setupView(view);
         homeViewModel.getDatesStudiesVpsAndMatrikelNumberFromDb();
-        mainActivity.currentFragment = "home";
+        MainActivity.currentFragment = "home";
         return view;
     }
 
@@ -80,11 +80,7 @@ public class HomeFragment extends Fragment {
     //checks if the user is currently logged in. If not sends him to login screen
     private void userLoggedIn() {
         FirebaseUser user = firebaseAuth.getCurrentUser();
-        firebaseAuth.addAuthStateListener(new FirebaseAuth.AuthStateListener() {
-            @Override
-            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
-
-            }
+        firebaseAuth.addAuthStateListener(firebaseAuth -> {
         });
         if (user == null) {
             navController.navigate(R.id.action_global_loginFragment);

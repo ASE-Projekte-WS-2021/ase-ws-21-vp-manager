@@ -104,7 +104,7 @@
         <item>Fragebogen</item>
         <item>Gamingstudie</item>
         <item>Interview</item>
-        <item>Laborstudien</item>
+        <item>Laborstudie</item>
         <item>Tagebuchstudie</item>
         <item>Usability/UXstudie</item>
         <item>Sonstige</item>
@@ -143,7 +143,6 @@
 
 
     <!---Personal Account-->
-    <string name="personalAccountTitle">Angemeldete Studien</string>
     <string name="drawerDate">Datum</string>
     <string name="drawerDateFull">Datum - Wochentag - Uhrzeit</string>
     <string name="zeroOwnStudiesHeader">Bisher hast du noch keine Studien erstellt. Wähle im Menü den Reiter Studien erstellen um Studien zu erstellen!</string>
@@ -314,7 +313,12 @@
     <string name="infoOwnStudiesTitle">Eigene Studie</string>
     <string name="infoFindStudyTitle">Studie finden</string>
     <string name="infoPAUpcomingTitle">Anstehende Termine</string>
-
+    <string name="drawerHeaderName">Nutzername</string>
+    <string name="drawerItemOne">Mein VP-Status</string>
+    <string name="drawerItemTwo">Studien finden</string>
+    <string name="drawerItemThree">Studien erstellen</string>
+    <string name="drawerItemFour">Meine Übersicht</string>
+    <string name="drawerItemFive">Abmelden</string>
 
     <!-- Info Messages -->
     <string name="infoLogin">Zur Verwendung des VP Managers benötigen Sie einen individuellen Nutzeraccounnt. \n\n Geben Sie hier wenn möglich Ihre universitäre E-Mail-Adresse an.</string>
@@ -341,6 +345,7 @@
     <string name="infoPaUpcoming">Alle ihre zukünftig anstehenden Termine werden hier angezeigt.</string>
     <string name="infoFindStudies">Hier finden sie alle Studien, an denen sie aktuell teilnehmen können. \n\n Weitere Informationen und die Anmeldung für freie Termine finden sie in der Detailansicht.</string>
     <string name="create_study_stepFour_presetHint">Vorlage auswählen</string>
+
 
 </resources>
 

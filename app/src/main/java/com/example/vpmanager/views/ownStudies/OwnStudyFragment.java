@@ -14,7 +14,7 @@ import androidx.viewpager.widget.ViewPager;
 
 import com.example.vpmanager.R;
 import com.example.vpmanager.adapter.ViewPagerAdapter;
-import com.example.vpmanager.views.mainActivity;
+import com.example.vpmanager.views.MainActivity;
 import com.google.android.material.tabs.TabLayout;
 
 public class OwnStudyFragment extends Fragment {
@@ -46,7 +46,7 @@ public class OwnStudyFragment extends Fragment {
         personalAccountFragment = new PersonalAccountFragment();
         selfcreatedStudiesFragment = new SelfcreatedStudiesFragment();
         tabLayout.setupWithViewPager(viewPager);
-        mainActivity.currentFragment = "ownStudyFragment";
+        MainActivity.currentFragment = "ownStudyFragment";
 
         ViewPagerAdapter viewPagerAdapter = new ViewPagerAdapter(getChildFragmentManager(), 0);
         viewPagerAdapter.addFragment(personalAccountFragment, getString(R.string.ownStudyStatusTab)); //Teilnahmen

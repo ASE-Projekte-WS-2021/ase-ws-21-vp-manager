@@ -97,7 +97,7 @@
     </fragment>
     <fragment
         android:id="@+id/studyCreatorFragment"
-        android:name="com.example.vpmanager.views.studyCreatorDetails.studyCreatorFragment"
+        android:name="com.example.vpmanager.views.studyCreatorDetails.StudyCreatorFragment"
         android:label="Studiendetails"
         tools:layout="@layout/fragment_creator_study">
         <argument

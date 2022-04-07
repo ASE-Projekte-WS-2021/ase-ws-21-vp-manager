@@ -12,7 +12,7 @@ import androidx.viewpager.widget.ViewPager;
 
 import com.example.vpmanager.R;
 import com.example.vpmanager.adapter.ViewPagerAdapter;
-import com.example.vpmanager.views.mainActivity;
+import com.example.vpmanager.views.MainActivity;
 import com.google.android.material.tabs.TabLayout;
 
 public class StudyEditFragment extends Fragment {
@@ -48,7 +48,7 @@ public class StudyEditFragment extends Fragment {
         studyEditDatesFragment = new StudyEditDatesFragment();
 
         tabLayoutEdit.setupWithViewPager(viewPagerEdit);
-        mainActivity.currentFragment = "editFragment";
+        MainActivity.currentFragment = "editFragment";
 
         ViewPagerAdapter viewPagerAdapter = new ViewPagerAdapter(getParentFragmentManager(), 0);
         viewPagerAdapter.addFragment(studyEditDetailsFragment, getString(R.string.studyViewTabOne));
@@ -69,7 +69,7 @@ public class StudyEditFragment extends Fragment {
     //Sets the current user ID and study ID
     private void getRequiredInfos() {
         currentStudyIdEdit = getArguments().getString("studyId");
-        currentUserIdEdit = mainActivity.createUserId(getActivity());
+        currentUserIdEdit = MainActivity.createUserId(getActivity());
     }
 
 }

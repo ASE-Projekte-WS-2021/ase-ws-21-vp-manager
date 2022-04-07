@@ -45,7 +45,6 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:fontFamily="@font/google_sans_bold"
-                android:text="@string/duplicateDate"
                 android:paddingStart="12dp"
                 android:paddingEnd="12dp"
                 android:textAlignment="center"
@@ -53,66 +52,17 @@
                 android:textSize="20sp" />
 
             <TextView
-                android:id="@+id/duplicate_desc"
+                android:id="@+id/info_desc"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:fontFamily="@font/google_sans_regular"
                 android:gravity="center_horizontal"
                 android:paddingStart="12dp"
-                android:paddingEnd="12dp"
                 android:paddingTop="20dp"
+                android:paddingEnd="12dp"
                 android:paddingBottom="20dp"
-                android:text="@string/addExistingDateWarning"
                 android:textColor="@color/black" />
-
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:gravity="center_horizontal"
-                android:layout_gravity="center_horizontal">
-
-                <CheckBox
-                    android:id="@+id/doNotShowAgainCheckBox"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:textColorHint="@color/black"
-                    android:hint="@string/cancelView"
-                    android:buttonTint="@color/heatherred_Main"/>
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:gravity="center_horizontal"
-                android:layout_marginBottom="8dp"
-                android:layout_marginTop="12dp">
-
-                <Button
-                    android:id="@+id/abort"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/cancelNavigation"
-                    android:textColor="@color/black"
-                    android:backgroundTint="@color/heatherred_Main"/>
-
-                <Button
-                    android:id="@+id/addAnyways"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/add"
-                    android:backgroundTint="@color/heatherred_Main"
-                    android:layout_marginStart="24dp"
-                    android:layout_marginLeft="24dp"
-                    android:textColor="@color/black"/>
-
-            </LinearLayout>
-
         </LinearLayout>
     </RelativeLayout>
 

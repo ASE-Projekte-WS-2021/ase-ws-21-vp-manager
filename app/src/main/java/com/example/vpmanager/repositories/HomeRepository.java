@@ -1,19 +1,14 @@
 package com.example.vpmanager.repositories;
 
-import static com.example.vpmanager.views.mainActivity.uniqueID;
+import static com.example.vpmanager.views.MainActivity.uniqueID;
 
-import androidx.annotation.NonNull;
-
+import com.example.vpmanager.Config;
 import com.example.vpmanager.interfaces.GetAllDatesListener;
 import com.example.vpmanager.interfaces.GetAllStudiesListener;
 import com.example.vpmanager.interfaces.GetVpAndMatNrListener;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
-import com.google.firebase.firestore.QuerySnapshot;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -85,24 +80,16 @@ public class HomeRepository {
         dbDatesListHomeRepo.clear();
 
         datesRef.get()
-                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                    @Override
-                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                .addOnCompleteListener(task -> {
 
-                        if (task.isSuccessful()) {
-                            for (QueryDocumentSnapshot document : task.getResult()) {
-                                dbDatesListHomeRepo.add(document.getData());
-                            }
-                            getAllDatesListener.onAllDatesReady(true);
+                    if (task.isSuccessful()) {
+                        for (QueryDocumentSnapshot document : task.getResult()) {
+                            dbDatesListHomeRepo.add(document.getData());
                         }
+                        getAllDatesListener.onAllDatesReady(true);
                     }
                 })
-                .addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        getAllDatesListener.onAllDatesReady(false);
-                    }
-                });
+                .addOnFailureListener(e -> getAllDatesListener.onAllDatesReady(false));
     }
 
 
@@ -115,24 +102,16 @@ public class HomeRepository {
         dbStudiesListHomeRepo.clear();
 
         studiesRef.get()
-                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                    @Override
-                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                        if (task.isSuccessful()) {
-                            for (QueryDocumentSnapshot document : task.getResult()) {
-                                dbStudiesListHomeRepo.add(document.getData());
-                                //createListEntries(); can be skipped here!
-                            }
-                            getAllStudiesListener.onAllStudiesReady(true);
+                .addOnCompleteListener(task -> {
+                    if (task.isSuccessful()) {
+                        for (QueryDocumentSnapshot document : task.getResult()) {
+                            dbStudiesListHomeRepo.add(document.getData());
+                            //createListEntries(); can be skipped here!
                         }
+                        getAllStudiesListener.onAllStudiesReady(true);
                     }
                 })
-                .addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        getAllStudiesListener.onAllStudiesReady(false);
-                    }
-                });
+                .addOnFailureListener(e -> getAllStudiesListener.onAllStudiesReady(false));
     }
 
 
@@ -143,17 +122,14 @@ public class HomeRepository {
         db = FirebaseFirestore.getInstance();
         CollectionReference usersRef = db.collection("users");
         //uniqueId from mainActivity can be used
-        usersRef.whereEqualTo("deviceId", uniqueID).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-            @Override
-            public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                if (task.isSuccessful()) {
-                    String vps = "", matrikelNumber = "";
-                    for (QueryDocumentSnapshot document : task.getResult()) {
-                        vps = document.getString("vps");
-                        matrikelNumber = document.getString("matrikelNumber");
-                    }
-                    getVpAndMatNrListener.onAllDataReady(vps, matrikelNumber, dbDatesListHomeRepo, dbStudiesListHomeRepo);
+        usersRef.whereEqualTo("deviceId", uniqueID).get().addOnCompleteListener(task -> {
+            if (task.isSuccessful()) {
+                String vps = "", matrikelNumber = "";
+                for (QueryDocumentSnapshot document : task.getResult()) {
+                    vps = document.getString("vps");
+                    matrikelNumber = document.getString("matrikelNumber");
                 }
+                getVpAndMatNrListener.onAllDataReady(vps, matrikelNumber, dbDatesListHomeRepo, dbStudiesListHomeRepo);
             }
         }).addOnFailureListener(e -> getVpAndMatNrListener.onAllDataReady("", "", dbDatesListHomeRepo, dbStudiesListHomeRepo));
     }
@@ -183,8 +159,8 @@ public class HomeRepository {
         URL url = new URL("https://vp.software-engineering.education/" + matrikelNumber + "/vps");
         urlConnection = (HttpURLConnection) url.openConnection();
         urlConnection.setRequestMethod("GET");
-        urlConnection.setReadTimeout(10000 /* milliseconds */);
-        urlConnection.setConnectTimeout(15000 /* milliseconds */);
+        urlConnection.setReadTimeout(Config.timeout_Request /* milliseconds */);
+        urlConnection.setConnectTimeout(Config.timeout_Request /* milliseconds */);
         urlConnection.setDoOutput(true);
         urlConnection.connect();
 

@@ -4,23 +4,16 @@ import static android.content.ContentValues.TAG;
 
 import android.util.Log;
 
-import androidx.annotation.NonNull;
-
 import com.example.vpmanager.interfaces.FirebaseAuthCreateListener;
 import com.example.vpmanager.interfaces.FirebaseAuthEmailListener;
 import com.example.vpmanager.interfaces.FirebaseAuthResetListener;
 import com.example.vpmanager.interfaces.LoginListener;
 import com.example.vpmanager.interfaces.RegisterListener;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.Transaction;
 
 import java.util.HashMap;
@@ -65,15 +58,12 @@ public class LoginRegisterRepository {
 
     public void registerNewUser(String email, String password) {
 
-        firebaseAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-            @Override
-            public void onComplete(@NonNull Task<AuthResult> task) {
-                if (task.isSuccessful()) {
-                    firebaseAuthCreateListener.onNewUserWithEmailAndPasswordFinished(null);
-                } else {
-                    String localErrorMessage = task.getException().getMessage();
-                    firebaseAuthCreateListener.onNewUserWithEmailAndPasswordFinished(localErrorMessage);
-                }
+        firebaseAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(task -> {
+            if (task.isSuccessful()) {
+                firebaseAuthCreateListener.onNewUserWithEmailAndPasswordFinished(null);
+            } else {
+                String localErrorMessage = task.getException().getMessage();
+                firebaseAuthCreateListener.onNewUserWithEmailAndPasswordFinished(localErrorMessage);
             }
         });
     }
@@ -84,42 +74,36 @@ public class LoginRegisterRepository {
     //Uses firebaseAuthEmailListener to send a verification mail to user
     public void sendVerificationEmail() {
 
-        firebaseAuth.getCurrentUser().sendEmailVerification().addOnCompleteListener(new OnCompleteListener<Void>() {
-            @Override
-            public void onComplete(@NonNull Task<Void> task) {
-                if (task.isSuccessful()) {
-                    firebaseAuthEmailListener.onSendEmailFinished(null);
-                } else {
-                    String localErrorMessage = task.getException().getMessage();
-                    firebaseAuthEmailListener.onSendEmailFinished(localErrorMessage);
-                }
+        firebaseAuth.getCurrentUser().sendEmailVerification().addOnCompleteListener(task -> {
+            if (task.isSuccessful()) {
+                firebaseAuthEmailListener.onSendEmailFinished(null);
+            } else {
+                String localErrorMessage = task.getException().getMessage();
+                firebaseAuthEmailListener.onSendEmailFinished(localErrorMessage);
             }
         });
     }
 
 
-    //Parameter: email, matNr, vph
+    //Parameter: email, individual immatrikulation number of student, number of participation hours(vps)
     //Return values:
     //Saves existing user meta data (device id, marNr, vps) in the database
     public void saveUserInDb(String email, String matNr, String vph) {
         db = FirebaseFirestore.getInstance();
         //email is used for deviceId
         final DocumentReference userDocRef = db.collection("users").document(email);
-        db.runTransaction(new Transaction.Function<Void>() {
-            @Override
-            public Void apply(@NonNull Transaction transaction) throws FirebaseFirestoreException {
-                DocumentSnapshot snapshot = transaction.get(userDocRef);
-                if (!snapshot.exists()) {
-                    Map<String, Object> user = new HashMap<>();
-                    user.put("deviceId", email);
-                    user.put("matrikelNumber", matNr);
-                    user.put("vps", vph);
-                    transaction.set(userDocRef, user);
+        db.runTransaction((Transaction.Function<Void>) transaction -> {
+            DocumentSnapshot snapshot = transaction.get(userDocRef);
+            if (!snapshot.exists()) {
+                Map<String, Object> user = new HashMap<>();
+                user.put("deviceId", email);
+                user.put("matrikelNumber", matNr);
+                user.put("vps", vph);
+                transaction.set(userDocRef, user);
 
-                    firebaseAuth.signOut();
-                }
-                return null;
+                firebaseAuth.signOut();
             }
+            return null;
         }).addOnSuccessListener(aVoid -> registerListener.onRegisterFinished(),
                 aVoid -> Log.d(TAG, "Transaction success!"
                 )).addOnFailureListener(e -> Log.w(TAG, "Transaction failure.", e));
@@ -131,12 +115,7 @@ public class LoginRegisterRepository {
     //Sends a password reset mail to the user
     public void sendResetEmail(String email) {
 
-        firebaseAuth.sendPasswordResetEmail(email).addOnSuccessListener(new OnSuccessListener<Void>() {
-            @Override
-            public void onSuccess(Void unused) {
-                firebaseAuthResetListener.onResetEmailSent();
-            }
-        });
+        firebaseAuth.sendPasswordResetEmail(email).addOnSuccessListener(unused -> firebaseAuthResetListener.onResetEmailSent());
     }
 
 
@@ -144,24 +123,21 @@ public class LoginRegisterRepository {
     //Return values:
     //Initializes the log in process, and sets error message when needed
     public void loginUser(String email, String password) {
-        firebaseAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-            @Override
-            public void onComplete(@NonNull Task<AuthResult> task) {
-                if (task.isSuccessful()) {
-                    FirebaseUser user = firebaseAuth.getCurrentUser();
-                    if (user != null) {
-                        if (user.isEmailVerified()) {
-                            loginListener.createUserInMainActivity(email);
-                        } else {
-                            firebaseAuth.signOut();
-                            String localErrorMessage = "Bitte verifizieren Sie zuerst Ihre Email Adresse";
-                            loginListener.onLoginFailed(localErrorMessage);
-                        }
+        firebaseAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(task -> {
+            if (task.isSuccessful()) {
+                FirebaseUser user = firebaseAuth.getCurrentUser();
+                if (user != null) {
+                    if (user.isEmailVerified()) {
+                        loginListener.createUserInMainActivity(email);
+                    } else {
+                        firebaseAuth.signOut();
+                        String localErrorMessage = "Bitte verifizieren Sie zuerst Ihre Email Adresse";
+                        loginListener.onLoginFailed(localErrorMessage);
                     }
-                } else {
-                    String localErrorMessage = task.getException().getMessage();
-                    loginListener.onLoginFailed(localErrorMessage);
                 }
+            } else {
+                String localErrorMessage = task.getException().getMessage();
+                loginListener.onLoginFailed(localErrorMessage);
             }
         });
     }

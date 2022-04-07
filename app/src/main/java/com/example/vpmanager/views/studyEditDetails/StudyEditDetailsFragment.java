@@ -64,7 +64,6 @@ public class StudyEditDetailsFragment extends Fragment {
     private LottieAnimationView doneAnimation;
 
 
-
     public StudyEditDetailsFragment() {
     }
 
@@ -115,17 +114,17 @@ public class StudyEditDetailsFragment extends Fragment {
         categories = view.findViewById(R.id.edit_study_category);
         dropdownListCategories = new ArrayList<>();
 
-        for(int i = 1; i < getResources().getStringArray(R.array.createCategoryList).length; i++){
+        for (int i = 1; i < getResources().getStringArray(R.array.createCategoryList).length; i++) {
             dropdownListCategories.add(getResources().getStringArray(R.array.createCategoryList)[i]);
         }
-        arrayAdapterCategories = new ArrayAdapter<>(getActivity(), R.layout.material_dropdown_item, dropdownListCategories);
+        arrayAdapterCategories = new ArrayAdapter<>(getActivity(), R.layout.item_material_dropdown, dropdownListCategories);
         categories.setAdapter(arrayAdapterCategories);
 
         executionType = view.findViewById(R.id.edit_study_executionType);
         dropdownListExecutionType = new ArrayList<>();
         dropdownListExecutionType.add("Remote");
         dropdownListExecutionType.add("Präsenz");
-        arrayAdapterExecutionType = new ArrayAdapter<>(getActivity(), R.layout.material_dropdown_item, dropdownListExecutionType);
+        arrayAdapterExecutionType = new ArrayAdapter<>(getActivity(), R.layout.item_material_dropdown, dropdownListExecutionType);
         executionType.setAdapter(arrayAdapterExecutionType);
 
         contactMail = view.findViewById(R.id.edit_study_contact_mail);
@@ -159,7 +158,7 @@ public class StudyEditDetailsFragment extends Fragment {
 
             @Override
             public void afterTextChanged(Editable editable) {
-                if (editable.toString().equals("Remote")){
+                if (editable.toString().equals("Remote")) {
 
                     presenceLayout.setVisibility(View.GONE);
                     remoteLayout.setVisibility(View.VISIBLE);
@@ -170,14 +169,11 @@ public class StudyEditDetailsFragment extends Fragment {
             }
         });
 
-        saveButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+        saveButton.setOnClickListener(v -> {
 
-                if (checkMandatoryFields()){
-                    playAnimation();
-                    studyEditViewModel.updateStudyAndDates();
-                }
+            if (checkMandatoryFields()) {
+                playAnimation();
+                studyEditViewModel.updateStudyAndDates();
             }
         });
 
@@ -199,25 +195,25 @@ public class StudyEditDetailsFragment extends Fragment {
     //Checks for mandatory input and sets error messages
     private Boolean checkMandatoryFields() {
 
-        if (title.getText().toString().isEmpty()){
+        if (title.getText().toString().isEmpty()) {
             title.setError("Titel darf nicht leer sein!");
             return false;
         }
-        if (contactMail.getText().toString().isEmpty()){
+        if (contactMail.getText().toString().isEmpty()) {
             contactMail.setError("Meil darf nicht leer sein!");
             return false;
         }
-        if (description.getText().toString().isEmpty()){
+        if (description.getText().toString().isEmpty()) {
             description.setError("Beschreibung darf nicht leer sein!");
             return false;
         }
         if (executionType.getText().toString().equals("Remote")) {
-            if (platformOne.getText().toString().isEmpty()){
+            if (platformOne.getText().toString().isEmpty()) {
                 platformOne.setError("Es muss eine Platform angegeben werden!");
                 return false;
             }
-        }else {
-            if (location.getText().toString().isEmpty()){
+        } else {
+            if (location.getText().toString().isEmpty()) {
                 location.setError("Es muss ein Ort angegeben werden!");
                 return false;
             }
@@ -239,7 +235,7 @@ public class StudyEditDetailsFragment extends Fragment {
     //Parameter:
     //Return values:
     //Navigates back to the study details view
-    private void navigateToCreatorDetailsView(){
+    private void navigateToCreatorDetailsView() {
         Bundle args = new Bundle();
         args.putString("studyId", currentStudyIdEdit);
         args.putBoolean("fromEditFragment", true);

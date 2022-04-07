@@ -11,7 +11,7 @@ import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.vpmanager.PA_ExpandableListDataPump;
+import com.example.vpmanager.helper.AccessDatabaseHelper;
 import com.example.vpmanager.R;
 import com.example.vpmanager.models.DateModel;
 
@@ -22,7 +22,6 @@ public class StudyDatesCreatorAdapter extends RecyclerView.Adapter<RecyclerView.
     private Context mContext;
     private ArrayList<DateModel> mStudyDates;
     private OnDateClickListener mOnDateClickListener;
-
 
 
     //Parameter: context, studyDates, onDareCLickListener
@@ -37,7 +36,7 @@ public class StudyDatesCreatorAdapter extends RecyclerView.Adapter<RecyclerView.
     @NonNull
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.date_creator_item, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_appointment_creator, parent, false);
         CustomViewHolder holder = new CustomViewHolder(view, mContext);
         return holder;
     }
@@ -61,7 +60,6 @@ public class StudyDatesCreatorAdapter extends RecyclerView.Adapter<RecyclerView.
     public int getItemCount() {
         return mStudyDates.size();
     }
-
 
 
     private class CustomViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
@@ -90,23 +88,20 @@ public class StudyDatesCreatorAdapter extends RecyclerView.Adapter<RecyclerView.
             participatedButton = itemView.findViewById(R.id.dateParticipatedButton);
             border_participated = itemView.findViewById(R.id.dateCreatorBorderCard_participated);
 
-            participatedButton.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
+            participatedButton.setOnClickListener(v -> {
 
-                    participated = !participated;
+                participated = !participated;
 
-                    if (participated) {
-                        participatedButton.setTextColor(context.getResources().getColor(R.color.green_dark));
-                        participatedButton.setText(R.string.participated);
-                        border_participated.setCardBackgroundColor(context.getResources().getColor(R.color.green_dark));
-                    } else {
-                        participatedButton.setTextColor(context.getResources().getColor(R.color.heatherred_dark));
-                        participatedButton.setText(R.string.notParticipated);
-                        border_participated.setCardBackgroundColor(context.getResources().getColor(R.color.heatherred_dark));
-                    }
-                    PA_ExpandableListDataPump.setDateState(mStudyDates.get(getAdapterPosition()).getDateId(), participated);
+                if (participated) {
+                    participatedButton.setTextColor(context.getResources().getColor(R.color.green_dark));
+                    participatedButton.setText(R.string.participated);
+                    border_participated.setCardBackgroundColor(context.getResources().getColor(R.color.green_dark));
+                } else {
+                    participatedButton.setTextColor(context.getResources().getColor(R.color.heatherred_dark));
+                    participatedButton.setText(R.string.notParticipated);
+                    border_participated.setCardBackgroundColor(context.getResources().getColor(R.color.heatherred_dark));
                 }
+                AccessDatabaseHelper.setDateState(mStudyDates.get(getAdapterPosition()).getDateId(), participated);
             });
         }
 

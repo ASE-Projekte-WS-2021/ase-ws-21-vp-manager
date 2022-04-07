@@ -1,8 +1,6 @@
 package com.example.vpmanager.viewmodels;
 
-import static com.example.vpmanager.views.mainActivity.uniqueID;
-
-import android.util.Log;
+import static com.example.vpmanager.views.MainActivity.uniqueID;
 
 import androidx.lifecycle.ViewModel;
 
@@ -72,8 +70,6 @@ public class HomeViewModel extends ViewModel implements GetAllDatesListener, Get
     public void onAllDatesReady(Boolean success) {
         if (success) {
             fetchAllStudiesFromDb();
-        } else {
-            Log.d("HomeViewModel", "Getting all dates from DB failed!");
         }
     }
 
@@ -81,8 +77,6 @@ public class HomeViewModel extends ViewModel implements GetAllDatesListener, Get
     public void onAllStudiesReady(Boolean success) {
         if (success) {
             fetchVpAndMatrikelNumber();
-        } else {
-            Log.d("HomeViewModel", "Getting all studies from DB failed!");
         }
     }
 
@@ -376,7 +370,7 @@ public class HomeViewModel extends ViewModel implements GetAllDatesListener, Get
                     }
                 }
             }
-            if (saveDate && date != null ) {
+            if (saveDate && date != null) {
                 datesList.add(date);
             }
         }
@@ -528,7 +522,7 @@ public class HomeViewModel extends ViewModel implements GetAllDatesListener, Get
     //Sets the text for the last participated appointment
     private void setLastAppointmentText() {
         String date = getLastParticipationDate();
-        if (date == null && collectedVPS == 0 ) {
+        if (date == null && collectedVPS == 0) {
             homeFragment.loadDefaultorEmptyVersion();
         } else {
             homeFragment.setPlannedCompletionDate(date);

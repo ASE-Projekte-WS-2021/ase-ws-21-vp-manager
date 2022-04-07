@@ -1,7 +1,6 @@
 package com.example.vpmanager.adapter;
 
 import android.content.Context;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,10 +13,10 @@ import androidx.cardview.widget.CardView;
 import androidx.navigation.NavController;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.vpmanager.PA_ExpandableListDataPump;
+import com.example.vpmanager.helper.AccessDatabaseHelper;
 import com.example.vpmanager.R;
 import com.example.vpmanager.models.StudyObjectPa;
-import com.example.vpmanager.views.mainActivity;
+import com.example.vpmanager.views.MainActivity;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -35,18 +34,16 @@ public class CustomStudyListAdapter extends RecyclerView.Adapter<RecyclerView.Vi
     //Parameter: context, navController, studyMetaInfos
     //Return values:
     //Sets the required adapter elements
-    public CustomStudyListAdapter(Context context,NavController navController, ArrayList<StudyObjectPa> studyMetaInfos) {
+    public CustomStudyListAdapter(Context context, NavController navController, ArrayList<StudyObjectPa> studyMetaInfos) {
         mContext = context;
         mStudyMetaInfos = studyMetaInfos;
         this.navController = navController;
-        Log.d("StudyListAdapter", "constructor was called");
     }
 
     public CustomStudyListAdapter(Context context, NavController navController, HashMap<String, List<String>> studyMetaInfos) {
         mContext = context;
         mStudyMetaInfos = transformLists(studyMetaInfos);
         this.navController = navController;
-        Log.d("StudyListAdapter", "constructor was called");
     }
 
     private ArrayList<StudyObjectPa> transformLists(HashMap<String, List<String>> hashMapList) {
@@ -85,7 +82,7 @@ public class CustomStudyListAdapter extends RecyclerView.Adapter<RecyclerView.Vi
     @NonNull
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.pa_listview_item, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_pa_listview, parent, false);
         CustomViewHolder holder = new CustomViewHolder(view);
         return holder;
     }
@@ -95,10 +92,10 @@ public class CustomStudyListAdapter extends RecyclerView.Adapter<RecyclerView.Vi
 
         ((CustomViewHolder) holder).studyTitle.setText(mStudyMetaInfos.get(position).getTitle());
 
-        if( mStudyMetaInfos.get(position).getVps() != null && mStudyMetaInfos.get(position).getVps().contains("null"))
+        if (mStudyMetaInfos.get(position).getVps() != null && mStudyMetaInfos.get(position).getVps().contains("null"))
             mStudyMetaInfos.get(position).setVps("0 VP-Stunden");
 
-        if(mStudyMetaInfos.get(position).getVps() != null && !mStudyMetaInfos.get(position).getVps().contains("VP-Stunden"))
+        if (mStudyMetaInfos.get(position).getVps() != null && !mStudyMetaInfos.get(position).getVps().contains("VP-Stunden"))
             mStudyMetaInfos.get(position).setVps(mStudyMetaInfos.get(position).getVps() + " VP-Stunden");
 
         ((CustomViewHolder) holder).studyVps.setText(mStudyMetaInfos.get(position).getVps());
@@ -116,7 +113,7 @@ public class CustomStudyListAdapter extends RecyclerView.Adapter<RecyclerView.Vi
 
         TextView studyTitle, studyVps, studyDate;
         CardView studyItemParentLayout;
-        View colorView ;
+        View colorView;
 
         public CustomViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -133,16 +130,11 @@ public class CustomStudyListAdapter extends RecyclerView.Adapter<RecyclerView.Vi
 
             studyItemParentLayout = itemView.findViewById(R.id.pa_item_card_parent);
 
-            studyItemParentLayout.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    String studyId = mStudyMetaInfos.get(getAdapterPosition()).getStudyId();
-                    PA_ExpandableListDataPump.navigateToStudyCreatorFragment(mainActivity.uniqueID, studyId, "OwnStudyFragment", navController);
-                }
+            studyItemParentLayout.setOnClickListener(v -> {
+                String studyId = mStudyMetaInfos.get(getAdapterPosition()).getStudyId();
+                AccessDatabaseHelper.navigateToStudyCreatorFragment(MainActivity.uniqueID, studyId, "OwnStudyFragment", navController);
             });
         }
     }
-
-
 }
 

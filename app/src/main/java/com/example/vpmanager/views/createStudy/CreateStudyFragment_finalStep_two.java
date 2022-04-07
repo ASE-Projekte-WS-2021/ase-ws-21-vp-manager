@@ -11,10 +11,10 @@ import android.widget.TextView;
 
 import com.example.vpmanager.Config;
 import com.example.vpmanager.R;
-import com.example.vpmanager.views.mainActivity;
+import com.example.vpmanager.views.MainActivity;
 
 
-public class createStudyFragment_finalStep_two extends Fragment {
+public class CreateStudyFragment_finalStep_two extends Fragment {
 
 
     private TextView descriptionTextView;
@@ -24,7 +24,7 @@ public class createStudyFragment_finalStep_two extends Fragment {
     //Parameter:
     //Return values:
     //Sets the current fragment for the activity
-    public createStudyFragment_finalStep_two() {
+    public CreateStudyFragment_finalStep_two() {
         CreateStudyFragment.currentFragment = Config.createFragmentSeven;
     }
 
@@ -35,7 +35,7 @@ public class createStudyFragment_finalStep_two extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        mainActivity.currentFragment = "createFinalStepTwo";
+        MainActivity.currentFragment = "createFinalStepTwo";
         return inflater.inflate(R.layout.fragment_create_study_final_step_two, container, false);
     }
 
