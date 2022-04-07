@@ -4,7 +4,7 @@ import android.app.Dialog;
 import android.content.res.ColorStateList;
 import android.os.Bundle;
 
-import com.example.vpmanager.PA_ExpandableListDataPump;
+import com.example.vpmanager.helper.AccessDatabaseHelper;
 import com.example.vpmanager.R;
 import com.example.vpmanager.viewmodels.StudyCreatorViewModel;
 import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton;
@@ -78,7 +78,7 @@ public class StudyCreatorDetailsFragment extends Fragment {
     //Return values:
     //Sets the current study ID and ViewModel
     private void prepareComponents() {
-        currentStudyId = studyCreatorFragment.currentStudyId;
+        currentStudyId = StudyCreatorFragment.currentStudyId;
         studyViewModel = new ViewModelProvider(requireActivity()).get(StudyCreatorViewModel.class);
         studyViewModel.studyCreatorDetailsFragment = this;
         studyViewModel.prepareRepo();
@@ -109,12 +109,7 @@ public class StudyCreatorDetailsFragment extends Fragment {
             navController.navigate(R.id.action_studyCreatorFragment_to_editStudyFragment, args);
         });
 
-        changeStudyStateButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                showCloseStudyWarning();
-            }
-        });
+        changeStudyStateButton.setOnClickListener(v -> showCloseStudyWarning());
     }
 
 
@@ -123,7 +118,7 @@ public class StudyCreatorDetailsFragment extends Fragment {
     //Initializes button for closing finished studies; sets up alert messages
     private void showCloseStudyWarning() {
         Dialog dialog = new Dialog(getActivity(), R.style.DialogStyle);
-        dialog.setContentView(R.layout.duplicate_dialog);
+        dialog.setContentView(R.layout.dialog_warning);
 
         dialog.getWindow().setBackgroundDrawableResource(R.drawable.bg_window);
 
@@ -145,40 +140,27 @@ public class StudyCreatorDetailsFragment extends Fragment {
             warningText.setText(getString(R.string.studyOpenWarning));
         }
 
-        btnClose.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                dialog.dismiss();
+        btnClose.setOnClickListener(view -> dialog.dismiss());
+
+        addAnywaysButton.setOnClickListener(v -> {
+            studyIsClosed = !studyIsClosed;
+            if (!studyIsClosed) {
+                changeStudyStateButton.setText(R.string.changeStudyStateTitleClose);
+                changeStudyStateButton.setStrokeColor(ColorStateList.valueOf(getContext().getResources().getColor(R.color.heatherred_dark)));
+                changeStudyStateButton.setBackgroundTintList(ColorStateList.valueOf(getContext().getResources().getColor(R.color.heatherred_Main)));
+                changeStudyStateButton.setIcon(getResources().getDrawable(R.drawable.ic_baseline_close_24));
+            } else {
+                changeStudyStateButton.setText(R.string.changeStudyStateTitleOpen);
+                changeStudyStateButton.setStrokeColor(ColorStateList.valueOf(getContext().getResources().getColor(R.color.green_dark)));
+                changeStudyStateButton.setBackgroundTintList(ColorStateList.valueOf(getContext().getResources().getColor(R.color.green_Main)));
+                changeStudyStateButton.setIcon(getResources().getDrawable(R.drawable.ic_baseline_refresh_24));
             }
+            AccessDatabaseHelper.setStudyState(currentStudyId, studyIsClosed);
+            dialog.dismiss();
+
         });
 
-        addAnywaysButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                studyIsClosed = !studyIsClosed;
-                if (!studyIsClosed) {
-                    changeStudyStateButton.setText(R.string.changeStudyStateTitleClose);
-                    changeStudyStateButton.setStrokeColor(ColorStateList.valueOf(getContext().getResources().getColor(R.color.heatherred_dark)));
-                    changeStudyStateButton.setBackgroundTintList(ColorStateList.valueOf(getContext().getResources().getColor(R.color.heatherred_Main)));
-                    changeStudyStateButton.setIcon(getResources().getDrawable(R.drawable.ic_baseline_close_24));
-                } else {
-                    changeStudyStateButton.setText(R.string.changeStudyStateTitleOpen);
-                    changeStudyStateButton.setStrokeColor(ColorStateList.valueOf(getContext().getResources().getColor(R.color.green_dark)));
-                    changeStudyStateButton.setBackgroundTintList(ColorStateList.valueOf(getContext().getResources().getColor(R.color.green_Main)));
-                    changeStudyStateButton.setIcon(getResources().getDrawable(R.drawable.ic_baseline_refresh_24));
-                }
-                PA_ExpandableListDataPump.setStudyState(currentStudyId, studyIsClosed);
-                dialog.dismiss();
-
-            }
-        });
-
-        abortButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                dialog.dismiss();
-            }
-        });
+        abortButton.setOnClickListener(v -> dialog.dismiss());
         dialog.show();
     }
 
@@ -191,17 +173,42 @@ public class StudyCreatorDetailsFragment extends Fragment {
         headerText.setText(studyViewModel.getStudyDetails().getName());
         description.setText(studyViewModel.getStudyDetails().getDescription());
         vpValue.setText(studyViewModel.getStudyDetails().getVps() + " VP");
-        contactInfo.setText(studyViewModel.getStudyDetails().getContactOne());
-        //contactTwo could be accessed
-        //contactThree could be accessed
+        String contactOne, contactTwo, contactThree, contactFour, contactFive, contactString = "";
+        //mail
+        contactOne = studyViewModel.getStudyDetails().getContactOne();
+        //handy
+        contactTwo = studyViewModel.getStudyDetails().getContactTwo();
+        //Skype
+        contactThree = studyViewModel.getStudyDetails().getContactThree();
+        //Discord
+        contactFour = studyViewModel.getStudyDetails().getContactFour();
+        //Sonstiges
+        contactFive = studyViewModel.getStudyDetails().getContactFive();
+
+        if (contactOne != null && !contactOne.isEmpty()) {
+            contactString += "Mail: " + contactOne + "\n";
+        }
+        if (contactTwo != null && !contactTwo.isEmpty()) {
+            contactString += "Telefon: " + contactTwo + "\n";
+        }
+        if (contactThree != null && !contactThree.isEmpty()) {
+            contactString += "Skype: " + contactThree + "\n";
+        }
+        if (contactFour != null && !contactFour.isEmpty()) {
+            contactString += "Discord: " + contactFour + "\n";
+        }
+        if (contactFive != null && !contactFive.isEmpty()) {
+            contactString += "Andere: " + contactFive + "\n";
+        }
+        contactInfo.setText(contactString);
+
         category.setText(studyViewModel.getStudyDetails().getCategory());
         studyType.setText(studyViewModel.getStudyDetails().getExecutionType());
         if (studyViewModel.getStudyDetails().getExecutionType().equals(getString(R.string.remoteString))) {
             remoteData.setText(studyViewModel.getStudyDetails().getRemotePlatformOne());
             //remotePlatformTwo could be accessed
-            if(studyViewModel.getStudyDetails().getRemotePlatformTwo() != null)
-            {
-                String platforms = remoteData.getText().toString()+ " & " + studyViewModel.getStudyDetails().getRemotePlatformTwo();
+            if (studyViewModel.getStudyDetails().getRemotePlatformTwo() != null) {
+                String platforms = remoteData.getText().toString() + " & " + studyViewModel.getStudyDetails().getRemotePlatformTwo();
                 remoteData.setText(platforms);
             }
         } else {

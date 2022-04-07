@@ -44,9 +44,9 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:fontFamily="@font/google_sans_bold"
-                android:text="Matrikelnummer und VPS "
                 android:paddingStart="12dp"
                 android:paddingEnd="12dp"
+                android:text="Matrikelnummer und VPS "
                 android:textAlignment="center"
                 android:textColor="@color/black"
                 android:textSize="20sp" />
@@ -59,8 +59,8 @@
                 android:fontFamily="@font/google_sans_regular"
                 android:gravity="center_horizontal"
                 android:paddingStart="12dp"
-                android:paddingEnd="12dp"
                 android:paddingTop="20dp"
+                android:paddingEnd="12dp"
                 android:paddingBottom="10dp"
                 android:text="Sie können hier Ihre Matrikelnummer und die benötigten VPS eintragen."
                 android:textColor="@color/black" />
@@ -71,77 +71,77 @@
                 android:orientation="vertical">
 
 
+                <com.google.android.material.textfield.TextInputLayout
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginRight="20dp"
+                    android:hint="Matrikelnummer"
+                    android:textColorHint="@color/white"
+                    app:boxStrokeColor="@color/white"
+                    app:boxStrokeWidthFocused="2dp"
+                    app:hintTextColor="@color/heatherred_Main">
 
-
-                    <com.google.android.material.textfield.TextInputLayout
-                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/dialog_input_number"
+                        style="@style/You.EditText.Style"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="20dp"
-                        android:layout_marginTop="20dp"
-                        android:layout_marginRight="20dp"
-                        android:hint="Matrikelnummer"
-                        android:textColorHint="@color/white"
-                        app:boxStrokeColor="@color/white"
-                        app:boxStrokeWidthFocused="2dp"
-                        app:hintTextColor="@color/heatherred_Main">
+                        android:layout_height="match_parent"
+                        android:maxLength="34" />
 
-                        <com.google.android.material.textfield.TextInputEditText
-                            android:id="@+id/dialog_input_number"
-                            style="@style/You.EditText.Style"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:maxLength="34" />
+                </com.google.android.material.textfield.TextInputLayout>
 
-                    </com.google.android.material.textfield.TextInputLayout><com.google.android.material.textfield.TextInputLayout
-                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                <com.google.android.material.textfield.TextInputLayout
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginRight="20dp"
+                    android:hint="Benötigte VPS"
+                    android:textColorHint="@color/white"
+                    app:boxStrokeColor="@color/white"
+                    app:boxStrokeWidthFocused="2dp"
+                    app:hintTextColor="@color/heatherred_Main">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/dialog_input_vps"
+                        style="@style/You.EditText.Style"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="20dp"
-                        android:layout_marginTop="20dp"
-                        android:layout_marginRight="20dp"
-                        android:hint="Benötigte VPS"
-                        android:textColorHint="@color/white"
-                        app:boxStrokeColor="@color/white"
-                        app:boxStrokeWidthFocused="2dp"
-                        app:hintTextColor="@color/heatherred_Main">
+                        android:layout_height="match_parent"
+                        android:maxLength="34" />
 
-                        <com.google.android.material.textfield.TextInputEditText
-                            android:id="@+id/dialog_input_vps"
-                            style="@style/You.EditText.Style"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:maxLength="34" />
-
-                    </com.google.android.material.textfield.TextInputLayout>
+                </com.google.android.material.textfield.TextInputLayout>
 
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:gravity="center_horizontal"
+                android:layout_marginTop="12dp"
                 android:layout_marginBottom="8dp"
-                android:layout_marginTop="12dp">
+                android:gravity="center_horizontal"
+                android:orientation="horizontal">
 
                 <Button
                     android:id="@+id/abort"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:backgroundTint="@color/heatherred_Main"
                     android:text="Abbrechen"
-                    android:textColor="@color/white"
-                    android:backgroundTint="@color/heatherred_Main"/>
+                    android:textColor="@color/white" />
 
                 <Button
                     android:id="@+id/addAnyways"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Hinzufügen"
-                    android:backgroundTint="@color/heatherred_Main"
                     android:layout_marginStart="24dp"
                     android:layout_marginLeft="24dp"
-                    android:textColor="@color/white"/>
+                    android:backgroundTint="@color/heatherred_Main"
+                    android:text="Hinzufügen"
+                    android:textColor="@color/white" />
 
             </LinearLayout>
 

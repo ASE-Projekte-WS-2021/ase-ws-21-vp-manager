@@ -1,7 +1,9 @@
 package com.example.vpmanager.views.createStudy;
 
 import android.os.Bundle;
+
 import androidx.fragment.app.Fragment;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,10 +11,10 @@ import android.view.ViewGroup;
 import com.example.vpmanager.Config;
 import com.example.vpmanager.R;
 import com.google.android.material.textfield.TextInputEditText;
-import com.example.vpmanager.views.mainActivity;
+import com.example.vpmanager.views.MainActivity;
 
 
-public class createStudyFragment_StepFour_Remote extends Fragment {
+public class CreateStudyFragment_StepFour_Remote extends Fragment {
 
     public static TextInputEditText textInputEditTextPlatform;
     public static TextInputEditText textInputEditTextOptionalPlatform;
@@ -20,7 +22,7 @@ public class createStudyFragment_StepFour_Remote extends Fragment {
     //Parameter:
     //Return values:
     //Sets the current fragment for the activity
-    public createStudyFragment_StepFour_Remote() {
+    public CreateStudyFragment_StepFour_Remote() {
         CreateStudyFragment.currentFragment = Config.createFragmentFour;
     }
 
@@ -31,7 +33,7 @@ public class createStudyFragment_StepFour_Remote extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        mainActivity.currentFragment = "createStepFourRemote";
+        MainActivity.currentFragment = "createStepFourRemote";
         return inflater.inflate(R.layout.fragment_create_study_step_four_remote, container, false);
     }
 

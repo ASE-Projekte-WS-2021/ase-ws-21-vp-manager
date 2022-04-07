@@ -1,6 +1,6 @@
 package com.example.vpmanager.views;
 
-import static com.example.vpmanager.views.mainActivity.uniqueID;
+import static com.example.vpmanager.views.MainActivity.uniqueID;
 
 import android.content.res.ColorStateList;
 import android.os.Bundle;
@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
@@ -18,7 +19,7 @@ import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.vpmanager.PA_ExpandableListDataPump;
+import com.example.vpmanager.helper.AccessDatabaseHelper;
 import com.example.vpmanager.R;
 import com.example.vpmanager.adapter.StudyListAdapter;
 import com.example.vpmanager.models.StudyMetaInfoModel;
@@ -60,7 +61,7 @@ public class FindStudyFragment extends Fragment implements StudyListAdapter.OnSt
         setupClickListener();
         //starting point to get the data
         findStudyViewModel.fetchStudyMetaData();
-        mainActivity.currentFragment = "findStudy";
+        MainActivity.currentFragment = "findStudy";
         return view;
     }
 
@@ -376,10 +377,6 @@ public class FindStudyFragment extends Fragment implements StudyListAdapter.OnSt
                         if (othersActive)
                             list.add(info);
                         break;
-                    default:
-                        if (othersActive)
-                            list.add(info);
-                        break;
                 }
             }
         }
@@ -436,6 +433,6 @@ public class FindStudyFragment extends Fragment implements StudyListAdapter.OnSt
     //Navigates to the more detailed view of a study
     @Override
     public void onStudyClick(String studyId) {
-        PA_ExpandableListDataPump.navigateToStudyCreatorFragment(uniqueID, studyId, "FindStudyFragment", navController);
+        AccessDatabaseHelper.navigateToStudyCreatorFragment(uniqueID, studyId, "FindStudyFragment", navController);
     }
 }

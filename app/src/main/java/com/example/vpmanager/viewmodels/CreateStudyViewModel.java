@@ -5,7 +5,7 @@ import androidx.lifecycle.ViewModel;
 import com.example.vpmanager.views.createStudy.CreateStudyFragment;
 import com.example.vpmanager.interfaces.CreateStudyListener;
 import com.example.vpmanager.repositories.CreateStudyRepository;
-import com.example.vpmanager.views.mainActivity;
+import com.example.vpmanager.views.MainActivity;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -21,7 +21,6 @@ public class CreateStudyViewModel extends ViewModel implements CreateStudyListen
 
     private CreateStudyRepository mCreationRepo;
     public CreateStudyFragment createStudyFragment;
-
 
 
     //Parameter:
@@ -41,7 +40,7 @@ public class CreateStudyViewModel extends ViewModel implements CreateStudyListen
 
         String studyId = getNewId();
         studyCreationProcessData.put("id", studyId);
-        studyCreationProcessData.put("creator", mainActivity.uniqueID);
+        studyCreationProcessData.put("creator", MainActivity.uniqueID);
         studyCreationProcessData.put("studyStateClosed", false);
 
         if (!datesCreationProcessData.isEmpty()) {

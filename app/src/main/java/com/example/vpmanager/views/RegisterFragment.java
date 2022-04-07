@@ -52,7 +52,7 @@ public class RegisterFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        mainActivity.currentFragment = "register";
+        MainActivity.currentFragment = "register";
         View view = inflater.inflate(R.layout.fragment_register, container, false);
         prepareViewModel();
         setupView(view);
@@ -64,7 +64,7 @@ public class RegisterFragment extends Fragment {
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         navController = Navigation.findNavController(view);
-        ((mainActivity) getActivity()).setDrawerLocked();
+        ((MainActivity) getActivity()).setDrawerLocked();
     }
 
     private void prepareViewModel() {
@@ -108,18 +108,13 @@ public class RegisterFragment extends Fragment {
     //Shows ToolTip PopUp; sets dialog properties
     private void showToolTip() {
         Dialog dialog = new Dialog(getActivity(), R.style.DialogStyle);
-        dialog.setContentView(R.layout.info_dialog);
+        dialog.setContentView(R.layout.dialog_info);
 
         dialog.getWindow().setBackgroundDrawableResource(R.drawable.bg_window);
 
         ImageView btnClose = dialog.findViewById(R.id.btn_close);
 
-        btnClose.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                dialog.dismiss();
-            }
-        });
+        btnClose.setOnClickListener(view -> dialog.dismiss());
 
         TextView title = dialog.findViewById(R.id.info_title);
         TextView desc = dialog.findViewById(R.id.info_desc);

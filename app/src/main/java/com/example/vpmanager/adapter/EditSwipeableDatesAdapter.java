@@ -44,7 +44,7 @@ public class EditSwipeableDatesAdapter extends RecyclerView.Adapter<RecyclerView
     @NonNull
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.date_item, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_appointment, parent, false);
         CustomViewHolder holder = new CustomViewHolder(view);
         return holder;
     }
@@ -78,15 +78,13 @@ public class EditSwipeableDatesAdapter extends RecyclerView.Adapter<RecyclerView
     //Deletes associated date item
     public void deleteItem(int position) {
         mRecentlyDeletedDate = editDatesList.get(position);
-        if(mRecentlyDeletedDate.getSelected() && mRecentlyDeletedDate.getUserId() != null)
-        {
+        if (mRecentlyDeletedDate.getSelected() && mRecentlyDeletedDate.getUserId() != null) {
             View view = mFragmentView.findViewById(R.id.edit_study_dates_layout);
             Snackbar snackbar = Snackbar.make(view, R.string.removeAppointmentnotPossible,
                     Snackbar.LENGTH_LONG);
             snackbar.show();
             notifyDataSetChanged();
-        }
-        else {
+        } else {
             mRecentlyDeletedDatePosition = position;
             editDatesList.remove(position);
             notifyItemRemoved(position);

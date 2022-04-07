@@ -1,8 +1,7 @@
 package com.example.vpmanager.viewmodels;
 
-import static com.example.vpmanager.views.mainActivity.uniqueID;
+import static com.example.vpmanager.views.MainActivity.uniqueID;
 
-import android.util.Log;
 import android.widget.LinearLayout;
 
 import androidx.lifecycle.ViewModel;
@@ -70,8 +69,6 @@ public class PersonalAccountViewModel extends ViewModel implements GetAllDatesLi
     public void onAllDatesReady(Boolean success) {
         if (success) {
             fetchAllStudiesFromDb();
-        } else {
-            Log.d("PAViewModel", "Getting all dates from DB failed!");
         }
     }
 
@@ -79,8 +76,6 @@ public class PersonalAccountViewModel extends ViewModel implements GetAllDatesLi
     public void onAllStudiesReady(Boolean success) {
         if (success) {
             fetchVpAndMatrikelNumber();
-        } else {
-            Log.d("PAViewModel", "Getting all studies from DB failed!");
         }
     }
 

@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="?android:windowBackground"
-    tools:context=".views.createStudy.createStudyFragment_StepFour_Remote">
+    tools:context=".views.createStudy.CreateStudyFragment_StepFour_Remote">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -74,11 +74,11 @@
                         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_below="@+id/presetLayoutStepFour"
                         android:layout_marginLeft="20dp"
                         android:layout_marginTop="20dp"
                         android:layout_marginRight="20dp"
                         android:hint="@string/createLocationHint"
-                        android:layout_below="@+id/presetLayoutStepFour"
                         android:textColorHint="@color/heatherred_Main"
                         app:boxStrokeColor="@color/black"
                         app:boxStrokeWidthFocused="2dp"

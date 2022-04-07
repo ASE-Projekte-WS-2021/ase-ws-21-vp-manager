@@ -34,7 +34,7 @@ public class StudyDatesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
     @NonNull
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.date_item, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_appointment, parent, false);
         CustomViewHolder holder = new CustomViewHolder(view, mOnDateClickListener);
         return holder;
     }

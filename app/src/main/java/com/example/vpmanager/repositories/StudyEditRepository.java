@@ -4,18 +4,14 @@ import static android.content.ContentValues.TAG;
 
 import android.util.Log;
 
-import androidx.annotation.NonNull;
 
 import com.example.vpmanager.interfaces.EditStudyDetailsListener;
 import com.example.vpmanager.interfaces.StudyDatesListener;
 import com.example.vpmanager.interfaces.StudyUpdatedListener;
 import com.example.vpmanager.models.DateModel;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
-import com.google.firebase.firestore.QuerySnapshot;
 import com.google.firebase.firestore.SetOptions;
 
 import java.util.ArrayList;
@@ -74,43 +70,40 @@ public class StudyEditRepository {
         CollectionReference studyDocRef = db.collection("studies");
         studyEditDetailsMap.clear(); //reset and save new details in it
 
-        studyDocRef.whereEqualTo("id", currentStudyIdEdit).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-            @Override
-            public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                if (task.isSuccessful()) {
-                    for (QueryDocumentSnapshot document : task.getResult()) {
-                        if (document != null) {
-                            studyEditDetailsMap.put("id", document.getString("id"));
-                            studyEditDetailsMap.put("name", document.getString("name"));
-                            studyEditDetailsMap.put("vps", document.getString("vps"));
-                            studyEditDetailsMap.put("category", document.getString("category"));
-                            studyEditDetailsMap.put("executionType", document.getString("executionType"));
-                            studyEditDetailsMap.put("contact", document.getString("contact"));
-                            studyEditDetailsMap.put("contact2", document.getString("contact2"));
-                            studyEditDetailsMap.put("contact3", document.getString("contact3"));
-                            studyEditDetailsMap.put("contact4", document.getString("contact4"));
-                            studyEditDetailsMap.put("contact5", document.getString("contact5"));
-                            studyEditDetailsMap.put("description", document.getString("description"));
-                            studyEditDetailsMap.put("platform", document.getString("platform"));
-                            studyEditDetailsMap.put("platform2", document.getString("platform2"));
-                            studyEditDetailsMap.put("location", document.getString("location"));
-                            studyEditDetailsMap.put("street", document.getString("street"));
-                            studyEditDetailsMap.put("room", document.getString("room"));
-                            studyEditDetailsMap.put("studyStateClosed", (Boolean) document.getBoolean("studyStateClosed"));
-                        } else {
-                            Log.d("loadStudyEditDetails", "Error: the document does not exist!");
-                        }
-                        editStudyDetailsListener.onEditStudyDetailsReady(studyEditDetailsMap);
+        studyDocRef.whereEqualTo("id", currentStudyIdEdit).get().addOnCompleteListener(task -> {
+            if (task.isSuccessful()) {
+                for (QueryDocumentSnapshot document : task.getResult()) {
+                    if (document != null) {
+                        studyEditDetailsMap.put("id", document.getString("id"));
+                        studyEditDetailsMap.put("name", document.getString("name"));
+                        studyEditDetailsMap.put("vps", document.getString("vps"));
+                        studyEditDetailsMap.put("category", document.getString("category"));
+                        studyEditDetailsMap.put("executionType", document.getString("executionType"));
+                        studyEditDetailsMap.put("contact", document.getString("contact"));
+                        studyEditDetailsMap.put("contact2", document.getString("contact2"));
+                        studyEditDetailsMap.put("contact3", document.getString("contact3"));
+                        studyEditDetailsMap.put("contact4", document.getString("contact4"));
+                        studyEditDetailsMap.put("contact5", document.getString("contact5"));
+                        studyEditDetailsMap.put("description", document.getString("description"));
+                        studyEditDetailsMap.put("platform", document.getString("platform"));
+                        studyEditDetailsMap.put("platform2", document.getString("platform2"));
+                        studyEditDetailsMap.put("location", document.getString("location"));
+                        studyEditDetailsMap.put("street", document.getString("street"));
+                        studyEditDetailsMap.put("room", document.getString("room"));
+                        studyEditDetailsMap.put("studyStateClosed", (Boolean) document.getBoolean("studyStateClosed"));
+                    } else {
+                        Log.d("loadStudyEditDetails", "Error: the document does not exist!");
                     }
-                } else {
-                    Log.d("loadStudyEditDetails", "Error:" + task.getException());
+                    editStudyDetailsListener.onEditStudyDetailsReady(studyEditDetailsMap);
                 }
+            } else {
+                Log.d("loadStudyEditDetails", "Error:" + task.getException());
             }
         });
     }
 
 
-    //Parameter: currentStudyIdEdit
+    //Parameter: id of current study that is edited
     //Return values:
     //Loads all study date values from database
     private void loadStudyEditDates(String currentStudyIdEdit) {
@@ -119,31 +112,28 @@ public class StudyEditRepository {
         studyEditDatesArrayList.clear();
 
         datesRef.whereEqualTo("studyId", currentStudyIdEdit).get()
-                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                    @Override
-                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                        if (task.isSuccessful()) {
-                            for (QueryDocumentSnapshot document : task.getResult()) {
+                .addOnCompleteListener(task -> {
+                    if (task.isSuccessful()) {
+                        for (QueryDocumentSnapshot document : task.getResult()) {
 
-                                studyEditDatesArrayList.add(
-                                        new DateModel(
-                                                document.getString("id"),      //id of the date
-                                                document.getString("date"),    //the date itself
-                                                document.getString("studyId"), //id of corresponding study
-                                                document.getString("userId"),  //id of user who selected the date
-                                                document.getBoolean("selected"), //boolean if selected or not
-                                                document.getBoolean("participated")) //boolean if participated or not
-                                );
-                            }
-                            editStudyDatesListener.onStudyDatesReady(studyEditDatesArrayList);
-                        } else {
-                            Log.d("loadStudyEditDates", "Error:" + task.getException());
+                            studyEditDatesArrayList.add(
+                                    new DateModel(
+                                            document.getString("id"),      //id of the date
+                                            document.getString("date"),    //the date itself
+                                            document.getString("studyId"), //id of corresponding study
+                                            document.getString("userId"),  //id of user who selected the date
+                                            document.getBoolean("selected"), //boolean if selected or not
+                                            document.getBoolean("participated")) //boolean if participated or not
+                            );
                         }
+                        editStudyDatesListener.onStudyDatesReady(studyEditDatesArrayList);
+                    } else {
+                        Log.d("loadStudyEditDates", "Error:" + task.getException());
                     }
                 });
     }
 
-    //Parameter: specificDate, specificDateId
+    //Parameter: specific Date object, id of specific date object
     //Return values:
     //Updates dates in database; no callback yet: only if the study is updated completely
     public void updateDates(Map<String, Object> specificDate, String specificDateId) {
@@ -154,7 +144,7 @@ public class StudyEditRepository {
                 .addOnFailureListener(e -> Log.w(TAG, "Error writing/updating document", e));
     }
 
-    //Parameter: updatedStudyMap, idOfUpdatedStudy
+    //Parameter: map of new study info, idOfUpdatedStudy
     //Return values:
     //Updates studies in database
     public void updateStudy(Map<String, Object> updatedStudyMap, String idOfUpdatedStudy) {
@@ -167,7 +157,7 @@ public class StudyEditRepository {
     }
 
 
-    //Parameter: dateId
+    //Parameter: id of date object
     //Return values:
     //Deletes data from database
     public void deleteDate(String dateId) {

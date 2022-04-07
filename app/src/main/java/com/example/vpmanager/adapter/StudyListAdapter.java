@@ -41,7 +41,7 @@ public class StudyListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
     @NonNull
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.studylist_cart, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_studylist, parent, false);
         CustomViewHolder holder = new CustomViewHolder(view, mOnStudyItemClickListener);
         return holder;
     }
@@ -66,7 +66,6 @@ public class StudyListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
     public int getItemCount() {
         return mStudyMetaInfos.size();
     }
-
 
 
     private class CustomViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {

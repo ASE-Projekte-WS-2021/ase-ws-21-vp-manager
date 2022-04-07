@@ -79,7 +79,6 @@
                 </androidx.cardview.widget.CardView>
 
                 <LinearLayout
-                    android:weightSum="12"
                     android:id="@+id/personalAccountLegend"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -87,7 +86,8 @@
                     android:layout_marginStart="10dp"
                     android:layout_marginEnd="10dp"
                     android:layout_marginBottom="5dp"
-                    android:orientation="horizontal">
+                    android:orientation="horizontal"
+                    android:weightSum="12">
 
                     <RelativeLayout
                         android:id="@+id/legend_green_yellow"
@@ -219,10 +219,11 @@
                 android:orientation="vertical">
 
                 <LinearLayout
+                    android:id="@+id/pa_sort_expanderButton"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:id="@+id/pa_sort_expanderButton">
+                    android:orientation="horizontal">
+
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -230,83 +231,90 @@
                         android:layout_marginStart="15dp"
                         android:text="Sortieren"
                         android:textSize="15sp" />
+
                     <ImageView
+                        android:id="@+id/pa_sort_expanderIcon"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:src="@drawable/ic_baseline_expand_more_24"
-                        android:id="@+id/pa_sort_expanderIcon"/>
+                        android:src="@drawable/ic_baseline_expand_more_24" />
                 </LinearLayout>
-                        <LinearLayout
-                            android:layout_width="match_parent"
+
+                <LinearLayout
+                    android:id="@+id/pa_sort_expanderLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="10dp"
+                    android:layout_marginBottom="5dp"
+                    android:orientation="horizontal"
+                    android:visibility="gone"
+                    android:weightSum="3">
+
+                    <LinearLayout
+                        android:id="@+id/pa_sort_alphabetical"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center">
+
+                        <TextView
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:id="@+id/pa_sort_expanderLayout"
-                            android:layout_marginHorizontal="10dp"
-                            android:layout_marginBottom="5dp"
-                            android:orientation="horizontal"
-                            android:weightSum="3"
-                            android:visibility="gone">
-                            <LinearLayout
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:id="@+id/pa_sort_alphabetical"
-                                android:layout_weight="1"
-                                android:gravity="center">
-                                <TextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:text="Name"
-                                    android:textStyle="bold"
-                                    android:textColor="@color/heatherred_Main"
-                                    android:textSize="20sp"/>
-                                <ImageView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    app:tint="@color/heatherred_Main"
-                                    android:id="@+id/pa_sort_alphabetical_Icon"/>
-                            </LinearLayout>
+                            android:text="Name"
+                            android:textColor="@color/heatherred_Main"
+                            android:textSize="20sp"
+                            android:textStyle="bold" />
 
-                            <LinearLayout
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:id="@+id/pa_sort_date"
-                                android:layout_weight="1"
-                                android:gravity="center">
-                                <TextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:text="Datum"
-                                    android:textStyle="bold"
-                                    android:textColor="@color/heatherred_Main"
-                                    android:textSize="20sp"/>
-                                <ImageView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    app:tint="@color/heatherred_Main"
-                                    android:id="@+id/pa_sort_date_Icon"/>
-                            </LinearLayout>
+                        <ImageView
+                            android:id="@+id/pa_sort_alphabetical_Icon"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            app:tint="@color/heatherred_Main" />
+                    </LinearLayout>
 
-                            <LinearLayout
-                                android:id="@+id/pa_sort_vp"
-                                android:layout_width="113dp"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:gravity="center">
+                    <LinearLayout
+                        android:id="@+id/pa_sort_date"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center">
 
-                                <TextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:text="VPS"
-                                    android:textColor="@color/heatherred_Main"
-                                    android:textSize="20sp"
-                                    android:textStyle="bold" />
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Datum"
+                            android:textColor="@color/heatherred_Main"
+                            android:textSize="20sp"
+                            android:textStyle="bold" />
 
-                                <ImageView
-                                    android:id="@+id/pa_sort_vp_Icon"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    app:tint="@color/heatherred_Main" />
-                            </LinearLayout>
-                        </LinearLayout>
+                        <ImageView
+                            android:id="@+id/pa_sort_date_Icon"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            app:tint="@color/heatherred_Main" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/pa_sort_vp"
+                        android:layout_width="113dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="VPS"
+                            android:textColor="@color/heatherred_Main"
+                            android:textSize="20sp"
+                            android:textStyle="bold" />
+
+                        <ImageView
+                            android:id="@+id/pa_sort_vp_Icon"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            app:tint="@color/heatherred_Main" />
+                    </LinearLayout>
+                </LinearLayout>
             </LinearLayout>
 
         </androidx.cardview.widget.CardView>
@@ -329,10 +337,11 @@
                 android:orientation="vertical">
 
                 <LinearLayout
+                    android:id="@+id/pa_status_expanderButton"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:id="@+id/pa_status_expanderButton">
+                    android:orientation="horizontal">
+
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -340,20 +349,21 @@
                         android:layout_marginStart="15dp"
                         android:text="Studienstatus"
                         android:textSize="15sp" />
+
                     <ImageView
+                        android:id="@+id/pa_status_expanderIcon"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:src="@drawable/ic_baseline_expand_more_24"
-                        android:id="@+id/pa_status_expanderIcon"/>
+                        android:src="@drawable/ic_baseline_expand_more_24" />
                 </LinearLayout>
 
                 <com.google.android.material.chip.ChipGroup
+                    android:id="@+id/pa_status_expanderLayout"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:id="@+id/pa_status_expanderLayout"
                     android:layout_gravity="center_horizontal"
-                    app:flexWrap="wrap"
-                    android:visibility="gone">
+                    android:visibility="gone"
+                    app:flexWrap="wrap">
 
                     <com.google.android.material.chip.Chip
                         android:id="@+id/pa_remove_planned"
@@ -361,9 +371,8 @@
                         android:layout_height="wrap_content"
                         android:text="Geplant"
                         android:textStyle="bold"
-                        app:chipBackgroundColor="@color/pieChartPlanned"
                         app:checkedIconTint="@color/white"
-                        />
+                        app:chipBackgroundColor="@color/pieChartPlanned" />
 
                     <com.google.android.material.chip.Chip
                         android:id="@+id/pa_remove_participation"
@@ -372,8 +381,8 @@
                         android:layout_toEndOf="@id/pa_remove_planned"
                         android:text="Teilgenommen"
                         android:textStyle="bold"
-                        app:chipBackgroundColor="@color/pieChartParticipation"
-                        app:checkedIconTint="@color/white"/>
+                        app:checkedIconTint="@color/white"
+                        app:chipBackgroundColor="@color/pieChartParticipation" />
 
                     <com.google.android.material.chip.Chip
                         android:id="@+id/pa_remove_completed"
@@ -383,8 +392,8 @@
                         android:layout_toEndOf="@id/pa_remove_participation"
                         android:text="Abgeschlossen"
                         android:textStyle="bold"
-                        app:chipBackgroundColor="@color/pieChartSafe"
-                        app:checkedIconTint="@color/white"/>
+                        app:checkedIconTint="@color/white"
+                        app:chipBackgroundColor="@color/pieChartSafe" />
 
                 </com.google.android.material.chip.ChipGroup>
             </LinearLayout>

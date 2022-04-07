@@ -1,8 +1,6 @@
 package com.example.vpmanager.viewmodels;
 
-import static com.example.vpmanager.views.mainActivity.uniqueID;
-
-import android.util.Log;
+import static com.example.vpmanager.views.MainActivity.uniqueID;
 
 import androidx.lifecycle.ViewModel;
 
@@ -30,7 +28,7 @@ public class UpcomingAppointViewModel extends ViewModel implements GetAllDatesLi
 
     private List<Map<String, Object>> dbDatesListUpAppoint = new ArrayList<>();
     private List<Map<String, Object>> dbStudiesListUpAppoint = new ArrayList<>();
-    private List<String[]>[] arrivingDates = new List[]{null};  //final?
+    private List<String[]>[] arrivingDates = new List[]{null};
 
     private HashMap<String, String> getStudyIdByName = new HashMap<>();
 
@@ -61,8 +59,6 @@ public class UpcomingAppointViewModel extends ViewModel implements GetAllDatesLi
     public void onAllDatesReady(Boolean success) {
         if (success) {
             getAllStudies();
-        } else {
-            Log.d("UpAppointViewModel", "Getting all dates from DB failed!");
         }
     }
 
@@ -74,8 +70,6 @@ public class UpcomingAppointViewModel extends ViewModel implements GetAllDatesLi
 
             arrivingDates[0] = getAllArrivingDates();
             finishSetupList(arrivingDates[0]);
-        } else {
-            Log.d("UpAppointViewModel", "Getting all studies from DB failed!");
         }
     }
 

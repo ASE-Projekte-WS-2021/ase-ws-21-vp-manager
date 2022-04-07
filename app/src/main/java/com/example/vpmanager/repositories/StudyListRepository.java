@@ -1,15 +1,13 @@
 package com.example.vpmanager.repositories;
 
 import android.util.Log;
-import androidx.annotation.NonNull;
+
 import com.example.vpmanager.models.StudyMetaInfoModel;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
-import com.google.firebase.firestore.QuerySnapshot;
+
 import java.util.ArrayList;
 
 
@@ -25,7 +23,6 @@ public class StudyListRepository {
     private ArrayList<ArrayList<String>> studyIdNameVpCat;
 
     private StudyMetaDataListener studyMetaDataListener;
-
 
 
     //Parameter:
@@ -98,27 +95,24 @@ public class StudyListRepository {
         //all studies are retrieved, sorted alphabetically by their names
         studiesRef.orderBy("name", Query.Direction.DESCENDING)
                 .get()
-                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                    @Override
-                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                        if (task.isSuccessful()) {
-                            for (QueryDocumentSnapshot document : task.getResult()) {
-                                //local ArrayList is stored in the big ArrayList for each existing study
-                                if (!document.getBoolean("studyStateClosed")) {
-                                    ArrayList<String> idNameVphCat = new ArrayList<>();
-                                    idNameVphCat.add(0, document.getString("id"));
-                                    idNameVphCat.add(1, document.getString("name"));
-                                    idNameVphCat.add(2, document.getString("vps"));
-                                    idNameVphCat.add(3, document.getString("category"));
-                                    idNameVphCat.add(4, document.getString("executionType"));
-                                    studyIdNameVpCat.add(idNameVphCat);
-                                }
+                .addOnCompleteListener(task -> {
+                    if (task.isSuccessful()) {
+                        for (QueryDocumentSnapshot document : task.getResult()) {
+                            //local ArrayList is stored in the big ArrayList for each existing study
+                            if (!document.getBoolean("studyStateClosed")) {
+                                ArrayList<String> idNameVphCat = new ArrayList<>();
+                                idNameVphCat.add(0, document.getString("id"));
+                                idNameVphCat.add(1, document.getString("name"));
+                                idNameVphCat.add(2, document.getString("vps"));
+                                idNameVphCat.add(3, document.getString("category"));
+                                idNameVphCat.add(4, document.getString("executionType"));
+                                studyIdNameVpCat.add(idNameVphCat);
                             }
-                            setStudyMetaInfo();
-                            studyMetaDataListener.onStudyMetaDataReady(studyMetaInfosArrayList);
-                        } else {
-                            Log.d("getStudyInfosFromDB", "Error:" + task.getException());
                         }
+                        setStudyMetaInfo();
+                        studyMetaDataListener.onStudyMetaDataReady(studyMetaInfosArrayList);
+                    } else {
+                        Log.d("getStudyInfosFromDB", "Error:" + task.getException());
                     }
                 });
     }

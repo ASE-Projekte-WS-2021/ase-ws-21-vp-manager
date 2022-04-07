@@ -12,11 +12,11 @@ import android.widget.ListView;
 
 import com.example.vpmanager.Config;
 import com.example.vpmanager.R;
-import com.example.vpmanager.views.mainActivity;
+import com.example.vpmanager.views.MainActivity;
 
 import java.util.ArrayList;
 
-public class createStudyFragment_finalStep_three extends Fragment {
+public class CreateStudyFragment_finalStep_three extends Fragment {
 
 
     //A recyclerView with custom item layout can be used here too.
@@ -28,7 +28,7 @@ public class createStudyFragment_finalStep_three extends Fragment {
     //Parameter:
     //Return values:
     //Sets the current fragment for the activity
-    public createStudyFragment_finalStep_three() {
+    public CreateStudyFragment_finalStep_three() {
         CreateStudyFragment.currentFragment = Config.createFragmentEight;
     }
 
@@ -39,7 +39,7 @@ public class createStudyFragment_finalStep_three extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        mainActivity.currentFragment = "createFinalStepThree";
+        MainActivity.currentFragment = "createFinalStepThree";
         return inflater.inflate(R.layout.fragment_create_study_final_step_three, container, false);
     }
 

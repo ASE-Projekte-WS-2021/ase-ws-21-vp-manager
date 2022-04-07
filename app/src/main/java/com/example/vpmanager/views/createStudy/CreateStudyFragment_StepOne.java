@@ -14,11 +14,11 @@ import android.widget.AutoCompleteTextView;
 import com.example.vpmanager.Config;
 import com.example.vpmanager.R;
 import com.google.android.material.textfield.TextInputEditText;
-import com.example.vpmanager.views.mainActivity;
+import com.example.vpmanager.views.MainActivity;
 
 import java.util.ArrayList;
 
-public class createStudyFragment_StepOne extends Fragment {
+public class CreateStudyFragment_StepOne extends Fragment {
 
     public static TextInputEditText textInputEditTextTitle;
     public static TextInputEditText textInputEditTextVP;
@@ -35,7 +35,7 @@ public class createStudyFragment_StepOne extends Fragment {
     //Parameter:
     //Return values:
     //Sets the current fragment for the activity
-    public createStudyFragment_StepOne() {
+    public CreateStudyFragment_StepOne() {
         CreateStudyFragment.currentFragment = Config.createFragmentOne;
     }
 
@@ -46,7 +46,7 @@ public class createStudyFragment_StepOne extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        mainActivity.currentFragment = "createStepOne";
+        MainActivity.currentFragment = "createStepOne";
         return inflater.inflate(R.layout.fragment_create_study_step_one, container, false);
     }
 
@@ -71,14 +71,14 @@ public class createStudyFragment_StepOne extends Fragment {
         for (int i = 1; i < getResources().getStringArray(R.array.createCategoryList).length; i++) {
             dropdownListCategories.add(getResources().getStringArray(R.array.createCategoryList)[i]);
         }
-        arrayAdapterCategories = new ArrayAdapter<>(getActivity(), R.layout.material_dropdown_item, dropdownListCategories);
+        arrayAdapterCategories = new ArrayAdapter<>(getActivity(), R.layout.item_material_dropdown, dropdownListCategories);
         autoCompleteTextViewCategory.setAdapter(arrayAdapterCategories);
 
         autoCompleteTextViewExecutionType = view.findViewById(R.id.create_stepOne_textView_executionType);
         dropdownListExecutionType = new ArrayList<>();
         dropdownListExecutionType.add("Remote");
         dropdownListExecutionType.add("Präsenz");
-        arrayAdapterExecutionType = new ArrayAdapter<>(getActivity(), R.layout.material_dropdown_item, dropdownListExecutionType);
+        arrayAdapterExecutionType = new ArrayAdapter<>(getActivity(), R.layout.item_material_dropdown, dropdownListExecutionType);
         autoCompleteTextViewExecutionType.setAdapter(arrayAdapterExecutionType);
     }
 

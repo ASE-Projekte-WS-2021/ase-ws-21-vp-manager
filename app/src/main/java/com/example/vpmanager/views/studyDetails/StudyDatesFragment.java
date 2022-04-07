@@ -15,7 +15,6 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -53,10 +52,9 @@ public class StudyDatesFragment extends Fragment implements StudyDatesAdapter.On
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_study_dates, container, false);
+        View view = inflater.inflate(R.layout.fragment_study_appointments, container, false);
         prepareComponents();
         initViews(view);
-        Log.d("StudyDates", "viewModelInstance" + studyViewModel.toString());
         studyViewModel.fetchStudyDates(currentStudyId, currentUserId);
         return view;
     }
@@ -87,12 +85,7 @@ public class StudyDatesFragment extends Fragment implements StudyDatesAdapter.On
         selectedDateLineTwo = view.findViewById(R.id.selectedDateItemLayoutProposal);
         cancelDateBtn = view.findViewById(R.id.cancelDateBtn);
 
-        cancelDateBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                unSelectDateAlert();
-            }
-        });
+        cancelDateBtn.setOnClickListener(view1 -> unSelectDateAlert());
     }
 
 
@@ -146,17 +139,14 @@ public class StudyDatesFragment extends Fragment implements StudyDatesAdapter.On
     //Return values:
     //Sets alertdialogs for selecting dates
     private void selectDateAlert(String dateId) {
-        DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                switch (which) {
-                    case DialogInterface.BUTTON_POSITIVE:
-                        //starting point of selecting a date
-                        studyViewModel.selectDate(dateId, currentUserId);
-                        break;
-                    case DialogInterface.BUTTON_NEGATIVE:
-                        break;
-                }
+        DialogInterface.OnClickListener dialogClickListener = (dialog, which) -> {
+            switch (which) {
+                case DialogInterface.BUTTON_POSITIVE:
+                    //starting point of selecting a date
+                    studyViewModel.selectDate(dateId, currentUserId);
+                    break;
+                case DialogInterface.BUTTON_NEGATIVE:
+                    break;
             }
         };
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
@@ -170,17 +160,14 @@ public class StudyDatesFragment extends Fragment implements StudyDatesAdapter.On
     //Return values:
     //Sets alertdialogs for unselecting dates
     private void unSelectDateAlert() {
-        DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                switch (which) {
-                    case DialogInterface.BUTTON_POSITIVE:
-                        //starting point of unselecting a date
-                        studyViewModel.unselectDate();
-                        break;
-                    case DialogInterface.BUTTON_NEGATIVE:
-                        break;
-                }
+        DialogInterface.OnClickListener dialogClickListener = (dialog, which) -> {
+            switch (which) {
+                case DialogInterface.BUTTON_POSITIVE:
+                    //starting point of unselecting a date
+                    studyViewModel.unselectDate();
+                    break;
+                case DialogInterface.BUTTON_NEGATIVE:
+                    break;
             }
         };
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
@@ -189,8 +176,7 @@ public class StudyDatesFragment extends Fragment implements StudyDatesAdapter.On
                 .setNegativeButton(getString(R.string.no), dialogClickListener).show();
     }
 
-    public void disAbleSignOutButton()
-    {
+    public void disAbleSignOutButton() {
         cancelDateBtn.setVisibility(View.GONE);
     }
 

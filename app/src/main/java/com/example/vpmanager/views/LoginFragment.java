@@ -42,7 +42,7 @@ public class LoginFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_login, container, false);
-        mainActivity.currentFragment = "login";
+        MainActivity.currentFragment = "login";
         prepareViewModel();
         setupView(view);
         setOnClickListeners();
@@ -52,7 +52,7 @@ public class LoginFragment extends Fragment {
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         navController = Navigation.findNavController(view);
-        ((mainActivity) getActivity()).setDrawerLocked();
+        ((MainActivity) getActivity()).setDrawerLocked();
     }
 
     private void prepareViewModel() {
@@ -126,9 +126,9 @@ public class LoginFragment extends Fragment {
     //Return values:
     //successful login
     public void createUserInMainActivity(String email) {
-        mainActivity.uniqueID = email;
-        mainActivity.createUserId(getActivity());
-        ((mainActivity) getActivity()).setDrawerUnlocked();
+        MainActivity.uniqueID = email;
+        MainActivity.createUserId(getActivity());
+        ((MainActivity) getActivity()).setDrawerUnlocked();
         navController.navigate(R.id.action_global_homeFragment);
     }
 

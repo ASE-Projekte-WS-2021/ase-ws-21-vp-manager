@@ -13,7 +13,7 @@
 
     <fragment
         android:id="@+id/createStudyFragment_Base"
-        android:name="com.example.vpmanager.views.createStudy.createStudyFragment_Base"
+        android:name="com.example.vpmanager.views.createStudy.CreateStudyFragment_Base"
         android:label="fragment_create_study_base"
         tools:layout="@layout/fragment_create_study_base">
         <action
@@ -24,7 +24,7 @@
     </fragment>
     <fragment
         android:id="@+id/createStudyFragment_StepOne"
-        android:name="com.example.vpmanager.views.createStudy.createStudyFragment_StepOne"
+        android:name="com.example.vpmanager.views.createStudy.CreateStudyFragment_StepOne"
         android:label="fragment_create_study_step_one"
         tools:layout="@layout/fragment_create_study_step_one">
         <action
@@ -40,7 +40,7 @@
     </fragment>
     <fragment
         android:id="@+id/createStudyFragment_StepTwo"
-        android:name="com.example.vpmanager.views.createStudy.createStudyFragment_StepTwo"
+        android:name="com.example.vpmanager.views.createStudy.CreateStudyFragment_StepTwo"
         android:label="fragment_create_study_step_two"
         tools:layout="@layout/fragment_create_study_step_two">
         <action
@@ -56,7 +56,7 @@
     </fragment>
     <fragment
         android:id="@+id/createStudyFragment_StepThree"
-        android:name="com.example.vpmanager.views.createStudy.createStudyFragment_StepThree"
+        android:name="com.example.vpmanager.views.createStudy.CreateStudyFragment_StepThree"
         android:label="fragment_create_study_step_three"
         tools:layout="@layout/fragment_create_study_step_three">
         <action
@@ -77,7 +77,7 @@
     </fragment>
     <fragment
         android:id="@+id/createStudyFragment_StepFour_Presence"
-        android:name="com.example.vpmanager.views.createStudy.createStudyFragment_StepFour_Presence"
+        android:name="com.example.vpmanager.views.createStudy.CreateStudyFragment_StepFour_Presence"
         android:label="createStudyFragment_StepFour_Presence"
         tools:layout="@layout/fragment_create_study_step_four_presence">
         <action
@@ -93,7 +93,7 @@
     </fragment>
     <fragment
         android:id="@+id/createStudyFragment_StepFour_Remote"
-        android:name="com.example.vpmanager.views.createStudy.createStudyFragment_StepFour_Remote"
+        android:name="com.example.vpmanager.views.createStudy.CreateStudyFragment_StepFour_Remote"
         android:label="fragment_create_study_step_four_remote"
         tools:layout="@layout/fragment_create_study_step_four_remote">
         <action
@@ -109,7 +109,7 @@
     </fragment>
     <fragment
         android:id="@+id/createStudyFragment_StepFive"
-        android:name="com.example.vpmanager.views.createStudy.createStudyFragment_StepFive"
+        android:name="com.example.vpmanager.views.createStudy.CreateStudyFragment_StepFive"
         android:label="fragment_create_study_step_five"
         tools:layout="@layout/fragment_create_study_step_five">
         <action
@@ -130,7 +130,7 @@
     </fragment>
     <fragment
         android:id="@+id/createStudyFragment_finalStep"
-        android:name="com.example.vpmanager.views.createStudy.createStudyFragment_finalStep"
+        android:name="com.example.vpmanager.views.createStudy.CreateStudyFragment_finalStep"
         android:label="fragment_create_study_final_step"
         tools:layout="@layout/fragment_create_study_final_step">
         <action
@@ -146,7 +146,7 @@
     </fragment>
     <fragment
         android:id="@+id/createStudyFragment_finalStep_two"
-        android:name="com.example.vpmanager.views.createStudy.createStudyFragment_finalStep_two"
+        android:name="com.example.vpmanager.views.createStudy.CreateStudyFragment_finalStep_two"
         android:label="fragment_create_study_final_step_two"
         tools:layout="@layout/fragment_create_study_final_step_two">
         <action
@@ -162,7 +162,7 @@
     </fragment>
     <fragment
         android:id="@+id/createStudyFragment_finalStep_three"
-        android:name="com.example.vpmanager.views.createStudy.createStudyFragment_finalStep_three"
+        android:name="com.example.vpmanager.views.createStudy.CreateStudyFragment_finalStep_three"
         android:label="fragment_create_study_final_step_three"
         tools:layout="@layout/fragment_create_study_final_step_three">
         <action

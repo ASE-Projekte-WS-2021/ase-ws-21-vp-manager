@@ -48,7 +48,7 @@ public class CreateStudyRepository {
                         e -> Log.w(TAG, "Error writing document", e));
     }
 
-    //Parameter: newDate, studyId
+    //Parameter: new Date object, studyId
     //Return values:
     //is called several times before "createNewStudy" because a study needs all dateIds
     public void createNewDate(Map<String, Object> newDate, String dateId) {

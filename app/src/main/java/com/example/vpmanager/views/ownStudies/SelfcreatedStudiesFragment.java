@@ -2,7 +2,6 @@ package com.example.vpmanager.views.ownStudies;
 
 import android.content.res.ColorStateList;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -378,10 +377,6 @@ public class SelfcreatedStudiesFragment extends Fragment implements StudyListAda
                         if (othersActive)
                             list.add(info);
                         break;
-                    default:
-                        if (othersActive)
-                            list.add(info);
-                        break;
                 }
             }
         }
@@ -445,7 +440,6 @@ public class SelfcreatedStudiesFragment extends Fragment implements StudyListAda
     @Override
     public void onStudyClick(String studyId) {
         Bundle args = new Bundle();
-        Log.d("OwnStudyFragment", "onStudyClick - studyId:" + studyId);
         args.putString("studyId", studyId);
         navController.navigate(R.id.action_ownStudyFragment_to_studyCreatorFragment, args);
     }

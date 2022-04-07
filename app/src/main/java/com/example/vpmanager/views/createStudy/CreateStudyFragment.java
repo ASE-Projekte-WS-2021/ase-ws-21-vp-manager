@@ -36,11 +36,7 @@ public class CreateStudyFragment extends Fragment {
     private Button backBtn;
     private Button nextBtn;
     private StateProgressBar stateProgressBar;
-    private String stepOne;
-    private String stepTwo;
-    private String stepThree;
-    private String stepFour;
-    private String stepFive;
+    private String stepOne, stepTwo, stepThree, stepFour, stepFive;
     private String[] progressBarDescriptionData;
     private LottieAnimationView doneAnimation;
 
@@ -101,7 +97,7 @@ public class CreateStudyFragment extends Fragment {
 
         createStudyViewModel.studyCreationProcessData.clear();
         createStudyViewModel.datesCreationProcessData.clear();
-        createStudyFragment_StepFive.dates.clear();
+        CreateStudyFragment_StepFive.dates.clear();
 
         backBtn = view.findViewById(R.id.backButton);
         nextBtn = view.findViewById(R.id.nextButton);
@@ -148,7 +144,7 @@ public class CreateStudyFragment extends Fragment {
     private void nextButton() {
         switch (currentFragment) {
             case 0:
-                createStudyFragment_StepOne createStudyFragment_stepOne = new createStudyFragment_StepOne();
+                CreateStudyFragment_StepOne createStudyFragment_stepOne = new CreateStudyFragment_StepOne();
                 stateProgressBar.setVisibility(View.VISIBLE);
                 stateProgressBar.setCurrentStateNumber(StateProgressBar.StateNumber.ONE);
 
@@ -159,7 +155,7 @@ public class CreateStudyFragment extends Fragment {
                 saveDataInViewModelStepOne();
 
                 if (mandatoryCheck(currentFragment)) {
-                    createStudyFragment_StepTwo createStudyFragment_stepTwo = new createStudyFragment_StepTwo();
+                    CreateStudyFragment_StepTwo createStudyFragment_stepTwo = new CreateStudyFragment_StepTwo();
                     stateProgressBar.setCurrentStateNumber(StateProgressBar.StateNumber.ONE);
 
                     navControllerCreate.navigate(R.id.action_createStudyFragment_StepOne_to_createStudyFragment_StepTwo);
@@ -169,7 +165,7 @@ public class CreateStudyFragment extends Fragment {
             case 2:
                 saveDataInViewModelStepTwo();
                 if (mandatoryCheck(currentFragment)) {
-                    createStudyFragment_StepThree createStudyFragment_stepThree = new createStudyFragment_StepThree();
+                    CreateStudyFragment_StepThree createStudyFragment_stepThree = new CreateStudyFragment_StepThree();
                     stateProgressBar.setCurrentStateNumber(StateProgressBar.StateNumber.TWO);
 
                     navControllerCreate.navigate(R.id.action_createStudyFragment_StepTwo_to_createStudyFragment_StepThree);
@@ -183,12 +179,12 @@ public class CreateStudyFragment extends Fragment {
                     String executionType = createStudyViewModel.studyCreationProcessData.get("executionType").toString();
 
                     if (executionType.equals(getString(R.string.remoteString))) {
-                        createStudyFragment_StepFour_Remote createStudyFragment_stepFour_remote = new createStudyFragment_StepFour_Remote();
+                        CreateStudyFragment_StepFour_Remote createStudyFragment_stepFour_remote = new CreateStudyFragment_StepFour_Remote();
 
                         navControllerCreate.navigate(R.id.action_createStudyFragment_StepThree_to_createStudyFragment_StepFour_Remote);
 
                     } else {
-                        createStudyFragment_StepFour_Presence createStudyFragment_stepFour_presence = new createStudyFragment_StepFour_Presence();
+                        CreateStudyFragment_StepFour_Presence createStudyFragment_stepFour_presence = new CreateStudyFragment_StepFour_Presence();
 
                         navControllerCreate.navigate(R.id.action_createStudyFragment_StepThree_to_createStudyFragment_StepFour_Presence);
 
@@ -198,7 +194,7 @@ public class CreateStudyFragment extends Fragment {
             case 4:
                 saveDataInViewModelStepFour();
                 if (mandatoryCheck(currentFragment)) {
-                    createStudyFragment_StepFive createStudyFragment_stepFive = new createStudyFragment_StepFive();
+                    CreateStudyFragment_StepFive createStudyFragment_stepFive = new CreateStudyFragment_StepFive();
                     stateProgressBar.setCurrentStateNumber(StateProgressBar.StateNumber.FOUR);
 
                     String executionType = createStudyViewModel.studyCreationProcessData.get("executionType").toString();
@@ -214,21 +210,21 @@ public class CreateStudyFragment extends Fragment {
                 break;
             case 5:
                 saveDataInViewModelStepFive();
-                createStudyFragment_finalStep createStudyFragment_finalStep = new createStudyFragment_finalStep();
+                CreateStudyFragment_finalStep createStudyFragment_finalStep = new CreateStudyFragment_finalStep();
                 stateProgressBar.setCurrentStateNumber(StateProgressBar.StateNumber.FIVE);
 
                 navControllerCreate.navigate(R.id.action_createStudyFragment_StepFive_to_createStudyFragment_finalStep);
 
                 break;
             case 6:
-                createStudyFragment_finalStep_two createStudyFragment_finalStep_two = new createStudyFragment_finalStep_two();
+                CreateStudyFragment_finalStep_two createStudyFragment_finalStep_two = new CreateStudyFragment_finalStep_two();
                 stateProgressBar.setCurrentStateNumber(StateProgressBar.StateNumber.FIVE);
 
                 navControllerCreate.navigate(R.id.action_createStudyFragment_finalStep_to_createStudyFragment_finalStep_two);
 
                 break;
             case 7:
-                createStudyFragment_finalStep_three createStudyFragment_finalStep_three = new createStudyFragment_finalStep_three();
+                CreateStudyFragment_finalStep_three createStudyFragment_finalStep_three = new CreateStudyFragment_finalStep_three();
                 stateProgressBar.setCurrentStateNumber(StateProgressBar.StateNumber.FIVE);
                 nextBtn.setText(getString(R.string.fragment_create_study_base_create));
                 nextBtn.setBackgroundColor(getResources().getColor(R.color.green_Main));
@@ -256,7 +252,7 @@ public class CreateStudyFragment extends Fragment {
             case 1:
                 saveDataInViewModelStepOne();
                 stateProgressBar.setVisibility(View.INVISIBLE);
-                createStudyFragment_Base createStudyFragment_base = new createStudyFragment_Base();
+                CreateStudyFragment_Base createStudyFragment_base = new CreateStudyFragment_Base();
 
                 navControllerCreate.navigate(R.id.action_createStudyFragment_StepOne_to_createStudyFragment_Base);
 
@@ -264,7 +260,7 @@ public class CreateStudyFragment extends Fragment {
             case 2:
                 saveDataInViewModelStepTwo();
                 stateProgressBar.setCurrentStateNumber(StateProgressBar.StateNumber.ONE);
-                createStudyFragment_StepOne createStudyFragment_stepOne = new createStudyFragment_StepOne();
+                CreateStudyFragment_StepOne createStudyFragment_stepOne = new CreateStudyFragment_StepOne();
 
 
                 navControllerCreate.navigate(R.id.action_createStudyFragment_StepTwo_to_createStudyFragment_StepOne);
@@ -273,7 +269,7 @@ public class CreateStudyFragment extends Fragment {
             case 3:
                 saveDataInViewModelStepThree();
                 stateProgressBar.setCurrentStateNumber(StateProgressBar.StateNumber.ONE);
-                createStudyFragment_StepTwo createStudyFragment_stepTwo = new createStudyFragment_StepTwo();
+                CreateStudyFragment_StepTwo createStudyFragment_stepTwo = new CreateStudyFragment_StepTwo();
 
                 navControllerCreate.navigate(R.id.action_createStudyFragment_StepThree_to_createStudyFragment_StepTwo);
 
@@ -281,7 +277,7 @@ public class CreateStudyFragment extends Fragment {
             case 4:
                 saveDataInViewModelStepFour();
                 stateProgressBar.setCurrentStateNumber(StateProgressBar.StateNumber.TWO);
-                createStudyFragment_StepThree createStudyFragment_stepThree = new createStudyFragment_StepThree();
+                CreateStudyFragment_StepThree createStudyFragment_stepThree = new CreateStudyFragment_StepThree();
 
                 String executionTypeCase4 = createStudyViewModel.studyCreationProcessData.get("executionType").toString();
                 if (executionTypeCase4.equals(getString(R.string.remoteString))) {
@@ -301,12 +297,12 @@ public class CreateStudyFragment extends Fragment {
                 String executionTypeCase5 = createStudyViewModel.studyCreationProcessData.get("executionType").toString();
 
                 if (executionTypeCase5.equals(getString(R.string.remoteString))) {
-                    createStudyFragment_StepFour_Remote createStudyFragment_stepFour_remote = new createStudyFragment_StepFour_Remote();
+                    CreateStudyFragment_StepFour_Remote createStudyFragment_stepFour_remote = new CreateStudyFragment_StepFour_Remote();
 
                     navControllerCreate.navigate(R.id.action_createStudyFragment_StepFive_to_createStudyFragment_StepFour_Remote);
 
                 } else {
-                    createStudyFragment_StepFour_Presence createStudyFragment_stepFour_presence = new createStudyFragment_StepFour_Presence();
+                    CreateStudyFragment_StepFour_Presence createStudyFragment_stepFour_presence = new CreateStudyFragment_StepFour_Presence();
 
                     navControllerCreate.navigate(R.id.action_createStudyFragment_StepFive_to_createStudyFragment_StepFour_Presence);
 
@@ -315,21 +311,21 @@ public class CreateStudyFragment extends Fragment {
                 break;
             case 6:
                 stateProgressBar.setCurrentStateNumber(StateProgressBar.StateNumber.FOUR);
-                createStudyFragment_StepFive createStudyFragment_stepFive = new createStudyFragment_StepFive();
+                CreateStudyFragment_StepFive createStudyFragment_stepFive = new CreateStudyFragment_StepFive();
 
                 navControllerCreate.navigate(R.id.action_createStudyFragment_finalStep_to_createStudyFragment_StepFive);
 
                 break;
             case 7:
                 stateProgressBar.setCurrentStateNumber(StateProgressBar.StateNumber.FOUR);
-                createStudyFragment_finalStep createStudyFragment_finalStep = new createStudyFragment_finalStep();
+                CreateStudyFragment_finalStep createStudyFragment_finalStep = new CreateStudyFragment_finalStep();
 
                 navControllerCreate.navigate(R.id.action_createStudyFragment_finalStep_two_to_createStudyFragment_finalStep);
 
                 break;
             case 8:
                 stateProgressBar.setCurrentStateNumber(StateProgressBar.StateNumber.FIVE);
-                createStudyFragment_finalStep_two createStudyFragment_finalStep_two = new createStudyFragment_finalStep_two();
+                CreateStudyFragment_finalStep_two createStudyFragment_finalStep_two = new CreateStudyFragment_finalStep_two();
                 nextBtn.setText(getString(R.string.fragment_create_study_base_next));
                 nextBtn.setBackgroundColor(getResources().getColor(R.color.heatherred_Main));
 
@@ -346,24 +342,24 @@ public class CreateStudyFragment extends Fragment {
     //Return values:
     //Loads data from firebase and stores associated values in Strings, following methods do the same for the next fragments
     private void saveDataInViewModelStepOne() {
-        String name = createStudyFragment_StepOne.textInputEditTextTitle.getText().toString();
+        String name = CreateStudyFragment_StepOne.textInputEditTextTitle.getText().toString().trim();
         if (!name.isEmpty()) {
             createStudyViewModel.studyCreationProcessData.put("name", name);
         }
-        String vps = createStudyFragment_StepOne.textInputEditTextVP.getText().toString();
+        String vps = CreateStudyFragment_StepOne.textInputEditTextVP.getText().toString().trim();
         if (!vps.isEmpty()) {
             createStudyViewModel.studyCreationProcessData.put("vps", vps);
         } else {
             createStudyViewModel.studyCreationProcessData.put("vps", "0");
         }
 
-        String category = createStudyFragment_StepOne.autoCompleteTextViewCategory.getText().toString();
+        String category = CreateStudyFragment_StepOne.autoCompleteTextViewCategory.getText().toString().trim();
 
         if (!category.isEmpty()) {
             createStudyViewModel.studyCreationProcessData.put("category", category);
         }
 
-        String executionType = createStudyFragment_StepOne.autoCompleteTextViewExecutionType.getText().toString();
+        String executionType = CreateStudyFragment_StepOne.autoCompleteTextViewExecutionType.getText().toString().trim();
 
         if (!executionType.isEmpty()) {
             createStudyViewModel.studyCreationProcessData.put("executionType", executionType);
@@ -386,23 +382,23 @@ public class CreateStudyFragment extends Fragment {
     //Return values:
     //Loads data from firebase and stores associated values in Strings
     private void saveDataInViewModelStepTwo() {
-        String mail = createStudyFragment_StepTwo.textInputEditTextContactMail.getText().toString();
+        String mail = CreateStudyFragment_StepTwo.textInputEditTextContactMail.getText().toString().trim();
         if (!mail.isEmpty()) {
             createStudyViewModel.studyCreationProcessData.put("contact", mail);
         }
-        String phone = createStudyFragment_StepTwo.textInputEditTextContactPhone.getText().toString();
+        String phone = CreateStudyFragment_StepTwo.textInputEditTextContactPhone.getText().toString().trim();
         if (!phone.isEmpty()) {
             createStudyViewModel.studyCreationProcessData.put("contact2", phone);
         }
-        String skype = createStudyFragment_StepTwo.textInputEditTextContactSkype.getText().toString();
+        String skype = CreateStudyFragment_StepTwo.textInputEditTextContactSkype.getText().toString().trim();
         if (!skype.isEmpty()) {
             createStudyViewModel.studyCreationProcessData.put("contact3", skype);
         }
-        String discord = createStudyFragment_StepTwo.textInputEditTextContactDiscord.getText().toString();
+        String discord = CreateStudyFragment_StepTwo.textInputEditTextContactDiscord.getText().toString().trim();
         if (!discord.isEmpty()) {
             createStudyViewModel.studyCreationProcessData.put("contact4", discord);
         }
-        String other = createStudyFragment_StepTwo.textInputEditTextContactOthers.getText().toString();
+        String other = CreateStudyFragment_StepTwo.textInputEditTextContactOthers.getText().toString().trim();
         if (!other.isEmpty()) {
             createStudyViewModel.studyCreationProcessData.put("contact5", other);
         }
@@ -412,7 +408,7 @@ public class CreateStudyFragment extends Fragment {
     //Return values:
     //Loads data from firebase stores associated value in String
     private void saveDataInViewModelStepThree() {
-        String description = createStudyFragment_StepThree.textInputEditTextDesc.getText().toString();
+        String description = CreateStudyFragment_StepThree.textInputEditTextDesc.getText().toString().trim();
         if (!description.isEmpty()) {
             createStudyViewModel.studyCreationProcessData.put("description", description);
         }
@@ -425,24 +421,24 @@ public class CreateStudyFragment extends Fragment {
     private void saveDataInViewModelStepFour() {
         String executionType = createStudyViewModel.studyCreationProcessData.get("executionType").toString();
         if (executionType.equals(getString(R.string.remoteString))) {
-            String platform = createStudyFragment_StepFour_Remote.textInputEditTextPlatform.getText().toString();
+            String platform = CreateStudyFragment_StepFour_Remote.textInputEditTextPlatform.getText().toString().trim();
             if (!platform.isEmpty()) {
                 createStudyViewModel.studyCreationProcessData.put("platform", platform);
             }
-            String platform2 = createStudyFragment_StepFour_Remote.textInputEditTextOptionalPlatform.getText().toString();
+            String platform2 = CreateStudyFragment_StepFour_Remote.textInputEditTextOptionalPlatform.getText().toString().trim();
             if (!platform2.isEmpty()) {
                 createStudyViewModel.studyCreationProcessData.put("platform2", platform2);
             }
         } else {
-            String location = createStudyFragment_StepFour_Presence.textInputEditTextLocation.getText().toString();
+            String location = CreateStudyFragment_StepFour_Presence.textInputEditTextLocation.getText().toString().trim();
             if (!location.isEmpty()) {
                 createStudyViewModel.studyCreationProcessData.put("location", location);
             }
-            String street = createStudyFragment_StepFour_Presence.textInputEditTextStreet.getText().toString();
+            String street = CreateStudyFragment_StepFour_Presence.textInputEditTextStreet.getText().toString().trim();
             if (!street.isEmpty()) {
                 createStudyViewModel.studyCreationProcessData.put("street", street);
             }
-            String room = createStudyFragment_StepFour_Presence.textInputEditTextRoom.getText().toString();
+            String room = CreateStudyFragment_StepFour_Presence.textInputEditTextRoom.getText().toString().trim();
             if (!room.isEmpty()) {
                 createStudyViewModel.studyCreationProcessData.put("room", room);
             }
@@ -454,8 +450,8 @@ public class CreateStudyFragment extends Fragment {
     //Return values:
     //Stores date data in the ViewModel Arraylist
     private void saveDataInViewModelStepFive() {
-        if (!createStudyFragment_StepFive.dates.isEmpty()) {
-            createStudyViewModel.datesCreationProcessData = createStudyFragment_StepFive.dates;
+        if (!CreateStudyFragment_StepFive.dates.isEmpty()) {
+            createStudyViewModel.datesCreationProcessData = CreateStudyFragment_StepFive.dates;
         }
     }
 
@@ -472,22 +468,22 @@ public class CreateStudyFragment extends Fragment {
                     return true;
                 }
                 if (createStudyViewModel.studyCreationProcessData.get("name") == null) {
-                    createStudyFragment_StepOne.textInputEditTextTitle.setError(getString(R.string.titleError));
-                    createStudyFragment_StepOne.textInputEditTextTitle.requestFocus();
+                    CreateStudyFragment_StepOne.textInputEditTextTitle.setError(getString(R.string.titleError));
+                    CreateStudyFragment_StepOne.textInputEditTextTitle.requestFocus();
 
                     break;
                 }
                 if (createStudyViewModel.studyCreationProcessData.get("category") == null) {
-                    createStudyFragment_StepOne.autoCompleteTextViewCategory.setFocusable(true);
-                    createStudyFragment_StepOne.autoCompleteTextViewCategory.requestFocus();
-                    createStudyFragment_StepOne.autoCompleteTextViewCategory.showDropDown();
+                    CreateStudyFragment_StepOne.autoCompleteTextViewCategory.setFocusable(true);
+                    CreateStudyFragment_StepOne.autoCompleteTextViewCategory.requestFocus();
+                    CreateStudyFragment_StepOne.autoCompleteTextViewCategory.showDropDown();
 
                     break;
                 }
                 if (createStudyViewModel.studyCreationProcessData.get("executionType") == null) {
-                    createStudyFragment_StepOne.autoCompleteTextViewExecutionType.setFocusable(true);
-                    createStudyFragment_StepOne.autoCompleteTextViewExecutionType.requestFocus();
-                    createStudyFragment_StepOne.autoCompleteTextViewExecutionType.showDropDown();
+                    CreateStudyFragment_StepOne.autoCompleteTextViewExecutionType.setFocusable(true);
+                    CreateStudyFragment_StepOne.autoCompleteTextViewExecutionType.requestFocus();
+                    CreateStudyFragment_StepOne.autoCompleteTextViewExecutionType.showDropDown();
 
                     break;
                 }
@@ -496,15 +492,15 @@ public class CreateStudyFragment extends Fragment {
                 if (createStudyViewModel.studyCreationProcessData.get("contact") != null) {
                     return true;
                 }
-                createStudyFragment_StepTwo.textInputEditTextContactMail.setError(getString(R.string.mailError));
-                createStudyFragment_StepTwo.textInputEditTextContactMail.requestFocus();
+                CreateStudyFragment_StepTwo.textInputEditTextContactMail.setError(getString(R.string.mailError));
+                CreateStudyFragment_StepTwo.textInputEditTextContactMail.requestFocus();
                 break;
             case 3:
                 if (createStudyViewModel.studyCreationProcessData.get("description") != null) {
                     return true;
                 }
-                createStudyFragment_StepThree.textInputEditTextDesc.setError(getString(R.string.descriptionError));
-                createStudyFragment_StepThree.textInputEditTextDesc.requestFocus();
+                CreateStudyFragment_StepThree.textInputEditTextDesc.setError(getString(R.string.descriptionError));
+                CreateStudyFragment_StepThree.textInputEditTextDesc.requestFocus();
                 break;
             case 4:
                 if (createStudyViewModel.studyCreationProcessData.get("location") != null &&
@@ -514,27 +510,27 @@ public class CreateStudyFragment extends Fragment {
                 }
                 String executionType = createStudyViewModel.studyCreationProcessData.get("executionType").toString();
                 if (executionType.equals(getString(R.string.presenceString))) {
-                    createStudyFragment_StepFour_Presence.textInputEditTextLocation
+                    CreateStudyFragment_StepFour_Presence.textInputEditTextLocation
                             .setError(getString(R.string.locationError));
-                    createStudyFragment_StepFour_Presence.textInputEditTextRoom
+                    CreateStudyFragment_StepFour_Presence.textInputEditTextRoom
                             .setError(getString(R.string.roomError));
-                    createStudyFragment_StepFour_Presence.textInputEditTextStreet
+                    CreateStudyFragment_StepFour_Presence.textInputEditTextStreet
                             .setError(getString(R.string.streetError));
 
-                    if(createStudyViewModel.studyCreationProcessData.get("location") == null)
-                        createStudyFragment_StepFour_Presence.textInputEditTextLocation.requestFocus();
-                    else if(createStudyViewModel.studyCreationProcessData.get("street") == null)
-                        createStudyFragment_StepFour_Presence.textInputEditTextStreet.requestFocus();
-                    else if(createStudyViewModel.studyCreationProcessData.get("room") == null)
-                        createStudyFragment_StepFour_Presence.textInputEditTextRoom.requestFocus();
+                    if (createStudyViewModel.studyCreationProcessData.get("location") == null)
+                        CreateStudyFragment_StepFour_Presence.textInputEditTextLocation.requestFocus();
+                    else if (createStudyViewModel.studyCreationProcessData.get("street") == null)
+                        CreateStudyFragment_StepFour_Presence.textInputEditTextStreet.requestFocus();
+                    else if (createStudyViewModel.studyCreationProcessData.get("room") == null)
+                        CreateStudyFragment_StepFour_Presence.textInputEditTextRoom.requestFocus();
                 }
                 if (createStudyViewModel.studyCreationProcessData.get("platform") != null) {
                     return true;
                 }
                 if (executionType.equals(getString(R.string.remoteString))) {
-                    createStudyFragment_StepFour_Remote.textInputEditTextPlatform
+                    CreateStudyFragment_StepFour_Remote.textInputEditTextPlatform
                             .setError(getString(R.string.platformError));
-                    createStudyFragment_StepFour_Remote.textInputEditTextPlatform.requestFocus();
+                    CreateStudyFragment_StepFour_Remote.textInputEditTextPlatform.requestFocus();
                 }
                 break;
             default:

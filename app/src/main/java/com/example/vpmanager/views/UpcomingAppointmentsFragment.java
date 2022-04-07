@@ -35,7 +35,7 @@ public class UpcomingAppointmentsFragment extends Fragment {
         prepareViewModel();
         initHomeFragmentComponents(view);
         mViewModel.getAllDatesAndStudies();
-        mainActivity.currentFragment = "upcomingAppointments";
+        MainActivity.currentFragment = "upcomingAppointments";
 
         return view;
     }
@@ -49,7 +49,7 @@ public class UpcomingAppointmentsFragment extends Fragment {
     //Parameter:
     //Return Values:
     //Sets View Model and prepares the repository
-    private void prepareViewModel(){
+    private void prepareViewModel() {
         //the fragment is viewModelStoreOwner
         mViewModel = new ViewModelProvider(this).get(UpcomingAppointViewModel.class);
         mViewModel.upcomingAppointmentsFragment = this;

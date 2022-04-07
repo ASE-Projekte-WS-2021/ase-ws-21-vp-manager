@@ -88,17 +88,45 @@ public class StudyDetailsFragment extends Fragment {
         //id could be accessed
         headerText.setText(studyViewModel.getStudyDetails().getName());
         description.setText(studyViewModel.getStudyDetails().getDescription());
+
+        String contactOne, contactTwo, contactThree, contactFour, contactFive, contactString = "";
+        //mail
+        contactOne = studyViewModel.getStudyDetails().getContactOne();
+        //handy
+        contactTwo = studyViewModel.getStudyDetails().getContactTwo();
+        //Skype
+        contactThree = studyViewModel.getStudyDetails().getContactThree();
+        //Discord
+        contactFour = studyViewModel.getStudyDetails().getContactFour();
+        //Sonstiges
+        contactFive = studyViewModel.getStudyDetails().getContactFive();
+
+        if (contactOne != null && !contactOne.isEmpty()) {
+            contactString += "Mail: " + contactOne + "\n";
+        }
+        if (contactTwo != null && !contactTwo.isEmpty()) {
+            contactString += "Telefon: " + contactTwo + "\n";
+        }
+        if (contactThree != null && !contactThree.isEmpty()) {
+            contactString += "Skype: " + contactThree + "\n";
+        }
+        if (contactFour != null && !contactFour.isEmpty()) {
+            contactString += "Discord: " + contactFour + "\n";
+        }
+        if (contactFive != null && !contactFive.isEmpty()) {
+            contactString += "Andere: " + contactFive + "\n";
+        }
+
         vpValue.setText(studyViewModel.getStudyDetails().getVps() + " VP");
-        contactInfo.setText(studyViewModel.getStudyDetails().getContactOne());
-        //contactTwo could be accessed
-        //contactThree could be accessed
+
+        contactInfo.setText(contactString);
+
         category.setText(studyViewModel.getStudyDetails().getCategory());
         studyType.setText(studyViewModel.getStudyDetails().getExecutionType());
         if (studyViewModel.getStudyDetails().getExecutionType().equals(getString(R.string.remoteString))) {
             remoteData.setText(studyViewModel.getStudyDetails().getRemotePlatformOne());
-            if(studyViewModel.getStudyDetails().getRemotePlatformTwo() != null)
-            {
-                String platforms = remoteData.getText().toString()+ " & " + studyViewModel.getStudyDetails().getRemotePlatformTwo();
+            if (studyViewModel.getStudyDetails().getRemotePlatformTwo() != null) {
+                String platforms = remoteData.getText().toString() + " & " + studyViewModel.getStudyDetails().getRemotePlatformTwo();
                 remoteData.setText(platforms);
             }
             //remotePlatformTwo could be accessed

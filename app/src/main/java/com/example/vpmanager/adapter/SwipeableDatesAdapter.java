@@ -46,7 +46,7 @@ public class SwipeableDatesAdapter extends RecyclerView.Adapter<RecyclerView.Vie
     @NonNull
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.date_item, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_appointment, parent, false);
         CustomViewHolder holder = new CustomViewHolder(view);
         return holder;
     }
@@ -78,7 +78,7 @@ public class SwipeableDatesAdapter extends RecyclerView.Adapter<RecyclerView.Vie
     //Parameter:
     //Return values:
     //Removes date item
-    public void deleteItem(int position){
+    public void deleteItem(int position) {
         mRecentlyDeletedItem = preselectedDates.get(position);
         mRecentlyDeletedItemPosition = position;
         preselectedDates.remove(position);
@@ -89,7 +89,7 @@ public class SwipeableDatesAdapter extends RecyclerView.Adapter<RecyclerView.Vie
     //Parameter:
     //Return values:
     //Sets snack bar for cancelling appointments
-    private void showUndoSnackBar(){
+    private void showUndoSnackBar() {
         View view = mFragmentView.findViewById(R.id.create_step_five_layout);
         Snackbar snackbar = Snackbar.make(view, R.string.removeAppointmentAlert,
                 Snackbar.LENGTH_LONG);
@@ -100,7 +100,7 @@ public class SwipeableDatesAdapter extends RecyclerView.Adapter<RecyclerView.Vie
     //Parameter:
     //Return values:
     //Manages deleted dates
-    private void undoDelete(){
+    private void undoDelete() {
         preselectedDates.add(mRecentlyDeletedItemPosition, mRecentlyDeletedItem);
         notifyItemInserted(mRecentlyDeletedItemPosition);
     }

@@ -63,14 +63,6 @@
                         android:text="Datum"
                         android:textSize="20sp" />
 
-                    <TextView
-                        android:id="@+id/selectedDateItemLayoutProposal"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="5dp"
-                        android:text="(Datum - Wochentag - Uhrzeit)"
-                        android:textSize="15sp"
-                        android:textStyle="bold" />
 
                 </LinearLayout>
 

@@ -15,14 +15,14 @@ import androidx.navigation.Navigation;
 import androidx.viewpager.widget.ViewPager;
 
 import com.example.vpmanager.R;
-import com.example.vpmanager.views.mainActivity;
+import com.example.vpmanager.views.MainActivity;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.tabs.TabLayout;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class studyCreatorFragment extends Fragment {
+public class StudyCreatorFragment extends Fragment {
 
     public static String currentStudyId;
     public static String currentUserId;
@@ -36,7 +36,7 @@ public class studyCreatorFragment extends Fragment {
     private StudyCreatorDatesFragment datesFragment;
 
 
-    public studyCreatorFragment() {
+    public StudyCreatorFragment() {
     }
 
     @Override
@@ -62,7 +62,7 @@ public class studyCreatorFragment extends Fragment {
         viewPagerAdapter.addFragment(detailsFragment, "Details");
         viewPagerAdapter.addFragment(datesFragment, "Termine");
         viewPager.setAdapter(viewPagerAdapter);
-        mainActivity.currentFragment = "studyCreatorFragment";
+        MainActivity.currentFragment = "studyCreatorFragment";
 
         return view;
     }
@@ -83,7 +83,7 @@ public class studyCreatorFragment extends Fragment {
     //Return values:
     //Sets the current user ID and study ID
     private void getRequiredInfos() {
-        currentUserId = mainActivity.createUserId(getActivity());
+        currentUserId = MainActivity.createUserId(getActivity());
         currentStudyId = getArguments().getString("studyId");
 
     }
