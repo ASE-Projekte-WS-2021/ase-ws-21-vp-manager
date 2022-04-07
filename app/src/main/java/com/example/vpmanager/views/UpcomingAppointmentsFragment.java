@@ -46,6 +46,9 @@ public class UpcomingAppointmentsFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
     }
 
+    //Parameter:
+    //Return Values:
+    //Sets View Model and prepares the repository
     private void prepareViewModel(){
         //the fragment is viewModelStoreOwner
         mViewModel = new ViewModelProvider(this).get(UpcomingAppointViewModel.class);
@@ -61,7 +64,9 @@ public class UpcomingAppointmentsFragment extends Fragment {
     }
 
 
-
+    //Parameter: adapter
+    //Return Values:
+    //Sets adapter for the arriving dates list
     public void setListViewAdapter(CustomListViewAdapterAppointments adapter) {
         arrivingDatesList.setAdapter(adapter);
         adapter.notifyDataSetChanged();
