@@ -101,9 +101,6 @@
             app:destination="@id/editStudyFragment"
             app:popUpTo="@id/editStudyFragment"
             app:popUpToInclusive="true" />
-        <argument
-            android:name="fromEditFragment"
-            app:argType="boolean" />
     </fragment>
     <fragment
         android:id="@+id/editStudyFragment"

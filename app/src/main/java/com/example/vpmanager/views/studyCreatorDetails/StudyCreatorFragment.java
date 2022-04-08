@@ -71,11 +71,6 @@ public class StudyCreatorFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         navController = Navigation.findNavController(view);
         super.onViewCreated(view, savedInstanceState);
-        Boolean fromEditFragment = getArguments().getBoolean("fromEditFragment");
-        if (fromEditFragment) {
-            Snackbar snackbar = Snackbar.make(view, "Studie aktualisiert", Snackbar.LENGTH_SHORT);
-            snackbar.show();
-        }
     }
 
 

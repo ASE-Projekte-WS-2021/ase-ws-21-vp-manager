@@ -237,7 +237,6 @@ public class StudyEditDetailsFragment extends Fragment {
     private void navigateToCreatorDetailsView() {
         Bundle args = new Bundle();
         args.putString("studyId", currentStudyIdEdit);
-        args.putBoolean("fromEditFragment", true);
         navController.navigate(R.id.action_editStudyFragment_to_studyCreatorFragment, args);
     }
 
