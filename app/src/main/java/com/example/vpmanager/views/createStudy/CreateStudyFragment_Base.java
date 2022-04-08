@@ -12,9 +12,7 @@ import com.example.vpmanager.Config;
 import com.example.vpmanager.R;
 import com.example.vpmanager.views.MainActivity;
 
-
 public class CreateStudyFragment_Base extends Fragment {
-
 
     //Parameter:
     //Return values:
@@ -30,8 +28,9 @@ public class CreateStudyFragment_Base extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.fragment_create_study_base, container, false);
         MainActivity.currentFragment = "createBase";
-        return inflater.inflate(R.layout.fragment_create_study_base, container, false);
+        return view;
     }
 
     @Override

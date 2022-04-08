@@ -53,7 +53,7 @@ public class CustomAlertDialog extends Dialog implements android.view.View.OnCli
         switch (v.getId()) {
             case R.id.addAnyways:
                 if (vps.getText().toString().equals("")) {
-                    vps.setText(Config.vpSum);
+                    vps.setText(Integer.toString(Config.vpSum));
                 }
                 fragment.closeDialog(vps.getText().toString(), matrikelnumber.getText().toString());
                 break;

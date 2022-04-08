@@ -14,7 +14,7 @@
 
     <string name="overview">Übersicht</string>
     <string name="welcome">Willkommen beim VP-Manager! \nHier können Sie Ihre Versuchspersonenstunden planen, Ihren aktuellen Fortschritt betrachten und selbst Studien erstellen.</string>
-    <string name="vpState">Laut aktueller Planung des VP-Managers haben Sie zum</string>
+    <string name="vpState">Nach aktueller Planung haben Sie zum</string>
     <string name="vps">VP-Stunden</string>
     <string name="collected">gesammelt</string>
     <string name="openVps">Es fehlen Ihnen noch</string>
@@ -42,8 +42,8 @@
     <string name="createPlatformHint">Primär Plattform*</string>
     <string name="createPlatformHint2">Sekundär Plattform</string>
     <string name="createLocationHint">Ort*</string>
-    <string name="createRoomHint">Raum</string>
-    <string name="createStreetHint">Straße</string>
+    <string name="createRoomHint">Raum*</string>
+    <string name="createAddressHint">Adresse*</string>
     <string name="createAlertBase">Bitten tragen Sie die fehlenden Angaben ein:</string>
     <string name="createAlertStudyDesc">Studienbeschreibung*</string>
     <string name="createAlertExecutionType">Durchführungsart</string>
@@ -310,7 +310,7 @@
     <string name="infoEditFragmentTitle">Studie bearbeiten</string>
     <string name="infoStudyDetailsTitle">Studie einsehen</string>
     <string name="infoCreatorStudyDetailsTitle">Eigene Studie einsehen</string>
-    <string name="infoOwnStudiesTitle">Eigene Studie</string>
+    <string name="infoOwnStudiesTitle">Meine Übersicht</string>
     <string name="infoFindStudyTitle">Studie finden</string>
     <string name="infoPAUpcomingTitle">Anstehende Termine</string>
     <string name="drawerHeaderName">Nutzername</string>

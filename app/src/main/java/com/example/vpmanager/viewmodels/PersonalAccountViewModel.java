@@ -240,7 +240,7 @@ public class PersonalAccountViewModel extends ViewModel implements GetAllDatesLi
         String completedString = "Erledigt: " + completedVP + " VP";
         String participatedString = "Teilgenommen: " + participatedVP + " VP";
         String plannedString = "Geplant: " + plannedVP + " VP";
-        String remainingString = "Übrig: " + remainingVP / Config.progressBarMultiplicator + " VP";
+        String remainingString = "Übrig: " + (double) remainingVP / Config.progressBarMultiplicator + " VP";
         float weightSum = sumVPs * Config.progressBarMultiplicator;
 
         personalAccountFragment.setProgressBarStrings(completedString, participatedString, plannedString, remainingString, weightSum);

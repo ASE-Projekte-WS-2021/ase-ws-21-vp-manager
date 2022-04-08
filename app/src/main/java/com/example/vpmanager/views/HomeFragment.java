@@ -43,6 +43,9 @@ public class HomeFragment extends Fragment {
     private FlexboxLayout flexLayout;
     private RelativeLayout appointmentLayout;
 
+    //private ProgressBar circle;
+    private RelativeLayout loadingLayout;
+
     public HomeFragment() {
     }
 
@@ -56,6 +59,8 @@ public class HomeFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_home, container, false);
+        //circle = view.findViewById(R.id.progressBar1);
+        setupLoadingScreen(view);
         prepareViewModel();
         setupView(view);
         homeViewModel.getDatesStudiesVpsAndMatrikelNumberFromDb();
@@ -85,6 +90,11 @@ public class HomeFragment extends Fragment {
         if (user == null) {
             navController.navigate(R.id.action_global_loginFragment);
         }
+    }
+
+    private void setupLoadingScreen(View view){
+        loadingLayout = view.findViewById(R.id.loading_circle_layout);
+        loadingLayout.setVisibility(View.VISIBLE);
     }
 
 
@@ -183,6 +193,7 @@ public class HomeFragment extends Fragment {
 
     public void setPlannedCompletionDate(String completionDate) {
         plannedCompletionDate.setText(completionDate);
+        loadingLayout.setVisibility(View.GONE);
     }
 
 
@@ -199,6 +210,8 @@ public class HomeFragment extends Fragment {
     public void loadDefaultorEmptyVersion() {
         defaultLayout.setVisibility(View.VISIBLE);
         flexLayout.setVisibility(View.GONE);
+        //GONE
+        loadingLayout.setVisibility(View.GONE);
     }
 
 

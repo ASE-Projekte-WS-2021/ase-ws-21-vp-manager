@@ -102,7 +102,7 @@
                         android:layout_marginLeft="20dp"
                         android:layout_marginTop="20dp"
                         android:layout_marginRight="20dp"
-                        android:hint="@string/createStreetHint"
+                        android:hint="@string/createAddressHint"
                         android:textColorHint="@color/heatherred_Main"
                         app:boxStrokeColor="@color/black"
                         app:boxStrokeWidthFocused="2dp">
