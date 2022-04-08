@@ -4,8 +4,6 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -25,8 +23,6 @@ public class StudyListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
     private Context mContext;
     public ArrayList<StudyMetaInfoModel> mStudyMetaInfos;
     private OnStudyItemClickListener mOnStudyItemClickListener;
-    private Animation animation;
-
 
     //Parameter: context, studyMetaInfos, onStudyItemCLickListener
     //Return values:
@@ -82,30 +78,18 @@ public class StudyListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
         public CustomViewHolder(@NonNull View itemView, OnStudyItemClickListener onStudyItemClickListener) {
             super(itemView);
             this.onStudyItemClickListener = onStudyItemClickListener;
-            //Animation
-            animation = AnimationUtils.loadAnimation(mContext, R.anim.animation);
 
             studyTitle = itemView.findViewById(R.id.textviewName);
-            studyTitle.setAnimation(animation);
 
             studyVps = itemView.findViewById(R.id.textviewVP);
-            studyVps.setAnimation(animation);
 
             studyTag = itemView.findViewById(R.id.textviewTag);
-            studyTag.setAnimation(animation);
 
             studyCat = itemView.findViewById(R.id.textviewCat);
-            studyCat.setAnimation(animation);
-
 
             locationIcon = itemView.findViewById(R.id.localSymbolStudyFragment);
-            if (locationIcon.getVisibility() == View.VISIBLE) {
-                locationIcon.setAnimation(animation);
-            }
+
             remoteIcon = itemView.findViewById(R.id.remoteSymbolStudyFragment);
-            if (remoteIcon.getVisibility() == View.VISIBLE) {
-                remoteIcon.setAnimation(animation);
-            }
 
             studyItemParentLayout = itemView.findViewById(R.id.ll_item);
             studyItemParentLayout.setOnClickListener(this);
@@ -126,17 +110,12 @@ public class StudyListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
             if (type.equals("Präsenz")) {
                 locationIcon.setVisibility(View.VISIBLE);
                 remoteIcon.setVisibility(View.INVISIBLE);
-                locationIcon.setAnimation(animation);
             } else {
                 remoteIcon.setVisibility(View.VISIBLE);
                 locationIcon.setVisibility(View.INVISIBLE);
-                remoteIcon.setAnimation(animation);
             }
         }
-
-
     }
-
 
     //Parameter:
     //Return values:
@@ -144,7 +123,6 @@ public class StudyListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
     public interface OnStudyItemClickListener {
         void onStudyClick(String studyId);
     }
-
 
 }
 

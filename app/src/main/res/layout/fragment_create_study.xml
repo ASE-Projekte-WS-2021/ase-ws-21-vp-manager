@@ -6,11 +6,6 @@
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:fillViewport="true">
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -89,8 +84,6 @@
                 app:spb_stateTextSize="15sp" />
 
         </LinearLayout>
-
-    </ScrollView>
 
     <com.airbnb.lottie.LottieAnimationView
         android:id="@+id/animationView"
