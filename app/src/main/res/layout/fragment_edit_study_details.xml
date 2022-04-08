@@ -28,7 +28,8 @@
                 android:layout_marginStart="15dp"
                 android:layout_marginEnd="15dp"
                 android:layout_marginBottom="15dp"
-                android:text="@string/saveStudy" />
+                android:text="@string/saveStudy"
+                android:backgroundTint="@color/green_Main"/>
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/edit_study_textInputLayout_title"
