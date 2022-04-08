@@ -221,7 +221,6 @@ public class StudyEditDetailsFragment extends Fragment {
         return true;
     }
 
-
     //Parameter:
     //Return values:
     //Sets animation properties
@@ -238,7 +237,6 @@ public class StudyEditDetailsFragment extends Fragment {
     private void navigateToCreatorDetailsView() {
         Bundle args = new Bundle();
         args.putString("studyId", currentStudyIdEdit);
-        args.putBoolean("fromEditFragment", true);
         navController.navigate(R.id.action_editStudyFragment_to_studyCreatorFragment, args);
     }
 
@@ -272,7 +270,7 @@ public class StudyEditDetailsFragment extends Fragment {
             if (cat.equals("Interview")) {
                 categories.setText(getString(R.string.interviewText), false);
             }
-            if (cat.equals("Laborstudien")) {
+            if (cat.equals("Laborstudie")) {
                 categories.setText(getString(R.string.labStudyText), false);
             }
             if (cat.equals("Tagebuchstudie")) {

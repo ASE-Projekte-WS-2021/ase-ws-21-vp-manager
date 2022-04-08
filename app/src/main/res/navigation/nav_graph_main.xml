@@ -67,13 +67,6 @@
             app:popUpTo="@id/studyCreatorFragment"
             app:popUpToInclusive="true" />
     </fragment>
-    <!--
-    <activity
-        android:id="@+id/createStudyActivity"
-        android:name="com.example.vpmanager.createStudy.createStudyActivity"
-        android:label="Studien erstellen"
-        tools:layout="@layout/activity_create_study" />
-        -->
     <fragment
         android:id="@+id/ownStudyFragment"
         android:name="com.example.vpmanager.views.ownStudies.OwnStudyFragment"
@@ -108,9 +101,6 @@
             app:destination="@id/editStudyFragment"
             app:popUpTo="@id/editStudyFragment"
             app:popUpToInclusive="true" />
-        <argument
-            android:name="fromEditFragment"
-            app:argType="boolean" />
     </fragment>
     <fragment
         android:id="@+id/editStudyFragment"
