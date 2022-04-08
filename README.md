@@ -1,7 +1,7 @@
 # VP-Manager
 
 Der VP-Manager unterstützt die Studierenden der Medieninformatik und Informationswissenschaft beim Sammeln von Versuchspersonen-Stunden und bei der Suche nach 
-Teilnehmer:innen für eigene Studien. Der eigene Fortschritt kann dabei stets in in einer individuellen Überischt verfolgt werden. Der Account ist an eine persönliche Mailadresse gebunden um die Nutzer eindeutig identifizieren zu können.
+Teilnehmer:innen für eigene Studien. Der eigene Fortschritt kann dabei stets in einer individuellen Übersicht verfolgt werden. Der Account ist an eine persönliche Mailadresse gebunden um die Nutzer eindeutig identifizieren zu können.
 
 Die App gibt einen Überblick über den eigenen VP-Status, indem sie beispielsweise anstehene Termine oder auch bereits vom Sekretariat verbuchte VP-Stunden anzeigt. Die insgesamt
 benötigten VP-Stunden können zudem angepasst werden.
