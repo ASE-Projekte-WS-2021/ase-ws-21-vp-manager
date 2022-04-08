@@ -44,7 +44,7 @@ letztere zu korrigieren oder zu ergänzen.
 - Studien/Teilnahmestatus
 - Sortier- und Filterfunktionen
 
-Anmerkung: Die genannten Bereiche wurden primär den jeweiligen Teammitgliedern zugewiesen. Bei Überschneidungen wurde paarweise gearbeitet.
+Anmerkung: Die genannten Bereiche wurden primär, jedoch nicht ausschließlich, von den jeweiligen Teammitgliedern bearbeitet.
 
 
 ## Bauen der App auf Basis des Repositorys
@@ -55,7 +55,7 @@ Anmerkung: Die genannten Bereiche wurden primär den jeweiligen Teammitgliedern 
 
 - Mit Android Studio: Wähle "Get from VCS" und gib diesen Link ein: https://github.com/ASE-Projekte-WS-2021/ase-ws-21-vp-manager.git 
 
-  anschießend
+  Anschießend:
 
 - Wähle "trust project" wenn es gefragt wird 
 - Wähle "sync gradle files" für den Fall das es nicht automatishc startet 
