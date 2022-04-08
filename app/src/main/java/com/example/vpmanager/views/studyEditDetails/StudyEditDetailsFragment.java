@@ -221,7 +221,6 @@ public class StudyEditDetailsFragment extends Fragment {
         return true;
     }
 
-
     //Parameter:
     //Return values:
     //Sets animation properties
@@ -272,7 +271,7 @@ public class StudyEditDetailsFragment extends Fragment {
             if (cat.equals("Interview")) {
                 categories.setText(getString(R.string.interviewText), false);
             }
-            if (cat.equals("Laborstudien")) {
+            if (cat.equals("Laborstudie")) {
                 categories.setText(getString(R.string.labStudyText), false);
             }
             if (cat.equals("Tagebuchstudie")) {
