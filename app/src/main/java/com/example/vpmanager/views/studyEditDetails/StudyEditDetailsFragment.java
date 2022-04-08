@@ -6,7 +6,6 @@ import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -64,6 +63,7 @@ public class StudyEditDetailsFragment extends Fragment {
     private Button saveButton;
     private LottieAnimationView doneAnimation;
 
+
     public StudyEditDetailsFragment() {
     }
 
@@ -78,7 +78,7 @@ public class StudyEditDetailsFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_edit_study_details, container, false);
         prepareComponents();
         setupView(view);
-        //dates also need to be loaded here!!
+        //dates also need to be loaded here
         studyEditViewModel.fetchEditStudyDetailsAndDates(currentStudyIdEdit);
         return view;
     }
@@ -89,16 +89,18 @@ public class StudyEditDetailsFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
     }
 
+
+    //Parameter:
+    //Return values:
+    //Sets study ID and the View Model
     private void prepareComponents() {
         currentStudyIdEdit = StudyEditFragment.currentStudyIdEdit;
-        //maybe "this"?
         studyEditViewModel = new ViewModelProvider(getParentFragment()).get(StudyEditViewModel.class);
         studyEditViewModel.studyEditDetailsFragment = this;
         studyEditViewModel.prepareRepo();
-        Log.d("DetailsFragment", "viewModelStore: " + getParentFragment().toString());
     }
 
-    //Parameter:
+    //Parameter: view
     //Return values:
     //Connects the code with the view and sets Listener for Saving
     private void setupView(View view) {
@@ -112,17 +114,17 @@ public class StudyEditDetailsFragment extends Fragment {
         categories = view.findViewById(R.id.edit_study_category);
         dropdownListCategories = new ArrayList<>();
 
-        for(int i = 1; i < getResources().getStringArray(R.array.createCategoryList).length; i++){
+        for (int i = 1; i < getResources().getStringArray(R.array.createCategoryList).length; i++) {
             dropdownListCategories.add(getResources().getStringArray(R.array.createCategoryList)[i]);
         }
-        arrayAdapterCategories = new ArrayAdapter<>(getActivity(), R.layout.material_dropdown_item, dropdownListCategories);
+        arrayAdapterCategories = new ArrayAdapter<>(getActivity(), R.layout.item_material_dropdown, dropdownListCategories);
         categories.setAdapter(arrayAdapterCategories);
 
         executionType = view.findViewById(R.id.edit_study_executionType);
         dropdownListExecutionType = new ArrayList<>();
         dropdownListExecutionType.add("Remote");
         dropdownListExecutionType.add("Präsenz");
-        arrayAdapterExecutionType = new ArrayAdapter<>(getActivity(), R.layout.material_dropdown_item, dropdownListExecutionType);
+        arrayAdapterExecutionType = new ArrayAdapter<>(getActivity(), R.layout.item_material_dropdown, dropdownListExecutionType);
         executionType.setAdapter(arrayAdapterExecutionType);
 
         contactMail = view.findViewById(R.id.edit_study_contact_mail);
@@ -156,8 +158,8 @@ public class StudyEditDetailsFragment extends Fragment {
 
             @Override
             public void afterTextChanged(Editable editable) {
-                Log.d("editable", ": " + editable.toString());
-                if (editable.toString().equals("Remote")){
+                if (editable.toString().equals("Remote")) {
+
                     presenceLayout.setVisibility(View.GONE);
                     remoteLayout.setVisibility(View.VISIBLE);
                 } else {
@@ -167,19 +169,15 @@ public class StudyEditDetailsFragment extends Fragment {
             }
         });
 
-        saveButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+        saveButton.setOnClickListener(v -> {
 
-                if (checkMandatoryFields()){
-                    playAnimation();
-                    studyEditViewModel.updateStudyAndDates();
-                }
+            if (checkMandatoryFields()) {
+                playAnimation();
+                studyEditViewModel.updateStudyAndDates();
             }
         });
 
         doneAnimation = view.findViewById(R.id.animationViewEdit);
-
         doneAnimation.addAnimatorListener(
                 new AnimatorListenerAdapter() {
                     @Override
@@ -191,27 +189,31 @@ public class StudyEditDetailsFragment extends Fragment {
         );
     }
 
+
+    //Parameter:
+    //Return values: boolean
+    //Checks for mandatory input and sets error messages
     private Boolean checkMandatoryFields() {
 
-        if (title.getText().toString().isEmpty()){
+        if (title.getText().toString().isEmpty()) {
             title.setError("Titel darf nicht leer sein!");
             return false;
         }
-        if (contactMail.getText().toString().isEmpty()){
+        if (contactMail.getText().toString().isEmpty()) {
             contactMail.setError("Meil darf nicht leer sein!");
             return false;
         }
-        if (description.getText().toString().isEmpty()){
+        if (description.getText().toString().isEmpty()) {
             description.setError("Beschreibung darf nicht leer sein!");
             return false;
         }
         if (executionType.getText().toString().equals("Remote")) {
-            if (platformOne.getText().toString().isEmpty()){
+            if (platformOne.getText().toString().isEmpty()) {
                 platformOne.setError("Es muss eine Platform angegeben werden!");
                 return false;
             }
-        }else {
-            if (location.getText().toString().isEmpty()){
+        } else {
+            if (location.getText().toString().isEmpty()) {
                 location.setError("Es muss ein Ort angegeben werden!");
                 return false;
             }
@@ -219,6 +221,9 @@ public class StudyEditDetailsFragment extends Fragment {
         return true;
     }
 
+    //Parameter:
+    //Return values:
+    //Sets animation properties
     private void playAnimation() {
         doneAnimation.setVisibility(LottieAnimationView.VISIBLE);
         doneAnimation.setProgress(0);
@@ -226,18 +231,21 @@ public class StudyEditDetailsFragment extends Fragment {
         doneAnimation.playAnimation();
     }
 
-
-    private void navigateToCreatorDetailsView(){
+    //Parameter:
+    //Return values:
+    //Navigates back to the study details view
+    private void navigateToCreatorDetailsView() {
         Bundle args = new Bundle();
         args.putString("studyId", currentStudyIdEdit);
-        args.putBoolean("fromEditFragment", true);
         navController.navigate(R.id.action_editStudyFragment_to_studyCreatorFragment, args);
     }
 
 
+    //Parameter:
+    //Return values:
+    //Set the existing study details in the edit view
     public void setDetails() {
 
-        Log.d("DetailsFragment", "setDetails: " + studyEditViewModel.studyEditProcessData.toString());
         //title, vph, category, executionType
         if (studyEditViewModel.studyEditProcessData.get("name") != null) {
             title.setText(studyEditViewModel.studyEditProcessData.get("name").toString());
@@ -248,40 +256,31 @@ public class StudyEditDetailsFragment extends Fragment {
         if (studyEditViewModel.studyEditProcessData.get("category") != null) {
             String cat = studyEditViewModel.studyEditProcessData.get("category").toString();
             if (cat.equals("Feldstudie")) {
-                //categories.setSelection(1);
-                categories.setText("Feldstudie", false);
+                categories.setText(getString(R.string.fieldStudyText), false);
             }
             if (cat.equals("Fokusgruppe")) {
-                //categories.setSelection(2);
-                categories.setText("Fokusgruppe", false);
+                categories.setText(getString(R.string.focusGroupText), false);
             }
             if (cat.equals("Fragebogen")) {
-                //categories.setSelection(3);
-                categories.setText("Fragebogen", false);
+                categories.setText(getString(R.string.questionnaireText), false);
             }
             if (cat.equals("Gamingstudie")) {
-                //categories.setSelection(4);
-                categories.setText("Gamingstudie", false);
+                categories.setText(getString(R.string.gamingText), false);
             }
             if (cat.equals("Interview")) {
-                //categories.setSelection(4);
-                categories.setText("Interview", false);
+                categories.setText(getString(R.string.interviewText), false);
             }
-            if (cat.equals("Laborstudien")) {
-                //categories.setSelection(4);
-                categories.setText("Laborstudien", false);
+            if (cat.equals("Laborstudie")) {
+                categories.setText(getString(R.string.labStudyText), false);
             }
             if (cat.equals("Tagebuchstudie")) {
-                //categories.setSelection(4);
-                categories.setText("Tagebuchstudie", false);
+                categories.setText(getString(R.string.diaryStudyText), false);
             }
             if (cat.equals("Usability/UXstudie")) {
-                //categories.setSelection(4);
-                categories.setText("Usability/UXstudie", false);
+                categories.setText(getString(R.string.usabilityText), false);
             }
             if (cat.equals("Sonstige")) {
-                //categories.setSelection(4);
-                categories.setText("Sonstige", false);
+                categories.setText(getString(R.string.othersText), false);
             }
         }
         if (studyEditViewModel.studyEditProcessData.get("executionType") != null) {
@@ -293,7 +292,6 @@ public class StudyEditDetailsFragment extends Fragment {
                 executionType.setText("Präsenz", false);
             }
         }
-
 
         //contacts
         //mail is never null (mandatory mail)

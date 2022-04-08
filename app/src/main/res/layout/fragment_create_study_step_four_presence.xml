@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="?android:windowBackground"
-    tools:context=".views.createStudy.createStudyFragment_StepFour_Remote">
+    tools:context=".views.createStudy.CreateStudyFragment_StepFour_Remote">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -17,35 +17,24 @@
             android:layout_height="match_parent">
 
 
-        <TextView
-            android:id="@+id/create_stepFourLocal_pageTitle"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/fragment_create_study_pageFourTitle"
-            android:textAlignment="center"
-            android:textSize="35sp" />
+            <TextView
+                android:id="@+id/create_stepFourLocal_pageTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/fragment_create_study_pageFourTitle"
+                android:textAlignment="center"
+                android:textSize="35sp" />
 
-        <View
-            android:id="@+id/create_stepFour_local_separator"
-            android:layout_below="@+id/create_stepFourLocal_pageTitle"
-            android:layout_width="match_parent"
-            android:layout_height="3dp"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp"
-            android:layout_marginTop="5dp"
-            android:background="@color/black"  />
+            <View
+                android:id="@+id/create_stepFour_local_separator"
+                android:layout_width="match_parent"
+                android:layout_height="3dp"
+                android:layout_below="@+id/create_stepFourLocal_pageTitle"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginRight="20dp"
+                android:background="@color/black" />
 
-        <!--      <TextView
-                  android:id="@+id/pageDesc"
-                  android:layout_width="match_parent"
-                  android:layout_height="0dp"
-                  android:layout_weight="2.5"
-                  android:textSize="20sp"
-                  android:textAlignment="center"
-                  android:layout_marginLeft="5dp"
-                  android:layout_marginRight="5dp"
-                  android:layout_marginTop="30dp"
-                  android:text="@string/fragment_create_study_desc_page_four_presence" />-->
 
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -57,75 +46,99 @@
                     android:layout_height="wrap_content"
                     android:layout_centerInParent="true">
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/create_stepFour_locOne_InputLayout"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
-            android:layout_marginTop="20dp"
-            android:layout_marginRight="20dp"
-            android:hint="@string/createLocationHint"
-            android:textColorHint="@color/heatherred_Main"
-            app:boxStrokeColor="@color/black"
-            app:boxStrokeWidthFocused="2dp"
-            app:hintTextColor="@color/heatherred_Main">
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/presetLayoutStepFour"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginTop="30dp"
+                        android:layout_marginRight="20dp"
+                        android:hint="@string/create_study_stepFour_presetHint"
+                        android:textColorHint="@color/heatherred_Main"
+                        app:boxBackgroundColor="@color/white"
+                        app:boxStrokeColor="@color/black"
+                        app:boxStrokeWidthFocused="2dp"
+                        app:hintTextColor="@color/heatherred_Main">
 
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/inputFieldLocation"
-                style="@style/You.EditText.Style"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"/>
+                        <AutoCompleteTextView
+                            android:id="@+id/create_stepFour_local_Preset"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:inputType="none" />
 
-        </com.google.android.material.textfield.TextInputLayout>
+                    </com.google.android.material.textfield.TextInputLayout>
 
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/create_stepFour_locOne_InputLayout"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/presetLayoutStepFour"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginRight="20dp"
+                        android:hint="@string/createLocationHint"
+                        android:textColorHint="@color/heatherred_Main"
+                        app:boxStrokeColor="@color/black"
+                        app:boxStrokeWidthFocused="2dp"
+                        app:hintTextColor="@color/heatherred_Main">
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/create_stepFour_locTwo_InputLayout"
-            android:layout_below="@+id/create_stepFour_locOne_InputLayout"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
-            android:layout_marginTop="20dp"
-            android:layout_marginRight="20dp"
-            android:hint="@string/createStreetHint"
-            android:textColorHint="@color/heatherred_Main"
-            app:boxStrokeColor="@color/black"
-            app:boxStrokeWidthFocused="2dp">
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/inputFieldLocation"
+                            style="@style/You.EditText.Style"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent" />
 
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/inputFieldStreet"
-                style="@style/You.EditText.Style"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent" />
-
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/create_stepFour_locThree_InputLayout"
-            android:layout_below="@+id/create_stepFour_locTwo_InputLayout"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
-            android:layout_marginTop="20dp"
-            android:layout_marginRight="20dp"
-            android:hint="@string/createRoomHint"
-            android:textColorHint="@color/heatherred_Main"
-            app:boxStrokeColor="@color/black"
-            app:boxStrokeWidthFocused="2dp"
-            app:hintTextColor="@color/heatherred_Main">
+                    </com.google.android.material.textfield.TextInputLayout>
 
 
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/inputFieldRoom"
-                style="@style/You.EditText.Style"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent" />
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/create_stepFour_locTwo_InputLayout"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/create_stepFour_locOne_InputLayout"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginRight="20dp"
+                        android:hint="@string/createAddressHint"
+                        android:textColorHint="@color/heatherred_Main"
+                        app:boxStrokeColor="@color/black"
+                        app:boxStrokeWidthFocused="2dp">
 
-        </com.google.android.material.textfield.TextInputLayout>
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/inputFieldStreet"
+                            style="@style/You.EditText.Style"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent" />
+
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/create_stepFour_locThree_InputLayout"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/create_stepFour_locTwo_InputLayout"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginRight="20dp"
+                        android:hint="@string/createRoomHint"
+                        android:textColorHint="@color/heatherred_Main"
+                        app:boxStrokeColor="@color/black"
+                        app:boxStrokeWidthFocused="2dp"
+                        app:hintTextColor="@color/heatherred_Main">
+
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/inputFieldRoom"
+                            style="@style/You.EditText.Style"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent" />
+
+                    </com.google.android.material.textfield.TextInputLayout>
 
                 </RelativeLayout>
 

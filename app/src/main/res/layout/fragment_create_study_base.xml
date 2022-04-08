@@ -4,41 +4,32 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="?android:windowBackground"
-    tools:context=".views.createStudy.createStudyFragment_Base">
+    tools:context=".views.createStudy.CreateStudyFragment_Base">
 
-    <!--
-    <TextView
-        android:id="@+id/create_base_pageTitle"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/fragment_create_study_pageBaseTitle"
-        android:textAlignment="center"
-        android:textSize="35sp" />
+        android:layout_height="match_parent"
+        android:fillViewport="true">
 
-    <View
-        android:id="@+id/create_base_separator"
-        android:layout_width="match_parent"
-        android:layout_height="3dp"
-        android:layout_below="@+id/create_base_pageTitle"
-        android:layout_marginLeft="20dp"
-        android:layout_marginTop="5dp"
-        android:layout_marginRight="20dp"
-        android:background="@color/black" />
-        android:layout_below="@+id/create_base_separator"
-        android:layout_marginLeft="5dp"
-        android:layout_marginTop="30dp"
-        android:layout_marginRight="5dp"
--->
-    <TextView
-        android:id="@+id/create_base_pageDesc"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:layout_marginLeft="5dp"
-        android:layout_marginRight="5dp"
-        android:text="@string/fragment_create_study_pageBaseDesc"
-        android:textAlignment="center"
-        android:textSize="20sp" />
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/create_base_pageDesc"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:layout_marginHorizontal="40dp"
+                android:text="@string/fragment_create_study_pageBaseDesc"
+                android:textAlignment="center"
+                android:textSize="20sp" />
+
+        </RelativeLayout>
+
+
+    </ScrollView>
+
 
 </RelativeLayout>
 

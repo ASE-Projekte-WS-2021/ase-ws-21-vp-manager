@@ -13,8 +13,10 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.VPManager">
         <activity
-            android:name="com.example.vpmanager.views.mainActivity"
-            android:exported="true">
+            android:name="com.example.vpmanager.views.MainActivity"
+            android:windowSoftInputMode="adjustPan"
+            android:exported="true"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -25,12 +27,6 @@
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
-
-        <!--
-        <activity
-            android:name="com.example.vpmanager.createStudy.createStudyActivity"
-            android:exported="true">
-        </activity> -->
 
     </application>
 

@@ -5,30 +5,28 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".views.ownStudies.OwnStudyFragment"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
 
-    app:layout_behavior="@string/appbar_scrolling_view_behavior">
+    tools:context=".views.ownStudies.OwnStudyFragment">
 
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/tab_layout_ownStudies"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:tabRippleColor="@color/green_light"
-        app:tabIndicatorColor="@color/green_Main"
-        app:tabSelectedTextColor="@color/white"
-        app:tabTextColor="@color/white"
         android:clickable="true"
-        android:focusable="true">
+        android:focusable="true"
+        app:tabIndicatorColor="@color/green_Main"
+        app:tabRippleColor="@color/green_light"
+        app:tabSelectedTextColor="@color/white"
+        app:tabTextColor="@color/white">
 
 
     </com.google.android.material.tabs.TabLayout>
 
 
-
     <androidx.viewpager.widget.ViewPager
         android:id="@+id/view_pager_ownStudies"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        />
+        android:layout_height="match_parent" />
 
 </LinearLayout>

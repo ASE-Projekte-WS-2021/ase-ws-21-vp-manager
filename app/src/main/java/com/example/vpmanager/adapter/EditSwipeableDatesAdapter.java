@@ -24,16 +24,27 @@ public class EditSwipeableDatesAdapter extends RecyclerView.Adapter<RecyclerView
     private int mRecentlyDeletedDatePosition;
     private View mFragmentView;
 
+
+    //Parameter: context, studyDates, fragmentView
+    //Return values:
+    //Sets variables
     public EditSwipeableDatesAdapter(Context context, ArrayList<DateModel> studyDates, View fragmentView) {
         mContext = context;
-        editDatesList = studyDates;
+        editDatesList = DateModel.sortByDate(studyDates);
         mFragmentView = fragmentView;
+        this.registerAdapterDataObserver(new RecyclerView.AdapterDataObserver() {
+            @Override
+            public void onChanged() {
+                super.onChanged();
+                editDatesList = DateModel.sortByDate(studyDates);
+            }
+        });
     }
 
     @NonNull
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.date_item, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_appointment, parent, false);
         CustomViewHolder holder = new CustomViewHolder(view);
         return holder;
     }
@@ -43,7 +54,6 @@ public class EditSwipeableDatesAdapter extends RecyclerView.Adapter<RecyclerView
 
         //other textViews can be filled with data here
         ((CustomViewHolder) holder).dateDate.setText(editDatesList.get(position).getDate());
-        //((CustomViewHolder) holder).dateOtherInfos.setText(editDatesList.get(position).getXYZ());
     }
 
     @Override
@@ -51,35 +61,54 @@ public class EditSwipeableDatesAdapter extends RecyclerView.Adapter<RecyclerView
         return editDatesList.size();
     }
 
+
     private class CustomViewHolder extends RecyclerView.ViewHolder {
 
         TextView dateDate;
-        TextView dateOtherInfos;
 
         public CustomViewHolder(@NonNull View itemView) {
             super(itemView);
             dateDate = itemView.findViewById(R.id.dateItemDate);
-            dateOtherInfos = itemView.findViewById(R.id.dateItemLayoutProposal);
         }
     }
 
-    public void deleteItem(int position){
+
+    //Parameter: position
+    //Return values:
+    //Deletes associated date item
+    public void deleteItem(int position) {
         mRecentlyDeletedDate = editDatesList.get(position);
-        mRecentlyDeletedDatePosition = position;
-        editDatesList.remove(position);
-        notifyItemRemoved(position);
-        showUndoSnackBar();
+        if (mRecentlyDeletedDate.getSelected() && mRecentlyDeletedDate.getUserId() != null) {
+            View view = mFragmentView.findViewById(R.id.edit_study_dates_layout);
+            Snackbar snackbar = Snackbar.make(view, R.string.removeAppointmentnotPossible,
+                    Snackbar.LENGTH_LONG);
+            snackbar.show();
+            notifyDataSetChanged();
+        } else {
+            mRecentlyDeletedDatePosition = position;
+            editDatesList.remove(position);
+            notifyItemRemoved(position);
+            showUndoSnackBar();
+        }
     }
 
-    private void showUndoSnackBar(){
+
+    //Parameter:
+    //Return values:
+    //Sets snack bar for cancelling appointments
+    private void showUndoSnackBar() {
         View view = mFragmentView.findViewById(R.id.edit_study_dates_layout);
-        Snackbar snackbar = Snackbar.make(view, "1 Termin gelöscht",
+        Snackbar snackbar = Snackbar.make(view, R.string.removeAppointmentAlert,
                 Snackbar.LENGTH_LONG);
-        snackbar.setAction("Rückgängig", v -> undoDelete());
+        snackbar.setAction(R.string.cancelAction, v -> undoDelete());
         snackbar.show();
     }
 
-    private void undoDelete(){
+
+    //Parameter:
+    //Return values:
+    //Manages deleted dates
+    private void undoDelete() {
         editDatesList.add(mRecentlyDeletedDatePosition, mRecentlyDeletedDate);
         notifyItemInserted(mRecentlyDeletedDatePosition);
     }

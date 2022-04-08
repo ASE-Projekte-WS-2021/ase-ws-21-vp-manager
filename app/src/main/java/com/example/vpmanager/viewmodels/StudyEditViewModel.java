@@ -1,6 +1,5 @@
 package com.example.vpmanager.viewmodels;
 
-import android.util.Log;
 
 import androidx.lifecycle.ViewModel;
 
@@ -9,7 +8,7 @@ import com.example.vpmanager.interfaces.StudyDatesListener;
 import com.example.vpmanager.interfaces.StudyUpdatedListener;
 import com.example.vpmanager.models.DateModel;
 import com.example.vpmanager.repositories.StudyEditRepository;
-import com.example.vpmanager.views.mainActivity;
+import com.example.vpmanager.views.MainActivity;
 import com.example.vpmanager.views.studyEditDetails.StudyEditDatesFragment;
 import com.example.vpmanager.views.studyEditDetails.StudyEditDetailsFragment;
 
@@ -17,6 +16,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
+
 
 public class StudyEditViewModel extends ViewModel implements EditStudyDetailsListener,
         StudyDatesListener, StudyUpdatedListener {
@@ -31,9 +31,13 @@ public class StudyEditViewModel extends ViewModel implements EditStudyDetailsLis
 
     private StudyEditRepository mStudyEditRepo;
 
+
+    //Parameter:
+    //Return values:
+    //Gets instance of the Study Edit repository and sets the FirestoreCallback
     public void prepareRepo() {
         mStudyEditRepo = StudyEditRepository.getInstance();
-        //Instance is the same but different data can be retrieved!
+        //Instance is the same but different data can be retrieved
         mStudyEditRepo.setFirestoreCallback(this, this, this);
     }
 
@@ -42,14 +46,18 @@ public class StudyEditViewModel extends ViewModel implements EditStudyDetailsLis
         mStudyEditRepo.getStudyEditDates(currentStudyIdEdit);
     }
 
+
+    //Parameter:
+    //Return values:
+    //Manages the changes made in the edit process
     public void updateStudyAndDates() {
 
         //studyId is already in the map and can be reused
-        //the creator isn't loaded in the first place so is is added here
-        studyEditProcessData.put("creator", mainActivity.uniqueID);
+        //the creator isn't loaded in the first place so it is added here
+        studyEditProcessData.put("creator", MainActivity.uniqueID);
 
-        //these two for-loops manage the deletion of dates in the db, that were in the db in the
-        //beginning but got deleted in the edit process
+        /*these two for-loops manage the deletion of dates in the db, that were in the db in the
+        beginning but got deleted in the edit process*/
         ArrayList<String> idsOfTheProcessData = new ArrayList<>();
         for (int i = 0; i < datesEditProcessDataObjects.size(); i++) {
             idsOfTheProcessData.add(datesEditProcessDataObjects.get(i).getDateId());
@@ -75,11 +83,10 @@ public class StudyEditViewModel extends ViewModel implements EditStudyDetailsLis
                 localDateMap.put("id", localDateId);
                 localDateMap.put("studyId", datesEditProcessDataObjects.get(i).getStudyId());
 
-                //if another user already selected this date --> keep his/her id
-                //this if statement is necessary because getUserId() might throw a nullPointer
+               /* if another user already selected this date --> keep his/her id
+                this if statement is necessary because getUserId() might throw a nullPointer*/
                 if (datesEditProcessDataObjects.get(i).getUserId() != null) {
                     //if someone selected the date, we don't want to do anything
-                    //localDateMap.put("userId", datesEditProcessDataObjects.get(i).getUserId());
                 } else {
                     //if no one selected the date or it is new, we want to set selected as null
                     localDateMap.put("userId", null);
@@ -89,7 +96,6 @@ public class StudyEditViewModel extends ViewModel implements EditStudyDetailsLis
 
                 if (datesEditProcessDataObjects.get(i).getSelected()) {
                     //if someone selected the date, true can be set or nothing should happen
-                    //localDateMap.put("selected", true);
                 } else {
                     //set true if no one selected this date
                     localDateMap.put("selected", false);
@@ -105,7 +111,7 @@ public class StudyEditViewModel extends ViewModel implements EditStudyDetailsLis
 
                 mStudyEditRepo.updateDates(localDateMap, localDateId);
             }
-            //remove the previous list of dateIds ?
+            //remove the previous list of dateIds
             studyEditProcessData.remove("dates");
 
             studyEditProcessData.put("dates", dateIds);
@@ -117,9 +123,17 @@ public class StudyEditViewModel extends ViewModel implements EditStudyDetailsLis
         mStudyEditRepo.updateStudy(studyEditProcessData, studyId);
     }
 
+
+    //Parameter:
+    //Return values:
+    //Manages the changes made for fields with existing input values
     private void updateStudyFieldsWithInput() {
         studyEditProcessData.put("name", studyEditDetailsFragment.title.getText().toString());
-        studyEditProcessData.put("vps", studyEditDetailsFragment.vph.getText().toString());
+        if (!studyEditDetailsFragment.vph.getText().toString().isEmpty()) {
+            studyEditProcessData.put("vps", studyEditDetailsFragment.vph.getText().toString());
+        } else {
+            studyEditProcessData.put("vps", "0");
+        }
         studyEditProcessData.put("category", studyEditDetailsFragment.categories.getText().toString());
         studyEditProcessData.put("executionType", studyEditDetailsFragment.executionType.getText().toString());
 
@@ -152,15 +166,18 @@ public class StudyEditViewModel extends ViewModel implements EditStudyDetailsLis
         }
     }
 
+
+    //Parameter: newDate, studyId
+    //Return values:
+    //Gets DateModel objects and adds new element
     public void addNewDateToList(String newDate, String studyId) {
-        Log.d("StudyEditViewModel", "addNewDateToList: before" + datesEditProcessDataObjects.toString());
         DateModel newDateObject = new DateModel(
-                getNewId(), newDate, studyId, mainActivity.uniqueID, false, false
+                getNewId(), newDate, studyId, MainActivity.uniqueID, false, false
         );
         datesEditProcessDataObjects.add(newDateObject);
-        Log.d("StudyEditViewModel", "addNewDateToList: after" + datesEditProcessDataObjects.toString());
         studyEditDatesFragment.notifyDatesObjectListChanged();
     }
+
 
     private String getNewId() {
         return UUID.randomUUID().toString();
@@ -170,7 +187,6 @@ public class StudyEditViewModel extends ViewModel implements EditStudyDetailsLis
     public void onEditStudyDetailsReady(Map<String, Object> editDetailsMap) {
         studyEditProcessData = editDetailsMap;
         studyEditDetailsFragment.setDetails();
-        Log.d("studyReady", ": " + studyEditProcessData.toString());
     }
 
     //called when the editFragment is opened
@@ -181,12 +197,11 @@ public class StudyEditViewModel extends ViewModel implements EditStudyDetailsLis
         for (int i = 0; i < datesArrayList.size(); i++) {
             idsOfAllInitialDates.add(datesArrayList.get(i).getDateId());
         }
-        Log.d("onStudyDatesReady", "dateIds: " + idsOfAllInitialDates);
+
         studyEditDatesFragment.setupRecyclerView();
     }
 
     @Override
     public void onStudyUpdated() {
-        //studyEditDetailsFragment.navigateToCreatorDetailsView();
     }
 }

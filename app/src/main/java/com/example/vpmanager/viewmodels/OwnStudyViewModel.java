@@ -1,5 +1,6 @@
 package com.example.vpmanager.viewmodels;
 
+
 import androidx.lifecycle.ViewModel;
 
 import com.example.vpmanager.interfaces.StudyMetaDataListener;
@@ -23,6 +24,13 @@ public class OwnStudyViewModel extends ViewModel implements StudyMetaDataListene
 
     public void fetchOwnStudyMetaData() {
         mOwnStudyRepo.getOwnStudyMetaInfo();
+    }
+
+    //Parameter:
+    //Return Values: an arrayList containing StudyMetaInfoModel-objects of all currently existing studies
+    //Returns the filled arrayList of study data
+    public ArrayList<StudyMetaInfoModel> getStudyMetaInfo() {
+        return mOwnStudyMetaInfo;
     }
 
     public ArrayList<StudyMetaInfoModel> getOwnStudyMetaInfo() {

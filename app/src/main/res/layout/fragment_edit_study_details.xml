@@ -28,7 +28,8 @@
                 android:layout_marginStart="15dp"
                 android:layout_marginEnd="15dp"
                 android:layout_marginBottom="15dp"
-                android:text="Save Study" />
+                android:text="@string/saveStudy"
+                android:backgroundTint="@color/green_Main"/>
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/edit_study_textInputLayout_title"
@@ -38,7 +39,7 @@
                 android:layout_below="@+id/edit_study_saving_button"
                 android:layout_marginStart="20dp"
                 android:layout_marginEnd="20dp"
-                android:hint="Titel"
+                android:hint="@string/titleTag"
                 android:textColorHint="@color/heatherred_Main"
                 app:boxStrokeColor="@color/black"
                 app:boxStrokeWidthFocused="2dp"
@@ -61,7 +62,7 @@
                 android:layout_marginStart="20dp"
                 android:layout_marginTop="10dp"
                 android:layout_marginEnd="20dp"
-                android:hint="VP-Stunden"
+                android:hint="@string/vpTag"
                 android:textColorHint="@color/heatherred_Main"
                 app:boxStrokeColor="@color/black"
                 app:boxStrokeWidthFocused="2dp"
@@ -85,7 +86,7 @@
                 android:layout_marginStart="20dp"
                 android:layout_marginTop="10dp"
                 android:layout_marginEnd="20dp"
-                android:hint="Studienkategorie"
+                android:hint="@string/catHint"
                 android:textColorHint="@color/heatherred_Main"
                 app:boxBackgroundColor="@color/white"
                 app:boxStrokeColor="@color/black"
@@ -109,7 +110,7 @@
                 android:layout_marginStart="20dp"
                 android:layout_marginTop="10dp"
                 android:layout_marginEnd="20dp"
-                android:hint="Durchführungsart"
+                android:hint="@string/typeHint"
                 android:textColorHint="@color/heatherred_Main"
                 app:boxBackgroundColor="@color/white"
                 app:boxStrokeColor="@color/black"
@@ -124,38 +125,6 @@
 
             </com.google.android.material.textfield.TextInputLayout>
 
-            <!--
-            <RelativeLayout
-                android:id="@+id/spinner_category_layout"
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:layout_marginStart="20dp"
-                android:layout_marginEnd="20dp"
-                android:layout_marginTop="20dp">
-
-                <Spinner
-                    android:id="@+id/edit_study_category_spinner"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:popupBackground="@color/green_Main" />
-            </RelativeLayout>
-
-            <RelativeLayout
-                android:id="@+id/spinner_execution_layout"
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:layout_below="@+id/spinner_category_layout"
-                android:layout_marginStart="20dp"
-                android:layout_marginEnd="20dp"
-                android:layout_marginTop="5dp">
-
-                <Spinner
-                    android:id="@+id/edit_study_execution_spinner"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:popupBackground="@color/green_Main" />
-            </RelativeLayout>
-            -->
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/edit_study_textInputLayout_contact_mail"
@@ -166,7 +135,7 @@
                 android:layout_marginStart="20dp"
                 android:layout_marginTop="20dp"
                 android:layout_marginEnd="20dp"
-                android:hint="Kontakt - Mail"
+                android:hint="@string/contactOneHint"
                 android:textColorHint="@color/heatherred_Main"
                 app:boxStrokeColor="@color/black"
                 app:boxStrokeWidthFocused="2dp"
@@ -190,7 +159,7 @@
                 android:layout_marginStart="20dp"
                 android:layout_marginTop="10dp"
                 android:layout_marginEnd="20dp"
-                android:hint="Kontakt - Tel.-Nr."
+                android:hint="@string/contactTwoHint"
                 android:textColorHint="@color/heatherred_Main"
                 app:boxStrokeColor="@color/black"
                 app:boxStrokeWidthFocused="2dp"
@@ -214,7 +183,7 @@
                 android:layout_marginStart="20dp"
                 android:layout_marginTop="10dp"
                 android:layout_marginEnd="20dp"
-                android:hint="Kontakt - Skype"
+                android:hint="@string/contactThreeHint"
                 android:textColorHint="@color/heatherred_Main"
                 app:boxStrokeColor="@color/black"
                 app:boxStrokeWidthFocused="2dp"
@@ -237,7 +206,7 @@
                 android:layout_marginStart="20dp"
                 android:layout_marginTop="10dp"
                 android:layout_marginEnd="20dp"
-                android:hint="Kontakt - Discord"
+                android:hint="@string/contactFourHint"
                 android:textColorHint="@color/heatherred_Main"
                 app:boxStrokeColor="@color/black"
                 app:boxStrokeWidthFocused="2dp"
@@ -260,7 +229,7 @@
                 android:layout_marginStart="20dp"
                 android:layout_marginTop="10dp"
                 android:layout_marginEnd="20dp"
-                android:hint="Kontakt - Andere"
+                android:hint="@string/contactFiveHint"
                 android:textColorHint="@color/heatherred_Main"
                 app:boxStrokeColor="@color/black"
                 app:boxStrokeWidthFocused="2dp"
@@ -283,7 +252,7 @@
                 android:layout_marginStart="20dp"
                 android:layout_marginTop="20dp"
                 android:layout_marginEnd="20dp"
-                android:hint="Studienbeschreibung"
+                android:hint="@string/descriptionHint"
                 android:textColorHint="@color/heatherred_Main"
                 app:boxStrokeColor="@color/black"
                 app:boxStrokeWidthFocused="2dp"
@@ -312,7 +281,7 @@
                     android:layout_marginStart="20dp"
                     android:layout_marginTop="20dp"
                     android:layout_marginEnd="20dp"
-                    android:hint="Ort"
+                    android:hint="@string/locHint"
                     android:textColorHint="@color/heatherred_Main"
                     app:boxStrokeColor="@color/black"
                     app:boxStrokeWidthFocused="2dp"
@@ -335,7 +304,7 @@
                     android:layout_marginStart="20dp"
                     android:layout_marginTop="10dp"
                     android:layout_marginEnd="20dp"
-                    android:hint="Straße"
+                    android:hint="@string/streetHint"
                     android:textColorHint="@color/heatherred_Main"
                     app:boxStrokeColor="@color/black"
                     app:boxStrokeWidthFocused="2dp"
@@ -359,7 +328,7 @@
                     android:layout_marginTop="10dp"
                     android:layout_marginEnd="20dp"
                     android:layout_marginBottom="20dp"
-                    android:hint="Raum"
+                    android:hint="@string/roomHint"
                     android:textColorHint="@color/heatherred_Main"
                     app:boxStrokeColor="@color/black"
                     app:boxStrokeWidthFocused="2dp"
@@ -390,7 +359,7 @@
                     android:layout_marginStart="20dp"
                     android:layout_marginTop="20dp"
                     android:layout_marginEnd="20dp"
-                    android:hint="Plattform 1"
+                    android:hint="@string/platformOneHint"
                     android:textColorHint="@color/heatherred_Main"
                     app:boxStrokeColor="@color/black"
                     app:boxStrokeWidthFocused="2dp"
@@ -414,7 +383,7 @@
                     android:layout_marginTop="10dp"
                     android:layout_marginEnd="20dp"
                     android:layout_marginBottom="20dp"
-                    android:hint="Plattform 2"
+                    android:hint="@string/platformTwoHint"
                     android:textColorHint="@color/heatherred_Main"
                     app:boxStrokeColor="@color/black"
                     app:boxStrokeWidthFocused="2dp"

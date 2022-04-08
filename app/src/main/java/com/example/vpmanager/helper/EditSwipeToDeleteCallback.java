@@ -4,7 +4,6 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
-import android.util.Log;
 import android.view.View;
 
 import androidx.annotation.NonNull;
@@ -15,27 +14,15 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.vpmanager.R;
 import com.example.vpmanager.adapter.EditSwipeableDatesAdapter;
 
+
+//Creates a Callback for the given drag and swipe allowance. These values serve as defaults
 public class EditSwipeToDeleteCallback extends ItemTouchHelper.SimpleCallback {
-    /*
-     * Creates a Callback for the given drag and swipe allowance. These values serve as
-     * defaults
-     * and if you want to customize behavior per ViewHolder, you can override
-     * {@link #getSwipeDirs(RecyclerView, ViewHolder)}
-     * and / or {@link #getDragDirs(RecyclerView, ViewHolder)}.
-     *
-     * @param dragDirs  Binary OR of direction flags in which the Views can be dragged. Must be
-     *                  composed of {@link #LEFT}, {@link #RIGHT}, {@link #START}, {@link
-     *                  #END},
-     *                  {@link #UP} and {@link #DOWN}.
-     * @param swipeDirs Binary OR of direction flags in which the Views can be swiped. Must be
-     *                  composed of {@link #LEFT}, {@link #RIGHT}, {@link #START}, {@link
-     *                  #END},
-     *                  {@link #UP} and {@link #DOWN}.
-     */
+
 
     private EditSwipeableDatesAdapter mAdapter;
     private Drawable icon;
     private final ColorDrawable background;
+
 
     public EditSwipeToDeleteCallback(EditSwipeableDatesAdapter adapter) {
         super(0, ItemTouchHelper.RIGHT | ItemTouchHelper.LEFT);
@@ -69,18 +56,12 @@ public class EditSwipeToDeleteCallback extends ItemTouchHelper.SimpleCallback {
         int iconTop = itemView.getTop() + (itemView.getHeight() - icon.getIntrinsicHeight()) / 2;
         int iconBottom = iconTop + icon.getIntrinsicHeight();
 
-        Log.d("margin", ":" + iconMargin);
-        Log.d("Top", ":" + iconTop);
-        Log.d("Bottom", ":" + iconBottom);
-        Log.d("intrinsicHeight", ":" + icon.getIntrinsicHeight());
 
         if (dX > 0) { // Swiping to the right
 
-            //these were swapped in the example
             int iconLeft = itemView.getLeft() + iconMargin;
             int iconRight = itemView.getLeft() + iconMargin + icon.getIntrinsicWidth();
 
-            //icon.setBounds(0,iconTop,48,iconBottom);
             icon.setBounds(iconLeft, iconTop, iconRight, iconBottom);
             background.setBounds(itemView.getLeft(), itemView.getTop(),
                     itemView.getLeft() + ((int) dX) + backgroundCornerOffset,
@@ -88,7 +69,7 @@ public class EditSwipeToDeleteCallback extends ItemTouchHelper.SimpleCallback {
 
 
             background.draw(c);
-            if (itemView.getLeft() + ((int) dX) + backgroundCornerOffset > bound1){
+            if (itemView.getLeft() + ((int) dX) + backgroundCornerOffset > bound1) {
                 icon.draw(c);
             }
 
@@ -101,11 +82,11 @@ public class EditSwipeToDeleteCallback extends ItemTouchHelper.SimpleCallback {
                     itemView.getTop(), itemView.getRight(), itemView.getBottom());
 
             background.draw(c);
-            if (itemView.getRight() + ((int) dX) - backgroundCornerOffset < bound2){
+            if (itemView.getRight() + ((int) dX) - backgroundCornerOffset < bound2) {
                 icon.draw(c);
             }
 
-        } else { // view is unSwiped (dX = 0 ??)
+        } else { // view is unSwiped
             background.setBounds(0, 0, 0, 0);
             icon.setBounds(0, 0, 0, 0);
         }

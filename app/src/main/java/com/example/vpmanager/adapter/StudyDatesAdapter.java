@@ -1,7 +1,6 @@
 package com.example.vpmanager.adapter;
 
 import android.content.Context;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,27 +21,28 @@ public class StudyDatesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
     private ArrayList<DateModel> mStudyDates;
     private OnDateClickListener mOnDateClickListener;
 
+
+    //Parameter: context, studyDates, onDareCLickListener
+    //Return values:
+    //Sets variables
     public StudyDatesAdapter(Context context, ArrayList<DateModel> studyDates, OnDateClickListener onDateClickListener) {
         mContext = context;
-        mStudyDates = studyDates;
+        mStudyDates = DateModel.sortByDate(studyDates);
         mOnDateClickListener = onDateClickListener;
-        Log.d("StudyDatesAdapter", "constructor was called");
     }
 
     @NonNull
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.date_item, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_appointment, parent, false);
         CustomViewHolder holder = new CustomViewHolder(view, mOnDateClickListener);
         return holder;
     }
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
-
         //other textViews can be filled with data here
         ((CustomViewHolder) holder).dateDate.setText(mStudyDates.get(position).getDate());
-        //((CustomViewHolder) holder).dateOtherInfos.setText(mStudyDates.get(position).getXYZ());
     }
 
     @Override
@@ -53,7 +53,6 @@ public class StudyDatesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
     private class CustomViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         TextView dateDate;
-        TextView dateOtherInfos;
         LinearLayout dateItemParentLayout;
         OnDateClickListener onDateClickListener;
 
@@ -62,7 +61,6 @@ public class StudyDatesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
             this.onDateClickListener = onDateClickListener;
 
             dateDate = itemView.findViewById(R.id.dateItemDate);
-            dateOtherInfos = itemView.findViewById(R.id.dateItemLayoutProposal);
 
             if (this.onDateClickListener != null) {
                 dateItemParentLayout = itemView.findViewById(R.id.dateItemParentLayout);
@@ -74,11 +72,13 @@ public class StudyDatesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
         public void onClick(View view) {
             //Get the id of the date that was clicked on
             String dateId = mStudyDates.get(getAdapterPosition()).getDateId();
-            Log.d("StudyDatesAdapter", "dateId that was clicked on:" + dateId);
             onDateClickListener.onDateClick(dateId);
         }
     }
 
+    //Parameter:
+    //Return values:
+    //interface to get dateId
     public interface OnDateClickListener {
         void onDateClick(String dateId);
     }

@@ -1,7 +1,6 @@
 package com.example.vpmanager.views.studyEditDetails;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,7 +12,7 @@ import androidx.viewpager.widget.ViewPager;
 
 import com.example.vpmanager.R;
 import com.example.vpmanager.adapter.ViewPagerAdapter;
-import com.example.vpmanager.views.mainActivity;
+import com.example.vpmanager.views.MainActivity;
 import com.google.android.material.tabs.TabLayout;
 
 public class StudyEditFragment extends Fragment {
@@ -49,10 +48,11 @@ public class StudyEditFragment extends Fragment {
         studyEditDatesFragment = new StudyEditDatesFragment();
 
         tabLayoutEdit.setupWithViewPager(viewPagerEdit);
+        MainActivity.currentFragment = "editFragment";
 
         ViewPagerAdapter viewPagerAdapter = new ViewPagerAdapter(getParentFragmentManager(), 0);
-        viewPagerAdapter.addFragment(studyEditDetailsFragment, "Details");
-        viewPagerAdapter.addFragment(studyEditDatesFragment, "Termine");
+        viewPagerAdapter.addFragment(studyEditDetailsFragment, getString(R.string.studyViewTabOne));
+        viewPagerAdapter.addFragment(studyEditDatesFragment, getString(R.string.studyViewTabTwo));
         viewPagerEdit.setAdapter(viewPagerAdapter);
 
         return view;
@@ -62,12 +62,14 @@ public class StudyEditFragment extends Fragment {
     public void onViewCreated(View view, Bundle savedInstanceState) {
         navController = Navigation.findNavController(view);
         super.onViewCreated(view, savedInstanceState);
-        Log.d("EditParentFragment", "instance: " + this.toString());
     }
 
+    //Parameter:
+    //Return values:
+    //Sets the current user ID and study ID
     private void getRequiredInfos() {
         currentStudyIdEdit = getArguments().getString("studyId");
-        currentUserIdEdit = mainActivity.createUserId(getActivity());
+        currentUserIdEdit = MainActivity.createUserId(getActivity());
     }
 
 }

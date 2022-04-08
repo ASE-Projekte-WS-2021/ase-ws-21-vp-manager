@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="?android:windowBackground"
-    tools:context=".views.createStudy.createStudyFragment_StepOne">
+    tools:context=".views.createStudy.CreateStudyFragment_StepOne">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -16,159 +16,138 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-        <TextView
-            android:id="@+id/create_stepOne_pageTitle"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/fragment_create_study_pageOneTitle"
-            android:textAlignment="center"
-            android:textSize="35sp" />
+            <TextView
+                android:id="@+id/create_stepOne_pageTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/fragment_create_study_pageOneTitle"
+                android:textAlignment="center"
+                android:textSize="35sp" />
 
-        <View
-            android:id="@+id/create_stepOne_separator"
-            android:layout_width="match_parent"
-            android:layout_height="3dp"
-            android:layout_below="@+id/create_stepOne_pageTitle"
-            android:layout_marginLeft="20dp"
-            android:layout_marginTop="5dp"
-            android:layout_marginRight="20dp"
-            android:background="@color/black" />
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_below="@+id/create_stepOne_separator">
+            <View
+                android:id="@+id/create_stepOne_separator"
+                android:layout_width="match_parent"
+                android:layout_height="3dp"
+                android:layout_below="@+id/create_stepOne_pageTitle"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginRight="20dp"
+                android:background="@color/black" />
 
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_centerInParent="true">
+                android:layout_height="match_parent"
+                android:layout_below="@+id/create_stepOne_separator">
 
-                <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/create_stepOne_titleInputLayout"
-                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="20dp"
-                    android:layout_marginTop="20dp"
-                    android:layout_marginRight="20dp"
-                    android:hint="@string/createStudyTitleHint"
-                    android:textColorHint="@color/heatherred_Main"
-                    app:boxStrokeColor="@color/black"
-                    app:boxStrokeWidthFocused="2dp"
-                    app:hintTextColor="@color/heatherred_Main">
+                    android:layout_centerInParent="true">
 
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/inputFieldTitle"
-                        style="@style/You.EditText.Style"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:maxLength="34" />
-
-                </com.google.android.material.textfield.TextInputLayout>
-
-
-                <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/create_stepOne_vphInputLayout"
-                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/create_stepOne_titleInputLayout"
-                    android:layout_marginLeft="20dp"
-                    android:layout_marginTop="30dp"
-                    android:layout_marginRight="20dp"
-                    android:hint="@string/createOfferedVP"
-                    android:textColorHint="@color/heatherred_Main"
-                    app:boxStrokeColor="@color/black"
-                    app:boxStrokeWidthFocused="2dp"
-                    app:hintTextColor="@color/heatherred_Main">
-
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/inputFieldVP"
-                        style="@style/You.EditText.Style"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:inputType="numberDecimal" />
-
-                </com.google.android.material.textfield.TextInputLayout>
-
-                <!--
-            <Spinner
-                android:id="@+id/create_stepOne_spinnerCategories"
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:layout_below="@+id/create_stepOne_vphInputLayout"
-                android:layout_marginStart="20dp"
-                android:layout_marginTop="30dp"
-                android:layout_marginEnd="20dp"
-                android:popupBackground="@color/heatherred_Main" />
-
-            <Spinner
-                android:id="@+id/create_stepOne_spinnerExecutionType"
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:layout_below="@+id/create_stepOne_vphInputLayout"
-                android:layout_marginStart="20dp"
-                android:layout_marginTop="30dp"
-                android:layout_marginEnd="20dp"
-                android:popupBackground="@color/heatherred_Main" />
-                -->
-
-                <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/create_stepOne_dropDown_category"
-                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/create_stepOne_vphInputLayout"
-                    android:layout_marginLeft="20dp"
-                    android:layout_marginTop="30dp"
-                    android:layout_marginRight="20dp"
-                    android:hint="Studienkategorie"
-                    android:textColorHint="@color/heatherred_Main"
-                    app:boxBackgroundColor="@color/white"
-                    app:boxStrokeColor="@color/black"
-                    app:boxStrokeWidthFocused="2dp"
-                    app:hintTextColor="@color/heatherred_Main">
-
-                    <AutoCompleteTextView
-                        android:id="@+id/create_stepOne_textView_category"
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/create_stepOne_titleInputLayout"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:inputType="none" />
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginRight="20dp"
+                        android:hint="@string/createStudyTitleHint"
+                        android:textColorHint="@color/heatherred_Main"
+                        app:boxStrokeColor="@color/black"
+                        app:boxStrokeWidthFocused="2dp"
+                        app:hintTextColor="@color/heatherred_Main">
 
-                </com.google.android.material.textfield.TextInputLayout>
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/inputFieldTitle"
+                            style="@style/You.EditText.Style"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:maxLength="34" />
 
-                <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/create_stepOne_dropDown_executionType"
-                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/create_stepOne_dropDown_category"
-                    android:layout_marginLeft="20dp"
-                    android:layout_marginTop="30dp"
-                    android:layout_marginRight="20dp"
-                    android:layout_marginBottom="20dp"
-                    android:hint="Durchführungsart"
-                    android:textColorHint="@color/heatherred_Main"
-                    app:boxBackgroundColor="@color/white"
-                    app:boxStrokeColor="@color/black"
-                    app:boxStrokeWidthFocused="2dp"
-                    app:hintTextColor="@color/heatherred_Main">
+                    </com.google.android.material.textfield.TextInputLayout>
 
-                    <AutoCompleteTextView
-                        android:id="@+id/create_stepOne_textView_executionType"
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/create_stepOne_vphInputLayout"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:inputType="none" />
+                        android:layout_below="@+id/create_stepOne_titleInputLayout"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginTop="30dp"
+                        android:layout_marginRight="20dp"
+                        android:hint="@string/createOfferedVP"
+                        android:textColorHint="@color/heatherred_Main"
+                        app:boxStrokeColor="@color/black"
+                        app:boxStrokeWidthFocused="2dp"
+                        app:hintTextColor="@color/heatherred_Main">
 
-                </com.google.android.material.textfield.TextInputLayout>
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/inputFieldVP"
+                            style="@style/You.EditText.Style"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:inputType="numberDecimal" />
+
+                    </com.google.android.material.textfield.TextInputLayout>
+
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/create_stepOne_dropDown_category"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/create_stepOne_vphInputLayout"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginTop="30dp"
+                        android:layout_marginRight="20dp"
+                        android:hint="@string/catHint"
+                        android:textColorHint="@color/heatherred_Main"
+                        app:boxBackgroundColor="@color/white"
+                        app:boxStrokeColor="@color/black"
+                        app:boxStrokeWidthFocused="2dp"
+                        app:hintTextColor="@color/heatherred_Main">
+
+                        <AutoCompleteTextView
+                            android:id="@+id/create_stepOne_textView_category"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:inputType="none" />
+
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/create_stepOne_dropDown_executionType"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/create_stepOne_dropDown_category"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginTop="30dp"
+                        android:layout_marginRight="20dp"
+                        android:layout_marginBottom="20dp"
+                        android:hint="@string/typeHint"
+                        android:textColorHint="@color/heatherred_Main"
+                        app:boxBackgroundColor="@color/white"
+                        app:boxStrokeColor="@color/black"
+                        app:boxStrokeWidthFocused="2dp"
+                        app:hintTextColor="@color/heatherred_Main">
+
+                        <AutoCompleteTextView
+                            android:id="@+id/create_stepOne_textView_executionType"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:inputType="none" />
+
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                </RelativeLayout>
 
             </RelativeLayout>
 
         </RelativeLayout>
+    </ScrollView>
 
-        </RelativeLayout>
-         </ScrollView>
-
-        </RelativeLayout>
+</RelativeLayout>
 

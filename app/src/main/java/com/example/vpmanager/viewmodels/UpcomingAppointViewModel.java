@@ -1,11 +1,10 @@
 package com.example.vpmanager.viewmodels;
 
-import static com.example.vpmanager.views.mainActivity.uniqueID;
-
-import android.util.Log;
+import static com.example.vpmanager.views.MainActivity.uniqueID;
 
 import androidx.lifecycle.ViewModel;
 
+import com.example.vpmanager.Config;
 import com.example.vpmanager.adapter.CustomListViewAdapterAppointments;
 import com.example.vpmanager.interfaces.GetAllDatesListener;
 import com.example.vpmanager.interfaces.GetAllStudiesListener;
@@ -17,7 +16,6 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -30,8 +28,7 @@ public class UpcomingAppointViewModel extends ViewModel implements GetAllDatesLi
 
     private List<Map<String, Object>> dbDatesListUpAppoint = new ArrayList<>();
     private List<Map<String, Object>> dbStudiesListUpAppoint = new ArrayList<>();
-
-    private List<String[]>[] arrivingDates = new List[]{null};  //final?
+    private List<String[]>[] arrivingDates = new List[]{null};
 
     private HashMap<String, String> getStudyIdByName = new HashMap<>();
 
@@ -39,9 +36,13 @@ public class UpcomingAppointViewModel extends ViewModel implements GetAllDatesLi
     public UpcomingAppointmentsFragment upcomingAppointmentsFragment;
     private HomeRepository mHomeRepo;
 
+
+    //Parameter:
+    //Return values:
+    //Gets instance of the Home Repository and sets the FirestoreCallback
     public void prepareRepo() {
         mHomeRepo = HomeRepository.getInstance();
-        //Instance is the same but different data can be retrieved!
+        //Instance is the same but different data can be retrieved
         mHomeRepo.setFirestoreCallbackUpAppoint(this, this);
     }
 
@@ -58,8 +59,6 @@ public class UpcomingAppointViewModel extends ViewModel implements GetAllDatesLi
     public void onAllDatesReady(Boolean success) {
         if (success) {
             getAllStudies();
-        } else {
-            Log.d("UpAppointViewModel", "Getting all dates from DB failed!");
         }
     }
 
@@ -71,12 +70,14 @@ public class UpcomingAppointViewModel extends ViewModel implements GetAllDatesLi
 
             arrivingDates[0] = getAllArrivingDates();
             finishSetupList(arrivingDates[0]);
-        } else {
-            Log.d("UpAppointViewModel", "Getting all studies from DB failed!");
         }
     }
 
-    private List<String[]> getAllArrivingDates() {   //static?
+
+    //Parameter:
+    //Return values: List<String[]>
+    //Loads the upcoming appointments and returns the created list
+    private List<String[]> getAllArrivingDates() {
         HashMap<String, String> studyIdList = new HashMap<>();
 
         List<String[]> arrivingDates = new ArrayList<>();
@@ -169,36 +170,88 @@ public class UpcomingAppointViewModel extends ViewModel implements GetAllDatesLi
                 arrivingDates.add(listEntry);
             }
         }
-        return arrivingDates;
+        return sortList(arrivingDates);
     }
 
+
+    //Parameter: dates
+    //Return values:
+    //Finalizes the upcoming study list by filling the elements in the ArrayList with the associated entries
     private void finishSetupList(List<String[]> dates) {
 
         if (dates != null) {
 
             ArrayList<String> listEntries = new ArrayList<>();
-            HashMap<String, String> sortingMap = new HashMap<>();
             for (String[] listEntry : dates) {
                 String name = listEntry[0];
                 String date = listEntry[1];
                 String studyID = listEntry[2];
 
                 if (date != null && name != null) {
-                    sortingMap.put(date, name);
+                    listEntries.add(name + "\t\t" + date);
                     getStudyIdByName.put(name, studyID);
                 }
             }
-            for (String key : sortingMap.keySet()) {
-                listEntries.add(sortingMap.get(key) + "\t\t" + key);
-            }
-            Collections.reverse(listEntries);
-
             upcomingAppointmentsFragment.setListViewAdapter(new CustomListViewAdapterAppointments(
                     upcomingAppointmentsFragment.getContext(), upcomingAppointmentsFragment.getNavController(),
                     listEntries, getStudyIdByName, "UpcomingAppointmentsFragment"));
         }
     }
 
+
+    //Parameter: toSort
+    //Return values: List<String[]>
+    //Sorts the list by date
+    private List<String[]> sortList(List<String[]> toSort) {
+        List<String[]> list = new ArrayList<>();
+
+        String[][] dateList = new String[toSort.size()][3];
+        int position = 0;
+        for (String[] ob : toSort) {
+            dateList[position][Config.listEntryIndexZero] = ob[Config.listEntryIndexZero];
+            dateList[position][Config.listEntryIndexOne] = ob[Config.listEntryIndexOne];
+            dateList[position][Config.listEntryIndexTwo] = ob[Config.listEntryIndexTwo];
+            position++;
+        }
+
+        for (int i = 0; i < dateList.length; i++) {
+            for (int k = 0; k < dateList.length - 1; k++) {
+
+                String date1 = dateList[k][1].substring(dateList[k][1].indexOf(",") + 2);
+                String date2 = dateList[k + 1][1].substring(dateList[k + 1][1].indexOf(",") + 2);
+
+                date1 = date1.replaceAll("um", "");
+                date1 = date1.replaceAll("Uhr", "");
+                date2 = date2.replaceAll("um", "");
+                date2 = date2.replaceAll("Uhr", "");
+
+                Format format = new SimpleDateFormat("dd.MM.yyyy hh:mm");
+                try {
+
+                    Date d1_Date = (Date) format.parseObject(date1);
+                    Date d2_Date = (Date) format.parseObject(date2);
+
+                    if (d2_Date.before(d1_Date)) {
+                        String[] tempDate = dateList[k];
+                        dateList[k] = dateList[k + 1];
+                        dateList[k + 1] = tempDate;
+                    }
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+        list.clear();
+        for (String[] date : dateList) {
+            list.add(date);
+        }
+        return list;
+    }
+
+
+    //Parameter: date
+    //Return values: boolean
+    //Checks if date has expired
     private boolean isDateInPast(String date) { //static?
 
         Calendar c = Calendar.getInstance();

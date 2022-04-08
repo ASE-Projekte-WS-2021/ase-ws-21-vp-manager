@@ -79,7 +79,6 @@
                 </androidx.cardview.widget.CardView>
 
                 <LinearLayout
-                    android:weightSum="12"
                     android:id="@+id/personalAccountLegend"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -87,7 +86,8 @@
                     android:layout_marginStart="10dp"
                     android:layout_marginEnd="10dp"
                     android:layout_marginBottom="5dp"
-                    android:orientation="horizontal">
+                    android:orientation="horizontal"
+                    android:weightSum="12">
 
                     <RelativeLayout
                         android:id="@+id/legend_green_yellow"
@@ -216,108 +216,186 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:orientation="horizontal"
-                android:weightSum="15">
+                android:orientation="vertical">
 
                 <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="9"
-                    android:weightSum="4">
+                    android:id="@+id/pa_sort_expanderButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
 
                     <TextView
-                        android:layout_width="0dp"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
                         android:layout_marginStart="15dp"
-                        android:layout_weight="1"
-                        android:text="Filter"
+                        android:text="Sortieren"
                         android:textSize="15sp" />
 
-                    <androidx.cardview.widget.CardView
-                        android:layout_width="0dp"
+                    <ImageView
+                        android:id="@+id/pa_sort_expanderIcon"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_gravity="center_vertical"
-                        android:layout_marginEnd="10dp"
-                        android:layout_weight="3"
-                        android:elevation="10dp"
-                        app:cardBackgroundColor="@color/cardview_light_background"
-                        app:cardCornerRadius="10dp">
-
-                        <ImageView
-                            android:id="@+id/pa_sort_alphabetical"
-                            android:layout_width="40dp"
-                            android:layout_height="match_parent"
-                            android:layout_gravity="left"
-                            app:srcCompat="@drawable/ic_baseline_sort_by_alpha_24"
-                            app:tint="@color/heatherred_dark" />
-
-                        <ImageView
-                            android:id="@+id/pa_sort_date"
-                            android:layout_width="40dp"
-                            android:layout_height="match_parent"
-                            android:layout_gravity="center"
-                            android:layout_marginHorizontal="5dp"
-                            app:srcCompat="@drawable/ic_baseline_date_range_24"
-                            app:tint="@color/heatherred_dark" />
-
-                        <TextView
-                            android:id="@+id/pa_sort_vp"
-                            android:layout_width="40dp"
-                            android:layout_height="match_parent"
-                            android:layout_gravity="right"
-                            android:gravity="center"
-                            android:text="VP"
-                            android:textColor="@color/heatherred_dark"
-                            android:textSize="20sp" />
-
-                    </androidx.cardview.widget.CardView>
-
+                        android:src="@drawable/ic_baseline_expand_more_24" />
                 </LinearLayout>
 
-                <RelativeLayout
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_marginVertical="10dp"
-                    android:layout_weight="6">
+                <LinearLayout
+                    android:id="@+id/pa_sort_expanderLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="10dp"
+                    android:layout_marginBottom="5dp"
+                    android:orientation="horizontal"
+                    android:visibility="gone"
+                    android:weightSum="3">
 
-                    <androidx.cardview.widget.CardView
-                        android:layout_width="120dp"
-                        android:layout_height="30dp"
-                        android:layout_centerInParent="true"
-                        android:layout_gravity="center_horizontal"
-                        android:elevation="10dp"
-                        app:cardBackgroundColor="@color/cardview_light_background"
-                        app:cardCornerRadius="10dp">
+                    <LinearLayout
+                        android:id="@+id/pa_sort_alphabetical"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center">
 
-                        <ToggleButton
-                            android:id="@+id/pa_remove_planned"
-                            android:layout_width="40dp"
-                            android:layout_height="30dp"
-                            android:layout_gravity="start"
-                            android:background="@color/pieChartPlanned"
-                            android:checked="true" />
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Name"
+                            android:textColor="@color/heatherred_Main"
+                            android:textSize="20sp"
+                            android:textStyle="bold" />
 
-                        <ToggleButton
-                            android:id="@+id/pa_remove_participation"
-                            android:layout_width="40dp"
-                            android:layout_height="30dp"
-                            android:layout_gravity="center"
-                            android:background="@color/pieChartParticipation"
-                            android:checked="true" />
+                        <ImageView
+                            android:id="@+id/pa_sort_alphabetical_Icon"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            app:tint="@color/heatherred_Main" />
+                    </LinearLayout>
 
-                        <ToggleButton
-                            android:id="@+id/pa_remove_completed"
-                            android:layout_width="40dp"
-                            android:layout_height="30dp"
-                            android:layout_gravity="end"
-                            android:background="@color/pieChartSafe"
-                            android:checked="true" />
+                    <LinearLayout
+                        android:id="@+id/pa_sort_date"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center">
 
-                    </androidx.cardview.widget.CardView>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Datum"
+                            android:textColor="@color/heatherred_Main"
+                            android:textSize="20sp"
+                            android:textStyle="bold" />
 
-                </RelativeLayout>
+                        <ImageView
+                            android:id="@+id/pa_sort_date_Icon"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            app:tint="@color/heatherred_Main" />
+                    </LinearLayout>
 
+                    <LinearLayout
+                        android:id="@+id/pa_sort_vp"
+                        android:layout_width="113dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="VPS"
+                            android:textColor="@color/heatherred_Main"
+                            android:textSize="20sp"
+                            android:textStyle="bold" />
+
+                        <ImageView
+                            android:id="@+id/pa_sort_vp_Icon"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            app:tint="@color/heatherred_Main" />
+                    </LinearLayout>
+                </LinearLayout>
+            </LinearLayout>
+
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardViewStatus"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/cardViewFilter"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="10dp"
+            android:elevation="10dp"
+            app:cardBackgroundColor="@color/cardview_light_background"
+            app:cardCornerRadius="10dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:id="@+id/pa_status_expanderButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginStart="15dp"
+                        android:text="Studienstatus"
+                        android:textSize="15sp" />
+
+                    <ImageView
+                        android:id="@+id/pa_status_expanderIcon"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/ic_baseline_expand_more_24" />
+                </LinearLayout>
+
+                <com.google.android.material.chip.ChipGroup
+                    android:id="@+id/pa_status_expanderLayout"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:visibility="gone"
+                    app:flexWrap="wrap">
+
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/pa_remove_planned"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Geplant"
+                        android:textStyle="bold"
+                        app:checkedIconTint="@color/white"
+                        app:chipBackgroundColor="@color/pieChartPlanned" />
+
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/pa_remove_participation"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_toEndOf="@id/pa_remove_planned"
+                        android:text="Teilgenommen"
+                        android:textStyle="bold"
+                        app:checkedIconTint="@color/white"
+                        app:chipBackgroundColor="@color/pieChartParticipation" />
+
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/pa_remove_completed"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="end"
+                        android:layout_toEndOf="@id/pa_remove_participation"
+                        android:text="Abgeschlossen"
+                        android:textStyle="bold"
+                        app:checkedIconTint="@color/white"
+                        app:chipBackgroundColor="@color/pieChartSafe" />
+
+                </com.google.android.material.chip.ChipGroup>
             </LinearLayout>
 
         </androidx.cardview.widget.CardView>
@@ -327,7 +405,7 @@
         <ScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_below="@+id/cardViewFilter"
+            android:layout_below="@+id/cardViewStatus"
             android:fillViewport="true">
 
             <androidx.cardview.widget.CardView
@@ -341,21 +419,12 @@
                 app:cardBackgroundColor="@color/cardview_light_background"
                 app:cardCornerRadius="10dp">
 
-                <ListView
+                <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/pa_fragment_listView"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_margin="10dp"
                     android:background="@color/cardview_light_background" />
-
-                <!--
-                <ExpandableListView
-                    android:id="@+id/pa_fragment_expandableList"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_margin="10dp"
-                    android:background="@color/cardview_light_background" />
-                    -->
 
             </androidx.cardview.widget.CardView>
 

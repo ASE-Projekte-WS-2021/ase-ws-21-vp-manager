@@ -1,14 +1,14 @@
 package com.example.vpmanager.viewmodels;
 
-import static com.example.vpmanager.views.mainActivity.uniqueID;
+import static com.example.vpmanager.views.MainActivity.uniqueID;
 
-import android.util.Log;
 import android.widget.LinearLayout;
 
 import androidx.lifecycle.ViewModel;
 
+import com.example.vpmanager.Config;
 import com.example.vpmanager.R;
-import com.example.vpmanager.adapter.CustomListViewAdapter;
+import com.example.vpmanager.adapter.CustomStudyListAdapter;
 import com.example.vpmanager.interfaces.GetAllDatesListener;
 import com.example.vpmanager.interfaces.GetAllStudiesListener;
 import com.example.vpmanager.interfaces.GetVpAndMatNrListener;
@@ -41,6 +41,10 @@ public class PersonalAccountViewModel extends ViewModel implements GetAllDatesLi
     public PersonalAccountFragment personalAccountFragment;
     private PersonalAccountRepository mOwnStudyRepo;
 
+
+    //Parameter:
+    //Return values:
+    //Gets instance of the PA Repository and sets the FirestoreCallback
     public void prepareRepo() {
         mOwnStudyRepo = PersonalAccountRepository.getInstance();
         //Instance is the same but different data can be retrieved!
@@ -65,8 +69,6 @@ public class PersonalAccountViewModel extends ViewModel implements GetAllDatesLi
     public void onAllDatesReady(Boolean success) {
         if (success) {
             fetchAllStudiesFromDb();
-        } else {
-            Log.d("PAViewModel", "Getting all dates from DB failed!");
         }
     }
 
@@ -74,8 +76,6 @@ public class PersonalAccountViewModel extends ViewModel implements GetAllDatesLi
     public void onAllStudiesReady(Boolean success) {
         if (success) {
             fetchVpAndMatrikelNumber();
-        } else {
-            Log.d("PAViewModel", "Getting all studies from DB failed!");
         }
     }
 
@@ -91,6 +91,10 @@ public class PersonalAccountViewModel extends ViewModel implements GetAllDatesLi
         createListEntries(datesList, studiesList);
     }
 
+
+    //Parameter: List<Map<String, dateList, List<Map<String, studiesList
+    //Return values:
+    //Creates list entries from the dates and studies map
     private void createListEntries(List<Map<String, Object>> datesList, List<Map<String, Object>> studiesList) {
 
         HashMap<String, HashMap<String, String>> datesMap = new HashMap<>();
@@ -116,7 +120,7 @@ public class PersonalAccountViewModel extends ViewModel implements GetAllDatesLi
             }
         }
 
-        //studiesList is directly used from the repo! No such list in the viewModel!
+        //studiesList is directly used from the repo
         for (Map<String, Object> map : studiesList) {
             String id = null;
             HashMap<String, String> tempMap = new HashMap<>();
@@ -171,19 +175,21 @@ public class PersonalAccountViewModel extends ViewModel implements GetAllDatesLi
                 }
             }
         }
-        //maybe clear needed
-        //expandableListDetail.clear();
+
         expandableListDetail.put("Abgeschlossene Studien", completedStudies);
-        expandableListDetail.put("Teilgenommene Studien", passedStudies); //=> teilgenommene Studien
+        expandableListDetail.put("Teilgenommene Studien", passedStudies);
         expandableListDetail.put("Geplante Studien", ownStudies);
 
-        personalAccountFragment.setNewListViewAdapter(new CustomListViewAdapter(personalAccountFragment.getContext(),
-                personalAccountFragment.getNavController(), expandableListDetail));
+        personalAccountFragment.setNewListViewAdapter(new CustomStudyListAdapter(personalAccountFragment.getContext(), personalAccountFragment.getNavController(), expandableListDetail));
 
         calculateProgressBarData();
     }
 
-    private void calculateProgressBarData(){
+
+    //Parameter:
+    //Return values:
+    //Calculates the values for finished studies, planned studies and participated studies for the progress bar
+    private void calculateProgressBarData() {
 
         plannedVP = 0;
         completedVP = 0;
@@ -192,7 +198,7 @@ public class PersonalAccountViewModel extends ViewModel implements GetAllDatesLi
         List<String> savedList = expandableListDetail.get("Abgeschlossene Studien");
         if (savedList != null) {
             for (int i = 0; i < savedList.size(); i++) {
-                String vps = savedList.get(i).split(";")[1];
+                String vps = savedList.get(i).split(";")[Config.listEntryIndexOne];
                 double studyVPS = 0;
                 if (vps != null && !vps.equals(""))
                     studyVPS = Double.parseDouble(vps);
@@ -203,7 +209,7 @@ public class PersonalAccountViewModel extends ViewModel implements GetAllDatesLi
         List<String> vpList = expandableListDetail.get("Geplante Studien");
         if (vpList != null) {
             for (int i = 0; i < vpList.size(); i++) {
-                String vps = vpList.get(i).split(";")[1];
+                String vps = vpList.get(i).split(";")[Config.listEntryIndexOne];
                 double studyVPS = 0;
                 if (vps != null && !vps.equals(""))
                     studyVPS = Double.parseDouble(vps);
@@ -213,7 +219,7 @@ public class PersonalAccountViewModel extends ViewModel implements GetAllDatesLi
         List<String> passedVpList = expandableListDetail.get("Teilgenommene Studien");
         if (passedVpList != null) {
             for (int i = 0; i < passedVpList.size(); i++) {
-                String vps = passedVpList.get(i).split(";")[1];
+                String vps = passedVpList.get(i).split(";")[Config.listEntryIndexOne];
                 double studyVPS = 0;
                 if (vps != null && !vps.equals(""))
                     studyVPS = Double.parseDouble(vps);
@@ -222,10 +228,10 @@ public class PersonalAccountViewModel extends ViewModel implements GetAllDatesLi
         }
 
         //calculate the remainingVP
-        int max = (int) (sumVPs * 100);
-        int scaledCompletedVP = (int) completedVP * 100;
-        int scaledParticipationVP = (int) participatedVP * 100;
-        int scaledPlannedVP = (int) plannedVP * 100;
+        int max = (int) (sumVPs * Config.progressBarMultiplicator);
+        int scaledCompletedVP = (int) completedVP * Config.progressBarMultiplicator;
+        int scaledParticipationVP = (int) participatedVP * Config.progressBarMultiplicator;
+        int scaledPlannedVP = (int) plannedVP * Config.progressBarMultiplicator;
         int remainingVP = max - (scaledCompletedVP + scaledParticipationVP + scaledPlannedVP);
         if (remainingVP < 0) {
             remainingVP = 0;
@@ -234,38 +240,41 @@ public class PersonalAccountViewModel extends ViewModel implements GetAllDatesLi
         String completedString = "Erledigt: " + completedVP + " VP";
         String participatedString = "Teilgenommen: " + participatedVP + " VP";
         String plannedString = "Geplant: " + plannedVP + " VP";
-        String remainingString = "Übrig: " + remainingVP / 100 + " VP";
-        float weightSum = sumVPs*100;
+        String remainingString = "Übrig: " + (double) remainingVP / Config.progressBarMultiplicator + " VP";
+        float weightSum = sumVPs * Config.progressBarMultiplicator;
 
         personalAccountFragment.setProgressBarStrings(completedString, participatedString, plannedString, remainingString, weightSum);
 
         LinearLayout.LayoutParams paramCompleted = new LinearLayout.LayoutParams(
                 0,
                 LinearLayout.LayoutParams.MATCH_PARENT,
-                (float) completedVP*100
+                (float) completedVP * Config.progressBarMultiplicator
         );
         LinearLayout.LayoutParams paramParticipated = new LinearLayout.LayoutParams(
                 0,
                 LinearLayout.LayoutParams.MATCH_PARENT,
-                (float) participatedVP*100
+                (float) participatedVP * Config.progressBarMultiplicator
         );
         LinearLayout.LayoutParams paramPlanned = new LinearLayout.LayoutParams(
                 0,
                 LinearLayout.LayoutParams.MATCH_PARENT,
-                (float) plannedVP*100
+                (float) plannedVP * Config.progressBarMultiplicator
         );
         LinearLayout.LayoutParams paramRest = new LinearLayout.LayoutParams(
                 0,
                 LinearLayout.LayoutParams.MATCH_PARENT,
-                (float) (sumVPs - (completedVP + participatedVP + plannedVP))*100
+                (float) (sumVPs - (completedVP + participatedVP + plannedVP)) * Config.progressBarMultiplicator
         );
 
         setInitialStateOfFilter();
         personalAccountFragment.setProgressBarParts(paramCompleted, paramParticipated, paramPlanned, paramRest);
     }
 
-    private void setInitialStateOfFilter(){
-        //initial state of the filter
+
+    //Parameter:
+    //Return values:
+    //Sets the initial state off the filter after navigating to the fragment
+    private void setInitialStateOfFilter() {
         sortAlphabeticallyActive = false;
         sortAppointmentsActive = false;
         sortVpCountActive = false;
@@ -274,7 +283,11 @@ public class PersonalAccountViewModel extends ViewModel implements GetAllDatesLi
         sortVpCountInvert = false;
     }
 
-    public void filterListViewTextTags (String type) {
+
+    //Parameter: type
+    //Return values:
+    //Sets the current filter status
+    public void filterListViewTextTags(String type) {
         switch (type) {
             case "names":
                 if (!sortAlphabeticallyInvert && !sortAlphabeticallyActive) {
@@ -287,16 +300,16 @@ public class PersonalAccountViewModel extends ViewModel implements GetAllDatesLi
                     sortAlphabeticallyInvert = false;
                     sortAlphabeticallyActive = false;
                 }
-                personalAccountFragment.setAlphabeticallyToggle("names", sortAlphabeticallyActive);
+                personalAccountFragment.setAlphabeticallyToggle("names", sortAlphabeticallyActive, sortAlphabeticallyInvert);
 
                 if (sortAppointmentsActive) {
                     //first change color with correct boolean, then reset the boolean afterwards!
-                    personalAccountFragment.setAppointmentsToggle("names", sortAppointmentsActive);
+                    personalAccountFragment.setAppointmentsToggle("names", sortAppointmentsActive, sortAppointmentsInvert);
                     sortAppointmentsActive = false;
                 }
                 if (sortVpCountActive) {
                     //first change color with correct boolean, then reset the boolean afterwards!
-                    personalAccountFragment.setVpToggle("names", sortVpCountActive);
+                    personalAccountFragment.setVpToggle("names", sortVpCountActive, sortVpCountInvert);
                     sortVpCountActive = false;
                 }
                 sortAppointmentsInvert = false;
@@ -313,16 +326,16 @@ public class PersonalAccountViewModel extends ViewModel implements GetAllDatesLi
                     sortAppointmentsInvert = false;
                     sortAppointmentsActive = false;
                 }
-                personalAccountFragment.setAppointmentsToggle("dates", sortAppointmentsActive);
+                personalAccountFragment.setAppointmentsToggle("dates", sortAppointmentsActive, sortAppointmentsInvert);
 
                 if (sortVpCountActive) {
                     //first change color with correct boolean, then reset the boolean afterwards!
-                    personalAccountFragment.setVpToggle("dates", sortVpCountActive);
+                    personalAccountFragment.setVpToggle("dates", sortVpCountActive, sortVpCountInvert);
                     sortVpCountActive = false;
                 }
                 if (sortAlphabeticallyActive) {
                     //first change color with correct boolean, then reset the boolean afterwards!
-                    personalAccountFragment.setAlphabeticallyToggle("dates", sortAlphabeticallyActive);
+                    personalAccountFragment.setAlphabeticallyToggle("dates", sortAlphabeticallyActive, sortAlphabeticallyInvert);
                     sortAlphabeticallyActive = false;
                 }
                 sortAlphabeticallyInvert = false;
@@ -339,16 +352,16 @@ public class PersonalAccountViewModel extends ViewModel implements GetAllDatesLi
                     sortVpCountInvert = false;
                     sortVpCountActive = false;
                 }
-                personalAccountFragment.setVpToggle("vps", sortVpCountActive);
+                personalAccountFragment.setVpToggle("vps", sortVpCountActive, sortVpCountInvert);
 
                 if (sortAlphabeticallyActive) {
                     //first change color with correct boolean, then reset the boolean afterwards!
-                    personalAccountFragment.setAlphabeticallyToggle("vps", sortAlphabeticallyActive);
+                    personalAccountFragment.setAlphabeticallyToggle("vps", sortAlphabeticallyActive, sortAlphabeticallyInvert);
                     sortAlphabeticallyActive = false;
                 }
                 if (sortAppointmentsActive) {
                     //first change color with correct boolean, then reset the boolean afterwards!
-                    personalAccountFragment.setAppointmentsToggle("vps", sortAppointmentsActive);
+                    personalAccountFragment.setAppointmentsToggle("vps", sortAppointmentsActive, sortAppointmentsInvert);
                     sortAppointmentsActive = false;
                 }
                 sortAlphabeticallyInvert = false;
@@ -357,106 +370,82 @@ public class PersonalAccountViewModel extends ViewModel implements GetAllDatesLi
             default:
                 break;
         }
-        System.out.println("Nach Vp normal: " + sortVpCountActive);
-        System.out.println("Nach Vp inverted: " + sortVpCountInvert);
+
         filterListViewTextContent();
     }
 
+
+    //Parameter:
+    //Return values:
+    //Applies the filter
     private void filterListViewTextContent() {
-        CustomListViewAdapter adapter;
 
-        if (sortAlphabeticallyActive) {
-            adapter = new CustomListViewAdapter(personalAccountFragment.getContext(),
-                    personalAccountFragment.getNavController(), sortByName(sortAlphabeticallyInvert)); //this.getActivity(),
-        } else if (sortAppointmentsActive) {
-            adapter = new CustomListViewAdapter(personalAccountFragment.getContext(),
-                    personalAccountFragment.getNavController(), sortByDate(sortAppointmentsInvert)); //this.getActivity(),
-        } else if (sortVpCountActive) {
-            adapter = new CustomListViewAdapter(personalAccountFragment.getContext(),
-                    personalAccountFragment.getNavController(), sortByVPS(sortVpCountInvert)); //this.getActivity(),
+        if (!sortAlphabeticallyActive && !sortAppointmentsActive && !sortVpCountActive) {
+            personalAccountFragment.applyColorFilter();
         } else {
-            adapter = new CustomListViewAdapter(personalAccountFragment.getContext(),
-                    personalAccountFragment.getNavController(), expandableListDetail); //this.getActivity(),
-        }
-
-        personalAccountFragment.setNewListViewAdapter(adapter);
-        System.out.println("sortlist" + adapter.getObjects());
-
-        if (personalAccountFragment.getColorToggleState("completed")) { //if not checked, do stuff in loop
-            filterListViewColorTags(false, R.color.pieChartSafe);
-        }
-        if (personalAccountFragment.getColorToggleState("participated")) { //if not checked, do stuff in loop
-            filterListViewColorTags(false, R.color.pieChartParticipation);
-        }
-        if (personalAccountFragment.getColorToggleState("planned")) { //if not checked, do stuff in loop
-            filterListViewColorTags(false, R.color.pieChartPlanned);
+            if (sortAlphabeticallyActive) {
+                personalAccountFragment.setNewListViewAdapter(new CustomStudyListAdapter(personalAccountFragment.getContext(),
+                        personalAccountFragment.getNavController(), sortByName(sortAlphabeticallyInvert))); //this.getActivity(),
+            } else if (sortAppointmentsActive) {
+                personalAccountFragment.setNewListViewAdapter(new CustomStudyListAdapter(personalAccountFragment.getContext(),
+                        personalAccountFragment.getNavController(), sortByDate(sortAppointmentsInvert))); //this.getActivity(),
+            } else if (sortVpCountActive) {
+                personalAccountFragment.setNewListViewAdapter(new CustomStudyListAdapter(personalAccountFragment.getContext(),
+                        personalAccountFragment.getNavController(), sortByVPS(sortVpCountInvert))); //this.getActivity(),
+            }
         }
     }
 
-    public void filterListViewColorTags(boolean state, int color) {
-        if (state) {
-            CustomListViewAdapter adapter = new CustomListViewAdapter(personalAccountFragment.getContext(),
-                    personalAccountFragment.getNavController(), expandableListDetail); //this.getActivity(),
-            personalAccountFragment.setNewListViewAdapter(adapter);
 
-            if (personalAccountFragment.getColorToggleState("planned")){
-                filterListViewColorTags(!personalAccountFragment.getColorToggleState("planned"),
-                        R.color.pieChartPlanned);
-            }
-            if (personalAccountFragment.getColorToggleState("completed")){
-                filterListViewColorTags(!personalAccountFragment.getColorToggleState("completed"),
-                        R.color.pieChartSafe);
-            }
-            if (personalAccountFragment.getColorToggleState("participated")){
-                filterListViewColorTags(!personalAccountFragment.getColorToggleState("participated"),
-                        R.color.pieChartParticipation);
-            }
+    //Parameter: completedState, plannedState, participatedState
+    //Return values:
+    //Adds studies with selected state according to the filter input
+    public void filterListViewColorTags(boolean completedState, boolean plannedState, boolean participatedState) {
 
-            if (sortAlphabeticallyActive){
-                filterListViewTextTags("names"); //false,
-            }
-            if (sortAppointmentsActive){
-                filterListViewTextTags("dates"); //false,
-            }
-            if (sortVpCountActive){
-                filterListViewTextTags("vps");  //false,
-            }
+        CustomStudyListAdapter adapter = new CustomStudyListAdapter(personalAccountFragment.getContext(), personalAccountFragment.getNavController(), expandableListDetail); //this.getActivity(),
 
-        } else {
-            CustomListViewAdapter adapter = personalAccountFragment.getCurrentAdapter();
-            List<StudyObjectPa> removeList = new ArrayList<>();
+        ArrayList<StudyObjectPa> newList = new ArrayList<>();
+        ArrayList<StudyObjectPa> currentList = adapter.mStudyMetaInfos;
 
-            for (StudyObjectPa object : adapter.getObjects()) {
-                if (object != null) {                               //listView != null &&  warum sollte list hier null sein?
-                    if (object.getColor() == color) {
-                        removeList.add(object);
-                    }
+        if (!(completedState && plannedState && participatedState)) {
+            for (StudyObjectPa ob : currentList) {
+
+                switch (ob.getColor()) {
+                    case R.color.pieChartSafe:
+                        if (completedState)
+                            newList.add(ob);
+                        break;
+                    case R.color.pieChartParticipation:
+                        if (participatedState)
+                            newList.add(ob);
+                        break;
+                    case R.color.pieChartPlanned:
+                        if (plannedState)
+                            newList.add(ob);
+                        break;
                 }
             }
-            for (StudyObjectPa object : removeList) {
-                adapter.getObjects().remove(object);
-            }
-
-            //remove adapter may be not necessary
-            //personalAccountFragment.setNewListViewAdapter(null);
-            //adapter.notifyDataSetChanged(); ???
+            adapter = new CustomStudyListAdapter(personalAccountFragment.getContext(), personalAccountFragment.getNavController(), newList);
             personalAccountFragment.setNewListViewAdapter(adapter);
-
-            System.out.println(adapter.getObjects());
+        } else {
+            personalAccountFragment.setNewListViewAdapter(adapter);
         }
+
     }
 
+    //Parameter: invert
+    //Return values: ArrayList<StudyObjectPa>
+    //Sorts studies alphabetically
     private ArrayList<StudyObjectPa> sortByName(boolean invert) {
-        CustomListViewAdapter adapter = personalAccountFragment.getCurrentAdapter();
+        CustomStudyListAdapter adapter = personalAccountFragment.getCurrentAdapter();
         ArrayList<StudyObjectPa> list = new ArrayList<>();
-        for (int i = 0; i < adapter.getObjects().size(); i++) {
-            if (adapter.getObjects().get(i) != null) {               //listView != null &&  warum sollte liste null sein?
-                StudyObjectPa item = adapter.getObjects().get(i);
+        for (int i = 0; i < adapter.mStudyMetaInfos.size(); i++) {
+            if (adapter.mStudyMetaInfos.get(i) != null) {
+                StudyObjectPa item = adapter.mStudyMetaInfos.get(i);
                 list.add(item);
             }
         }
         StudyObjectPa[] studyList = new StudyObjectPa[list.size()];
-        System.out.println("list size: " + list.size());
         for (int i = 0; i < list.size(); i++) {
             studyList[i] = list.get(i);
         }
@@ -464,7 +453,7 @@ public class PersonalAccountViewModel extends ViewModel implements GetAllDatesLi
         for (int i = 0; i < studyList.length; i++) {
 
             for (int k = 0; k < studyList.length - 1; k++) {
-                if (studyList[k].getTitle().compareToIgnoreCase(studyList[k + 1].getTitle()) < 0) {
+                if (studyList[k].getTitle().compareToIgnoreCase(studyList[k + 1].getTitle()) > 0) {
                     StudyObjectPa tempStudy = studyList[k];
                     studyList[k] = studyList[k + 1];
                     studyList[k + 1] = tempStudy;
@@ -475,19 +464,21 @@ public class PersonalAccountViewModel extends ViewModel implements GetAllDatesLi
         for (StudyObjectPa ob : studyList) {
             list.add(ob);
         }
-        System.out.println("list after clear" + list.size());
         if (!invert) {
             Collections.reverse(list);
         }
         return list;
     }
 
+    //Parameter: invert
+    //Return values: ArrayList<StudyObjectPa>
+    //Sorts study list chronologically
     private ArrayList<StudyObjectPa> sortByDate(boolean invert) {
-        CustomListViewAdapter adapter = personalAccountFragment.getCurrentAdapter();
+        CustomStudyListAdapter adapter = personalAccountFragment.getCurrentAdapter();
         ArrayList<StudyObjectPa> list = new ArrayList<>();
-        for (int i = 0; i < adapter.getObjects().size(); i++) {
-            if (adapter.getObjects().get(i) != null) {             //listView != null && warum sollte list null sein?
-                StudyObjectPa item = adapter.getObjects().get(i);
+        for (int i = 0; i < adapter.mStudyMetaInfos.size(); i++) {
+            if (adapter.mStudyMetaInfos.get(i) != null) {             //listView != null && warum sollte list null sein?
+                StudyObjectPa item = adapter.mStudyMetaInfos.get(i);
                 list.add(item);
             }
         }
@@ -534,12 +525,16 @@ public class PersonalAccountViewModel extends ViewModel implements GetAllDatesLi
         return list;
     }
 
+
+    //Parameter: invert
+    //Return values: ArrayList<StudyObjectPa>
+    //Sorts the study entries by the associated vp value
     private ArrayList<StudyObjectPa> sortByVPS(boolean invert) {
-        CustomListViewAdapter adapter = personalAccountFragment.getCurrentAdapter();
+        CustomStudyListAdapter adapter = personalAccountFragment.getCurrentAdapter();
         ArrayList<StudyObjectPa> list = new ArrayList<>();
-        for (int i = 0; i < adapter.getObjects().size(); i++) {
-            if (adapter.getObjects().get(i) != null) {               //listView != null &&  warum sollte list null sein?
-                StudyObjectPa item = adapter.getObjects().get(i);
+        for (int i = 0; i < adapter.mStudyMetaInfos.size(); i++) {
+            if (adapter.mStudyMetaInfos.get(i) != null) {               //listView != null &&  warum sollte list null sein?
+                StudyObjectPa item = adapter.mStudyMetaInfos.get(i);
                 list.add(item);
             }
         }
@@ -550,7 +545,11 @@ public class PersonalAccountViewModel extends ViewModel implements GetAllDatesLi
 
         for (int i = 0; i < studyList.length; i++) {
             for (int k = 0; k < studyList.length - 1; k++) {
-                if (Float.parseFloat(studyList[k].getVps()) > Float.parseFloat(studyList[k + 1].getVps())) {
+
+                String first_number = studyList[k].getVps().replace("VP-Stunden", "").trim();
+                String second_number = studyList[k + 1].getVps().replace("VP-Stunden", "").trim();
+
+                if (Float.parseFloat(first_number) > Float.parseFloat(second_number)) {
                     StudyObjectPa tempStudy = studyList[k];
                     studyList[k] = studyList[k + 1];
                     studyList[k + 1] = tempStudy;

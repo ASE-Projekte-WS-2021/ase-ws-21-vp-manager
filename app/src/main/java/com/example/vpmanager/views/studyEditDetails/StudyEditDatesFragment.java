@@ -3,12 +3,9 @@ package com.example.vpmanager.views.studyEditDetails;
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.DatePicker;
-import android.widget.TimePicker;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -46,7 +43,8 @@ public class StudyEditDatesFragment extends Fragment {
     private EditSwipeableDatesAdapter editSwipeableDatesAdapter;
     private View currentView;
 
-    public StudyEditDatesFragment(){
+
+    public StudyEditDatesFragment() {
     }
 
     @Override
@@ -57,7 +55,7 @@ public class StudyEditDatesFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_edit_study_dates, container, false);
+        View view = inflater.inflate(R.layout.fragment_edit_study_appointments, container, false);
         prepareComponents();
         setupView(view);
         currentView = view;
@@ -69,45 +67,54 @@ public class StudyEditDatesFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
     }
 
-    private void prepareComponents(){
+
+    //Parameter:
+    //Return values:
+    //Sets study edit ID and the View Model
+    private void prepareComponents() {
         currentStudyIdEdit = StudyEditFragment.currentStudyIdEdit;
-        //should get the same viewModel as the Details fragment...
+        //should get the same viewModel as the Details fragment
         studyEditViewModel = new ViewModelProvider(getParentFragment()).get(StudyEditViewModel.class);
         studyEditViewModel.studyEditDatesFragment = this;
-        Log.d("DatesFragment", "viewModelStore: " + getParentFragment().toString());
     }
 
-    //no arrayList of strings needs to be filled. the list of dateObjects in the viewModel is used directly!!
-    public void notifyDatesObjectListChanged(){
-        Log.d("StudyEditDatesFragment", "notifyDatesObjectListChanged: "
-                + studyEditViewModel.datesEditProcessDataObjects.toString());
+
+    //Parameter:
+    //Return values:
+    //no arrayList of strings needs to be filled. The list of dateObjects in the viewModel is used directly
+    public void notifyDatesObjectListChanged() {
         editSwipeableDatesAdapter.notifyDataSetChanged();
     }
 
-    private void setupView(View view){
+
+    //Parameter: view
+    //Return values:
+    //Initializes the Recycler View and sets the edit dates button
+    private void setupView(View view) {
         studyEditDatesRecyclerView = view.findViewById(R.id.editStudyDatesRecyclerView);
         FloatingActionButton editFab = view.findViewById(R.id.fab_edit_dates);
-        editFab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                datePicker();
-            }
-        });
+        editFab.setOnClickListener(view1 -> datePicker());
     }
 
+
+    //Parameter:
+    //Return values:
+    //Sets up the Recycler View elements
     public void setupRecyclerView() {
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
 
-        Log.d("StudyEditDatesFragment", "datesEditProcessDataObjects: " + studyEditViewModel.datesEditProcessDataObjects);
         editSwipeableDatesAdapter = new EditSwipeableDatesAdapter(getContext(), studyEditViewModel.datesEditProcessDataObjects, currentView);
         studyEditDatesRecyclerView.setAdapter(editSwipeableDatesAdapter);
         studyEditDatesRecyclerView.setLayoutManager(linearLayoutManager);
 
         ItemTouchHelper itemTouchHelper = new ItemTouchHelper(new EditSwipeToDeleteCallback(editSwipeableDatesAdapter));
         itemTouchHelper.attachToRecyclerView(studyEditDatesRecyclerView);
-        Log.d("StudyEditDatesFragment", "setupRecyclerView: done");
     }
 
+
+    //Parameter:
+    //Return values:
+    //Sets up the date picker view and dialog
     private void datePicker() {
         final Calendar c = Calendar.getInstance();
         Locale.setDefault(Locale.GERMANY);
@@ -116,38 +123,40 @@ public class StudyEditDatesFragment extends Fragment {
         mDay = c.get(Calendar.DAY_OF_MONTH);
 
         DatePickerDialog datePickerDialog = new DatePickerDialog(getActivity(), R.style.my_dialog_theme,
-                new DatePickerDialog.OnDateSetListener() {
-                    @Override
-                    public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
-                        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("EEEE");
-                        Date date = new Date(year, monthOfYear, dayOfMonth - 1);
-                        weekDay = simpleDateFormat.format(date);
-                        date_time = weekDay + ", " + dayOfMonth + "." + (monthOfYear + 1) + "." + year + " um ";
-                        timePicker();
-                    }
+                (view, year, monthOfYear, dayOfMonth) -> {
+                    SimpleDateFormat simpleDateFormat = new SimpleDateFormat("EEEE");
+                    Date date = new Date(year, monthOfYear, dayOfMonth - 1);
+                    weekDay = simpleDateFormat.format(date);
+                    date_time = weekDay + ", " + dayOfMonth + "." + (monthOfYear + 1) + "." + year + " um ";
+                    timePicker();
                 }, mYear, mMonth, mDay);
         datePickerDialog.getDatePicker().setMinDate(System.currentTimeMillis() - 1000);
         datePickerDialog.show();
     }
 
+
+    //Parameter:
+    //Return values:
+    //Sets up the time picker view and dialog
     private void timePicker() {
         final Calendar c = Calendar.getInstance();
         mHour = c.get(Calendar.HOUR_OF_DAY);
         mMinute = c.get(Calendar.MINUTE);
 
         TimePickerDialog timePickerDialog = new TimePickerDialog(getActivity(), R.style.my_timepicker_theme,
-                new TimePickerDialog.OnTimeSetListener() {
-                    @Override
-                    public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
+                (view, hourOfDay, minute) -> {
 
-                        mHour = hourOfDay;
-                        mMinute = minute;
-                        addDateToList(hourOfDay, minute);
-                    }
+                    mHour = hourOfDay;
+                    mMinute = minute;
+                    addDateToList(hourOfDay, minute);
                 }, mHour, mMinute, true);
         timePickerDialog.show();
     }
 
+
+    //Parameter: hourOfDay, minute
+    //Return values:
+    //Adds new date item to the list
     private void addDateToList(int hourOfDay, int minute) {
         String minutes = Integer.toString(minute);
         String hours = Integer.toString(hourOfDay);
@@ -159,9 +168,8 @@ public class StudyEditDatesFragment extends Fragment {
         }
 
         String newDate = date_time + hours + ":" + minutes + " Uhr";
-        //datesArrayList.add(newDate);
 
-        //The new date is immediately added to the dateObjectList in the viewModel!
+        //The new date is immediately added to the dateObjectList in the viewModel
         studyEditViewModel.addNewDateToList(newDate, currentStudyIdEdit);
     }
 

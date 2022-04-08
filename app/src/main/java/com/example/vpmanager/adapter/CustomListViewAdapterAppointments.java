@@ -1,6 +1,6 @@
 package com.example.vpmanager.adapter;
 
-import static com.example.vpmanager.views.mainActivity.uniqueID;
+import static com.example.vpmanager.views.MainActivity.uniqueID;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -11,7 +11,7 @@ import android.widget.TextView;
 
 import androidx.navigation.NavController;
 
-import com.example.vpmanager.PA_ExpandableListDataPump;
+import com.example.vpmanager.helper.AccessDatabaseHelper;
 import com.example.vpmanager.R;
 import com.example.vpmanager.models.StudyObjectPa;
 
@@ -22,9 +22,9 @@ public class CustomListViewAdapterAppointments extends BaseAdapter {
 
     private LayoutInflater inflater;
     private ArrayList<StudyObjectPa> objects;
-    //private Activity activity;
     NavController navController;
     private String sourceFragment;
+
 
     private class ViewHolder {
         TextView titleTextView;
@@ -32,26 +32,31 @@ public class CustomListViewAdapterAppointments extends BaseAdapter {
 
     }
 
-    // Activity activity,
-    public CustomListViewAdapterAppointments(Context context,NavController nav, ArrayList<String> list, HashMap<String, String> getStudyIdByName, String source) {
+
+    //Parameter: context, nav, list, Hashmap<String, getStudyIdByName, source
+    //Return values:
+    //Sets the required adapter elements
+    public CustomListViewAdapterAppointments(Context context, NavController nav, ArrayList<String> list, HashMap<String, String> getStudyIdByName, String source) {
         super();
         inflater = LayoutInflater.from(context);
         navController = nav;
         this.objects = transformUpcomingAppointments(list, getStudyIdByName);
-        //this.activity = activity;
         sourceFragment = source;
     }
 
+
+    //Parameter: list, Hashmap<String, getStudyIdByName
+    //Return values: ArrayList<StudyObjectPa>
+    //Fills the ArrayList for upcoming appointments
     private ArrayList<StudyObjectPa> transformUpcomingAppointments(ArrayList<String> list, HashMap<String, String> getStudyIdByName) {
         ArrayList<StudyObjectPa> returnList = new ArrayList<>();
 
-        for(int i = 0; i < list.size(); i++)
-        {
+        for (int i = 0; i < list.size(); i++) {
             String[] values = list.get(i).split("\t\t");//0 name 1 date
             String id = getStudyIdByName.get(values[0]);
             assert id != null;
-            if(!id.equals("")) {
-                StudyObjectPa object = new StudyObjectPa(values[0],null, id, values[1], 0);
+            if (!id.equals("")) {
+                StudyObjectPa object = new StudyObjectPa(values[0], null, id, values[1], 0);
 
                 returnList.add(object);
             }
@@ -81,7 +86,7 @@ public class CustomListViewAdapterAppointments extends BaseAdapter {
         View colorView = null;
         if (convertView == null) {
             holder = new ViewHolder();
-            convertView = inflater.inflate(R.layout.pa_upcoming_listview_item, null); //NOT SURE
+            convertView = inflater.inflate(R.layout.item_pa_upcoming_listview, null); //NOT SURE
 
             titleView = convertView.findViewById(R.id.upcoming_listviewItemTitle);
 
@@ -99,7 +104,7 @@ public class CustomListViewAdapterAppointments extends BaseAdapter {
                 @Override
                 public void onClick(View v) {
                     StudyObjectPa study = objects.get(position);
-                    PA_ExpandableListDataPump.navigateToStudyCreatorFragment(uniqueID, study.getStudyId(), sourceFragment, navController);
+                    AccessDatabaseHelper.navigateToStudyCreatorFragment(uniqueID, study.getStudyId(), sourceFragment, navController);
                 }
             });
         }

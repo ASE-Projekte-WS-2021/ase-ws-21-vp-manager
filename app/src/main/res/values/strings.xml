@@ -12,6 +12,29 @@
     <string name="pieSliceLabelRemaining">Remaining</string>
     <string name="personalAccount">Persönliche Übersicht</string>
 
+    <string name="overview">Übersicht</string>
+    <string name="welcome">Willkommen beim VP-Manager! \nHier können Sie Ihre Versuchspersonenstunden planen, Ihren aktuellen Fortschritt betrachten und selbst Studien erstellen.</string>
+    <string name="vpState">Nach aktueller Planung haben Sie zum</string>
+    <string name="vps">VP-Stunden</string>
+    <string name="collected">gesammelt</string>
+    <string name="openVps">Es fehlen Ihnen noch</string>
+    <string name="vpsDot">VP-Stunden.</string>
+    <string name="findStudies">Jetzt Studien finden</string>
+    <string name="matNumberText">Mithilfe Ihrer Matrikelnummer können die aktuell im Lehrstuhl verbuchten Versuchspersonenstunden angezeigt werden.</string>
+    <string name="matNumberRequired">Matrikelnummer eingeben</string>
+    <string name="officialVps">Im Lehrstuhl bereits eingetragene VP-Stunden</string>
+    <string name="noVps">0/15</string>
+    <string name="nextAppointments">Nächste Termine</string>
+    <string name="allAppointments">Alle Termine ansehen</string>
+
+
+    <!---Navigation-->
+    <string name="warning">Achtung!</string>
+    <string name="leavePageWarning">Wenn Sie diesen Bereich verlassen gehen Ihre Änderungen verloren! Wollen Sie trotzdem verlassen?</string>
+    <string name="cancelNavigation">Abbrechen</string>
+    <string name="leavePage">"Verlassen"</string>
+
+
     <!---Create Study-->
     <string name="createStudyDesc">Studienbeschreibung</string>
     <string name="createAddDateButton">Termine hinzufügen</string>
@@ -19,8 +42,8 @@
     <string name="createPlatformHint">Primär Plattform*</string>
     <string name="createPlatformHint2">Sekundär Plattform</string>
     <string name="createLocationHint">Ort*</string>
-    <string name="createRoomHint">Raum</string>
-    <string name="createStreetHint">Straße</string>
+    <string name="createRoomHint">Raum*</string>
+    <string name="createAddressHint">Adresse*</string>
     <string name="createAlertBase">Bitten tragen Sie die fehlenden Angaben ein:</string>
     <string name="createAlertStudyDesc">Studienbeschreibung*</string>
     <string name="createAlertExecutionType">Durchführungsart</string>
@@ -28,8 +51,8 @@
     <string name="createAlertLocation">Durchführungsort</string>
     <string name="createAlertOptionalBase">Sind Sie sicher das Sie ohne folgende Angaben fortfahren wollen:</string>
     <string name="createAlertVP">VP-Stunden</string>
-    <string name="createAlertRoom">Raum</string>
-    <string name="createAlertStreet">Straße</string>
+    <string name="createAlertRoom">Raum*</string>
+    <string name="createAlertStreet">Adresse*</string>
     <string name="createAlertPlatform">Plattform</string>
     <string name="createAlertDates">Termine</string>
     <string name="remoteString">Remote</string>
@@ -56,7 +79,7 @@
     <string name="fragment_create_study_desc_page_four_remote">Präferierte Streaming-Dienste für die Remote Ausführung, wie Zoom, Skype oder Discord können hier hinterlegt werden.</string>
     <string name="fragment_create_study_desc_page_four_presence">Unter folgender Adresse soll die Studie durchgeführt werden:</string>
     <string name="fragment_create_study_desc_page_three">Ordnen Sie hier Ihre Studie einer der thematischen Kategorien zu. \n\n Die Durchführungsart bezieht sich auf den lokalen Kontext (Remote / Präsenz).</string>
-    <string name="fragment_create_study_pageFourTitle">Ort / Adresse</string>
+    <string name="fragment_create_study_pageFourTitle">Ortsangaben</string>
     <string name="fragment_create_study_pageFourTitleTwo">Plattform</string>
     <string name="fragment_create_study_pageFiveTitle">Termine</string>
     <string name="fragment_create_study_desc_page_five">Wählen sie hier Termine aus, an denen sich potenzielle Teilnehmer für ihre Studie einschreiben können.</string>
@@ -67,6 +90,12 @@
     <string name="fragment_create_study_base_create">Erstellen</string>
     <string name="fragment_create_study_finalPage_title_three">Terminbestätigung</string>
 
+    <string name="progressbar_one">Basis</string>
+    <string name="progressbar_two">Beschreibung</string>
+    <string name="progressbar_three">Ort</string>
+    <string name="progressbar_four">Termine</string>
+    <string name="progressbar_five">Bestätigen</string>
+
 
     <string-array name="createCategoryList">
         <item>Studienkategorie</item>
@@ -75,7 +104,7 @@
         <item>Fragebogen</item>
         <item>Gamingstudie</item>
         <item>Interview</item>
-        <item>Laborstudien</item>
+        <item>Laborstudie</item>
         <item>Tagebuchstudie</item>
         <item>Usability/UXstudie</item>
         <item>Sonstige</item>
@@ -87,12 +116,69 @@
         <item>Präsenz</item>
     </string-array>
 
+    <string-array name="createPresetLabList">
+        <item>Future Interaction Lab</item>
+        <item>Versuchsraum 4</item>
+        <item>Besprechungsraum TB</item>
+    </string-array>
+
+    <string-array name="createPresetLocations">
+        <item>Regensburg</item>
+        <item>Regensburg</item>
+        <item>Regensburg</item>
+    </string-array>
+
+    <string-array name="createPresetAddress">
+        <item>Universitätsstraße 31</item>
+        <item>Franz-Mayer-Straße 1</item>
+        <item>Franz-Mayer-Straße 1</item>
+    </string-array>
+
+
+    <string-array name="createPresetRooms">
+        <item>PT 3.0.27–28</item>
+        <item>TB VR4</item>
+        <item>TB 1.101</item>
+    </string-array>
+
+
     <!---Personal Account-->
-    <string name="personalAccountTitle">Angemeldete Studien</string>
+    <string name="drawerDate">Datum</string>
+    <string name="drawerDateFull">Datum - Wochentag - Uhrzeit</string>
+    <string name="zeroOwnStudiesHeader">Bisher hast du noch keine Studien erstellt. Wähle im Menü den Reiter Studien erstellen um Studien zu erstellen!</string>
+    <string name="ownStudiesHeader">Deine erstellten Studien</string>
+    <string name="ownStudyStatusTab">Teilnahmen</string>
+    <string name="ownStudyTab">Eigene Studien</string>
+    <string name="dateTag">Termin:</string>
+    <string name="vpTextTag">VP-Stunden:</string>
+  
+     
+
+
+    <string name="inputReminder">Bitte erst Matrikelnummer eingeben und die benötigten VP bestätigen</string>
+    <string name="duplicateDate">Doppelter Termin</string>
+    <string name="addExistingDateWarning">Sie wollen einen bereits vorhandenen Termin erneut hinzufügen. \nWollen Sie in trotzdem fortfahren?</string>
+
 
     <!---findStudyActivity-->
     <string name="entryListHeader">Aktuelles Studienangebot</string>
     <string name="vpHours">VP-Stunden</string>
+    <string name="studyTypeText">Studientyp: </string>
+    <string name="findStudyHeader">Ausgeschriebene Studien</string>
+    <string name="sortStudyText">Sortieren nach: </string>
+    <string name="vpText">VPS</string>
+    <string name="categoryText">Kategorien</string>
+    <string name="executionText">Durchführung</string>
+    <string name="fieldStudyText">Feldstudie</string>
+    <string name="focusGroupText">Fokusgruppe</string>
+    <string name="questionnaireText">Fragebogen</string>
+    <string name="interviewText">Interview</string>
+    <string name="usabilityText">Usability/UX</string>
+    <string name="labStudyText">Laborstudie</string>
+    <string name="diaryStudyText">Tagebuchstudie</string>
+    <string name="gamingText">Gamingstudie</string>
+    <string name="othersText">Sonstige</string>
+
 
     <!---studyActivity-->
     <string name="studyViewHeader">Detailansicht - Studie</string>
@@ -103,6 +189,14 @@
     <string name="dropDateView">Sie haben sich bereits für einen Termin eingetragen. (für Abmeldung hier kilcken)</string>
     <string name="dropDateQuestion">Möchten Sie sich für diesen Termin wieder austragen?</string>
     <string name="selectDateQuestion">Möchten Sie sich für diesen Termin eintragen?</string>
+    <string name="studyViewTabOne">Details</string>
+    <string name="studyViewTabTwo">Termine</string>
+
+
+    <string name="logInSuccessful">Erfolgreich angemeldet!</string>
+    <string name="logOutSuccessful">Erfolgreich abgemeldet!</string>
+    <string name="elementExpired">Termin ist nicht mehr verfügbar!</string>
+
 
     <!--General-->
     <string name="yes">Ja</string>
@@ -113,7 +207,11 @@
     <string name="collectionPathDates">dates</string>
     <string name="findStudyCardDescText">Suche nach passenden Studien für deinen Uni-Alltag und sammle VP-Stunden!</string>
     <string name="createStudyCardDescText">Erstelle deine eigenen Studien und präsentiere sie der Ziegruppe!</string>
-    <!-- TODO: Remove or change this placeholder text -->
+    <string name="cancelView">Nicht mehr anzeigen</string>
+    <string name="add">Hinzufügen</string>
+
+
+    <!---->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
 
@@ -131,6 +229,12 @@
     <string name="already_have_an_account_clickable"><font color='#01C6DB'>Login</font></string>
     <string name="register_info_title">Optionale Angaben</string>
     <string name="register_info_desc">Durch die Angabe der eigenen Matrikelnummer können die vom Lehrstuhl offiziell verbuchten Versuchspersonstunden angezeigt werden. \nDurch Angabe der benötigten VPs können die bereits gesammeleten in Relation gestellt werden.</string>
+    <string name="successfulRegistration">Registierung erfolgreich, bitte überprüfe deine Email-Postfach</string>
+    <string name="neededVps">15</string>
+    <string name="repeatPassword">Passwort wiederholen</string>
+    <string name="matNumber"><font color='#01C6DB'>Matrikelnummer</font></string>
+    <string name="neededVpText">Benötige VP</string>
+
 
     <!-- Study Details Tags -->
 
@@ -139,8 +243,23 @@
     <string name="vpTag">VP-Stunden</string>
     <string name="catTag">Kategorie</string>
     <string name="conTag">Kontakt</string>
+    <string name="locTag">Durchführungsort</string>
     <string name="typeTag">Studientyp</string>
-    <string name="locTag">Ort / Plattform</string>
+
+    <string name="catHint">Studienkategorie</string>
+    <string name="typeHint">Durchführungsart</string>
+    <string name="contactOneHint">Kontakt - Mail</string>
+    <string name="contactTwoHint">Kontakt - Tel.-Nr.</string>
+    <string name="contactThreeHint">Kontakt - Skype</string>
+    <string name="contactFourHint">Kontakt - Discord</string>
+    <string name="contactFiveHint">Kontakt - Andere</string>
+    <string name="descriptionHint">Studienbeschreibung*</string>
+    <string name="locHint">Ort*</string>
+    <string name="streetHint">Adresse*</string>
+    <string name="roomHint">Raum*</string>
+    <string name="platformOneHint">Plattform 1</string>
+    <string name="platformTwoHint">Plattform 2</string>
+
 
     <!-- Edit Study -->
 
@@ -150,9 +269,82 @@
     <string name="changeStudyStateContinue">Fortfahren</string>
     <string name="changeStudyStateTitleClose">Studie abschließen</string>
     <string name="changeStudyStateTitleOpen">Studie wieder öffnen</string>
+    <string name="saveStudy">Studie speichern</string>
+    <string name="removeAppointmentAlert">1 Termin gelöscht</string>
+    <string name="removeAppointmentnotPossible">Belegte Termine können nicht entfernt werden.</string>
+    <string name="cancelAction">Rückgängig</string>
 
 
+    <!---Error Texts-->
 
+    <string name="titleError">Titel darf nicht leer sein</string>
+    <string name="descriptionError">Studienbeschreibung darf nicht leer sein</string>
+    <string name="locationError">Ort der Studie muss angegeben werden</string>
+    <string name="roomError">Raum der Studie muss angegeben werden</string>
+    <string name="streetError">Straße der Studie muss angegeben werden</string>
+    <string name="platformError">Primärplattform muss angegeben werden</string>
+    <string name="mailError">Email-Kontakt muss angegeben werden</string>
+    <string name="selectDateError">Dieser Termin ist nicht mehr verfügbar!</string>
+    <string name="noMailError">Email Feld kann nicht leer sein"</string>
+    <string name="noPasswordError">Geben sie bitte ein Passwort an</string>
+    <string name="passwordsNotEqual">Passwörter müssen übereinstimmen</string>
+
+
+    <!---Confirm Texts-->
+    <string name="participated">Teilgenommen</string>
+    <string name="notParticipated">Nicht Teilgenommen</string>
+
+
+    <!-- Info Titles -->
+    <string name="infoPaMainTitle">Dashboard</string>
+    <string name="infoLoginTitle">Anmeldung</string>
+    <string name="infoCreateStartTitle">Studie erstellen</string>
+    <string name="infoCreateBaseTitle">Metadaten</string>
+    <string name="infoCreateContactTitle">Kontaktangabe</string>
+    <string name="infoCreateDescTitle">Studienbeschreibung</string>
+    <string name="infoCreatePlatformTitle">Plattformen</string>
+    <string name="infoCreateLocationTitle">Ortangaben</string>
+    <string name="infoCreateDatesTitle">Termine</string>
+    <string name="infoCreateConfirmDetailsTitle">Eingabebestätigung</string>
+    <string name="infoCreateConfirmDatesTitle">Terminbestätigung</string>
+    <string name="infoEditFragmentTitle">Studie bearbeiten</string>
+    <string name="infoStudyDetailsTitle">Studie einsehen</string>
+    <string name="infoCreatorStudyDetailsTitle">Eigene Studie einsehen</string>
+    <string name="infoOwnStudiesTitle">Meine Übersicht</string>
+    <string name="infoFindStudyTitle">Studie finden</string>
+    <string name="infoPAUpcomingTitle">Anstehende Termine</string>
+    <string name="drawerHeaderName">Nutzername</string>
+    <string name="drawerItemOne">Mein VP-Status</string>
+    <string name="drawerItemTwo">Studien finden</string>
+    <string name="drawerItemThree">Studien erstellen</string>
+    <string name="drawerItemFour">Meine Übersicht</string>
+    <string name="drawerItemFive">Abmelden</string>
+
+    <!-- Info Messages -->
+    <string name="infoLogin">Zur Verwendung des VP Managers benötigen Sie einen individuellen Nutzeraccounnt. \n\n Geben Sie hier wenn möglich Ihre universitäre E-Mail-Adresse an.</string>
+    <string name="infoPaMain">Sehen sie hier den aktuellen Stand ihrer VP-Stunden ein. Zusätzlich finden Sie zukünftige Termine für Ihre anstehenden Studien und Teilnahmen.</string>
+
+    <string name="infoCreateStart">Geben sie in den folgenden Schritten alle relevanen Informationen zu ihrer Studie an. \n\n Potenzielle Teilnehmer können diese anschließend über den Reiter "Studie finden" einsehen und sich für ihre angegebenen Termine eintragen. </string>
+    <string name="infoCreateBase">Metadaten zu ihrer Studie. \n\n Diese sind auch außerhalb der Detailansicht in der Studienliste sichtbar.</string>
+    <string name="infoCreateContact">Geben sie hier an, wie potenzielle Teilnehmer sie für inhaltliche oder oragnisatorische Fragen alternativ erreichen können</string>
+    <string name="infoCreateDescription">Hier können sie weitere Details zu Ablauf, Inhalt, Dauer oder Teilnahmevoraussetzungen ihrer Studie angeben</string>
+    <string name="infoCreatePlatform">. Hier kommunizieren sie während der Studie mit ihren Teilnehmern. Die angegebenen Dienste sollten kein Ausschlusskriterium bei der Studienauswahl sein, geben sie also gerne eine alternative Plattform an.</string>
+    <string name="infoCreateLocation">Geben sie hier die Adresse des Austragungsortes an. \n\n Achten sie auf die korrekten Bezeichner für universitäre Räume und Labore</string>
+    <string name="infoCreateDates">Geben sie hier freie Termine für ihre Studie an. \n\n Bereits vergebene Termine können anschließend im Reiter "Eigene Studien" eingesehen werden.</string>
+
+    <string name="infoCreateConfirmDetails">Bevor sie ihre Studie veröffentlichen, überprüfen sie hier bitte ihre Angaben.</string>
+    <string name="infoCreateConfirmDates">Folgende Termine stehen potenziellen Studienteilnehmern zur Verfügung.</string>
+    <string name="infoOwnAttendances">Sehen sie hier ihre Studienteilnahmen und den aktuellen Fortschritt ihres VP_Kontos ein.</string>
+
+
+    <string name="infoStudyDetails">Hier können sie alle verfügbaren Informationen zur Studie einsehen. \n\n Wenn sie an einer Teilnahme interessiert sind, schreiben sie sich im "Termine"-Tab für ein passendes Zeitfenster ein.</string>
+    <string name="infoStudyCreatorDetails">Hier können sie die angegebenen Informationen und Termine ihrer Studie einsehen und bearbeiten. \n\n Mit "Studie abschließen" können bereits beendete Studien aus der öffentlichen Liste entfernt werden.</string>
+    <string name="infoEditStudy">Hier können sie nachträglich Studieninformationen und Termine ändern / ergänzen.</string>
+    <string name="infoOwnStudies">Sehen sie hier ihre Studienteilnahmen und den aktuellen Fortschritt ihres VP-Kontos ein. \n\n im "Meine Studien"-Tab können sie ihre eigenen Studien einsehen und bearbeiten.</string>
+
+    <string name="infoPaUpcoming">Alle ihre zukünftig anstehenden Termine werden hier angezeigt.</string>
+    <string name="infoFindStudies">Hier finden sie alle Studien, an denen sie aktuell teilnehmen können. \n\n Weitere Informationen und die Anmeldung für freie Termine finden sie in der Detailansicht.</string>
+    <string name="create_study_stepFour_presetHint">Vorlage auswählen</string>
 
 
 </resources>

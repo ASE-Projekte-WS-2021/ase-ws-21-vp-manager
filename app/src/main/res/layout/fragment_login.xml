@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".views.loginFragment">
+    tools:context=".views.LoginFragment">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -15,8 +15,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:scrollbarThumbVertical="@null"
-            android:scrollbarThumbHorizontal="@null">
+            android:scrollbarThumbHorizontal="@null"
+            android:scrollbarThumbVertical="@null">
 
 
             <TextView
@@ -52,8 +52,8 @@
                         android:id="@+id/login_email_input"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:hint="@string/login_email_address"
                         android:fontFamily="@font/google_sans_bold"
+                        android:hint="@string/login_email_address"
                         android:inputType="text">
 
                     </com.google.android.material.textfield.TextInputEditText>

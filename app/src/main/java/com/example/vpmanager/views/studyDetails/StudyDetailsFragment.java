@@ -14,19 +14,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link StudyDetailsFragment#//newInstance} factory method to
- * create an instance of this fragment.
- */
-public class StudyDetailsFragment extends Fragment {
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    /*
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-     */
+public class StudyDetailsFragment extends Fragment {
 
     private StudyViewModel studyViewModel;
 
@@ -42,45 +31,15 @@ public class StudyDetailsFragment extends Fragment {
     private TextView remoteData;
     private TextView localData;
 
-    // TODO: Rename and change types of parameters
-    /*
-    private String mParam1;
-    private String mParam2;
-     */
 
     public StudyDetailsFragment() {
         // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param //param1 Parameter 1.
-     * @param //param2 Parameter 2.
-     * @return A new instance of fragment studyDetails.
-     */
-    // TODO: Rename and change types and number of parameters
-    /*
-    public static StudyDetailsFragment newInstance(String param1, String param2) {
-        StudyDetailsFragment fragment = new StudyDetailsFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
-     */
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        /*
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
-         */
     }
 
     @Override
@@ -93,6 +52,10 @@ public class StudyDetailsFragment extends Fragment {
         return view;
     }
 
+
+    //Parameter:
+    //Return values:
+    //Sets the current study ID and ViewModel
     private void prepareComponents() {
         currentStudyId = StudyFragment.currentStudyId;
         studyViewModel = new ViewModelProvider(requireActivity()).get(StudyViewModel.class);
@@ -100,6 +63,10 @@ public class StudyDetailsFragment extends Fragment {
         studyViewModel.prepareRepo();
     }
 
+
+    //Parameter: view
+    //Return values:
+    //Initializes the views for the study detail
     private void initDetailViews(View view) {
         headerText = view.findViewById(R.id.studyFragmentHeader);
         description = view.findViewById(R.id.descriptionStudyFragment);
@@ -107,23 +74,61 @@ public class StudyDetailsFragment extends Fragment {
         contactInfo = view.findViewById(R.id.contactInformationStudyFragment);
         category = view.findViewById(R.id.categoryStudyFragment);
         studyType = view.findViewById(R.id.studyTypeStudyFragment);
+
         //Textview for further studyType data (depending on type)
         remoteData = view.findViewById(R.id.remoteStudyStudyFragment);
         localData = view.findViewById(R.id.localStudyStudyFragment);
     }
 
+
+    //Parameter:
+    //Return values:
+    //Sets the text views for the study details
     public void setStudyDetails() {
         //id could be accessed
         headerText.setText(studyViewModel.getStudyDetails().getName());
         description.setText(studyViewModel.getStudyDetails().getDescription());
+
+        String contactOne, contactTwo, contactThree, contactFour, contactFive, contactString = "";
+        //mail
+        contactOne = studyViewModel.getStudyDetails().getContactOne();
+        //handy
+        contactTwo = studyViewModel.getStudyDetails().getContactTwo();
+        //Skype
+        contactThree = studyViewModel.getStudyDetails().getContactThree();
+        //Discord
+        contactFour = studyViewModel.getStudyDetails().getContactFour();
+        //Sonstiges
+        contactFive = studyViewModel.getStudyDetails().getContactFive();
+
+        if (contactOne != null && !contactOne.isEmpty()) {
+            contactString += "Mail: " + contactOne + "\n";
+        }
+        if (contactTwo != null && !contactTwo.isEmpty()) {
+            contactString += "Telefon: " + contactTwo + "\n";
+        }
+        if (contactThree != null && !contactThree.isEmpty()) {
+            contactString += "Skype: " + contactThree + "\n";
+        }
+        if (contactFour != null && !contactFour.isEmpty()) {
+            contactString += "Discord: " + contactFour + "\n";
+        }
+        if (contactFive != null && !contactFive.isEmpty()) {
+            contactString += "Andere: " + contactFive + "\n";
+        }
+
         vpValue.setText(studyViewModel.getStudyDetails().getVps() + " VP");
-        contactInfo.setText(studyViewModel.getStudyDetails().getContactOne());
-        //contactTwo could be accessed
-        //contactThree could be accessed
+
+        contactInfo.setText(contactString);
+
         category.setText(studyViewModel.getStudyDetails().getCategory());
         studyType.setText(studyViewModel.getStudyDetails().getExecutionType());
-        if (studyViewModel.getStudyDetails().getExecutionType().equals("Remote")) {
+        if (studyViewModel.getStudyDetails().getExecutionType().equals(getString(R.string.remoteString))) {
             remoteData.setText(studyViewModel.getStudyDetails().getRemotePlatformOne());
+            if (studyViewModel.getStudyDetails().getRemotePlatformTwo() != null) {
+                String platforms = remoteData.getText().toString() + " & " + studyViewModel.getStudyDetails().getRemotePlatformTwo();
+                remoteData.setText(platforms);
+            }
             //remotePlatformTwo could be accessed
         } else {
             String locationString = studyViewModel.getStudyDetails().getLocation() + "\t\t" +

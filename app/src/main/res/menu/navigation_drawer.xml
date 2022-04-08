@@ -7,20 +7,20 @@
 
         <item
             android:id="@+id/homeFragment"
-            android:icon="@drawable/ic_baseline_person_24"
-            android:title="Persönliche Übersicht" />
+            android:icon="@drawable/ic_baseline_dashboard_24"
+            android:title="@string/drawerItemOne" />
         <item
             android:id="@+id/findStudyFragment"
             android:icon="@drawable/ic_baseline_search_24"
-            android:title="Studien finden" />
+            android:title="@string/drawerItemTwo" />
         <item
             android:id="@+id/createStudyFragment"
             android:icon="@drawable/ic_baseline_create_24"
-            android:title="Studien erstellen" />
+            android:title="@string/drawerItemThree" />
         <item
             android:id="@+id/ownStudyFragment"
-            android:icon="@drawable/ic_baseline_folder_24"
-            android:title="Eigene Studien" />
+            android:icon="@drawable/ic_baseline_person_24"
+            android:title="@string/drawerItemFour" />
     </group>
 
     <group
@@ -30,7 +30,7 @@
         <item
             android:id="@+id/nestedGraphLoginRegistration"
             android:icon="@drawable/ic_baseline_exit_to_app_24"
-            android:title="Abmelden" />
+            android:title="@string/drawerItemFive" />
     </group>
 
 </menu>

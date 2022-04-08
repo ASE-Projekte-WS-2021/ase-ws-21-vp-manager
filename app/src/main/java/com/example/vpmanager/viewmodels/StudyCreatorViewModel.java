@@ -20,14 +20,15 @@ public class StudyCreatorViewModel extends ViewModel implements StudyDetailsList
     private StudyDetailModel mStudyDetails;
     private ArrayList<DateModel> mStudyDates;
 
-    private ArrayList<String> userIdsOfDates = new ArrayList<>();
-    private DateModel selectedDateObject;
-
     private StudyRepository mStudyRepo;
 
+
+    //Parameter:
+    //Return values:
+    //Gets instance from studyRepository and sets the FirestoreCallback
     public void prepareRepo() {
         mStudyRepo = StudyRepository.getInstance();
-        //Instance is the same but different data can be retrieved!
+        //Instance is the same but different data can be retrieved
         mStudyRepo.setFirestoreCallback(this, this);
     }
 

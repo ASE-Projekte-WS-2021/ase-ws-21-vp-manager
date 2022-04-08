@@ -14,10 +14,14 @@ public class ViewPagerAdapter extends FragmentStatePagerAdapter {
     private List<Fragment> fragments = new ArrayList<>();
     private List<String> fragmentNames = new ArrayList<>();
 
+
     public ViewPagerAdapter(@NonNull FragmentManager fm, int behavior) {
         super(fm, behavior);
     }
 
+    //Parameter: fragment, title
+    //Return values:
+    //Adds the fragment with the associated title
     public void addFragment(Fragment fragment, String title) {
         fragments.add(fragment);
         fragmentNames.add(title);

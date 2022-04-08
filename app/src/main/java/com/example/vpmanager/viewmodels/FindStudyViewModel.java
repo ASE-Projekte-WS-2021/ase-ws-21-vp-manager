@@ -1,6 +1,5 @@
 package com.example.vpmanager.viewmodels;
 
-import android.util.Log;
 
 import androidx.lifecycle.ViewModel;
 
@@ -12,11 +11,11 @@ import java.util.ArrayList;
 
 public class FindStudyViewModel extends ViewModel implements StudyListRepository.StudyMetaDataListener {
 
-    //not best practise in my opinion
-    public FindStudyFragment findStudyFragment;
 
+    public FindStudyFragment findStudyFragment;
     private ArrayList<StudyMetaInfoModel> mStudyMetaInfo;
     private StudyListRepository mStudyListRepo;
+
 
     //Parameter:
     //Return Values:
@@ -32,7 +31,6 @@ public class FindStudyViewModel extends ViewModel implements StudyListRepository
     //Return Values: an arrayList containing StudyMetaInfoModel-objects of all currently existing studies
     //Returns the filled arrayList of study data
     public ArrayList<StudyMetaInfoModel> getStudyMetaInfo() {
-        Log.d("FindStudyViewModel", "getStudyMetaInfo start + end (returns an ArrayList of StudyInfoModels)");
         return mStudyMetaInfo;
     }
 
