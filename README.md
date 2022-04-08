@@ -18,6 +18,8 @@ letztere zu korrigieren oder zu ergänzen.
 
 ![Main Pages Screenshot](https://github.com/ASE-Projekte-WS-2021/ase-ws-21-vp-manager/blob/improvement_readMe/wiki_Images/app_screenshots.png)
 
+ Eine detaillierte DOkumentation des VP-Managers finden sie in der ([Präsentation](https://docs.google.com/presentation/d/10WS_gH9wkGFBhsbHTYtQ16cwsczPvLDgANnSx5P_wNw/edit)).
+ 
 
 ## Team
 
