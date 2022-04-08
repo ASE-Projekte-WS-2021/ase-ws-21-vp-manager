@@ -16,7 +16,6 @@ import androidx.viewpager.widget.ViewPager;
 
 import com.example.vpmanager.R;
 import com.example.vpmanager.views.MainActivity;
-import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.tabs.TabLayout;
 
 import java.util.ArrayList;
