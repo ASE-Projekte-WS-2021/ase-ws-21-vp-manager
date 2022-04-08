@@ -79,7 +79,7 @@ public class StudyCreatorDetailsFragment extends Fragment {
     //Sets the current study ID and ViewModel
     private void prepareComponents() {
         currentStudyId = StudyCreatorFragment.currentStudyId;
-        studyViewModel = new ViewModelProvider(requireActivity()).get(StudyCreatorViewModel.class);
+        studyViewModel = new ViewModelProvider(getParentFragment()).get(StudyCreatorViewModel.class);
         studyViewModel.studyCreatorDetailsFragment = this;
         studyViewModel.prepareRepo();
 

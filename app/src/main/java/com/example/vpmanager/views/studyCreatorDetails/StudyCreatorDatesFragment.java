@@ -52,7 +52,7 @@ public class StudyCreatorDatesFragment extends Fragment {
     //Sets current study ID and the ViewModel
     private void prepareComponents() {
         currentStudyId = StudyCreatorFragment.currentStudyId;
-        studyViewModel = new ViewModelProvider(requireActivity()).get(StudyCreatorViewModel.class);
+        studyViewModel = new ViewModelProvider(getParentFragment()).get(StudyCreatorViewModel.class);
         studyViewModel.studyDatesFragment = this;
         studyViewModel.prepareRepo();
     }
